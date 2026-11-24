@@ -1,0 +1,237 @@
+{
+  "entryId": "w:ray",
+  "headword": "ray",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/reɪ/",
+    "us": "/reɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ray#p-main",
+      "ipa": {
+        "uk": "/reɪ/",
+        "us": "/reɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "rays",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "senses": [
+    {
+      "senseId": "w:ray#s1",
+      "pos": "n.",
+      "glossZh": "光线；射线",
+      "pronunciationId": "w:ray#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ray#e-5fb65f1b51d24d06",
+          "text": "One of the most important ways is to limit your exposure to UV rays from the sun.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhuji-2025-12-first:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:ray#e-e96aaf160984ad56",
+          "text": "Every early morning, when the first ray of sunlight spilled over the roof, Grandma would put on her shoes, hold a small bamboo basket, and walk slowly to the corner with her slightly bent back.",
+          "source": {
+            "paperId": "paper-mock-zj-ningbo-2026-mar",
+            "paperTitle": "宁波“十校”2026届高三3月联考",
+            "groupId": "group:paper-mock-zj-ningbo-2026-mar:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:ray#e-c15f5b3f184132af",
+          "text": "UV rays are strongest between 10 a.m. and 4 p.m., so it’s best to stay indoors or in the shade during these hours.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhuji-2025-12-first:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ray#s2",
+      "pos": "n.",
+      "glossZh": "一线（希望等）",
+      "pronunciationId": "w:ray#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ray#e-bf0ff39c684c83cf",
+          "text": "Seeing a ray of hope, Ms. Burdeyney began raising __46__ for the project with a friend, Toronto businessman Meyer Zeifman.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:ray#e-e62eeb36d1cd4263",
+          "text": "My daily posts and the __50__ I received became a precious ray of light in the chaos of my house.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:ray#e-fdab9fd92fb1d871",
+          "text": "In 1999, the station rescued 7 injured red-crowned cranes from the wild, which brought a crucial ray of hope for the program.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 100
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ray#s3",
+      "pos": "n.",
+      "glossZh": "鳐鱼",
+      "pronunciationId": "w:ray#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ray#e-3742e9e33dc0fd26",
+          "text": "Palau also has other reefs and sandy channels, with marine life including sharks and manta rays.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-a:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 95
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Ray（人名）",
+      "reason": "同形专名"
+    },
+    {
+      "glossZh": "鱼鳍硬条",
+      "reason": "鱼类学术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

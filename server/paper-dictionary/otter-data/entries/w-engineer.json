@@ -1,0 +1,249 @@
+{
+  "entryId": "w:engineer",
+  "headword": "engineer",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌendʒɪˈnɪə(r)/",
+    "us": "/ˌendʒɪˈnɪr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:engineer#p-main",
+      "ipa": {
+        "uk": "/ˌendʒɪˈnɪə(r)/",
+        "us": "/ˌendʒɪˈnɪr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "engineers",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "engineered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "engineering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 26,
+    "mock": 120
+  },
+  "unassignedCounts": {
+    "gaokao": 10,
+    "mock": 118
+  },
+  "senses": [
+    {
+      "senseId": "w:engineer#s1",
+      "pos": "n.",
+      "glossZh": "工程师",
+      "pronunciationId": "w:engineer#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:engineer#e-df80332aaf098897",
+          "text": "A computer engineer.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:engineer#e-f74cd3c0899e92fa",
+          "text": "Engineers are now working on a new concept: the rail drones of the future.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:engineer#e-acdfafcfb5685f3a",
+          "text": "“The way they demonstrated how microplastics were trapped through the boiling process was nice,” Caroline Gauchotte-Lindsay, an environmental engineer at the University of Glasgow in Scotland who was not involved in the research, tells New Scientist.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 142,
+            "end": 150
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:engineer#s2",
+      "pos": "v.",
+      "glossZh": "设计制造",
+      "pronunciationId": "w:engineer#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:engineer#e-fb0bf0e0c73163c1",
+          "text": "Though he acknowledges that engineering works can fail because the person who thought them up or engineered them simply got things wrong, in this book Dr. Petroski widens his view to consider the larger context in which such failures occur.Sometimes devices fail because a good design is constructed with low quality materials incompetently applied.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:engineer#e-f4e46438ef89d073",
+          "text": "They then engineered this model into a physical device designed to broadcast the forgotten melody – a “robotic tutor.” This artificial song was introduced to the chingolos in the park during their critical learning period from October to February.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:engineer#s3",
+      "pos": "v.",
+      "glossZh": "通过基因工程改造",
+      "pronunciationId": "w:engineer#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:engineer#e-688de2d33defdb33",
+          "text": "The researchers went on to genetically engineer the DEC2 mutation into mice, showing that the animals need less sleep than their littermates.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:engineer#s4",
+      "pos": "v.",
+      "glossZh": "设法促成",
+      "pronunciationId": "w:engineer#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "名词 engineering",
+      "reason": "工程学或工程技术应另建词条"
+    },
+    {
+      "glossZh": "炮兵",
+      "reason": "历史军事用语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

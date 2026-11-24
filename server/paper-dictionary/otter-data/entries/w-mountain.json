@@ -1,0 +1,240 @@
+{
+  "entryId": "w:mountain",
+  "headword": "mountain",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmaʊntən/",
+    "us": "/ˈmaʊntn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:mountain#p-main",
+      "ipa": {
+        "uk": "/ˈmaʊntən/",
+        "us": "/ˈmaʊntn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "mountains",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Mountains",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 141
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 138
+  },
+  "senses": [
+    {
+      "senseId": "w:mountain#s1",
+      "pos": "n.",
+      "glossZh": "山；高山",
+      "pronunciationId": "w:mountain#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:mountain#e-16f065b094718d43",
+          "text": "He passed milky white waterfalls and mountains in many shades of blue.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:grammar-fill:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:mountain#e-83d4e2b99a276f8b",
+          "text": "The hot spring at the foot of the mountain is something you must try after the climb.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:mountain#e-7143ce628bcfcd32",
+          "text": "Here is a picture of Dorothy Woodruff, on her horse, looking down from a hill top: “When the sun slipped behind the mountains, it shed a rosy glow all around them.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 116,
+            "end": 125
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:mountain#s2",
+      "pos": "短语",
+      "glossZh": "美洲狮",
+      "pronunciationId": "w:mountain#p-main",
+      "note": "mountain lion。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:mountain#e-3237d8e0ebdc09a0",
+          "text": "This __46__ climbing up and down the side of a mountain inhabited (栖息) by mountain lions, although I should say they were only heard, never __47__.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 82
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:mountain#s3",
+      "pos": "n.",
+      "glossZh": "大量；多得像山一样",
+      "pronunciationId": "w:mountain#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:mountain#e-3767c6b5ad875590",
+          "text": "For years, his demanding schedule was a constant __41__ — caught in a tug-of-war between his patients and a mountain of paperwork.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 116
+          }
+        },
+        {
+          "exampleId": "w:mountain#e-f58f729bdaebdcd0",
+          "text": "But we’ve failed to recognize how something as basic as school schedules dramatically disadvantages working parents, along with those who can’t afford the mountain of out-of-school costs these schedules impose.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 155,
+            "end": 163
+          }
+        },
+        {
+          "exampleId": "w:mountain#e-92172446246c79c9",
+          "text": "First, solar panels typically have a lifespan of 25–30 years, and mountains of solar waste are expected in the coming decade.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 75
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "山岳派；蒸汽机车型号；雷诺曼牌",
+      "reason": "历史或专门名称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

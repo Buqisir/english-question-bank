@@ -1,0 +1,351 @@
+{
+  "entryId": "w:worry",
+  "headword": "worry",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈwʌri/",
+    "us": "/ˈwɜːri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:worry#p-main",
+      "ipa": {
+        "uk": "/ˈwʌri/",
+        "us": "/ˈwɜːri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "worries",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "worried",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "worrying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 28,
+    "mock": 289
+  },
+  "unassignedCounts": {
+    "gaokao": 7,
+    "mock": 288
+  },
+  "senses": [
+    {
+      "senseId": "w:worry#s1",
+      "pos": "v.",
+      "glossZh": "担心",
+      "pronunciationId": "w:worry#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:worry#e-743c65599a15a6a0",
+          "text": "Don’t worry about grammar or spelling.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:worry#e-7a983dfa989b9bf6",
+          "text": "I took the dogs out four times a day, and I worried that Tilly __53__ climbing the stairs could reopen the wound.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:worry#e-58c11d2772deeed6",
+          "text": "She worries about her academic ability.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:worry#s2",
+      "pos": "v.",
+      "glossZh": "使担心",
+      "pronunciationId": "w:worry#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:worry#e-02284bcdc055708e",
+          "text": "What worried me was my children growing up in a world where all the objects around them seem bound to hurt them.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:worry#s3",
+      "pos": "adj.",
+      "glossZh": "担心的",
+      "pronunciationId": "w:worry#p-main",
+      "note": "常用 worried。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:worry#e-d11ae28e73776205",
+          "text": "It also makes it easier for you to bring up anything that you are worried about.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:worry#e-df7e8037c5271fb6",
+          "text": "Her owners started to get worried.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:worry#e-8fb8117b7c77bcc2",
+          "text": "However, none of my co-workers would go with me, and I was worried about walking on the street alone at night.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:worry#s4",
+      "pos": "n.",
+      "glossZh": "担忧",
+      "pronunciationId": "w:worry#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:worry#e-143c3fadddf84b92",
+          "text": "However, within fifteen minutes of __39__, my worries had gone.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:cloze:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:worry#e-0d0020f56ac43980",
+          "text": "“It just creates some worries and insecurities in kids that aren’t necessarily healthy.”",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:worry#s5",
+      "pos": "n.",
+      "glossZh": "让人发愁的事",
+      "pronunciationId": "w:worry#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:worry#s6",
+      "pos": "短语",
+      "glossZh": "没关系；别担心",
+      "pronunciationId": "w:worry#p-main",
+      "note": "no worries。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:worry#e-d240e4f604934efb",
+          "text": "No worries: He handed it to his wife, and she was gone in a flash down the road to buy a new tire iron.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "撕咬喉咙、勒死、反复摆弄",
+      "reason": "少见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

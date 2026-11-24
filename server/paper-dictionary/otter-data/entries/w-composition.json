@@ -1,0 +1,324 @@
+{
+  "entryId": "w:composition",
+  "headword": "composition",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌkɒmpəˈzɪʃn/",
+    "us": "/ˌkɑːmpəˈzɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:composition#p-main",
+      "ipa": {
+        "uk": "/ˌkɒmpəˈzɪʃn/",
+        "us": "/ˌkɑːmpəˈzɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "compositions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 29
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 19
+  },
+  "senses": [
+    {
+      "senseId": "w:composition#s1",
+      "pos": "n.",
+      "glossZh": "构图；画面布局",
+      "pronunciationId": "w:composition#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:composition#e-4a1fc9bed71a6b8e",
+          "text": "To understand a painting, we’re taught to look for color, composition, and light.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:composition#e-7c907186efdf6ed9",
+          "text": "Professor Robert Epstein from Harvard University’s Visual Cognition Lab notes, “When we take photos with a phone, our brain is in a ‘rapid capture’ mode; whereas with a film camera, it enters a ‘deliberate composition’ state.” Functional MRI（核磁共振）studies have shown that when using a smartphone, areas of the brain linked to quick decision-making are more active.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 206,
+            "end": 217
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:composition#s2",
+      "pos": "n.",
+      "glossZh": "成分；构成；组成",
+      "pronunciationId": "w:composition#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:composition#e-95d7a97ee97173d4",
+          "text": "This kindergarten was included in a two-year study looking at how biodiversity enhancements affect the microbial composition of children’s skin and saliva.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n085:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 113,
+            "end": 124
+          }
+        },
+        {
+          "exampleId": "w:composition#e-72d0cffb22bb1bb5",
+          "text": "This system assesses key environmental factors such as soil composition, moisture levels and terrain contours, as well as potential risks like erosion and flooding.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:composition#e-5b8229df8fd0c293",
+          "text": "That is, meal timing and composition could also be key to reducing jet lag.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:composition#s3",
+      "pos": "n.",
+      "glossZh": "作文；写作",
+      "pronunciationId": "w:composition#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:composition#e-161bb7f0d7d37572",
+          "text": "Instead, I grabbed an old, ugly composition notebook with a __45__ cover and dog-eared corners.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:cloze:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:composition#e-5ac8262bfe5ee889",
+          "text": "Though its release date is unclear, as a longtime freshman composition instructor, I’m already aware of the problem of AI-assisted cheating in writing classes.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:composition#e-0d335cea9d7c169a",
+          "text": "They also receive instruction in essay organization and composition.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 67
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:composition#s4",
+      "pos": "n.",
+      "glossZh": "作曲；音乐或戏剧作品",
+      "pronunciationId": "w:composition#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:composition#e-10998800c4db3ec7",
+          "text": "(3) Dramatic compositions (4) Films",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:composition#e-081ee05f5d726084",
+          "text": "Unlike popular or folk music, classical music often involves compositions that require a high level of",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:composition#e-f947dcef7e9beaa8",
+          "text": "Her talents in music composition.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 32
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "和解款、函数复合、力的合成",
+      "reason": "法律或数理专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

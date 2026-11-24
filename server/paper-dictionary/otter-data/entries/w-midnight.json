@@ -1,0 +1,129 @@
+{
+  "entryId": "w:midnight",
+  "headword": "midnight",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmɪdnaɪt/",
+    "us": "/ˈmɪdnaɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:midnight#p-main",
+      "ipa": {
+        "uk": "/ˈmɪdnaɪt/",
+        "us": "/ˈmɪdnaɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "midnights",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:midnight#s1",
+      "pos": "n.",
+      "glossZh": "午夜（夜里十二点）",
+      "pronunciationId": "w:midnight#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 11
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:midnight#e-5aa53e82f3b966b8",
+          "text": "I woke up at midnight to find a swimming pool in my tent.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:midnight#e-aadb52088170f5e8",
+          "text": "When I finally started to study, I would race through the assigned work, often well past midnight.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:midnight#e-dce94af3a595c715",
+          "text": "The peak is forecast for the night of Saturday, December 13th, with best viewing expected in the hours after midnight.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-01-first-semester-quality-assessment",
+            "paperTitle": "山东省泰安市2025-2026学年第一学期普通高中质量检测 高三年级英语试卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 117
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "一对六点",
+      "reason": "骰子游戏用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

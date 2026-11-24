@@ -1,0 +1,71 @@
+{
+  "entryId": "w:bride",
+  "headword": "bride",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/braɪd/",
+    "us": "/braɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bride#p-main",
+      "ipa": {
+        "uk": "/braɪd/",
+        "us": "/braɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "brides",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:bride#s1",
+      "pos": "n.",
+      "glossZh": "新娘",
+      "pronunciationId": "w:bride#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "所爱之物、蕾丝连接环、地名等",
+      "reason": "修辞义、手工术语或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

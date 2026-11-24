@@ -1,0 +1,117 @@
+{
+  "entryId": "w:moreover",
+  "headword": "moreover",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/mɔːrˈəʊvə(r)/",
+    "us": "/mɔːrˈoʊvər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:moreover#p-main",
+      "ipa": {
+        "uk": "/mɔːrˈəʊvə(r)/",
+        "us": "/mɔːrˈoʊvər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 53
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:moreover#s1",
+      "pos": "adv.",
+      "glossZh": "此外；而且",
+      "pronunciationId": "w:moreover#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 53
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:moreover#e-033280301ccf9cf4",
+          "text": "\"Moreover, the meanings seem to not go beyond what other animals convey with non-verbal communication.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:moreover#e-1d5bb7e6a053f06e",
+          "text": "Moreover, having a system in the same building where it’s eaten means zero emissions (排放) from transporting plants from soil to salad.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:moreover#e-9623bf1d43c933d0",
+          "text": "Moreover, by predicting future decay patterns, AI helps museums take preventive measures and improve preservation strategies.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 15
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,305 @@
+{
+  "entryId": "w:accept",
+  "headword": "accept",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əkˈsept/",
+    "us": "/əkˈsept/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:accept#p-main",
+      "ipa": {
+        "uk": "/əkˈsept/",
+        "us": "/əkˈsept/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "accepted",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "accepting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "accepts",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 26,
+    "mock": 195
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 194
+  },
+  "senses": [
+    {
+      "senseId": "w:accept#s1",
+      "pos": "v.",
+      "glossZh": "接受；收下（给予的事物、提议等）",
+      "pronunciationId": "w:accept#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:accept#e-fd17ca468e83ea6a",
+          "text": "At every stop, Jim accepted the parting good wishes of families that had become his own.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:accept#e-07467d704e415c4a",
+          "text": "Grateful and relieved, Emily accepted the offer.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:accept#s2",
+      "pos": "v.",
+      "glossZh": "接纳；录取；准许进入",
+      "pronunciationId": "w:accept#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:accept#e-8577be300f8d5673",
+          "text": "James Barry (c.1789 — 1865) was born Margaret Bulkley in Ireland but, dressed as a man, she was accepted by Edinburgh University to study medicine.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-a:figure-ed26865ff4e2681b:cell-1-2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:accept#e-573011e92653e000",
+          "text": "The Saint Lukas train doesn’t accept passengers – it accepts only the sick.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:accept#s3",
+      "pos": "v.",
+      "glossZh": "承认或接受事实、处境；认可观点",
+      "pronunciationId": "w:accept#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:accept#e-a77f3f6667f56b96",
+          "text": "However, some high sugar brands, like Classic Coca Cola, have accepted the sugar tax and are refusing to change for fear of upsetting consumers.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:accept#e-2d7a0af409bbcd7c",
+          "text": "But all of that growth will take up a lot of space, and though more and more people accept the concept of solar energy, few like large solar panels to be installed near them.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:accept#e-917bb94c4f55e875",
+          "text": "Just accept your differences and learn to work with each other.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2022-i:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:accept#s4",
+      "pos": "v.",
+      "glossZh": "受理；接收符合条件的材料",
+      "pronunciationId": "w:accept#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:accept#e-b8133b2a139cfecc",
+          "text": "Short writings missed as a result of an excused absence will be accepted.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "reading-a-11",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:accept#e-96df41043bf4a240",
+          "text": "Please note: Only original, physical IDs are accepted (no photocopies or digital images).",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 53
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "已获认可的项目；承兑汇票",
+      "reason": "罕见名词用法或金融专业用法"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

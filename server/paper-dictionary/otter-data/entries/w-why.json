@@ -1,0 +1,278 @@
+{
+  "entryId": "w:why",
+  "headword": "why",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/waɪ/",
+    "us": "/waɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:why#p-main",
+      "ipa": {
+        "uk": "/waɪ/",
+        "us": "/waɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "whies",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "why's",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "whys",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 213,
+    "mock": 1412
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1411
+  },
+  "senses": [
+    {
+      "senseId": "w:why#s1",
+      "pos": "adv.",
+      "glossZh": "为什么",
+      "pronunciationId": "w:why#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 195,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:why#e-89d7e69b9fb63892",
+          "text": "Why does Ricky want to move?",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 3
+          }
+        },
+        {
+          "exampleId": "w:why#e-16187b06fcb6e9d5",
+          "text": "Why did Jennifer choose the program at Ministry Saint Joseph's Hospital in Marshfield?",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2020-i:25",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 3
+          }
+        },
+        {
+          "exampleId": "w:why#e-75447ce76ba69273",
+          "text": "Why should you listen to experts according to the speaker?",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 3
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:why#s2",
+      "pos": "关系副词",
+      "glossZh": "说明前述原因或结果",
+      "pronunciationId": "w:why#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 16,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:why#e-d3b556663518a737",
+          "text": "Rome can be pricey for travelers, which is why many choose to stay in a hostel（旅社）.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:why#e-01b6175faa2c7f4d",
+          "text": "Annoyed by the level of distraction(干扰)in his open office, he said, “That’s why I have a membership at the coworking space across the street – so I can focus.” His comment struck me as strange.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:why#e-3b6e14470c199fd9",
+          "text": "The dawn chorus of birdsong has inspired poets and nature lovers for thousands of years, but the reason why birds start the day this way is an enduring mystery.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 107
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:why#s3",
+      "pos": "短语",
+      "glossZh": "何不……",
+      "pronunciationId": "w:why#p-main",
+      "note": "why not。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:why#e-a7d18b71bc0944a7",
+          "text": "With gas prices rising and airport security lines snaking longer than ever, why not book your next domestic vacation on a train?",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:why#e-1f8ed355747e2bca",
+          "text": "Why not try a regional alternative or check out a popular destination’s lesser-known sights?",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:why#s4",
+      "pos": "n.",
+      "glossZh": "原因",
+      "pronunciationId": "w:why#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "why 作感叹词",
+      "reason": "较少见的口语语气用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

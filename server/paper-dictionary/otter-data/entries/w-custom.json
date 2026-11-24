@@ -1,0 +1,246 @@
+{
+  "entryId": "w:custom",
+  "headword": "custom",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkʌstəm/",
+    "us": "/ˈkʌstəm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:custom#p-main",
+      "ipa": {
+        "uk": "/ˈkʌstəm/",
+        "us": "/ˈkʌstəm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "customs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 27
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 20
+  },
+  "senses": [
+    {
+      "senseId": "w:custom#s1",
+      "pos": "n.",
+      "glossZh": "习俗；惯例；习惯",
+      "pronunciationId": "w:custom#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:custom#e-e5b76dacd09288bf",
+          "text": "“You’ll prepare a stand to share your own culture – food, crafts, customs ...",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:custom#e-0545eea49cb04593",
+          "text": "I learned the local languages and customs, for without the crucial guidance of its people, I would have been completely lost in that vast wilderness.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:reading-b:2",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:custom#e-f33c216f6e74c007",
+          "text": "Small talk is a social custom, not an invitation for deep disclosure.” The problem was not them but my __51__.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:custom#s2",
+      "pos": "adj.",
+      "glossZh": "定制的；按特定需求制作的",
+      "pronunciationId": "w:custom#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:custom#e-888934a4309a8d11",
+          "text": "Their mycelium can also be shaped into custom structures, making them suitable for wearable electronics, smart sensors, and other emerging technologies.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:custom#e-b949b158115eb6c6",
+          "text": "On Monday evening, she asked her parents into her room, showed them her portfolio (作品集) and notes, and said, “I know you’re worried, but I believe I can make it as an artist – selling online, teaching, or doing custom work.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 211,
+            "end": 217
+          }
+        },
+        {
+          "exampleId": "w:custom#e-5ca4e64acbe3a9b1",
+          "text": "Heber, a brand strategist who paints part-time, usually __48__ $350-$400 for custom house paintings.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 83
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:custom#s3",
+      "pos": "n.",
+      "glossZh": "海关；关税（customs）",
+      "pronunciationId": "w:custom#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:custom#e-b484fde4cf482568",
+          "text": "In April, customs authorities in the eastern city of Ningbo seized a shipment of 200,000 goods",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:grammar-fill",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:grammar-fill:13",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:custom#s4",
+      "pos": "n.",
+      "glossZh": "惠顾；生意",
+      "pronunciationId": "w:custom#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "惯例法；贡金",
+      "reason": "历史或法律专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

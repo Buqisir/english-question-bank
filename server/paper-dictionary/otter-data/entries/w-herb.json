@@ -1,0 +1,156 @@
+{
+  "entryId": "w:herb",
+  "headword": "herb",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/hɜːb/",
+    "us": "/ɜːrb/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:herb#p-main",
+      "ipa": {
+        "uk": "/hɜːb/",
+        "us": "/ɜːrb/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "herbs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 12
+  },
+  "senses": [
+    {
+      "senseId": "w:herb#s1",
+      "pos": "n.",
+      "glossZh": "调味香草",
+      "pronunciationId": "w:herb#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:herb#e-ec5b204be850ff29",
+          "text": "This vibrant vegetable and chicken one-pot, finished with lemon and fresh herbs, has you covered, whatever your mood.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:herb#s2",
+      "pos": "n.",
+      "glossZh": "药草",
+      "pronunciationId": "w:herb#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:herb#e-79e74a6e2359a71c",
+          "text": "Researchers are also studying old texts with AI, finding forgotten herb(草药) mixes.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:grammar-fill:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:herb#e-f274bee8a8611c69",
+          "text": "It demands reverence for the natural properties of medicinal herbs and the application of precise methods to unlock their medical value.”",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:herb#s3",
+      "pos": "n.",
+      "glossZh": "草本植物",
+      "pronunciationId": "w:herb#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Herb（人名）、大麻（俚语）",
+      "reason": "同形专名或非高考常用义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

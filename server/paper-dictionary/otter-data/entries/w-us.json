@@ -1,0 +1,222 @@
+{
+  "entryId": "w:us",
+  "headword": "us",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "US"
+  ],
+  "ipa": {
+    "uk": "/əs/",
+    "us": "/əs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:us#p-main",
+      "ipa": {
+        "uk": "/əs/",
+        "us": "/əs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:us#p-strong",
+      "ipa": {
+        "uk": "/ʌs/",
+        "us": "/ʌs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "重读"
+    },
+    {
+      "pronunciationId": "w:us#p-country",
+      "ipa": {
+        "uk": "/ˌjuː ˈes/",
+        "us": "/ˌjuː ˈes/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "美国缩写"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 98,
+    "mock": 969
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 969
+  },
+  "senses": [
+    {
+      "senseId": "w:us#s1",
+      "pos": "pron.",
+      "glossZh": "我们（we 的宾格）",
+      "pronunciationId": "w:us#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 94,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:us#e-b650e418a6f71d00",
+          "text": "■Mail your entry to us by October 31 this year.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:us#e-ebafe5e26fe10740",
+          "text": "His wife prepared a pot of water for us to wash our hands.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:us#e-fc9a0daf2a41ad22",
+          "text": "As we all sat there __52__, a fisherman pulled up, threw us a rope and towed (拖) us back.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "cloze-3",
+              "sentence": 9
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 59
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:us#s2",
+      "pos": "缩写",
+      "glossZh": "美国",
+      "pronunciationId": "w:us#p-country",
+      "note": "United States 的缩写，一律大写。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:us#e-e4f4b79ab5532f9f",
+          "text": "Bellevue, a fast-growing city just east of Seattle, uses a system that is gaining popularity around the US: intersection(十字路口) signals that can adjust in real time to traffic conditions.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 106
+          }
+        },
+        {
+          "exampleId": "w:us#e-72be8843191a327b",
+          "text": "It has taken her to every state in the US except Montana, Washington and Oregon, she says proudly.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:us#e-d3a9561f89b6166c",
+          "text": "What does the news say about big online spenders in the US?",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 58
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "上索布语、超声检查、无条件刺激",
+      "reason": "同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,295 @@
+{
+  "entryId": "w:tired",
+  "headword": "tired",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtaɪəd/",
+    "us": "/ˈtaɪərd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:tired#p-main",
+      "ipa": {
+        "uk": "/ˈtaɪəd/",
+        "us": "/ˈtaɪərd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more tired",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most tired",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "tireder",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "tiredest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 15,
+    "mock": 78
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 76
+  },
+  "senses": [
+    {
+      "senseId": "w:tired#s1",
+      "pos": "adj.",
+      "glossZh": "疲倦的",
+      "pronunciationId": "w:tired#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tired#e-a3b8a4ac83eb551a",
+          "text": "“After a long run, you may feel like you’re in pain, you may feel tired.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:tired#e-aab6318ad9b784e1",
+          "text": "There were some tough times and I just felt extremely tired.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:tired#e-323590de54a939c3",
+          "text": "Still, she made no attempt to fly, perhaps she had been struggling against the window too long and was too tired?",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 112
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:tired#s2",
+      "pos": "adj.",
+      "glossZh": "厌烦的",
+      "pronunciationId": "w:tired#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tired#e-cd0eefd4254308ef",
+          "text": "They are tired of doing their homework.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:24",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:tired#e-78b2d43a382efb34",
+          "text": "She was tired of working in the office.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jan:21",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:tired#e-5895fd78a96d1d40",
+          "text": "I feared that my classmates might grow tired of my efforts or even lose patience with me.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:tired#s3",
+      "pos": "adj.",
+      "glossZh": "陈旧的",
+      "pronunciationId": "w:tired#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tired#e-5e7fe0323ef6b8df",
+          "text": "From vintage toys to gold, jewellery, watches, cameras, old tech, silver and more; broken, tired or tiptop, Vintage Cash Cow sorts it all so you don’t have to.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-a:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 96
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:tired#s4",
+      "pos": "adj.",
+      "glossZh": "老套的",
+      "pronunciationId": "w:tired#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:tired#s5",
+      "pos": "v.",
+      "glossZh": "感到厌倦",
+      "pronunciationId": "w:tired#p-main",
+      "note": "tire 的过去式。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tired#e-5bbbef2f6e08d019",
+          "text": "His skills and abilities continued to grow, and he never tired of mind-bending calculations or homework.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 62
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

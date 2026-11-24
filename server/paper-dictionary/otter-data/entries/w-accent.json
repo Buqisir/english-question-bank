@@ -1,0 +1,185 @@
+{
+  "entryId": "w:accent",
+  "headword": "accent",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈæksənt/",
+    "us": "/ˈæksent/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:accent#p-main",
+      "ipa": {
+        "uk": "/ˈæksənt/",
+        "us": "/ˈæksent/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "accents",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "accented",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "accenting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 16
+  },
+  "senses": [
+    {
+      "senseId": "w:accent#s1",
+      "pos": "n.",
+      "glossZh": "口音（带有某个地域或群体特色的发音）",
+      "pronunciationId": "w:accent#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:accent#e-0e0951e90f51be86",
+          "text": "Sometimes because of their different accents, they couldn’t communicate well with others, which made them always sit or stand silently at the back of the classroom.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:accent#e-84e796799e8ee72b",
+          "text": "In a French interview, Joe Banton, an English football player displayed French pronunciations instead of his native Scouse accent.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 129
+          }
+        },
+        {
+          "exampleId": "w:accent#e-dca66dfbd76a92ec",
+          "text": "This is why children can pick up a new language without an accent, while adults, no matter how dedicated, cannot.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:accent#s2",
+      "pos": "n.",
+      "glossZh": "重音；重音或变音符号",
+      "pronunciationId": "w:accent#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:accent#s3",
+      "pos": "n.",
+      "glossZh": "强调；突出之处；装饰性点缀",
+      "pronunciationId": "w:accent#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:accent#s4",
+      "pos": "v.",
+      "glossZh": "重读；强调",
+      "pronunciationId": "w:accent#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "手语发音特征；韵律学与乐谱的专门细分",
+      "reason": "专业用法"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

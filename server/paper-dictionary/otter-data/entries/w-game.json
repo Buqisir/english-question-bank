@@ -1,0 +1,396 @@
+{
+  "entryId": "w:game",
+  "headword": "game",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɡeɪm/",
+    "us": "/ɡeɪm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:game#p-main",
+      "ipa": {
+        "uk": "/ɡeɪm/",
+        "us": "/ɡeɪm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "gamer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "gamest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more game",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most game",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "games",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "gamed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "gaming",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 35,
+    "mock": 336
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 334
+  },
+  "senses": [
+    {
+      "senseId": "w:game#s1",
+      "pos": "n.",
+      "glossZh": "游戏",
+      "pronunciationId": "w:game#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:game#e-910b3d817ef8a60d",
+          "text": "I remember her reading a magazine while taking the part of the Wolf in a game of “Little Red Riding Hood” with my brother’s two daughters.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:game#e-e95881ed455eac0b",
+          "text": "They like smartphone games.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2021-national-b:26",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:game#e-c8c0f464428adb6a",
+          "text": "“In a Go game, each move should serve a long-term goal.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:game#s2",
+      "pos": "n.",
+      "glossZh": "比赛",
+      "pronunciationId": "w:game#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:game#e-d841c603f7aa0ee7",
+          "text": "When does Gomez watch a football game on TV?",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:game#e-81b07cef0854e821",
+          "text": "If we readjust our view of arguments – from a verbal fight or tennis game to a reasoned exchange through which we all gain respect and understanding from each other -then we change the very nature of what it means to “win” an argument.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:game#e-c4337b64e5fb3308",
+          "text": "She had passed a baseball field, breaking up the game and flattening the umpire（裁判）in passing.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:game#s3",
+      "pos": "n.",
+      "glossZh": "运动项目",
+      "pronunciationId": "w:game#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:game#e-3b424fce5f6c8e00",
+          "text": "Handball is a fascinating game which combines speed, strength, technical precision, skill and teamwork.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:game#e-706602ea93e91fc7",
+          "text": "Yet for most of my life, I wasn’t into football – the “beautiful game” never held my attention.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:game#s4",
+      "pos": "n.",
+      "glossZh": "运动会",
+      "pronunciationId": "w:game#p-main",
+      "note": "大写 the Games，例中指奥运会。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:game#e-8d64defaaca7ee88",
+          "text": "As time went by, she thought __59__ that she could make the London Games – and win.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-b:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:game#s5",
+      "pos": "短语",
+      "glossZh": "需要长期努力的事",
+      "pronunciationId": "w:game#p-main",
+      "note": "a long game。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:game#e-f7ce2930af555531",
+          "text": "“Feeding is a long game,” says Markey.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:game#s6",
+      "pos": "n.",
+      "glossZh": "猎物",
+      "pronunciationId": "w:game#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:game#s7",
+      "pos": "adj.",
+      "glossZh": "愿意尝试的",
+      "pronunciationId": "w:game#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:game#s8",
+      "pos": "v.",
+      "glossZh": "钻规则的空子",
+      "pronunciationId": "w:game#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

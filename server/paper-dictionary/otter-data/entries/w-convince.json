@@ -1,0 +1,268 @@
+{
+  "entryId": "w:convince",
+  "headword": "convince",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kənˈvɪns/",
+    "us": "/kənˈvɪns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:convince#p-main",
+      "ipa": {
+        "uk": "/kənˈvɪns/",
+        "us": "/kənˈvɪns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "convinced",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "convinces",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "convincing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 60
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 57
+  },
+  "senses": [
+    {
+      "senseId": "w:convince#s1",
+      "pos": "v.",
+      "glossZh": "使信服；使确信",
+      "pronunciationId": "w:convince#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:convince#e-21e5f1cf8b99d905",
+          "text": "He says it’s not easy to convince people that nutria fur is green, but he has no doubt about it.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:convince#e-751927067f7ac5a1",
+          "text": "Years of experience in the industry - and failed attempts to use technology - have convinced him that the best way to check cattle is with a man on a horse.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:convince#e-4201e6c50b9c97c6",
+          "text": "Emotion was also important in convincing readers – or the lack of emotion, at least.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:convince#s2",
+      "pos": "v.",
+      "glossZh": "说服（某人做某事）",
+      "pronunciationId": "w:convince#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:convince#e-754206cbb4665186",
+          "text": "Maya convinced her uncle to create a website showing Harold’s railroad.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:convince#e-148053d9b273d7e5",
+          "text": "Last month, Tim convinced me to join him in climbing a small hill.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:convince#s3",
+      "pos": "adj.",
+      "glossZh": "令人信服的（convincing）",
+      "pronunciationId": "w:convince#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:convince#e-c6e8b752f9a0fa0b",
+          "text": "Dirty shorts and old shoes gave him the __46__ of a real beggar and his convincing dialect soon won him the __47__ of the beggars.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:convince#e-134c0218598f8134",
+          "text": "The man’s words sounded pretty convincing.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:7",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:convince#e-ed4fdd3230b07cc1",
+          "text": "However, a new working paper by Dr. Alp Sungu of the University of Pennsylvania offers convincing evidence from a large-scale randomized controlled trial (RCT) – the gold standard in social science.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 97
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "定罪、战胜",
+      "reason": "古旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

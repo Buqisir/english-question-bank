@@ -1,0 +1,190 @@
+{
+  "entryId": "w:organ",
+  "headword": "organ",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɔːɡən/",
+    "us": "/ˈɔːrɡən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:organ#p-main",
+      "ipa": {
+        "uk": "/ˈɔːɡən/",
+        "us": "/ˈɔːrɡən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "organs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 37
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 34
+  },
+  "senses": [
+    {
+      "senseId": "w:organ#s1",
+      "pos": "n.",
+      "glossZh": "器官",
+      "pronunciationId": "w:organ#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:organ#e-14d058c58613eb1b",
+          "text": "Instead, it is a vital, dynamic body part, an organ in its own right that works with the brain, the bones and more to help keep us healthy.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:organ#e-9b4aed35ceb280dd",
+          "text": "More than 100,000 people in the United States are currently waiting for organ transplants, and many face long delays or rejection even when a suitable donor is found.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:organ#e-986146f9874c651b",
+          "text": "The key lies in the ability of a single cell to develop into a whole organism, and dedifferentiation (去分化), where mature cells return to a dividing state before forming new tissues and organs.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 185,
+            "end": 191
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:organ#s2",
+      "pos": "n.",
+      "glossZh": "管风琴",
+      "pronunciationId": "w:organ#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:organ#e-243fd78e90a2b29b",
+          "text": "Organ music is played on Thursday afternoons.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:17",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:organ#e-6fb47d423dfa94ef",
+          "text": "Enjoy organ music on Thursday.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2025-eight-provinces-jan:22",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:organ#s3",
+      "pos": "n.",
+      "glossZh": "机构；机关",
+      "pronunciationId": "w:organ#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

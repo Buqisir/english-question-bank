@@ -1,0 +1,404 @@
+{
+  "entryId": "w:card",
+  "headword": "card",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kɑːd/",
+    "us": "/kɑːrd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:card#p-main",
+      "ipa": {
+        "uk": "/kɑːd/",
+        "us": "/kɑːrd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "cards",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "carded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "carding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 18,
+    "mock": 162
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 157
+  },
+  "senses": [
+    {
+      "senseId": "w:card#s1",
+      "pos": "n.",
+      "glossZh": "银行卡；信用卡",
+      "pronunciationId": "w:card#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:card#e-4b21fa518ba21f2e",
+          "text": "To apply for a credit card.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:card#e-74326ebc3a91e0f1",
+          "text": "Cancel a credit card.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:card#e-fceae15cfaaba610",
+          "text": "I jumped out of the car, made a mad run for the machine, and popped my card in, only to read the message:“Out of order.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:card#s2",
+      "pos": "n.",
+      "glossZh": "证件卡；会员卡；借阅证",
+      "pronunciationId": "w:card#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:card#e-d0d468a2c6f81308",
+          "text": "She wished me to have my own library card to check out books for myself.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:card#e-53d885b49d08461c",
+          "text": "They must have ID cards with them.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2022-national-b:23",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:card#e-07085e11f942cd2f",
+          "text": "Club membership cards.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:card#s3",
+      "pos": "n.",
+      "glossZh": "卡片；贺卡；明信片",
+      "pronunciationId": "w:card#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:card#e-85b2538361116a16",
+          "text": "Similarly, if you speak only Chinese, receiving a card in Swedish takes part of the fun away.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:31",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:card#e-6d5c6742f65175d4",
+          "text": "In many communities, that trust is won every day when life-saving medicine, greeting cards, social security checks, college acceptance letters – even the bills – appear in mailboxes in front of the houses.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:card#e-8d1b0fc136d04816",
+          "text": "Then they gave her a birthday card with a heartfelt letter tucked inside.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:card#s4",
+      "pos": "n.",
+      "glossZh": "纸牌",
+      "pronunciationId": "w:card#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:card#e-61ad51d8bc98032f",
+          "text": "■ Pack of Cards (no 6’s or 9’s)",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:card#e-99f49647e4ed549e",
+          "text": "Initially, we chatted, played cards quietly.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:card#s5",
+      "pos": "n.",
+      "glossZh": "名片",
+      "pronunciationId": "w:card#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:card#s6",
+      "pos": "n.",
+      "glossZh": "卡纸；硬纸片",
+      "pronunciationId": "w:card#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:card#e-79c1ac8b0ce90a14",
+          "text": "Through this technique, Yao’s team detected how sound waves had shaken a paper card or leaf.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 83
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:card#s7",
+      "pos": "v.",
+      "glossZh": "查验身份证件",
+      "pronunciationId": "w:card#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "纺织梳具、罗盘刻度盘、图论删点图等",
+      "reason": "行业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

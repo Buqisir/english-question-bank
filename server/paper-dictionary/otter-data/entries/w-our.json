@@ -1,0 +1,117 @@
+{
+  "entryId": "w:our",
+  "headword": "our",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈaʊə(r)/",
+    "us": "/ˈaʊər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:our#p-main",
+      "ipa": {
+        "uk": "/ˈaʊə(r)/",
+        "us": "/ˈaʊər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 200,
+    "mock": 1803
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:our#s1",
+      "pos": "det.",
+      "glossZh": "我们的",
+      "pronunciationId": "w:our#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 200,
+        "mock": 1803
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:our#e-b11aabb6c4646d9b",
+          "text": "While running every aspect of our own news station, kids and their fellow campers will create and host a broadcast airing each night at dinner for the entire camp.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:our#e-3dd0dfbbaf9e7c88",
+          "text": "Also, it gives our parents more time to do what they are like and it improves the family relationship.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-national-b:writing-short-error-correction:9",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:our#e-8290b551d2317c73",
+          "text": "“Our cooperation is truly proof of what makes Salk science so special and impactful,” says Pereira.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 4
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

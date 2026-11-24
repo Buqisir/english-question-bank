@@ -1,0 +1,122 @@
+{
+  "entryId": "w:your",
+  "headword": "your",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/jɔː(r)/",
+    "us": "/jʊr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:your#p-main",
+      "ipa": {
+        "uk": "/jɔː(r)/",
+        "us": "/jʊr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 490,
+    "mock": 2963
+  },
+  "unassignedCounts": {
+    "gaokao": 487,
+    "mock": 2963
+  },
+  "senses": [
+    {
+      "senseId": "w:your#s1",
+      "pos": "det.",
+      "glossZh": "你的；你们的",
+      "pronunciationId": "w:your#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:your#e-81321cc745387938",
+          "text": "■On the same sheet of paper, write or type your name, address, telephone number, and birth date.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:your#e-fadc5f7bfd7072a9",
+          "text": "Talk directly to your audience, be yourself and make a connection.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:your#e-29b5c376cd940023",
+          "text": "“You’re 20, but your heart is 40!” he said.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 20
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "泛指的所有格和强调熟悉事物的用法",
+      "reason": "仍用上述释义，具体对象由语境决定"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

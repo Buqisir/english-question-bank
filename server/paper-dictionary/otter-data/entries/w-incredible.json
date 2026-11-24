@@ -1,0 +1,201 @@
+{
+  "entryId": "w:incredible",
+  "headword": "incredible",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪnˈkredəbl/",
+    "us": "/ɪnˈkredəbl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:incredible#p-main",
+      "ipa": {
+        "uk": "/ɪnˈkredəbl/",
+        "us": "/ɪnˈkredəbl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more incredible",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most incredible",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 16
+  },
+  "senses": [
+    {
+      "senseId": "w:incredible#s1",
+      "pos": "adj.",
+      "glossZh": "惊人的；难以置信的",
+      "pronunciationId": "w:incredible#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:incredible#e-f1fb1aaa1ac53532",
+          "text": "Today, satellite and sonar technology enable us to map the ocean floor with incredible precision, but none of",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:incredible#e-260765de87dede51",
+          "text": "One afternoon, while we were looking up at the sky, I turned to grandpa with a __46__, “Isn’t it incredible that we have actually sent men to the moon and back?”",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:incredible#e-a175dde35b8905d7",
+          "text": "When the older kids, skilled and confident, began flicking (挑击) the ball with incredible force, our kids had to dive and duck because they had no protective masks (面罩) on their faces.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:incredible#s2",
+      "pos": "adj.",
+      "glossZh": "极好的；了不起的",
+      "pronunciationId": "w:incredible#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:incredible#e-31c43ed8d867c1b1",
+          "text": "Thanks to the incredible local emergency services, he was located, rescued and airlifted to hospital.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:incredible#e-4362ae416389ff26",
+          "text": "“TCM is incredible!",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:grammar-fill:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:incredible#e-10c25f9ab8cfd4c7",
+          "text": "Although my book is a work of fiction, I hope I’ve done justice to this incredible and inspiring woman.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 82
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

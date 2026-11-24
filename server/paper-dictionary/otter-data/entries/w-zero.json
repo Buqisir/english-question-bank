@@ -1,0 +1,378 @@
+{
+  "entryId": "w:zero",
+  "headword": "zero",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈzɪərəʊ/",
+    "us": "/ˈzɪroʊ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:zero#p-main",
+      "ipa": {
+        "uk": "/ˈzɪərəʊ/",
+        "us": "/ˈzɪroʊ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "zeroes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "zeros",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "zeroed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "zeroing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 32
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 28
+  },
+  "senses": [
+    {
+      "senseId": "w:zero#s1",
+      "pos": "num.",
+      "glossZh": "零",
+      "pronunciationId": "w:zero#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:zero#e-885ef0c4ee8622ca",
+          "text": "This sense of uncertainty led me to think about the meaning of zero.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:zero#e-214f0b192897ca1a",
+          "text": "For digits, they used a dot for 1, a line for 5, and a shell shape to show zero.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-04-second:reading-a:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:zero#e-0f312e931c9cfcda",
+          "text": "The latter was measured by the human development index (HDI), a score based on life expectancy, time in education and per capita income, which ranges from zero to one.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhuji-2025-12-first:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 155,
+            "end": 159
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:zero#s2",
+      "pos": "num.",
+      "glossZh": "没有任何",
+      "pronunciationId": "w:zero#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:zero#e-eb568366a569db2e",
+          "text": "I experienced this when I started switching to a zero waste lifestyle five years ago, as I was living with my parents, and I continue to experience this with my husband, as he is not completely zero waste like me.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:zero#e-730d5342ad14ee37",
+          "text": "Just then I realised that I had zero cash in my wallet.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:zero#e-bae171fe31cf7c37",
+          "text": "Moreover, having a system in the same building where it’s eaten means zero emissions (排放) from transporting plants from soil to salad.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 74
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:zero#s3",
+      "pos": "n.",
+      "glossZh": "零分",
+      "pronunciationId": "w:zero#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:zero#e-ce1e40f01a17aec8",
+          "text": "If it is not turned in by the 4th day after the due date, it will earn a zero.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "reading-a-11",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:zero#e-dba33a21635be186",
+          "text": "Daily assignments not completed during class will get a zero.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "reading-a-11",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:zero#e-d2e981424f8578e7",
+          "text": "You will receive a zero.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2022-i:23",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:zero#s4",
+      "pos": "n.",
+      "glossZh": "零度",
+      "pronunciationId": "w:zero#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:zero#e-c6fa887d00ebcdf7",
+          "text": "In winter, expect temperatures from below zero to the high 20s.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-a:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:zero#s5",
+      "pos": "v.",
+      "glossZh": "使归零",
+      "pronunciationId": "w:zero#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:zero#s6",
+      "pos": "短语",
+      "glossZh": "把注意力集中在",
+      "pronunciationId": "w:zero#p-main",
+      "note": "zero in on sth。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:zero#e-2c1ac017886229ca",
+          "text": "Whereas some previous tests relied on observing general brain activities, this strategy zeroed in on an activity directly linked to a researcher’s verbal command.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 94
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "函数零点、零息债券、日本零式战机",
+      "reason": "专业或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

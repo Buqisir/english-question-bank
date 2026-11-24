@@ -1,0 +1,124 @@
+{
+  "entryId": "w:physician",
+  "headword": "physician",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fɪˈzɪʃn/",
+    "us": "/fɪˈzɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:physician#p-main",
+      "ipa": {
+        "uk": "/fɪˈzɪʃn/",
+        "us": "/fɪˈzɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "physicians",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:physician#s1",
+      "pos": "n.",
+      "glossZh": "医师；医生",
+      "pronunciationId": "w:physician#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:physician#e-7deed83babc61183",
+          "text": "Born to a Jewish family in Florence, she moved to Paris where she worked as a physician and performed surgery.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-a:figure-ed26865ff4e2681b:cell-1-1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 87
+          }
+        },
+        {
+          "exampleId": "w:physician#e-ff6bfaca210a66e6",
+          "text": "Tan Yunxian (1461 — 1554) was a Chinese physician who learned her skills from her grandparents.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-a:figure-d47b575dce95546b:cell-1-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:physician#e-511f352d2e23290d",
+          "text": "For Dr. Leong, it’s finally possible to be both a dedicated physician and a present __55__.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 69
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

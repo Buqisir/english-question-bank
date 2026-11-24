@@ -1,0 +1,273 @@
+{
+  "entryId": "w:update",
+  "headword": "update",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌʌpˈdeɪt/",
+    "us": "/ˌʌpˈdeɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:update#p-main",
+      "ipa": {
+        "uk": "/ˌʌpˈdeɪt/",
+        "us": "/ˌʌpˈdeɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:update#p-noun",
+      "ipa": {
+        "uk": "/ˈʌpdeɪt/",
+        "us": "/ˈʌpdeɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "名词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "updates",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "updated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "updating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 80
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 74
+  },
+  "senses": [
+    {
+      "senseId": "w:update#s1",
+      "pos": "v.",
+      "glossZh": "更新",
+      "pronunciationId": "w:update#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:update#e-a6d410f92172d719",
+          "text": "For the biggest stadiums in the world, we have used data supplied by the World Atlas list so far, which ranks them by their stated permanent capacity, as well as updated information from official stadium websites.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 162,
+            "end": 169
+          }
+        },
+        {
+          "exampleId": "w:update#e-c36059a66cd63e60",
+          "text": "When was the last time you updated your resume?",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:update#e-96d5d37f4178c9da",
+          "text": "The scoreboard was updated to 43-41.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:update#s2",
+      "pos": "n.",
+      "glossZh": "最新消息",
+      "pronunciationId": "w:update#p-noun",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:update#e-b8bcf4b4c70b6cb8",
+          "text": "Every Wednesday, the two classes met on video chats to share updates on their progress.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:update#e-2e53cb5cd23d1933",
+          "text": "These limited-edition publications bring you the newest research and excavation (发掘) updates unique to each of these iconic archaeological sites.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:update#e-7834aca83108bfa3",
+          "text": "The flight update.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:update#s3",
+      "pos": "n.",
+      "glossZh": "软件更新",
+      "pronunciationId": "w:update#p-noun",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:update#s4",
+      "pos": "v.",
+      "glossZh": "把最新进展告知某人",
+      "pronunciationId": "w:update#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:update#e-e2d631189d5108b2",
+          "text": "Keep him updated.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

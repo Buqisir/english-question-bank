@@ -1,0 +1,362 @@
+{
+  "entryId": "w:leap",
+  "headword": "leap",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/liːp/",
+    "us": "/liːp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:leap#p-main",
+      "ipa": {
+        "uk": "/liːp/",
+        "us": "/liːp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "leaps",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "leaped",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    },
+    {
+      "form": "leaping",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "leapt",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 27
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 17
+  },
+  "senses": [
+    {
+      "senseId": "w:leap#s1",
+      "pos": "v.",
+      "glossZh": "跳；跃",
+      "pronunciationId": "w:leap#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:leap#e-1e91d3703f839a2a",
+          "text": "Thinking of the young rockhopper leaping over a fearful gap, I ask the scientists: Can rockhoppers’ courage be an advantage for their survival?",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:leap#e-69dc18b57f3ade12",
+          "text": "Seeing this, Li Wei and Director Zhang exchanged surprised glances and practically leaped from their chairs.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:leap#e-6d8494b5f17dcdd8",
+          "text": "He taught me about all the pieces and showed me how they moved: the king could move one square in any direction, and the game was won by trapping him; pawns(兵) moved straight forward; knights(马) moved in an L-shape and could leap over other pieces...",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 225,
+            "end": 229
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:leap#s2",
+      "pos": "v.",
+      "glossZh": "迅速跃升",
+      "pronunciationId": "w:leap#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:leap#e-135c11aa74d9b306",
+          "text": "She leaped from understudy to star.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-11-fourth:30",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:leap#s3",
+      "pos": "n.",
+      "glossZh": "跳跃",
+      "pronunciationId": "w:leap#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:leap#e-4d8de55b2547072a",
+          "text": "Suddenly his heart did a leap – as Ed lifted the rocket to place it on the launch pad, his fin（翼） had caught against something, pulling it away from the fuselage（机身） — not enough to break it off, just enough to loosen it.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:leap#s4",
+      "pos": "n.",
+      "glossZh": "重大进步；飞跃",
+      "pronunciationId": "w:leap#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:leap#e-faf4a1b4f976b098",
+          "text": "Imagine a rain collection device on your roof, producing small amounts of electricity whenever it rains – a small step for a raindrop, but a giant leap for sustainable energy technology.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 147,
+            "end": 151
+          }
+        },
+        {
+          "exampleId": "w:leap#e-d17daec3f3ee0404",
+          "text": "Undeniably, the emergence of conversational AI itself marks a leap in technological progress.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:leap#e-95a7d633e8013004",
+          "text": "The Svetlana-led MIT team’s leap in water recovery technology is a powerful testament to this very truth, one that is anticipated to bring vital solutions to water-scarce regions.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:leap#s5",
+      "pos": "短语",
+      "glossZh": "迈出冒险的一步",
+      "pronunciationId": "w:leap#p-main",
+      "note": "take the leap。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:leap#e-5b7e9c3ab42a98fc",
+          "text": "take the leap (飞跃), however __46__ it would be.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:leap#e-fe941904a2dfdec6",
+          "text": "With this in mind, I took the leap into this kind of learning by organising a stream stroll at the university where I taught.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:leap#e-a79782fff608284d",
+          "text": "“__39__ Better still, they encourage them to take the leap and sing a solo.”",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 58
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "豹子群、鱼梯、半蒲式耳",
+      "reason": "低频专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

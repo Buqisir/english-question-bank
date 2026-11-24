@@ -1,0 +1,317 @@
+{
+  "entryId": "w:bottle",
+  "headword": "bottle",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈbɒtl/",
+    "us": "/ˈbɑːtl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bottle#p-main",
+      "ipa": {
+        "uk": "/ˈbɒtl/",
+        "us": "/ˈbɑːtl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "bottles",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "bottled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "bottling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 27,
+    "mock": 85
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 85
+  },
+  "senses": [
+    {
+      "senseId": "w:bottle#s1",
+      "pos": "n.",
+      "glossZh": "瓶；瓶子",
+      "pronunciationId": "w:bottle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bottle#e-f976848261776470",
+          "text": "Finally I managed to put my whole head into it, like a cork (软木塞) forced into a bottle.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:bottle#e-970d2a44157cc8b4",
+          "text": "He poured water from a bottle into his hand and offered it to my dogs.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:cloze:3",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:bottle#e-56567ae1800bddd2",
+          "text": "And the wine was cloudy, in a funny old bottle with no label (标签) on it.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:cloze:1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bottle#s2",
+      "pos": "n.",
+      "glossZh": "一瓶的量",
+      "pronunciationId": "w:bottle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bottle#e-d8966e6fb9eae9a6",
+          "text": "You run into the grocery store to pick up one bottle of water.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:bottle#e-826c7420e83a35e4",
+          "text": "“The kids literally come to school with bags of snacks and large bottles of soft drinks,” she says.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:bottle#e-451a3122a791daf7",
+          "text": "It was __43__ called Mario, coming to __44__ us a box containing some tomatoes and a bottle of wine.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 91
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bottle#s3",
+      "pos": "n.",
+      "glossZh": "奶瓶",
+      "pronunciationId": "w:bottle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bottle#e-4e0ae8b44d8eaf97",
+          "text": "We had to have a bit of a production line going, making up “tiger milk”, washing baby bottles, and cleaning the floors.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:bottle#e-5af89f1f5f9241c8",
+          "text": "She taught him to eat from a bottle, and she woke in the night for his feeds.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bottle#s4",
+      "pos": "v.",
+      "glossZh": "装瓶",
+      "pronunciationId": "w:bottle#p-main",
+      "note": "bottled water 意为瓶装水。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bottle#e-4701cd553bdb33e0",
+          "text": "Even bottled water, scientists found earlier this year, contains 10 to 1,000 times more microplastics than originally thought.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bottle#s5",
+      "pos": "短语",
+      "glossZh": "压抑、克制（感情）",
+      "pronunciationId": "w:bottle#p-main",
+      "note": "bottle up",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "胆量、临阵退缩、用瓶子打人、印刷旋转等",
+      "reason": "地区俚语或行业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

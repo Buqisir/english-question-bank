@@ -1,0 +1,279 @@
+{
+  "entryId": "w:modest",
+  "headword": "modest",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmɒdɪst/",
+    "us": "/ˈmɑːdɪst/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:modest#p-main",
+      "ipa": {
+        "uk": "/ˈmɒdɪst/",
+        "us": "/ˈmɑːdɪst/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "modester",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "modestest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more modest",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most modest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 30
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 22
+  },
+  "senses": [
+    {
+      "senseId": "w:modest#s1",
+      "pos": "adj.",
+      "glossZh": "谦逊的",
+      "pronunciationId": "w:modest#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:modest#e-d2aa77ff6b71ba01",
+          "text": "This means having a modest view of your own competence or abilities.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-putian-2026-03-second-quality-test:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:modest#e-8c06e4d8ea4508f6",
+          "text": "Paragraph 2: Praised for easing a tense situation by a warm hug, Armus was modest.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:modest#e-03ba3d9c89690974",
+          "text": "Modest and knowledgeable.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:26",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:modest#s2",
+      "pos": "adj.",
+      "glossZh": "数量或程度不大的",
+      "pronunciationId": "w:modest#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:modest#e-3f48c5567ee71e09",
+          "text": "With modest investment and creative thinking, outdated technology can serve new purposes, contributing to a greener digital society while helping to solve the growing problem of electronic waste.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:modest#e-4b387d7773320297",
+          "text": "True to his humble beginnings, he started repaying Stanford almost immediately after graduation – beginning with modest athletic department gifts that grew into historic donations exceeding $250 million.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2",
+            "paperTitle": "2025-2026学年德州市“优高联盟”高三上学期期中诊断性测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 113,
+            "end": 119
+          }
+        },
+        {
+          "exampleId": "w:modest#e-4b2308dc8e3e413e",
+          "text": "And she works several overnight shifts every week at a nursing home to supplement her and her husband’s modest salaries.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 110
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:modest#s3",
+      "pos": "adj.",
+      "glossZh": "简朴的",
+      "pronunciationId": "w:modest#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:modest#e-8f6bf6a8514c3172",
+          "text": "If I didn’t find a job soon, I wouldn’t be able to pay the rent on my apartment – a modest two-bedroom in a four-story walkup.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:modest#e-b2d98a170467f025",
+          "text": "Chunfu is a modest venue, with tables and chairs that appear to have been used for ages.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:grammar-fill:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:modest#s4",
+      "pos": "adj.",
+      "glossZh": "（衣着）端庄的",
+      "pronunciationId": "w:modest#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,168 @@
+{
+  "entryId": "w:ad",
+  "headword": "AD",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌeɪ ˈdiː/",
+    "us": "/ˌeɪ ˈdiː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ad#p-main",
+      "ipa": {
+        "uk": "/ˌeɪ ˈdiː/",
+        "us": "/ˌeɪ ˈdiː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:ad#p-ad",
+      "ipa": {
+        "uk": "/æd/",
+        "us": "/æd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "小写 ad"
+    }
+  ],
+  "forms": [
+    {
+      "form": "ADs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Ads",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "ads",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 29
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 26
+  },
+  "senses": [
+    {
+      "senseId": "w:ad#s1",
+      "pos": "缩写",
+      "glossZh": "公元",
+      "pronunciationId": "w:ad#p-main",
+      "note": "Anno Domini 的缩写，用在表示公元纪年的年份前后。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ad#e-13257039f4fee1a8",
+          "text": "Classical music has its roots in the Middle Ages (approximately 450-1450 AD) and has evolved",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:ad#e-6013f8dd4407722d",
+          "text": "Pliny the Younger, a teacher around AD 61—113, encouraged students to practice speaking at home.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ad#s2",
+      "pos": "n.",
+      "glossZh": "广告（ad 的小写用法）",
+      "pronunciationId": "w:ad#p-ad",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ad#e-d730bf679292cc97",
+          "text": "Silently grumbling（抱怨）, I arose and walked down the hall, temporarily abandoning my collection of Help Wanted ads and stack of résumés on the kitchen table.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 110,
+            "end": 113
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "反倾销、地名和副导演等缩写",
+      "reason": "各自领域的同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

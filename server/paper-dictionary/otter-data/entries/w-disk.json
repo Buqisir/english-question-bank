@@ -1,0 +1,138 @@
+{
+  "entryId": "w:disk",
+  "headword": "disk",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪsk/",
+    "us": "/dɪsk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:disk#p-main",
+      "ipa": {
+        "uk": "/dɪsk/",
+        "us": "/dɪsk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "disks",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:disk#s1",
+      "pos": "n.",
+      "glossZh": "圆片；圆盘",
+      "pronunciationId": "w:disk#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:disk#e-567675b00c6f507e",
+          "text": "dropped: bamboo strips broken, the rattan cord (藤条) in a mess, the carved wooden feeding disk",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 93
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:disk#s2",
+      "pos": "n.",
+      "glossZh": "磁盘；光盘",
+      "pronunciationId": "w:disk#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:disk#e-d855ce8945806bbd",
+          "text": "This method allows for extremely high density (密度), with up to 360 TB stored on a 5-inch glass disk.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 99
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:disk#s3",
+      "pos": "n.",
+      "glossZh": "椎间盘",
+      "pronunciationId": "w:disk#p-main",
+      "note": "此义也拼作 disc。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "用圆盘耙耕地；使螺旋桨迎风增阻",
+      "reason": "专门动词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

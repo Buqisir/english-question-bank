@@ -1,0 +1,830 @@
+{
+  "entryId": "w:point",
+  "headword": "point",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pɔɪnt/",
+    "us": "/pɔɪnt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:point#p-main",
+      "ipa": {
+        "uk": "/pɔɪnt/",
+        "us": "/pɔɪnt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "points",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "pointed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "pointing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 54,
+    "mock": 385
+  },
+  "unassignedCounts": {
+    "gaokao": 10,
+    "mock": 379
+  },
+  "senses": [
+    {
+      "senseId": "w:point#s1",
+      "pos": "n.",
+      "glossZh": "得分",
+      "pronunciationId": "w:point#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:point#s2",
+      "pos": "n.",
+      "glossZh": "论点；要点",
+      "pronunciationId": "w:point#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:point#e-abeb4de620bc34b7",
+          "text": "Unfortunately we forgot to weigh them before taking out their insides, but I was determined to prove my point.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 109
+          }
+        },
+        {
+          "exampleId": "w:point#e-8a579ba76128ae55",
+          "text": "It’s the last chance to make your point.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:point#e-bcc3e692282c27e8",
+          "text": "Elizabeth Sims analyzes the final chapters of five great novels to see what key points they include and how you can adapt them for your work.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 86
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:point#s3",
+      "pos": "n.",
+      "glossZh": "目的；用意",
+      "pronunciationId": "w:point#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:point#e-c185718e2d225765",
+          "text": "Campbell’s point is to wake up those responsible for AI - the technology companies and world leaders - so they are on the same page as all the experts currently developing it.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:point#e-9715b3c4e98d6a1b",
+          "text": "This distaste for arguments is common, but it depends on a mistaken view of arguments that causes problems for our personal and social lives – and in many ways misses the point of arguing in the first place.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 171,
+            "end": 176
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:point#s4",
+      "pos": "n.",
+      "glossZh": "某个时刻或阶段",
+      "pronunciationId": "w:point#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:point#e-c1d25f71e8e230b7",
+          "text": "We are almost certain to get __53__ at some point during the process of achieving our goal.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:point#e-3a25a6e428fb8f95",
+          "text": "At this point, it is not clear why dogs seem to be equipped with the ability to recognize different facial expressions in humans.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:point#e-b13c1cc6fa342d5a",
+          "text": "At one point, Emily’s car got stuck.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:point#s5",
+      "pos": "n.",
+      "glossZh": "地点或位置",
+      "pronunciationId": "w:point#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:point#e-747060ac4d3fce94",
+          "text": "Walking up a path through the forest towards Shutlingsloe, a local high point, I came across a small clearing and immediately noticed the dead yellow grasses set against the fresh snow.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-a:figure-8f50d0ac5d38cb0b:cell-2-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:point#e-449e844dba663aee",
+          "text": "They share the same start point.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2024-ii:23",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:point#e-856bedc79df61c9d",
+          "text": "Where to find a charging point.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2026-ii:33",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:point#s6",
+      "pos": "n.",
+      "glossZh": "某种度数的界点",
+      "pronunciationId": "w:point#p-main",
+      "note": "如 freezing point（冰点）。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:point#e-80c716ac47f7da13",
+          "text": "The salt lowers water’s freezing point, causing ice to melt（融化）.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:point#e-c7a1e474b7742802",
+          "text": "Then the steam cools and condenses (凝结) back into hot water, which is used to heat a different kind of liquid with a much lower boiling point, such as butane, to drive a second generator before it is transported back to the system.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-c:8",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 136,
+            "end": 141
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:point#s7",
+      "pos": "n.",
+      "glossZh": "程度",
+      "pronunciationId": "w:point#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:point#e-9d56449b442babe5",
+          "text": "That said, to be honest the only people who ever ring our home phone are our Baby Boomer parents, to the point where we play a game and guess who is calling before we pick up the phone (using Caller ID would take the fun out of it).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:point#e-7fe8e62ebd53a942",
+          "text": "A couple of years ago film-maker David Bond realised that his children, then aged five and three, were attached to screens to the point where he was able to say “chocolate” into his three-year-old son’s ear without getting a response.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 130,
+            "end": 135
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:point#s8",
+      "pos": "n.",
+      "glossZh": "尖端",
+      "pronunciationId": "w:point#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:point#s9",
+      "pos": "v.",
+      "glossZh": "指向",
+      "pronunciationId": "w:point#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:point#e-d8cfd26410b75355",
+          "text": "After a short way, the farmer stopped and pointed at a weed which we missed.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:point#e-c7be95fb7de66442",
+          "text": "At this moment, Gunter pointed towards the waiting hall of the bus station.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:point#e-6ba68ee7f716a6b3",
+          "text": "Almost everyone was looking up, yet he was pointing down.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:point#s10",
+      "pos": "v.",
+      "glossZh": "表明；提示",
+      "pronunciationId": "w:point#p-main",
+      "note": "point to。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:point#e-a45381760c8f0f01",
+          "text": "yet they also point to a fundamental problem.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:point#e-38de29c04bf855b2",
+          "text": "This finding points to a broader principle in human neuroscience: Transformation often requires crossing intensity levels that moderate effort simply can’t reach.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:point#e-7c76a57d0df288a1",
+          "text": "Though the evidence isn’t clear yet, journals like Psychology Today point to a possible connection between heavy screen use and social withdrawal, trouble starting conversations and difficulty maintaining eye contact – all behaviors typically associated with autism.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:point#s11",
+      "pos": "adj.",
+      "glossZh": "尖的",
+      "pronunciationId": "w:point#p-main",
+      "note": "pointed。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:point#e-76dedeae8744c923",
+          "text": "It has a pointed roof.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2026-ii:26",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:point#e-e493a8785488bdad",
+          "text": "You might go for a classic straight marker with a pointed end to stick directly into the soil, or perhaps you’re feeling a bit more adventurous and want to create a round or heart shape with a hole to hang from a metal post.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 64
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:point#s12",
+      "pos": "短语",
+      "glossZh": "指出",
+      "pronunciationId": "w:point#p-main",
+      "note": "point out。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:point#e-ca129a8f8ff4b7e7",
+          "text": "It is not my intention to point out the central theme of each of the plays in this collection, for that would, indeed, ruin the pleasure of reading, discussing, and thinking about the plays and the effectiveness of the playwright.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:point#e-400936a1653f68fa",
+          "text": "What phenomenon does the author point out in paragraph 1?",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2025-i:28",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:point#e-f3eb5dea1614d1c7",
+          "text": "Though many companies use algorithms (算法) to weed out fake reviews, Azimi points out that the machines are programmed by humans, and given our limited ability to spot fake reviews, this isn’t a good sign.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:point#s13",
+      "pos": "短语",
+      "glossZh": "观点",
+      "pronunciationId": "w:point#p-main",
+      "note": "point of view。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:point#e-8a1df0df05edc23d",
+          "text": "From a 21st-century point of view, the printed book is certainly ancient, but it remains as interactive as any battery-powered e-reader.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:point#e-98bcc9b7f3ac21f8",
+          "text": "Audrey Sabbagh, an associate professor at Paris City University, once asked, “Can we consider research that is not ethical from an environmental point of view to be excellent?” That question stayed with me.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 145,
+            "end": 150
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:point#s14",
+      "pos": "短语",
+      "glossZh": "特意做某事",
+      "pronunciationId": "w:point#p-main",
+      "note": "make it a point。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:point#e-8a7e322ed6cc21b7",
+          "text": "My parents made it a point for their two kids to spend time outside, no matter the weather or season.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 33
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Artist Point",
+      "reason": "固定地名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

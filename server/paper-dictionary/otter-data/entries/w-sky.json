@@ -1,0 +1,129 @@
+{
+  "entryId": "w:sky",
+  "headword": "sky",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/skaɪ/",
+    "us": "/skaɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:sky#p-main",
+      "ipa": {
+        "uk": "/skaɪ/",
+        "us": "/skaɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "skies",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 60
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 58
+  },
+  "senses": [
+    {
+      "senseId": "w:sky#s1",
+      "pos": "n.",
+      "glossZh": "天空",
+      "pronunciationId": "w:sky#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sky#e-760fa70b0cbfec78",
+          "text": "The sky was clear when we __47__, but storms move in fast in the mountains, and this one quickly __48__ our peaceful morning trip.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "cloze-3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:sky#e-3b6dc0f5bb1040a6",
+          "text": "The bird stood up and flew into the blue sky.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:sky#e-a516f4628fd4d430",
+          "text": "Paragraph 2: When I finally reached the summit, the rising sun painted the sky gold.",
+          "source": {
+            "paperId": "paper-mock-hunan-nine-school-alliance-2026-first-joint-exam",
+            "paperTitle": "湖南省2026届高三九校联盟第一次联考",
+            "groupId": "group:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 78
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Skye 旧拼写、姓氏、悬空喝下、竞价抬高",
+      "reason": "地名、姓氏或罕见义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

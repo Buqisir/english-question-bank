@@ -1,0 +1,166 @@
+{
+  "entryId": "w:offend",
+  "headword": "offend",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈfend/",
+    "us": "/əˈfend/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:offend#p-main",
+      "ipa": {
+        "uk": "/əˈfend/",
+        "us": "/əˈfend/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "offended",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "offending",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "offends",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "senses": [
+    {
+      "senseId": "w:offend#s1",
+      "pos": "v.",
+      "glossZh": "冒犯；使不快",
+      "pronunciationId": "w:offend#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:offend#e-a3f1d819f6f48c12",
+          "text": "On the personal level, it fuels anxiety, as individuals repeatedly question whether they have offended their peers.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:offend#e-ee7c03617e603095",
+          "text": "If my colleague wants to eat alone in the canteen, I would not feel offended.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:offend#e-bb18b41588df39f6",
+          "text": "Otherwise the recipient may feel offended.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第三次学情诊断英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-z20-plus-alliance-2026-05-senior-three-third-academic-diagnostic:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:offend#s2",
+      "pos": "v.",
+      "glossZh": "违法；犯罪",
+      "pronunciationId": "w:offend#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:offend#s3",
+      "pos": "v.",
+      "glossZh": "使人感到刺眼、不悦",
+      "pronunciationId": "w:offend#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

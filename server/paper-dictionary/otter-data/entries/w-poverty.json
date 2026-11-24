@@ -1,0 +1,138 @@
+{
+  "entryId": "w:poverty",
+  "headword": "poverty",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpɒvəti/",
+    "us": "/ˈpɑːvərti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:poverty#p-main",
+      "ipa": {
+        "uk": "/ˈpɒvəti/",
+        "us": "/ˈpɑːvərti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "poverties",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "senses": [
+    {
+      "senseId": "w:poverty#s1",
+      "pos": "n.",
+      "glossZh": "贫困",
+      "pronunciationId": "w:poverty#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:poverty#e-41b787b5c944e206",
+          "text": "Fighting Poverty in North Africa",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2023-four-provinces-feb:27",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:poverty#e-6952712a93e58b92",
+          "text": "It’s one of the city’s most dangerous neighborhoods, with a high poverty rate.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:poverty#e-b73264590b26f209",
+          "text": "Twenty years ago, Azheke was just a far-off village struggling with poverty, underdeveloped transportation and outdated farming practices.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:grammar-fill:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:poverty#s2",
+      "pos": "n.",
+      "glossZh": "贫乏",
+      "pronunciationId": "w:poverty#p-main",
+      "note": "如 poverty of imagination。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

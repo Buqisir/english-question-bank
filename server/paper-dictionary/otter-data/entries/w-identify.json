@@ -1,0 +1,292 @@
+{
+  "entryId": "w:identify",
+  "headword": "identify",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/aɪˈdentɪfaɪ/",
+    "us": "/aɪˈdentɪfaɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:identify#p-main",
+      "ipa": {
+        "uk": "/aɪˈdentɪfaɪ/",
+        "us": "/aɪˈdentɪfaɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "identified",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "identifies",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "identifying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 228
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 226
+  },
+  "senses": [
+    {
+      "senseId": "w:identify#s1",
+      "pos": "v.",
+      "glossZh": "识别；认出",
+      "pronunciationId": "w:identify#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:identify#e-f89a4d1249acf185",
+          "text": "This happened over and over, but we soon learned to identify different grasses like cockleburs, lamb's-quarters, foxtails, and the king of weeds, the pretty purple thistle.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:identify#e-76ec4d70cbcef44e",
+          "text": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks – like identifying the main idea in a reading passage – to ones that require mental abstraction – such as drawing inferences from a text.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 113,
+            "end": 124
+          }
+        },
+        {
+          "exampleId": "w:identify#e-96721fc7b0db726e",
+          "text": "AI can help identify the slightest signs of decay, such as cracks or discoloration, which are often invisible to the human eye.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:identify#s2",
+      "pos": "v.",
+      "glossZh": "查明；确定",
+      "pronunciationId": "w:identify#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:identify#e-01a0db39b5495941",
+          "text": "Louise Hartley, who is leading the Tiny Forest project in the UK, explains that the process begins by identifying areas in which a tiny forest could have the biggest influence.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 113
+          }
+        },
+        {
+          "exampleId": "w:identify#e-8e1a646f49264542",
+          "text": "The work helps researchers identify ideal places to plant milkweed and other vegetation that are important to the life cycle of West Coast monarch butterflies.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:identify#e-64fba83e1e89bee0",
+          "text": "She identified two distinct groups: high and low intensity speakers.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:identify#s3",
+      "pos": "v.",
+      "glossZh": "认定……为",
+      "pronunciationId": "w:identify#p-main",
+      "note": "identify sb/sth as …。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:identify#e-15ee7133c1b16460",
+          "text": "Growing up in Portland, Ore., Shah loved creative writing but was identified as a “STEM kid.” She majored in mechanical engineering.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:identify#e-3f8a4e87efda09d8",
+          "text": "Some of the fossils have been identified as cambroernids （寒武岐须虫类）, which weren’t known to exist before the Cambrian.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:identify#s4",
+      "pos": "短语",
+      "glossZh": "与……有共鸣",
+      "pronunciationId": "w:identify#p-main",
+      "note": "identify with sb。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:identify#s5",
+      "pos": "v.",
+      "glossZh": "自我认定为",
+      "pronunciationId": "w:identify#p-main",
+      "note": "identify as …。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

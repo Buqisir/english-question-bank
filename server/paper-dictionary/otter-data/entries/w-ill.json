@@ -1,0 +1,265 @@
+{
+  "entryId": "w:ill",
+  "headword": "ill",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪl/",
+    "us": "/ɪl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ill#p-main",
+      "ipa": {
+        "uk": "/ɪl/",
+        "us": "/ɪl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "iller",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "illest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more ill",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most ill",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "worse",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "worst",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 8,
+    "mock": 13
+  },
+  "senses": [
+    {
+      "senseId": "w:ill#s1",
+      "pos": "adj.",
+      "glossZh": "生病的",
+      "pronunciationId": "w:ill#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ill#e-18b56cbb44ebd253",
+          "text": "If we drink dirty water, we can catch diseases from the bacteria and become ill.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:ill#e-036098522d1c6365",
+          "text": "“My mom suddenly fell ill, and I have to stay with her.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:ill#e-bf2a214f34a6cdab",
+          "text": "To raise money for seriously ill children.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期初监测 英语",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:24",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ill#s2",
+      "pos": "adj.",
+      "glossZh": "有害的；不良的",
+      "pronunciationId": "w:ill#p-main",
+      "note": "如 ill effects。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ill#e-0b5307233144c7e9",
+          "text": "Even so, many people who are obese don’t experience these ill effects, a clue that something more complex is going on.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:ill#e-6100f0208abc3e70",
+          "text": "Like mice, people who are naturally short sleepers seem to be immune (免疫的) to the ill effects of short sleep.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 85
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ill#s3",
+      "pos": "adj.",
+      "glossZh": "不友善的；恶意的",
+      "pronunciationId": "w:ill#p-main",
+      "note": "ill will 表示「恶意」。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ill#e-7b8f2880aca2d280",
+          "text": "The common fear that a friend secretly dislikes us often reflects internal insecurities rather than actual ill will.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 110
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ill#s4",
+      "pos": "adv.",
+      "glossZh": "不好地；不充分地",
+      "pronunciationId": "w:ill#p-main",
+      "note": "如 ill prepared。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "馆际互借",
+      "reason": "大写 ILL 为 Interlibrary Loan 缩写，g2–g9 留空"
+    },
+    {
+      "glossZh": "邪恶（名词）、苯环利定",
+      "reason": "罕见旧义或俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

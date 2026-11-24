@@ -1,0 +1,291 @@
+{
+  "entryId": "w:upon",
+  "headword": "upon",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈpɒn/",
+    "us": "/əˈpɑːn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:upon#p-main",
+      "ipa": {
+        "uk": "/əˈpɒn/",
+        "us": "/əˈpɑːn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 11,
+    "mock": 69
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 66
+  },
+  "senses": [
+    {
+      "senseId": "w:upon#s1",
+      "pos": "prep.",
+      "glossZh": "在……上",
+      "pronunciationId": "w:upon#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:upon#e-e98801cd17a8f709",
+          "text": "When the explorers first set foot upon the continent of North America, the skies and lands were alive with an astonishing variety of wildlife.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:upon#e-d80b56009c679fca",
+          "text": "“Happiness is a butterfly, which is always just beyond your grasp when pursued, but may land upon you if you sit quietly.” I reread the quote in my car, hoping it would give me confidence.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 97
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:upon#s2",
+      "pos": "prep.",
+      "glossZh": "一……就……",
+      "pronunciationId": "w:upon#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:upon#e-42a338bef81cdd96",
+          "text": "Upon entering the correct zone, parking staff will guide you directly to a space.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        },
+        {
+          "exampleId": "w:upon#e-a403dfbaa375d608",
+          "text": "Upon arriving in England, he sang London is the Place for Me.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        },
+        {
+          "exampleId": "w:upon#e-c1df2b0aa24b5b88",
+          "text": "Upon arriving at the concert hall, Ms. Carson handed out script（剧本）copies to the actors.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
+            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2025-10-first-baseline-test:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:upon#s3",
+      "pos": "prep.",
+      "glossZh": "以……为依据",
+      "pronunciationId": "w:upon#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:upon#e-d70d8da72756806e",
+          "text": "The best apps adapt themselves based upon your behavior.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:upon#e-002f36bba749c8c4",
+          "text": "Building upon past research that found exercise releases biochemicals that improve mental function, scientists at Radboud University and the University of Edinburgh conducted a study to determine when exercise was most beneficial to learning.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:upon#s4",
+      "pos": "短语",
+      "glossZh": "即将来到",
+      "pronunciationId": "w:upon#p-main",
+      "note": "be upon sb。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:upon#e-b494037de23d2258",
+          "text": "Summer is upon us.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:upon#s5",
+      "pos": "短语",
+      "glossZh": "仔细思考",
+      "pronunciationId": "w:upon#p-main",
+      "note": "reflect upon。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:upon#e-2b2497aafb6a056f",
+          "text": "reflect upon",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:cloze",
+            "locator": {
+              "question": 57,
+              "questionId": "question:paper-gaokao-2024-national-a:57",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 12
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

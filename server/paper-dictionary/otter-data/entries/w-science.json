@@ -1,0 +1,306 @@
+{
+  "entryId": "w:science",
+  "headword": "science",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsaɪəns/",
+    "us": "/ˈsaɪəns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:science#p-main",
+      "ipa": {
+        "uk": "/ˈsaɪəns/",
+        "us": "/ˈsaɪəns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "sciences",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 18,
+    "mock": 359
+  },
+  "unassignedCounts": {
+    "gaokao": 6,
+    "mock": 357
+  },
+  "senses": [
+    {
+      "senseId": "w:science#s1",
+      "pos": "n.",
+      "glossZh": "科学",
+      "pronunciationId": "w:science#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:science#e-c2803e91b1d7657b",
+          "text": "It is our hope that in coming decades, advances in science will offer new perspectives (视角) from which to study how people manage their lives.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:science#e-1555ea290333de59",
+          "text": "A science report.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jan:26",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:science#e-6424857fe8cea1fe",
+          "text": "“Our cooperation is truly proof of what makes Salk science so special and impactful,” says Pereira.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:science#s2",
+      "pos": "n.",
+      "glossZh": "自然科学课程",
+      "pronunciationId": "w:science#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:science#e-d7d7f1216209e72c",
+          "text": "The program aims to help students develop science skills, environmental awareness, and healthy lifestyles.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:science#e-65e58ee277b8decc",
+          "text": "He loved science.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:science#e-cbf170a48f218b8c",
+          "text": "Note to teachers: Children’s Theatre has a study guide demonstrating how math and science can be taught",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 89
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:science#s3",
+      "pos": "n.",
+      "glossZh": "专门学科",
+      "pronunciationId": "w:science#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:science#e-c32f63ad3e0bce0b",
+          "text": "As Kristian Hammond, professor of electrical engineering and computer science at Northwestern University, put it: \"There's never a stage at which the system knows",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:science#e-3ed0856d8bb7df06",
+          "text": "Joanna Wright, a senior political science major, loves coffee and goes to the cafe at least six days a week.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:science#e-6514fc9c5bcb931d",
+          "text": "These neo-emotions are part of a paradigm (范式) shift in emotion science.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 71
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:science#s4",
+      "pos": "n.",
+      "glossZh": "科学界",
+      "pronunciationId": "w:science#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:science#e-977050280dad5e6e",
+          "text": "In the 1940s, few women were accepted in science.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 48
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "期刊及媒体名称",
+      "reason": "如 Science、Developmental Science、Live Science。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,216 @@
+{
+  "entryId": "w:himself",
+  "headword": "himself",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/hɪmˈself/",
+    "us": "/hɪmˈself/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:himself#p-main",
+      "ipa": {
+        "uk": "/hɪmˈself/",
+        "us": "/hɪmˈself/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "themselves",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 120
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 119
+  },
+  "senses": [
+    {
+      "senseId": "w:himself#s1",
+      "pos": "pron.",
+      "glossZh": "他自己（反身）",
+      "pronunciationId": "w:himself#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:himself#e-c654330bbcef4370",
+          "text": "To look into the __44__ , Wang disguised（伪装）himself and __45__ the beggars .",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:himself#e-f362549972a7f792",
+          "text": "He realised that something needed to change, and, being a London media type, appointed himself “marketing director for Nature”.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 94
+          }
+        },
+        {
+          "exampleId": "w:himself#e-b452ca7530514d4d",
+          "text": "But that’s not the thing he prides himself on.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:himself#s2",
+      "pos": "pron.",
+      "glossZh": "他亲自（强调）",
+      "pronunciationId": "w:himself#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:himself#e-93eacfac1c8eb6f8",
+          "text": "When James Shapland spotted a gap in the market for a dog-friendly café that was half-way between a tiny, trendy coffee shop and a large chain, he started one himself, Coffi Lab – coffi is Welsh for coffee and the lab refers to Labradors (a breed of dog).",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 159,
+            "end": 166
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:himself#s3",
+      "pos": "短语",
+      "glossZh": "他独自；他独力",
+      "pronunciationId": "w:himself#p-main",
+      "note": "by himself。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:himself#e-1c7e885a9e47e25b",
+          "text": "I looked around and finally spotted David, who was standing by himself off to the side by a fence.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "writing-continuation-3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:himself#e-59afa53640dab87d",
+          "text": "He wanted to read it by himself.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2022-ii:25",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 31
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "那位先生",
+      "reason": "爱尔兰英语地区用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

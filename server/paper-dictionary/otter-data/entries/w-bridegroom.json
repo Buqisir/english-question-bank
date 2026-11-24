@@ -1,0 +1,66 @@
+{
+  "entryId": "w:bridegroom",
+  "headword": "bridegroom",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈbraɪdɡruːm/",
+    "us": "/ˈbraɪdɡruːm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bridegroom#p-main",
+      "ipa": {
+        "uk": "/ˈbraɪdɡruːm/",
+        "us": "/ˈbraɪdɡruːm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "bridegrooms",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:bridegroom#s1",
+      "pos": "n.",
+      "glossZh": "新郎",
+      "pronunciationId": "w:bridegroom#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

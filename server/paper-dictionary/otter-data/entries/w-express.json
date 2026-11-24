@@ -1,0 +1,264 @@
+{
+  "entryId": "w:express",
+  "headword": "express",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪkˈspres/",
+    "us": "/ɪkˈspres/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:express#p-main",
+      "ipa": {
+        "uk": "/ɪkˈspres/",
+        "us": "/ɪkˈspres/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more express",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most express",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "expresses",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "expressed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "expressing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 20,
+    "mock": 128
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 127
+  },
+  "senses": [
+    {
+      "senseId": "w:express#s1",
+      "pos": "v.",
+      "glossZh": "表达（思想或情感）",
+      "pronunciationId": "w:express#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 16,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:express#e-458952fd597f9962",
+          "text": "And it came to me then how much easier it would be if we had a range of words that express different __42__ of gratitude (感谢).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:express#e-a29cedf306769bec",
+          "text": "The high intensity group reported that conversations where people spoke at the same time when expressing agreement were not interruptive but engaged and friendlier than the conversations with moments of silence in between speaking turns.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 94,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:express#e-f4fe7ca681aac37a",
+          "text": "Another way to encourage healthy social interaction is by encouraging kids to use words- not fists-to express how they feel.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 109
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:express#s2",
+      "pos": "v.",
+      "glossZh": "用某种形式表述",
+      "pronunciationId": "w:express#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:express#e-d83594acdb8d7374",
+          "text": "But elevation is necessarily relative: only the choice of a reference point allows us to express numerically the height of an object or a location.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 96
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:express#s3",
+      "pos": "n.",
+      "glossZh": "快车",
+      "pronunciationId": "w:express#p-main",
+      "note": "也见于书名中对快车的比喻。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:express#e-610a594abaef9fe6",
+          "text": "How long does it take the Rajdhani Express to reach Delhi?",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:express#s4",
+      "pos": "adj.",
+      "glossZh": "快速直达的",
+      "pronunciationId": "w:express#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:express#s5",
+      "pos": "adj.",
+      "glossZh": "明确说出的",
+      "pronunciationId": "w:express#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:express#s6",
+      "pos": "v.",
+      "glossZh": "挤出（液体）",
+      "pronunciationId": "w:express#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "基因表达",
+      "reason": "生物学术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

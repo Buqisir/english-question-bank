@@ -1,0 +1,149 @@
+{
+  "entryId": "w:continent",
+  "headword": "continent",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɒntɪnənt/",
+    "us": "/ˈkɑːntɪnənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:continent#p-main",
+      "ipa": {
+        "uk": "/ˈkɒntɪnənt/",
+        "us": "/ˈkɑːntɪnənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "continents",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Continents",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "senses": [
+    {
+      "senseId": "w:continent#s1",
+      "pos": "n.",
+      "glossZh": "洲；大陆",
+      "pronunciationId": "w:continent#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:continent#e-bed942b4144c35e9",
+          "text": "When the explorers first set foot upon the continent of North America, the skies and lands were alive with an astonishing variety of wildlife.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:continent#e-c7435bee84f90704",
+          "text": "In the mid-20th century, maps of the world showed continents surrounded by vast, featureless oceans.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:continent#e-bd6d9ae979e217a9",
+          "text": "They examined over 200,000 conversations from 686 users spanning 37 countries and five continents.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 97
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:continent#s2",
+      "pos": "n.",
+      "glossZh": "欧洲大陆",
+      "pronunciationId": "w:continent#p-main",
+      "note": "the Continent。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "克制的、能控制排泄的",
+      "reason": "古旧形容词义或医疗术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

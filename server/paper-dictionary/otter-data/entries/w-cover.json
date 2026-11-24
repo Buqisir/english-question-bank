@@ -1,0 +1,599 @@
+{
+  "entryId": "w:cover",
+  "headword": "cover",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkʌvə(r)/",
+    "us": "/ˈkʌvər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:cover#p-main",
+      "ipa": {
+        "uk": "/ˈkʌvə(r)/",
+        "us": "/ˈkʌvər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "covers",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "covered",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "covering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 22,
+    "mock": 220
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 214
+  },
+  "senses": [
+    {
+      "senseId": "w:cover#s1",
+      "pos": "v.",
+      "glossZh": "覆盖；遮住；盖上",
+      "pronunciationId": "w:cover#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cover#e-165fc39dad1419b8",
+          "text": "They often cover only their eyes with their hands, leaving the rest of their bodies __43__.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-b:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:cover#e-f51d45797e43085a",
+          "text": "She was covered in spider – webs (蛛网) and was barely able to move her wings.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:cover#e-cbe75c2dd94aa6b7",
+          "text": "Reserve a spot indoors, at its chef’s counter, or covered dog-friendly patio (露台), with creative wine tastings in the mix.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cover#s2",
+      "pos": "v.",
+      "glossZh": "占（面积）；行走（距离）",
+      "pronunciationId": "w:cover#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cover#e-2089c17f4931ab6d",
+          "text": "They cover a vast area.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2020-ii:32",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:cover#e-edbe42c98144c50a",
+          "text": "more dots covered a larger coloured area",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:33",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:cover#e-729b371fe9fb8914",
+          "text": "However, most produce at the store went through weeks of travel and covered hundreds of miles before reaching the table.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cover#s3",
+      "pos": "v.",
+      "glossZh": "涉及；涵盖；讲到",
+      "pronunciationId": "w:cover#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cover#e-faef973b7b3d120d",
+          "text": "The 2.5-hour tour covers the Gooyer Windmill, the Skinny Bridge, the Rijksmuseum, Heineken Brewery and much more.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-a",
+            "locator": {
+              "paragraph": 22,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:cover#e-5863e61569c6e5e8",
+          "text": "And are listening to and viewing content as effective as reading the written word when covering the same material?",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:cover#e-6d1470cadfee5631",
+          "text": "If we’re covering friction, for example, I bring different tires (轮胎) into my classroom so that my students can conduct lab experiments with them to see how friction works in real-life applications.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cover#s4",
+      "pos": "v.",
+      "glossZh": "报道",
+      "pronunciationId": "w:cover#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cover#e-52aaac0188dedec8",
+          "text": "They are covered by the local media.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:cover#e-12b90b6fcd329e52",
+          "text": "Upper schoolers get a crash course in layout tools and even learn the demands of a 24-hour news cycle, covering news from across campus and further afield.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 103,
+            "end": 111
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cover#s5",
+      "pos": "v.",
+      "glossZh": "足以支付；承担费用",
+      "pronunciationId": "w:cover#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cover#e-4e5c113eca3289b0",
+          "text": "Jenifer received great support from her family as she worked to earn her degree: Her husband worked two jobs to cover the bills, and her 68-year-old mother helped take care of the children at times.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 112,
+            "end": 117
+          }
+        },
+        {
+          "exampleId": "w:cover#e-ed33b2f8fa84956a",
+          "text": "* Teaching Fellows receive financial support in the form of grants (政府拨款) throughout the year, helping to cover classroom materials and support professional growth.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:cover#e-6885b5c4bfd3c0fd",
+          "text": "We just ask for donations to cover our costs,” says Linda.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cover#s6",
+      "pos": "v.",
+      "glossZh": "代替；代班",
+      "pronunciationId": "w:cover#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cover#e-e852a8be7843fd45",
+          "text": "Jennifer Ashley Tepper, a producer and author of Broadway history books, said she kept “several framed understudy slips from performances when friends and future stars went on for roles that they covered.” She called the change “a bittersweet shift.”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-c:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 196,
+            "end": 203
+          }
+        },
+        {
+          "exampleId": "w:cover#e-9d0b29923fd363dd",
+          "text": "For extra income, she needed me to babysit while she covered someone else’s __45__ that evening.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:cloze:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cover#s7",
+      "pos": "n.",
+      "glossZh": "封面；外封",
+      "pronunciationId": "w:cover#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cover#e-402ccb9aea8a11fd",
+          "text": "More recently, as books have become inexpensive or even throwaway, artists have used them as the raw material for artworks – transforming covers, pages or even complete volumes into paintings and sculptures.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 138,
+            "end": 144
+          }
+        },
+        {
+          "exampleId": "w:cover#e-5734fa327a6b1bbb",
+          "text": "To serve its function, a book must be activated by a user: the cover opened, the pages parted, the contents reviewed, perhaps notes written down or words underlined.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:cover#e-bba9fa9d422c922d",
+          "text": "Of course, these days there are plenty of online dictionaries and thesauruses, but I’m old-fashioned enough to prefer a hard cover and pages I can leaf through with my fingers.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 132,
+            "end": 137
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cover#s8",
+      "pos": "n.",
+      "glossZh": "盖子；保护套；遮盖",
+      "pronunciationId": "w:cover#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cover#e-d46bc3c4c04a35d5",
+          "text": "Fioravanti also said that the robot mowers aren’t suited to steep areas of Green-Wood or where tree cover makes them lose signal.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 105
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cover#s9",
+      "pos": "n.",
+      "glossZh": "（英式）保险保障",
+      "pronunciationId": "w:cover#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:cover#s10",
+      "pos": "v. / n.",
+      "glossZh": "翻唱；翻唱版本",
+      "pronunciationId": "w:cover#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "板球外场位置、钢筋保护层、动物配种",
+      "reason": "学科或行业专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

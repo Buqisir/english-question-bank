@@ -1,0 +1,189 @@
+{
+  "entryId": "w:essential",
+  "headword": "essential",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈsenʃl/",
+    "us": "/ɪˈsenʃl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:essential#p-main",
+      "ipa": {
+        "uk": "/ɪˈsenʃl/",
+        "us": "/ɪˈsenʃl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more essential",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most essential",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "essentials",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 172
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 172
+  },
+  "senses": [
+    {
+      "senseId": "w:essential#s1",
+      "pos": "adj.",
+      "glossZh": "必不可少的",
+      "pronunciationId": "w:essential#p-main",
+      "note": "essential to/for sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:essential#e-1a005eceae35277e",
+          "text": "“Breaking apart what an interruption means is essential if we want to understand how humans interact with each other.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:essential#e-f47ca313e7a45273",
+          "text": "A torch（手电筒）along with suitable clothing is essential for walking in the dark.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:14",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:essential#e-c4de5af9d25d7f18",
+          "text": "She says it is essential that we keep control of artificial intelligence, or risk being sidelined and perhaps even worse.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:essential#s2",
+      "pos": "n.",
+      "glossZh": "必需品",
+      "pronunciationId": "w:essential#p-main",
+      "note": "常用复数。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:essential#e-1d1382533a9b347c",
+          "text": "Ranking My College Life Essentials",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-application",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-application:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:essential#s3",
+      "pos": "n.",
+      "glossZh": "基本要素",
+      "pronunciationId": "w:essential#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "特发性的",
+      "reason": "医学专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,163 @@
+{
+  "entryId": "w:candle",
+  "headword": "candle",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkændl/",
+    "us": "/ˈkændl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:candle#p-main",
+      "ipa": {
+        "uk": "/ˈkændl/",
+        "us": "/ˈkændl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "candles",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "senses": [
+    {
+      "senseId": "w:candle#s1",
+      "pos": "n.",
+      "glossZh": "蜡烛",
+      "pronunciationId": "w:candle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:candle#e-521f61816f2a3f75",
+          "text": "Hoping to impress some talented actors to come and work for me for nothing, I spread some throws over the sofas and lit candles to make it seem a bit more “young professional”.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 120,
+            "end": 127
+          }
+        },
+        {
+          "exampleId": "w:candle#e-58a0e7eeecb5c58f",
+          "text": "She held a candle and mentioned that a few residents were gathering in the hallway and invited me to join them.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:candle#e-4b013428a74c7344",
+          "text": "Afterwards, I brought out a big chocolate cake and we covered it with candles, singing “Happy Birthday” for my grandma back in America in five different languages.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n123:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 77
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:candle#s2",
+      "pos": "短语",
+      "glossZh": "远远比不上",
+      "pronunciationId": "w:candle#p-main",
+      "note": "not hold a candle to",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:candle#e-c1957562e97e3871",
+          "text": "And while all those connections have become dear to me since, none of them hold a candle to the bond I found in my then-56-year-old castmate, who brought his own objects to rehearsal and made references I didn’t understand.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 88
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "旧光度单位、滤芯部件、照蛋、预干陶坯等",
+      "reason": "旧计量单位或行业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

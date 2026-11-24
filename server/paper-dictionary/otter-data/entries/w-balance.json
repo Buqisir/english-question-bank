@@ -1,0 +1,309 @@
+{
+  "entryId": "w:balance",
+  "headword": "balance",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈbæləns/",
+    "us": "/ˈbæləns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:balance#p-main",
+      "ipa": {
+        "uk": "/ˈbæləns/",
+        "us": "/ˈbæləns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "balances",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "balanced",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "balancing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 17,
+    "mock": 245
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 244
+  },
+  "senses": [
+    {
+      "senseId": "w:balance#s1",
+      "pos": "n.",
+      "glossZh": "平衡；身体上的稳定",
+      "pronunciationId": "w:balance#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:balance#e-e5e9f70be1814e94",
+          "text": "The first group participated in a program of nonaerobic (无氧) exercise – balance training and weight training – three times a week.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:balance#s2",
+      "pos": "n.",
+      "glossZh": "均衡；平衡状态",
+      "pronunciationId": "w:balance#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:balance#e-775ec37f3eb0d985",
+          "text": "Balance between work and family.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jun:30",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:balance#e-ca18e60252fcac5b",
+          "text": "To promote the idea of work-life balance.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:balance#e-a3cf65068b4524d1",
+          "text": "Find a happy balance",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:balance#s3",
+      "pos": "v.",
+      "glossZh": "兼顾；权衡；使平衡",
+      "pronunciationId": "w:balance#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:balance#e-9a964904466df196",
+          "text": "Stop trying to balance time between them all.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jan:31",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:balance#e-ed04a7914517f1aa",
+          "text": "Balancing study and training.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:balance#e-2ed3bdf0d314d00e",
+          "text": "Each subject got eight reviews to read: a balanced set of two positive fake, two positive real, two negative fake and two negative real, presented in a random order.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:balance#s4",
+      "pos": "v.",
+      "glossZh": "保持平衡；使某物稳住",
+      "pronunciationId": "w:balance#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:balance#s5",
+      "pos": "n.",
+      "glossZh": "余额；余款；余下的部分",
+      "pronunciationId": "w:balance#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:balance#s6",
+      "pos": "n.",
+      "glossZh": "天平；秤",
+      "pronunciationId": "w:balance#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:balance#s7",
+      "pos": "v.",
+      "glossZh": "使（账目）平衡",
+      "pronunciationId": "w:balance#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "钟表调速装置、收拢帆、天秤座",
+      "reason": "专业义或专名。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

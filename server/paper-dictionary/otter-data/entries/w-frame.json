@@ -1,0 +1,557 @@
+{
+  "entryId": "w:frame",
+  "headword": "frame",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/freɪm/",
+    "us": "/freɪm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:frame#p-main",
+      "ipa": {
+        "uk": "/freɪm/",
+        "us": "/freɪm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "frames",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "framed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "framing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 45
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 32
+  },
+  "senses": [
+    {
+      "senseId": "w:frame#s1",
+      "pos": "n.",
+      "glossZh": "框架",
+      "pronunciationId": "w:frame#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:frame#e-ffdcac4665250d73",
+          "text": "Its concrete panels were piled up without a strong internal frame, and its joints were even filled with old cement（水泥）bags and wrinkled newspapers.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:frame#e-998cefc79bb6aa99",
+          "text": "At first, neighbors watched the process with doubt as she strung hundreds of thin, upright wires across a solid wooden frame.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 119,
+            "end": 124
+          }
+        },
+        {
+          "exampleId": "w:frame#e-f220e394d409fa6b",
+          "text": "I watched him shoulder his eighteen-pound carbon frame bike without hesitation and start running, his legs straining against the weight.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:frame#s2",
+      "pos": "n.",
+      "glossZh": "框子",
+      "pronunciationId": "w:frame#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:frame#e-e5ddf10813ff43a0",
+          "text": "With all the fancy fashion frames out there, it can be easy to overlook what really matters – the lenses(镜片).",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:frame#e-dc4aad1900dd062f",
+          "text": "Armed with these images, I tried making a private album on my phone and uploading to a family digital frame.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-b:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 107
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:frame#s3",
+      "pos": "n.",
+      "glossZh": "体格",
+      "pronunciationId": "w:frame#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:frame#e-ae0f0ba7cf2c9307",
+          "text": "Basketball season had begun without him--his five-foot-four frame considered “insufficient” for the team.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:frame#s4",
+      "pos": "n.",
+      "glossZh": "画面的一帧",
+      "pronunciationId": "w:frame#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:frame#e-7571cf08a080307d",
+          "text": "The system developed by Faccio and his team involves high-speed cameras which can record images at speeds of 2,000 frames per second.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 115,
+            "end": 121
+          }
+        },
+        {
+          "exampleId": "w:frame#e-603e7653922cbfb6",
+          "text": "Typical video records at 30 or 60 frames (帧) per second.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-c:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:frame#s5",
+      "pos": "短语",
+      "glossZh": "参照系",
+      "pronunciationId": "w:frame#p-main",
+      "note": "frame of reference。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:frame#e-78359f005b592404",
+          "text": "This ability to recognize that a shape will need to be turned in a specific direction before it will fit is called an “allocentric frame of reference”.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 131,
+            "end": 136
+          }
+        },
+        {
+          "exampleId": "w:frame#e-aec25a8a75f43c68",
+          "text": "This indicates that Goffin’s cockatoos do indeed possess an allocentric frame of reference when moving objects in space, similar to two-year-old babies.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 77
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:frame#s6",
+      "pos": "短语",
+      "glossZh": "时间范围",
+      "pronunciationId": "w:frame#p-main",
+      "note": "time frame。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:frame#e-9ae333ae909e475c",
+          "text": "To make some of my landscape shots, I have traveled up to four hours away to shoot within a 10-minute time frame.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 112
+          }
+        },
+        {
+          "exampleId": "w:frame#e-7f30a9c66e5e6fee",
+          "text": "If you wish to remain on the list, you may have to email back within a certain time frame ( it'll say in the email) to keep your spot.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:frame#e-d9feffadc1860355",
+          "text": "Items outside the 30-day time frame",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-a",
+            "locator": {
+              "paragraph": 16,
+              "paragraphId": "cell:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-a:ocr-916a21169272a7ae:2:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:frame#s7",
+      "pos": "v.",
+      "glossZh": "构建",
+      "pronunciationId": "w:frame#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:frame#e-040ae8bc12660157",
+          "text": "To frame his story, Klein creates the character of Ned, a fictional witness to the progress brought about by",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:frame#s8",
+      "pos": "v.",
+      "glossZh": "设定理解方式",
+      "pronunciationId": "w:frame#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:frame#e-31e22bd63a10ecd7",
+          "text": "Weiner starts each chapter with a scene on a train ride between cities and then frames each philosopher’s work in the context (背景) of one thing they can help us do better.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:frame#e-fcb9eaa9fd8821d3",
+          "text": "Framing contests as a way to improve yourself, __55__ something that must be won to be worthwhile, can help you achieve the best rewards.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:frame#e-bc648616fba3c867",
+          "text": "In 19 chapters, Lemire focuses mainly on the project processes, framing early failures as key to his success.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 71
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:frame#s9",
+      "pos": "v.",
+      "glossZh": "给……装框",
+      "pronunciationId": "w:frame#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:frame#e-44f3d82f2567a8a4",
+          "text": "Jennifer Ashley Tepper, a producer and author of Broadway history books, said she kept “several framed understudy slips from performances when friends and future stars went on for roles that they covered.” She called the change “a bittersweet shift.”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-c:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 102
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:frame#s10",
+      "pos": "v.",
+      "glossZh": "栽赃",
+      "pronunciationId": "w:frame#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "斯诺克的一局",
+      "reason": "体育专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,163 @@
+{
+  "entryId": "w:basin",
+  "headword": "basin",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈbeɪsn/",
+    "us": "/ˈbeɪsn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:basin#p-main",
+      "ipa": {
+        "uk": "/ˈbeɪsn/",
+        "us": "/ˈbeɪsn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "basins",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "senses": [
+    {
+      "senseId": "w:basin#s1",
+      "pos": "n.",
+      "glossZh": "盆；洗脸盆",
+      "pronunciationId": "w:basin#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:basin#e-daafeb7a0b865653",
+          "text": "You can put a basin of water or a humidifier near the plant.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:basin#s2",
+      "pos": "n.",
+      "glossZh": "流域；盆地",
+      "pronunciationId": "w:basin#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:basin#e-2ba5b207fd7ac034",
+          "text": "● Conservation and education encourage preservation of rainforests in national parks and nature reserves for scientific research (e. g. the Caura Basin, Venezuela).",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 146,
+            "end": 151
+          }
+        },
+        {
+          "exampleId": "w:basin#e-324ebebb5fbab9cf",
+          "text": "Africa’s Congo Basin forests, once relatively stable, have shown increased tree death rate since 2010.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n090:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:basin#e-f8376fe4a705471c",
+          "text": "Developed countries are also at risk: in the US, for example, the Colorado River basin has been in drought since 2000, and higher temperatures mean more water falls as rain instead of snow.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 86
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "美国地名及使地形凹陷（动词）",
+      "reason": "同形专名或罕见用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

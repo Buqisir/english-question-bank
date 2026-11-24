@@ -1,0 +1,310 @@
+{
+  "entryId": "w:struggle",
+  "headword": "struggle",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈstrʌɡəl/",
+    "us": "/ˈstrʌɡəl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:struggle#p-main",
+      "ipa": {
+        "uk": "/ˈstrʌɡəl/",
+        "us": "/ˈstrʌɡəl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "struggles",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "struggled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "struggling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 299
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 297
+  },
+  "senses": [
+    {
+      "senseId": "w:struggle#s1",
+      "pos": "v.",
+      "glossZh": "艰难地做",
+      "pronunciationId": "w:struggle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:struggle#e-4454d4eb06ddda78",
+          "text": "Many of their families were struggling to make ends meet.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:struggle#e-5272667a54fa92b3",
+          "text": "The government has struggled to come up with measures to address the problem, particularly in the poorer, rural areas east of the Volga River, including arranging doctor’s appointments by video chat and expanding financial aid programs to motivate doctors to practice medicine in remote parts of the country like Krasnoyarsk.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:struggle#e-af43789e6ab4a89d",
+          "text": "She'd been struggling with eating disorders and health issues, which __43__ led her to getting surgery.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:struggle#s2",
+      "pos": "v.",
+      "glossZh": "挣扎",
+      "pronunciationId": "w:struggle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:struggle#e-df224d3b42429503",
+          "text": "Still, she made no attempt to fly, perhaps she had been struggling against the window too long and was too tired?",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:struggle#e-7137fc76c5c374f1",
+          "text": "As a tiny crack（裂缝）appeared and a wet yellow chick struggled out, my heart cracked open too.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:writing-continuation:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:struggle#s3",
+      "pos": "n.",
+      "glossZh": "挣扎",
+      "pronunciationId": "w:struggle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:struggle#e-8b7428d6503bf15a",
+          "text": "She ceased her struggle the instant I picked her up.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:struggle#s4",
+      "pos": "n.",
+      "glossZh": "艰苦的努力",
+      "pronunciationId": "w:struggle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:struggle#e-19e84dbaf7f0d0df",
+          "text": "As I served the role of a vital communication link, I was reminded of my desperate struggle to converse before I learned English.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 91
+          }
+        },
+        {
+          "exampleId": "w:struggle#e-153bacf3b5c1d9f3",
+          "text": "After a struggle, she managed to free the vehicle and continued inching along the snow-covered road.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:struggle#e-c1f3ae374a512ed3",
+          "text": "Her struggle with PTSD and alienation from her family and old life is a stark reminder of the long, invisible scars of war.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:struggle#s5",
+      "pos": "v.",
+      "glossZh": "与……斗争",
+      "pronunciationId": "w:struggle#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

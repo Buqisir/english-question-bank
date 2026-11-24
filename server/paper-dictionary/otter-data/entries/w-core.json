@@ -1,0 +1,301 @@
+{
+  "entryId": "w:core",
+  "headword": "core",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kɔː(r)/",
+    "us": "/kɔːr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:core#p-main",
+      "ipa": {
+        "uk": "/kɔː(r)/",
+        "us": "/kɔːr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "cores",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "cored",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "coring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 109
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 102
+  },
+  "senses": [
+    {
+      "senseId": "w:core#s1",
+      "pos": "n.",
+      "glossZh": "核心；最重要的部分",
+      "pronunciationId": "w:core#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:core#e-127f2955ddcedf03",
+          "text": "The core (核心) of your relationship is that you will always be there to help each other.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "seven-choices-6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:core#e-4ed1b70f61508f60",
+          "text": "The supercapacitor’s core lies in carbon black’s high ability to conduct electricity.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:core#e-d07e9bfd4ab76905",
+          "text": "“This is at the core of what Finns have to offer the rest of the world.”",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:core#s2",
+      "pos": "n.",
+      "glossZh": "物体的中心；果核；躯干核心部位",
+      "pronunciationId": "w:core#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:core#e-2d3c4901036808f1",
+          "text": "In tai chi, the dan tian is your qi core and qi in Chinese means life force.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:core#e-b42b60f1b2ec873c",
+          "text": "This means keeping your head, shoulders, and hips in line, relaxing your shoulders, engaging your core, and avoiding unnecessary tension.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:core#e-09ee618cd2c6e510",
+          "text": "Green space runs through its core.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:grammar-fill:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:core#s3",
+      "pos": "adj.",
+      "glossZh": "核心的；最重要的",
+      "pronunciationId": "w:core#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:core#e-1c162ade553fbe78",
+          "text": "The core issue is that body size terms are never neutral; they profoundly affect people’s self-respect, internalized weight bias, and clinical communication.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:core#e-2dc1f022593b0787",
+          "text": "From Pre-K to Upper School, students dive headfirst into the world of fact-based storytelling, learning the core principles of reporting and developing the skills to become active creators of news.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 112
+          }
+        },
+        {
+          "exampleId": "w:core#e-81e9350fb993953d",
+          "text": "If work is a core part of your identity and you have few other interests, retirement could be a challenge.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:core#s4",
+      "pos": "v.",
+      "glossZh": "去掉果核",
+      "pronunciationId": "w:core#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "翻修件押金、矿工地下班次、机构缩写",
+      "reason": "专门义或同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

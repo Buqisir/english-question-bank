@@ -1,0 +1,219 @@
+{
+  "entryId": "w:neighbour",
+  "headword": "neighbour",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "neighbor"
+  ],
+  "ipa": {
+    "uk": "/ˈneɪbə(r)/",
+    "us": "/ˈneɪbər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:neighbour#p-main",
+      "ipa": {
+        "uk": "/ˈneɪbə(r)/",
+        "us": "/ˈneɪbər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "neighbors",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "neighbored",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "neighboring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "neighbours",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "neighboured",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "neighbouring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 25,
+    "mock": 198
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 198
+  },
+  "senses": [
+    {
+      "senseId": "w:neighbour#s1",
+      "pos": "n.",
+      "glossZh": "邻居",
+      "pronunciationId": "w:neighbour#p-main",
+      "note": "美式拼写 neighbor。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 24,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:neighbour#e-39aaca1ee5c977d2",
+          "text": "A long-time neighbor said they never planted trees and only kept a garden for one year.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:grammar-fill:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:neighbour#e-80dfe557770dc720",
+          "text": "Neighbors will bring me freshly made cheese and will come to my door to __47__ me to close the window in my car when rain is coming.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-ii:cloze:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:neighbour#e-4d4e414e67a08d2e",
+          "text": "Butch, a dog who belonged to one of the neighbors, was waiting just like every day before.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:neighbour#s2",
+      "pos": "v.",
+      "glossZh": "与……相邻",
+      "pronunciationId": "w:neighbour#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:neighbour#s3",
+      "pos": "adj.",
+      "glossZh": "邻近的",
+      "pronunciationId": "w:neighbour#p-main",
+      "note": "neighboring / neighbouring。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:neighbour#e-dca46e3c26fc2107",
+          "text": "The summer before my eighth grade I was one of a group of boys that a neighboring farmer hired to work in his field.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 81
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "亲近某人；近似于",
+      "reason": "罕见动词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

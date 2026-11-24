@@ -1,0 +1,262 @@
+{
+  "entryId": "w:breath",
+  "headword": "breath",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/breθ/",
+    "us": "/breθ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:breath#p-main",
+      "ipa": {
+        "uk": "/breθ/",
+        "us": "/breθ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "breaths",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 82
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 75
+  },
+  "senses": [
+    {
+      "senseId": "w:breath#s1",
+      "pos": "n.",
+      "glossZh": "呼吸；一口气",
+      "pronunciationId": "w:breath#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:breath#e-b47ab5e0694ed3ef",
+          "text": "Fear threatened to __53__, but Sam took a deep breath and began.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:breath#e-9cb1f9cc87a09c03",
+          "text": "Negative thoughts crowded my mind, echoing with every labored breath: You’re too fat, too unfit – a fool for even trying this.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:breath#e-e3fcda16879fe48b",
+          "text": "He taught “breathe and squeeze” – slow breaths to control stress chemicals, and muscle squeezes to focus the mind.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:cloze:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:breath#s2",
+      "pos": "n.",
+      "glossZh": "呼出的气息",
+      "pronunciationId": "w:breath#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:breath#e-52a3458fda9b1549",
+          "text": "Paws (爪子) flew and their breath hung in the air over the grasslands, before the male eventually turned and dropped to the ground in frustration.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:breath#e-ba6a1189f877b9ea",
+          "text": "It was a cold, gray day when Frank Daily stood with his friends, waiting for the bus after school, his breath forming pale clouds in the bitter air.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 103,
+            "end": 109
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:breath#s3",
+      "pos": "短语",
+      "glossZh": "恢复正常呼吸；缓过气来",
+      "pronunciationId": "w:breath#p-main",
+      "note": "catch one's breath",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:breath#e-8defb13ef5acfee6",
+          "text": "As we stood there, catching our breath, we noticed the __53__ had stopped completely.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:breath#s4",
+      "pos": "短语",
+      "glossZh": "别指望；别抱太大希望",
+      "pronunciationId": "w:breath#p-main",
+      "note": "don't hold your breath",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:breath#e-b2c6880503c05e10",
+          "text": "However, even if we should be moving in the direction of more time spent at schools, don’t hold your breath.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 107
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:breath#s5",
+      "pos": "n.",
+      "glossZh": "一丝；一缕",
+      "pronunciationId": "w:breath#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "清音的、作为动词的用法",
+      "reason": "专业形容词用法或 breathe 的误拼"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,251 @@
+{
+  "entryId": "w:a",
+  "headword": "a",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "an"
+  ],
+  "ipa": {
+    "uk": "/ə/",
+    "us": "/ə/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:a#p-main",
+      "ipa": {
+        "uk": "/ə/",
+        "us": "/ə/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "a 弱读 /ə/、强读 /eɪ/；an 弱读 /ən/、强读 /æn/"
+    },
+    {
+      "pronunciationId": "w:a#p-letter",
+      "ipa": {
+        "uk": "/eɪ/",
+        "us": "/eɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "字母"
+    }
+  ],
+  "forms": [
+    {
+      "form": "a's",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3767,
+    "mock": 26334
+  },
+  "unassignedCounts": {
+    "gaokao": 3686,
+    "mock": 26334
+  },
+  "senses": [
+    {
+      "senseId": "w:a#s1",
+      "pos": "det.",
+      "glossZh": "一（个、件等）；某一；用于单数可数名词前，指未特指的人或事物",
+      "note": "辅音音素前用 a，元音音素前用 an。a thousand 里的 a 表示「一」。",
+      "pronunciationId": "w:a#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 45,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:a#e-4207f210d507bfd2",
+          "text": "Write a poem about how courage, determination, and strength have helped you face challenges in your life.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:a#e-798c9a5085d54bb5",
+          "text": "I am an active playgoer and play-reader, and perhaps my best reason for editing this book is a hope of sharing my enthusiasm for the theater with others.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:a#e-15759d46dda0d871",
+          "text": "With an impressive 2,000-seat concert hall, St David’s Hall is home to the annual Welsh Proms Cardiff.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:a#s2",
+      "pos": "n.",
+      "glossZh": "字母 A；也用作等级、分组或编号的标记",
+      "pronunciationId": "w:a#p-letter",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:a#e-14e03a1ff6c89ab0",
+          "text": "90-100, A; 80-89, B; 70-79, C; 60-69, D; Below 60, E.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "reading-a-3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:a#s3",
+      "pos": "det.",
+      "glossZh": "每一；每逢",
+      "note": "常用在频率、速度或价格表达里，如 twice a week。",
+      "pronunciationId": "w:a#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 34,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:a#e-eb4050825cda02d3",
+          "text": "Hunters bring in more than 300,000 nutria tails a year, so part of Mouton’s job these days is trying to promote fur.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:a#e-b84fb7c178fbd289",
+          "text": "I was always an enthusiastic reader sometimes reading up to three books a day as a child.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:a#e-abd6a89f7e94789f",
+          "text": "However, you need to pay 2 euros a day for Wi-Fi.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:9",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 34
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "王牌、安培和特定行业缩写等",
+      "reason": "专业或标记义，另依具体写法查阅"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,324 @@
+{
+  "entryId": "w:slide",
+  "headword": "slide",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/slaɪd/",
+    "us": "/slaɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:slide#p-main",
+      "ipa": {
+        "uk": "/slaɪd/",
+        "us": "/slaɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "slides",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "slid",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    },
+    {
+      "form": "slidden",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "sliding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 50
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 46
+  },
+  "senses": [
+    {
+      "senseId": "w:slide#s1",
+      "pos": "v.",
+      "glossZh": "滑动",
+      "pronunciationId": "w:slide#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slide#e-3d36dd6b77bc5409",
+          "text": "While Emily was driving on a narrow stretch of road, her car slid into a ditch（沟）.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:slide#e-8e314e7c6fb78340",
+          "text": "The Barcelona subway pulls into the station, the doors slide open and passengers pour out to go about their daily business.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:slide#e-e961369c90580dff",
+          "text": "As raindrops slide down these tubes, tiny air bubbles form between them, causing a big separation of electric charges.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:slide#s2",
+      "pos": "v.",
+      "glossZh": "轻轻地放入",
+      "pronunciationId": "w:slide#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slide#e-1c3c0df6907c3cfe",
+          "text": "That night, Michael slid a list of Uncle Sam’s favorite foods into his pocket – the ones Dad had always bought at the market on weekends, the two of them laughing over plates together.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:slide#e-3b1c5a2aa537535d",
+          "text": "My cheeks burned, and I slid my notebook into my desk, fighting back tears.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:slide#s3",
+      "pos": "短语",
+      "glossZh": "听任某事荒废",
+      "pronunciationId": "w:slide#p-main",
+      "note": "let something slide。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slide#e-5f8de984c309859c",
+          "text": "It is so easy to let an online course slide, but your grades will suffer as a result.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:slide#s4",
+      "pos": "n.",
+      "glossZh": "幻灯片",
+      "pronunciationId": "w:slide#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slide#e-e6d9158a834ec016",
+          "text": "Her fingers moved quickly and skillfully across the keyboard as she arranged slides and typed notes.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 83
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:slide#s5",
+      "pos": "n.",
+      "glossZh": "滑梯",
+      "pronunciationId": "w:slide#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:slide#s6",
+      "pos": "n.",
+      "glossZh": "显微镜载玻片",
+      "pronunciationId": "w:slide#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:slide#s7",
+      "pos": "n.",
+      "glossZh": "滑坡",
+      "pronunciationId": "w:slide#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:slide#s8",
+      "pos": "v.",
+      "glossZh": "逐渐下跌",
+      "pronunciationId": "w:slide#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "拉链滑块、滑阀、滑棒、爱尔兰舞步、粗俗人身称呼",
+      "reason": "器件、表演专义或俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

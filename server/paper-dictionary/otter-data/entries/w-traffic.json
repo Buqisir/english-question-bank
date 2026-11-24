@@ -1,0 +1,219 @@
+{
+  "entryId": "w:traffic",
+  "headword": "traffic",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtræfɪk/",
+    "us": "/ˈtræfɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:traffic#p-main",
+      "ipa": {
+        "uk": "/ˈtræfɪk/",
+        "us": "/ˈtræfɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "traffics",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "trafficked",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "trafficking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 27,
+    "mock": 124
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 123
+  },
+  "senses": [
+    {
+      "senseId": "w:traffic#s1",
+      "pos": "n.",
+      "glossZh": "道路交通",
+      "pronunciationId": "w:traffic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 27,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:traffic#e-874821620f274b19",
+          "text": "The bridge was closed to motor traffic so people could enjoy a walk across it.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:traffic#e-9e556ed3173e2577",
+          "text": "The traffic signals along Factoria Boulevard in Bellevue, Washington, generally don't flash the same length of green twice in a row, especially at rush hour.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:traffic#e-341b2512e5d582d3",
+          "text": "Many parents say there’s too much traffic on the roads for their children to walk safely to school, so they pack them into the car instead.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:traffic#s2",
+      "pos": "n.",
+      "glossZh": "运输流量",
+      "pronunciationId": "w:traffic#p-main",
+      "note": "也可指空中或水上的往来。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:traffic#e-857b75b652777573",
+          "text": "Air traffic controllers ensure planes’ safe navigation.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:traffic#s3",
+      "pos": "n.",
+      "glossZh": "网络流量",
+      "pronunciationId": "w:traffic#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:traffic#s4",
+      "pos": "n.",
+      "glossZh": "非法交易",
+      "pronunciationId": "w:traffic#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:traffic#s5",
+      "pos": "v.",
+      "glossZh": "非法贩卖",
+      "pronunciationId": "w:traffic#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "普通商品义及以物易物",
+      "reason": "古旧或少见"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

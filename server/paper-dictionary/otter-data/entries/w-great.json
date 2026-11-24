@@ -1,0 +1,470 @@
+{
+  "entryId": "w:great",
+  "headword": "great",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɡreɪt/",
+    "us": "/ɡreɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:great#p-main",
+      "ipa": {
+        "uk": "/ɡreɪt/",
+        "us": "/ɡreɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "greater",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "greatest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 65,
+    "mock": 544
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 544
+  },
+  "senses": [
+    {
+      "senseId": "w:great#s1",
+      "pos": "adj.",
+      "glossZh": "程度大的",
+      "pronunciationId": "w:great#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 23,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:great#e-b380d4c76e488d09",
+          "text": "Jenifer received great support from her family as she worked to earn her degree: Her husband worked two jobs to cover the bills, and her 68-year-old mother helped take care of the children at times.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:great#e-c1e66159e764a24c",
+          "text": "It’s of great importance.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:great#e-0473c9f708f81fb4",
+          "text": "I watched with great sympathy as elderly Italians tried to hold a conversation in Italian with people who did not speak the language.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:great#s2",
+      "pos": "adj.",
+      "glossZh": "很棒的",
+      "pronunciationId": "w:great#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 22,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:great#e-964f6be3b5febfc0",
+          "text": "For some moments, John said nothing, but, suddenly, he sprang to his feet and cried, “I have a great idea!",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:great#e-23a69d879b05f9cc",
+          "text": "I’m enjoying the creative activities, and it feels great to have done something useful.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "reading-c-5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:great#e-ea86521aae88e93b",
+          "text": "In fact, don’t wait until you’ve made a mistake to try this – it’s a great way to boost self-confidence at any time.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 74
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:great#s3",
+      "pos": "adj.",
+      "glossZh": "杰出的",
+      "pronunciationId": "w:great#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:great#e-d795433457028b4a",
+          "text": "Can our planet afford to have any great thinkers become discouraged and give up?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:great#e-21e8289966d8bfff",
+          "text": "Why does the author list great philosophers in paragraph 4?",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2023-national-a:29",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:great#e-91367f475eac3a90",
+          "text": "Not all great writers are great spellers.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:great#s4",
+      "pos": "int.",
+      "glossZh": "太好了",
+      "pronunciationId": "w:great#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:great#e-73958ba6f95e0fda",
+          "text": "When I handed in the essay to my teacher, he read it, laughed out loud, and said, “Great.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:great#s5",
+      "pos": "短语",
+      "glossZh": "大量",
+      "pronunciationId": "w:great#p-main",
+      "note": "a great deal (of)。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:great#e-4186daa6b2aca111",
+          "text": "She spent a great deal of time visiting the poor.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:great#e-5d91a0ea3af1b562",
+          "text": "But if you have to read a great deal for study, you will appreciate the benefits of being able to read more quickly.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:great#e-3f32571d48684ff8",
+          "text": "The platform has enabled Ribeiro to realise her dream with a great deal of freedom, as __50__ to a restaurant where the service is __51__, the menu is known in advance, and the meal is expected to be no __52__.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:great#s6",
+      "pos": "短语",
+      "glossZh": "户外的大自然",
+      "pronunciationId": "w:great#p-main",
+      "note": "the great outdoors。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:great#e-34339ce80a034be9",
+          "text": "His first few visits to the great outdoors were funny.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:great#e-019c5ceb43a8897b",
+          "text": "Emmanuel Chappard, an experienced guide, has a passion for making the great outdoors accessible to all.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:great#s7",
+      "pos": "前缀",
+      "glossZh": "亲属称谓再隔一代",
+      "pronunciationId": "w:great#p-main",
+      "note": "great-。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:great#e-657a522b94cc6180",
+          "text": "His mother, grandmother and great grandmother were all born at the reserve and still live there.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 33
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "The Great Gatsby、Great Wall",
+      "reason": "作品及地标专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

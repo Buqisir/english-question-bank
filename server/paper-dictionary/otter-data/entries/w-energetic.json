@@ -1,0 +1,207 @@
+{
+  "entryId": "w:energetic",
+  "headword": "energetic",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌenəˈdʒetɪk/",
+    "us": "/ˌenərˈdʒetɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:energetic#p-main",
+      "ipa": {
+        "uk": "/ˌenəˈdʒetɪk/",
+        "us": "/ˌenərˈdʒetɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more energetic",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most energetic",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 37
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 33
+  },
+  "senses": [
+    {
+      "senseId": "w:energetic#s1",
+      "pos": "adj.",
+      "glossZh": "精力充沛的",
+      "pronunciationId": "w:energetic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:energetic#e-35c1f20a4b529d15",
+          "text": "She’s energetic.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:energetic#e-9ce68f003bd880db",
+          "text": "Lila was energetic and enthusiastic and always a joy to be around.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:energetic#e-36d0689412db3ea1",
+          "text": "Zak Williams’s fun-filled family life at home with his wife, Olivia, and their energetic son is something he always dreamed of.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:energetic#s2",
+      "pos": "adj.",
+      "glossZh": "充满活力的",
+      "pronunciationId": "w:energetic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:energetic#e-e2729d9c098f06df",
+          "text": "At the heart of her vision is the idea that urban life should be an energetic and rich affair, whereby people are able to interact with one another in dense (稠密) and exciting urban environments.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:energetic#e-dc833cc69a3bac4b",
+          "text": "Yet, I felt a surprising pull to stay – perhaps from the energetic atmosphere, or my curiosity about how stories were made.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:energetic#e-f4b724f1f2cc33b5",
+          "text": "Typically made in series, her works are light, energetic, and beautiful.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 56
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "高能材料作名词",
+      "reason": "专业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

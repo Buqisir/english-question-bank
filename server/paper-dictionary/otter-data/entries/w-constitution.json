@@ -1,0 +1,131 @@
+{
+  "entryId": "w:constitution",
+  "headword": "constitution",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌkɒnstɪˈtjuːʃn/",
+    "us": "/ˌkɑːnstɪˈtuːʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:constitution#p-main",
+      "ipa": {
+        "uk": "/ˌkɒnstɪˈtjuːʃn/",
+        "us": "/ˌkɑːnstɪˈtuːʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "constitutions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:constitution#s1",
+      "pos": "n.",
+      "glossZh": "宪法",
+      "pronunciationId": "w:constitution#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:constitution#s2",
+      "pos": "n.",
+      "glossZh": "构成；结构",
+      "pronunciationId": "w:constitution#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:constitution#s3",
+      "pos": "n.",
+      "glossZh": "体质；体格",
+      "pronunciationId": "w:constitution#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:constitution#s4",
+      "pos": "n.",
+      "glossZh": "章程；组织或系统的基本规则",
+      "pronunciationId": "w:constitution#p-main",
+      "note": "本例指为 AI 代理规定行为的准则。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:constitution#e-445f2167e3bb806b",
+          "text": "Perhaps the most disturbing was a “constitution attack,” where hidden instructions secretly placed into a behavior guide caused the agent to disable other systems without question.",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 47
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "宗教法令",
+      "reason": "专业历史用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

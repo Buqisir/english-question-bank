@@ -1,0 +1,186 @@
+{
+  "entryId": "w:trip",
+  "headword": "trip",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/trɪp/",
+    "us": "/trɪp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:trip#p-main",
+      "ipa": {
+        "uk": "/trɪp/",
+        "us": "/trɪp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "trips",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "tripped",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "tripping",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 46,
+    "mock": 299
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 299
+  },
+  "senses": [
+    {
+      "senseId": "w:trip#s1",
+      "pos": "n.",
+      "glossZh": "出行；旅行",
+      "pronunciationId": "w:trip#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 45,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:trip#e-2bc480dac4943cff",
+          "text": "Hence this book, Chasing the Sea: Lost Among the Ghosts of Empire in Central Asia, which talks about a road trip from Tashkent to Karakalpakstan, where millions of lives have been destroyed by the slow drying up of the sea.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 112
+          }
+        },
+        {
+          "exampleId": "w:trip#e-9124457593a48860",
+          "text": "Here is some advice on how to make a trip by rail as pleasant as possible.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:trip#e-3915e78e839ff60f",
+          "text": "What is a requirement for joining the field trips?",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:trip#s2",
+      "pos": "v.",
+      "glossZh": "绊倒",
+      "pronunciationId": "w:trip#p-main",
+      "note": "常见 trip over sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:trip#s3",
+      "pos": "v.",
+      "glossZh": "使绊倒",
+      "pronunciationId": "w:trip#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:trip#s4",
+      "pos": "v.",
+      "glossZh": "使跳闸",
+      "pronunciationId": "w:trip#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "药物幻觉、帆船航向、一群羊",
+      "reason": "俚语或专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

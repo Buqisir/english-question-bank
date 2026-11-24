@@ -1,0 +1,226 @@
+{
+  "entryId": "w:gallery",
+  "headword": "gallery",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɡæləri/",
+    "us": "/ˈɡæləri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:gallery#p-main",
+      "ipa": {
+        "uk": "/ˈɡæləri/",
+        "us": "/ˈɡæləri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "galleries",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 63
+  },
+  "unassignedCounts": {
+    "gaokao": 8,
+    "mock": 62
+  },
+  "senses": [
+    {
+      "senseId": "w:gallery#s1",
+      "pos": "n.",
+      "glossZh": "画廊",
+      "pronunciationId": "w:gallery#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gallery#e-b77a40d8753ea23d",
+          "text": "Those viewing the quality of Abbot Hall’s temporary exhibitions may be forgiven for thinking they are in a city gallery.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 112,
+            "end": 119
+          }
+        },
+        {
+          "exampleId": "w:gallery#e-8d91155690cad210",
+          "text": "Discover, explore and enjoy award-winning Tullie House, where historic collections, contemporary art and family fun are brought together in one impressive museum and art gallery.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:13",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 170,
+            "end": 177
+          }
+        },
+        {
+          "exampleId": "w:gallery#e-acbc382477c90acd",
+          "text": "In the study, 187 people were invited to visit Kettle’s Yard gallery during an exhibition of handmade clay objects.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gallery#s2",
+      "pos": "n.",
+      "glossZh": "展厅",
+      "pronunciationId": "w:gallery#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gallery#e-0243fe661c62d92a",
+          "text": "There are four fantastic galleries to visit from fine art to interactive fun, so there’s something for everyone!",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:13",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:gallery#e-0cc987bb3554c1d4",
+          "text": "The temporary exhibition gallery has a wide range of art, craft（工艺） and local history exhibitions which change every month.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:gallery#e-c141996e2f7610e3",
+          "text": "The Perelman Building with small galleries devoted to special exhibitions of costumes, photographs, and modern and contemporary design is a short walk from the main building.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:reading-a:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gallery#s3",
+      "pos": "n.",
+      "glossZh": "楼座",
+      "pronunciationId": "w:gallery#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:gallery#s4",
+      "pos": "n.",
+      "glossZh": "图片库",
+      "pronunciationId": "w:gallery#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "发动机油道",
+      "reason": "机械专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

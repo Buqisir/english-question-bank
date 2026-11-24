@@ -1,0 +1,232 @@
+{
+  "entryId": "w:shoe",
+  "headword": "shoe",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ʃuː/",
+    "us": "/ʃuː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:shoe#p-main",
+      "ipa": {
+        "uk": "/ʃuː/",
+        "us": "/ʃuː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "shoes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "shod",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    },
+    {
+      "form": "shoed",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    },
+    {
+      "form": "shoeing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 64
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 63
+  },
+  "senses": [
+    {
+      "senseId": "w:shoe#s1",
+      "pos": "n.",
+      "glossZh": "鞋",
+      "pronunciationId": "w:shoe#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shoe#e-81b1c4f83a95caa2",
+          "text": "Dirty shorts and old shoes gave him the __46__ of a real beggar and his convincing dialect soon won him the __47__ of the beggars.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:shoe#e-c18ec0cdeb3659c0",
+          "text": "to instruct the children whose shoes were held together with string was a surprise.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:shoe#e-a7e0c8e34b7f82f3",
+          "text": "The most important piece of equipment for running is a good pair of running shoes, so be sure to do some research before you purchase a pair.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shoe#s2",
+      "pos": "短语",
+      "glossZh": "设身处地为他人着想",
+      "pronunciationId": "w:shoe#p-main",
+      "note": "put oneself in sb's shoes。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shoe#e-4fcacacb9f4d202d",
+          "text": "I tried to put myself in my brother’s shoes.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:7",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:shoe#e-9405b7e39e87ede5",
+          "text": "Sometimes, it’s simply about listening, acknowledging someone’s feelings and putting yourself in their shoes.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 110,
+            "end": 115
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shoe#s3",
+      "pos": "n.",
+      "glossZh": "马蹄铁",
+      "pronunciationId": "w:shoe#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:shoe#s4",
+      "pos": "v.",
+      "glossZh": "给马钉蹄铁",
+      "pronunciationId": "w:shoe#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "牌靴",
+      "reason": "赌场器具专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

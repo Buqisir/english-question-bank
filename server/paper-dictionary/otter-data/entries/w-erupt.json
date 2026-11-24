@@ -1,0 +1,199 @@
+{
+  "entryId": "w:erupt",
+  "headword": "erupt",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈrʌpt/",
+    "us": "/ɪˈrʌpt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:erupt#p-main",
+      "ipa": {
+        "uk": "/ɪˈrʌpt/",
+        "us": "/ɪˈrʌpt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "erupted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "erupting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "erupts",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "senses": [
+    {
+      "senseId": "w:erupt#s1",
+      "pos": "v.",
+      "glossZh": "（火山）喷发",
+      "pronunciationId": "w:erupt#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:erupt#e-9a85c4d9f9f79d21",
+          "text": "As a result, water would be released when volcanoes erupt.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:erupt#s2",
+      "pos": "v.",
+      "glossZh": "突然爆发",
+      "pronunciationId": "w:erupt#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:erupt#e-2bfcc1e09d816f3e",
+          "text": "The awkward moment ended with the class erupting into laughter.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:5",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:erupt#e-0bf3d244bd11d6a1",
+          "text": "Paragraph 2: After two seconds’ silence, thunderous applause erupted.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:erupt#e-2f90246db7bd4279",
+          "text": "Our table remained painfully quiet while chaos erupted around us.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:erupt#s3",
+      "pos": "v.",
+      "glossZh": "（皮疹）突然出现",
+      "pronunciationId": "w:erupt#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:erupt#s4",
+      "pos": "v.",
+      "glossZh": "（牙齿）萌出",
+      "pronunciationId": "w:erupt#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

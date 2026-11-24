@@ -1,0 +1,200 @@
+{
+  "entryId": "w:dignity",
+  "headword": "dignity",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdɪɡnəti/",
+    "us": "/ˈdɪɡnəti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dignity#p-main",
+      "ipa": {
+        "uk": "/ˈdɪɡnəti/",
+        "us": "/ˈdɪɡnəti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "dignities",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "senses": [
+    {
+      "senseId": "w:dignity#s1",
+      "pos": "n.",
+      "glossZh": "尊严；人格价值",
+      "pronunciationId": "w:dignity#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dignity#e-27b7906d36a45c23",
+          "text": "For Kimani, success in 2030 means seeing 200 thousand smallholder farmers living with dignity – affording education, healthcare, and financial stability through improved yields.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:dignity#e-ec862bf6bcd069b0",
+          "text": "The age of artificial intelligence (AI) has transformed our interactions, but threatens human dignity on a worldwide scale, according to a study led by Charles Darwin University (CDU).",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:dignity#e-dd2debd455d6086d",
+          "text": "To her, the humanities were subjects that showed students the dignity（尊严）and goodness within everyone, the __50__ need to feel worth – in ourselves and others.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dignity#s2",
+      "pos": "n.",
+      "glossZh": "庄重；体面",
+      "pronunciationId": "w:dignity#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dignity#e-19f6e9031f9b19b0",
+          "text": "When the driver asked about her shoes, she explained with quiet dignity, “I can’t afford them.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:dignity#e-35baa0ac75fcab6c",
+          "text": "We had unknowingly witnessed quiet dignity, the immense strength required to bear personal burdens while faithfully fulfilling one’s duties.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test",
+            "paperTitle": "淄博市2025-2026学年度第一学期高三摸底质量检测 英语试卷",
+            "groupId": "group:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:dignity#e-c2a192032b0096b1",
+          "text": "Life had clearly been hard for him, but he still stood tall and carried himself with quiet dignity.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 98
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "高官；基本公理",
+      "reason": "罕见旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

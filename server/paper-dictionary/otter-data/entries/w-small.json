@@ -1,0 +1,553 @@
+{
+  "entryId": "w:small",
+  "headword": "small",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/smɔːl/",
+    "us": "/smɔːl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:small#p-main",
+      "ipa": {
+        "uk": "/smɔːl/",
+        "us": "/smɔːl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "smaller",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "smallest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "smalls",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 102,
+    "mock": 789
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 789
+  },
+  "senses": [
+    {
+      "senseId": "w:small#s1",
+      "pos": "adj.",
+      "glossZh": "尺寸小的",
+      "pronunciationId": "w:small#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 34,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:small#e-7646eb26489f7af1",
+          "text": "Molai built at the __53__ of each sapling(幼树)a bamboo platform, where he placed earthen pots with small holes to __54__ rainwater.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 103
+          }
+        },
+        {
+          "exampleId": "w:small#e-1ecdfd89604b2103",
+          "text": "Very small drones with advanced sensors and AI and travelling ahead of the train could guide it like a co-pilot.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:small#e-c8c073137208fcaa",
+          "text": "Mum is small, but I remember feeling so high up there.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:grammar-fill:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:small#s2",
+      "pos": "adj.",
+      "glossZh": "数量少的",
+      "pronunciationId": "w:small#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:small#e-b07c84223600dad5",
+          "text": "But while you probably add only a small amount of salt to your food, road crews spread about 20 million tons of salt on U. S. roads every year!",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:small#e-18831f89aa221f6f",
+          "text": "At the end of the thirty days, you will then add back a small number of carefully chosen online activities that you believe will provide massive benefits to the things you value.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:small#e-04a64b29a6900c0f",
+          "text": "If your supermarket sells loose produce, then buying smaller quantities is easier.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:small#s3",
+      "pos": "adj.",
+      "glossZh": "规模小的",
+      "pronunciationId": "w:small#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 16,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:small#e-b601232f39124924",
+          "text": "What is an advantage of a smaller business according to Leaney?",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:small#e-8b079deeb6562fc0",
+          "text": "But the study was small and needs to be repeated with far larger groups of people to determine exactly which aspects of an exercise routine make the biggest difference.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:small#e-1a6c57335fbfc7a6",
+          "text": "Ursula has always called the beautiful small town of Beaverton her home.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:small#s4",
+      "pos": "adj.",
+      "glossZh": "程度轻微的",
+      "pronunciationId": "w:small#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 23,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:small#e-7145676ee6214cce",
+          "text": "Since the effects were small, this may suggest that our creative thinking does not differ that much in response to total silence and 85 decibels of background noise.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:small#e-db2ca324c4ac804c",
+          "text": "“People care about being interrupted, and those small interruptions can have a massive effect on the overall communication,” Hilton said.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:small#e-9df39dd246a7c397",
+          "text": "I felt a small pain in my chest.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:small#s5",
+      "pos": "adj.",
+      "glossZh": "年幼的",
+      "pronunciationId": "w:small#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:small#e-ac361cf2dc8aa83c",
+          "text": "Small children are easy to throw up in the air and catch-and they __36__ it.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:small#e-f9ae507b8db9b774",
+          "text": "Though friendly, he could easily knock over my niece’s small boys and my six-month-old granddaughter.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:small#s6",
+      "pos": "adv.",
+      "glossZh": "以小规模",
+      "pronunciationId": "w:small#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:small#e-3a9e784f2d948645",
+          "text": "●Start small.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:small#s7",
+      "pos": "短语",
+      "glossZh": "闲聊",
+      "pronunciationId": "w:small#p-main",
+      "note": "small talk。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:small#e-a4f8ad5d54b46d1d",
+          "text": "Why do people have small talk?",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:small#e-318ef9da4d5e979b",
+          "text": "Making small talk interesting.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:small#s8",
+      "pos": "短语",
+      "glossZh": "无足轻重的事物",
+      "pronunciationId": "w:small#p-main",
+      "note": "small fry。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:small#e-4b776eb4f3dd74b7",
+          "text": "However, that was small fry compared with the city’s Circus Maximus, which accommodated around 250,000 people.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:small#s9",
+      "pos": "adj.",
+      "glossZh": "小写的",
+      "pronunciationId": "w:small#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:small#s10",
+      "pos": "n.",
+      "glossZh": "小号",
+      "pronunciationId": "w:small#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Small 姓氏及腰背部",
+      "reason": "专名或仅见于固定说法的少见名词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

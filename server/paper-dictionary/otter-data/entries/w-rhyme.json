@@ -1,0 +1,323 @@
+{
+  "entryId": "w:rhyme",
+  "headword": "rhyme",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/raɪm/",
+    "us": "/raɪm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:rhyme#p-main",
+      "ipa": {
+        "uk": "/raɪm/",
+        "us": "/raɪm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "rhymes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "rhymed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "rhyming",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "senses": [
+    {
+      "senseId": "w:rhyme#s1",
+      "pos": "n.",
+      "glossZh": "押韵",
+      "pronunciationId": "w:rhyme#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rhyme#e-7756ae7ad86fd5e4",
+          "text": "Oral cultures must “think memorable thoughts”, relying on rhyme, emotion, and cliché（陈词滥调）to preserve knowledge.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:rhyme#e-405b8c3e2be65b3d",
+          "text": "People with dyslexia have varying degrees of difficulty not only with reading and writing but also with pronouncing new words, recalling known words, recognizing rhymes, dividing words into syllables（音节）, and comprehending written material.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 162,
+            "end": 168
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rhyme#s2",
+      "pos": "n.",
+      "glossZh": "押韵词",
+      "pronunciationId": "w:rhyme#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rhyme#e-14cc5d59a2469922",
+          "text": "Imagine you’re writing a poem, rhymes must be paired up before you start a new line.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:rhyme#e-2eb46cef248c0699",
+          "text": "grab it”, it begins thinking about words like “rabbit” almost immediately, writing the next sentence to end at the appropriate rhyme.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 127,
+            "end": 132
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rhyme#s3",
+      "pos": "n.",
+      "glossZh": "押韵诗",
+      "pronunciationId": "w:rhyme#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rhyme#e-7aaa1fe752551143",
+          "text": "There are a variety of them, including rhymes, spelling acronyms and sentence mnemonics.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:rhyme#e-5fffc46fabf0b4a8",
+          "text": "Rhymes are a great way to remember things.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:rhyme#e-2ecca9965aa705d5",
+          "text": "There’s a rhyme to help you which goes like this, “In fourteen-hundred and ninety-two, Columbus sailed the ocean blue.” Most people who’ve heard that never forget it!",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rhyme#s4",
+      "pos": "v.",
+      "glossZh": "押韵",
+      "pronunciationId": "w:rhyme#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rhyme#e-f35b10c9c648bc52",
+          "text": "Filled with dancing stem cell blobs （小团） and active frogs – who like to color, eat ice cream, and swim, just like her grandchildren – Blau’s rhyming book is a joint effort with illustrator Margery Fain, 69.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
+            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2025-10-first-baseline-test:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 141,
+            "end": 148
+          }
+        },
+        {
+          "exampleId": "w:rhyme#e-b0b58e198cfca84c",
+          "text": "It presents rhyming songs.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
+            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-guangxi-nanning-2025-10-first-baseline-test:25",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:rhyme#e-c71f1a0a48578e36",
+          "text": "AI can simplify rhyming lines.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:28",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 23
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "计数",
+      "reason": "旧拼法，现代用 rime 的对应历史义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

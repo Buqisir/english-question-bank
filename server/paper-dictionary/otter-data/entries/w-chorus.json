@@ -1,0 +1,249 @@
+{
+  "entryId": "w:chorus",
+  "headword": "chorus",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɔːrəs/",
+    "us": "/ˈkɔːrəs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:chorus#p-main",
+      "ipa": {
+        "uk": "/ˈkɔːrəs/",
+        "us": "/ˈkɔːrəs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "choruses",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "chorusses",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "chorused",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "chorusing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 29
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 23
+  },
+  "senses": [
+    {
+      "senseId": "w:chorus#s1",
+      "pos": "n.",
+      "glossZh": "合唱团；合唱队",
+      "pronunciationId": "w:chorus#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chorus#e-a422409239c581a1",
+          "text": "For older adults, activities like attending a songwriting workshop or joining a chorus go beyond mere leisure.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:chorus#e-67b1980fe3270dc3",
+          "text": "San Francisco Opera is holding auditions (试演) in October/November 2025 for classically trained singers for its 2026 contract year chorus positions, with full-time and part-time openings across all voice categories.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 130,
+            "end": 136
+          }
+        },
+        {
+          "exampleId": "w:chorus#e-3d701d91ab5b3121",
+          "text": "For those who sang with the chorus in the past 5 seasons, only an application form is needed.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-a:9",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chorus#s2",
+      "pos": "n.",
+      "glossZh": "齐声发出的声音；合鸣",
+      "pronunciationId": "w:chorus#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chorus#e-f712fd67c5c44054",
+          "text": "The dawn chorus of birdsong has inspired poets and nature lovers for thousands of years, but the reason why birds start the day this way is an enduring mystery.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:chorus#e-e55fe58c47c03d8f",
+          "text": "Wearily, I pushed myself upright, remounted my bike and started to double back in the hope of spotting clear trail markers, but this only made things worse: the trees seemed to press in around me as I desperately scanned for landmarks – and the cicadas (蝉) had erupted into a deafening chorus.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 286,
+            "end": 292
+          }
+        },
+        {
+          "exampleId": "w:chorus#e-1114795356827a8e",
+          "text": "“Welcome,” the class recited in a chorus that sounded nothing like my pronunciation.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:writing-continuation:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chorus#s3",
+      "pos": "n.",
+      "glossZh": "歌曲的副歌；反复段",
+      "pronunciationId": "w:chorus#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:chorus#s4",
+      "pos": "v.",
+      "glossZh": "齐声说；齐声唱",
+      "pronunciationId": "w:chorus#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "古希腊戏剧歌舞团、管风琴音栓、合唱音效等",
+      "reason": "历史或音乐制作专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,182 @@
+{
+  "entryId": "w:absence",
+  "headword": "absence",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈæbsəns/",
+    "us": "/ˈæbsəns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:absence#p-main",
+      "ipa": {
+        "uk": "/ˈæbsəns/",
+        "us": "/ˈæbsəns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "absences",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 35
+  },
+  "senses": [
+    {
+      "senseId": "w:absence#s1",
+      "pos": "n.",
+      "glossZh": "缺席；不在；离开的一段时间",
+      "pronunciationId": "w:absence#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:absence#e-e828700443471a4a",
+          "text": "I was back teaching after an absence of 15 years, dealing with the various kinds of “forbidden fruit” that come out of book bags.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:absence#e-b8133b2a139cfecc",
+          "text": "Short writings missed as a result of an excused absence will be accepted.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "reading-a-11",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:absence#s2",
+      "pos": "n.",
+      "glossZh": "缺乏；没有",
+      "note": "in the absence of 表示「在缺少……的情况下」。",
+      "pronunciationId": "w:absence#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:absence#e-16eb921f242716aa",
+          "text": "The absence of nonverbal cues makes it easy to misinterpret tone, while the constant visibility of online interactions can intensify feelings of exclusion or neglect.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:absence#e-1e7cf68121ddc716",
+          "text": "When the fruit trees he planted were not producing anything, he realized the absence of bees was to blame.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:absence#e-7585447f4fdea9e6",
+          "text": "Analysis of the roots, branches, and seeds disclosed an absence of silver.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 63
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "短暂失去意识；剑刃不接触",
+      "reason": "医学或击剑术语"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

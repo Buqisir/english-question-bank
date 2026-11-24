@@ -1,0 +1,815 @@
+{
+  "entryId": "w:place",
+  "headword": "place",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pleɪs/",
+    "us": "/pleɪs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:place#p-main",
+      "ipa": {
+        "uk": "/pleɪs/",
+        "us": "/pleɪs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "places",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "placed",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "placing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 128,
+    "mock": 791
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 790
+  },
+  "senses": [
+    {
+      "senseId": "w:place#s1",
+      "pos": "n.",
+      "glossZh": "地方；地点",
+      "pronunciationId": "w:place#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 77,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:place#e-aa56f95a4cb5f362",
+          "text": "Many museums are lively places and they attract a lot of visitors.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:grammar-fill:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:place#e-ee73f881748d7e12",
+          "text": "This special building is a place in which theatre is made and where children, artists, writers and anyone else have the opportunity（机会）to do creative things.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:place#e-ca8025bd32936c3e",
+          "text": "Describing her alarm at its proposed replacement with an expressway, Jane Jacobs called on her mayor（市长）to champion “New York as a decent place to live, and not just rush through.” Similar campaigns occurred in Australia in the late 1960s and 1970s as well.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 138,
+            "end": 143
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:place#s2",
+      "pos": "n.",
+      "glossZh": "住处",
+      "pronunciationId": "w:place#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:place#e-9fe2066b7d4c72a1",
+          "text": "What time is Michael leaving his place tomorrow morning?",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:place#e-e6c14252b8f247ef",
+          "text": "We had decided on key items for the __42__ we were moving to in town, donated what we could, and rented a place to __43__ our supposedly important objects.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 106,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:place#e-fb2b37c510be8dec",
+          "text": "He and his wife began looking for a place in Manhattan.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:place#s3",
+      "pos": "n.",
+      "glossZh": "地位；重要性",
+      "pronunciationId": "w:place#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:place#e-126b73539cd1a76d",
+          "text": "I have a special place in my heart for libraries.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:place#e-719f7b33aca41ab6",
+          "text": "As I grew older and became a mother, the library took on a new place and an added meaning in my life.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:place#e-c2251b1cdc277b25",
+          "text": "Consistency has its place.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:place#s4",
+      "pos": "n.",
+      "glossZh": "名次",
+      "pronunciationId": "w:place#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:place#e-dff1b691312af4fe",
+          "text": "He won fifth place.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:place#e-ee5767e83b5df2e1",
+          "text": "Earning first place on the latest “Asia’s 50 best restaurants” list, progressive Indian restaurant Gaggan is one of the most exciting venues(场所) to arrive in Bangkok in recent years.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:place#s5",
+      "pos": "n.",
+      "glossZh": "位置；座位",
+      "pronunciationId": "w:place#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:place#e-4e902593d7b84f61",
+          "text": "She’d just look up at the right time, long enough to answer-in character - “The better to eat you with, my dear,” and go back to her place in the magazine article.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 133,
+            "end": 138
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:place#s6",
+      "pos": "v.",
+      "glossZh": "放置；摆放",
+      "pronunciationId": "w:place#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:place#e-7a11c266b23ae855",
+          "text": "Molai built at the __53__ of each sapling(幼树)a bamboo platform, where he placed earthen pots with small holes to __54__ rainwater.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:place#e-55f6fe80db3f3517",
+          "text": "He placed them in the tanks and waited.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:place#e-76702ab36924a052",
+          "text": "Where will the speakers place the gift just received?",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:place#s7",
+      "pos": "v.",
+      "glossZh": "下单；订购",
+      "pronunciationId": "w:place#p-main",
+      "note": "place an order。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:place#e-324b30e36e1e97ec",
+          "text": "Placing an order.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:place#e-c938df31ea16d77f",
+          "text": "Customers can also place pickup orders online for lunch or dinner until 8: 00 pm six days a week.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:place#s8",
+      "pos": "v.",
+      "glossZh": "施加（要求）",
+      "pronunciationId": "w:place#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:place#e-94aaa35249516d00",
+          "text": "The friend who is remaining needs to be sensitive to all the additional time demands placed on the friend who has moved.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 91
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:place#s9",
+      "pos": "v.",
+      "glossZh": "把……置于某个背景或位置",
+      "pronunciationId": "w:place#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:place#e-908fbcb509ee02aa",
+          "text": "Jacobs argues that urban communities are best placed to understand how their city functions, because city life is created and sustained through their various interactions.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:place#e-f97086c547155c35",
+          "text": "Since I began thinking about this project in August 2011, the issue of sea-level rise and the need to place it historically have only become more urgent: between then and the end of 2022 the global sea rose by almost 5 centimeters, about half of the overall rise recorded by satellites since 1993.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 107
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:place#s10",
+      "pos": "短语",
+      "glossZh": "发生；举行",
+      "pronunciationId": "w:place#p-main",
+      "note": "take place。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:place#e-3e479e3b0045e37c",
+          "text": "Where does the conversation probably take place?",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:place#e-ab9d96483f0636ae",
+          "text": "The exhibition takes place at the same time as this year’s 150th anniversary of the creation of Yellowstone National Park.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:place#e-d26f9f88ce0196fe",
+          "text": "Daji, or big open-air fairs, typically take place on specific dates of the lunar calendar, for example, on dates with five or seven as the last digit.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:place#s11",
+      "pos": "短语",
+      "glossZh": "起初；本来",
+      "pronunciationId": "w:place#p-main",
+      "note": "in the first place。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:place#e-64a379a459e0e3fc",
+          "text": "Do your part to preserve what makes a destination special in the first place.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:place#e-1d8df57bbf41f584",
+          "text": "This distaste for arguments is common, but it depends on a mistaken view of arguments that causes problems for our personal and social lives – and in many ways misses the point of arguing in the first place.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 201,
+            "end": 206
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:place#s12",
+      "pos": "短语",
+      "glossZh": "不自在；不合场合",
+      "pronunciationId": "w:place#p-main",
+      "note": "out of place。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:place#e-0f7cdab8911b8307",
+          "text": "Without my beloved beaches and endless blue-sky days, I felt at a loss and out of place.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 87
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:place#s13",
+      "pos": "短语",
+      "glossZh": "落实；建立好",
+      "pronunciationId": "w:place#p-main",
+      "note": "put in place。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:place#e-88d490b3175ab554",
+          "text": "Conservation measures will have to be put in place if these deep-sea fish are to survive.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:place#s14",
+      "pos": "v.",
+      "glossZh": "打电话",
+      "pronunciationId": "w:place#p-main",
+      "note": "place a call。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:place#e-1be7b11d71fda283",
+          "text": "To place an urgent call.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:25",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "地名、机构名称中的 Place",
+      "reason": "固定专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

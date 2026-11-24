@@ -1,0 +1,124 @@
+{
+  "entryId": "w:poem",
+  "headword": "poem",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpəʊɪm/",
+    "us": "/ˈpoʊəm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:poem#p-main",
+      "ipa": {
+        "uk": "/ˈpəʊɪm/",
+        "us": "/ˈpoʊəm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "poems",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 77
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:poem#s1",
+      "pos": "n.",
+      "glossZh": "诗；诗歌",
+      "pronunciationId": "w:poem#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 77
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:poem#e-bda528c094d65014",
+          "text": "■Write a poem using 100 words or fewer.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:poem#e-1fe1abe99e1227fa",
+          "text": "Riders have printed nearly 20,000 short stories and poems since the program was launched last March.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:poem#e-91f9b60ae39f8f55",
+          "text": "Slowly, he agreed to recite a short poem.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 40
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

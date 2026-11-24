@@ -1,0 +1,129 @@
+{
+  "entryId": "w:competence",
+  "headword": "competence",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɒmpɪtəns/",
+    "us": "/ˈkɑːmpɪtəns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:competence#p-main",
+      "ipa": {
+        "uk": "/ˈkɒmpɪtəns/",
+        "us": "/ˈkɑːmpɪtəns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "competences",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 25
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:competence#s1",
+      "pos": "n.",
+      "glossZh": "能力；胜任力",
+      "pronunciationId": "w:competence#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 25
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:competence#e-a477ba53b26af6c4",
+          "text": "In both of these ways, expansive framing represents a stepping stone towards better science comprehension and scientific competence.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 131
+          }
+        },
+        {
+          "exampleId": "w:competence#e-15c8b05ee77aab21",
+          "text": "Psychologists have found the less expertise（专业素养）you have in something, the more likely you are to overestimate your competence in it.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 124,
+            "end": 134
+          }
+        },
+        {
+          "exampleId": "w:competence#e-b5e1ccab5415f972",
+          "text": "Even chores like cleaning the floor will give you a sense of competence and achievement.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 71
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "语言知识体系、岩石抗变形能力、法律权限",
+      "reason": "各学科专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

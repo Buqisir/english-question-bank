@@ -1,0 +1,367 @@
+{
+  "entryId": "w:firm",
+  "headword": "firm",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fɜːm/",
+    "us": "/fɜːrm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:firm#p-main",
+      "ipa": {
+        "uk": "/fɜːm/",
+        "us": "/fɜːrm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "firmer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "firmest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more firm",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most firm",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "firms",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "firmed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "firming",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 57
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 52
+  },
+  "senses": [
+    {
+      "senseId": "w:firm#s1",
+      "pos": "n.",
+      "glossZh": "公司",
+      "pronunciationId": "w:firm#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:firm#e-85f902d8fb97623c",
+          "text": "In a law firm.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:firm#e-7f68510f4936b7b4",
+          "text": "The downturn hit the real estate（房地产） firm where she had worked for ten years as an office manager.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:firm#e-be63aa81d8aa84c9",
+          "text": "With help from Tesla, Westinghouse’s firm developed a system using alternating current, which soon became the major form of power delivery.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:firm#s2",
+      "pos": "adj.",
+      "glossZh": "坚决的",
+      "pronunciationId": "w:firm#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:firm#e-9b613ee4eb2a1fe6",
+          "text": "In 1934, with the passage of the Migratory Bird Hunting Stamp Act (Act), an increasingly concerned nation took firm action to stop the destruction of migratory (迁徙的) waterfowl and the wetlands so vital to their survival.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 111,
+            "end": 115
+          }
+        },
+        {
+          "exampleId": "w:firm#e-2c7181d9220e6e38",
+          "text": "“I’ve been reviewing your observations,” he said, his voice warm and firm.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:writing-continuation:3",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:firm#e-6e97ecbc1d3d2257",
+          "text": "And I don’t want him,” I said, but the delivery man was firm: I had signed; the elephant was mine.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:firm#s3",
+      "pos": "adj.",
+      "glossZh": "牢固的",
+      "pronunciationId": "w:firm#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:firm#e-01bbed476a9acb33",
+          "text": "You can then begin to build a firm foundation through training, allowing freedom only once you are sure of a response from your dog.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:seven-choices:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:firm#s4",
+      "pos": "adj.",
+      "glossZh": "结实的",
+      "pronunciationId": "w:firm#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:firm#s5",
+      "pos": "adj.",
+      "glossZh": "确定的",
+      "pronunciationId": "w:firm#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:firm#e-045e41657833692f",
+          "text": "There is no firm conclusion regarding why people develop parasocial relationships.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n090:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:firm#s6",
+      "pos": "adv.",
+      "glossZh": "稳稳地",
+      "pronunciationId": "w:firm#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:firm#e-b2b274e4a636ca9d",
+          "text": "The snow held firm, a silent, unyielding barrier between me and the outside world.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:writing-continuation:4",
+              "sentence": 10
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:firm#s7",
+      "pos": "v.",
+      "glossZh": "使结实",
+      "pronunciationId": "w:firm#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "确定录取志愿",
+      "reason": "英国招生专门用语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,186 @@
+{
+  "entryId": "w:contest",
+  "headword": "contest",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɒntest/",
+    "us": "/ˈkɑːntest/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:contest#p-main",
+      "ipa": {
+        "uk": "/ˈkɒntest/",
+        "us": "/ˈkɑːntest/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "名词"
+    },
+    {
+      "pronunciationId": "w:contest#p-verb",
+      "ipa": {
+        "uk": "/kənˈtest/",
+        "us": "/kənˈtest/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "动词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "contests",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "contested",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "contesting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 104
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 103
+  },
+  "senses": [
+    {
+      "senseId": "w:contest#s1",
+      "pos": "n.",
+      "glossZh": "比赛；竞赛；争夺",
+      "pronunciationId": "w:contest#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:contest#e-e039abd0b6588fdd",
+          "text": "When I was in middle school, my social studies teacher asked me to enter a writing contest.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:contest#e-b761e825f1c24761",
+          "text": "“We wanted to do something where we do a call to artists in the Bay Area to submit stories for a contest,” Trost says.“And as of right now, we’ve received about 120 submissions.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:contest#e-a60c7533e026be67",
+          "text": "Speeding up and flying over a car while switching hands with a between-the-legs movement to throw the ball home, Chen Dengxing, aged 39 and standing 1.76 meters, made history by becoming the first athlete from China to win the dunk（扣篮） contest of the world’s biggest streetball competition in 2025.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 236,
+            "end": 243
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:contest#s2",
+      "pos": "v.",
+      "glossZh": "争夺；参加竞选",
+      "pronunciationId": "w:contest#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:contest#s3",
+      "pos": "v.",
+      "glossZh": "质疑；对……提出异议",
+      "pronunciationId": "w:contest#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "奋力守住",
+      "reason": "罕见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

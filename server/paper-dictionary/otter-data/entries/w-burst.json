@@ -1,0 +1,329 @@
+{
+  "entryId": "w:burst",
+  "headword": "burst",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bɜːst/",
+    "us": "/bɜːrst/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:burst#p-main",
+      "ipa": {
+        "uk": "/bɜːst/",
+        "us": "/bɜːrst/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "bursts",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "bursting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 46
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 38
+  },
+  "senses": [
+    {
+      "senseId": "w:burst#s1",
+      "pos": "n.",
+      "glossZh": "突发的一阵；短时间的涌现",
+      "pronunciationId": "w:burst#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:burst#e-999c497dceeefdbd",
+          "text": "By 9:33am, a burst of additional traffic might push it to 145 seconds.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:burst#e-7e14c3142e5f194c",
+          "text": "Little do they know that as they do so, a burst of energy is sent up to street level to help charge an electric car.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:burst#e-d57ef2b6dfb41bd7",
+          "text": "A huge and beautifully preserved set of fossils （化石） discovered in China has cast doubt on the idea that complex life dramatically flourished during a rapid burst of evolution known as the Cambrian （寒武纪） explosion.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 157,
+            "end": 162
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:burst#s2",
+      "pos": "v.",
+      "glossZh": "爆裂；突然破开",
+      "pronunciationId": "w:burst#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:burst#e-771b2c2ac26a375e",
+          "text": "On the walls hang photographs of the city’s 1966 flood, when the River Arno burst its banks.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:burst#s3",
+      "pos": "v.",
+      "glossZh": "突然冲入、冲出或冲开",
+      "pronunciationId": "w:burst#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:burst#e-d7e46d903ab7633f",
+          "text": "After friends departed with cheerful goodbyes, I began tidying empty glasses, still lost in the happy scenes when Lily burst through the front door into her room.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 119,
+            "end": 124
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:burst#s4",
+      "pos": "短语",
+      "glossZh": "突然哭起来、笑起来或开始做某事",
+      "pronunciationId": "w:burst#p-main",
+      "note": "burst into 或 burst out",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:burst#e-b496d8f608910ae8",
+          "text": "Now, a series of experiments on zebra finches (斑胸草雀) suggests that while darkness holds back singing, birds build up a strong motivation to sing in the night that causes them to burst into song at dawn.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 178,
+            "end": 183
+          }
+        },
+        {
+          "exampleId": "w:burst#e-058ab1a549979c9a",
+          "text": "After Mom walked back into the house, Dad looked at his sons, and we all burst out laughing.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:cloze",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:cloze:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:burst#e-9d8f38a0d95a925e",
+          "text": "For days, Lauren’s daughter would burst into tears before school, pressing her face against her mom’s leg and begging not to go – an all-too-familiar scene for parents of young students.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:burst#s5",
+      "pos": "短语",
+      "glossZh": "充满；满是",
+      "pronunciationId": "w:burst#p-main",
+      "note": "burst with",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:burst#e-3261d75f14e82d61",
+          "text": "Every surface bursts with colorful creations: posters and paper fill every corner and a handmade sign declares her the “Teacher of Awesome (Math).” This transformation mirrors her revolutionary approach to education – one that relies not only on textbooks but also on student-crafted learning journals filled with origami folds(折纸), hand-drawn diagrams, and lessons printed on rainbow-colored paper.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:burst#e-f9ca83e67c17dc31",
+          "text": "To make matters more challenging, my three children – Mike, Emma, and little Sam – had been bursting with restless energy all week, their stored excitement from school ready to burst forth before a long weekend.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 100
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "连续射击、纵情饮酒",
+      "reason": "军事术语或偏义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

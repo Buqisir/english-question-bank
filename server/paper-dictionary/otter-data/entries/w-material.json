@@ -1,0 +1,253 @@
+{
+  "entryId": "w:material",
+  "headword": "material",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/məˈtɪəriəl/",
+    "us": "/məˈtɪriəl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:material#p-main",
+      "ipa": {
+        "uk": "/məˈtɪəriəl/",
+        "us": "/məˈtɪriəl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more material",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most material",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "materials",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 24,
+    "mock": 294
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 294
+  },
+  "senses": [
+    {
+      "senseId": "w:material#s1",
+      "pos": "n.",
+      "glossZh": "材料",
+      "pronunciationId": "w:material#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:material#e-ca3403adab621732",
+          "text": "Though he acknowledges that engineering works can fail because the person who thought them up or engineered them simply got things wrong, in this book Dr. Petroski widens his view to consider the larger context in which such failures occur.Sometimes devices fail because a good design is constructed with low quality materials incompetently applied.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 317,
+            "end": 326
+          }
+        },
+        {
+          "exampleId": "w:material#e-6788e8c13e0bd35a",
+          "text": "Soon she had him climbing trees and finding nest material.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:10",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:material#e-88dfe393664b4d62",
+          "text": "More recently, as books have become inexpensive or even throwaway, artists have used them as the raw material for artworks – transforming covers, pages or even complete volumes into paintings and sculptures.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 109
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:material#s2",
+      "pos": "n.",
+      "glossZh": "资料；素材",
+      "pronunciationId": "w:material#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:material#e-56001ff271ed70df",
+          "text": "Teachers should produce their own teaching material.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2024-i:31",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:material#e-5a3eec4a8b1088dd",
+          "text": "Be sure to schedule set times to watch your lectures, read materials and contribute to online discussion boards.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:material#e-6d0473fc184b5fce",
+          "text": "Spend a few minutes reading the material aloud.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-zhejiang-jan:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:material#s3",
+      "pos": "n.",
+      "glossZh": "布料",
+      "pronunciationId": "w:material#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:material#s4",
+      "pos": "adj.",
+      "glossZh": "物质的",
+      "pronunciationId": "w:material#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:material#s5",
+      "pos": "adj.",
+      "glossZh": "重要的；实质性的",
+      "pronunciationId": "w:material#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Materials Lab 专名、国际象棋棋子",
+      "reason": "专名或专业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

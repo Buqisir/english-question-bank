@@ -1,0 +1,162 @@
+{
+  "entryId": "w:crime",
+  "headword": "crime",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kraɪm/",
+    "us": "/kraɪm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:crime#p-main",
+      "ipa": {
+        "uk": "/kraɪm/",
+        "us": "/kraɪm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "crimes",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "senses": [
+    {
+      "senseId": "w:crime#s1",
+      "pos": "n.",
+      "glossZh": "犯罪；犯罪活动；罪行",
+      "pronunciationId": "w:crime#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:crime#e-c99200de74bd7a1e",
+          "text": "The crime was never solved – many believe it was linked to illegal hunting, smuggling (走私), or conflicts over land and money.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b:14",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:crime#e-f3dd088b6685de81",
+          "text": "He emphasized that Hunter would serve not only as a powerful tool in fighting crime but also as a bridge between the police and the community, especially during visits to schools and local events.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:crime#e-544f70d7e9bb37db",
+          "text": "If you’ve been a victim of a crime, please notify the campus security and/or local police.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:seven-choices",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:seven-choices:12",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:crime#s2",
+      "pos": "n.",
+      "glossZh": "严重的过错；应受谴责的行为",
+      "pronunciationId": "w:crime#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:crime#e-8b65a9d21f1bb552",
+          "text": "“As if life / were a progressive and cunning crime / with no witness to the tiny hidden transgressions（越界）.” He advises the reader to become alert.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 50
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "压缩侧信道攻击名称",
+      "reason": "同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

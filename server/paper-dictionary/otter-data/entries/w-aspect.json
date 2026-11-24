@@ -1,0 +1,155 @@
+{
+  "entryId": "w:aspect",
+  "headword": "aspect",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈæspekt/",
+    "us": "/ˈæspekt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:aspect#p-main",
+      "ipa": {
+        "uk": "/ˈæspekt/",
+        "us": "/ˈæspekt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "aspects",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 24,
+    "mock": 132
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 132
+  },
+  "senses": [
+    {
+      "senseId": "w:aspect#s1",
+      "pos": "n.",
+      "glossZh": "方面；层面",
+      "pronunciationId": "w:aspect#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 24,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:aspect#e-d349e244a7e36fe4",
+          "text": "While running every aspect of our own news station, kids and their fellow campers will create and host a broadcast airing each night at dinner for the entire camp.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:aspect#e-0848bf14462271fc",
+          "text": "They don’t have to be world-changing, just aspects of your personality that you’re proud of.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:aspect#e-4272c821b2370803",
+          "text": "When I let them see an aspect of my life outside of school, some students who were also interested in cars connected with me more and became more engaged in my courses.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:aspect#s2",
+      "pos": "n.",
+      "glossZh": "朝向；方位",
+      "pronunciationId": "w:aspect#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:aspect#s3",
+      "pos": "n.",
+      "glossZh": "外观；样子",
+      "pronunciationId": "w:aspect#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "语法体貌、星相、铁路信号及程序切面",
+      "reason": "领域专门义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

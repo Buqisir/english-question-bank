@@ -1,0 +1,180 @@
+{
+  "entryId": "w:plane",
+  "headword": "plane",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pleɪn/",
+    "us": "/pleɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:plane#p-main",
+      "ipa": {
+        "uk": "/pleɪn/",
+        "us": "/pleɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "planes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "planed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "planing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 58
+  },
+  "unassignedCounts": {
+    "gaokao": 7,
+    "mock": 58
+  },
+  "senses": [
+    {
+      "senseId": "w:plane#s1",
+      "pos": "n.",
+      "glossZh": "飞机",
+      "pronunciationId": "w:plane#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:plane#e-0eb7768c6222bf10",
+          "text": "Three months later I __37__ myself on a plane to Phoenix, Arizona.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:plane#e-29f1635cf0677c73",
+          "text": "The moment I got off the plane, I ran like crazy through the airport building and jumped into the first taxi on the rank without a second thought.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:plane#e-879e44f85eb7dd20",
+          "text": "The greening of planes, trains and automobiles",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:plane#s2",
+      "pos": "n.",
+      "glossZh": "平面",
+      "pronunciationId": "w:plane#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:plane#s3",
+      "pos": "n.",
+      "glossZh": "刨子",
+      "pronunciationId": "w:plane#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:plane#s4",
+      "pos": "v.",
+      "glossZh": "刨平",
+      "pronunciationId": "w:plane#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

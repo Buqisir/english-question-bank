@@ -1,0 +1,363 @@
+{
+  "entryId": "w:paper",
+  "headword": "paper",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpeɪpə(r)/",
+    "us": "/ˈpeɪpər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:paper#p-main",
+      "ipa": {
+        "uk": "/ˈpeɪpə(r)/",
+        "us": "/ˈpeɪpər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "papers",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "papered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "papering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 32,
+    "mock": 225
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 223
+  },
+  "senses": [
+    {
+      "senseId": "w:paper#s1",
+      "pos": "n.",
+      "glossZh": "纸",
+      "pronunciationId": "w:paper#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 20,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:paper#e-b78751ae13fae67d",
+          "text": "■Write by hand or type on a single sheet of paper.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:paper#e-b56dd08438e4ad55",
+          "text": "Always keep a pencil and paper beside you.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:paper#e-573d67873e0253f9",
+          "text": "This is a unique piece, as posters such as this one were printed on soft paper and very few have survived.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 78
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:paper#s2",
+      "pos": "n.",
+      "glossZh": "作业论文或学术文章",
+      "pronunciationId": "w:paper#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:paper#e-80ea117758f7a9bb",
+          "text": "By what time did John plan to finish his term paper?",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:paper#e-41656f9cfbde7c85",
+          "text": "On March 7,1907, the English statistician Francis Galton published a paper which illustrated what has come to be known as the “wisdom of crowds” effect.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:paper#e-9ff5c7f4a280e263",
+          "text": "Writing was so difficult and painful for me that my teacher had allowed me to present my paper on the sinking of the Titanic by acting out a play, where I played all the parts.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 94
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:paper#s3",
+      "pos": "n.",
+      "glossZh": "报纸",
+      "pronunciationId": "w:paper#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:paper#e-8a5efe63df449e31",
+          "text": "As someone noted in this paper a couple of weeks ago, they eat great food and never gain weight.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:paper#e-04160e1240c90e1c",
+          "text": "A morning paper.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:paper#e-472431d8f710f9dd",
+          "text": "It was a __46__ to get off that plane and make it to my hotel, where I bought the local paper.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 93
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:paper#s4",
+      "pos": "n.",
+      "glossZh": "试卷",
+      "pronunciationId": "w:paper#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:paper#e-392cc66222e75e00",
+          "text": "An exam paper.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2022-i:21",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:paper#e-0b19779cb9d4547c",
+          "text": "Tom, a hard-working junior high school student, was buried in thick review books and exercise papers all day long.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 100
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:paper#s5",
+      "pos": "n.",
+      "glossZh": "文件；证件",
+      "pronunciationId": "w:paper#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:paper#s6",
+      "pos": "v.",
+      "glossZh": "用墙纸裱糊",
+      "pronunciationId": "w:paper#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

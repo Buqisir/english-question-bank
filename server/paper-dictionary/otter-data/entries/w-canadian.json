@@ -1,0 +1,192 @@
+{
+  "entryId": "w:canadian",
+  "headword": "Canadian",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəˈneɪdiən/",
+    "us": "/kəˈneɪdiən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:canadian#p-main",
+      "ipa": {
+        "uk": "/kəˈneɪdiən/",
+        "us": "/kəˈneɪdiən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more Canadian",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most Canadian",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "Canadians",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "senses": [
+    {
+      "senseId": "w:canadian#s1",
+      "pos": "adj.",
+      "glossZh": "加拿大的；加拿大人的",
+      "pronunciationId": "w:canadian#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:canadian#e-9b6b344fff332e40",
+          "text": "On September 7, 1991, the costliest hailstorm(雹暴) in Canadian history hit Calgary’s southern suburbs.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:canadian#e-f1c12e3672dd5556",
+          "text": "Most famously, a Canadian journalist who had moved her family to Manhattan in the early 1950s led a campaign to stop the destruction of her local park.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:canadian#e-be609618a518aa3a",
+          "text": "She drove on for a while and found herself on an unfamiliar road toward a Canadian town.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 82
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:canadian#s2",
+      "pos": "n.",
+      "glossZh": "加拿大人",
+      "pronunciationId": "w:canadian#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:canadian#e-ddcd60ce8d93cf06",
+          "text": "I’m a Canadian; my feeling of pride in my native land is enhanced by small verbal Canadianisms like “eaves trough” or “serviette”, which are well-documented in dictionaries but rarely used by AI chatbots, for the most part.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:canadian#e-771fe9af6bc9c99b",
+          "text": "It’s a familiar tale these days: A Canadian quits their exhausting day job to pursue a dream, like opening a coffee shop, and finds freedom and joy.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 43
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "加拿大河、美国的同名城镇、独木舟",
+      "reason": "专名或器材专称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,117 @@
+{
+  "entryId": "w:always",
+  "headword": "always",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɔːlweɪz/",
+    "us": "/ˈɔːlweɪz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:always#p-main",
+      "ipa": {
+        "uk": "/ˈɔːlweɪz/",
+        "us": "/ˈɔːlweɪz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 79,
+    "mock": 580
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:always#s1",
+      "pos": "adv.",
+      "glossZh": "总是；一直；永远",
+      "pronunciationId": "w:always#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 79,
+        "mock": 580
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:always#e-ae175bc0ce9d439a",
+          "text": "I’ve always loved the ocean.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-ii:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:always#e-8aeb3cb239d28db1",
+          "text": "The core (核心) of your relationship is that you will always be there to help each other.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "seven-choices-6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:always#e-2314440d70734b6c",
+          "text": "This effect capitalizes on the fact that when people make errors, those errors aren’t always the same.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 92
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

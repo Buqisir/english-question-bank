@@ -1,0 +1,722 @@
+{
+  "entryId": "w:show",
+  "headword": "show",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ʃəʊ/",
+    "us": "/ʃəʊ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:show#p-main",
+      "ipa": {
+        "uk": "/ʃəʊ/",
+        "us": "/ʃəʊ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "shows",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "showed",
+      "tags": [
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "showing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "shown",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 131,
+    "mock": 1163
+  },
+  "unassignedCounts": {
+    "gaokao": 6,
+    "mock": 1161
+  },
+  "senses": [
+    {
+      "senseId": "w:show#s1",
+      "pos": "v.",
+      "glossZh": "表明",
+      "pronunciationId": "w:show#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 58,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:show#e-68b193896fc693bf",
+          "text": "The tests show that the social environment is extremely influential when we’re making decisions.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:show#e-7f38a260b8ab645f",
+          "text": "“However, this study does not show cause and effect between cardiovascular fitness and dementia, it only shows an association.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:show#e-bfe086749b35b1ea",
+          "text": "The results show that consumers generally trust negative reviews more than positive ones.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:show#s2",
+      "pos": "v.",
+      "glossZh": "给……看",
+      "pronunciationId": "w:show#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:show#e-9b3612e1cdf672e6",
+          "text": "During the training stage, each dog was shown only the upper half or the lower half of the person’s face.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:show#e-fa0fe0253244ce36",
+          "text": "It shows the cooking process to guests.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2023-national-a:23",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:show#e-48a68a4753568dc6",
+          "text": "Zero waste was a radical lifestyle movement a few years back, I remember showing my parents a video of Bea Johnson, sharing how cool I thought it would be to buy groceries with jars, and have so little trash!",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:show#s3",
+      "pos": "v.",
+      "glossZh": "流露出（情感或态度）",
+      "pronunciationId": "w:show#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:show#e-f0e5a46f5e385f32",
+          "text": "You write “Dear Santa” because you don’t know him personally and you want to show him respect.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 88
+          }
+        },
+        {
+          "exampleId": "w:show#e-c29e5c03627d08e5",
+          "text": "When your child shares or shows empathy（同理心）toward a friend, praise him (“Ben stopped crying!",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:show#e-88431672af0a917d",
+          "text": "Even those who didn’t share that interest with me seemed more engaged once I showed a different side of myself.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 83
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:show#s4",
+      "pos": "v.",
+      "glossZh": "放映",
+      "pronunciationId": "w:show#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:show#e-f56fd9b087f3bb59",
+          "text": "When “Rise of the Planet of the Apes” was first shown to the public last month, a group of excited animal activists gathered on Hollywood Boulevard.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:show#e-8ec606e19fa5dd11",
+          "text": "A nearby theater was showing a documentary（纪录片） about several local animal shelters that were helping to save abandoned dogs across the country.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:show#s5",
+      "pos": "v.",
+      "glossZh": "给……指路",
+      "pronunciationId": "w:show#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:show#e-b724f43221e8049f",
+          "text": "He showed her the wrong way.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:show#s6",
+      "pos": "短语",
+      "glossZh": "到场",
+      "pronunciationId": "w:show#p-main",
+      "note": "show up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:show#e-ccb3100de611733b",
+          "text": "Organizers expected perhaps 50,000 people to show up.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:show#e-0c8b90192ee7720b",
+          "text": "One reason was: “You’ll actually show up if you know someone is waiting for you at the gym,” while another read: “__36__” With a workout partner, you will increase your training effort as there is a subtle (微妙) competition.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "seven-choices-1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:show#e-777280ce3a85b865",
+          "text": "So, when my brother showed up, I asked him to watch Toby and keep him outside.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:show#s7",
+      "pos": "短语",
+      "glossZh": "显现",
+      "pronunciationId": "w:show#p-main",
+      "note": "show up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:show#e-a9b06bbc21fff132",
+          "text": "In most people the first signs show up in their 50s or early 60s.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:show#e-91f3e3161333ce5e",
+          "text": "Researchers say more and more terms for these “neo-emotions” are showing up online, describing new dimensions and aspects of feeling.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:show#s8",
+      "pos": "n.",
+      "glossZh": "演出",
+      "pronunciationId": "w:show#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:show#e-cbb40c37cd501fab",
+          "text": "Unusual fashion shows in New Orleans and Brooklyn have showcased nutria fur made into clothes in different styles.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:show#e-d8bfdcc29db4106f",
+          "text": "Magic shows are entertaining as long as the audience does not discover how the tricks are done.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:show#e-9bc3d813ba052ef0",
+          "text": "Sherman Cymru is excited to present a packed programme of the very best theatre, dance, family shows and music from Wales and the rest of the world.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:11",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 100
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:show#s9",
+      "pos": "n.",
+      "glossZh": "电视节目",
+      "pronunciationId": "w:show#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:show#e-dad965072682cf33",
+          "text": "Why is Emily doing unpaid work in the new season of the show?",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:show#e-d7f518e826714387",
+          "text": "Cookery shows and documentaries about food are broadcast more often than before.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:show#e-93465fb57c7e1cde",
+          "text": "Even if you haven’t been to the small fishing village Mevagissey, you’ve probably seen it in a movie or British TV show.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 115,
+            "end": 119
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:show#s10",
+      "pos": "n.",
+      "glossZh": "展览",
+      "pronunciationId": "w:show#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:show#e-3d18454a13bbbed6",
+          "text": "Go to an art show.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:listening.short-dialogue",
+            "locator": {
+              "question": 3,
+              "questionId": "question:listening:3",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:show#e-f6c6a46322553e21",
+          "text": "She drank coffee and __48__ the Chelsea Flower Show on television.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:show#s11",
+      "pos": "n.",
+      "glossZh": "装出来的样子",
+      "pronunciationId": "w:show#p-main",
+      "note": "常见 a show of confidence。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "顶级联赛、矿灯蓝焰、产前见红、麻屑和姓氏",
+      "reason": "专门义或专名"
+    },
+    {
+      "glossZh": "赛马获第三名和亮牌",
+      "reason": "赛事和牌戏用语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

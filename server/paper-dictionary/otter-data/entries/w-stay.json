@@ -1,0 +1,569 @@
+{
+  "entryId": "w:stay",
+  "headword": "stay",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/steɪ/",
+    "us": "/steɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:stay#p-main",
+      "ipa": {
+        "uk": "/steɪ/",
+        "us": "/steɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "stays",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "stayed",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "staying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 43,
+    "mock": 451
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 447
+  },
+  "senses": [
+    {
+      "senseId": "w:stay#s1",
+      "pos": "n.",
+      "glossZh": "逗留",
+      "pronunciationId": "w:stay#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:stay#e-2447eb8996935822",
+          "text": "Trip includes round-trip air tickets, hotel stay for two nights, and tours of the National Air and Space Museum and the office of National Geographic World.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:stay#e-bf30fd2861e4f28b",
+          "text": "Throughout their no-cost stays in __45__ homes, they feed pets and water plants in the homeowner’s __46__.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:stay#e-7a2ba8ec14839b04",
+          "text": "Their stay in Elkhead is the subject of Nothing Daunted: The Unexpected Education of Two Society Girls in the West by Dorothy Wickenden, who is a magazine editor and Dorothy Woodruff’s granddaughter.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:stay#s2",
+      "pos": "v.",
+      "glossZh": "留在原处",
+      "pronunciationId": "w:stay#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:stay#e-96b054ee4735b756",
+          "text": "“We were so amazed that they could stay underwater much longer than us local islanders,” Dr. Jubilado said.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:stay#e-346b479c15a70ab6",
+          "text": "The lamb had become separated from its __37__, so I jumped out of the tractor to __38__ it while Don stayed in his seat.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:stay#e-3b522633e58678c6",
+          "text": "Stay in the lecture hall.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:stay#s3",
+      "pos": "v.",
+      "glossZh": "暂住",
+      "pronunciationId": "w:stay#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:stay#e-5046aec5be815727",
+          "text": "We were staying at a research camp outside “the polar bear capital of the world”-the town of Churchill in Manitoba, Canada.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:stay#e-e6d9f5809b594660",
+          "text": "Rome can be pricey for travelers, which is why many choose to stay in a hostel（旅社）.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:stay#e-617d56cfbacd11be",
+          "text": "When Emily rolled down the window, Rachel asked if she was okay and told her it was not safe to stay overnight in the car.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 100
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:stay#s4",
+      "pos": "v.",
+      "glossZh": "保持某种状态",
+      "pronunciationId": "w:stay#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:stay#e-3df128eaa5648041",
+          "text": "Challenging work that requires lots of analytical thinking, planning and other managerial skills might help your brain stay sharp as you age, a study published Wednesday in the journal Neurology suggests.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 119,
+            "end": 123
+          }
+        },
+        {
+          "exampleId": "w:stay#e-74cd0836cc639e7f",
+          "text": "Thankfully, Jeff stayed calm and turned off the gas quickly.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:stay#e-9e5f841ac8efbac8",
+          "text": "To stay warm, she ran her engine for a few minutes every now and then.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
+              "sentence": 9
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:stay#s5",
+      "pos": "短语",
+      "glossZh": "在外不回家",
+      "pronunciationId": "w:stay#p-main",
+      "note": "stay out。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:stay#e-8f2eb775bac9de39",
+          "text": "I was unwilling talk with him and often disobeyed his rule of not stay out with my friends too late.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-national-a:writing-short-error-correction:8",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:stay#s6",
+      "pos": "短语",
+      "glossZh": "熬夜",
+      "pronunciationId": "w:stay#p-main",
+      "note": "stay up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:stay#e-7bc08f4aecbee005",
+          "text": "Even in middle school I would stay up very late.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:stay#e-940a65326e860d93",
+          "text": "I still loved the night and would stay up until unruly hours for no apparent reason, chatting online and watching videos.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:stay#e-47437300239a4b46",
+          "text": "In desperation, I stayed up to write a poem, carefully avoiding __45__ letters.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:stay#s7",
+      "pos": "短语",
+      "glossZh": "继续留下",
+      "pronunciationId": "w:stay#p-main",
+      "note": "stay on。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:stay#e-1cca5df5ff9336d5",
+          "text": "Some participants even stay on to work at Mcvilly’s enterprise.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:stay#s8",
+      "pos": "短语",
+      "glossZh": "留在记忆中",
+      "pronunciationId": "w:stay#p-main",
+      "note": "stay with somebody。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:stay#e-a8caf44b1ca13f78",
+          "text": "That question stayed with me.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:stay#e-495aa9136ce2c25d",
+          "text": "That moment stayed with me more than the writings the others saw.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:seven-choices:9",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:stay#s9",
+      "pos": "n.",
+      "glossZh": "暂缓执行令",
+      "pronunciationId": "w:stay#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "陡峭的、服装撑条、桅杆支索及换舷",
+      "reason": "地区用法、行业专义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

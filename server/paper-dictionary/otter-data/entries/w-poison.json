@@ -1,0 +1,254 @@
+{
+  "entryId": "w:poison",
+  "headword": "poison",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpɔɪzn/",
+    "us": "/ˈpɔɪzn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:poison#p-main",
+      "ipa": {
+        "uk": "/ˈpɔɪzn/",
+        "us": "/ˈpɔɪzn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "poisons",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "poisoned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "poisoning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "senses": [
+    {
+      "senseId": "w:poison#s1",
+      "pos": "n.",
+      "glossZh": "毒物；毒药",
+      "pronunciationId": "w:poison#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:poison#e-41d6194b18bc3246",
+          "text": "Releasing poisons to contain competitors.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:29",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:poison#e-bab49c54a2647910",
+          "text": "Be careful of poisons, as each works in a unique way.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:poison#s2",
+      "pos": "v.",
+      "glossZh": "使中毒；下毒",
+      "pronunciationId": "w:poison#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:poison#e-2cef922820b9204a",
+          "text": "Worse, he says, in Queensland, landholders have been accused of poisoning kangaroos and building fences to prevent them from reaching water.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:poison#e-9b9881209b1f86d1",
+          "text": "The she-wolf was fatally poisoned and died as well.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:poison#s3",
+      "pos": "n.",
+      "glossZh": "中毒",
+      "pronunciationId": "w:poison#p-main",
+      "note": "poisoning。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:poison#e-47143d01415b25e0",
+          "text": "Other recalls are because of possible pollution with bacteria or viruses that can cause food poisoning or other illness.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:poison#e-f94a6ebd326d0a24",
+          "text": "He got food poisoning.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:poison#e-e47f915fc05ed4d6",
+          "text": "Carbon monoxide poisoning.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:30",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 25
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "poison oak",
+      "reason": "独立植物名称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

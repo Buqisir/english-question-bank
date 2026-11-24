@@ -1,0 +1,260 @@
+{
+  "entryId": "w:low",
+  "headword": "low",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ləʊ/",
+    "us": "/loʊ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:low#p-main",
+      "ipa": {
+        "uk": "/ləʊ/",
+        "us": "/loʊ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "lower",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "lowest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "lows",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 21,
+    "mock": 154
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 152
+  },
+  "senses": [
+    {
+      "senseId": "w:low#s1",
+      "pos": "adj.",
+      "glossZh": "低的；少的",
+      "pronunciationId": "w:low#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 21,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:low#e-d734ede9a9caf9f3",
+          "text": "According to the World Wildlife Fund, the global black rhino population has dropped as low as 5500, giving the rhinos a “critically endangered” status.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:low#e-db415003e2552f33",
+          "text": "A special low entrance charge of £2 per person is available to all in full-time education, up to and including those at first degree level, in organised groups with teachers.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-a:14",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:low#e-a8fe6884a187a2d1",
+          "text": "Drive at low speed.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:low#s2",
+      "pos": "adj.",
+      "glossZh": "位置低的",
+      "pronunciationId": "w:low#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:low#e-95023757b9ec45b3",
+          "text": "The lowest rung might be looking at what friends and family have posted on social media (and giving likes and comments), which is a good way to keep involved with the people you care about.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:seven-choices:9",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:low#s3",
+      "pos": "adj.",
+      "glossZh": "情绪低落的",
+      "pronunciationId": "w:low#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:low#e-248cc145b2c64f70",
+          "text": "Bright colors such as yellow and orange are energetic and help lift low moods.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 71
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:low#s4",
+      "pos": "adj.",
+      "glossZh": "音调低的",
+      "pronunciationId": "w:low#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:low#s5",
+      "pos": "adv.",
+      "glossZh": "在低处",
+      "pronunciationId": "w:low#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:low#s6",
+      "pos": "n.",
+      "glossZh": "低谷",
+      "pronunciationId": "w:low#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:low#s7",
+      "pos": "n.",
+      "glossZh": "低气压区",
+      "pronunciationId": "w:low#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "牛叫、旧式坟丘义",
+      "reason": "罕见同形词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

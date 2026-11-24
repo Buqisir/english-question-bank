@@ -1,0 +1,264 @@
+{
+  "entryId": "w:drill",
+  "headword": "drill",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/drɪl/",
+    "us": "/drɪl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:drill#p-main",
+      "ipa": {
+        "uk": "/drɪl/",
+        "us": "/drɪl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "drills",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "drilled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "drilling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "senses": [
+    {
+      "senseId": "w:drill#s1",
+      "pos": "v.",
+      "glossZh": "钻孔；钻进",
+      "pronunciationId": "w:drill#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drill#e-7fb411e6317fb9b0",
+          "text": "A hair-raising section concerns the building of the railroads, which entailed（牵涉）drilling through the Rockies, often in blinding snowstorms.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:drill#e-63a61fb48515d118",
+          "text": "Workers start by drilling two wells over 8,000 feet deep into rock hot enough to roast a turkey.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:drill#e-fbe4b5bad5048e55",
+          "text": "A thunderous crack alerted me to a woodpecker drilling holes in a tree near my local park.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:drill#s2",
+      "pos": "n.",
+      "glossZh": "演习；操练",
+      "pronunciationId": "w:drill#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drill#e-e3b9ce29c2504bac",
+          "text": "In fact, building work ethic (道德) in kids doesn’t require military-style drills.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:drill#e-f07fe0793fc9c9b2",
+          "text": "They woke up early to practice before school, worked on passing drills during lunch breaks, and stayed late to perfect their shots.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:writing-continuation:3",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:drill#e-59faafa2fd1416a5",
+          "text": "What does the woman think of the scheduled fire drills?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:drill#s3",
+      "pos": "v.",
+      "glossZh": "训练；反复灌输",
+      "pronunciationId": "w:drill#p-main",
+      "note": "drill sth into sb 语气较强。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drill#e-9de6dbc3a4bd1894",
+          "text": "Ever since the first day of school, it had been drilled into my brain that I must strive for academic success.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:drill#s4",
+      "pos": "n.",
+      "glossZh": "钻；钻孔工具",
+      "pronunciationId": "w:drill#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "条播器、西非猴类、海螺名、陷阱音乐等",
+      "reason": "行业术语、物种名或音乐分类"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,227 @@
+{
+  "entryId": "w:select",
+  "headword": "select",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/sɪˈlekt/",
+    "us": "/sɪˈlekt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:select#p-main",
+      "ipa": {
+        "uk": "/sɪˈlekt/",
+        "us": "/sɪˈlekt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more select",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most select",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "selected",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "selecting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "selects",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 15,
+    "mock": 96
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 95
+  },
+  "senses": [
+    {
+      "senseId": "w:select#s1",
+      "pos": "v.",
+      "glossZh": "挑选",
+      "pronunciationId": "w:select#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:select#e-b5fb172ebe477d95",
+          "text": "Levine and his research team selected volunteers aged between 45 and 64 who did not exercise much but were otherwise healthy.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:select#e-d78b2891df591901",
+          "text": "In the experiment, Goffin’s cockatoos were able to select the right tool for the job, in most cases, by visual recognition alone.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:select#e-599dd77f7944fbd3",
+          "text": "This project will select 10 visual artists and 10 writers to create artwork that will be displayed on temporary signs along the multi-use path.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:select#s2",
+      "pos": "v.",
+      "glossZh": "点选",
+      "pronunciationId": "w:select#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:select#e-e8ec44f8e8a4c4f2",
+          "text": "Once in your account, select Electronic Articles Received.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:9",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:select#s3",
+      "pos": "adj.",
+      "glossZh": "精选的",
+      "pronunciationId": "w:select#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:select#e-0a20f9290047c208",
+          "text": "Accurate and select.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-sixth:24",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "查询并取出数据",
+      "reason": "数据库专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

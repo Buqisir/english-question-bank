@@ -1,0 +1,194 @@
+{
+  "entryId": "w:assume",
+  "headword": "assume",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈsjuːm/",
+    "us": "/əˈsuːm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:assume#p-main",
+      "ipa": {
+        "uk": "/əˈsjuːm/",
+        "us": "/əˈsuːm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "assumed",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "assumes",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "assuming",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 81
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 80
+  },
+  "senses": [
+    {
+      "senseId": "w:assume#s1",
+      "pos": "v.",
+      "glossZh": "假定；以为；推测",
+      "pronunciationId": "w:assume#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:assume#e-a7039d621fd5251c",
+          "text": "However, for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 103,
+            "end": 109
+          }
+        },
+        {
+          "exampleId": "w:assume#e-a5016f078bb6e42f",
+          "text": "For instance, if an object’s name was meant to sound genderless, like Miuu, participants would still assign a gender to it – they would assume Miuu was a “he” or “she.”",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 136,
+            "end": 142
+          }
+        },
+        {
+          "exampleId": "w:assume#e-5fc34d7329342d02",
+          "text": "Moreover, we humans tend to assume that positive reviews might be fake.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:assume#s2",
+      "pos": "v.",
+      "glossZh": "承担；担任",
+      "pronunciationId": "w:assume#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:assume#e-937fe71d08539e33",
+          "text": "Assuming the duty of the “guardian of the genome,” its role is visible in sunburned skin peeling (脱落) away to protect against skin cancer.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:assume#s3",
+      "pos": "v.",
+      "glossZh": "呈现；具有；装出（某种样子）",
+      "pronunciationId": "w:assume#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "收纳、接纳",
+      "reason": "罕见旧义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

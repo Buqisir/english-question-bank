@@ -1,0 +1,251 @@
+{
+  "entryId": "w:letter",
+  "headword": "letter",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈletə(r)/",
+    "us": "/ˈletər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:letter#p-main",
+      "ipa": {
+        "uk": "/ˈletə(r)/",
+        "us": "/ˈletər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "letters",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 29,
+    "mock": 148
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 147
+  },
+  "senses": [
+    {
+      "senseId": "w:letter#s1",
+      "pos": "n.",
+      "glossZh": "信；书信",
+      "pronunciationId": "w:letter#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 24,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:letter#e-a3a1c382c4282f9c",
+          "text": "Thank you for your letter, what really made me happy.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:writing-short-error-correction:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:letter#e-7da9d4adef9a4416",
+          "text": "That’s when things went __49__ “I remember walking down the long __50__ and opening the door to my room to find an entire flock of seagulls,” Burchill said in a recent letter of __51__ to the 4-star hotel.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 168,
+            "end": 174
+          }
+        },
+        {
+          "exampleId": "w:letter#e-72bcd2a6e7d77992",
+          "text": "I have a drawer full of letters to Santa.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:letter#s2",
+      "pos": "n.",
+      "glossZh": "字母",
+      "pronunciationId": "w:letter#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:letter#e-45d76ddc566148f6",
+          "text": "SILENCE in big black letters was on signs hung everywhere.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:letter#e-8293d1ed586cb9e8",
+          "text": "An essay not submitted in class on the due date will lose a letter grade for each class period it is late.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "reading-a-11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:letter#e-31fe024a156d4c8a",
+          "text": "In his next attempt, Faizan entered the semifinals, but was tripped up by “xylophone”, mistakenly confusing “ph” with “f”. This setback taught him something new: “Every letter carries a cultural context – only memorizing is far less effective than understanding etymology (词源).” Thereafter, he spent 2 hours daily analyzing word origins.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 169,
+            "end": 175
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:letter#s3",
+      "pos": "短语",
+      "glossZh": "邮递员",
+      "pronunciationId": "w:letter#p-main",
+      "note": "letter carrier，美式用法。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:letter#e-45c9d06a37df9318",
+          "text": "It’s been 33 years since Jim left the route, but we are still reminded of the deep bond established between community and letter carrier.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 122,
+            "end": 128
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:letter#s4",
+      "pos": "n.",
+      "glossZh": "字面含义",
+      "pronunciationId": "w:letter#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Environmental Science & Technology Letters",
+      "reason": "刊名，g28 留空"
+    },
+    {
+      "glossZh": "信纸规格、体育荣誉标志",
+      "reason": "专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

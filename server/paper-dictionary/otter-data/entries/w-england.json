@@ -1,0 +1,126 @@
+{
+  "entryId": "w:england",
+  "headword": "England",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɪŋɡlənd/",
+    "us": "/ˈɪŋɡlənd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:england#p-main",
+      "ipa": {
+        "uk": "/ˈɪŋɡlənd/",
+        "us": "/ˈɪŋɡlənd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 28
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:england#s1",
+      "pos": "专名",
+      "glossZh": "英格兰",
+      "pronunciationId": "w:england#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 28
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:england#e-a31266ee34477c10",
+          "text": "Cumbria, England",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-a:figure-8f50d0ac5d38cb0b:cell-1-1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:england#e-79a71406ab688b7b",
+          "text": "Work with a team in England.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:england#e-c48933ea86362963",
+          "text": "Ludlow is known as the Foodie Center of England.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 47
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "英国",
+      "reason": "非正式泛称，容易与正式地名混淆"
+    },
+    {
+      "glossZh": "新英格兰",
+      "reason": "New England 是美国地区名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,159 @@
+{
+  "entryId": "w:reveal",
+  "headword": "reveal",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈviːl/",
+    "us": "/rɪˈviːl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:reveal#p-main",
+      "ipa": {
+        "uk": "/rɪˈviːl/",
+        "us": "/rɪˈviːl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "reveals",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "revealed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "revealing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 201
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 200
+  },
+  "senses": [
+    {
+      "senseId": "w:reveal#s1",
+      "pos": "v.",
+      "glossZh": "揭示",
+      "pronunciationId": "w:reveal#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reveal#e-367805c0c4c74424",
+          "text": "Their study revealed that the large number of observation-only records did not lead to better global coverage.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:reveal#e-4815ea3cda13d89e",
+          "text": "By using machine learning and advanced algorithms (算法), these institutions are creating personalized visitor journeys, protecting delicate collections, and revealing hidden stories.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 156,
+            "end": 165
+          }
+        },
+        {
+          "exampleId": "w:reveal#e-a25643f8712cfc9e",
+          "text": "The chart below reveals the hidden environmental cost of fashion weeks last year.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:reveal#s2",
+      "pos": "n.",
+      "glossZh": "揭晓",
+      "pronunciationId": "w:reveal#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "门窗框内侧面",
+      "reason": "建筑专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

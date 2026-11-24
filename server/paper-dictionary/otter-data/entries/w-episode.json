@@ -1,0 +1,209 @@
+{
+  "entryId": "w:episode",
+  "headword": "episode",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈepɪsəʊd/",
+    "us": "/ˈepɪsoʊd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:episode#p-main",
+      "ipa": {
+        "uk": "/ˈepɪsəʊd/",
+        "us": "/ˈepɪsoʊd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "episodes",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "senses": [
+    {
+      "senseId": "w:episode#s1",
+      "pos": "n.",
+      "glossZh": "一段经历",
+      "pronunciationId": "w:episode#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:episode#e-5ee898fa4bd02c7c",
+          "text": "Gabriel Radvansky, a psychology professor at the University of Notre Dame, who has spent years investigating how physical movement affects memory, uncovers the underlying mechanism: the brain organizes experience into separate episodes called event models.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 227,
+            "end": 235
+          }
+        },
+        {
+          "exampleId": "w:episode#e-f2ded208b576adab",
+          "text": "This episode was just one innocent __53__ to lessen the divide between ourselves and the many species with whom we co-exist.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:cloze",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:episode#e-e15c7c77db55a388",
+          "text": "When you cross a doorway, the brain files the previous episode of activity away and begins building a new one.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 62
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:episode#s2",
+      "pos": "n.",
+      "glossZh": "（连续节目）一集",
+      "pronunciationId": "w:episode#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:episode#e-f67e332e391f33ef",
+          "text": "Podcaster Jason Feifer devoted an episode to this question in his program, noting many idealize the 1950s.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:episode#e-087099eebb5eb7a0",
+          "text": "Next, the team analyzed over 360,000 YouTube videos and 770,000 podcast (播客) episodes from before and after ChatGPT’s release to track the use of GPT words over time.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-sep-opening:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 85
+          }
+        },
+        {
+          "exampleId": "w:episode#e-4e26aa2a8504a05b",
+          "text": "In one episode, Armstrong speaks from the edge of the “exclusion（排斥）zone” that marked the area in Perth where First Nations people, only seventy years ago, were not permitted to enter freely.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:episode#s3",
+      "pos": "n.",
+      "glossZh": "一段发作期",
+      "pronunciationId": "w:episode#p-main",
+      "note": "如 an episode of depression。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

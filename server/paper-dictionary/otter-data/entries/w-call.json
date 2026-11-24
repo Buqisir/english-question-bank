@@ -1,0 +1,830 @@
+{
+  "entryId": "w:call",
+  "headword": "call",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kɔːl/",
+    "us": "/kɔːl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:call#p-main",
+      "ipa": {
+        "uk": "/kɔːl/",
+        "us": "/kɔːl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "calls",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "called",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "calling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 108,
+    "mock": 693
+  },
+  "unassignedCounts": {
+    "gaokao": 7,
+    "mock": 691
+  },
+  "senses": [
+    {
+      "senseId": "w:call#s1",
+      "pos": "v.",
+      "glossZh": "称呼；把……叫作；给……命名",
+      "pronunciationId": "w:call#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 22,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:call#e-29132cab89359188",
+          "text": "They are not called rainforests for nothing!",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:call#e-3e7da213c186c7d3",
+          "text": "At the beginning of the year, the artist built a piece called “Strawpocalypse,” a pair of 10-foot-tall plastic waves, frozen mid-crash.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:call#e-f373cec5fdc2c6ac",
+          "text": "This ability to recognize that a shape will need to be turned in a specific direction before it will fit is called an “allocentric frame of reference”.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 114
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:call#s2",
+      "pos": "v.",
+      "glossZh": "打电话；打电话给",
+      "pronunciationId": "w:call#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 23,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:call#e-23ad7151da59dd6c",
+          "text": "When Jim Grant spotted black smoke coming out of a building on his way to work, he __41__ his car to call 911.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 105
+          }
+        },
+        {
+          "exampleId": "w:call#e-37e38abc7bfcb801",
+          "text": "For groups of 35 or more, please call to discuss options.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:call#e-882599b01299f7fd",
+          "text": "With his heart in his mouth, Kevin grabbed Mrs. Hill’s home phone and called the police.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 76
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:call#s3",
+      "pos": "n.",
+      "glossZh": "电话；通话",
+      "pronunciationId": "w:call#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 29,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:call#e-6f54dcf00f416060",
+          "text": "Practically everyone can make and receive calls anywhere, anytime.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:call#e-4c0bdc636a619ef6",
+          "text": "With busy schedules, squeezing in phone calls can be a challenge.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:call#e-64858ba1ef196f3d",
+          "text": "Knowing the route is vital to conservation efforts, but James had no way to figure it out – until he got a phone call from Washington State Penitentiary in Walla Walla.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 113,
+            "end": 117
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:call#s4",
+      "pos": "n.",
+      "glossZh": "叫声；喊声",
+      "pronunciationId": "w:call#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:call#e-9bee0e2a22aa3417",
+          "text": "Although previous research has shown that apes and monkeys can understand complex information from another animal’s call, the animals do not appear to use their voices intentionally to communicate messages.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 116,
+            "end": 120
+          }
+        },
+        {
+          "exampleId": "w:call#e-50ded4ef85bb91f3",
+          "text": "She again looked directly into my eyes, then let out a squeaking call and was gone.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:6",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:call#s5",
+      "pos": "v.",
+      "glossZh": "呼唤；喊（某人过来）",
+      "pronunciationId": "w:call#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:call#e-f47b0dae90be25d3",
+          "text": "He sized up the situation and called for his daughter, who spoke English.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:call#e-a98d0959bf60fb2a",
+          "text": "While we were outdoors last summer enjoying the sunshine, our oldest daughter, Kaytlin, called me to the doorway.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 94
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:call#s6",
+      "pos": "短语",
+      "glossZh": "喊出；大声叫",
+      "pronunciationId": "w:call#p-main",
+      "note": "call out",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:call#e-62f028e3a47f0421",
+          "text": "After finishing an order, she calls out the name on the cup.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-i:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:call#e-eff85daf9ec27cdd",
+          "text": "he called out, holding the branch with both hands.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:4",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:call#e-e7eda6711ba65061",
+          "text": "“Your car is all set, ma’am,” the mechanic called out to the woman.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:call#s7",
+      "pos": "短语",
+      "glossZh": "取消",
+      "pronunciationId": "w:call#p-main",
+      "note": "call off",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:call#e-06ce76508f8c9af1",
+          "text": "To call off a meeting.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:call#s8",
+      "pos": "短语",
+      "glossZh": "号召；要求（某人做某事）",
+      "pronunciationId": "w:call#p-main",
+      "note": "call on",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:call#e-a526531313b5033f",
+          "text": "What does the author call on other writers to do?",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2020-national-ii:34",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:call#e-5e1705444dc0f555",
+          "text": "Describing her alarm at its proposed replacement with an expressway, Jane Jacobs called on her mayor（市长）to champion “New York as a decent place to live, and not just rush through.” Similar campaigns occurred in Australia in the late 1960s and 1970s as well.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 87
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:call#s9",
+      "pos": "短语",
+      "glossZh": "需要；呼吁；要求",
+      "pronunciationId": "w:call#p-main",
+      "note": "call for",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:call#e-4bdddf84261301cf",
+          "text": "However, for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:call#e-c7592c80ebfcca2b",
+          "text": "To call for action to protect animals.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:27",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:call#e-d26b6600d4d3756b",
+          "text": "In their new book Movement: How to Take Back Our Streets and Transform Our Lives, they call for a rethink of our streets and the role they play in our lives.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 91
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:call#s10",
+      "pos": "短语",
+      "glossZh": "拜访；探望",
+      "pronunciationId": "w:call#p-main",
+      "note": "call on",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:call#e-4754e96cd2982f39",
+          "text": "Calling on her mother.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:call#s11",
+      "pos": "短语",
+      "glossZh": "随叫随到；值班待命",
+      "pronunciationId": "w:call#p-main",
+      "note": "on call",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:call#e-0a2b489d5345ca8a",
+          "text": "The French take their 35-hour workweek seriously – so seriously that some labor unions recently struck a deal with a group of companies limiting the number of hours that independent contractors can be on call.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 204,
+            "end": 208
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:call#s12",
+      "pos": "n.",
+      "glossZh": "号召；征集通知",
+      "pronunciationId": "w:call#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:call#e-55fbdc5f48290759",
+          "text": "“We wanted to do something where we do a call to artists in the Bay Area to submit stories for a contest,” Trost says.“And as of right now, we’ve received about 120 submissions.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:call#e-06bb4a0b28a4e256",
+          "text": "This call is open to Burlington-based artists and is open to all art forms that can be presented in a sign format.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:call#s13",
+      "pos": "n.",
+      "glossZh": "召唤；使命感",
+      "pronunciationId": "w:call#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:call#e-04cd61493a13ce3d",
+          "text": "It’s a call she must heed alone, though.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:call#s14",
+      "pos": "n.",
+      "glossZh": "判断；决定",
+      "pronunciationId": "w:call#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:call#s15",
+      "pos": "短语",
+      "glossZh": "要求停止",
+      "pronunciationId": "w:call#p-main",
+      "note": "call a stop to",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:call#e-1c02823f48e51eb0",
+          "text": "They include “debt-for-nature-swapping” agreements under which some donor countries and organisations reduce their debt repayment demands in return for calling a stop to destructive logging.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 152,
+            "end": 159
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "看涨期权、函数调用、跟注、测量地界等",
+      "reason": "金融、计算机、游戏或测量专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

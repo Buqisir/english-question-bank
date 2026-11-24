@@ -1,0 +1,194 @@
+{
+  "entryId": "w:obstacle",
+  "headword": "obstacle",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɒbstəkl/",
+    "us": "/ˈɑːbstəkl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:obstacle#p-main",
+      "ipa": {
+        "uk": "/ˈɒbstəkl/",
+        "us": "/ˈɑːbstəkl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "obstacles",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 34
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 28
+  },
+  "senses": [
+    {
+      "senseId": "w:obstacle#s1",
+      "pos": "n.",
+      "glossZh": "障碍物",
+      "pronunciationId": "w:obstacle#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:obstacle#e-7f41396de6476bae",
+          "text": "If the robot runs into an obstacle, it adjusts itself.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-d:3",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:obstacle#e-6c58c58d063d09c9",
+          "text": "Or, to the extent that we can speak of their intentions at all – for example, the intention of a self-driving car to avoid an obstacle – we have in mind something it’s designed to do.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 126,
+            "end": 134
+          }
+        },
+        {
+          "exampleId": "w:obstacle#e-6ce5cc64fd1788f9",
+          "text": "Going strong for five years now, the dads train in freestyle skiing, which essentially turns a mountain into a skate park: large-scale jumps, boxes and other obstacles.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 158,
+            "end": 167
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:obstacle#s2",
+      "pos": "n.",
+      "glossZh": "阻碍；困难",
+      "pronunciationId": "w:obstacle#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:obstacle#e-8891d1f0a1ebe428",
+          "text": "“The conflict isn’t the obstacle to your dream,” she’d tell them.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:obstacle#e-dbebfc8899051146",
+          "text": "One common obstacle is managing scheduling conflicts.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:obstacle#e-7a8f777f2b43e2c8",
+          "text": "Harvard Griffin GSAS is committed to ensuring that our fee does not create a financial obstacle.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 95
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

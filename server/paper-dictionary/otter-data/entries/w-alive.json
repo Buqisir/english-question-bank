@@ -1,0 +1,188 @@
+{
+  "entryId": "w:alive",
+  "headword": "alive",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈlaɪv/",
+    "us": "/əˈlaɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:alive#p-main",
+      "ipa": {
+        "uk": "/əˈlaɪv/",
+        "us": "/əˈlaɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more alive",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most alive",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 59
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 58
+  },
+  "senses": [
+    {
+      "senseId": "w:alive#s1",
+      "pos": "adj.",
+      "glossZh": "活着的",
+      "pronunciationId": "w:alive#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:alive#e-99457ef0681203a3",
+          "text": "After Charlie had a heart attack, Tindale says, she was prepared to put him to sleep, but Farber’s treatments eased her dog’s suffering so much that she was able to keep him alive for an additional five months.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 174,
+            "end": 179
+          }
+        },
+        {
+          "exampleId": "w:alive#e-a8cd1e710adc4272",
+          "text": "She hesitated but followed me to a flower bed, where among the thick green leaves, something small and purple caught the morning light – a lavender（薰衣草）flower, half-hidden, still alive.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 179,
+            "end": 184
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:alive#s2",
+      "pos": "adj.",
+      "glossZh": "有活力的；活跃的；充满……的",
+      "pronunciationId": "w:alive#p-main",
+      "note": "come alive 指「活跃起来；变得生动」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:alive#e-70711ebca0eaf89b",
+          "text": "When the explorers first set foot upon the continent of North America, the skies and lands were alive with an astonishing variety of wildlife.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:alive#e-83b859b1de11b41a",
+          "text": "His father frequently amused the boy with a tablet computer which was loaded with colorful pictures that come alive when you poke them.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 110,
+            "end": 115
+          }
+        },
+        {
+          "exampleId": "w:alive#e-e30c4195dd4f024d",
+          "text": "School can keep those dreams alive by giving kids a way to learn and grow.”",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:5",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "带电的",
+      "reason": "旧式或电气专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

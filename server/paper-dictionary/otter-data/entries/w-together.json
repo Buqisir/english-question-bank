@@ -1,0 +1,407 @@
+{
+  "entryId": "w:together",
+  "headword": "together",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/təˈɡeðə(r)/",
+    "us": "/təˈɡeðər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:together#p-main",
+      "ipa": {
+        "uk": "/təˈɡeðə(r)/",
+        "us": "/təˈɡeðər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 56,
+    "mock": 329
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 329
+  },
+  "senses": [
+    {
+      "senseId": "w:together#s1",
+      "pos": "adv.",
+      "glossZh": "一起",
+      "pronunciationId": "w:together#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 27,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:together#e-e97c705a6d6ebe66",
+          "text": "Campers will share their colorful ideas and imagination with each other and work together to visualize,sketch and paint with non-traditional techniques to create the coolest mural which will be displayed in public for all to see.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:together#e-4ce9fe8bbff6e611",
+          "text": "With the young unable to afford to leave home and the old at risk of isolation(孤独), more families are choosing to live together.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 119,
+            "end": 127
+          }
+        },
+        {
+          "exampleId": "w:together#e-5981c37574641f43",
+          "text": "I took down one of the dictionaries, and we read it together for a few minutes before I handed it to him.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:together#s2",
+      "pos": "adv.",
+      "glossZh": "合在一起",
+      "pronunciationId": "w:together#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:together#e-907fcdc05f12341c",
+          "text": "For this work, titled “Truckload of Plastic,” Von Wong and a group of volunteers collected more than 10,000 pieces of plastic, which were then tied together to look like they’d been dumped（倾倒）from a truck all at once.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 148,
+            "end": 156
+          }
+        },
+        {
+          "exampleId": "w:together#e-cbac7708cfa80ac6",
+          "text": "to instruct the children whose shoes were held together with string was a surprise.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:together#e-874db63b5e96bbac",
+          "text": "It takes sentences from its library of documents and prebuilt arguments and strings them together.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 97
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:together#s3",
+      "pos": "短语",
+      "glossZh": "使团聚",
+      "pronunciationId": "w:together#p-main",
+      "note": "bring together。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:together#e-d8090a0d58fd83c4",
+          "text": "An easy way to bring all work generations together is with a chat platform",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-national-ii:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:together#e-60c8a0bc24aac378",
+          "text": "That’s only for giving __60__ to the dogs that brought us together.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:cloze",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-a:cloze:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:together#e-b7e8f22586c99de0",
+          "text": "It felt great to know that I had helped bring this family together again.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:cloze:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:together#s4",
+      "pos": "短语",
+      "glossZh": "聚会",
+      "pronunciationId": "w:together#p-main",
+      "note": "get together。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:together#e-10bf2abb07025b6a",
+          "text": "The best housewarming parties encourage old friends to get together.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-national-iii:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 67
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:together#s5",
+      "pos": "短语",
+      "glossZh": "组装",
+      "pronunciationId": "w:together#p-main",
+      "note": "piece together。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:together#e-d3894c0563a860b6",
+          "text": "Skilled at putting up shelves and piecing together furniture, she never pays someone else to do a job she can do herself.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:together#s6",
+      "pos": "短语",
+      "glossZh": "汇集编成",
+      "pronunciationId": "w:together#p-main",
+      "note": "put together。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:together#e-b613be721a2b3c3b",
+          "text": "“It is curious that no one has put together a history of both the steam and electric revolutions,” writes Maury Klein in his book The Power Makers, Steam, Electricity, and the Men Who Invented Modern America.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:together#e-fb93a5cc4edfda62",
+          "text": "So I’ve put together some good tips for starting an art journey.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:together#e-29bddfc40c461ef5",
+          "text": "Barcelona has put together a package of clean energy technologies to help public transportation go greener, while also doing its part to tackle climate change and aid Europe’s difficult shift to the privately owned electric vehicle market.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 26
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "连续地",
+      "reason": "少见"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

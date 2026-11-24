@@ -1,0 +1,201 @@
+{
+  "entryId": "w:joy",
+  "headword": "joy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dʒɔɪ/",
+    "us": "/dʒɔɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:joy#p-main",
+      "ipa": {
+        "uk": "/dʒɔɪ/",
+        "us": "/dʒɔɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "joys",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 202
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 199
+  },
+  "senses": [
+    {
+      "senseId": "w:joy#s1",
+      "pos": "n.",
+      "glossZh": "喜悦；快乐",
+      "pronunciationId": "w:joy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:joy#e-68e147ce6b5c3290",
+          "text": "I shared my joy with that year’s class.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:joy#e-5c8b91ef6055ea0d",
+          "text": "Younger plants are often cheaper than fully grown ones, and you get to care for them as they mature – which is part of the joy of owning plants.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 123,
+            "end": 126
+          }
+        },
+        {
+          "exampleId": "w:joy#e-a93168bf20cc5639",
+          "text": "I realise now that Mum didn’t find the joy in these tasks: she created it.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:grammar-fill:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:joy#s2",
+      "pos": "n.",
+      "glossZh": "乐事；令人快乐的人或事",
+      "pronunciationId": "w:joy#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:joy#e-f5d6e0f194ea4f30",
+          "text": "To achieve that, I started searching for simple joys.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:joy#e-b3aeb42133c57a0e",
+          "text": "— and football, once a terrible source of loneliness for me, has finally become a precious joy I happily share with my whole family.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 94
+          }
+        },
+        {
+          "exampleId": "w:joy#e-498f638b28158685",
+          "text": "Simple joys like birding enrich life.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-guangdong-guangzhou-2025-08-stage-training:27",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 11
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "人名、姓氏",
+      "reason": "专名，m15 留空"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

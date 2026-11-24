@@ -1,0 +1,122 @@
+{
+  "entryId": "w:june",
+  "headword": "June",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dʒuːn/",
+    "us": "/dʒuːn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:june#p-main",
+      "ipa": {
+        "uk": "/dʒuːn/",
+        "us": "/dʒuːn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 23,
+    "mock": 55
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 55
+  },
+  "senses": [
+    {
+      "senseId": "w:june#s1",
+      "pos": "n.",
+      "glossZh": "六月",
+      "pronunciationId": "w:june#p-main",
+      "note": "月份名写作 June。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 23,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:june#e-25d2b75179162518",
+          "text": "It was just after sunrise on a June morning.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:june#e-e74246bdb29333a1",
+          "text": "We begin on 1st June with Manchester Camerata and Nicola Benedetti, presenting an amazing programme of Mozart pieces.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:june#e-43971d79b74ebfbe",
+          "text": "When the final bell rang in June, I walked away with a yearbook full of messages about writing’s most powerful significance – the ability to connect people, to put us in another’s skin, to teach us what it means to be human.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 32
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "人名琼",
+      "reason": "专名，m11 留空"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

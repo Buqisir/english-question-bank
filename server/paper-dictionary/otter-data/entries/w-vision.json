@@ -1,0 +1,281 @@
+{
+  "entryId": "w:vision",
+  "headword": "vision",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈvɪʒn/",
+    "us": "/ˈvɪʒn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:vision#p-main",
+      "ipa": {
+        "uk": "/ˈvɪʒn/",
+        "us": "/ˈvɪʒn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "visions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 56
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 51
+  },
+  "senses": [
+    {
+      "senseId": "w:vision#s1",
+      "pos": "n.",
+      "glossZh": "愿景",
+      "pronunciationId": "w:vision#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:vision#e-54f1b594eca88446",
+          "text": "Jane Jacobs spent her working life advancing a distinct vision of the city – in particular focusing on what makes a successful urban community.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:vision#e-e7f6d29fb3e7aa37",
+          "text": "At the heart of her vision is the idea that urban life should be an energetic and rich affair, whereby people are able to interact with one another in dense (稠密) and exciting urban environments.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:vision#e-57263aa776041aa9",
+          "text": "Experts say such measures represent a vision: moving people out of cars and onto bikes – to save energy, reduce pollution, and make cities more livable.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:vision#s2",
+      "pos": "n.",
+      "glossZh": "视力",
+      "pronunciationId": "w:vision#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:vision#e-db5a8d86855a57e4",
+          "text": "Those with vision problems can have texts read aloud.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:vision#e-2122908715d71171",
+          "text": "In an effort to make art more accessible to the blind and people with vision loss, the garden features several sculptures meant to be touched.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 76
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:vision#s3",
+      "pos": "n.",
+      "glossZh": "视觉识别能力",
+      "pronunciationId": "w:vision#p-main",
+      "note": "如 computer vision（计算机视觉）。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:vision#e-af98025615b260a5",
+          "text": "SLEAP uses computer vision (the ability for computers to understand images) and deep learning (an AI approach for training a computer to learn and work like the human brain) to help researchers process images much more quickly.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:vision#s4",
+      "pos": "n.",
+      "glossZh": "幻象",
+      "pronunciationId": "w:vision#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:vision#e-95b5a05a7dca907d",
+          "text": "They were messages, and visions – a secret language whispered by the universe to the soul.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:vision#s5",
+      "pos": "n.",
+      "glossZh": "远见",
+      "pronunciationId": "w:vision#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:vision#e-a8477fd30013f84c",
+          "text": "Carina Hong’s story is one of vision and commitment.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "预录影像、赋予愿景的动词",
+      "reason": "行业用法或少见词性"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

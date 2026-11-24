@@ -1,0 +1,213 @@
+{
+  "entryId": "w:keyboard",
+  "headword": "keyboard",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkiːbɔːd/",
+    "us": "/ˈkiːbɔːrd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:keyboard#p-main",
+      "ipa": {
+        "uk": "/ˈkiːbɔːd/",
+        "us": "/ˈkiːbɔːrd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "keyboards",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "senses": [
+    {
+      "senseId": "w:keyboard#s1",
+      "pos": "n.",
+      "glossZh": "键盘",
+      "pronunciationId": "w:keyboard#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:keyboard#e-7b320fc10b634bb9",
+          "text": "In the study, participants practiced a simple task in which they pressed keyboard buttons corresponding to the",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:keyboard#e-631dd07778dd1fb1",
+          "text": "Her fingers moved quickly and skillfully across the keyboard as she arranged slides and typed notes.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:keyboard#e-a24ce633f92249b1",
+          "text": "I chose proper seats in restaurants to avoid elbow conflicts, flipped notebooks, used reversed (颠倒的) keyboards and operated right-handed mice with my left hand, always drawing curious stares from others.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:writing-continuation:7",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 110
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:keyboard#s2",
+      "pos": "n.",
+      "glossZh": "电子键盘乐器",
+      "pronunciationId": "w:keyboard#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:keyboard#e-f0a6bcf749ddcd20",
+          "text": "She pulled out a parcel, ready to __41__ the perfect gift – a real 61-key music keyboard for her 4-year-old, Aubree.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-2026-03-m171:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 88
+          }
+        },
+        {
+          "exampleId": "w:keyboard#e-c9bb462febb957ab",
+          "text": "He then remembered the 61 full-size keyboard his own daughter __47__ used.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-2026-03-m171:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:keyboard#e-3fa3f38959f3d5b9",
+          "text": "Her face lit up at the sight of the keyboard.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-2026-03-m171:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:keyboard#s3",
+      "pos": "n.",
+      "glossZh": "乐器的一组琴键",
+      "pronunciationId": "w:keyboard#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "用键盘打字（动词）",
+      "reason": "罕见词性"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

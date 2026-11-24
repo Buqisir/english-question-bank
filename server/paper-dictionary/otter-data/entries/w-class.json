@@ -1,0 +1,435 @@
+{
+  "entryId": "w:class",
+  "headword": "class",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/klɑːs/",
+    "us": "/klæs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:class#p-main",
+      "ipa": {
+        "uk": "/klɑːs/",
+        "us": "/klæs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "classes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "classed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "classing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 73,
+    "mock": 440
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 438
+  },
+  "senses": [
+    {
+      "senseId": "w:class#s1",
+      "pos": "n.",
+      "glossZh": "课；课堂；上课时间",
+      "pronunciationId": "w:class#p-main",
+      "note": "单节课或正在上课的时段。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 44,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:class#e-eb80da701aebcdb8",
+          "text": "Daily assignments not completed during class will get a zero.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "reading-a-11",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:class#e-2d51ecaf664dbd0f",
+          "text": "I’m writing to share with you an art class I had in a park last Friday.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-application",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-application:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:class#e-b3d9565799a4a751",
+          "text": "Need a break between classes or just a quick pick-me-up in the morning?",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:class#s2",
+      "pos": "n.",
+      "glossZh": "课程",
+      "pronunciationId": "w:class#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:class#e-c42b26aebda9165a",
+          "text": "Take an evening class.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:7",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:class#e-b0d38f6a05358ca3",
+          "text": "actually wanted to drop the class at one point, but stopped short because I didn’t want to give him the satisfaction of my chickening out.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:class#e-d7a03399ee0f3a56",
+          "text": "Urban Sprouts’ classes, at two middle schools and two high schools, include hands-on experiments such as soil testing, flower-and-seed dissection, tastings of fresh or dried produce, and work in the garden.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:class#s3",
+      "pos": "n.",
+      "glossZh": "班；全班学生；同一届学生",
+      "pronunciationId": "w:class#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:class#e-dbb2763e98544d16",
+          "text": "I shared my joy with that year’s class.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:class#e-72d1cae7531d7e56",
+          "text": "I’m Li Hua, from Class 3.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-application",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-application:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:class#e-ddf8645d21342609",
+          "text": "The awkward moment ended with the class erupting into laughter.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:5",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:class#s4",
+      "pos": "n.",
+      "glossZh": "社会阶层",
+      "pronunciationId": "w:class#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:class#e-c066ce3c7c94e50c",
+          "text": "And the more we look, the more we will see that social factors(因素)like gender, race, and class do not determine the appearance of genius.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 94
+          }
+        },
+        {
+          "exampleId": "w:class#e-9ed43a3b9b210bb0",
+          "text": "Yet historians confirm that decade was heavy with issues: uncontrolled individualism, racial and class tensions, and nuclear fears.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 102
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:class#s5",
+      "pos": "n.",
+      "glossZh": "等级；档次",
+      "pronunciationId": "w:class#p-main",
+      "note": "例句中的 1st class 指头等邮件。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:class#e-5ef8a9d0e9172699",
+          "text": "Order a free postage pack; arrives 1st class with the details you need",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:class#s6",
+      "pos": "n.",
+      "glossZh": "一流；上等",
+      "pronunciationId": "w:class#p-main",
+      "note": "在 top class / top-class 中表示「一流的」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:class#e-083b90389760c79c",
+          "text": "Even though Britain has a reputation for less-than-impressive cuisine, it is producing more top class chefs who appear frequently on our television screens and whose recipe books frequently top the best seller lists.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 101
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:class#s7",
+      "pos": "n.",
+      "glossZh": "格调；品位",
+      "pronunciationId": "w:class#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:class#s8",
+      "pos": "v.",
+      "glossZh": "把……归类",
+      "pronunciationId": "w:class#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "编程的类、统计组距、生物分类的纲和巡天缩写",
+      "reason": "学科术语或同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,195 @@
+{
+  "entryId": "w:america",
+  "headword": "America",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈmerɪkə/",
+    "us": "/əˈmerɪkə/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:america#p-main",
+      "ipa": {
+        "uk": "/əˈmerɪkə/",
+        "us": "/əˈmerɪkə/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 61
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 58
+  },
+  "senses": [
+    {
+      "senseId": "w:america#s1",
+      "pos": "n.",
+      "glossZh": "美国",
+      "pronunciationId": "w:america#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:america#e-5e96db14d3c55f3a",
+          "text": "Klein writes, “America did not invent the steam engine, but once they grasped its passwords they put it to more uses than anyone else.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:america#e-4d378b80953b8d84",
+          "text": "the steam and electric revolutions in America during one man’s lifetime.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:america#e-b877fbb22a61dbd1",
+          "text": "Kids there were born outside of America.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-third:25",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:america#s2",
+      "pos": "n.",
+      "glossZh": "美洲",
+      "pronunciationId": "w:america#p-main",
+      "note": "North America 北美洲，South America 南美洲。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:america#e-2f7bb0d982e054bb",
+          "text": "When the explorers first set foot upon the continent of North America, the skies and lands were alive with an astonishing variety of wildlife.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:america#e-511656a44f3cafc0",
+          "text": "Now, the team has discovered that another fungus-farming ant, Sericomyrmex amabilis, which is found in Central and South America, can do the same thing without symbiotic bacteria, becoming the first known animal to have evolved this ability.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 128
+          }
+        },
+        {
+          "exampleId": "w:america#e-cfc0c822688af371",
+          "text": "They selected 76 forest plots across Central America and monitored them for up to 20 years.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 52
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "女性名、荷兰地名",
+      "reason": "同形专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

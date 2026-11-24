@@ -1,0 +1,178 @@
+{
+  "entryId": "w:fox",
+  "headword": "fox",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fɒks/",
+    "us": "/fɑːks/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fox#p-main",
+      "ipa": {
+        "uk": "/fɒks/",
+        "us": "/fɑːks/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "foxes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Foxes",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "foxed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "foxing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "senses": [
+    {
+      "senseId": "w:fox#s1",
+      "pos": "n.",
+      "glossZh": "狐狸",
+      "pronunciationId": "w:fox#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fox#e-2705230deed57da0",
+          "text": "The snow was marked only by small animals: foxes, coyotes, mice, and varying hares, which turned white in the winter.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:fox#e-3433445050768056",
+          "text": "He said a small fox had been trapped in the fence of his backyard, and it was crying painfully, making his heart ache.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:fox#e-4f7d740346594c79",
+          "text": "He notes that Chicago’s urban foxes are said to look both ways before crossing the street.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fox#s2",
+      "pos": "n.",
+      "glossZh": "狡猾的人",
+      "pronunciationId": "w:fox#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fox#s3",
+      "pos": "v.",
+      "glossZh": "使困惑",
+      "pronunciationId": "w:fox#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Fox Entertainment",
+      "reason": "公司专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,123 @@
+{
+  "entryId": "w:pizza",
+  "headword": "pizza",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpiːtsə/",
+    "us": "/ˈpiːtsə/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:pizza#p-main",
+      "ipa": {
+        "uk": "/ˈpiːtsə/",
+        "us": "/ˈpiːtsə/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "pizzas",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 28
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:pizza#s1",
+      "pos": "n.",
+      "glossZh": "比萨饼",
+      "pronunciationId": "w:pizza#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 28
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pizza#e-58be76667c983d9f",
+          "text": "Pasta and pizza were on everyone’s lunch menu in my native land of Italy.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:pizza#e-d10b0274b761f040",
+          "text": "Alex had drawn basketball courts to explain angles, and pizza slices to explain fractions.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:pizza#e-05389436974e62dd",
+          "text": "The festival showcases the diversity of Chicago’s culinary scene, offering everything from the city’s famous deep-dish pizza and Chicago-style hot dogs to high-end international cuisine, suitable for all ages.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "cell:m171:chicago",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 119,
+            "end": 124
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

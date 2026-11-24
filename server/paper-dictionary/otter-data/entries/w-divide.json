@@ -1,0 +1,308 @@
+{
+  "entryId": "w:divide",
+  "headword": "divide",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈvaɪd/",
+    "us": "/dɪˈvaɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:divide#p-main",
+      "ipa": {
+        "uk": "/dɪˈvaɪd/",
+        "us": "/dɪˈvaɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "divides",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "divided",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "dividing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 64
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 59
+  },
+  "senses": [
+    {
+      "senseId": "w:divide#s1",
+      "pos": "v.",
+      "glossZh": "分开；划分；分配",
+      "pronunciationId": "w:divide#p-main",
+      "note": "divide sth into … 指「把某物分成……」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:divide#e-e69a29d0a67490f6",
+          "text": "They were randomly divided into four groups and exposed to various noise levels in the background, from total silence to 50 decibels(分贝), 70 decibels, and 85 decibels.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:divide#e-ce737d5c542a178a",
+          "text": "To do so, I divided the book into two parts.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:divide#e-57638288206bdf05",
+          "text": "Is there a better way to divide the work?” These questions don’t make you a troublemaker – they make the project stronger.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:divide#s2",
+      "pos": "v.",
+      "glossZh": "除；（数）除以",
+      "pronunciationId": "w:divide#p-main",
+      "note": "divide A by B。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:divide#e-1ee9bce00e1fc04c",
+          "text": "To calculate your speed as you do, divide 3,600 (the number of seconds in an hour) by the number of seconds it takes you to travel one mile (the distance between two mileposts).",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:divide#s3",
+      "pos": "v.",
+      "glossZh": "使有分歧；使对立",
+      "pronunciationId": "w:divide#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:divide#e-5f7df275eae11c78",
+          "text": "These tools can help you win every argument – not in the unhelpful sense of beating your opponents but in the better sense of learning about what divides people, learning why they disagree with us and learning to talk and work together with them.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 146,
+            "end": 153
+          }
+        },
+        {
+          "exampleId": "w:divide#e-a71e351843123d05",
+          "text": "Like countless real female veterans (退伍老兵), she returns to a divided America that refuses to honor her service – facing indifference, skepticism, and even hostility from a society that insists “there were no women in Vietnam”.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:divide#s4",
+      "pos": "n.",
+      "glossZh": "分歧；鸿沟；分界",
+      "pronunciationId": "w:divide#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:divide#e-96f812dfe3e42361",
+          "text": "With no formal scientific training, she pioneered a new way of study: integration, aiming to bridge the divide between humans and gorillas (大猩猩).",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:divide#e-e7a33fa8eb9c518b",
+          "text": "At a societal level, avoidance may entrench political divides or rigid beliefs.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:divide#e-8ea6d5d20edcc10b",
+          "text": "To bridge the digital divide among seniors.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:21",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 28
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "分组表决；以华彩作变奏",
+      "reason": "议会制度或音乐专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

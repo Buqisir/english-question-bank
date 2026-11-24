@@ -1,0 +1,301 @@
+{
+  "entryId": "w:encounter",
+  "headword": "encounter",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪnˈkaʊntə(r)/",
+    "us": "/ɪnˈkaʊntər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:encounter#p-main",
+      "ipa": {
+        "uk": "/ɪnˈkaʊntə(r)/",
+        "us": "/ɪnˈkaʊntər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "encounters",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "encountered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "encountering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 78
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 76
+  },
+  "senses": [
+    {
+      "senseId": "w:encounter#s1",
+      "pos": "v.",
+      "glossZh": "碰到",
+      "pronunciationId": "w:encounter#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:encounter#e-1f9ef381c23e9360",
+          "text": "Readers will encounter not only stories they have heard before, but some new stories and a moving discussion of the responsibility of the engineer to the public and the ways young engineers can be helped to grasp them.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:encounter#e-2051d55ad7267f89",
+          "text": "These include encountering wildlife, walking along the edge of water, and following an established trail.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:encounter#e-e7ad2663e99f1274",
+          "text": "During his years of reporting, one of his most memorable experiences is one in Nantong, where he encountered self-made business people in the textile（纺织）industry who built international enterprises out of nothing.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 108
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:encounter#s2",
+      "pos": "v.",
+      "glossZh": "遭遇（困难）",
+      "pronunciationId": "w:encounter#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:encounter#e-962d69cd2e013357",
+          "text": "You’ll hear these participants’ stories and learn what strategies worked well for them, and what traps they encountered that you should avoid.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 119
+          }
+        },
+        {
+          "exampleId": "w:encounter#e-b0e5c1644ab244bc",
+          "text": "But for me, it was the first challenge I encountered as an international student in Ireland.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:encounter#e-6f4d3388562c63c5",
+          "text": "They repeatedly encountered discrimination and racial violence, such as fistfights with white players and fans.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:encounter#s3",
+      "pos": "n.",
+      "glossZh": "相遇",
+      "pronunciationId": "w:encounter#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:encounter#e-9df64dfebb6b8ae1",
+          "text": "Making the best of this close encounter(相遇), I took some pictures of the bear.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:encounter#e-81f9f08b46519faa",
+          "text": "This makes sense because the people who get observational biodiversity data on mobile devices are often citizen scientists recording their encounters with species in areas nearby.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 139,
+            "end": 149
+          }
+        },
+        {
+          "exampleId": "w:encounter#e-4e3400fc1b8ac639",
+          "text": "Such a complex but ultimately enriching set of encounters helps individuals know their neighbors and neighbourhood better.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:encounter#s4",
+      "pos": "n.",
+      "glossZh": "交锋",
+      "pronunciationId": "w:encounter#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "任务的交会阶段",
+      "reason": "航天专用语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

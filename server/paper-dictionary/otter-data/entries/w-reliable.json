@@ -1,0 +1,132 @@
+{
+  "entryId": "w:reliable",
+  "headword": "reliable",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈlaɪəbl/",
+    "us": "/rɪˈlaɪəbl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:reliable#p-main",
+      "ipa": {
+        "uk": "/rɪˈlaɪəbl/",
+        "us": "/rɪˈlaɪəbl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more reliable",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most reliable",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 91
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:reliable#s1",
+      "pos": "adj.",
+      "glossZh": "可靠的",
+      "pronunciationId": "w:reliable#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 91
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reliable#e-d898b5b72a649351",
+          "text": "Drones’ reliable performance in remote areas.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2022-national-b:28",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:reliable#e-f830cd4e6c5fafac",
+          "text": "The innovative design requires little effort to achieve a reliable weekly supply of fresh greens.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:reliable#e-6d03f33a203f812a",
+          "text": "The findings of the study are reliable.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2025-eight-provinces-jan:35",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 38
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,419 @@
+{
+  "entryId": "w:chip",
+  "headword": "chip",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tʃɪp/",
+    "us": "/tʃɪp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:chip#p-main",
+      "ipa": {
+        "uk": "/tʃɪp/",
+        "us": "/tʃɪp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "chips",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "CHiPs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "chipped",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "chipping",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "senses": [
+    {
+      "senseId": "w:chip#s1",
+      "pos": "n.",
+      "glossZh": "（英式）薯条",
+      "pronunciationId": "w:chip#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chip#e-0b258887faae9b72",
+          "text": "Probably fish and chips, or a Sunday dinner of meat and two vegetables.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:chip#e-0e7df4154fee95d1",
+          "text": "He has cereal, bacon, cake and fish and chips for dinner, washed down with a couple of beers.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-b:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chip#s2",
+      "pos": "n.",
+      "glossZh": "（美式）薯片",
+      "pronunciationId": "w:chip#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chip#e-d92508d698b15480",
+          "text": "Which may lead to the recall of a pack of potato chips?",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-cq-nankai-2026-05-ninth-quality-test:21",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:chip#e-5c5693811dd8fb98",
+          "text": "Mia said, throwing potato chips at him.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:chip#e-8b0744f5a2365786",
+          "text": "Overflowing with sugar, salt and fat, the colorfully packaged candies, cookies and chips, despite being calorie-loaded and nutritionally bad for us, are deliciously addictive.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chip#s3",
+      "pos": "n.",
+      "glossZh": "碎片；小块",
+      "pronunciationId": "w:chip#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chip#e-087283d88bfb74a2",
+          "text": "As a finishing touch, I sprinkled (撒) a few chocolate chips on top, hoping to add a bit of chocolate flavor to the cookies that didn’t look very appetizing.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:chip#e-1a3811e890414b9e",
+          "text": "In contrast, ours looked embarrassing; some were misshapen, the icing had melted, and the chocolate chips were scattered everywhere.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 105
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chip#s4",
+      "pos": "n.",
+      "glossZh": "芯片",
+      "pronunciationId": "w:chip#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chip#e-107e065dc0980ba5",
+          "text": "Imagine a future where the most powerful computers aren’t made of silicon chips, but are grown from living cells.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:chip#e-9e73b6103282f9ac",
+          "text": "All runners must personally collect their race kits, including the bib (号码布) number and timing chip, at the Marathon Expo held days before the event.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:chip#e-cec8d06dd9917a25",
+          "text": "The wristwatch collects sweat from the skin and analyzes it in real time using a sensor chip with an ion-sensitive membrane (离子敏感膜).",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 92
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chip#s5",
+      "pos": "n.",
+      "glossZh": "（赌局中的）筹码",
+      "pronunciationId": "w:chip#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:chip#s6",
+      "pos": "v.",
+      "glossZh": "削下；凿下；崩掉一小块",
+      "pronunciationId": "w:chip#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chip#e-771e0afafebcbc16",
+          "text": "After my divorce, Walter quietly became my support: fixing my car, teaching me skills, and even chipping ice off my roof.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-2026-03-m171:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:chip#e-810f1c779e8831b5",
+          "text": "Grandma’s old wooden mailbox, with a chipped blue coat (涂料层) and a slightly rusted hinge (铰链), had stood at the quiet corner of the community for 20 years.",
+          "source": {
+            "paperId": "paper-mock-zj-ningbo-2026-mar",
+            "paperTitle": "宁波“十校”2026届高三3月联考",
+            "groupId": "group:paper-mock-zj-ningbo-2026-mar:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chip#s7",
+      "pos": "短语",
+      "glossZh": "凑钱；出一份力",
+      "pronunciationId": "w:chip#p-main",
+      "note": "chip in。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:chip#s8",
+      "pos": "短语",
+      "glossZh": "插话",
+      "pronunciationId": "w:chip#p-main",
+      "note": "chip in。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "轻挑球、染色质免疫沉淀、航海木三角片等",
+      "reason": "运动、科技专门用法或同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

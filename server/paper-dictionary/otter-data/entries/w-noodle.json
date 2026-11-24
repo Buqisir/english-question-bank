@@ -1,0 +1,129 @@
+{
+  "entryId": "w:noodle",
+  "headword": "noodle",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈnuːdl/",
+    "us": "/ˈnuːdl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:noodle#p-main",
+      "ipa": {
+        "uk": "/ˈnuːdl/",
+        "us": "/ˈnuːdl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "noodles",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:noodle#s1",
+      "pos": "n.",
+      "glossZh": "面条",
+      "pronunciationId": "w:noodle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 12
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:noodle#e-010b7b2bd6ede1ef",
+          "text": "Dandan noodles and mapo tofu are sure bets.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:noodle#e-3f8cb2c1eb61015e",
+          "text": "The spacious dining room is regularly filled with customers enjoying dumplings and a variety of noodle and rice dishes.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:noodle#e-2274c12ae70d4a33",
+          "text": "David stayed up late every night, snacking on instant noodles and cookies.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 61
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "脑袋；即兴乐段",
+      "reason": "罕见俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

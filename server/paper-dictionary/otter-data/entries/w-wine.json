@@ -1,0 +1,169 @@
+{
+  "entryId": "w:wine",
+  "headword": "wine",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/waɪn/",
+    "us": "/waɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:wine#p-main",
+      "ipa": {
+        "uk": "/waɪn/",
+        "us": "/waɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "wines",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 28
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 28
+  },
+  "senses": [
+    {
+      "senseId": "w:wine#s1",
+      "pos": "n.",
+      "glossZh": "葡萄酒",
+      "pronunciationId": "w:wine#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wine#e-f2f968b3b7bcdbb9",
+          "text": "It was __43__ called Mario, coming to __44__ us a box containing some tomatoes and a bottle of wine.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:wine#e-88114afcd9ac9f6b",
+          "text": "This nice Cantonese restaurant in Columbia Heights quickly became a destination for chef Henji Cheung’s Hong Kong-style cooking and co-owner Sarah Thompson’s natural wine list that earned her a Michelin nod.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 166,
+            "end": 170
+          }
+        },
+        {
+          "exampleId": "w:wine#e-47b377cd73684b81",
+          "text": "Reserve a spot indoors, at its chef’s counter, or covered dog-friendly patio (露台), with creative wine tastings in the mix.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 101
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:wine#s2",
+      "pos": "n.",
+      "glossZh": "以其他原料酿成的果酒或米酒",
+      "pronunciationId": "w:wine#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:wine#s3",
+      "pos": "n.",
+      "glossZh": "酒红色",
+      "pronunciationId": "w:wine#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:wine#s4",
+      "pos": "短语",
+      "glossZh": "设酒宴款待",
+      "pronunciationId": "w:wine#p-main",
+      "note": "wine and dine。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏、软件名称、方言中的风、牙买加舞蹈",
+      "reason": "专名、方言或专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

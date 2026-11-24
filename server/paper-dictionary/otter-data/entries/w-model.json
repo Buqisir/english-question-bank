@@ -1,0 +1,631 @@
+{
+  "entryId": "w:model",
+  "headword": "model",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmɒdl/",
+    "us": "/ˈmɑːdl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:model#p-main",
+      "ipa": {
+        "uk": "/ˈmɒdl/",
+        "us": "/ˈmɑːdl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "models",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "modeled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "modeling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "modelled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "modelling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 333
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 323
+  },
+  "senses": [
+    {
+      "senseId": "w:model#s1",
+      "pos": "n.",
+      "glossZh": "模特",
+      "pronunciationId": "w:model#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:model#e-c8be84667c7bb18c",
+          "text": "Model Paige Morgan says,” To give people a guilt-free option that they can wear without someone throwing paint on them – I think that’s going to be a massive thing, at least here in New York.” Designer Jennifer Anderson admits it took her a while to come around to the opinion that using nutria fur for her creations is morally acceptable.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:model#e-09c6155a2d936428",
+          "text": "She acts as a model.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:model#s2",
+      "pos": "n.",
+      "glossZh": "实物模型",
+      "pronunciationId": "w:model#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:model#e-64c5b9d232669d44",
+          "text": "“Uh, this is a model of the Apollo 11 spacecraft.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:model#e-a0ceab66583f824d",
+          "text": "Before I knew it, I was building models, climbing trees, or playing instruments.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:model#s3",
+      "pos": "n.",
+      "glossZh": "模拟或分析模型",
+      "pronunciationId": "w:model#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:model#e-9b47ed18b7cad361",
+          "text": "Theoretical models.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2023-i:30",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:model#e-dfc1d17e3a538171",
+          "text": "Llama is a large language model that, like other AI systems such as ChatGPT, uses vast amounts of data to predict and generate text.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:model#e-386da18302291316",
+          "text": "To test the effect of SEQUOIA for clinical decision-making, Gevaert and his colleagues identified breast cancer genes that the model could accurately predict the expression of and that are already used in commercial breast cancer genomic tests.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 127,
+            "end": 132
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:model#s4",
+      "pos": "n.",
+      "glossZh": "型号；款式",
+      "pronunciationId": "w:model#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:model#e-575428cf8344de9e",
+          "text": "However, for the car and the other appliances（设备）that we need we can go with new, energy-saving models.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:model#e-5b6747d6b0110dea",
+          "text": "So it seems most reasonable to go for the energy-saving models.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:model#e-4008f343243de56a",
+          "text": "Starting this spring, Bryant Park picked a model made by a company called Sunseeker.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 48
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:model#s5",
+      "pos": "n.",
+      "glossZh": "组织或经营模式",
+      "pronunciationId": "w:model#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:model#e-cba6c98253c4864f",
+          "text": "This clothing-as-service model follows the broader societal movement towards shared economies.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:grammar-fill:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:model#e-551e42b64ef35d59",
+          "text": "To follow other enterprise models.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-2026-01-shandong-jinan-gaosan-first:26",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:model#s6",
+      "pos": "n.",
+      "glossZh": "可仿效的范例",
+      "pronunciationId": "w:model#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:model#e-87e855aa70923060",
+          "text": "Managed by residents with strict rules, it was a pioneering model that inspired thousands of estates later – completely distinct from the dark, crowded and poor areas people had to live in before.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:model#e-6fc81a7c18721d5f",
+          "text": "“These ants are the first animal shown to be engaging in such a process, offering exciting potential as a model for human efforts,” says Currie.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-c:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 111
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:model#s7",
+      "pos": "短语",
+      "glossZh": "榜样",
+      "pronunciationId": "w:model#p-main",
+      "note": "role model。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:model#e-ef6a8ca0f87131a1",
+          "text": "A role model in her family.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:model#e-4b3059dd68accbee",
+          "text": "David Bond: A Role Model for Children",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:27",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:model#e-41a333c0c1cbdff1",
+          "text": "Children need role models.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2026-i:27",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:model#s8",
+      "pos": "v.",
+      "glossZh": "示范（行为）",
+      "pronunciationId": "w:model#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:model#e-bc21772a48799328",
+          "text": "●Teachers and chaperones should model good behavior for the group and remain with students at all times.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:model#e-be24fdf26e8c5f49",
+          "text": "Model the work ethic you want to see.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-ii:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:model#s9",
+      "pos": "v.",
+      "glossZh": "以……为原型",
+      "pronunciationId": "w:model#p-main",
+      "note": "be modelled on。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:model#e-17ded2ddcf7da01c",
+          "text": "It was modeled on a pizza chain.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-cq-nankai-2025-12-fourth-quality-test:24",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:model#s10",
+      "pos": "v.",
+      "glossZh": "建立模拟模型",
+      "pronunciationId": "w:model#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:model#s11",
+      "pos": "v.",
+      "glossZh": "当模特",
+      "pronunciationId": "w:model#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "形式逻辑的真值解释；软件 MVC 的数据层",
+      "reason": "专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

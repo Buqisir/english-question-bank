@@ -1,0 +1,405 @@
+{
+  "entryId": "w:there",
+  "headword": "there",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ðeə(r)/",
+    "us": "/ðer/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:there#p-main",
+      "ipa": {
+        "uk": "/ðeə(r)/",
+        "us": "/ðer/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 181,
+    "mock": 998
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 998
+  },
+  "senses": [
+    {
+      "senseId": "w:there#s1",
+      "pos": "adv.",
+      "glossZh": "在那里",
+      "pronunciationId": "w:there#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 49,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:there#e-93aaee127e014f53",
+          "text": "To find a well-paid job there.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2020-i:25",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:there#e-34523415ca1be9a1",
+          "text": "His mother, grandmother and great grandmother were all born at the reserve and still live there.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:there#e-d3c1bdecfbc2e61d",
+          "text": "One of the four original copies of the Magna Carta is displayed there.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:there#s2",
+      "pos": "adv.",
+      "glossZh": "到那里",
+      "pronunciationId": "w:there#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:there#e-cadc15b305786add",
+          "text": "It didn’t take long for Merebeth to decide to drive the dog there herself.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "sentence": 8
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:there#e-8702a0348c46f606",
+          "text": "Once there, Lenoue was __49__ and later taken to a hospital, where she learned that she had serious injuries in one of her knees.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:there#e-49753c18df1f621d",
+          "text": "She has just moved there.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:there#s3",
+      "pos": "pron.",
+      "glossZh": "表示有或存在",
+      "pronunciationId": "w:there#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 120,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:there#e-afdd197ff4d0e3b1",
+          "text": "After high school, Jennifer attended a local technical college, working to pay her tuition（学费）, because there was no extra money set aside for a college education.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 109
+          }
+        },
+        {
+          "exampleId": "w:there#e-7ea2f3dc561536da",
+          "text": "“There are relatively few studies that stress the unique role of fathers,” Padilla-Walker said.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:there#e-7a466658a8da1ec9",
+          "text": "There has been a very serious decline in the numbers of shallow-water fish as a result of overfishing.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:there#s4",
+      "pos": "adv.",
+      "glossZh": "达到那个阶段",
+      "pronunciationId": "w:there#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:there#e-9776e13d90c15b3d",
+          "text": "Welcome to the club; we’ve all been there.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:there#e-dfdda99282831c85",
+          "text": "This issue won’t tell you what your ending should be – that’s up to you and the story you’re telling – but it might provide what you need to get there.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 145,
+            "end": 150
+          }
+        },
+        {
+          "exampleId": "w:there#e-3acb289482977b06",
+          "text": "And it wasn’t, ultimately, the dictionary that got me there – not really.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:4",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 59
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:there#s5",
+      "pos": "短语",
+      "glossZh": "就这样",
+      "pronunciationId": "w:there#p-main",
+      "note": "there you have it。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:there#e-fc91132093cb9939",
+          "text": "And there you have it.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-b:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:there#s6",
+      "pos": "短语",
+      "glossZh": "当场",
+      "pronunciationId": "w:there#p-main",
+      "note": "right then and there。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:there#e-82e7f8889743223e",
+          "text": "Right then and there, this total __49__ examined my engine, explaining as he worked that my spark plugs （火花塞） hadn’t been changed for so long that they were __50__ to function.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "their 的误拼",
+      "reason": "拼写错误"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

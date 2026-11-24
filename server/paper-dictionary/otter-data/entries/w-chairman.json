@@ -1,0 +1,92 @@
+{
+  "entryId": "w:chairman",
+  "headword": "chairman",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtʃeəmən/",
+    "us": "/ˈtʃermən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:chairman#p-main",
+      "ipa": {
+        "uk": "/ˈtʃeəmən/",
+        "us": "/ˈtʃermən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "chairmen",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:chairman#s1",
+      "pos": "n.",
+      "glossZh": "主席；主持人；董事长",
+      "pronunciationId": "w:chairman#p-main",
+      "note": "性别无关的称呼可用 chair 或 chairperson。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chairman#e-884b2ddf24916c7f",
+          "text": "Mr Titterton is chairman of the Omega Ensemble but has been the group’s official page turner for the past four years.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 24
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "抬轿者、作主持人的动词形式",
+      "reason": "历史或罕见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

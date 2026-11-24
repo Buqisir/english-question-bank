@@ -1,0 +1,121 @@
+{
+  "entryId": "w:olympics",
+  "headword": "Olympics",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈlɪmpɪks/",
+    "us": "/əˈlɪmpɪks/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:olympics#p-main",
+      "ipa": {
+        "uk": "/əˈlɪmpɪks/",
+        "us": "/əˈlɪmpɪks/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 4,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 6
+  },
+  "senses": [
+    {
+      "senseId": "w:olympics#s1",
+      "pos": "n.",
+      "glossZh": "奥林匹克运动会",
+      "pronunciationId": "w:olympics#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:olympics#e-7576b7a910799939",
+          "text": "Why was the 2016 Olympics important for the speaker?",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:olympics#e-d40d5727c63fba4a",
+          "text": "This reflection shaped her exhibition displayed on Paris’s Champs-Elysees during the 2024 Summer Olympics.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-b:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 105
+          }
+        },
+        {
+          "exampleId": "w:olympics#e-77073298c10495d9",
+          "text": "Norway’s success at the 2026 Winter Olympics was impressive, but the nation’s record-breaking practice actually began earlier.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 44
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Junior Ranger Wildlife Olympics",
+      "reason": "公园活动名称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

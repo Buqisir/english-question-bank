@@ -1,0 +1,485 @@
+{
+  "entryId": "w:ring",
+  "headword": "ring",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪŋ/",
+    "us": "/rɪŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ring#p-main",
+      "ipa": {
+        "uk": "/rɪŋ/",
+        "us": "/rɪŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "rings",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "ringed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "ringing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "rang",
+      "tags": [
+        "past"
+      ]
+    },
+    {
+      "form": "rung",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 60
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 55
+  },
+  "senses": [
+    {
+      "senseId": "w:ring#s1",
+      "pos": "v.",
+      "glossZh": "响铃",
+      "pronunciationId": "w:ring#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ring#e-9c943f425fc47494",
+          "text": "The alarm rang at 6 a.m. The pair went down the stairs quietly to the kitchen.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:ring#e-99b797e066a6b8fa",
+          "text": "When the final bell rang in June, I walked away with a yearbook full of messages about writing’s most powerful significance – the ability to connect people, to put us in another’s skin, to teach us what it means to be human.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:ring#e-6dfa015772b4dd3b",
+          "text": "Then the phone rang.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:writing-continuation:8",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ring#s2",
+      "pos": "v.",
+      "glossZh": "打电话",
+      "pronunciationId": "w:ring#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ring#e-95214862d38ab5a7",
+          "text": "That said, to be honest the only people who ever ring our home phone are our Baby Boomer parents, to the point where we play a game and guess who is calling before we pick up the phone (using Caller ID would take the fun out of it).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:ring#e-a9e327bffe527c34",
+          "text": "When I was about to give up, Gunter fished out his little phone and rang up a friend.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:ring#e-a2a2945ced8b3a99",
+          "text": "Ring her up tomorrow.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ring#s3",
+      "pos": "v.",
+      "glossZh": "在耳中回响",
+      "pronunciationId": "w:ring#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ring#e-a5a469e4a6f78aa3",
+          "text": "Southbank, at an eastern bend in the Thames, is the center of British skateboarding, where the continuous crashing of skateboards left your head ringing.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 145,
+            "end": 152
+          }
+        },
+        {
+          "exampleId": "w:ring#e-93a5f114b1cb5262",
+          "text": "There were times when I found myself wondering if I should pack it all in, but the boy’s words kept ringing in my ears.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:ring#e-e72777531951171b",
+          "text": "And the old man’s words were still ringing in his ears:",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ring#s4",
+      "pos": "v.",
+      "glossZh": "按响铃",
+      "pronunciationId": "w:ring#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ring#e-e985e2b65fb2167e",
+          "text": "With purpose, she marched next door and rang the bell of the Carters, thinking she should give the boys a lesson.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ring#s5",
+      "pos": "n.",
+      "glossZh": "戒指",
+      "pronunciationId": "w:ring#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ring#e-9ab1f6e31fbb2ad1",
+          "text": "A year later, much to my __58__, this man produced a little box with a ring and proposed to me.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-national-a:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ring#s6",
+      "pos": "n.",
+      "glossZh": "环状物",
+      "pronunciationId": "w:ring#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ring#e-cf7161ac92dcf67c",
+          "text": "Using a 3D bio-printer, the researchers created a thick ring loaded with human cells and built a network of 25 vessels running through it.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ring#s7",
+      "pos": "n.",
+      "glossZh": "铃声",
+      "pronunciationId": "w:ring#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ring#s8",
+      "pos": "n.",
+      "glossZh": "团伙",
+      "pronunciationId": "w:ring#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ring#s9",
+      "pos": "n.",
+      "glossZh": "拳击台",
+      "pronunciationId": "w:ring#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ring#s10",
+      "pos": "n.",
+      "glossZh": "电话",
+      "pronunciationId": "w:ring#p-main",
+      "note": "give sb a ring。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ring#s11",
+      "pos": "v.",
+      "glossZh": "围住",
+      "pronunciationId": "w:ring#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ring#s12",
+      "pos": "v.",
+      "glossZh": "听起来（给人某种印象）",
+      "pronunciationId": "w:ring#p-main",
+      "note": "如 ring true。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "环（代数结构）",
+      "reason": "数学专门义"
+    },
+    {
+      "glossZh": "粮食计量单位",
+      "reason": "历史用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

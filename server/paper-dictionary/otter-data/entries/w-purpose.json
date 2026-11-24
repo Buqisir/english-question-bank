@@ -1,0 +1,287 @@
+{
+  "entryId": "w:purpose",
+  "headword": "purpose",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpɜːpəs/",
+    "us": "/ˈpɜːrpəs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:purpose#p-main",
+      "ipa": {
+        "uk": "/ˈpɜːpəs/",
+        "us": "/ˈpɜːrpəs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "purposes",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 32,
+    "mock": 300
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 297
+  },
+  "senses": [
+    {
+      "senseId": "w:purpose#s1",
+      "pos": "n.",
+      "glossZh": "目的",
+      "pronunciationId": "w:purpose#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 27,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:purpose#e-be946cb6209b4234",
+          "text": "Sometimes our purpose is to achieve something; other times it may be to entertain, inform, or persuade.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:purpose#e-bcfbd9580c69c32e",
+          "text": "What is the author’s purpose in mentioning Fuzhou?",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2023-i:26",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:purpose#e-ed3ec2ee731b6af7",
+          "text": "What is the purpose of this text?",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2026-zhejiang-jan:21",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:purpose#s2",
+      "pos": "n.",
+      "glossZh": "用途",
+      "pronunciationId": "w:purpose#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:purpose#e-c764b0dbcacffbbf",
+          "text": "The posters in the exhibition serve the purpose of both advertising and art.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:purpose#e-8c2ea5d3148de338",
+          "text": "The last time I used a phone box for its intended purpose was …2006.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:purpose#e-e24e7dcc251dcbfe",
+          "text": "Christian Fong at the Rocky Mountain Institute, a research organization based in Colorado, is optimistic about the idea of giving retired coal plants a new purpose.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-d:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 156,
+            "end": 163
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:purpose#s3",
+      "pos": "n.",
+      "glossZh": "人生目标",
+      "pronunciationId": "w:purpose#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:purpose#e-dc07030e304369ae",
+          "text": "Mcvilly works to help people with mental health challenges feel more connected, supported, and also find real purpose.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 110,
+            "end": 117
+          }
+        },
+        {
+          "exampleId": "w:purpose#e-dcf2384cc33a4414",
+          "text": "“It feels like I found my purpose,” he said.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:purpose#s4",
+      "pos": "短语",
+      "glossZh": "故意地",
+      "pronunciationId": "w:purpose#p-main",
+      "note": "on purpose。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:purpose#e-6582d429c4b7618c",
+          "text": "Communicating messages on purpose.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:27",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "打算（动词）",
+      "reason": "罕见的旧式用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

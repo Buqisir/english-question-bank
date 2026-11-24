@@ -1,0 +1,223 @@
+{
+  "entryId": "w:involve",
+  "headword": "involve",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪnˈvɒlv/",
+    "us": "/ɪnˈvɑːlv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:involve#p-main",
+      "ipa": {
+        "uk": "/ɪnˈvɒlv/",
+        "us": "/ɪnˈvɑːlv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "involved",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "involves",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "involving",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 285
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 285
+  },
+  "senses": [
+    {
+      "senseId": "w:involve#s1",
+      "pos": "v.",
+      "glossZh": "包含；涉及",
+      "pronunciationId": "w:involve#p-main",
+      "note": "可接名词或 -ing 形式。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:involve#e-11833a960faa5c91",
+          "text": "They involve difficult climbing.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2024-ii:23",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:involve#e-e697fddf4ea50b8f",
+          "text": "“This exhibition involves the history of printing, art, photography and advertising over 16 decades.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:involve#e-63526d4838b149d1",
+          "text": "But as we’ve reshaped the world around us, dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch is at the heart of why so many of us struggle to resist tempting foods that we know we shouldn’t eat.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 93
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:involve#s2",
+      "pos": "v.",
+      "glossZh": "使参与；使卷入",
+      "pronunciationId": "w:involve#p-main",
+      "note": "involve sb in sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:involve#e-8835b0beb0ed8cd4",
+          "text": "“The way they demonstrated how microplastics were trapped through the boiling process was nice,” Caroline Gauchotte-Lindsay, an environmental engineer at the University of Glasgow in Scotland who was not involved in the research, tells New Scientist.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 204,
+            "end": 212
+          }
+        },
+        {
+          "exampleId": "w:involve#e-74607b770042a19b",
+          "text": "Get the audience involved.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:involve#e-97999f1c93a8155d",
+          "text": "Involve your child in the daily running of the house: tidying toys, feeding the dog, watering the plants.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "缠绕、遮蔽、乘方",
+      "reason": "旧义或专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

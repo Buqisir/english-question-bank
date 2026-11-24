@@ -1,0 +1,265 @@
+{
+  "entryId": "w:correct",
+  "headword": "correct",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəˈrekt/",
+    "us": "/kəˈrekt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:correct#p-main",
+      "ipa": {
+        "uk": "/kəˈrekt/",
+        "us": "/kəˈrekt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more correct",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most correct",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "corrected",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "correcting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "corrects",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 61
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 60
+  },
+  "senses": [
+    {
+      "senseId": "w:correct#s1",
+      "pos": "adj.",
+      "glossZh": "正确的；准确的；合适的",
+      "pronunciationId": "w:correct#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:correct#e-c93538e534f6d54e",
+          "text": "Inserting the correct “key” would let out the nut.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:correct#e-25333cde9617baee",
+          "text": "It’s good to eat things at the correct time, when they’re __58__, and as close as possible to where they were __59__.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-a:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:correct#e-2b2c7285bb37dea2",
+          "text": "Upon entering the correct zone, parking staff will guide you directly to a space.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:correct#s2",
+      "pos": "v.",
+      "glossZh": "改正；纠正（错误或说错的人）",
+      "pronunciationId": "w:correct#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:correct#e-a2296caf7939b22b",
+          "text": "By correcting grammar mistakes.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:correct#e-b56c4f2e0ff0be3c",
+          "text": "I asked my older sister to correct my grammar.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:5",
+              "sentence": 16
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:correct#e-c59d719c5eb58cfa",
+          "text": "Instead of correcting others when they were struggling to pronounce my name, I just smiled and nodded approvingly.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:correct#s3",
+      "pos": "v.",
+      "glossZh": "批改；评阅",
+      "pronunciationId": "w:correct#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:correct#e-f1f60027bd326c67",
+          "text": "On cold winter nights, he held this pen to correct homework and prepare lessons under the lamp, his neat and strong handwriting lighting the way for countless children’s studies.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 50
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "惩戒",
+      "reason": "古旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

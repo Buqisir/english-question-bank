@@ -1,0 +1,161 @@
+{
+  "entryId": "w:arctic",
+  "headword": "Arctic",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɑːktɪk/",
+    "us": "/ˈɑːrktɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:arctic#p-main",
+      "ipa": {
+        "uk": "/ˈɑːktɪk/",
+        "us": "/ˈɑːrktɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "arctics",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Arctics",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "senses": [
+    {
+      "senseId": "w:arctic#s1",
+      "pos": "adj.",
+      "glossZh": "北极的；北极地区的",
+      "pronunciationId": "w:arctic#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:arctic#e-6400a6429de57b0a",
+          "text": "The move is part of a huge multi-decade operation to relocate the whole Arctic town as the state-owned LKAB iron mine weakens the ground, threatening to swallow the town.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:arctic#e-9c25630c0886a88e",
+          "text": "Kolbert reveals how the loss of Arctic ice floes creates economic opportunities for Indigenous Greenlanders by extending the Northwest Passage’s shipping season, while accelerating local cultural extinction.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:arctic#e-1732a703724fd682",
+          "text": "What was the main difficulty during David’s Arctic project?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:arctic#s2",
+      "pos": "n.",
+      "glossZh": "北极地区",
+      "pronunciationId": "w:arctic#p-main",
+      "note": "the Arctic。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:arctic#s3",
+      "pos": "adj.",
+      "glossZh": "极冷的；严寒的",
+      "pronunciationId": "w:arctic#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "防水保暖套鞋及北极眼蝶",
+      "reason": "罕见和专门用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

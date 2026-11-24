@@ -1,0 +1,228 @@
+{
+  "entryId": "w:commit",
+  "headword": "commit",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəˈmɪt/",
+    "us": "/kəˈmɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:commit#p-main",
+      "ipa": {
+        "uk": "/kəˈmɪt/",
+        "us": "/kəˈmɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "commits",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "committed",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "committing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 41
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 38
+  },
+  "senses": [
+    {
+      "senseId": "w:commit#s1",
+      "pos": "v.",
+      "glossZh": "犯（罪、错）；做出（不好的事）",
+      "pronunciationId": "w:commit#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:commit#s2",
+      "pos": "v.",
+      "glossZh": "承诺；投入；致力于",
+      "pronunciationId": "w:commit#p-main",
+      "note": "be committed to 后接名词或动名词。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:commit#e-6aa5b8a51f2d7c61",
+          "text": "Even the most engaged and committed audience will eventually get bored.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:commit#e-691e9af5b63a6044",
+          "text": "Start and end dates are flexible, but hosts must commit to at least 6 weeks of service.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:commit#e-87c476204a80317a",
+          "text": "Harvard Griffin GSAS is committed to ensuring that our fee does not create a financial obstacle.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:commit#s3",
+      "pos": "v.",
+      "glossZh": "把……记下或存下",
+      "pronunciationId": "w:commit#p-main",
+      "note": "commit to memory 指牢记，commit to paper 指写下来。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:commit#e-ad7b75eb3619ca9b",
+          "text": "All the different hallways and rooms were too much to think about, let alone commit to memory.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:commit#e-d939782c6c32f402",
+          "text": "What sounds coherent（有条理的）when spoken often appears weak and illogical when committed to paper.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 85
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:commit#s4",
+      "pos": "v.",
+      "glossZh": "托付；把某人送去收治或关押",
+      "pronunciationId": "w:commit#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "版本库中的提交、已承诺入学的运动员",
+      "reason": "技术或体育招募专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

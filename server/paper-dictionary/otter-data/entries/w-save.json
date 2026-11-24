@@ -1,0 +1,508 @@
+{
+  "entryId": "w:save",
+  "headword": "save",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/seɪv/",
+    "us": "/seɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:save#p-main",
+      "ipa": {
+        "uk": "/seɪv/",
+        "us": "/seɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "saves",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "saved",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "saving",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 209
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 203
+  },
+  "senses": [
+    {
+      "senseId": "w:save#s1",
+      "pos": "v.",
+      "glossZh": "救助",
+      "pronunciationId": "w:save#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:save#e-5805625af6186723",
+          "text": "Thanks to them, a family was saved from the fire.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-ii:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:save#e-9f1fda8c3230bdb3",
+          "text": "A nearby theater was showing a documentary（纪录片） about several local animal shelters that were helping to save abandoned dogs across the country.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 109
+          }
+        },
+        {
+          "exampleId": "w:save#e-c1e0191f73f39ed1",
+          "text": "In my ninth-grade writing class last year, I met a cowboy who saved his town, a strict father who demanded his son earn straight A’s, and a modern-day Juliet who died of heartbreak after her parents rejected the love of her young life.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 67
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:save#s2",
+      "pos": "v.",
+      "glossZh": "挽救（濒于衰亡的事物）",
+      "pronunciationId": "w:save#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:save#e-fbc9e7627bfb6994",
+          "text": "Ridership on transit (交通) systems across the country has been down the past half century, so could short stories save transit?",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 113,
+            "end": 117
+          }
+        },
+        {
+          "exampleId": "w:save#e-d97b5cc02b92ceb9",
+          "text": "In Hungary, restorers are working to save the historic book collection of the Benedictine Abbey of Pannonhalma, a UNESCO World Heritage site, after discovering a serious insect infestation（虫害）.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:save#e-6b98af2ba6b06091",
+          "text": "program that helped save the wild bison.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:save#s3",
+      "pos": "v.",
+      "glossZh": "节省",
+      "pronunciationId": "w:save#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:save#e-2585e5ae95acf788",
+          "text": "But using cheese brine could help both cheese producers and cities save money, while keeping roads safe.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:save#e-3a5cd017af0b99d9",
+          "text": "What appliances to buy to save energy.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:24",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:save#e-79dd9031aef71770",
+          "text": "Ten minutes spent in this way could save you quite a lot of time in the long run.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:save#s4",
+      "pos": "v.",
+      "glossZh": "使免于",
+      "pronunciationId": "w:save#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:save#e-b019a5836f5bd4ab",
+          "text": "Yet, by learning to live with imperfection, you will save yourself headaches and a wastepaper basket full of crumpled (弄皱) paper.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:save#e-117bc7bbaf00b45c",
+          "text": "Terri, who now rents a house with friends in Wandsworth, South West London, says DIY also saves her from losing any deposit when a tenancy (租期) comes to an end.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:save#e-bf5db02508fc1c8c",
+          "text": "This will save you a lot of stress.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:save#s5",
+      "pos": "v.",
+      "glossZh": "留作以后用",
+      "pronunciationId": "w:save#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:save#e-640cce05f75c4e84",
+          "text": "For those wishing to park near friends, all vehicles must have passes for the same zone and arrive together – spaces cannot be saved.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 127,
+            "end": 132
+          }
+        },
+        {
+          "exampleId": "w:save#e-5c81ab00cbef04c0",
+          "text": "She’d begged for photos, but he laughed, “Save it for later, kiddo.” Now “later” came.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:save#s6",
+      "pos": "v.",
+      "glossZh": "保存数据",
+      "pronunciationId": "w:save#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:save#e-c75440c255fd057c",
+          "text": "Screenshots exist, and people can save what you share.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:save#s7",
+      "pos": "v.",
+      "glossZh": "攒钱",
+      "pronunciationId": "w:save#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:save#s8",
+      "pos": "n.",
+      "glossZh": "扑救",
+      "pronunciationId": "w:save#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:save#e-d9af337f13f6a2a9",
+          "text": "Over time, my creations have grown: from a skate model to El Dibu Martinez’s famous World Cup save, from a metal rock band to a wheeled dinosaur.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 98
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:save#s9",
+      "pos": "prep.",
+      "glossZh": "除……之外",
+      "pronunciationId": "w:save#p-main",
+      "note": "正式用法。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "豁免检定",
+      "reason": "游戏专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

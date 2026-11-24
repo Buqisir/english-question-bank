@@ -1,0 +1,162 @@
+{
+  "entryId": "w:membership",
+  "headword": "membership",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmembəʃɪp/",
+    "us": "/ˈmembərʃɪp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:membership#p-main",
+      "ipa": {
+        "uk": "/ˈmembəʃɪp/",
+        "us": "/ˈmembərʃɪp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "memberships",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 26,
+    "mock": 36
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 36
+  },
+  "senses": [
+    {
+      "senseId": "w:membership#s1",
+      "pos": "n.",
+      "glossZh": "会员资格；成员身份",
+      "pronunciationId": "w:membership#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 24,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:membership#e-1f9bfa8b095aa5e8",
+          "text": "Annoyed by the level of distraction(干扰)in his open office, he said, “That’s why I have a membership at the coworking space across the street – so I can focus.” His comment struck me as strange.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:membership#e-1af744103eb47002",
+          "text": "Parrots are most easily hurt when feeding on the ground; membership in a group plays an important function in ensuring their safety and improving their chances of survival from attacks by predators.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:membership#e-d32cce67961b00e5",
+          "text": ", return it with your annual membership fee in the attached envelope, and begin enjoying your benefits immediately.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:membership#s2",
+      "pos": "n.",
+      "glossZh": "全体会员（或会员人数）",
+      "pronunciationId": "w:membership#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:membership#e-a91ca24fe62df93a",
+          "text": "Farber is certain that the holistic approach will grow more popular with time, and if the past is any indication, he may be right: Since 1982, membership in the American Holistic Veterinary Medical Association has grown from 30 to over 700.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 143,
+            "end": 153
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "集合归属（形式义）",
+      "reason": "数学专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

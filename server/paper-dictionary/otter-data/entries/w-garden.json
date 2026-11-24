@@ -1,0 +1,251 @@
+{
+  "entryId": "w:garden",
+  "headword": "garden",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɡɑːdn/",
+    "us": "/ˈɡɑːrdn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:garden#p-main",
+      "ipa": {
+        "uk": "/ˈɡɑːdn/",
+        "us": "/ˈɡɑːrdn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "gardens",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "gardened",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "gardening",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 55,
+    "mock": 314
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 314
+  },
+  "senses": [
+    {
+      "senseId": "w:garden#s1",
+      "pos": "n.",
+      "glossZh": "花园",
+      "pronunciationId": "w:garden#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 42,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:garden#e-ee37b04244982ca6",
+          "text": "Take a tour of his Lakeland cottage, walk through his hillside garden and explore the riches of the collection in the Museum.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "paragraph": 18,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:18",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:garden#e-dbbcd69decd9001e",
+          "text": "Some students get so interested in gardening that they bring home seeds to start their own vegetable gardens.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 108
+          }
+        },
+        {
+          "exampleId": "w:garden#e-45dddeecfb4a16a0",
+          "text": "The garden also contains a winding path that guides visitors through the twelve regions of the Silk Road.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:garden#s2",
+      "pos": "n.",
+      "glossZh": "园艺",
+      "pronunciationId": "w:garden#p-main",
+      "note": "派生名词 gardening。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:garden#e-67b2b011b0e70fcd",
+          "text": "Some students get so interested in gardening that they bring home seeds to start their own vegetable gardens.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:garden#e-0c10a01008cbf5cf",
+          "text": "He knew all the kids and their pets by name; he carried in the groceries; he took note of unlocked doors, offered gardening advice and taught more than a few young boys the art of the curveball.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 123
+          }
+        },
+        {
+          "exampleId": "w:garden#e-87b1eea54f2763ab",
+          "text": "A novel design approach to gardening has been gaining in popularity worldwide.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:garden#s3",
+      "pos": "v.",
+      "glossZh": "做园艺",
+      "pronunciationId": "w:garden#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:garden#e-4a7d883de475683a",
+          "text": "Eschewing fertilizers（化肥）and power tools, it’s based on an elegantly simple principle: to garden more like nature does.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 96
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Covent Garden",
+      "reason": "伦敦地名，整体不按普通义分配"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

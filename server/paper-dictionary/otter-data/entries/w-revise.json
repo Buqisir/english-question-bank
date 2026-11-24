@@ -1,0 +1,179 @@
+{
+  "entryId": "w:revise",
+  "headword": "revise",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈvaɪz/",
+    "us": "/rɪˈvaɪz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:revise#p-main",
+      "ipa": {
+        "uk": "/rɪˈvaɪz/",
+        "us": "/rɪˈvaɪz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "revised",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "revises",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "revising",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 26
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 25
+  },
+  "senses": [
+    {
+      "senseId": "w:revise#s1",
+      "pos": "v.",
+      "glossZh": "修改",
+      "pronunciationId": "w:revise#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:revise#e-d0af5065e6cb59ab",
+          "text": "After you have revised your draft until it is too messy to work from anymore, you can enter your changes into your word processor.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:revise#e-6a4a61c67dfd9e4d",
+          "text": "The resulting blank space invites you to revise.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:revise#e-e01d7f3d69de2e79",
+          "text": "Many beginning writers don’t leave enough space to revise.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2022-ii:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:revise#s2",
+      "pos": "v.",
+      "glossZh": "复习（备考）",
+      "pronunciationId": "w:revise#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:revise#e-c05a4d7cbdde4270",
+          "text": "Whether you’re revising for an exam, feeling stuck on a school project or working through a friendship problem, going for a walk could help.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 23
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "二校样",
+      "reason": "出版专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

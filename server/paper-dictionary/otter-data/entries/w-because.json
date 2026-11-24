@@ -1,0 +1,190 @@
+{
+  "entryId": "w:because",
+  "headword": "because",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bɪˈkɒz/",
+    "us": "/bɪˈkʌz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:because#p-main",
+      "ipa": {
+        "uk": "/bɪˈkɒz/",
+        "us": "/bɪˈkʌz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 78,
+    "mock": 541
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 541
+  },
+  "senses": [
+    {
+      "senseId": "w:because#s1",
+      "pos": "conj.",
+      "glossZh": "因为；由于",
+      "pronunciationId": "w:because#p-main",
+      "note": "后面接从句。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 70,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:because#e-62306dda185ca8f0",
+          "text": "After high school, Jennifer attended a local technical college, working to pay her tuition（学费）, because there was no extra money set aside for a college education.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 103
+          }
+        },
+        {
+          "exampleId": "w:because#e-6edc05339b2d34b8",
+          "text": "Perhaps, then, their maths skill developed because they cannot count on their friends for help.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:because#e-010b75a61f5d5e74",
+          "text": "Because the system is automated, it significantly reduces the amount of water needed to grow plants.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:because#s2",
+      "pos": "短语",
+      "glossZh": "因为；由于",
+      "pronunciationId": "w:because#p-main",
+      "note": "because of 后面通常接名词、代词或动名词。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:because#e-25d3911cb63bb64d",
+          "text": "“Nicolo,” whose real name cannot be __41__ to the public because of Italy’s privacy laws, __42__ working the whole night at a factory in Turin.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:because#e-f37182ca3a43d45e",
+          "text": "Komodo National Park, officially recognized in 1980, is popular for ecotourism because of its unique biodiversity.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:grammar-fill",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2021-national-b:grammar-fill:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:because#e-b65728d8909f6e5d",
+          "text": "Because of this, I’m careful not to connect what my kids weigh with their worth as people.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

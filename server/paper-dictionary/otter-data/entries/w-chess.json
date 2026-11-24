@@ -1,0 +1,129 @@
+{
+  "entryId": "w:chess",
+  "headword": "chess",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tʃes/",
+    "us": "/tʃes/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:chess#p-main",
+      "ipa": {
+        "uk": "/tʃes/",
+        "us": "/tʃes/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "chesses",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:chess#s1",
+      "pos": "n.",
+      "glossZh": "国际象棋",
+      "pronunciationId": "w:chess#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 12
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chess#e-05b5caa68016fb6c",
+          "text": "A machine can now not only beat you at chess, it can also outperform you in debate.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:chess#e-502ce2d2dff11d44",
+          "text": "Most recently, I tried out my local library’s chess club.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:chess#e-84fbfa148f4a806a",
+          "text": "Passenger Frantz told the press that he was playing chess on the deck __42__ he saw the girl, who had been sitting on the ship’s rail while her father took a picture, __43__ into the water.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-01-first-semester-quality-assessment",
+            "paperTitle": "山东省泰安市2025-2026学年第一学期普通高中质量检测 高三年级英语试卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 57
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "雀麦、临时军桥木板等",
+      "reason": "同形植物名或军用术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

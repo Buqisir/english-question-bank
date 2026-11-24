@@ -1,0 +1,406 @@
+{
+  "entryId": "w:help",
+  "headword": "help",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/help/",
+    "us": "/help/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:help#p-main",
+      "ipa": {
+        "uk": "/help/",
+        "us": "/help/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "helps",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "helped",
+      "tags": [
+        "past",
+        "participle",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "helping",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 236,
+    "mock": 1714
+  },
+  "unassignedCounts": {
+    "gaokao": 13,
+    "mock": 1714
+  },
+  "senses": [
+    {
+      "senseId": "w:help#s1",
+      "pos": "v.",
+      "glossZh": "帮助；有助于",
+      "pronunciationId": "w:help#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 198,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:help#e-321518a87a91cef4",
+          "text": "After graduation, she worked to help her sisters and brothers pay for their schooling.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:help#e-3cdf7463911af2ae",
+          "text": "Writing down what the doctor says will help you remember important information.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-ii:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:help#e-d31b026945ccd0e8",
+          "text": "Once, when trying a certain trick on the beam (横杆), I fell onto the stones, damaging a nerve in my hand, and Toby came over, helping me up: Safe, man.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:2",
+              "sentence": 9
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 125,
+            "end": 132
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:help#s2",
+      "pos": "n.",
+      "glossZh": "帮助；援助",
+      "pronunciationId": "w:help#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:help#e-20c24604ec977f94",
+          "text": "I radioed the camp manager for help.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:help#e-94821d1525adb468",
+          "text": "In the 1990s, a group of thieves often sold stolen goods with the help of some beggars.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:help#e-a69e01f07e88364e",
+          "text": "She would have struggled with extreme __50__ to make it to that aid checkpoint without Bailey’s help.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 100
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:help#s3",
+      "pos": "n.",
+      "glossZh": "有帮助的人或事物",
+      "pronunciationId": "w:help#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:help#e-37f58a88e70fa989",
+          "text": "“He is such a help to his mother.He wants very much to earn some money, but I don’t see what he can do.”",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-ii:writing-continuation:material:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:help#e-aecad4ae731864cc",
+          "text": "She says: “I’m sure I wasn’t much of a help to start with painting the rooms and putting down the flooring throughout the house.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:help#s4",
+      "pos": "n.",
+      "glossZh": "帮工",
+      "pronunciationId": "w:help#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:help#e-ee3045fba9d565ba",
+          "text": "It happened that the plant downtown needed eight kids for __43__ help during our spring break, for which I had no __44__ beyond listening to my favorite records.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:help#s5",
+      "pos": "短语",
+      "glossZh": "请自取（食物、饮料等）",
+      "pronunciationId": "w:help#p-main",
+      "note": "help oneself to sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:help#e-d6834ce9df989aa5",
+          "text": "Before the film began, each woman was asked to help herself to a snack.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:help#s6",
+      "pos": "短语",
+      "glossZh": "忍不住",
+      "pronunciationId": "w:help#p-main",
+      "note": "can’t help doing sth；can’t help but do sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:help#e-55fd58f8a793f58f",
+          "text": "As he writes in his new book, A Long Way Home, Brierley couldn’t help but wonder about his hometown back in India.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:help#e-a65a5db56f55820b",
+          "text": "He is right, but I can’t help wishing they would keep those old ferries.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:help#s7",
+      "pos": "interj.",
+      "glossZh": "救命",
+      "pronunciationId": "w:help#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "冷水保温蜷缩姿势",
+      "reason": "大写 HELP 是专门缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

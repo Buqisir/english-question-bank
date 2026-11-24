@@ -1,0 +1,407 @@
+{
+  "entryId": "w:cool",
+  "headword": "cool",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kuːl/",
+    "us": "/kuːl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:cool#p-main",
+      "ipa": {
+        "uk": "/kuːl/",
+        "us": "/kuːl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "cooler",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "coolest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "cooled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "cooling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "cools",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 15,
+    "mock": 172
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 167
+  },
+  "senses": [
+    {
+      "senseId": "w:cool#s1",
+      "pos": "adj.",
+      "glossZh": "凉爽的；凉的",
+      "pronunciationId": "w:cool#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cool#e-685db699acee8c04",
+          "text": "Keep the room cool rather than warm to avoid feeling sleepy.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-ii:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:cool#e-32051994b824290c",
+          "text": "A cool summer had delayed __53__.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:cool#e-a83bd9f74a7c128a",
+          "text": "I went back to my bicycle, pushed it up the hill, and let it coast into the lovely cool waters of the dam, where I rolled around wearing my full cycling gear.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 87
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cool#s2",
+      "pos": "adj.",
+      "glossZh": "很棒的；酷的；时髦的",
+      "pronunciationId": "w:cool#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cool#e-8632583a1811b832",
+          "text": "In the movie Mission Impossible, Tom Cruise made being a secret agent seem like the coolest job ever.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 91
+          }
+        },
+        {
+          "exampleId": "w:cool#e-e7667528602d3596",
+          "text": "Campers will share their colorful ideas and imagination with each other and work together to visualize,sketch and paint with non-traditional techniques to create the coolest mural which will be displayed in public for all to see.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 166,
+            "end": 173
+          }
+        },
+        {
+          "exampleId": "w:cool#e-8c5d918501fab173",
+          "text": "Zero waste was a radical lifestyle movement a few years back, I remember showing my parents a video of Bea Johnson, sharing how cool I thought it would be to buy groceries with jars, and have so little trash!",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 128,
+            "end": 132
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cool#s3",
+      "pos": "v.",
+      "glossZh": "（使）变凉；冷却",
+      "pronunciationId": "w:cool#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cool#e-acf8f6fc4253fdb3",
+          "text": "In a study published Wednesday in Environmental Science & Technology Letters, researchers from China found that boiling tap water for just five minutes – then filtering it after it cools – could remove at least 80 percent of its microplastics.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 181,
+            "end": 186
+          }
+        },
+        {
+          "exampleId": "w:cool#e-9fe38ef1d27883c7",
+          "text": "Allow them to cool completely afterward.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-anhui-hefei-2026-02-first:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:cool#e-fc8cc1c22db58052",
+          "text": "As an added bonus, the water cools the panels, increasing their efficiency.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cool#s4",
+      "pos": "v.",
+      "glossZh": "冷静下来；缓和",
+      "pronunciationId": "w:cool#p-main",
+      "note": "常用 cool down。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cool#e-c5adcadf0ed01848",
+          "text": "When one person remains reasonable, the argument usually cools down much faster.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:cool#e-2ed868faa2cf23d6",
+          "text": "But Tim tried to cool me down.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cool#s5",
+      "pos": "adj.",
+      "glossZh": "冷静的；从容的",
+      "pronunciationId": "w:cool#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:cool#s6",
+      "pos": "adj.",
+      "glossZh": "冷淡的；不热情的",
+      "pronunciationId": "w:cool#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:cool#s7",
+      "pos": "n.",
+      "glossZh": "凉爽；凉意",
+      "pronunciationId": "w:cool#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:cool#s8",
+      "pos": "n.",
+      "glossZh": "镇定；冷静",
+      "pronunciationId": "w:cool#p-main",
+      "note": "keep one’s cool。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "程序语言缩写、杀害",
+      "reason": "同形缩写或俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

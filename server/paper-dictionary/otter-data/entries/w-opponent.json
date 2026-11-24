@@ -1,0 +1,176 @@
+{
+  "entryId": "w:opponent",
+  "headword": "opponent",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈpəʊnənt/",
+    "us": "/əˈpoʊnənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:opponent#p-main",
+      "ipa": {
+        "uk": "/əˈpəʊnənt/",
+        "us": "/əˈpoʊnənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "opponents",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 28
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 25
+  },
+  "senses": [
+    {
+      "senseId": "w:opponent#s1",
+      "pos": "n.",
+      "glossZh": "对手",
+      "pronunciationId": "w:opponent#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:opponent#e-9d363d06dd9a08bb",
+          "text": "in a public debate in San Francisco, a software program called Project Debater beat its human opponents, including Noa Ovadia, Israel's former national debating champion.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 94,
+            "end": 103
+          }
+        },
+        {
+          "exampleId": "w:opponent#e-25870e37f94eb473",
+          "text": "Pairs of opponents hit the ball back and forth until one winner comes out from all who entered.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:opponent#e-20db8ac43881a917",
+          "text": "The basketball felt awkward in my hands as I watched my teenage opponent effortlessly dribble (运球) past me for the twentieth time.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:opponent#s2",
+      "pos": "n.",
+      "glossZh": "反对者",
+      "pronunciationId": "w:opponent#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:opponent#e-529f9d2a805fa8ad",
+          "text": "Using these terms assigns unfair value to certain end-of-life plastic solution strategies, and can be used by supporters or opponents of different recycling technologies to hide genuine evaluation of their environmental impact.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 124,
+            "end": 133
+          }
+        },
+        {
+          "exampleId": "w:opponent#e-6c00fbf63f6c8227",
+          "text": "Despite its apparent benefits, opponents have misrepresented the idea online, framing it as a secret government plan to control people’s free movement.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+            "paperTitle": "宁波市2025学年第一学期高考模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-ningbo-2025-11-first-mock:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 40
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

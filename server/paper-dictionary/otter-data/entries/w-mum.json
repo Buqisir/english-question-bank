@@ -1,0 +1,158 @@
+{
+  "entryId": "w:mum",
+  "headword": "mum",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/mʌm/",
+    "us": "/mʌm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:mum#p-main",
+      "ipa": {
+        "uk": "/mʌm/",
+        "us": "/mʌm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "mums",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 46
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 46
+  },
+  "senses": [
+    {
+      "senseId": "w:mum#s1",
+      "pos": "n.",
+      "glossZh": "妈妈",
+      "pronunciationId": "w:mum#p-main",
+      "note": "英式英语常用；美式英语通常写 mom。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:mum#e-68c92f7357f42632",
+          "text": "“We floated the idea to my mum of sharing a house,” says Kathryn Whitehead.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:mum#e-12c24bca64cadf83",
+          "text": "Her mother, Solio, is a first-time mum and she is doing a fantastic job.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:mum#e-72dfc3fd7ea660c9",
+          "text": "My mum would find fun even when completing the most boring of tasks.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:grammar-fill:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:mum#s2",
+      "pos": "adj.",
+      "glossZh": "守口如瓶的",
+      "pronunciationId": "w:mum#p-main",
+      "note": "常用 keep mum。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:mum#s3",
+      "pos": "n.",
+      "glossZh": "菊花",
+      "pronunciationId": "w:mum#p-main",
+      "note": "美式英语的非正式说法。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "一种古式烈啤酒；用哑剧表演",
+      "reason": "历史或罕见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

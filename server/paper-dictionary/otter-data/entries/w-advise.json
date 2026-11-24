@@ -1,0 +1,156 @@
+{
+  "entryId": "w:advise",
+  "headword": "advise",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ədˈvaɪz/",
+    "us": "/ədˈvaɪz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:advise#p-main",
+      "ipa": {
+        "uk": "/ədˈvaɪz/",
+        "us": "/ədˈvaɪz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "advised",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "advises",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "advising",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 114
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 113
+  },
+  "senses": [
+    {
+      "senseId": "w:advise#s1",
+      "pos": "v.",
+      "glossZh": "建议；劝告",
+      "pronunciationId": "w:advise#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:advise#e-3d0e99460c091a7f",
+          "text": "What does the man advise Mrs. White to do?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:advise#e-eedfe59757c0c7d4",
+          "text": "What are road users advised to do?",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:advise#e-6bf141bea88916cd",
+          "text": "Top Tip Prize winner Peter Easy advises being persistent, “Many successful photographers enter the same work in several competitions before they finally win.”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:advise#s2",
+      "pos": "v.",
+      "glossZh": "正式通知；告知",
+      "pronunciationId": "w:advise#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

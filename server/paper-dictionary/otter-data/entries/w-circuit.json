@@ -1,0 +1,247 @@
+{
+  "entryId": "w:circuit",
+  "headword": "circuit",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsɜːkɪt/",
+    "us": "/ˈsɜːrkɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:circuit#p-main",
+      "ipa": {
+        "uk": "/ˈsɜːkɪt/",
+        "us": "/ˈsɜːrkɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "circuits",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "senses": [
+    {
+      "senseId": "w:circuit#s1",
+      "pos": "n.",
+      "glossZh": "电路；线路",
+      "pronunciationId": "w:circuit#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:circuit#e-e00963b2fc70355d",
+          "text": "Morse invented a code for sending messages over an electromagnetic circuit.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:circuit#e-c0d019fbe170bdc2",
+          "text": "When the conductors are connected in an electrical circuit to an external load, such as a battery, electricity flows in the circuit.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:circuit#e-5172744d423fe97b",
+          "text": "One tonne of circuit boards can contain up to 800 times more gold than a tonne of gold-bearing rocks.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:circuit#s2",
+      "pos": "n.",
+      "glossZh": "神经或生物系统中的回路",
+      "pronunciationId": "w:circuit#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:circuit#e-9ec38613cbf6cf9e",
+          "text": "The researchers also found that 4-hertz brainwaves in the visual cortex seemed to spread to neural circuits in other brain regions involved in concept formation.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:circuit#e-1e4f329a32d322b1",
+          "text": "Memory can be defined by what people report, or physically as a circuit of cells and connections in the brain, known as an engram.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:circuit#e-4957cbd89d241526",
+          "text": "During childhood, neural（神经的）circuits are finely tuned to absorb sounds and accents.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:circuit#s3",
+      "pos": "n.",
+      "glossZh": "巡回路线；赛道；绕行一圈",
+      "pronunciationId": "w:circuit#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:circuit#s4",
+      "pos": "短语",
+      "glossZh": "循环训练",
+      "pronunciationId": "w:circuit#p-main",
+      "note": "circuit training",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:circuit#e-2e18e4f995b971e2",
+          "text": "Half of the exercisers did circuit training on an exercise bike for 35 minutes immediately after the test.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "巡回法院管辖区、卫理公会分区、中国旧行政区划",
+      "reason": "制度专称或历史用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

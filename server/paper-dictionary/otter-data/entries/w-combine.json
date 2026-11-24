@@ -1,0 +1,173 @@
+{
+  "entryId": "w:combine",
+  "headword": "combine",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəmˈbaɪn/",
+    "us": "/kəmˈbaɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:combine#p-main",
+      "ipa": {
+        "uk": "/kəmˈbaɪn/",
+        "us": "/kəmˈbaɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "动词"
+    },
+    {
+      "pronunciationId": "w:combine#p-noun",
+      "ipa": {
+        "uk": "/ˈkɒmbaɪn/",
+        "us": "/ˈkɑːmbaɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "名词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "combines",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "combined",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "combining",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 128
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 127
+  },
+  "senses": [
+    {
+      "senseId": "w:combine#s1",
+      "pos": "v.",
+      "glossZh": "结合；合并；兼具",
+      "pronunciationId": "w:combine#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:combine#e-c240417dcce3fe7b",
+          "text": "Your four major essays will combine to form the main part of the grade for this course: Essay 1 = 10%; Essay 2 = 15%; Essay 3 = 15%; Essay 4 = 20%.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "reading-a-5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:combine#e-8c78f2a5a4a2dbea",
+          "text": "The menu in this beautiful colonial house includes traditional Thai cuisine combined with modern cooking methods.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:combine#e-5fb16cbb69fbeb7d",
+          "text": "Handball is a fascinating game which combines speed, strength, technical precision, skill and teamwork.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:combine#s2",
+      "pos": "n.",
+      "glossZh": "联合收割机；联合企业",
+      "pronunciationId": "w:combine#p-noun",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "客货两用列车、职业队选拔测试",
+      "reason": "铁路或体育专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

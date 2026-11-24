@@ -1,0 +1,356 @@
+{
+  "entryId": "w:senior",
+  "headword": "senior",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsiːniə(r)/",
+    "us": "/ˈsiːniər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:senior#p-main",
+      "ipa": {
+        "uk": "/ˈsiːniə(r)/",
+        "us": "/ˈsiːniər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more senior",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most senior",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "seniors",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 126
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 121
+  },
+  "senses": [
+    {
+      "senseId": "w:senior#s1",
+      "pos": "adj.",
+      "glossZh": "资历较高的",
+      "pronunciationId": "w:senior#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:senior#e-fd629a0391207f8b",
+          "text": "And for that to happen, we also need to protect nature so that we can interact with it,\" said Peter Kahn, a senior author of the study.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 114
+          }
+        },
+        {
+          "exampleId": "w:senior#e-8ca2b8b669fc5d4c",
+          "text": "“We didn’t make a big deal of that,” said Novem Auyeung, a Parks Department senior scientist.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:senior#e-3c55388738d94abc",
+          "text": "Besides, as a senior editor, his job is to carefully compare and refine the translations of the Chinese texts, ensuring that they gain the broadest recognition in the English context.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:senior#s2",
+      "pos": "n.",
+      "glossZh": "老年人",
+      "pronunciationId": "w:senior#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:senior#e-0b517bc9cc66328a",
+          "text": "It reserves seats for the seniors.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2024-national-a:28",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:senior#e-f6ba15a4810011d8",
+          "text": "Prices: Adults £4.65, Seniors £3.95, Children £2.50",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:senior#e-eafcc544cd2eff85",
+          "text": "Furthermore, additional support is available for seniors and the disabled to ensure that the program remains accessible to a broad group.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a",
+            "locator": {
+              "paragraph": 27,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a:12",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:senior#s3",
+      "pos": "adj.",
+      "glossZh": "毕业班的",
+      "pronunciationId": "w:senior#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:senior#e-0401d1032291a35b",
+          "text": "Joanna Wright, a senior political science major, loves coffee and goes to the cafe at least six days a week.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:senior#e-df790c6a1d94dc52",
+          "text": "In 1992, my senior year, Perloff hosted a conference on a composer known for his rule-breaking style, John Cage.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:senior#s4",
+      "pos": "n.",
+      "glossZh": "毕业班学生",
+      "pronunciationId": "w:senior#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:senior#e-5f3c47805e51dba4",
+          "text": "• are eligible (有资格的) to apply for scholarships to Columbus College of Art and Design, Maryland Institute College of Art, and The Art Institute (Seniors only);",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-a:13",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 145,
+            "end": 152
+          }
+        },
+        {
+          "exampleId": "w:senior#e-a19c9f5c2a723a78",
+          "text": "• Be a rising high school sophomore, junior, or senior.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-04-second",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-04-second:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-04-second:reading-a:15",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:senior#s5",
+      "pos": "adj.",
+      "glossZh": "年长的",
+      "pronunciationId": "w:senior#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:senior#s6",
+      "pos": "n.",
+      "glossZh": "比某人年长的人",
+      "pronunciationId": "w:senior#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:senior#s7",
+      "pos": "n.",
+      "glossZh": "上级",
+      "pronunciationId": "w:senior#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "早期教会长老",
+      "reason": "宗教历史专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

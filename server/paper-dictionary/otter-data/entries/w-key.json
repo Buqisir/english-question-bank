@@ -1,0 +1,397 @@
+{
+  "entryId": "w:key",
+  "headword": "key",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kiː/",
+    "us": "/kiː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:key#p-main",
+      "ipa": {
+        "uk": "/kiː/",
+        "us": "/kiː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "keyer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "keyest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more key",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most key",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "keys",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 34,
+    "mock": 480
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 479
+  },
+  "senses": [
+    {
+      "senseId": "w:key#s1",
+      "pos": "adj.",
+      "glossZh": "关键的；极其重要的",
+      "pronunciationId": "w:key#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:key#e-998aaae3811f95cc",
+          "text": "A key skill set for success is persistence （毅力）, a characteristic that researchers say is heavily influenced by fathers.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:key#e-f1510148444875d3",
+          "text": "Silent onstage communication is key, and each pianist has their own style of “nodding” to indicate a page turn which they need to practise with their page turner.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:key#e-3e85446b379c51f3",
+          "text": "Social interaction is key to understanding symbols.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:31",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:key#s2",
+      "pos": "n.",
+      "glossZh": "钥匙",
+      "pronunciationId": "w:key#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:key#e-6e37f77a1219d819",
+          "text": "The clear front of the box had a “keyhole” in a geometric shape, and the birds were given five differently shaped “keys” to choose from.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 115,
+            "end": 119
+          }
+        },
+        {
+          "exampleId": "w:key#e-ef3ca5a450928d0c",
+          "text": "So, I called Directory Assistance, got put through to our landlady’s managing agent, and had a spare key sent to me with just enough time to get back in before the actors arrived.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:key#e-7b18a4c42021191d",
+          "text": "I gathered up my wallet and room key and set off.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:key#s3",
+      "pos": "n.",
+      "glossZh": "关键；要诀",
+      "pronunciationId": "w:key#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:key#e-f29cbb807c35799e",
+          "text": "Education is the key to success.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2020-i:27",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:key#e-33669dfbe2dc5017",
+          "text": "What is the key to successful landscape photography according to the author?",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2023-national-b:25",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:key#e-b993391e16a9a128",
+          "text": "The key is consistency.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-ii:36",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:key#s4",
+      "pos": "n.",
+      "glossZh": "琴键",
+      "pronunciationId": "w:key#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:key#e-3ab700b246da02df",
+          "text": "His fingers lingered on the keys gently and then unlocked the piano bench.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:key#s5",
+      "pos": "n.",
+      "glossZh": "（键盘等的）按键",
+      "pronunciationId": "w:key#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:key#s6",
+      "pos": "n.",
+      "glossZh": "调；调性",
+      "pronunciationId": "w:key#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:key#s7",
+      "pos": "n.",
+      "glossZh": "图例",
+      "pronunciationId": "w:key#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:key#s8",
+      "pos": "n.",
+      "glossZh": "答案表",
+      "pronunciationId": "w:key#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:key#s9",
+      "pos": "短语",
+      "glossZh": "键入",
+      "pronunciationId": "w:key#p-main",
+      "note": "key sth in。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "拱顶石、翅果、色键、密钥、小岛群",
+      "reason": "专业用法或同形地理用词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

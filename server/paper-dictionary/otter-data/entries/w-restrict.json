@@ -1,0 +1,147 @@
+{
+  "entryId": "w:restrict",
+  "headword": "restrict",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈstrɪkt/",
+    "us": "/rɪˈstrɪkt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:restrict#p-main",
+      "ipa": {
+        "uk": "/rɪˈstrɪkt/",
+        "us": "/rɪˈstrɪkt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "restricted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "restricting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "restricts",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 61
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:restrict#s1",
+      "pos": "v.",
+      "glossZh": "限制",
+      "pronunciationId": "w:restrict#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 61
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:restrict#e-137c63dbb34c763f",
+          "text": "To restrict solar development.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:34",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:restrict#e-01f35381b581bf72",
+          "text": "Importantly, deliberate practice is not restricted to classroom instruction.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-2026-01-first-quality-test:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:restrict#e-b3e72ba230affa19",
+          "text": "Merely restricting access may fuel curiosity and leave them ill-prepared for digital life.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-import-20261026-n093:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 18
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "限制定义域",
+      "reason": "数学专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,230 @@
+{
+  "entryId": "w:price",
+  "headword": "price",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/praɪs/",
+    "us": "/praɪs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:price#p-main",
+      "ipa": {
+        "uk": "/praɪs/",
+        "us": "/praɪs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "prices",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "priced",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "pricing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 18,
+    "mock": 195
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 193
+  },
+  "senses": [
+    {
+      "senseId": "w:price#s1",
+      "pos": "n.",
+      "glossZh": "价格",
+      "pronunciationId": "w:price#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:price#e-712cb37fd6c90d1f",
+          "text": "With gas prices rising and airport security lines snaking longer than ever, why not book your next domestic vacation on a train?",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:price#e-894a5521bee73d2a",
+          "text": "Prices: Adults £4.65, Seniors £3.95, Children £2.50",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:price#e-9fbfe2c9029b3b5e",
+          "text": "A couple of messages came in, one wanting additional __46__, another asking for a price cut.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 87
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:price#s2",
+      "pos": "n.",
+      "glossZh": "代价",
+      "pronunciationId": "w:price#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:price#s3",
+      "pos": "v.",
+      "glossZh": "给……定价",
+      "pronunciationId": "w:price#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:price#e-969609e7fbe3b6d4",
+          "text": "In this course we will analyze many interesting aspects of the sports industry: sports leagues, ticket pricing, salary negotiations, discrimination, and NCAA policies to name a few.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 103,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:price#e-2e1e66a5c5a2d6f1",
+          "text": "It read like a menu, itemizing all the rules he and his classmates would be __49__ to break, 11 in all, each priced at 50p.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:cloze:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 115
+          }
+        },
+        {
+          "exampleId": "w:price#e-c77535c2dcff12aa",
+          "text": "There is always a shop on the go so they will be pricing up something or finding change.” the headteacher says.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 56
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "扭伤处理法",
+      "reason": "大写缩略语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

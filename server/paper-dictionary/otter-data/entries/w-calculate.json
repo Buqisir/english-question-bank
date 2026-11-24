@@ -1,0 +1,195 @@
+{
+  "entryId": "w:calculate",
+  "headword": "calculate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkælkjuleɪt/",
+    "us": "/ˈkælkjuleɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:calculate#p-main",
+      "ipa": {
+        "uk": "/ˈkælkjuleɪt/",
+        "us": "/ˈkælkjuleɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "calculated",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "calculates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "calculating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 21
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 20
+  },
+  "senses": [
+    {
+      "senseId": "w:calculate#s1",
+      "pos": "v.",
+      "glossZh": "计算；算出；估算",
+      "pronunciationId": "w:calculate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:calculate#e-ab56928a6d6e2bc4",
+          "text": "It is calculated by the amount of greenhouse gas we produce in our daily lives.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:calculate#e-fb1c0e17359aedb3",
+          "text": "It is calculated that European railways alone spend approximately 20 billion euros a year on maintenance, including sending maintenance staff, often at night, to inspect and repair the rail infrastructure.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:calculate#e-8be7a7a4e7cb4029",
+          "text": "To calculate your speed as you do, divide 3,600 (the number of seconds in an hour) by the number of seconds it takes you to travel one mile (the distance between two mileposts).",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:calculate#s2",
+      "pos": "v.",
+      "glossZh": "预料；估计（会发生什么）",
+      "pronunciationId": "w:calculate#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:calculate#e-6d1ef73c1cb2e3e9",
+          "text": "Scientists have often been working from the wrong starting point when calculating what land and populations might be affected in the future.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:calculate#s3",
+      "pos": "短语",
+      "glossZh": "有意做成；旨在",
+      "pronunciationId": "w:calculate#p-main",
+      "note": "be calculated to do",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "推演棋步",
+      "reason": "棋类专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

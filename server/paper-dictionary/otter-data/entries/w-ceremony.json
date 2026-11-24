@@ -1,0 +1,148 @@
+{
+  "entryId": "w:ceremony",
+  "headword": "ceremony",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈserəməni/",
+    "us": "/ˈserəməʊni/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ceremony#p-main",
+      "ipa": {
+        "uk": "/ˈserəməni/",
+        "us": "/ˈserəməʊni/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "ceremonies",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "ceremonys",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 32
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 29
+  },
+  "senses": [
+    {
+      "senseId": "w:ceremony#s1",
+      "pos": "n.",
+      "glossZh": "仪式；典礼",
+      "pronunciationId": "w:ceremony#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ceremony#e-30ac400f17d7673a",
+          "text": "Send the kids out to pick flowers for the table or hold a brief ceremony before the meal",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-putian-2026-01-first-quality-test:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:ceremony#e-16dd5cdeb8f793f0",
+          "text": "On the graduation day, there would be a ceremony（典礼）which was to be held in a large church downtown I’d never visited.",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:ceremony#e-b5db636a6ccfabc3",
+          "text": "I’m writing to share with you the most impressive part of our school’s Coming-of-age Ceremony held last Friday.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:writing-application",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:writing-application:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 93
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ceremony#s2",
+      "pos": "n.",
+      "glossZh": "礼节；客套",
+      "pronunciationId": "w:ceremony#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "预兆、仪式用品",
+      "reason": "旧义或罕用"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

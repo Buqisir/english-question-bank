@@ -1,0 +1,141 @@
+{
+  "entryId": "w:eleven",
+  "headword": "eleven",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈlevn/",
+    "us": "/ɪˈlevn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:eleven#p-main",
+      "ipa": {
+        "uk": "/ɪˈlevn/",
+        "us": "/ɪˈlevn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "elevens",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "senses": [
+    {
+      "senseId": "w:eleven#s1",
+      "pos": "num.",
+      "glossZh": "十一",
+      "pronunciationId": "w:eleven#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:eleven#e-372bf21990a2dbd6",
+          "text": "For eleven years, the Amazon was my home, my school, and my proving ground.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:eleven#e-1943f96c95bbec6d",
+          "text": "Eleven testers from California, Florida, Iowa, Indiana, Kansas, Minnesota, Missouri, New York, North Carolina, and South Dakota tried out Talkspace, completing at least two live meetings with their therapists as well as messaging with them in between.",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:eleven#e-6c09c7c71e6fa7dd",
+          "text": "I was eleven the first time I saw Jane.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:eleven#s2",
+      "pos": "n.",
+      "glossZh": "十一人组成的球队",
+      "pronunciationId": "w:eleven#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "超过十分满分",
+      "reason": "文化典故引申"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

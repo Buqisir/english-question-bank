@@ -1,0 +1,171 @@
+{
+  "entryId": "w:apologise",
+  "headword": "apologise",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "apologize"
+  ],
+  "ipa": {
+    "uk": "/əˈpɒlədʒaɪz/",
+    "us": "/əˈpɑːlədʒaɪz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:apologise#p-main",
+      "ipa": {
+        "uk": "/əˈpɒlədʒaɪz/",
+        "us": "/əˈpɑːlədʒaɪz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "apologised",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "apologises",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "apologising",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "apologized",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "apologizes",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "apologizing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 48
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:apologise#s1",
+      "pos": "v.",
+      "glossZh": "道歉；表示歉意",
+      "pronunciationId": "w:apologise#p-main",
+      "note": "apologise to sb for sth。美式拼写 apologize，英式也用此拼法。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 48
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:apologise#e-8fde9a73feadb55f",
+          "text": "You don’t need to apologize for a minor slip.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-i:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:apologise#e-92fc66de4f0a31cf",
+          "text": "Why does the man apologize?",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:apologise#e-498ec475a3180e09",
+          "text": "He’d make a joke, then immediately look me in the eye and apologize, visibly embarrassed by his own words, as if he couldn’t believe he’d said something inappropriate in front of me.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 67
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "为立场或教义辩护",
+      "reason": "历史用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

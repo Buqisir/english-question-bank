@@ -1,0 +1,463 @@
+{
+  "entryId": "w:spot",
+  "headword": "spot",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/spɒt/",
+    "us": "/spɑːt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:spot#p-main",
+      "ipa": {
+        "uk": "/spɒt/",
+        "us": "/spɑːt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "spots",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "spotted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "spotting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 28,
+    "mock": 200
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 196
+  },
+  "senses": [
+    {
+      "senseId": "w:spot#s1",
+      "pos": "v.",
+      "glossZh": "发现",
+      "pronunciationId": "w:spot#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:spot#e-f0c791764b021131",
+          "text": "There, among many other things, Nicolo spotted two paintings he thought would look __45__ above his dining room table.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:cloze:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:spot#e-0867445e13e82c18",
+          "text": "I looked around and finally spotted David, who was standing by himself off to the side by a fence.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "writing-continuation-3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:spot#e-fbd844fe21534655",
+          "text": "Though many companies use algorithms (算法) to weed out fake reviews, Azimi points out that the machines are programmed by humans, and given our limited ability to spot fake reviews, this isn’t a good sign.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 162,
+            "end": 166
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:spot#s2",
+      "pos": "n.",
+      "glossZh": "地点",
+      "pronunciationId": "w:spot#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:spot#e-5cf446bc1ffaa341",
+          "text": "You have to make sure you don’t turn two pages at once and make sure you find the repeats in the music when you have to go back to the right spot.” Mr Titterton explained.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 141,
+            "end": 145
+          }
+        },
+        {
+          "exampleId": "w:spot#e-942bafa4620ca0d6",
+          "text": "Though overtourism is described as a problem affecting the entire world, it’s actually concentrated to a small number of extremely popular spots.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 139,
+            "end": 144
+          }
+        },
+        {
+          "exampleId": "w:spot#e-80d502d3d75a1fb3",
+          "text": "Then she concentrated on jogging to the spot where the track curved(拐弯).",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:7",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:spot#s3",
+      "pos": "n.",
+      "glossZh": "名额",
+      "pronunciationId": "w:spot#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:spot#e-6f5adf4b227b7def",
+          "text": "Reserve a spot indoors, at its chef’s counter, or covered dog-friendly patio (露台), with creative wine tastings in the mix.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:spot#e-87b8b89dd44643df",
+          "text": "If you wish to remain on the list, you may have to email back within a certain time frame ( it'll say in the email) to keep your spot.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 129,
+            "end": 133
+          }
+        },
+        {
+          "exampleId": "w:spot#e-54bf0807a82c402d",
+          "text": "Then we were offered a spot on a trip to Beijing last summer for him to participate in the fifth annual ShenMo International Abacus Competition.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:spot#s4",
+      "pos": "n.",
+      "glossZh": "斑点",
+      "pronunciationId": "w:spot#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:spot#s5",
+      "pos": "n.",
+      "glossZh": "污渍",
+      "pronunciationId": "w:spot#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:spot#s6",
+      "pos": "n.",
+      "glossZh": "痘",
+      "pronunciationId": "w:spot#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:spot#s7",
+      "pos": "短语",
+      "glossZh": "令人欣慰的事情",
+      "pronunciationId": "w:spot#p-main",
+      "note": "bright spot。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:spot#e-b5d5e2366cfb21ff",
+          "text": "A bright spot for me turned out to be reading.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:spot#s8",
+      "pos": "短语",
+      "glossZh": "最佳点",
+      "pronunciationId": "w:spot#p-main",
+      "note": "sweet spot。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:spot#e-90877c54bd9a6adf",
+          "text": "“The sweet spot in life to start exercising, if you haven’t already, is in late middle age when the heart still has flexibility,” Levine says.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:spot#s9",
+      "pos": "短语",
+      "glossZh": "当场",
+      "pronunciationId": "w:spot#p-main",
+      "note": "on the spot。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:spot#e-1e86ca0be9e94075",
+          "text": "She named it “Comet” (彗星) on the spot.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:writing-continuation:2",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:spot#s10",
+      "pos": "短语",
+      "glossZh": "使某人陷入窘境",
+      "pronunciationId": "w:spot#p-main",
+      "note": "put somebody on the spot。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:spot#e-08da38b962022cba",
+          "text": "Before I knew it, the truth __49__: she always put me on the spot like this all the time and never asked me __50__!",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 65
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "幼虎 Spot、孤子、家鸽、罚球点和飞机弹射位置",
+      "reason": "专名或技术义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

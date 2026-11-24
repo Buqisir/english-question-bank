@@ -1,0 +1,232 @@
+{
+  "entryId": "w:herself",
+  "headword": "herself",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/hɜːˈself/",
+    "us": "/hɜːrˈself/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:herself#p-main",
+      "ipa": {
+        "uk": "/hɜːˈself/",
+        "us": "/hɜːrˈself/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "themselves",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 16,
+    "mock": 87
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 87
+  },
+  "senses": [
+    {
+      "senseId": "w:herself#s1",
+      "pos": "pron.",
+      "glossZh": "她自己（反身）",
+      "pronunciationId": "w:herself#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:herself#e-a8553a6b5ce2a0fe",
+          "text": "She supported herself through college.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2020-i:24",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:herself#e-89bf0e57234ae601",
+          "text": "She relies on herself the whole time.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jan:23",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:herself#e-5327084b4bab723f",
+          "text": "She drove on for a while and found herself on an unfamiliar road toward a Canadian town.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:herself#s2",
+      "pos": "pron.",
+      "glossZh": "她亲自（强调）",
+      "pronunciationId": "w:herself#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:herself#e-eb66af6c25fce396",
+          "text": "It didn’t take long for Merebeth to decide to drive the dog there herself.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "sentence": 8
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:herself#e-d07e94ccfa7c5c57",
+          "text": "Skilled at putting up shelves and piecing together furniture, she never pays someone else to do a job she can do herself.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 113,
+            "end": 120
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:herself#s3",
+      "pos": "短语",
+      "glossZh": "她独自；她独力",
+      "pronunciationId": "w:herself#p-main",
+      "note": "by herself。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:herself#e-9344eccc2fd37169",
+          "text": "She ran Jackson’s Carnegie Library absolutely by herself.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:herself#e-7d8df4e360db2c5a",
+          "text": "She often traveled by herself.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 29
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

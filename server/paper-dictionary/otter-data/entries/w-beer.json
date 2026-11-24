@@ -1,0 +1,129 @@
+{
+  "entryId": "w:beer",
+  "headword": "beer",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bɪə(r)/",
+    "us": "/bɪr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:beer#p-main",
+      "ipa": {
+        "uk": "/bɪə(r)/",
+        "us": "/bɪr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "beers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 10
+  },
+  "senses": [
+    {
+      "senseId": "w:beer#s1",
+      "pos": "n.",
+      "glossZh": "啤酒；一杯或一瓶啤酒",
+      "pronunciationId": "w:beer#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:beer#e-15ce346c1da65a1e",
+          "text": "Sometimes she prepares traditional Brazilian dishes __48__ her native home; other times she __49__ dinner courses with her favorite beers.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 132,
+            "end": 137
+          }
+        },
+        {
+          "exampleId": "w:beer#e-ef43ac487af0e319",
+          "text": "Trembling in wet clothes, they shared a(n) __51__ half-sandwich and a beer.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:beer#e-105950d8735d3597",
+          "text": "Drinks with meals are more expensive, especially beer and quality wine.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:seven-choices:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 53
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Paul Beer、英国村名、给人啤酒（动词）",
+      "reason": "同形专名或罕见动词义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

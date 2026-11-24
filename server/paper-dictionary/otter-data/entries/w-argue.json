@@ -1,0 +1,231 @@
+{
+  "entryId": "w:argue",
+  "headword": "argue",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɑːɡjuː/",
+    "us": "/ˈɑːrɡjuː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:argue#p-main",
+      "ipa": {
+        "uk": "/ˈɑːɡjuː/",
+        "us": "/ˈɑːrɡjuː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "argued",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "argues",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "arguing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 113
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 109
+  },
+  "senses": [
+    {
+      "senseId": "w:argue#s1",
+      "pos": "v.",
+      "glossZh": "争论；争吵",
+      "pronunciationId": "w:argue#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:argue#e-420befe0b77c8e78",
+          "text": "This distaste for arguments is common, but it depends on a mistaken view of arguments that causes problems for our personal and social lives – and in many ways misses the point of arguing in the first place.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 180,
+            "end": 187
+          }
+        },
+        {
+          "exampleId": "w:argue#e-32effb940f29722b",
+          "text": "While my deskmate Lily stayed up late making her hand-painted storybook and the boys in the back row argued over their DIY craft models, I just sat quietly in my seat, staring at the blank sign-up sheet.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:argue#e-6cd179b3e6c33b3b",
+          "text": "Critical thinking doesn’t mean being negative or arguing with everyone.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:argue#s2",
+      "pos": "v.",
+      "glossZh": "论证；主张；提出理由支持或反对",
+      "pronunciationId": "w:argue#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:argue#e-9ed019462b20afa3",
+          "text": "Jacobs argues that urban communities are best placed to understand how their city functions, because city life is created and sustained through their various interactions.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:argue#e-600cd5cc8a5e71e4",
+          "text": "To argue for the need to touch objects for judgment.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:29",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:argue#e-780b468c20f99392",
+          "text": "To argue against the culture of equating busyness with worth.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-guangdong-six-school-alliance-2025-10-second:31",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:argue#s3",
+      "pos": "v.",
+      "glossZh": "表明；显示",
+      "pronunciationId": "w:argue#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "控告及同形姓氏",
+      "reason": "旧义和专名。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

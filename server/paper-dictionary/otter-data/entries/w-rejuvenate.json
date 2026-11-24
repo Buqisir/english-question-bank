@@ -1,0 +1,79 @@
+{
+  "entryId": "w:rejuvenate",
+  "headword": "rejuvenate",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈdʒuːvəneɪt/",
+    "us": "/rɪˈdʒuːvəneɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:rejuvenate#p-main",
+      "ipa": {
+        "uk": "/rɪˈdʒuːvəneɪt/",
+        "us": "/rɪˈdʒuːvəneɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:rejuvenate#s1",
+      "pos": "v.",
+      "glossZh": "使恢复活力",
+      "pronunciationId": "w:rejuvenate#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rejuvenate#e-a7806d24b58432d4",
+          "text": "Rejuvenate local ecology.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:25",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

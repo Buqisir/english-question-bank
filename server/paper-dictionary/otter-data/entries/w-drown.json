@@ -1,0 +1,191 @@
+{
+  "entryId": "w:drown",
+  "headword": "drown",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/draʊn/",
+    "us": "/draʊn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:drown#p-main",
+      "ipa": {
+        "uk": "/draʊn/",
+        "us": "/draʊn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "drowned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "drowning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "drowns",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "senses": [
+    {
+      "senseId": "w:drown#s1",
+      "pos": "v.",
+      "glossZh": "淹死；溺死；使溺水",
+      "pronunciationId": "w:drown#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:drown#s2",
+      "pos": "v.",
+      "glossZh": "淹没；使深陷其中",
+      "pronunciationId": "w:drown#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drown#e-4db9ccf5bb9bae63",
+          "text": "“The pointing, the tapping, the friend next to them saying ‘have you seen that guy’s face’, that is also constant,” he added, drowning himself in desperation.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 126,
+            "end": 134
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:drown#s3",
+      "pos": "短语",
+      "glossZh": "盖过（声音）；使难以听见",
+      "pronunciationId": "w:drown#p-main",
+      "note": "drown out。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drown#e-864cb7e21265c6c2",
+          "text": "Most offensive posts come from a small group of highly active users, whose outsized posts shape public beliefs, creating the “majority illusion” that makes this minority seem like the norm, drowning out the silent majority.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 190,
+            "end": 198
+          }
+        },
+        {
+          "exampleId": "w:drown#e-981634464c5bdfad",
+          "text": "The joy of the game was slipping away, drowned out by the constant noise of his friends.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:drown#e-0c68811e2eb687cd",
+          "text": "For example, urban birds may sing louder, start singing earlier in the morning or at higher frequencies to avoid getting drowned out by low-frequency traffic noise.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 128
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏",
+      "reason": "同形专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

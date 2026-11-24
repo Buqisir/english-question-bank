@@ -1,0 +1,296 @@
+{
+  "entryId": "w:orange",
+  "headword": "orange",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɒrɪndʒ/",
+    "us": "/ˈɔːrɪndʒ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:orange#p-main",
+      "ipa": {
+        "uk": "/ˈɒrɪndʒ/",
+        "us": "/ˈɔːrɪndʒ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more orange",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most orange",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "oranger",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "orangest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "oranges",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 23
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 15
+  },
+  "senses": [
+    {
+      "senseId": "w:orange#s1",
+      "pos": "n.",
+      "glossZh": "橙子",
+      "pronunciationId": "w:orange#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:orange#e-3bd4a65a8e61c5db",
+          "text": "Spain has lovely white towns and the scent(芳香)of oranges, but it is also a treasury of ancient remains including the cities left by the Greeks, Romans and Arabs.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:orange#e-03f097a89c880e45",
+          "text": "While he was sitting in a park eating an orange, a dog approached him.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:orange#e-37143f00eae32738",
+          "text": "In that moment, memories flooded my mind: that brutal November rainstorm when we took turns pushing each other’s bikes up muddy slopes, our frozen fingers clinging to handlebars; the night we sat on the pier sharing a single orange while dreaming of competing in the European Junior Championships; the energy bar he’d secretly slipped into my pocket at the start line this morning, with “For luck” scribbled on the wrapper.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 225,
+            "end": 231
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:orange#s2",
+      "pos": "n.",
+      "glossZh": "橙色",
+      "pronunciationId": "w:orange#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:orange#e-f07c5cea75da03e9",
+          "text": "There are always seven colors in a rainbow and they always show up in the same order: red, orange, yellow, green, blue, indigo and violet.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:orange#e-8b09962bd770e520",
+          "text": "Bright colors such as yellow and orange are energetic and help lift low moods.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:orange#e-c3f30010dc47077f",
+          "text": "As evening approached, painting the classroom windows in shades of orange and grey, she kept looking at the clock.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:orange#s3",
+      "pos": "adj.",
+      "glossZh": "橙色的",
+      "pronunciationId": "w:orange#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:orange#e-4b98705a4f5bc558",
+          "text": "In Turner’s The Fighting Temeraire, the old boat, bathed in an orange and purple sunset, is packed with significance and symbolism about a lost life and the end of the road.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:orange#e-ae8e89b37027d075",
+          "text": "I stayed up the hill, where I was helped into an orange jumpsuit before sitting down with my tandem partner.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:orange#e-36eb4f8914dfff84",
+          "text": "Volunteers holding orange signs.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 25
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Orange County",
+      "reason": "固定地名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

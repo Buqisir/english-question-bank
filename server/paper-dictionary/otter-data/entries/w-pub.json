@@ -1,0 +1,139 @@
+{
+  "entryId": "w:pub",
+  "headword": "pub",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pʌb/",
+    "us": "/pʌb/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:pub#p-main",
+      "ipa": {
+        "uk": "/pʌb/",
+        "us": "/pʌb/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "pubs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "PUBs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "senses": [
+    {
+      "senseId": "w:pub#s1",
+      "pos": "n.",
+      "glossZh": "酒馆",
+      "pronunciationId": "w:pub#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pub#e-3a85826aed15c132",
+          "text": "Across England and Wales, more than one pub closed each day in 2024.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:pub#e-8288fb3ead083fe0",
+          "text": "Xia Yujie, owner of China’s first accessible pub – Pub HandyCup, had his left hand disabled in a middle school medical accident.",
+          "source": {
+            "paperId": "paper-mock-zj-ningbo-2026-mar",
+            "paperTitle": "宁波“十校”2026届高三3月联考",
+            "groupId": "group:paper-mock-zj-ningbo-2026-mar:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:pub#e-6734e18058d3d8a4",
+          "text": "As society moves from a culture centred around socialising to one consumed by productivity, even pubs have adapted – some now serving as remote workspaces where laptops are welcomed.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 101
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "公共游戏服务器",
+      "reason": "游戏社群缩略语"
+    },
+    {
+      "glossZh": "出版物",
+      "reason": "同形缩略语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

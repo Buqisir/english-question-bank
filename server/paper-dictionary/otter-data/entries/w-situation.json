@@ -1,0 +1,129 @@
+{
+  "entryId": "w:situation",
+  "headword": "situation",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌsɪtʃuˈeɪʃn/",
+    "us": "/ˌsɪtʃuˈeɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:situation#p-main",
+      "ipa": {
+        "uk": "/ˌsɪtʃuˈeɪʃn/",
+        "us": "/ˌsɪtʃuˈeɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "situations",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 16,
+    "mock": 199
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:situation#s1",
+      "pos": "n.",
+      "glossZh": "情形",
+      "pronunciationId": "w:situation#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 16,
+        "mock": 199
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:situation#e-07fb27a5f8b018d2",
+          "text": "Simply saying thank you doesn’t seem enough in certain situations.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:situation#e-9de8cf8c5f8ee994",
+          "text": "However, another way the cats are able to distinguish between situations is by looking for familiar smells.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:situation#e-2ed8077edf18d4a0",
+          "text": "In the cafe, the couple bought Emily a hot chocolate and listened patiently as she explained her desperate situation: she was about a hundred miles from her destination, her car was completely stuck, and her entire holiday plan could be ruined.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 116
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "坐落位置、职位、电影院、穿搭",
+      "reason": "旧式、地理或地区用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,135 @@
+{
+  "entryId": "w:noon",
+  "headword": "noon",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/nuːn/",
+    "us": "/nuːn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:noon#p-main",
+      "ipa": {
+        "uk": "/nuːn/",
+        "us": "/nuːn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "noons",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Noons",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:noon#s1",
+      "pos": "n.",
+      "glossZh": "正午；中午",
+      "pronunciationId": "w:noon#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 19
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:noon#e-a9b31af8d4da4eb1",
+          "text": "Campers have a three-hour morning class engaging with a morning theme (9am to 12 noon) and a one-hour lunch break, followed by another three-hour class engaging with an afternoon theme (pm to 4pm).",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 85
+          }
+        },
+        {
+          "exampleId": "w:noon#e-cb062b40e00a9fe6",
+          "text": "What does the man want to do before noon?",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:noon#e-feb8a303e48e869c",
+          "text": "The next day, around noon, the couple showed up with a picnic basket full of __50__.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 25
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "全盛时期；姓氏",
+      "reason": "少见比喻或同形专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

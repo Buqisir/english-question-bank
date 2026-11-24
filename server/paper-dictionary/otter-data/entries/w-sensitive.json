@@ -1,0 +1,333 @@
+{
+  "entryId": "w:sensitive",
+  "headword": "sensitive",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsensətɪv/",
+    "us": "/ˈsensətɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:sensitive#p-main",
+      "ipa": {
+        "uk": "/ˈsensətɪv/",
+        "us": "/ˈsensətɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more sensitive",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most sensitive",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 43
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 37
+  },
+  "senses": [
+    {
+      "senseId": "w:sensitive#s1",
+      "pos": "adj.",
+      "glossZh": "对刺激敏感的",
+      "pronunciationId": "w:sensitive#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sensitive#e-15ab419ce1d0f52c",
+          "text": "She is sensitive to heat.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2021-national-a:25",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:sensitive#e-162e2bebbef6eecd",
+          "text": "Lab-raised zebra finches are more sensitive to light changes.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:28",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:sensitive#e-f893216a08d84737",
+          "text": "It is true that plastic-based fabrics can be less breathable and may feel rough for people with sensitive skin.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-04-second",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-2026-04-second:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-2026-04-second:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 105
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sensitive#s2",
+      "pos": "adj.",
+      "glossZh": "体察他人处境的",
+      "pronunciationId": "w:sensitive#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sensitive#e-a8b851e0389b1df2",
+          "text": "The friend who is remaining needs to be sensitive to all the additional time demands placed on the friend who has moved.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sensitive#s3",
+      "pos": "adj.",
+      "glossZh": "易受干扰的",
+      "pronunciationId": "w:sensitive#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sensitive#e-e5e888fe2217dd13",
+          "text": "Habitat Restoration Team volunteers play a vital role in restoring sensitive resources and protecting endangered species across the ridges and valleys.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:sensitive#e-7acca7866cb9f520",
+          "text": "Scientists and companies are discussing wider spacing between panels and avoiding construction during waterbirds’ sensitive periods, such as migration and nesting.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 114,
+            "end": 123
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sensitive#s4",
+      "pos": "adj.",
+      "glossZh": "容易感觉受伤的",
+      "pronunciationId": "w:sensitive#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sensitive#e-9fec4fce56f4166f",
+          "text": "Most people move on quickly, but for those who are sensitive to rejection, these small moments feel heavy.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:sensitive#e-bce5ad140e23558f",
+          "text": "They are even more sensitive to the effects of negative information, making it more likely that they will adopt a pessimistic habit of mind.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sensitive#s5",
+      "pos": "adj.",
+      "glossZh": "灵敏的",
+      "pronunciationId": "w:sensitive#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sensitive#e-25cc0f509f7160b0",
+          "text": "The next goal of the research team is to design various sensitive membrane materials for monitoring more physiological information.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sensitive#s6",
+      "pos": "adj.",
+      "glossZh": "需要谨慎处理的",
+      "pronunciationId": "w:sensitive#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:sensitive#s7",
+      "pos": "adj.",
+      "glossZh": "机密的",
+      "pronunciationId": "w:sensitive#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "超常感知者",
+      "reason": "罕见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

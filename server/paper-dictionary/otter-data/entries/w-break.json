@@ -1,0 +1,887 @@
+{
+  "entryId": "w:break",
+  "headword": "break",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/breɪk/",
+    "us": "/breɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:break#p-main",
+      "ipa": {
+        "uk": "/breɪk/",
+        "us": "/breɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "breaks",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "breaking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "broke",
+      "tags": [
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "broken",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "breaked",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 41,
+    "mock": 505
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 495
+  },
+  "senses": [
+    {
+      "senseId": "w:break#s1",
+      "pos": "v.",
+      "glossZh": "破裂；打破；折断；使损坏",
+      "pronunciationId": "w:break#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-c7148a70c65b9517",
+          "text": "I started taking the wheel off, and then, if you can believe it, I broke his tire iron.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:break#e-6fd09d5dca5ea4f9",
+          "text": "Jeff broke two eggs into a plate and added in some milk.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:break#e-3158dec8e0779015",
+          "text": "The broken window glass was the likely answer.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s2",
+      "pos": "n.",
+      "glossZh": "短暂休息；间歇；假期",
+      "pronunciationId": "w:break#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-3508f006913f7c34",
+          "text": "It happened that the plant downtown needed eight kids for __43__ help during our spring break, for which I had no __44__ beyond listening to my favorite records.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-i:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:break#e-c8b59fc830c2adb0",
+          "text": "Back downtown during a workday, they can enjoy a more domestic form of this interaction by walking along a fountain on their lunch break.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 131,
+            "end": 136
+          }
+        },
+        {
+          "exampleId": "w:break#e-bef556669894a07a",
+          "text": "Need a break between classes or just a quick pick-me-up in the morning?",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s3",
+      "pos": "v.",
+      "glossZh": "打断；终止；打破（习惯等）",
+      "pronunciationId": "w:break#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-b5d4bc6c83834723",
+          "text": "His job is to sit beside the pianist and turn the pages of the score so the musician doesn’t have to break the flow of sound by doing it themselves.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 106
+          }
+        },
+        {
+          "exampleId": "w:break#e-daf36b568b732ecd",
+          "text": "“We see it as a chance to try to break the growing disconnect between people and nature.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:break#e-2a31971dc70f57b7",
+          "text": "Then, start denying yourself the right in order to break the habit.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-zhejiang-jan:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s4",
+      "pos": "v.",
+      "glossZh": "打破（纪录）；超过",
+      "pronunciationId": "w:break#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-ce0e94172bd145c5",
+          "text": "He broke a world record.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s5",
+      "pos": "adj.",
+      "glossZh": "破产；身无分文",
+      "pronunciationId": "w:break#p-main",
+      "note": "只用在 broke 这一形态。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-ab58e0e050cb7bb6",
+          "text": "The firm went broke and left her looking for a new job.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s6",
+      "pos": "v.",
+      "glossZh": "（使）心碎；（使）垮掉",
+      "pronunciationId": "w:break#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-c3f34548f0c43b7b",
+          "text": "\"Some nights my heart was breaking to have to pick between my kids and studying for exams or papers,\" she says.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:break#e-c1aaf3f957c4c669",
+          "text": "He left after seven months, physically broken and having lost his mind.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s7",
+      "pos": "短语",
+      "glossZh": "消除（阻碍）；分解；拆解",
+      "pronunciationId": "w:break#p-main",
+      "note": "break down 或 break apart",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-db197dd1334a3af2",
+          "text": "Love breaks down barriers.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2020-i:27",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:break#e-adbbf453edecbea1",
+          "text": "If it’s short stories, Peter Mountford breaks down six techniques you can try to see which one helps you stick the landing.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:break#e-be302b4fd3088a57",
+          "text": "Volunteering can be the first step in breaking down prejudice.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-ii:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s8",
+      "pos": "短语",
+      "glossZh": "出故障；失灵",
+      "pronunciationId": "w:break#p-main",
+      "note": "break down",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-e4d14059ecfc2af4",
+          "text": "I was halfway across Indiana headed home to Kentucky when my car broke down.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s9",
+      "pos": "短语",
+      "glossZh": "结束；使解散；分手",
+      "pronunciationId": "w:break#p-main",
+      "note": "break up",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-a9715660b27e6330",
+          "text": "She had passed a baseball field, breaking up the game and flattening the umpire（裁判）in passing.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:break#e-eb777962a7c1ad32",
+          "text": "“And even if you don’t understand the __53__ for their pain or maybe it seems __54__—like girls breaking up with you – there are sometimes deeper things happening that you don’t understand,” Eby said.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 104
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s10",
+      "pos": "短语",
+      "glossZh": "突然爆发；突然开始",
+      "pronunciationId": "w:break#p-main",
+      "note": "break out",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-07ba7df9d56a7827",
+          "text": "At Cheverton Lodge Care Home, festive jingling breaks out from 17-year-old Ted Mayer’s speaker and he launches into his Christmas set.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:break#e-293b75a3edbee7a1",
+          "text": "monsters from all stores because of the risk of fights breaking out between customers.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:grammar-fill:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 63
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s11",
+      "pos": "短语",
+      "glossZh": "突然开始做某事；闯入",
+      "pronunciationId": "w:break#p-main",
+      "note": "break into",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-005d342d893a84a7",
+          "text": "Paragraph 1: An elderly aunt broke into warm applause.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s12",
+      "pos": "短语",
+      "glossZh": "逃脱；挣脱",
+      "pronunciationId": "w:break#p-main",
+      "note": "break free",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-ed030618c851a835",
+          "text": "Despite their loving intentions, Xiao Xin longs to find the courage to break free from fear.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 76
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s13",
+      "pos": "短语",
+      "glossZh": "冲破；突破",
+      "pronunciationId": "w:break#p-main",
+      "note": "break through",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-d31ea674367cec95",
+          "text": "In a world where people are __52__ marketed to, it is rare to find something that truly breaks through.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:cloze",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:cloze:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 94
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s14",
+      "pos": "v.",
+      "glossZh": "违反（规则、法律等）",
+      "pronunciationId": "w:break#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-50500dbecea6e59c",
+          "text": "He is to be __42__ for these exercises, but what really delights him is that this money will fund his __43__ in Break The Rules Day.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 112,
+            "end": 117
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s15",
+      "pos": "v.",
+      "glossZh": "透露；告知（消息）",
+      "pronunciationId": "w:break#p-main",
+      "note": "break the news",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-548b00119704b6ea",
+          "text": "But then, in the afternoon, Mr. Tian, our dearest Chinese teacher, ‘broke the news’ to us in his typically soft-spoken voice with his eyes sparkling with excitement and anticipation.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s16",
+      "pos": "n.",
+      "glossZh": "转机；机会",
+      "pronunciationId": "w:break#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-e9011acb6a1a7e61",
+          "text": "“I understand, from an environmental standpoint, that they’re wasteful, and I understand why producers, cost-wise and for other reasons, don’t want them,” said Julie Benko, a former understudy who caught a break and made it big.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 206,
+            "end": 211
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s17",
+      "pos": "v.",
+      "glossZh": "停止运转；坏掉",
+      "pronunciationId": "w:break#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:break#e-8a87f12d3583706f",
+          "text": "When something breaks today, many people simply replace it.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:break#s18",
+      "pos": "v.",
+      "glossZh": "（天）破晓",
+      "pronunciationId": "w:break#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "节目断点、汇价骤跌、网球破发、台球开球、旧式马车等",
+      "reason": "行业、运动或历史专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

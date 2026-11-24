@@ -1,0 +1,122 @@
+{
+  "entryId": "w:january",
+  "headword": "January",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdʒænjuəri/",
+    "us": "/ˈdʒænjueri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:january#p-main",
+      "ipa": {
+        "uk": "/ˈdʒænjuəri/",
+        "us": "/ˈdʒænjueri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 29
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:january#s1",
+      "pos": "n.",
+      "glossZh": "一月",
+      "pronunciationId": "w:january#p-main",
+      "note": "月份名写作 January。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 29
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:january#e-9c492ee25bc4c83b",
+          "text": "When the tiny creature arrived on January 31, she became the 40th black rhino to be born at the reserve.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:january#e-de9335216f5fe327",
+          "text": "When I was 9, we packed up our home in Los Angeles and arrived at Heathrow, London on a gray January morning.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:january#e-d238d31f6a658f3b",
+          "text": "Closed: 24 — 26 December and 1 January.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 38
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "人名",
+      "reason": "专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

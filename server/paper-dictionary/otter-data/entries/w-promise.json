@@ -1,0 +1,395 @@
+{
+  "entryId": "w:promise",
+  "headword": "promise",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈprɒmɪs/",
+    "us": "/ˈprɑːmɪs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:promise#p-main",
+      "ipa": {
+        "uk": "/ˈprɒmɪs/",
+        "us": "/ˈprɑːmɪs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "promises",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "promised",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "promising",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 24,
+    "mock": 234
+  },
+  "unassignedCounts": {
+    "gaokao": 11,
+    "mock": 232
+  },
+  "senses": [
+    {
+      "senseId": "w:promise#s1",
+      "pos": "n.",
+      "glossZh": "承诺",
+      "pronunciationId": "w:promise#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:promise#e-807b128a3c65a411",
+          "text": "Stick to a promise.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2022-national-a:28",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:promise#e-fea79711478550f2",
+          "text": "When he wasn’t doing all that, Jim was running across a checkerboard of green lawns（草坪） to ensure the local postal service did not fall short of its daily promise.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 155,
+            "end": 162
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:promise#s2",
+      "pos": "n.",
+      "glossZh": "有望出现的好事",
+      "pronunciationId": "w:promise#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:promise#e-a4921feb569a45ed",
+          "text": "They represent the promise of spring and a renewal of life.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:grammar-fill",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:grammar-fill:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:promise#e-199f87bb25419592",
+          "text": "Other cattlemen see more promise in robots.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:promise#e-10caf0489d059b73",
+          "text": "Some bycatch prevention methods have already shown promise in field trials.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:promise#s3",
+      "pos": "v.",
+      "glossZh": "答应",
+      "pronunciationId": "w:promise#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:promise#e-d0be546d92bcb994",
+          "text": "I promise not to let it go to my head.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:promise#e-b9d72f6fef02c20b",
+          "text": "I promised to take care of Tiffy and __52__ them as soon as we got to Kansas City.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:promise#e-bc1d9d3ee3240d44",
+          "text": "Paragraph 2: Four days later, when I was back in Vienna, I called Gunter as promised.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 84
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:promise#s4",
+      "pos": "v.",
+      "glossZh": "有望带来",
+      "pronunciationId": "w:promise#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:promise#e-05ecd62ab12a9a38",
+          "text": "With environmentalist Eanna Lamhna as the guide, this walk promises to be an informative tour.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:promise#e-30d3d33124799b82",
+          "text": "If you’re willing to drive a little further, the Ritz-Carlton Los Angeles promises luxurious rooms and extensive leisure facilities – perfect for turning a game day into a great weekend escape.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:promise#e-88b4429719eebaf9",
+          "text": "Looking ahead, the rapid advancement of AI promises both exciting possibilities and ethical (伦理的) challenges.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:promise#s5",
+      "pos": "adj.",
+      "glossZh": "有前途的",
+      "pronunciationId": "w:promise#p-main",
+      "note": "用 promising。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:promise#e-be66939530b91951",
+          "text": "Look for promising soccer players.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:promise#e-eb5e9c96d7e62b71",
+          "text": "It partners with community groups to engage promising talent, solidify their interest in the water field, raise their awareness of career opportunities, and enhance their long-term career prospects.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 53
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "异步结果占位对象",
+      "reason": "编程术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,143 @@
+{
+  "entryId": "w:shark",
+  "headword": "shark",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ʃɑːk/",
+    "us": "/ʃɑːrk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:shark#p-main",
+      "ipa": {
+        "uk": "/ʃɑːk/",
+        "us": "/ʃɑːrk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "sharks",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "senses": [
+    {
+      "senseId": "w:shark#s1",
+      "pos": "n.",
+      "glossZh": "鲨鱼",
+      "pronunciationId": "w:shark#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shark#e-a7e0b301474b49eb",
+          "text": "Blue Corner’s nutrient-rich waters attract small reef fish, and then larger ones like tuna and sharks.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:shark#e-5e04700a810358b9",
+          "text": "Mikaela had barely held it out before Elvis snatched it away as quickly as a shark grabbing its food.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2026-05-senior-three-second-semester-mock-exam:writing-continuation:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:shark#e-b128ddd47b00b47f",
+          "text": "Palau also has other reefs and sandy channels, with marine life including sharks and manta rays.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-a:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shark#s2",
+      "pos": "n.",
+      "glossZh": "盘剥他人的人",
+      "pronunciationId": "w:shark#p-main",
+      "note": "如 loan shark。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "一种夜蛾",
+      "reason": "昆虫名称用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

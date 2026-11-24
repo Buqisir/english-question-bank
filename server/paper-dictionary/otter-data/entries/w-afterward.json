@@ -1,0 +1,119 @@
+{
+  "entryId": "w:afterward",
+  "headword": "afterward",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɑːftəwəd/",
+    "us": "/ˈæftərwərd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:afterward#p-main",
+      "ipa": {
+        "uk": "/ˈɑːftəwəd/",
+        "us": "/ˈæftərwərd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:afterward#s1",
+      "pos": "adv.",
+      "glossZh": "后来；随后",
+      "pronunciationId": "w:afterward#p-main",
+      "note": "afterwards 在英式英语里更常见。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 19
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:afterward#e-739ab3698d4ccc33",
+          "text": "Allow them to cool completely afterward.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-anhui-hefei-2026-02-first:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:afterward#e-83fe34fcd2c2c3c2",
+          "text": "Afterward, she began showing up less frequently and eventually stopped coming altogether.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b:1",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:afterward#e-387a89b2226184cf",
+          "text": "Afterward, they reported what was on their minds.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

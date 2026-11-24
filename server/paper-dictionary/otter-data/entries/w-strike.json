@@ -1,0 +1,585 @@
+{
+  "entryId": "w:strike",
+  "headword": "strike",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/straɪk/",
+    "us": "/straɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:strike#p-main",
+      "ipa": {
+        "uk": "/straɪk/",
+        "us": "/straɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "strikes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "strake",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    },
+    {
+      "form": "stricken",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "striking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "stroke",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    },
+    {
+      "form": "struck",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 146
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 138
+  },
+  "senses": [
+    {
+      "senseId": "w:strike#s1",
+      "pos": "v.",
+      "glossZh": "撞击",
+      "pronunciationId": "w:strike#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:strike#e-0bfc6639fc3e51b4",
+          "text": "When photons strike a PV cell, they may reflect off the cell, pass through the cell, or be absorbed by the semiconductor material.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:strike#s2",
+      "pos": "v.",
+      "glossZh": "突然袭来",
+      "pronunciationId": "w:strike#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:strike#e-e7bdef63c56250c4",
+          "text": "Then, the wind began to howl, and a terrible storm struck, bringing with it blinding snow.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:strike#e-2f76106c518e1e05",
+          "text": "The gout（痛风）struck all of a sudden, but I took some medicine and it went away.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:strike#s3",
+      "pos": "v.",
+      "glossZh": "使留下深刻印象",
+      "pronunciationId": "w:strike#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:strike#e-fd3dcbe5626947e3",
+          "text": "I was struck speechless – he was __50__.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:strike#e-f2b08c7cd450039b",
+          "text": "Paragraph 1: Struck by the doctor’s warning, I knew I had to make a change.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:strike#e-02be90dbb9837660",
+          "text": "When Lila Martinez moved to Maple Street, she was struck by a marked contrast.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:strike#s4",
+      "pos": "短语",
+      "glossZh": "给某人某种印象",
+      "pronunciationId": "w:strike#p-main",
+      "note": "strike somebody as。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:strike#e-01ce5e2e5c5d1486",
+          "text": "His comment struck me as strange.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:strike#e-e5b2437562f04d73",
+          "text": "They could have written pages on the necessity of computers, but writing, in and of itself, simply didn’t strike them as important.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 106,
+            "end": 112
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:strike#s5",
+      "pos": "短语",
+      "glossZh": "达成协议",
+      "pronunciationId": "w:strike#p-main",
+      "note": "strike a deal。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:strike#e-805796c9d3f6c168",
+          "text": "The French take their 35-hour workweek seriously – so seriously that some labor unions recently struck a deal with a group of companies limiting the number of hours that independent contractors can be on call.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:strike#e-e1488c555d603c3b",
+          "text": "OpenAI has struck deals with Shopify and Etsy, an online marketplace for artisanal wares(手工制品), to allow merchants to sell their products through its chatbot in return for a fee.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:strike#s6",
+      "pos": "短语",
+      "glossZh": "令某人害怕",
+      "pronunciationId": "w:strike#p-main",
+      "note": "strike fear into somebody’s heart。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:strike#e-d67dcec4607bb27f",
+          "text": "Few things strike fear into a child’s heart like the prospect of failing.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:strike#s7",
+      "pos": "adj.",
+      "glossZh": "引人注目的",
+      "pronunciationId": "w:strike#p-main",
+      "note": "常用形式 striking。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:strike#e-a1f19bda3d82319e",
+          "text": "The researchers described “striking changes” in the geography of BMI.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:grammar-fill:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:strike#e-e1a62c853e945359",
+          "text": "Sydney’s striking architecture.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2022-national-a:32",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:strike#e-cd015d3998192731",
+          "text": "Two years later, he moved to China and soon discovered a striking contrast between the reality he witnessed and the narrative presented by certain Western media.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:strike#s8",
+      "pos": "v.",
+      "glossZh": "罢工",
+      "pronunciationId": "w:strike#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:strike#s9",
+      "pos": "n.",
+      "glossZh": "罢工",
+      "pronunciationId": "w:strike#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:strike#s10",
+      "pos": "n.",
+      "glossZh": "袭击",
+      "pronunciationId": "w:strike#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:strike#s11",
+      "pos": "v.",
+      "glossZh": "划掉",
+      "pronunciationId": "w:strike#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:strike#s12",
+      "pos": "短语",
+      "glossZh": "开始交谈",
+      "pronunciationId": "w:strike#p-main",
+      "note": "strike up a conversation。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:strike#e-881cb3bbea0e1dc0",
+          "text": "Fraser’s team of volunteers prepared the items as recollection is thought to be a powerful tool for striking up much-needed conversation in the elderly.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 108
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:strike#s13",
+      "pos": "短语",
+      "glossZh": "取得平衡",
+      "pronunciationId": "w:strike#p-main",
+      "note": "strike a balance。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:strike#e-65971a07b12636d2",
+          "text": "The HEV, striking a practical balance between these two extremes, certainly deserves a closer look.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 17
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "stroke、期权执行价和岩层走向",
+      "reason": "误配或专业义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

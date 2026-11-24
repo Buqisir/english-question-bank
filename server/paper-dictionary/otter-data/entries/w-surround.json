@@ -1,0 +1,208 @@
+{
+  "entryId": "w:surround",
+  "headword": "surround",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/səˈraʊnd/",
+    "us": "/səˈraʊnd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:surround#p-main",
+      "ipa": {
+        "uk": "/səˈraʊnd/",
+        "us": "/səˈraʊnd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "surrounds",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "surrounded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "surrounding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 36
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 34
+  },
+  "senses": [
+    {
+      "senseId": "w:surround#s1",
+      "pos": "v.",
+      "glossZh": "围绕",
+      "pronunciationId": "w:surround#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:surround#e-380b80c94f6b1dd5",
+          "text": "The hungry bear followed his nose to our camp, which was surrounded by a high wire fence.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:surround#e-9af9942cc0c64f94",
+          "text": "Instead, surround yourself with healthy choices.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-national-a:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:surround#e-8f0ab3fd40c5f742",
+          "text": "The crowd surrounded her – at a respectful distance.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:surround#s2",
+      "pos": "n.",
+      "glossZh": "外框",
+      "pronunciationId": "w:surround#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:surround#s3",
+      "pos": "短语",
+      "glossZh": "环绕声",
+      "pronunciationId": "w:surround#p-main",
+      "note": "surround sound。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:surround#e-72c3c59f7621e3df",
+          "text": "Finally, everyone wanted big screens and surround sound rather than the tiny screens in bedrooms.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:surround#e-354fc51b7fa860a7",
+          "text": "When visitors walk into the museum, the spatial sound field creates a surrounding atmosphere through multi-channel audio, providing the opportunity to get fully involved in surround sound.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 173,
+            "end": 181
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

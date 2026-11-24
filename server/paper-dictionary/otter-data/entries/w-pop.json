@@ -1,0 +1,438 @@
+{
+  "entryId": "w:pop",
+  "headword": "pop",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pɒp/",
+    "us": "/pɑːp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:pop#p-main",
+      "ipa": {
+        "uk": "/pɒp/",
+        "us": "/pɑːp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "pops",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "POPs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "PoPs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Pops",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "popped",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "popping",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 54
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 47
+  },
+  "senses": [
+    {
+      "senseId": "w:pop#s1",
+      "pos": "n.",
+      "glossZh": "流行音乐",
+      "pronunciationId": "w:pop#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pop#e-b42f3e61885b36a1",
+          "text": "It presents live entertainment, including pop, rock, folk, jazz, musicals, dance, world music, films and classical music.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pop#s2",
+      "pos": "adj.",
+      "glossZh": "流行音乐的",
+      "pronunciationId": "w:pop#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pop#e-6f8a888885ad69ed",
+          "text": "She’s a pop singer.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:pop#e-41085076e61252f9",
+          "text": "Unlike its pop star namesake, Belawncé and its fellow robot mowers aren’t beloved by all.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:pop#e-5a99f0a3dcbb72f7",
+          "text": "Two wild apes have a professor and a pop star to act as high-tech matchmakers (红娘)!",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pop#s3",
+      "pos": "n.",
+      "glossZh": "爷爷（亲昵称呼）",
+      "pronunciationId": "w:pop#p-main",
+      "note": "与 Nanna 并用时是祖父辈称呼。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pop#e-ee6e4f1f0ae941cb",
+          "text": "You write “Hi Nanna and Pop” because you are close to them.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jun:31",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pop#s4",
+      "pos": "v.",
+      "glossZh": "随手放入",
+      "pronunciationId": "w:pop#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pop#e-d55107e1f92d97bf",
+          "text": "I jumped out of the car, made a mad run for the machine, and popped my card in, only to read the message: “Out of order.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-ii:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 67
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pop#s5",
+      "pos": "v.",
+      "glossZh": "突然出现",
+      "pronunciationId": "w:pop#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pop#e-911b033e6a28c4b0",
+          "text": "Paragraph 1: As we reached the last riddle, a clue about an ancient Chinese tale suddenly popped up.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:pop#e-30264afa4d25dfa6",
+          "text": "“No,” she responded, “because I know that something will eventually pop into my head.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-b:4",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:pop#e-07504e0722f16e93",
+          "text": "Since the launch of Kentish Town – the first city farm to open its doors in October1972 – such farms have popped up across the UK, serving as vital habitats for nature.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 112
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pop#s6",
+      "pos": "v.",
+      "glossZh": "顺路短暂拜访",
+      "pronunciationId": "w:pop#p-main",
+      "note": "pop in。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pop#e-bd9b5afa1a28384d",
+          "text": "However, you can ask the staff when the delivery day is and then pop in that day to collect some cardboard boxes before they are sent to recycling.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:seven-choices:8",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pop#s7",
+      "pos": "v.",
+      "glossZh": "啪地弹开",
+      "pronunciationId": "w:pop#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pop#e-94f40a24029bb4a5",
+          "text": "As the lid popped open, a pile of yellowed letters, a cracked coarse porcelain bowl（粗瓷碗）, and an unremarkable old fountain pen fell out.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pop#s8",
+      "pos": "n.",
+      "glossZh": "砰的一声",
+      "pronunciationId": "w:pop#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:pop#s9",
+      "pos": "n.",
+      "glossZh": "汽水",
+      "pronunciationId": "w:pop#p-main",
+      "note": "北美部分地区用语。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "栈顶移除操作",
+      "reason": "计算机术语"
+    },
+    {
+      "glossZh": "Pop Mart",
+      "reason": "品牌专名"
+    },
+    {
+      "glossZh": "邮局协议、降水概率",
+      "reason": "大写专业缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

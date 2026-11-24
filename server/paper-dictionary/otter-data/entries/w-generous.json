@@ -1,0 +1,188 @@
+{
+  "entryId": "w:generous",
+  "headword": "generous",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdʒenərəs/",
+    "us": "/ˈdʒenərəs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:generous#p-main",
+      "ipa": {
+        "uk": "/ˈdʒenərəs/",
+        "us": "/ˈdʒenərəs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more generous",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most generous",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 33
+  },
+  "senses": [
+    {
+      "senseId": "w:generous#s1",
+      "pos": "adj.",
+      "glossZh": "慷慨的",
+      "pronunciationId": "w:generous#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:generous#e-16fd5e6862f4524e",
+          "text": "With the support of a generous Floridian couple, I stepped foot into Tallahassee Community College.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:generous#e-e37621b79b20429b",
+          "text": "Instead of telling them Santa is real, I told them it most likely has its origins in St. Nicholas, a man who was kind and generous to children in need.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 122,
+            "end": 130
+          }
+        },
+        {
+          "exampleId": "w:generous#e-ada5999fdb3359cf",
+          "text": "Over decades, Arrillaga’s generous donations and hands-on efforts reshaped Stanford’s campus.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2",
+            "paperTitle": "2025-2026学年德州市“优高联盟”高三上学期期中诊断性测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:generous#s2",
+      "pos": "adj.",
+      "glossZh": "丰厚的",
+      "pronunciationId": "w:generous#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:generous#e-1ea5e9b6d6243f06",
+          "text": "It provides generous salaries.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:generous#e-b014c74844a80f8c",
+          "text": "Representing a large development company, she had made a generous offer to buy the building.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 65
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "出身高贵的",
+      "reason": "旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

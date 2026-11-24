@@ -1,0 +1,129 @@
+{
+  "entryId": "w:wrist",
+  "headword": "wrist",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪst/",
+    "us": "/rɪst/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:wrist#p-main",
+      "ipa": {
+        "uk": "/rɪst/",
+        "us": "/rɪst/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "wrists",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:wrist#s1",
+      "pos": "n.",
+      "glossZh": "手腕",
+      "pronunciationId": "w:wrist#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 18
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wrist#e-5afa4fa49e4619bf",
+          "text": "Then, they wore movement trackers on their wrist for a week to measure their exercise and sleeping habits, and their mortality (死亡率) and health records were tracked over a subsequent follow-up period of eight years.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:wrist#e-42951ba5f56f2d9b",
+          "text": "Seven years ago, college senior Joey Romano broke his wrist skateboarding near the University of Texas at Austin.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:wrist#e-edb820ea25c57dbc",
+          "text": "Lily gripped my wrist as I positioned the branches.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 21
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "轴颈、击腕射",
+      "reason": "机械或体育术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

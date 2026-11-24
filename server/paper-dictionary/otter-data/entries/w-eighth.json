@@ -1,0 +1,161 @@
+{
+  "entryId": "w:eighth",
+  "headword": "eighth",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/eɪtθ/",
+    "us": "/eɪtθ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:eighth#p-main",
+      "ipa": {
+        "uk": "/eɪtθ/",
+        "us": "/eɪtθ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "eighths",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "senses": [
+    {
+      "senseId": "w:eighth#s1",
+      "pos": "num.",
+      "glossZh": "第八",
+      "pronunciationId": "w:eighth#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:eighth#e-72103ce876406070",
+          "text": "My dad, George, only had an eighth grade education.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:eighth#e-2a529f76113c3677",
+          "text": "The summer before my eighth grade I was one of a group of boys that a neighboring farmer hired to work in his field.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:eighth#e-551667a115ab8c6f",
+          "text": "Then his eighth birthday arrived.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:eighth#s2",
+      "pos": "n.",
+      "glossZh": "八分之一",
+      "pronunciationId": "w:eighth#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:eighth#e-2c46fe8852e9655c",
+          "text": "The piece, which Clement says is dark brown, is only about an eighth of the size of a postage stamp.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 68
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "毒品计量用语、分成八等份（动词）",
+      "reason": "俚语或罕见词性"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,237 @@
+{
+  "entryId": "w:person",
+  "headword": "person",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpɜːsn/",
+    "us": "/ˈpɜːrsn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:person#p-main",
+      "ipa": {
+        "uk": "/ˈpɜːsn/",
+        "us": "/ˈpɜːrsn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "people",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "persons",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 69,
+    "mock": 312
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 312
+  },
+  "senses": [
+    {
+      "senseId": "w:person#s1",
+      "pos": "n.",
+      "glossZh": "人；个人",
+      "pronunciationId": "w:person#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 58,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:person#e-e8c711d7ec6f622c",
+          "text": "3 Grand Prizes: Trip to Washington, D.C. for each of three winners, a parent and one other person of the winner’s choice.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:person#e-87e69c95515944c5",
+          "text": "Make all customers stand in one long, snaking line – called a serpentine line – and serve each person at the front with the next available register.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:person#e-cbcf4dab18fd09b9",
+          "text": "Is comprehension the same whether a person reads a text onscreen or on paper?",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:person#s2",
+      "pos": "短语",
+      "glossZh": "亲自；线下",
+      "pronunciationId": "w:person#p-main",
+      "note": "in person。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:person#e-8c37f333c1e89bf5",
+          "text": "Talk to Sara in person.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:person#e-84f37a4fc9eeed9e",
+          "text": "The tip that comes up most often is simple: build online courses into your weekly schedule, just like what you would do with in person courses.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 128,
+            "end": 134
+          }
+        },
+        {
+          "exampleId": "w:person#e-2e8ea6df45b06784",
+          "text": "Professor Alex Davidson teaches the same course in person and online.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:person#s3",
+      "pos": "n.",
+      "glossZh": "人称",
+      "pronunciationId": "w:person#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:person#e-6bea7abfac30810c",
+          "text": "Artist Biography: Please provide a short introduction (maximum 50 words) to the artist written in the third person.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 114
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

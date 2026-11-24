@@ -1,0 +1,263 @@
+{
+  "entryId": "w:fool",
+  "headword": "fool",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fuːl/",
+    "us": "/fuːl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fool#p-main",
+      "ipa": {
+        "uk": "/fuːl/",
+        "us": "/fuːl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "fools",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "fooled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "fooling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "senses": [
+    {
+      "senseId": "w:fool#s1",
+      "pos": "n.",
+      "glossZh": "傻瓜",
+      "pronunciationId": "w:fool#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fool#e-e2b2c13c02e3335d",
+          "text": "Negative thoughts crowded my mind, echoing with every labored breath: You’re too fat, too unfit – a fool for even trying this.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:fool#e-edb2527a9c8e56e0",
+          "text": "“I’m a person who needs a __53__, and I thought if God isn’t giving me one right now, I’m a fool,” says Jessica.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:fool#e-ab1a0b03c1e5e762",
+          "text": "However, the most recognizable character of all remains unnamed – the lucky fool who happens to be in the right place at the right time – he embodies the “survival of the least fit.” Such individuals attract devoted followers who believe in their mentor's(导师) insights and methods.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability",
+            "paperTitle": "杭州第二中学2025年10月高三年级适应性检测英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fool#s2",
+      "pos": "v.",
+      "glossZh": "欺骗",
+      "pronunciationId": "w:fool#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fool#e-20ef9cab36ed03e4",
+          "text": "Conmen(骗子) fool the emperor into believing they have made him a fabulous suit that the unworthy will be unable to see.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:fool#e-b0c8c12de57977dc",
+          "text": "Philosopher Jonathan Birch has vividly outlined the two sides of this divide: “One side will accuse the other of cruelly exploiting AI, while the other will dismiss the first group as ‘fooling themselves into believing machines have real consciousness’.” His concern is not unfounded.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 185,
+            "end": 192
+          }
+        },
+        {
+          "exampleId": "w:fool#e-e4a5ca411b8cf428",
+          "text": "She murmured, “I’m fooling myself.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:cloze:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fool#s3",
+      "pos": "n.",
+      "glossZh": "宫廷小丑",
+      "pronunciationId": "w:fool#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fool#s4",
+      "pos": "短语",
+      "glossZh": "使自己出丑",
+      "pronunciationId": "w:fool#p-main",
+      "note": "make a fool of oneself。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fool#e-129f10c1f082cbda",
+          "text": "Whispers spread – they laughed at him, betting he’d __48__ in mismatched clothes to make a fool of himself.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 95
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "水果奶油甜点",
+      "reason": "地域性食品名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

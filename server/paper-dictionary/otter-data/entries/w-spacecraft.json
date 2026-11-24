@@ -1,0 +1,117 @@
+{
+  "entryId": "w:spacecraft",
+  "headword": "spacecraft",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈspeɪskrɑːft/",
+    "us": "/ˈspeɪskræft/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:spacecraft#p-main",
+      "ipa": {
+        "uk": "/ˈspeɪskrɑːft/",
+        "us": "/ˈspeɪskræft/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:spacecraft#s1",
+      "pos": "n.",
+      "glossZh": "航天器",
+      "pronunciationId": "w:spacecraft#p-main",
+      "note": "复数与单数同形。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:spacecraft#e-ccb2b7ea8fdcc0f7",
+          "text": "The Blueprint Problem inspired a lot of early space programmes in the 1950s, which prioritised putting humans into space rather than exploring it remotely with robotic spacecraft.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 168,
+            "end": 178
+          }
+        },
+        {
+          "exampleId": "w:spacecraft#e-bd4e844bea99172f",
+          "text": "After launch, the crew stayed one day in high-Earth orbit to inspect spacecraft systems.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:spacecraft#e-fea2fbdb65298bd4",
+          "text": "Finally, it landed on the Pacific Ocean just as Apollo spacecraft did.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-a:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 65
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

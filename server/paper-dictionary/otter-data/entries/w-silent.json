@@ -1,0 +1,312 @@
+{
+  "entryId": "w:silent",
+  "headword": "silent",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsaɪlənt/",
+    "us": "/ˈsaɪlənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:silent#p-main",
+      "ipa": {
+        "uk": "/ˈsaɪlənt/",
+        "us": "/ˈsaɪlənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more silent",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most silent",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "silenter",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "silentest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 100
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 93
+  },
+  "senses": [
+    {
+      "senseId": "w:silent#s1",
+      "pos": "adj.",
+      "glossZh": "不出声的",
+      "pronunciationId": "w:silent#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:silent#e-435d24be2f66781b",
+          "text": "Silent onstage communication is key, and each pianist has their own style of “nodding” to indicate a page turn which they need to practise with their page turner.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:silent#e-bdd2d7245f41f433",
+          "text": "By then, the bird had already fallen silent, and Corinne stopped the recording.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:silent#e-de340020e65deb7c",
+          "text": "I have been grateful to Mr. Dalton, for I could __55__ have remained silent rather than challenging his authority or speaking up when I think I’m right.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:cloze",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:cloze:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:silent#s2",
+      "pos": "adj.",
+      "glossZh": "寂静无声的",
+      "pronunciationId": "w:silent#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:silent#e-ecd911fe48562a10",
+          "text": "The lively room fell silent.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:writing-continuation:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:silent#e-d90496f1ffdc1117",
+          "text": "It is silent to the human ear.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-guangdong-shantou-2026-03-first:30",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:silent#s3",
+      "pos": "adj.",
+      "glossZh": "不露声色的",
+      "pronunciationId": "w:silent#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:silent#e-598409c18e8b141e",
+          "text": "It now serves as a silent helper in offices, an uncredited partner in classrooms, and even “ears” in exam rooms.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:silent#e-13ba6a2a4d18d2df",
+          "text": "University of California Researcher Gloria Mark tracked 2,000 American office workers and students in her two-decade study on attention with silent screen recorders and heart-rate belts.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 141,
+            "end": 147
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:silent#s4",
+      "pos": "adj.",
+      "glossZh": "（电影）无声的",
+      "pronunciationId": "w:silent#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:silent#e-b9f0cab320f5ebd9",
+          "text": "To compare silent films and sound films.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:27",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:silent#s5",
+      "pos": "adj.",
+      "glossZh": "（字母）不发音的",
+      "pronunciationId": "w:silent#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:silent#s6",
+      "pos": "adj.",
+      "glossZh": "无症状的",
+      "pronunciationId": "w:silent#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "锂中毒综合征缩写；沉默的一代成员",
+      "reason": "医学缩写或特定世代名称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

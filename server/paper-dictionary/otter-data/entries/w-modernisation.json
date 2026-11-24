@@ -1,0 +1,127 @@
+{
+  "entryId": "w:modernisation",
+  "headword": "modernisation",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [
+    "modernization"
+  ],
+  "ipa": {
+    "uk": "/ˌmɒdənaɪˈzeɪʃn/",
+    "us": "/ˌmɑːdərnəˈzeɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:modernisation#p-main",
+      "ipa": {
+        "uk": "/ˌmɒdənaɪˈzeɪʃn/",
+        "us": "/ˌmɑːdərnəˈzeɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "modernizations",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:modernisation#s1",
+      "pos": "n.",
+      "glossZh": "现代化",
+      "pronunciationId": "w:modernisation#p-main",
+      "note": "美式拼写 modernization。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:modernisation#e-67aef3baf1c18794",
+          "text": "Russia’s public health care service has been in serious need of modernization.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:modernisation#e-d5d447d978d3693f",
+          "text": "An Artist’s Modernization of Paper-cutting",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:27",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:modernisation#e-c9fde637cb6ff063",
+          "text": "Beyond the language and culture he had long studied, he experienced firsthand the realities of Chinese-style modernization: efficient high-speed railways, mobile payment systems, and AI-enabled services.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 122
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

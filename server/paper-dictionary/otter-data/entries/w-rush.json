@@ -1,0 +1,486 @@
+{
+  "entryId": "w:rush",
+  "headword": "rush",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rʌʃ/",
+    "us": "/rʌʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:rush#p-main",
+      "ipa": {
+        "uk": "/rʌʃ/",
+        "us": "/rʌʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "rushes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "rushed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "rushing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 16,
+    "mock": 150
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 143
+  },
+  "senses": [
+    {
+      "senseId": "w:rush#s1",
+      "pos": "v.",
+      "glossZh": "匆匆赶去",
+      "pronunciationId": "w:rush#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rush#e-d4dd3a919a19064c",
+          "text": "Grant rushed to a side __44__ and ran up the stairs.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-ii:cloze:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:rush#e-dbfc4cab6437d6d3",
+          "text": "They rushed to the window, 30 or 40 birds all trying to __53__ at the same time, and pepperoni – everywhere.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:rush#e-4ec5a43616d1a7be",
+          "text": "Describing her alarm at its proposed replacement with an expressway, Jane Jacobs called on her mayor（市长）to champion “New York as a decent place to live, and not just rush through.” Similar campaigns occurred in Australia in the late 1960s and 1970s as well.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 166,
+            "end": 170
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rush#s2",
+      "pos": "v.",
+      "glossZh": "迅速送往",
+      "pronunciationId": "w:rush#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rush#e-d8d1dc029ed108f2",
+          "text": "So two by two,I read library books as fast as I could go: rushing them home in the basket of my bicycle.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rush#s3",
+      "pos": "n.",
+      "glossZh": "匆忙",
+      "pronunciationId": "w:rush#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rush#e-be53663b93238546",
+          "text": "Shirley Fitzgerald, the city’s official historian, told me that in its rush to modernity in the 1970s, Sydney swept aside much of its past, including many of its finest buildings.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:rush#e-2f31e2e5ae11e3c4",
+          "text": "Why the Rush?",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2025-i:31",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:rush#e-f36e2750aeba7e9f",
+          "text": "Decide if you want to sell; no rush, no obligation",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-a:13",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rush#s4",
+      "pos": "短语",
+      "glossZh": "交通高峰期",
+      "pronunciationId": "w:rush#p-main",
+      "note": "rush hour。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rush#e-df579c4d8ac879db",
+          "text": "The traffic signals along Factoria Boulevard in Bellevue, Washington, generally don't flash the same length of green twice in a row, especially at rush hour.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 147,
+            "end": 151
+          }
+        },
+        {
+          "exampleId": "w:rush#e-358e54c53a6c8944",
+          "text": "• __39__ Minimize impact and maximize experience by skipping major holidays or rush hour.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:rush#e-d744ea285cd2d829",
+          "text": "It was a little after the morning rush hour.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rush#s5",
+      "pos": "v.",
+      "glossZh": "仓促做完",
+      "pronunciationId": "w:rush#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rush#e-214f92657ba18a36",
+          "text": "I rushed through caring for my chickens and pigeons.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:rush#e-8d6f702f4c86d464",
+          "text": "“I used to rush through all this,” she said softly.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:cloze:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rush#s6",
+      "pos": "v.",
+      "glossZh": "奔流",
+      "pronunciationId": "w:rush#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rush#e-f095531769f02836",
+          "text": "rushing water and debris (碎片), the two made it to the steps of a nearby train station.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rush#s7",
+      "pos": "n.",
+      "glossZh": "突然而强烈的感觉",
+      "pronunciationId": "w:rush#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rush#e-697a219649c5e986",
+          "text": "When it does, it's a real rush of satisfaction.”",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-b:4",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:rush#e-1e2bf875e1bdf444",
+          "text": "Getting outside my comfort zone now gives me a rush.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rush#s8",
+      "pos": "n.",
+      "glossZh": "争购潮",
+      "pronunciationId": "w:rush#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:rush#s9",
+      "pos": "n.",
+      "glossZh": "灯心草",
+      "pronunciationId": "w:rush#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "槌球定点击球",
+      "reason": "体育专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

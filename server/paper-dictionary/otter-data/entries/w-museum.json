@@ -1,0 +1,136 @@
+{
+  "entryId": "w:museum",
+  "headword": "museum",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/mjuˈziːəm/",
+    "us": "/mjuˈziːəm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:museum#p-main",
+      "ipa": {
+        "uk": "/mjuˈziːəm/",
+        "us": "/mjuˈziːəm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "musea",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "museums",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 66,
+    "mock": 284
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:museum#s1",
+      "pos": "n.",
+      "glossZh": "博物馆",
+      "pronunciationId": "w:museum#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 66,
+        "mock": 284
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:museum#e-318dd8f381e7eecd",
+          "text": "Many museums are lively places and they attract a lot of visitors.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:grammar-fill:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:museum#e-ccaa231db1900481",
+          "text": "The museum explores the colourful history of the town and port of Goole, with plenty of hands-on exhibits for younger visitors.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:museum#e-a7cb72c20399f89b",
+          "text": "Museums are not only places to store artworks, but also spaces for learning.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-i:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "送入博物馆收藏；逛博物馆（动词）",
+      "reason": "罕用派生用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

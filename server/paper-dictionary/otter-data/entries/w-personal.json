@@ -1,0 +1,275 @@
+{
+  "entryId": "w:personal",
+  "headword": "personal",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpɜːsənl/",
+    "us": "/ˈpɜːrsənl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:personal#p-main",
+      "ipa": {
+        "uk": "/ˈpɜːsənl/",
+        "us": "/ˈpɜːrsənl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more personal",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most personal",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 16,
+    "mock": 357
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 355
+  },
+  "senses": [
+    {
+      "senseId": "w:personal#s1",
+      "pos": "adj.",
+      "glossZh": "个人的；属于个人的",
+      "pronunciationId": "w:personal#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:personal#e-600d5294d25f13ed",
+          "text": "Suiting personal taste.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:personal#e-f24015a98ad1b862",
+          "text": "In a journal or on a piece of paper, put the heading “Personal strengths.” __37__ Are you caring?",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:personal#e-667cf5d8ad273422",
+          "text": "Often students come to the classroom believing that learning can’t be fun and that what they learn isn’t relevant to the real world – much less to their personal interests.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 153,
+            "end": 161
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:personal#s2",
+      "pos": "adj.",
+      "glossZh": "私人的；涉及隐私的",
+      "pronunciationId": "w:personal#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:personal#e-206896de4cfc1eab",
+          "text": "Personal privacy unprotected.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2021-national-b:34",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:personal#e-66e24dab19c82c69",
+          "text": "But that didn’t stop China Daily from asking me last week to share a personal story for a video project about the integration of Beijing, Tianjin and Hebei province.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:personal#e-243a44fdf5817b2f",
+          "text": "Stop the man from giving away personal information.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:personal#s3",
+      "pos": "adj.",
+      "glossZh": "专为某人服务的",
+      "pronunciationId": "w:personal#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:personal#e-2f53bac12dc6ee4e",
+          "text": "Come and work out with our qualified personal trainer, Jodie McGregor, on the grounds of the Middleton Lodge estate.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:personal#e-6fbd0983b7717b74",
+          "text": "“I’m trying to get more and more people to __49__ that there are solutions(解决办法),” said Ms. Burdeyney, a trained nurse who is still working as a personal trainer after __50__.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 145,
+            "end": 153
+          }
+        },
+        {
+          "exampleId": "w:personal#e-3c17f8dacfd85c15",
+          "text": "Chatbots offer a personal shopper for all.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

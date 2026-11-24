@@ -1,0 +1,200 @@
+{
+  "entryId": "w:procedure",
+  "headword": "procedure",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/prəˈsiːdʒə(r)/",
+    "us": "/prəˈsiːdʒər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:procedure#p-main",
+      "ipa": {
+        "uk": "/prəˈsiːdʒə(r)/",
+        "us": "/prəˈsiːdʒər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "procedures",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 30
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 26
+  },
+  "senses": [
+    {
+      "senseId": "w:procedure#s1",
+      "pos": "n.",
+      "glossZh": "程序；做事的一套步骤",
+      "pronunciationId": "w:procedure#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:procedure#e-1440e781432e3bcd",
+          "text": "In a study published in Plant Phenomics, Busch and Pereira establish a new procedure for using SLEAP to analyze plant root phenotypes – how deep and wide they grow, how massive their root systems become, and other physical qualities.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:procedure#e-2057715ddabaf43d",
+          "text": "After the final choice was recorded, the procedure was repeated until all odors had been presented five times.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:procedure#e-b1fd4a0a41e9cba5",
+          "text": "The procedure for obtaining a copyright registration is quite simple – an application is submitted with a small fee and two copies of the work.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:procedure#s2",
+      "pos": "n.",
+      "glossZh": "医疗操作",
+      "pronunciationId": "w:procedure#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:procedure#e-e241a9ffad5172b9",
+          "text": "The hospital school is free of parents, doctors, and medical procedures.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:procedure#e-6929128ff4d3ad2b",
+          "text": "The procedure involved transplanting thousands of grafts – the essential building blocks of hair growth.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 20,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-a:12",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:procedure#e-9611cdae6053bd61",
+          "text": "Traditional endoscopes, the snake-like cameras doctors put through the body during procedures, are relatively massive compared to this new invention and often severely harm delicate brain tissue.",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qilu-2026-second-joint-exam:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 93
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "无返回值的子程序",
+      "reason": "编程术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

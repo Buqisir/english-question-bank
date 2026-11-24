@@ -1,0 +1,367 @@
+{
+  "entryId": "w:copy",
+  "headword": "copy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɒpi/",
+    "us": "/ˈkɑːpi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:copy#p-main",
+      "ipa": {
+        "uk": "/ˈkɒpi/",
+        "us": "/ˈkɑːpi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "copies",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "copied",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "copying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 103
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 99
+  },
+  "senses": [
+    {
+      "senseId": "w:copy#s1",
+      "pos": "n.",
+      "glossZh": "副本；复制件；（文件原件中的）一份",
+      "pronunciationId": "w:copy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:copy#e-3d3e3d3c808e30aa",
+          "text": "The third technique is to try printing out a triple – spaced (三倍行距) copy to allow space for revision.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:copy#e-8542816a0e9b378b",
+          "text": "One of the four original copies of the Magna Carta is displayed there.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:copy#e-ab4626c1f9ae17bd",
+          "text": "Interlibrary Loan (ILL) provides teachers, students and staff with access to books that are checked out or not owned by our own libraries, as well as digitized copies of articles and book chapters from our collection.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 160,
+            "end": 166
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:copy#s2",
+      "pos": "n.",
+      "glossZh": "（书、报刊等的）一册；一份",
+      "pronunciationId": "w:copy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:copy#e-830275a025458950",
+          "text": "I was about 13 when an uncle gave me a copy of Jostein Gaarder’s Sophie’s World.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:copy#e-d8d7d94bc762abf0",
+          "text": "In addition, I have an old two-volume copy of the Shorter Oxford Dictionary, picked up a few years ago in a bookshop sale for just 99 pence.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:copy#e-665eb7ad649f4ece",
+          "text": "So when Lily showed me her most treasured book – a first-edition copy of Harry Potter and the Philosopher’s Stone passed down from her aunt – my eyes widened in amazement.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-04-second",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2026-04-second:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:copy#s3",
+      "pos": "v.",
+      "glossZh": "模仿；照着做",
+      "pronunciationId": "w:copy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:copy#e-356a1500c1d9b051",
+          "text": "Research at Ohio State University in Columbus found that a toddler’s way of saying “I like you” during play is likely to come in the form of copying a friend’s behavior.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 141,
+            "end": 148
+          }
+        },
+        {
+          "exampleId": "w:copy#e-1e1e21e59fc689e8",
+          "text": "What does it indicate when toddlers copy their playmates' behavior?",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:32",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:copy#e-0f1ac2bf7ba7604c",
+          "text": "AI can copy thousands of design styles, but it cannot make value judgments.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:copy#s4",
+      "pos": "v.",
+      "glossZh": "抄写；复印；复制",
+      "pronunciationId": "w:copy#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:copy#e-c307efba21749f6c",
+          "text": "Copying files.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:copy#e-f2628efbac2aa16d",
+          "text": "Some simply copy and paste the answers into their homework.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
+            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:copy#s5",
+      "pos": "n.",
+      "glossZh": "供刊印的文字；文案",
+      "pronunciationId": "w:copy#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:copy#s6",
+      "pos": "v.",
+      "glossZh": "抄送",
+      "pronunciationId": "w:copy#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "土地租契、特定尺寸的纸、新闻跑腿员",
+      "reason": "古旧或专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

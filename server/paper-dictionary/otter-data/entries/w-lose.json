@@ -1,0 +1,394 @@
+{
+  "entryId": "w:lose",
+  "headword": "lose",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/luːz/",
+    "us": "/luːz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:lose#p-main",
+      "ipa": {
+        "uk": "/luːz/",
+        "us": "/luːz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "loses",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "losing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "lost",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 16,
+    "mock": 151
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 146
+  },
+  "senses": [
+    {
+      "senseId": "w:lose#s1",
+      "pos": "v.",
+      "glossZh": "失去",
+      "pronunciationId": "w:lose#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lose#e-6c2e469e6c816700",
+          "text": "And they tended to lose cognitive(认知) function at a much slower rate than those with the least mentally challenging jobs.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:lose#e-d36357321021dfdb",
+          "text": "Terri, who now rents a house with friends in Wandsworth, South West London, says DIY also saves her from losing any deposit when a tenancy (租期) comes to an end.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:lose#e-dd225dcd69de92cd",
+          "text": "However, I soon found that by doing so, I might be losing something more important: the opportunity to share a small part of my cultural identity.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lose#s2",
+      "pos": "v.",
+      "glossZh": "输掉",
+      "pronunciationId": "w:lose#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lose#e-56ff6a343bc2970d",
+          "text": "Those who are on the losing side often have only their things to tell their stories.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:lose#e-1ded939dd346d332",
+          "text": "Everybody else loses.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:lose#e-140e99ddc57c8f28",
+          "text": "They considered it a shame to lose a match against boys from a rural village school, who couldn’t even speak English due to lack of staff and opportunities.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lose#s3",
+      "pos": "v.",
+      "glossZh": "减去体重",
+      "pronunciationId": "w:lose#p-main",
+      "note": "lose weight。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lose#e-ea783cb3dc04b7ae",
+          "text": "How did the woman know how to lose weight?",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:lose#e-1a4175149fa1eb44",
+          "text": "Many of the benefits of today’s weight-loss drugs seem to come not from the kilograms they help us lose, but rather from improving fat distribution and function.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:lose#e-8bb94daf62748280",
+          "text": "When someone loses weight, people notice, comment, and ask how.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lose#s4",
+      "pos": "短语",
+      "glossZh": "迷路",
+      "pronunciationId": "w:lose#p-main",
+      "note": "lose one’s way。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lose#e-261a2f6bce9c83b0",
+          "text": "Lose their way.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2021-ii:25",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lose#s5",
+      "pos": "短语",
+      "glossZh": "忽略",
+      "pronunciationId": "w:lose#p-main",
+      "note": "lose sight of。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lose#e-5e880ab7ad32d06d",
+          "text": "“I think a point that many people lose sight of is how easy it can be to fall behind schedule,” says graduate student Amanda Bindman.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lose#s6",
+      "pos": "短语",
+      "glossZh": "沉浸于",
+      "pronunciationId": "w:lose#p-main",
+      "note": "lose oneself in。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lose#e-8e9a6e98128d92cc",
+          "text": "Its car-free policy ensures a quiet environment, where the sound of flowing streams and distant cowbells allows visitors to lose themselves in this peaceful yet lively destination.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-04-second",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-2026-04-second:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-2026-04-second:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 124,
+            "end": 128
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "钟表走慢、甩掉追踪者",
+      "reason": "真题无证"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

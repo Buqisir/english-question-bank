@@ -1,0 +1,283 @@
+{
+  "entryId": "w:journey",
+  "headword": "journey",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdʒɜːni/",
+    "us": "/ˈdʒɜːrni/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:journey#p-main",
+      "ipa": {
+        "uk": "/ˈdʒɜːni/",
+        "us": "/ˈdʒɜːrni/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "journeys",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "journeyed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "journeying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 250
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 250
+  },
+  "senses": [
+    {
+      "senseId": "w:journey#s1",
+      "pos": "n.",
+      "glossZh": "旅程",
+      "pronunciationId": "w:journey#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:journey#e-31149754ac595266",
+          "text": "Our journey takes us to picturesque Berber villages and lovely beaches.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:9",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:journey#e-8a6bf22c88bd402f",
+          "text": "In March 2008, Ginni boarded a ship with 48 passengers she’d never met before, to begin the journey towards Antarctica.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:journey#e-5f69aea27208d4ac",
+          "text": "Paragraph 1: Daniel and Rachel suggested that Emily continue her journey by train.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:journey#s2",
+      "pos": "n.",
+      "glossZh": "发展历程",
+      "pronunciationId": "w:journey#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:journey#e-c72c8806b0e50d16",
+          "text": "In my everyday life, I am on an ongoing journey to figure out different ways to reduce my carbon footprint on the planet.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:journey#e-722e29c60e442a0e",
+          "text": "He documented his journey as he set about treating nature as a brand to be marketed to young people.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:journey#e-8c444dc9293e4a7a",
+          "text": "You’ll want to look back on your journey to see how far you’ve come.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:journey#s3",
+      "pos": "v.",
+      "glossZh": "旅行",
+      "pronunciationId": "w:journey#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:journey#e-b1118d77ffb8461f",
+          "text": "Journey through the beautiful countryside of Provence, France, with Prof. Ori Z. Soltes.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:journey#s4",
+      "pos": "v.",
+      "glossZh": "回溯（时间）",
+      "pronunciationId": "w:journey#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:journey#e-b473fd8bdaf05c95",
+          "text": "Journey Back in Time with Scholars",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "玻璃制作时长、长颈鹿群",
+      "reason": "罕见或专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

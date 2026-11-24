@@ -1,0 +1,601 @@
+{
+  "entryId": "w:press",
+  "headword": "press",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pres/",
+    "us": "/pres/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:press#p-main",
+      "ipa": {
+        "uk": "/pres/",
+        "us": "/pres/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "presses",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "pressed",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "pressing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "prest",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 101
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 89
+  },
+  "senses": [
+    {
+      "senseId": "w:press#s1",
+      "pos": "v.",
+      "glossZh": "紧贴着压",
+      "pronunciationId": "w:press#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:press#e-c6f31cd31ee911ae",
+          "text": "With the pumpkin resting on the table, hole uppermost, I bent over and pressed my head against the opening.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:press#e-92f4f1f1ce99b5ad",
+          "text": "I got into a panic as I pressed firmly against the table and moved my head around trying to find the right angle, but it was no use.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:press#e-3ed2af358bd285cf",
+          "text": "Every day after school, Lucas and Noah pressed their noses against Mr. Henderson’s shop window.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:press#s2",
+      "pos": "v.",
+      "glossZh": "把（东西）硬塞给",
+      "pronunciationId": "w:press#p-main",
+      "note": "press sth into sb’s hand。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:press#e-15074d7d7e6cdbbd",
+          "text": "When she __53__ one nurse, she tried to press a five-pound note into her hand.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:cloze:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:press#e-c16263994d039cac",
+          "text": "honesty and help,” she said warmly, pressing two hundred dollars into his hand.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 22,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:writing-continuation:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:press#s3",
+      "pos": "v.",
+      "glossZh": "按下（键、开关）",
+      "pronunciationId": "w:press#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:press#e-11f03688a82a2727",
+          "text": "Which button should you press to make Junior move faster?",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-05-ninth:21",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:press#e-fff34f1d80b521d1",
+          "text": "Out of curiosity, he pressed the keys.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:press#e-f782d80f2d94804c",
+          "text": "Damian Stefaniuk presses a switch – the blocks, wired to an LED, bring the bulb to life.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:press#s4",
+      "pos": "v.",
+      "glossZh": "挤压",
+      "pronunciationId": "w:press#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:press#e-ad9d75cc81788ad6",
+          "text": "Captured microplastics could be pressed inside the machine to squeeze out remaining water, with the resulting tiny plastic balls removed and thrown in the ordinary garbage.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:press#e-cd4289bbe5a0dac4",
+          "text": "It's like when you press and rub soft things, like hair, between your hands.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:press#s5",
+      "pos": "v.",
+      "glossZh": "催促",
+      "pronunciationId": "w:press#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:press#s6",
+      "pos": "v.",
+      "glossZh": "熨平",
+      "pronunciationId": "w:press#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:press#s7",
+      "pos": "短语",
+      "glossZh": "很难做到",
+      "pronunciationId": "w:press#p-main",
+      "note": "be hard pressed to do sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:press#e-1646cede81e8fa6a",
+          "text": "These days you’d be hard pressed to find anyone in Australia over the age of 15 who doesn’t own a mobile phone.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:press#s8",
+      "pos": "短语",
+      "glossZh": "缺少；紧缺",
+      "pronunciationId": "w:press#p-main",
+      "note": "be pressed for time。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:press#e-81a6311f0f00a592",
+          "text": "Families are pressed for time, many with both parents working to",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:press#s9",
+      "pos": "adj.",
+      "glossZh": "紧迫的",
+      "pronunciationId": "w:press#p-main",
+      "note": "通常用 pressing。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:press#e-5ec2714b4fe47dc4",
+          "text": "One morning last month, I decided to try artificial intelligence on a pressing problem: my inbox.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:press#e-eea5ea421471d0a2",
+          "text": "This advancement responds directly to two pressing challenges.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:press#e-4b85baff901c745e",
+          "text": "Hanley-Dafoe never shies away from the pressing issues that can arouse hopelessness, such as the climate crisis, and she demonstrates how hope has always fueled movements for change.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:press#s10",
+      "pos": "n.",
+      "glossZh": "印刷机",
+      "pronunciationId": "w:press#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:press#e-ac0093013dbdf5a9",
+          "text": "Before the wide use of the printing press, books were treasured objects and could be works of art in their own right.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:press#s11",
+      "pos": "n.",
+      "glossZh": "新闻界",
+      "pronunciationId": "w:press#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:press#e-8ee6f2995a1486d6",
+          "text": "Marie, a journalist, came across a video clip of American actor Bill Murray describing how a painting saved his life during a press conference for his film.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 126,
+            "end": 131
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:press#s12",
+      "pos": "n.",
+      "glossZh": "出版社",
+      "pronunciationId": "w:press#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:press#e-19aae152e937d573",
+          "text": "In 2010, Ferguson joined the Foreign Languages Press, and has since authored several books introducing Chinese cities.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 52
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "强行征用入伍",
+      "reason": "军事历史用法"
+    },
+    {
+      "glossZh": "追加赌注",
+      "reason": "高尔夫专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

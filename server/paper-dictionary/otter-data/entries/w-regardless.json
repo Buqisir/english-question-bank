@@ -1,0 +1,144 @@
+{
+  "entryId": "w:regardless",
+  "headword": "regardless",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈɡɑːdləs/",
+    "us": "/rɪˈɡɑːrdləs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:regardless#p-main",
+      "ipa": {
+        "uk": "/rɪˈɡɑːdləs/",
+        "us": "/rɪˈɡɑːrdləs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more regardless",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most regardless",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 25
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 24
+  },
+  "senses": [
+    {
+      "senseId": "w:regardless#s1",
+      "pos": "短语",
+      "glossZh": "不管；无论",
+      "pronunciationId": "w:regardless#p-main",
+      "note": "regardless of。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:regardless#e-94b36513a29d33d2",
+          "text": "In contrast, the low intensity group perceived any amount of simultaneous (同时) chat as a rude interruption, regardless of what the speakers were saying.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 118
+          }
+        },
+        {
+          "exampleId": "w:regardless#e-57bbb1f868251b59",
+          "text": "Regardless of how much they like a playmate, they may still grab his toys, refuse to share, and get bossy.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:regardless#e-cbc5c49db08768a3",
+          "text": "But what if the deepest human need is to know we matter – regardless of whether others see things our way?",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:regardless#s2",
+      "pos": "adv.",
+      "glossZh": "无论如何",
+      "pronunciationId": "w:regardless#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

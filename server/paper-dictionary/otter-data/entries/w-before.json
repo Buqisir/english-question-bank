@@ -1,0 +1,393 @@
+{
+  "entryId": "w:before",
+  "headword": "before",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bɪˈfɔː(r)/",
+    "us": "/bɪˈfɔːr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:before#p-main",
+      "ipa": {
+        "uk": "/bɪˈfɔː(r)/",
+        "us": "/bɪˈfɔːr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "befores",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 98,
+    "mock": 713
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 712
+  },
+  "senses": [
+    {
+      "senseId": "w:before#s1",
+      "pos": "prep. / conj.",
+      "glossZh": "在……以前；早于；在做……之前",
+      "pronunciationId": "w:before#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 73,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:before#e-0674b32184edd483",
+          "text": "Before the film began, each woman was asked to help herself to a snack.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:before#e-a0dca6b1faba8a57",
+          "text": "Those who had held mentally stimulating(刺激), demanding jobs before retirement tended to do the best on the tests.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:before#e-54ee74800b383cc1",
+          "text": "Much still needed to be done before dinner was served, but already outside the building many homeless people were gathering.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:before#s2",
+      "pos": "adv.",
+      "glossZh": "以前；从前；先前",
+      "pronunciationId": "w:before#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:before#e-625349bc72adc0b5",
+          "text": "One morning she told her children about a family she had visited the day before.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:before#e-05d08b1f90c24bd9",
+          "text": "Readers will encounter not only stories they have heard before, but some new stories and a moving discussion of the responsibility of the engineer to the public and the ways young engineers can be helped to grasp them.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:before#e-76fad2e8fbdd6cfd",
+          "text": "Almost one third say they now use a wider variety of ingredients (配料) than they used to, and just under 1 in 4 say they now buy better quality ingredients than before.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 160,
+            "end": 166
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:before#s3",
+      "pos": "n.",
+      "glossZh": "从前的状态",
+      "pronunciationId": "w:before#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:before#e-37a96a1a9dd2349e",
+          "text": "By making it look like before.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2023-national-a:26",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:before#s4",
+      "pos": "prep.",
+      "glossZh": "在……前面；在……面前",
+      "pronunciationId": "w:before#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:before#e-abd75c2aea4c0fbf",
+          "text": "However, in this case, I was a woman all alone, in a strange neighborhood, at night, and there were twenty or so very large men – all wearing insignia（徽章） that indicated they were in some sort of club – standing before me.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 212,
+            "end": 218
+          }
+        },
+        {
+          "exampleId": "w:before#e-d4c43810c87b6cd1",
+          "text": "He literally blossomed before my eyes.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:before#s5",
+      "pos": "conj.",
+      "glossZh": "到……时才；过了……才",
+      "pronunciationId": "w:before#p-main",
+      "note": "常见于 it will be … before … 或 it wasn’t long before …。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:before#e-4dc524f74f28dcc5",
+          "text": "It didn’t take long before they walked through the front door carrying a big box.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:before#e-70437ea9c9bcf8de",
+          "text": "He told me a helicopter was on its way, but it would be 30 minutes before it arrived.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:before#e-6023c9cc50c26411",
+          "text": "It wasn’t long before he was weaned onto solid food and reintroduced to the wild.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:before#s6",
+      "pos": "短语",
+      "glossZh": "本末倒置",
+      "pronunciationId": "w:before#p-main",
+      "note": "put the cart before the horse。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:before#s7",
+      "pos": "prep.",
+      "glossZh": "优先于；先于（排序）",
+      "pronunciationId": "w:before#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:before#s8",
+      "pos": "prep.",
+      "glossZh": "提交给……审议；当着……的面",
+      "pronunciationId": "w:before#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

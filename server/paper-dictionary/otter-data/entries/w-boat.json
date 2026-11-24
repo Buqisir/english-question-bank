@@ -1,0 +1,180 @@
+{
+  "entryId": "w:boat",
+  "headword": "boat",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bəʊt/",
+    "us": "/boʊt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:boat#p-main",
+      "ipa": {
+        "uk": "/bəʊt/",
+        "us": "/boʊt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "boats",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "BOATs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "boated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "boating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 68
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 68
+  },
+  "senses": [
+    {
+      "senseId": "w:boat#s1",
+      "pos": "n.",
+      "glossZh": "船；小船",
+      "pronunciationId": "w:boat#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:boat#e-eb4925c477133780",
+          "text": "And in Karakalpakstan, he is saddened by the dust storms, diseases and fishing boats stuck miles from the sea.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:boat#e-15922bbdea085ccd",
+          "text": "Another time, we rented a boat in Vallecito Lake.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "cloze-3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:boat#e-72a0a78fd9ec5c79",
+          "text": "He goes to work by boat.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2022-national-a:33",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:boat#s2",
+      "pos": "v.",
+      "glossZh": "乘船；用船运送",
+      "pronunciationId": "w:boat#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:boat#s3",
+      "pos": "短语",
+      "glossZh": "处于同样的困境",
+      "pronunciationId": "w:boat#p-main",
+      "note": "in the same boat。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "纸牌、船式构象、水运流放及 BOAT 简写",
+      "reason": "专业、历史或同形缩写。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

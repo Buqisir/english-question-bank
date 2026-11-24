@@ -1,0 +1,147 @@
+{
+  "entryId": "w:delete",
+  "headword": "delete",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈliːt/",
+    "us": "/dɪˈliːt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:delete#p-main",
+      "ipa": {
+        "uk": "/dɪˈliːt/",
+        "us": "/dɪˈliːt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "deleted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "deletes",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "deleting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 35
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:delete#s1",
+      "pos": "v.",
+      "glossZh": "删除；删去",
+      "pronunciationId": "w:delete#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 35
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:delete#e-4b69dd3626195f6f",
+          "text": "By deleting unnecessary words.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:delete#e-fd3e71d2f13599db",
+          "text": "Delete unnecessary files.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:delete#e-aad3e8ab8cd5dd85",
+          "text": "He had accidentally deleted the last good photo of his beloved wife.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 27
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "删减版发行物；杀死；彻底打倒",
+      "reason": "行业或俚语用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,213 @@
+{
+  "entryId": "w:fetch",
+  "headword": "fetch",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fetʃ/",
+    "us": "/fetʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fetch#p-main",
+      "ipa": {
+        "uk": "/fetʃ/",
+        "us": "/fetʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "fetches",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "fetched",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "fetching",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 16
+  },
+  "senses": [
+    {
+      "senseId": "w:fetch#s1",
+      "pos": "v.",
+      "glossZh": "去取来",
+      "pronunciationId": "w:fetch#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fetch#e-c538a9a3505dcdf9",
+          "text": "Dogs are known for their impressive fetching habit, but cats take this behavior up a notch.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:fetch#e-7a5b317bb2493800",
+          "text": "tanks were free of any items so that the trainers could train the dolphins to fetch specific items.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:fetch#e-868e00c01585a4dd",
+          "text": "Ben came to fetch the microscope for an experiment.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:writing-continuation:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fetch#s2",
+      "pos": "n.",
+      "glossZh": "捡回抛掷物的游戏",
+      "pronunciationId": "w:fetch#p-main",
+      "note": "play fetch。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fetch#e-18c64025e38d64ee",
+          "text": "First, owners played games with their dogs: either “pull” (tug-of- war) or “throw (fetch).” During each game, the owner repeatedly said the category out loud.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 88
+          }
+        },
+        {
+          "exampleId": "w:fetch#e-171a2df2617c25d6",
+          "text": "Think gentle walks instead of intense fetch sessions.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+            "paperTitle": "宁波市2025学年第一学期高考模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-ningbo-2025-11-first-mock:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fetch#s3",
+      "pos": "v.",
+      "glossZh": "卖得（某个价格）",
+      "pronunciationId": "w:fetch#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "风程",
+      "reason": "气象专业义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

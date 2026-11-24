@@ -1,0 +1,123 @@
+{
+  "entryId": "w:friday",
+  "headword": "Friday",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfraɪdeɪ/",
+    "us": "/ˈfraɪdeɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:friday#p-main",
+      "ipa": {
+        "uk": "/ˈfraɪdeɪ/",
+        "us": "/ˈfraɪdeɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "Fridays",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 17,
+    "mock": 66
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:friday#s1",
+      "pos": "n.",
+      "glossZh": "星期五",
+      "pronunciationId": "w:friday#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 66
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:friday#e-d8d3517600dc6f60",
+          "text": "What does Bill often do on Friday night?",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:friday#e-7574d47ae17227c7",
+          "text": "Last Friday my mom decided to color his hair.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-b:writing-short-error-correction:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:friday#e-4d824fd5b6ffcb7d",
+          "text": "Dinner hours: Tuesday through Thursday 5: 30 pm - 9: 00 pm (last seating); Friday and Saturday 5: 00 pm - 9:30pm (last seating).",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 81
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

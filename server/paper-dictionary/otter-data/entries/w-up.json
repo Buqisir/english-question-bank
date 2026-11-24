@@ -1,0 +1,4747 @@
+{
+  "entryId": "w:up",
+  "headword": "up",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ʌp/",
+    "us": "/ʌp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:up#p-main",
+      "ipa": {
+        "uk": "/ʌp/",
+        "us": "/ʌp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "ups",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "UPs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 306,
+    "mock": 1947
+  },
+  "unassignedCounts": {
+    "gaokao": 42,
+    "mock": 1944
+  },
+  "senses": [
+    {
+      "senseId": "w:up#s1",
+      "pos": "prep. / adv.",
+      "glossZh": "向上",
+      "pronunciationId": "w:up#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-110a955e97c34a95",
+          "text": "She’d just look up at the right time, long enough to answer-in character - “The better to eat you with, my dear,” and go back to her place in the magazine article.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:up#e-364ccf2a76d8efcf",
+          "text": "Small children are easy to throw up in the air and catch-and they __36__ it.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:up#e-45b701abc38bc71e",
+          "text": "Little do they know that as they do so, a burst of energy is sent up to street level to help charge an electric car.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s2",
+      "pos": "adv.",
+      "glossZh": "起身",
+      "pronunciationId": "w:up#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-165cb94124875684",
+          "text": "Too often when you stand up to give a speech, you focus on the “public” at the expense of the” speaking.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:up#e-753a49d33feff841",
+          "text": "He stood up, hugged his parents, and smiled, trying not to let his emotions（情绪）get the better of him.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:up#e-68a7822f556bf07c",
+          "text": "The man stood up in a panic, then ran through the house toward the window and jumped out.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s3",
+      "pos": "adv.",
+      "glossZh": "上前；靠近",
+      "pronunciationId": "w:up#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-747f465fb946ba13",
+          "text": "I tried to put a $20 bill in the man’s hand, but he wouldn’t take it, so instead I went up to the truck and gave it to his wife as quietly as I could.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:up#e-e22cf85eb4feb9cb",
+          "text": "I went up to my new teammate and introduced myself.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:up#e-03a06108b89873e7",
+          "text": "I parked my car, pitying their ignorance, walked up to the cow in what the onlookers assumed to be a fearless manner.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s4",
+      "pos": "adv.",
+      "glossZh": "上升；增长",
+      "pronunciationId": "w:up#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-5c5a04b2d890467d",
+          "text": "Dogs are known for their impressive fetching habit, but cats take this behavior up a notch.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:up#e-40c50d7c9d5f69df",
+          "text": "The research, carried out by scientists at the Columbia Climate School and other institutions, found that if the city maintains past species patterns in new plantings, isoprene production in Manhattan in coming decades will go up by about 140%, and resulting summer ozone levels as much as 30%.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 227,
+            "end": 229
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s5",
+      "pos": "adv.",
+      "glossZh": "表示动作彻底完成",
+      "pronunciationId": "w:up#p-main",
+      "note": "如 use up（用尽）、eat up（吃光）。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-213f49d5b5775833",
+          "text": "Toby was using up his energy by running back and forth in the backyard and giving the kids plenty of room.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:up#e-2ce02b846934cf10",
+          "text": "Eat up what is provided for them.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:26",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:up#e-3dc5fe43121efc51",
+          "text": "Sure, my friends and I loved to __46__ about how bored we were in the middle of nowhere; __47__, as I finish up my junior year of college, I’m convinced that it took __48__ our small town to realize how much we actually loved it and what exactly we loved about it.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 109,
+            "end": 111
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s6",
+      "pos": "短语",
+      "glossZh": "最多达",
+      "pronunciationId": "w:up#p-main",
+      "note": "up to 后接数量。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-f5bcd96033e59a68",
+          "text": "50 Honorable Mentions: Judges will choose up to 50 honorable mention winners, who will each receive a T-shirt in memory of Earhart’s final flight.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:up#e-4251e450a7a6523e",
+          "text": "This variety, coupled with the fact that tiny forests grow up to ten times faster than standard forests, means they attract a rich abundance of wildlife.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:up#e-e4187735a649017d",
+          "text": "Ribeiro __44__ €35 per person for what is usually a three-course meal that can last up to three hours.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 86
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s7",
+      "pos": "短语",
+      "glossZh": "直至某个界限",
+      "pronunciationId": "w:up#p-main",
+      "note": "up to。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-3c213b34483f1e70",
+          "text": "“There is a lot of really interesting evidence which seems to be suggesting that if children are inspired up to the age of seven, then being outdoors will be a habit for life.” His own children have got into the habit of playing outside now: “We just send them out into the garden and tell them not to come back in for a while.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 106,
+            "end": 108
+          }
+        },
+        {
+          "exampleId": "w:up#e-9e62b92783b3641e",
+          "text": "A special low entrance charge of £2 per person is available to all in full-time education, up to and including those at first degree level, in organised groups with teachers.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-a:14",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 93
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s8",
+      "pos": "短语",
+      "glossZh": "长大",
+      "pronunciationId": "w:up#p-main",
+      "note": "grow up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-685847ae3cc6cda5",
+          "text": "Mauer, of Edgar, Wisconsin, grew up on a farm in a family of 10 children.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:up#e-d8736a0bf548662e",
+          "text": "Molai grew up in a tiny village in India.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:up#e-ef400508fe629365",
+          "text": "When he stood in front of the house where he grew up as a child, he saw a lady standing in the entrance.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 52
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s9",
+      "pos": "短语",
+      "glossZh": "放弃",
+      "pronunciationId": "w:up#p-main",
+      "note": "give up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-d036023e3133cd89",
+          "text": "Jennifer sacrificed（牺牲）to achieve her goal, giving up many nights with her kids and missing important events to study.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:up#e-d8e436e5dd8e3642",
+          "text": "Right as I was about to give up, a Mexican family in a small truck pulled over, and the father bounded out.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:up#e-8c9bfa731cf2f7a4",
+          "text": "Can our planet afford to have any great thinkers become discouraged and give up?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s10",
+      "pos": "短语",
+      "glossZh": "最终落得某种结果",
+      "pronunciationId": "w:up#p-main",
+      "note": "end up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-d8a2e22fd915d695",
+          "text": "His visit, however, ended up involving a lot more than that.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:up#e-0bdd3a1ad5251ae5",
+          "text": "But I ended up working late.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-b-1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:up#e-8a62b093fc31f8a5",
+          "text": "Often, they'll end up filling the area with small stones and using chemicals to control weeds.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s11",
+      "pos": "短语",
+      "glossZh": "干涸",
+      "pronunciationId": "w:up#p-main",
+      "note": "dry up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-017c6d97a9dc0716",
+          "text": "Hence this book, Chasing the Sea: Lost Among the Ghosts of Empire in Central Asia, which talks about a road trip from Tashkent to Karakalpakstan, where millions of lives have been destroyed by the slow drying up of the sea.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 209,
+            "end": 211
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s12",
+      "pos": "短语",
+      "glossZh": "报名",
+      "pronunciationId": "w:up#p-main",
+      "note": "sign up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-2956f3e00b0bbe30",
+          "text": "Campers who sign up for the 2-week secret agent camp can get to know about the life of real secret agents by learning strategies and military skills on the paintball field.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:up#e-1c9ca9c40eb8d36f",
+          "text": "Some of my friends had signed up to spend time at a soup kitchen, so I did, too.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:up#e-8c8e35b73a249b47",
+          "text": "She signed up on the website Bookalokal, and now welcomes __43__ into her Brussels flat twice a week for dinner parties.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s13",
+      "pos": "短语",
+      "glossZh": "想出",
+      "pronunciationId": "w:up#p-main",
+      "note": "think up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-af584dcf7fc28b3a",
+          "text": "I decided to think up a method of dealing with forbidden fruit.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:up#e-05d398e552dcc3fb",
+          "text": "Though he acknowledges that engineering works can fail because the person who thought them up or engineered them simply got things wrong, in this book Dr. Petroski widens his view to consider the larger context in which such failures occur.Sometimes devices fail because a good design is constructed with low quality materials incompetently applied.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 93
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s14",
+      "pos": "短语",
+      "glossZh": "到场",
+      "pronunciationId": "w:up#p-main",
+      "note": "show up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-578c79587ba81b8c",
+          "text": "Organizers expected perhaps 50,000 people to show up.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:up#e-9f6e898f62b89137",
+          "text": "So the main thing is just to show up and be adventurous, trying different foods and talking to strangers.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:up#e-740638f54aa58733",
+          "text": "So, when my brother showed up, I asked him to watch Toby and keep him outside.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s15",
+      "pos": "短语",
+      "glossZh": "提出（话题）",
+      "pronunciationId": "w:up#p-main",
+      "note": "bring up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-7c162dc7a4c50e78",
+          "text": "It also makes it easier for you to bring up anything that you are worried about.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s16",
+      "pos": "短语",
+      "glossZh": "停住（车或船）",
+      "pronunciationId": "w:up#p-main",
+      "note": "pull up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-b6d7e249dcc37a20",
+          "text": "Pulling up to the building, Grant saw flames (火焰) shooting out of a second-floor window.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-ii:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:up#e-e8476c1e903cda28",
+          "text": "As we all sat there __52__, a fisherman pulled up, threw us a rope and towed (拖) us back.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "cloze-3",
+              "sentence": 9
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s17",
+      "pos": "短语",
+      "glossZh": "想出",
+      "pronunciationId": "w:up#p-main",
+      "note": "come up with。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-6c2847f8d0ed63e8",
+          "text": "She is trying to come up with a label to attach to nutria fashions to show it is eco-friendly.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:8",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:up#e-48bd692d4eae45bb",
+          "text": "He works for one of Wisconsin’s county highway commissions and came up with the idea of using cheese brine.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:up#e-cd3de8b311692b47",
+          "text": "The government has struggled to come up with measures to address the problem, particularly in the poorer, rural areas east of the Volga River, including arranging doctor’s appointments by video chat and expanding financial aid programs to motivate doctors to practice medicine in remote parts of the country like Krasnoyarsk.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s18",
+      "pos": "短语",
+      "glossZh": "分手",
+      "pronunciationId": "w:up#p-main",
+      "note": "split up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-fc7944599e6ef7e0",
+          "text": "She had split up with her husband the week before, was living in a flat __52__, and since she’d found it too much to cope with (应对), she’d taken it out on __53__ people.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:cloze:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s19",
+      "pos": "短语",
+      "glossZh": "学会",
+      "pronunciationId": "w:up#p-main",
+      "note": "pick up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-e7d044ee75f509a7",
+          "text": "Retired Workers Can Pick Up New Skills",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jul:30",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s20",
+      "pos": "短语",
+      "glossZh": "由……组成",
+      "pronunciationId": "w:up#p-main",
+      "note": "be made up of。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-d3b3fbccf5b67f87",
+          "text": "A carbon footprint is made up of two parts, the primary footprint and the secondary footprint.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:up#e-c0d70cbcc50c2288",
+          "text": "How many parts is a student’s final grade made up of?",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2022-i:22",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s21",
+      "pos": "短语",
+      "glossZh": "占据（空间）",
+      "pronunciationId": "w:up#p-main",
+      "note": "take up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-1d8839f6fc92474a",
+          "text": "As the researchers report in Animal Behavior, the bears did best with patterns where the coloured dots did not move and where more of them also took up a larger coloured area.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 149,
+            "end": 151
+          }
+        },
+        {
+          "exampleId": "w:up#e-398266b9143f7a49",
+          "text": "But all of that growth will take up a lot of space, and though more and more people accept the concept of solar energy, few like large solar panels to be installed near them.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s22",
+      "pos": "短语",
+      "glossZh": "估量",
+      "pronunciationId": "w:up#p-main",
+      "note": "size up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-3db28163bdd2d4fb",
+          "text": "He sized up the situation and called for his daughter, who spoke English.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s23",
+      "pos": "短语",
+      "glossZh": "顺手买下",
+      "pronunciationId": "w:up#p-main",
+      "note": "pick up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-4799f4810a121e09",
+          "text": "On our first morning in Paris, I went around the corner to the food market to pick up some groceries.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:up#e-a52e9baaf87b402c",
+          "text": "You run into the grocery store to pick up one bottle of water.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:up#e-d10a92a40d0fb46d",
+          "text": "In addition, I have an old two-volume copy of the Shorter Oxford Dictionary, picked up a few years ago in a bookshop sale for just 99 pence.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 86
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s24",
+      "pos": "短语",
+      "glossZh": "加热",
+      "pronunciationId": "w:up#p-main",
+      "note": "heat up sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-cd268e4615908677",
+          "text": "Next, Jeff turned on the second stove burner to heat up the frying pan.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s25",
+      "pos": "短语",
+      "glossZh": "干（不好的事）",
+      "pronunciationId": "w:up#p-main",
+      "note": "get up to。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-6559246bb25383c3",
+          "text": "As they grew more mobile, we let them move freely around the house during the day, but when we were asleep we had to contain them in a large room, otherwise they’d get up to mischief.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 168,
+            "end": 170
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s26",
+      "pos": "短语",
+      "glossZh": "神情一下子亮起来",
+      "pronunciationId": "w:up#p-main",
+      "note": "light up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-966081250e5e6ab2",
+          "text": "“I’ve seen those magic moments when children are talking to someone they are inspired by - their eyes are shining and their faces light up,” she said.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 136,
+            "end": 138
+          }
+        },
+        {
+          "exampleId": "w:up#e-4a1bf763381d2a53",
+          "text": "His eyes lit up as I explained how scholarships, loans, and grants could make college possible, then invited him to join my advanced placement chemistry class next year.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s27",
+      "pos": "短语",
+      "glossZh": "仰慕",
+      "pronunciationId": "w:up#p-main",
+      "note": "look up to。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-d1e9f91f983ec101",
+          "text": "They look up to great thinkers.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2021-national-a:33",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s28",
+      "pos": "短语",
+      "glossZh": "归因于",
+      "pronunciationId": "w:up#p-main",
+      "note": "chalk sth up to sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-12703cd490d2ff6b",
+          "text": "Older and wiser now, Burchill chalked up the incident to youthful indiscretion (莽撞).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s29",
+      "pos": "短语",
+      "glossZh": "接电话",
+      "pronunciationId": "w:up#p-main",
+      "note": "pick up the phone。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-81b1b22c26c29845",
+          "text": "That said, to be honest the only people who ever ring our home phone are our Baby Boomer parents, to the point where we play a game and guess who is calling before we pick up the phone (using Caller ID would take the fun out of it).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 172,
+            "end": 174
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s30",
+      "pos": "短语",
+      "glossZh": "醒来",
+      "pronunciationId": "w:up#p-main",
+      "note": "wake up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-7c0d0431245fb49c",
+          "text": "When he woke up and found himself alone, the 4-year-old decided his brother might be on the train he saw in front of him – so he got on.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:up#e-520779c3980f5559",
+          "text": "I woke up at midnight to find a swimming pool in my tent.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:up#e-4640806030a15b37",
+          "text": "They moved in with a local family, the Harrisons, and, like them, had little privacy, rare baths, and a blanket of snow on their quilt when they woke up in the morning.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 150,
+            "end": 152
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s31",
+      "pos": "短语",
+      "glossZh": "加快",
+      "pronunciationId": "w:up#p-main",
+      "note": "speed up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-da7afb4bc1e621a7",
+          "text": "Instead, it will slow down everyone a little bit but speed up checkout overall.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:7",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:up#e-46f05f5f939dc94f",
+          "text": "“We need to speed up the development of green energy, and it will all get used,” says Wipke.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:up#e-194736792f56d972",
+          "text": "To speed up the process, please make sure the information you submit through the ILL Request Form is accurate.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s32",
+      "pos": "adv.",
+      "glossZh": "在较高的位置",
+      "pronunciationId": "w:up#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-658ccb01c533ea67",
+          "text": "Mum is small, but I remember feeling so high up there.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:grammar-fill:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s33",
+      "pos": "adv.",
+      "glossZh": "位于前方",
+      "pronunciationId": "w:up#p-main",
+      "note": "up ahead。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-b52a827edda75b6d",
+          "text": "Instead, she focused on reaching the shadow cast on the track by an oak tree up ahead.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:7",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s34",
+      "pos": "prep.",
+      "glossZh": "沿着一条路线往前",
+      "pronunciationId": "w:up#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-ba288b7dffbe661b",
+          "text": "As I carried her up the blackberry – lined path toward my Car where I kept a water bottle, she began to move.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s35",
+      "pos": "adj.",
+      "glossZh": "处在较高水平",
+      "pronunciationId": "w:up#p-main",
+      "note": "keep sth up 可指使其维持在较高水平。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-a2ce1dd6b2d87263",
+          "text": "A healthy breakfast can start your metabolism (新陈代谢), while eating small, healthy meals keeps your energy up all day.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-national-a:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 113,
+            "end": 115
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s36",
+      "pos": "短语",
+      "glossZh": "和……见面",
+      "pronunciationId": "w:up#p-main",
+      "note": "meet up with。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-92131e6cf7749ba4",
+          "text": "One day in the trees, Squirt met up with a family of gray squirrels.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:14",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s37",
+      "pos": "短语",
+      "glossZh": "装车",
+      "pronunciationId": "w:up#p-main",
+      "note": "load up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-00a1ae1c748fd81e",
+          "text": "It was a big deal for us to load up and go to the local library, where my kids could pick out books to read or books they wanted me to read to them.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s38",
+      "pos": "短语",
+      "glossZh": "收拾行装",
+      "pronunciationId": "w:up#p-main",
+      "note": "pack up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-546de362a375e66d",
+          "text": "When I was 9, we packed up our home in Los Angeles and arrived at Heathrow, London on a gray January morning.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s39",
+      "pos": "短语",
+      "glossZh": "使高兴起来",
+      "pronunciationId": "w:up#p-main",
+      "note": "cheer up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-54ac26e08490b301",
+          "text": "“What should we do to cheer Poppy up?” asked Dad.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s40",
+      "pos": "短语",
+      "glossZh": "开拓新的天地",
+      "pronunciationId": "w:up#p-main",
+      "note": "open up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-272e8ed1dc661830",
+          "text": "Any seasoned language learner will tell you that the beauty of mastering a foreign language is the world which it opens up to you.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 120,
+            "end": 122
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s41",
+      "pos": "短语",
+      "glossZh": "打开话匣子",
+      "pronunciationId": "w:up#p-main",
+      "note": "open up conversation。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-06a73d6194be2e01",
+          "text": "It just opens up conversation.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s42",
+      "pos": "短语",
+      "glossZh": "弥补",
+      "pronunciationId": "w:up#p-main",
+      "note": "make up for。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-71e76e48beb3a813",
+          "text": "Students can change majors, but remember that there’s no re-living a certain semester (学期), and there’s no making up for lost time.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:grammar-fill",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:grammar-fill:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 116
+          }
+        },
+        {
+          "exampleId": "w:up#e-daa4bc095ad8c413",
+          "text": "Regression is a crutch (拐杖) that allows you to make up for wasted time.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s43",
+      "pos": "短语",
+      "glossZh": "堆积",
+      "pronunciationId": "w:up#p-main",
+      "note": "pile up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-5c0d023fad782ef5",
+          "text": "a bit and the cakes pile up.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:cloze:3",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:up#e-71960a4360a74280",
+          "text": "Its concrete panels were piled up without a strong internal frame, and its joints were even filled with old cement（水泥）bags and wrinkled newspapers.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s44",
+      "pos": "短语",
+      "glossZh": "清理干净",
+      "pronunciationId": "w:up#p-main",
+      "note": "clean up / clear up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-3d671151010b2b45",
+          "text": "Jenna told Jeff to clean it up so they could continue to cook the rest of the porridge.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:up#e-3d32e9b588bb4057",
+          "text": "When he got older, John started to wonder if this process could be used to clean up the messes people were making.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:up#e-7f22213ae4c9a83e",
+          "text": "He cleaned up his house.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s45",
+      "pos": "短语",
+      "glossZh": "把……叫醒",
+      "pronunciationId": "w:up#p-main",
+      "note": "wake sb up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-3f1fa4f880d2fe48",
+          "text": "The twins carried the breakfast upstairs and woke their mother up.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s46",
+      "pos": "短语",
+      "glossZh": "配制",
+      "pronunciationId": "w:up#p-main",
+      "note": "make up（饮料等）。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-aab01534d37692e1",
+          "text": "We had to have a bit of a production line going, making up “tiger milk”, washing baby bottles, and cleaning the floors.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s47",
+      "pos": "短语",
+      "glossZh": "变暖",
+      "pronunciationId": "w:up#p-main",
+      "note": "warm up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-275b368ec8035e18",
+          "text": "It’s still a little too cold for them to go out into the open, but as soon as the weather warms up, I have no doubt that the little one will be out and about exploring and playing every day.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 98
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s48",
+      "pos": "短语",
+      "glossZh": "整理整齐",
+      "pronunciationId": "w:up#p-main",
+      "note": "tidy up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-4ab31a5558cebcb8",
+          "text": "I also water the flowers in the yard and tidying up my own bedroom whatever necessary.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-national-b:writing-short-error-correction:9",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:up#e-9546be8eb6832af4",
+          "text": "Tidy up a room.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s49",
+      "pos": "短语",
+      "glossZh": "装扮",
+      "pronunciationId": "w:up#p-main",
+      "note": "dress up as。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-af9246fd41e2c54a",
+          "text": "Dressing up as soldiers.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s50",
+      "pos": "短语",
+      "glossZh": "耽搁；阻滞",
+      "pronunciationId": "w:up#p-main",
+      "note": "hold up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-57f5c6bdc357a673",
+          "text": "Any small interruption – a price check, a chatty customer – can have downstream effects, holding up an entire line.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 106
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s51",
+      "pos": "短语",
+      "glossZh": "排队",
+      "pronunciationId": "w:up#p-main",
+      "note": "line up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-5e75861e30d72868",
+          "text": "With a serpentine line, a long delay at one register won’t unfairly punish the people who lined up behind it.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:7",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 98
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s52",
+      "pos": "短语",
+      "glossZh": "拿起；捡起",
+      "pronunciationId": "w:up#p-main",
+      "note": "pick up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-0efe8236f60461d4",
+          "text": "However, what my children want to do after school is pick up a screen – any screen – and stare at it for hours.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:up#e-8f18c494b5b1d368",
+          "text": "She ceased her struggle the instant I picked her up.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:up#e-95f146151bb470c5",
+          "text": "Join the Harvard Undergraduate Knitting Circle to make pom-poms and tassels out of thread, or pick up a pair of needles and learn to knit（编织）.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 99,
+            "end": 101
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s53",
+      "pos": "短语",
+      "glossZh": "发动（引擎）",
+      "pronunciationId": "w:up#p-main",
+      "note": "fire up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-ea5ef19b9bba310c",
+          "text": "He explained our basic task, the tractor fired up and we were off, riding down the field looking for weeds to spray with chemicals.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s54",
+      "pos": "短语",
+      "glossZh": "构思出",
+      "pronunciationId": "w:up#p-main",
+      "note": "dream up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-52030b08168f9437",
+          "text": "The project was dreamed up by a local charity (慈善组织) to reduce loneliness and improve elderly people’s wellbeing.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "reading-c-2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:up#e-d0780e1b3b41ed13",
+          "text": "He wasn’t mean or abusive; he just gave me the impression he could do whatever project we dreamed up better if he did it alone.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 100
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s55",
+      "pos": "短语",
+      "glossZh": "捆住",
+      "pronunciationId": "w:up#p-main",
+      "note": "tie up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-c92dcd873edad0e9",
+          "text": "So __45__ tying him up, I just kept a close eye on him.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "cloze-2",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s56",
+      "pos": "短语",
+      "glossZh": "建立；创办",
+      "pronunciationId": "w:up#p-main",
+      "note": "set up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-d1a6f12cf89c2858",
+          "text": "The Chinese government recently finalized a plan to set up a Giant Panda National Park(GPNP).",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "grammar-fill-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:up#e-35926434de9dc041",
+          "text": "She moved to Tunisia, and set up a programme named Acacias for All to put her sustainable farming philosophy into action.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:up#e-98ad576c156e67ab",
+          "text": "To set up his own business.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s57",
+      "pos": "短语",
+      "glossZh": "热身",
+      "pronunciationId": "w:up#p-main",
+      "note": "warm up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-dcc9cbe5e6b112c2",
+          "text": "Students from seven different primary schools in and around the small town were warming up and walking the route(路线)through thick evergreen forest.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "writing-continuation-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 90
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s58",
+      "pos": "短语",
+      "glossZh": "是什么情况",
+      "pronunciationId": "w:up#p-main",
+      "note": "What’s up?",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-9eab7e19640be286",
+          "text": "What’s up with that?",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s59",
+      "pos": "短语",
+      "glossZh": "显现",
+      "pronunciationId": "w:up#p-main",
+      "note": "show up，主语可以是迹象、症状等。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-105327558f802695",
+          "text": "In most people the first signs show up in their 50s or early 60s.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s60",
+      "pos": "短语",
+      "glossZh": "赶上进度",
+      "pronunciationId": "w:up#p-main",
+      "note": "catch up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-77232134755f8aea",
+          "text": "He had to catch up with his study.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s61",
+      "pos": "短语",
+      "glossZh": "下定决心",
+      "pronunciationId": "w:up#p-main",
+      "note": "make up one’s mind。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-7d4ff79cc51c88eb",
+          "text": "“We can’t seem to make up our minds whether we want a modern city or a traditional one.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s62",
+      "pos": "短语",
+      "glossZh": "腾出某人的时间或精力",
+      "pronunciationId": "w:up#p-main",
+      "note": "free sb up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-8e61a31cc8aa5ac2",
+          "text": "You would think learning takes more time from you, but actually there are always new ways of doing things that can save you time on daily tasks, freeing you up for the most important.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 157,
+            "end": 159
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s63",
+      "pos": "短语",
+      "glossZh": "积少成多",
+      "pronunciationId": "w:up#p-main",
+      "note": "add up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-0c0503b5a45809bb",
+          "text": "Every completion is a small victory that adds up in a big way.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:9",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s64",
+      "pos": "短语",
+      "glossZh": "安排好（实验等）",
+      "pronunciationId": "w:up#p-main",
+      "note": "set up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-0e84a23f1d516e1b",
+          "text": "The project required each team to develop a hypothesis（假说）, set up an experiment to test the hypothesis, do the statistical analysis and present the findings.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s65",
+      "pos": "短语",
+      "glossZh": "拟订",
+      "pronunciationId": "w:up#p-main",
+      "note": "draw up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-2ee69a9e48e997f9",
+          "text": "We started to meet regularly to draw up our plans.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:14",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s66",
+      "pos": "短语",
+      "glossZh": "完整地写出",
+      "pronunciationId": "w:up#p-main",
+      "note": "write up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-4e1dbc78f48f1d4e",
+          "text": "Each year my children would write up their Christmas wish lists.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s67",
+      "pos": "短语",
+      "glossZh": "搭建；安装",
+      "pronunciationId": "w:up#p-main",
+      "note": "set up 或 put up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-6d8ee4d05918ba18",
+          "text": "Skilled at putting up shelves and piecing together furniture, she never pays someone else to do a job she can do herself.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:up#e-123acb3487ec86c2",
+          "text": "Solar developers want to put up panels as quickly and cheaply as possible, so they haven't given much thought to what they put under them.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:up#e-2a91e34ab364500f",
+          "text": "A statue commemorating Shakespeare and Tang was put up at Shakespeare’s Birthplace Garden in 2017.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:grammar-fill:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s68",
+      "pos": "短语",
+      "glossZh": "张贴",
+      "pronunciationId": "w:up#p-main",
+      "note": "put up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-00e351f6f05b9809",
+          "text": "She adds: “I’ve moved house many times and I always like to personalise my room and put up pictures.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 90
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s69",
+      "pos": "短语",
+      "glossZh": "自责",
+      "pronunciationId": "w:up#p-main",
+      "note": "beat oneself up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-491d1b7748feaaa1",
+          "text": "Taking responsibility for mistakes is a positive step, but don’t beat yourself up about them.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:up#e-6fe49be1fc51ad90",
+          "text": "If you’re among the groups of people who are enjoying the mental and physical health benefits of surrounding yourself with plants, don’t beat yourself up if one (or a few!) doesn’t make it.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 151,
+            "end": 153
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s70",
+      "pos": "短语",
+      "glossZh": "着手从事（活动）",
+      "pronunciationId": "w:up#p-main",
+      "note": "take up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-ed6ff9b1fd3cb965",
+          "text": "I once took up a challenge to create a painting every day for a month and post the works online.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:up#e-c9e401c754699f87",
+          "text": "To encourage her to take up a hobby.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2023-national-a:25",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s71",
+      "pos": "短语",
+      "glossZh": "遮盖",
+      "pronunciationId": "w:up#p-main",
+      "note": "cover up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-b0dd8f5dd6e4a6a0",
+          "text": "So, it’s been useful to know how to cover up holes and repaint a room to avoid any charges when I’ve moved out.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s72",
+      "pos": "短语",
+      "glossZh": "加起来形成",
+      "pronunciationId": "w:up#p-main",
+      "note": "add up to。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-5d1c4ccf825cae41",
+          "text": "All this adds up to a state of hurry",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-national-a:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s73",
+      "pos": "短语",
+      "glossZh": "架好设备供使用",
+      "pronunciationId": "w:up#p-main",
+      "note": "set up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-c73ad0c95ba0213f",
+          "text": "I often leave early to seek the right destinations so I can set up early to avoid missing the moment I am attempting to photograph.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:up#e-77d89b17fe92873f",
+          "text": "Once we found the place, it was stressful getting lights and cameras set up in the limited time.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:5",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s74",
+      "pos": "短语",
+      "glossZh": "联手；合作",
+      "pronunciationId": "w:up#p-main",
+      "note": "team up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-618b2e9234f9bdb0",
+          "text": "Now, Pereira has teamed up with plant scientist Professor Wolfgang Busch to apply SLEAP to plants.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s75",
+      "pos": "短语",
+      "glossZh": "证实；为……提供依据",
+      "pronunciationId": "w:up#p-main",
+      "note": "back up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-1802b11a7733b222",
+          "text": "Several studies have backed this up and found that indoor plants can improve creativity, focus and memory.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s76",
+      "pos": "短语",
+      "glossZh": "（为自己或他人）发声",
+      "pronunciationId": "w:up#p-main",
+      "note": "speak up for。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-649669b093f0f332",
+          "text": "As you make your lifestyle changes, you may find yourself wanting to speak up for yourself if others comment on what you’re doing, which can turn itself into a whole household debate.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 77
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s77",
+      "pos": "短语",
+      "glossZh": "查阅",
+      "pronunciationId": "w:up#p-main",
+      "note": "look up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-9bc1ae37366b20d3",
+          "text": "However, if I need to check the origin of a word or to look up examples of its usage, there’s nothing better.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:up#e-4c95bcc86304cd10",
+          "text": "I decided that I wanted to learn as many words as I could and started marking every entry I looked up with a pencil to measure my progress.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 99,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:up#e-25356f58e2b99c1d",
+          "text": "How did Kevin feel when looking up the word in the dictionary?",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2026-i:25",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s78",
+      "pos": "短语",
+      "glossZh": "打电话",
+      "pronunciationId": "w:up#p-main",
+      "note": "ring up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-08cdc55f2c5a723d",
+          "text": "When I was about to give up, Gunter fished out his little phone and rang up a friend.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s79",
+      "pos": "短语",
+      "glossZh": "被照亮",
+      "pronunciationId": "w:up#p-main",
+      "note": "light up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-87649b5c718be2fb",
+          "text": "“You enter the fare gates（检票口）and you’ll see a kiosk that is lit up and it tells you you can get a one-minute, a three-minute, or a five-minute story,\" says Alicia Trost, the chief communications officer for the San Francisco Bay Area Rapid Transit - known as BART.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 67
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s80",
+      "pos": "短语",
+      "glossZh": "使警醒",
+      "pronunciationId": "w:up#p-main",
+      "note": "wake sb up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-b93dee09ac514d48",
+          "text": "Campbell’s point is to wake up those responsible for AI - the technology companies and world leaders - so they are on the same page as all the experts currently developing it.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s81",
+      "pos": "短语",
+      "glossZh": "由……决定",
+      "pronunciationId": "w:up#p-main",
+      "note": "be up to sb。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-31cc0e421a8d62cc",
+          "text": "This issue won’t tell you what your ending should be – that’s up to you and the story you’re telling – but it might provide what you need to get there.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 64
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s82",
+      "pos": "短语",
+      "glossZh": "构成；占（比例）",
+      "pronunciationId": "w:up#p-main",
+      "note": "make up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-728dff5f1628dc47",
+          "text": "They make up half of all shoppers.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:up#e-965e32581b4ae6d1",
+          "text": "It’s one of 47 that make up the peaceful mid-20th-century modern village of Usonia.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s83",
+      "pos": "短语",
+      "glossZh": "被提及",
+      "pronunciationId": "w:up#p-main",
+      "note": "come up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-0c2ef4d407027c09",
+          "text": "The tip that comes up most often is simple: build online courses into your weekly schedule, just like what you would do with in person courses.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s84",
+      "pos": "短语",
+      "glossZh": "收拢物品",
+      "pronunciationId": "w:up#p-main",
+      "note": "gather up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-072705b65315d754",
+          "text": "I gathered up my wallet and room key and set off.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s85",
+      "pos": "短语",
+      "glossZh": "能够胜任",
+      "pronunciationId": "w:up#p-main",
+      "note": "be up to the task。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-b5ba95a141cfabc5",
+          "text": "Fortunately, analyses suggest that renewables are up to the task.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 52
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s86",
+      "pos": "短语",
+      "glossZh": "起床",
+      "pronunciationId": "w:up#p-main",
+      "note": "get up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-3207490d6c5bc996",
+          "text": "Murphy gets up at a quarter to five and drives thirty minutes every day to get to work on time.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:up#e-c62094fdebcf61a0",
+          "text": "My roommates would tell me to go to bed and get up early the following morning to do it instead.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s87",
+      "pos": "短语",
+      "glossZh": "提供（食物或饮料）",
+      "pronunciationId": "w:up#p-main",
+      "note": "serve up。也可引申为带来笑容等。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-d4c5c543a17901b7",
+          "text": "Not only does this cafe serve up drinks, it also serves up smiles.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-i:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s88",
+      "pos": "短语",
+      "glossZh": "与……保持同样进度",
+      "pronunciationId": "w:up#p-main",
+      "note": "keep up with。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-c6ef6979b92555e6",
+          "text": "Ho recognizes the psychological benefit of helping kids keep up with their peers（同龄人）outside the hospital.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 63
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s89",
+      "pos": "短语",
+      "glossZh": "鼓舞",
+      "pronunciationId": "w:up#p-main",
+      "note": "lift sb up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-e792bdaf8e4c57e1",
+          "text": "“__51__ others: Lift others up on your journey.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s90",
+      "pos": "短语",
+      "glossZh": "领取",
+      "pronunciationId": "w:up#p-main",
+      "note": "pick up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-41fe7be9973f3391",
+          "text": "Items are picked up at one of our libraries – the one you selected in the ILL Request Form.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:up#e-df5094b099c29476",
+          "text": "Pick it up at the lending library.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:22",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s91",
+      "pos": "短语",
+      "glossZh": "把……搞糟",
+      "pronunciationId": "w:up#p-main",
+      "note": "mess sth up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-3e352edf1d982a4b",
+          "text": "It really messed up my relationship with food – something that took me years to overcome.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s92",
+      "pos": "短语",
+      "glossZh": "跟进",
+      "pronunciationId": "w:up#p-main",
+      "note": "follow up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-75603fcf29f29aca",
+          "text": "Written communication will give your audience more time to review it, think it over, and follow up with questions.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 98
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s93",
+      "pos": "短语",
+      "glossZh": "挂牌出售",
+      "pronunciationId": "w:up#p-main",
+      "note": "put up for sale。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-e83a280a75632b2e",
+          "text": "It is put up for sale.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2026-ii:26",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s94",
+      "pos": "短语",
+      "glossZh": "犯错",
+      "pronunciationId": "w:up#p-main",
+      "note": "mess up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-570a7653dc717ab1",
+          "text": "When kids mess up, don’t jump in with a rescue mission.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:10",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s95",
+      "pos": "短语",
+      "glossZh": "为某人的将来奠定基础",
+      "pronunciationId": "w:up#p-main",
+      "note": "set sb up for sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-eeebe609657e7add",
+          "text": "Those habits you’re building now are setting your child up for a lifetime of resilience (韧性) and satisfaction.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:11",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:up#e-dc79015e00acd618",
+          "text": "NAHS provides scholarship opportunities for high school students, which can truly set them up for life in this field.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-a:19",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 93
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s96",
+      "pos": "短语",
+      "glossZh": "熬夜",
+      "pronunciationId": "w:up#p-main",
+      "note": "stay up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-5094cf747a56298f",
+          "text": "Even in middle school I would stay up very late.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:up#e-1df2a66220f5234f",
+          "text": "I still loved the night and would stay up until unruly hours for no apparent reason, chatting online and watching videos.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s97",
+      "pos": "短语",
+      "glossZh": "变得激烈",
+      "pronunciationId": "w:up#p-main",
+      "note": "heat up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-b59e777e2a41627d",
+          "text": "Competition among gyms is heating up.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s98",
+      "pos": "短语",
+      "glossZh": "使中断",
+      "pronunciationId": "w:up#p-main",
+      "note": "break up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-2081ce940cea269a",
+          "text": "She had passed a baseball field, breaking up the game and flattening the umpire（裁判）in passing.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s99",
+      "pos": "短语",
+      "glossZh": "找错对象；判断错方向",
+      "pronunciationId": "w:up#p-main",
+      "note": "bark up the wrong tree。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-368cd7b3391eedec",
+          "text": "barking up the wrong tree",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jan:26",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s100",
+      "pos": "短语",
+      "glossZh": "接某人",
+      "pronunciationId": "w:up#p-main",
+      "note": "pick up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-b1ee2fb7b1beffb0",
+          "text": "Pick up Billy.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:up#e-d131d14a3fb2d637",
+          "text": "To pick up Kevin.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s101",
+      "pos": "短语",
+      "glossZh": "增强（如风势）",
+      "pronunciationId": "w:up#p-main",
+      "note": "pick up。例句第 49 空官方答案为 wind。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-899fef0db7f4d568",
+          "text": "The __49__ picked up and thunder rolled.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "cloze-3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s102",
+      "pos": "短语",
+      "glossZh": "选来阅读",
+      "pronunciationId": "w:up#p-main",
+      "note": "pick up（一本书）。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-012ff70d5dc267e1",
+          "text": "From then on, if I wanted to read an ending guaranteed to be happy, I’d pick up a love romance.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:up#e-77100592c63242c2",
+          "text": "If I wanted an ending I couldn’t guess, I’d pick up a mystery（悬疑小说）.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s103",
+      "pos": "短语",
+      "glossZh": "放轻松",
+      "pronunciationId": "w:up#p-main",
+      "note": "lighten up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-1179d6f9f8147f7e",
+          "text": "Lighten up.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s104",
+      "pos": "短语",
+      "glossZh": "赶快",
+      "pronunciationId": "w:up#p-main",
+      "note": "hurry up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:up#e-c65a1d38a585dbad",
+          "text": "At this __50__ the doctor shouted at him, “Hurry up!",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:up#s105",
+      "pos": "n.",
+      "glossZh": "顺境；好转的时候",
+      "pronunciationId": "w:up#p-main",
+      "note": "常见于 ups and downs（起伏）。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "上夸克、不加冰、印度北方邦缩写",
+      "reason": "专门用法或同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

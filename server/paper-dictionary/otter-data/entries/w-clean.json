@@ -1,0 +1,362 @@
+{
+  "entryId": "w:clean",
+  "headword": "clean",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kliːn/",
+    "us": "/kliːn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:clean#p-main",
+      "ipa": {
+        "uk": "/kliːn/",
+        "us": "/kliːn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "cleaner",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "cleanest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "cleans",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "cleaned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "cleaning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 47,
+    "mock": 266
+  },
+  "unassignedCounts": {
+    "gaokao": 9,
+    "mock": 265
+  },
+  "senses": [
+    {
+      "senseId": "w:clean#s1",
+      "pos": "adj.",
+      "glossZh": "干净的；洁净的",
+      "pronunciationId": "w:clean#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 24,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:clean#e-07cf392b90f02824",
+          "text": "When we are thirsty we just go to the kitchen and fill a glass with clean water.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:clean#e-044d71b19d9f00dd",
+          "text": "Tell everyone to bring clean clothes in good condition",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-national-a:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:clean#e-2c86b23b0b125804",
+          "text": "“Our hope is to have a clean, attractant-free place where bears can pass through without learning bad habits,” says James Jonkel, longtime biologist who manages bears in and around Missoula.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:clean#s2",
+      "pos": "adj.",
+      "glossZh": "清洁的；低污染的",
+      "pronunciationId": "w:clean#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:clean#e-8458cda3a38f2f7d",
+          "text": "It turns rotten arugula into clean fuel.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2022-i:26",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:clean#e-e56b00e644b49c6e",
+          "text": "Barcelona has put together a package of clean energy technologies to help public transportation go greener, while also doing its part to tackle climate change and aid Europe’s difficult shift to the privately owned electric vehicle market.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:clean#s3",
+      "pos": "v.",
+      "glossZh": "打扫；清理；使干净",
+      "pronunciationId": "w:clean#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:clean#e-6721b1c68c7e130a",
+          "text": "We had to have a bit of a production line going, making up “tiger milk”, washing baby bottles, and cleaning the floors.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 99,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:clean#e-cee8c6d5b2e2ba01",
+          "text": "With the right combination of animals and plants, he figured, maybe he could clean up waste the way nature did.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:clean#e-75ac467eea9e3080",
+          "text": "There is also research showing that pot plants can clean the air around them by removing harmful gases, such as carbon dioxide.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:clean#s4",
+      "pos": "n.",
+      "glossZh": "打扫；清洁",
+      "pronunciationId": "w:clean#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:clean#e-f9690dabcb6c3999",
+          "text": "Then I noticed folk conducting spring cleans dropping boxes of voluminous books on various subjects there.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:clean#s5",
+      "pos": "adj.",
+      "glossZh": "清白的；无不良记录的",
+      "pronunciationId": "w:clean#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:clean#s6",
+      "pos": "adj.",
+      "glossZh": "利落的；无瑕疵的",
+      "pronunciationId": "w:clean#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:clean#e-1e4e0109735b5e39",
+          "text": "The all-metal swing arm design and clean industrial look make it a statement piece for your home office, studio, or creative desk.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 40
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "举重提铃、冰壶刷冰、清嗓唱法",
+      "reason": "运动或音乐术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

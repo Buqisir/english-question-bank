@@ -1,0 +1,288 @@
+{
+  "entryId": "w:cell",
+  "headword": "cell",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/sel/",
+    "us": "/sel/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:cell#p-main",
+      "ipa": {
+        "uk": "/sel/",
+        "us": "/sel/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "cells",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 271
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 267
+  },
+  "senses": [
+    {
+      "senseId": "w:cell#s1",
+      "pos": "n.",
+      "glossZh": "细胞",
+      "pronunciationId": "w:cell#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cell#e-76ce2e94742fd1f1",
+          "text": "The research team __44__ Canadian doctor Allan Slomovic, who has done __45__ work on eye care using stem cells.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:cell#e-fd9d7c543edafba1",
+          "text": "Generally, larger animals within a species face higher cancer risk – large dog breeds have more cells and greater cancer rates than small ones.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:cell#e-dc0117e835b7d480",
+          "text": "It forms a bilayer, similar to the membrane of a living cell, with water-attracting heads on the outside and water-hating tails facing inward.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cell#s2",
+      "pos": "短语",
+      "glossZh": "手机；移动电话",
+      "pronunciationId": "w:cell#p-main",
+      "note": "cell phone",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cell#e-3ab608f043c74040",
+          "text": "If the Textalyzer bill becomes law, he said, \"people are going to be more afraid to put their hands on the cell phone.\"",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:cell#e-3875e7b23bb99d66",
+          "text": "In a panic, I reached down for my purse to grab my cell phone.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:writing-continuation:8",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cell#s3",
+      "pos": "n.",
+      "glossZh": "电池单元；电池",
+      "pronunciationId": "w:cell#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cell#e-ae4deac72f905583",
+          "text": "A photovoltaic (PV) cell, commonly called a solar cell, is a nonmechanical device that turns sunlight directly into electricity.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cell#s4",
+      "pos": "短语",
+      "glossZh": "风暴单体",
+      "pronunciationId": "w:cell#p-main",
+      "note": "storm cell",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cell#e-f517ec07242300eb",
+          "text": "“In 1999, I personally saw significant tornadoes(龙卷风) form from a seeded storm cell in Kansas,” Dr. Doswell says.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 83
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cell#s5",
+      "pos": "n.",
+      "glossZh": "牢房；单人小室",
+      "pronunciationId": "w:cell#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:cell#s6",
+      "pos": "n.",
+      "glossZh": "表格中的单元格；蜂巢中的小格",
+      "pronunciationId": "w:cell#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:cell#s7",
+      "pos": "n.",
+      "glossZh": "组织的基层或秘密小组",
+      "pronunciationId": "w:cell#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "期刊 Cell、昆虫翅室、通信数据包等",
+      "reason": "专名或行业专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,143 @@
+{
+  "entryId": "w:celebrity",
+  "headword": "celebrity",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/səˈlebrəti/",
+    "us": "/səˈlebrəti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:celebrity#p-main",
+      "ipa": {
+        "uk": "/səˈlebrəti/",
+        "us": "/səˈlebrəti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "celebrities",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 64
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 62
+  },
+  "senses": [
+    {
+      "senseId": "w:celebrity#s1",
+      "pos": "n.",
+      "glossZh": "名人；明星",
+      "pronunciationId": "w:celebrity#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:celebrity#e-4a8543d037f51512",
+          "text": "They focus on the life of celebrities.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:celebrity#e-9309e56fe7c87d0c",
+          "text": "Regardless of how famous they are, and despite the star treatment they receive, many celebrities make it a point to give back to charities.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:celebrity#e-e8e323faf343ec74",
+          "text": "In a time when celebrities, social media influencers, and famous personalities seem like they are just a click away, it’s easy to understand how emotional bonds with public figures have become more personal and complex than ever.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-import-20261026-n090:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:celebrity#s2",
+      "pos": "n.",
+      "glossZh": "名声；名望",
+      "pronunciationId": "w:celebrity#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "仪式",
+      "reason": "旧用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

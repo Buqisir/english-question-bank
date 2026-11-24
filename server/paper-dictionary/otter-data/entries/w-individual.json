@@ -1,0 +1,266 @@
+{
+  "entryId": "w:individual",
+  "headword": "individual",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌɪndɪˈvɪdʒuəl/",
+    "us": "/ˌɪndɪˈvɪdʒuəl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:individual#p-main",
+      "ipa": {
+        "uk": "/ˌɪndɪˈvɪdʒuəl/",
+        "us": "/ˌɪndɪˈvɪdʒuəl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more individual",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most individual",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "individuals",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 241
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 239
+  },
+  "senses": [
+    {
+      "senseId": "w:individual#s1",
+      "pos": "n.",
+      "glossZh": "个人；个体",
+      "pronunciationId": "w:individual#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:individual#e-5ebb43c8fc7a9d8c",
+          "text": "Some individuals are born with a gift for public speaking.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:individual#e-3db9eb2e9470d7e8",
+          "text": "Such a complex but ultimately enriching set of encounters helps individuals know their neighbors and neighbourhood better.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:individual#e-f47eb9bc55c309cc",
+          "text": "Not only will you be actively participating in the life of the Museum, but you also will receive special opportunities to share your love of art with other like-minded individuals.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 168,
+            "end": 179
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:individual#s2",
+      "pos": "adj.",
+      "glossZh": "单独的；单个的",
+      "pronunciationId": "w:individual#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:individual#e-547ee06c1c80c4c2",
+          "text": "The individual estimates.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2023-i:34",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:individual#e-876953db6d4e5ec9",
+          "text": "Consumers prefer money off individual items.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:individual#e-02582cb3d99310f9",
+          "text": "However, in recent years, Google has switched to neural (神经的) machine translation (NMT), which uses deep learning models to improve accuracy by understanding context rather than just individual words.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 183,
+            "end": 193
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:individual#s3",
+      "pos": "adj.",
+      "glossZh": "个人的（相对于团体）",
+      "pronunciationId": "w:individual#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:individual#e-f7b52e934ee0f399",
+          "text": "To become the Olympic champion in the individual (个人) all-around event, Gabby Douglas had to leave everything she __41__ best.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:individual#e-502822bd471c2e6f",
+          "text": "Encourage individual action.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 20
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "不可分割的",
+      "reason": "历史义，现代常用 indivisible"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

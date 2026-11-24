@@ -1,0 +1,206 @@
+{
+  "entryId": "w:fork",
+  "headword": "fork",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fɔːk/",
+    "us": "/fɔːrk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fork#p-main",
+      "ipa": {
+        "uk": "/fɔːk/",
+        "us": "/fɔːrk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "forks",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "forked",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "forking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "senses": [
+    {
+      "senseId": "w:fork#s1",
+      "pos": "n.",
+      "glossZh": "叉子",
+      "pronunciationId": "w:fork#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fork#e-007c3ade2d154f52",
+          "text": "People in Thailand generally use their forks only to push food onto their spoons.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-a:seven-choices:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:fork#e-1a73124686335f26",
+          "text": "Sarah set down her fork, disappointment clouding her eyes.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:fork#e-22b5b0e835c8eb05",
+          "text": "I watched them go, and my fork paused mid-air.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fork#s2",
+      "pos": "n.",
+      "glossZh": "分岔处",
+      "pronunciationId": "w:fork#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fork#s3",
+      "pos": "n.",
+      "glossZh": "叉形工具",
+      "pronunciationId": "w:fork#p-main",
+      "note": "如 tuning fork 音叉。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fork#e-325a8a82723fdf6d",
+          "text": "Good Vibrations: Dive into the wonderful world of sound with tuning forks, musical instruments and more.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "cell:paper-mock-import-20261026-n090:reading-a:ocr-916a21169272a7ae:1:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fork#s4",
+      "pos": "v.",
+      "glossZh": "分岔",
+      "pronunciationId": "w:fork#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "双攻",
+      "reason": "国际象棋术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

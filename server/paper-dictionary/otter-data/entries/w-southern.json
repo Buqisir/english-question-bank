@@ -1,0 +1,147 @@
+{
+  "entryId": "w:southern",
+  "headword": "southern",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsʌðən/",
+    "us": "/ˈsʌðərn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:southern#p-main",
+      "ipa": {
+        "uk": "/ˈsʌðən/",
+        "us": "/ˈsʌðərn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more southern",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most southern",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more Southern",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most Southern",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 23
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:southern#s1",
+      "pos": "adj.",
+      "glossZh": "南部的",
+      "pronunciationId": "w:southern#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 23
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:southern#e-2d7134b7f759f5d6",
+          "text": "Human speech contains more than 2,000 different sounds, from the common “m” and “a” to the rare clicks of some southern African languages.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-d-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 111,
+            "end": 119
+          }
+        },
+        {
+          "exampleId": "w:southern#e-f7c30a7ddd3f9837",
+          "text": "On September 7, 1991, the costliest hailstorm(雹暴) in Canadian history hit Calgary’s southern suburbs.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:southern#e-f2ebef6bdf7936d7",
+          "text": "“I am pleasantly surprised, because I am always looking for where to plug it in,” Espinoza said before catching the subway in a working-class area of southern Barcelona.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 150,
+            "end": 158
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏、专名简称和「南方人」名词义",
+      "reason": "专名或罕见词性"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

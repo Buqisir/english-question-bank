@@ -1,0 +1,228 @@
+{
+  "entryId": "w:purple",
+  "headword": "purple",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpɜːpl/",
+    "us": "/ˈpɜːrpl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:purple#p-main",
+      "ipa": {
+        "uk": "/ˈpɜːpl/",
+        "us": "/ˈpɜːrpl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more purple",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most purple",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "purpler",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "purplest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "purples",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 11
+  },
+  "senses": [
+    {
+      "senseId": "w:purple#s1",
+      "pos": "adj.",
+      "glossZh": "紫色的",
+      "pronunciationId": "w:purple#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:purple#e-486818d3be26710d",
+          "text": "This happened over and over, but we soon learned to identify different grasses like cockleburs, lamb's-quarters, foxtails, and the king of weeds, the pretty purple thistle.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 157,
+            "end": 163
+          }
+        },
+        {
+          "exampleId": "w:purple#e-f3537663a40470c3",
+          "text": "One time my friends and I drove three hours to Devil’s Lake, Wisconsin, to climb the purple quartz (石英)",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 91
+          }
+        },
+        {
+          "exampleId": "w:purple#e-45ac79302b5fb310",
+          "text": "However, instead of the brownish red hair she had hoped for, she final got purple hair.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-b:writing-short-error-correction:8",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:purple#s2",
+      "pos": "n.",
+      "glossZh": "紫色",
+      "pronunciationId": "w:purple#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:purple#e-3fe66f3023dfded6",
+          "text": "And it’s shaping up to be the next cultural phenomenon, with moviegoers heading to the theaters in big groups while dressed up in purple.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 130,
+            "end": 136
+          }
+        },
+        {
+          "exampleId": "w:purple#e-a2c65b1f8a69dfd3",
+          "text": "But beyond pure marketing, purple holds a greater meaning here.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:purple#e-b01440f15caee0bc",
+          "text": "All that plays into people wearing purple to support the movie and embrace this theme of strength.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 41
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "帝王权力",
+      "reason": "历史象征义"
+    },
+    {
+      "glossZh": "紫癜",
+      "reason": "医学专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

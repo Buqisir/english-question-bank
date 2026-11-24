@@ -1,0 +1,201 @@
+{
+  "entryId": "w:leader",
+  "headword": "leader",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈliːdə(r)/",
+    "us": "/ˈliːdər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:leader#p-main",
+      "ipa": {
+        "uk": "/ˈliːdə(r)/",
+        "us": "/ˈliːdər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "leaders",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 108
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 105
+  },
+  "senses": [
+    {
+      "senseId": "w:leader#s1",
+      "pos": "n.",
+      "glossZh": "领导者；带头人",
+      "pronunciationId": "w:leader#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:leader#e-529b14a25b78a6a9",
+          "text": "As a young girl growing up in France, Sarah Toumi dreamed of becoming a leader who could make the world a better place.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:leader#e-873d7277ab51e324",
+          "text": "Campbell’s point is to wake up those responsible for AI - the technology companies and world leaders - so they are on the same page as all the experts currently developing it.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:leader#e-11b6da974441b3ef",
+          "text": "That help comes from an unlikely duo: Beijing pop star Xingyu Lee and Professor Fan, leader of the research team on Skywalker Gibbons.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 91
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:leader#s2",
+      "pos": "n.",
+      "glossZh": "处于领先地位者",
+      "pronunciationId": "w:leader#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:leader#e-1a76a2876727fce6",
+          "text": "InSPIRE: A Leader in Agriculture",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:35",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:leader#e-b743514a4cefd316",
+          "text": "As a research leader, it studies sea animals in human care and natural habitats to advance scientific knowledge and apply discoveries to conservation.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:leader#e-b07fdd8c752eb871",
+          "text": "UNICEF is the world leader in delivering vital supplies to children.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 26
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "河流名、片头引导段",
+      "reason": "专名或行业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

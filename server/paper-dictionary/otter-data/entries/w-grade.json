@@ -1,0 +1,340 @@
+{
+  "entryId": "w:grade",
+  "headword": "grade",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɡreɪd/",
+    "us": "/ɡreɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:grade#p-main",
+      "ipa": {
+        "uk": "/ɡreɪd/",
+        "us": "/ɡreɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "grades",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "graded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "grading",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 23,
+    "mock": 129
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 127
+  },
+  "senses": [
+    {
+      "senseId": "w:grade#s1",
+      "pos": "n.",
+      "glossZh": "成绩",
+      "pronunciationId": "w:grade#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:grade#e-54599ee764509165",
+          "text": "Pre-College students will also receive a grade of Satisfactory/Unsatisfactory and a certificate of completion at the conclusion of the program.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:grade#e-9c0e0e266f743b18",
+          "text": "An essay not submitted in class on the due date will lose a letter grade for each class period it is late.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "reading-a-11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:grade#e-36d334c459ec5b23",
+          "text": "Which carries the most weight in the final grade?",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 48
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:grade#s2",
+      "pos": "n.",
+      "glossZh": "年级",
+      "pronunciationId": "w:grade#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:grade#e-867e239d5bff4993",
+          "text": "My dad, George, only had an eighth grade education.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:grade#e-360fdfead7980360",
+          "text": "The summer before my eighth grade I was one of a group of boys that a neighboring farmer hired to work in his field.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:grade#e-6fbd6282bf443d0f",
+          "text": "My son is in fourth grade and he can already speak fluent Mandarin（普通话）.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:grade#s3",
+      "pos": "v.",
+      "glossZh": "评分",
+      "pronunciationId": "w:grade#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:grade#e-8ab5e5948f24ddbb",
+          "text": "Grading Policies for Introduction to Literature",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-a-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:grade#e-eb07adbcb5902d78",
+          "text": "Additionally, from time to time I will assign group work to be completed in class or short assignments to be completed at home, both of which will be graded.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "reading-a-9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 150,
+            "end": 156
+          }
+        },
+        {
+          "exampleId": "w:grade#e-707846715574c885",
+          "text": "Grading homework and tests takes less time with AI assistance.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:grade#s4",
+      "pos": "n.",
+      "glossZh": "等级",
+      "pronunciationId": "w:grade#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:grade#s5",
+      "pos": "v.",
+      "glossZh": "分级",
+      "pronunciationId": "w:grade#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:grade#s6",
+      "pos": "n.",
+      "glossZh": "坡度",
+      "pronunciationId": "w:grade#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:grade#s7",
+      "pos": "v.",
+      "glossZh": "平整（土地）",
+      "pronunciationId": "w:grade#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "百分度",
+      "reason": "角度单位名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

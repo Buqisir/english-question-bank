@@ -1,0 +1,130 @@
+{
+  "entryId": "w:usually",
+  "headword": "usually",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈjuːʒuəli/",
+    "us": "/ˈjuːʒuəli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:usually#p-main",
+      "ipa": {
+        "uk": "/ˈjuːʒuəli/",
+        "us": "/ˈjuːʒuəli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more usually",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most usually",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 36,
+    "mock": 154
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:usually#s1",
+      "pos": "adv.",
+      "glossZh": "通常",
+      "pronunciationId": "w:usually#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 36,
+        "mock": 154
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:usually#e-bad6f9cc1d83c450",
+          "text": "There are usually no planned activities like games at a housewarming party.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:usually#e-f93798378b18accc",
+          "text": "There are usually around 30 different kinds of all-native tree species (物种).",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:usually#e-168f20144f3aeee8",
+          "text": "Articles are usually received within 1-2 days and books in 5-10 days.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

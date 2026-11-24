@@ -1,0 +1,143 @@
+{
+  "entryId": "w:nationality",
+  "headword": "nationality",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌnæʃəˈnæləti/",
+    "us": "/ˌnæʃəˈnæləti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:nationality#p-main",
+      "ipa": {
+        "uk": "/ˌnæʃəˈnæləti/",
+        "us": "/ˌnæʃəˈnæləti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "nationalities",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "senses": [
+    {
+      "senseId": "w:nationality#s1",
+      "pos": "n.",
+      "glossZh": "国籍",
+      "pronunciationId": "w:nationality#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:nationality#e-bd3aae3cf84a1d04",
+          "text": "They were of all ages and nationalities.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:nationality#e-ea024eff91f6d96a",
+          "text": "British nationality.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam",
+            "paperTitle": "金华义乌市、绍兴柯桥区 2026 年 5 月浙江省普通高中适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-zhejiang-jinhua-yiwu-shaoxing-keqiao-2026-05-adaptability-exam:21",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:nationality#e-64550f63dba56fff",
+          "text": "You made this difficult decision without ever questioning the race, religion, or nationality.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 92
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:nationality#s2",
+      "pos": "n.",
+      "glossZh": "民族",
+      "pronunciationId": "w:nationality#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "爱国情感",
+      "reason": "旧式用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

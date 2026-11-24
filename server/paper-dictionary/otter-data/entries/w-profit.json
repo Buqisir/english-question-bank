@@ -1,0 +1,214 @@
+{
+  "entryId": "w:profit",
+  "headword": "profit",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈprɒfɪt/",
+    "us": "/ˈprɑːfɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:profit#p-main",
+      "ipa": {
+        "uk": "/ˈprɒfɪt/",
+        "us": "/ˈprɑːfɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "profits",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "profited",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "profiting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 35
+  },
+  "senses": [
+    {
+      "senseId": "w:profit#s1",
+      "pos": "n.",
+      "glossZh": "利润",
+      "pronunciationId": "w:profit#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:profit#e-935cd0668d07a3cc",
+          "text": "To earn profits for the crews.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2022-national-b:30",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:profit#e-bc8bcf39607c9103",
+          "text": "Its profits will decline.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2024-ii:27",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:profit#e-684eaf14dac4a55f",
+          "text": "It was not until ninety days later that the company finally turned a profit, a hard-won victory that would fuel her next, most meaningful business.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:grammar-fill:1",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:profit#s2",
+      "pos": "v.",
+      "glossZh": "获利",
+      "pronunciationId": "w:profit#p-main",
+      "note": "profit from sth。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:profit#e-dfaed20b20979a24",
+          "text": "Some criminals kidnap(绑架) him, hoping to profit from his powers.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:seven-choices:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:profit#e-d790b1f3380b6ae1",
+          "text": "Oddly, attitudes among veterinarians vary widely – some criticize the trend while others support it and even profit from it.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 115
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:profit#s3",
+      "pos": "v.",
+      "glossZh": "从……受益",
+      "pronunciationId": "w:profit#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "土地收益权",
+      "reason": "法律专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

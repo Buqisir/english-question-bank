@@ -1,0 +1,185 @@
+{
+  "entryId": "w:winter",
+  "headword": "winter",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈwɪntə(r)/",
+    "us": "/ˈwɪntər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:winter#p-main",
+      "ipa": {
+        "uk": "/ˈwɪntə(r)/",
+        "us": "/ˈwɪntər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "winters",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Winters",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "wintered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "wintering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 20,
+    "mock": 143
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 143
+  },
+  "senses": [
+    {
+      "senseId": "w:winter#s1",
+      "pos": "n.",
+      "glossZh": "冬季",
+      "pronunciationId": "w:winter#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 19,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:winter#e-f2b8e9b11bb60eaf",
+          "text": "Milwaukee, Wisconsin, is road testing a new way to keep winter roads ice-free -by spreading on them cheese brine, the salty liquid used to make soft cheeses, like mozzarella.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:winter#e-8e3bb8a509eb5b81",
+          "text": "There was making leaf houses in autumn, ice skating in winter, and so much more.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:winter#e-e7dcaf56b39baeaf",
+          "text": "The snow was marked only by small animals: foxes, coyotes, mice, and varying hares, which turned white in the winter.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 110,
+            "end": 116
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:winter#s2",
+      "pos": "v.",
+      "glossZh": "过冬",
+      "pronunciationId": "w:winter#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:winter#e-a4a630a2a86590f3",
+          "text": "The butterflies, the reports confirmed, wintered in coastal California.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 48
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "衰败期、暖壶架、地名",
+      "reason": "少见比喻、旧用法或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

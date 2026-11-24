@@ -1,0 +1,124 @@
+{
+  "entryId": "w:laptop",
+  "headword": "laptop",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈlæptɒp/",
+    "us": "/ˈlæptɑːp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:laptop#p-main",
+      "ipa": {
+        "uk": "/ˈlæptɒp/",
+        "us": "/ˈlæptɑːp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "laptops",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:laptop#s1",
+      "pos": "n.",
+      "glossZh": "笔记本电脑",
+      "pronunciationId": "w:laptop#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 38
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:laptop#e-9333644f97ae6843",
+          "text": "Bent over my laptop while sitting on the bed in the corner of my room, I suddenly felt a pounding headache, and had to lie down.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:laptop#e-067301ec4a68fb0b",
+          "text": "As society moves from a culture centred around socialising to one consumed by productivity, even pubs have adapted – some now serving as remote workspaces where laptops are welcomed.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 161,
+            "end": 168
+          }
+        },
+        {
+          "exampleId": "w:laptop#e-eb5ec32c1cbc55da",
+          "text": "She sat at her laptop, deleted every word of the AI text, and typed: “My heroes leave at 4 am, so the city can eat at 7 am.” She wrote about the worn-out gloves and the smell of steaming hot dogs.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 21
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

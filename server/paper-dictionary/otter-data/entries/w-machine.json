@@ -1,0 +1,315 @@
+{
+  "entryId": "w:machine",
+  "headword": "machine",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/məˈʃiːn/",
+    "us": "/məˈʃiːn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:machine#p-main",
+      "ipa": {
+        "uk": "/məˈʃiːn/",
+        "us": "/məˈʃiːn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "machines",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "machined",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "machining",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 18,
+    "mock": 146
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 144
+  },
+  "senses": [
+    {
+      "senseId": "w:machine#s1",
+      "pos": "n.",
+      "glossZh": "机器",
+      "pronunciationId": "w:machine#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:machine#e-1fd26935b5d86b3d",
+          "text": "They share a front door and a washing machine, but Rita Whitehead has her own kitchen, bathroom, bedroom and living room on the ground floor.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:machine#e-3abdc4d53433aa39",
+          "text": "The story begins in the last years of the 18th century in Scotland, where Watt perfected “the machine that changed the world”.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 94,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:machine#e-9a375dc71222d500",
+          "text": "Two days later, all of the participants returned to the lab for a recall test, and they were connected to MRI (磁共振成像) machines to assess their brain activity.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 118,
+            "end": 126
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:machine#s2",
+      "pos": "n.",
+      "glossZh": "计算机",
+      "pronunciationId": "w:machine#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:machine#e-139537c300a86178",
+          "text": "A machine can now not only beat you at chess, it can also outperform you in debate.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:machine#e-cf6a724ef49c830a",
+          "text": "What Hammond is referring to is the question of meaning, and meaning is central to what distinguishes the least intelligent of humans from the most intelligent of machines.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 163,
+            "end": 171
+          }
+        },
+        {
+          "exampleId": "w:machine#e-a4e0d5416f88a26b",
+          "text": "Though many companies use algorithms (算法) to weed out fake reviews, Azimi points out that the machines are programmed by humans, and given our limited ability to spot fake reviews, this isn’t a good sign.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 94,
+            "end": 102
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:machine#s3",
+      "pos": "n.",
+      "glossZh": "严密运转的组织",
+      "pronunciationId": "w:machine#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:machine#s4",
+      "pos": "v.",
+      "glossZh": "用机器加工",
+      "pronunciationId": "w:machine#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:machine#s5",
+      "pos": "短语",
+      "glossZh": "机器学习",
+      "pronunciationId": "w:machine#p-main",
+      "note": "machine learning。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:machine#e-1f545e8080f9788e",
+          "text": "By using machine learning and advanced algorithms (算法), these institutions are creating personalized visitor journeys, protecting delicate collections, and revealing hidden stories.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:machine#e-85a4724a4cb30c69",
+          "text": "Huawei’s Pangu-Weather, Nvidia’s FourcastNet, and Google DeepMind’s GraphCast are making meteorologists(气象学家) reconsider how we use machine learning and weather forecasts, Peter Dueben, head of Earth system modeling at the European Centre for Medium-Range Weather Forecasts(ECMWF), told me for the story.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 132,
+            "end": 139
+          }
+        },
+        {
+          "exampleId": "w:machine#e-1928f1db11b38dcf",
+          "text": "• Cave Dance: An innovative exhibit that employs machine learning to bring life to dances from Dunhuang’s murals（壁画）.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 56
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "古希腊舞台装置等历史含义",
+      "reason": "专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

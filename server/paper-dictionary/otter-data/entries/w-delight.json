@@ -1,0 +1,317 @@
+{
+  "entryId": "w:delight",
+  "headword": "delight",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈlaɪt/",
+    "us": "/dɪˈlaɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:delight#p-main",
+      "ipa": {
+        "uk": "/dɪˈlaɪt/",
+        "us": "/dɪˈlaɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "delights",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "delighted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "delighting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 43
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 35
+  },
+  "senses": [
+    {
+      "senseId": "w:delight#s1",
+      "pos": "n.",
+      "glossZh": "高兴；喜悦",
+      "pronunciationId": "w:delight#p-main",
+      "note": "to sb's delight 指「令某人高兴的是」。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:delight#e-fff502c409e509d6",
+          "text": "Grinning with delight, Harry watched him pedal away and disappear in the distance.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation:4",
+              "sentence": 11
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:delight#e-687c6e6335901ba6",
+          "text": "To his delight, they were both quick to support him.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:delight#e-ef742e24b8d4be3a",
+          "text": "Every day before closing time, I would check the Library and see what books the visitors had taken and take delight in their choices.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 115
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:delight#s2",
+      "pos": "n.",
+      "glossZh": "令人愉快的人或事",
+      "pronunciationId": "w:delight#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:delight#e-a6b788d921a1693c",
+          "text": "As a woodworking maker in rural UK, I find my story full of unique delights.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:delight#s3",
+      "pos": "v.",
+      "glossZh": "使高兴；使愉快",
+      "pronunciationId": "w:delight#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:delight#e-5029d8996d9b67f2",
+          "text": "He is to be __42__ for these exercises, but what really delights him is that this money will fund his __43__ in Break The Rules Day.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:delight#e-6a7606b7f305a0cd",
+          "text": "Few things delight children, or annoy their parents, as much as screen time.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:delight#e-d931d9a698a5c1b9",
+          "text": "A chihuahua on a city break has different needs to a labrador on a hiking trip, yet many providers offer generic (通用的) packages that delight no one.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-d:3",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 133,
+            "end": 140
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:delight#s4",
+      "pos": "adj.",
+      "glossZh": "非常高兴的",
+      "pronunciationId": "w:delight#p-main",
+      "note": "delighted。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:delight#e-98e16c7b0e4234da",
+          "text": "And officials at Port Lympne were delighted with the new arrival, especially as black rhinos are known for being difficult to breed in captivity (圈养).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:delight#e-2c3586c33518a5f3",
+          "text": "Paul Beer, head of rhino section at Port Lympne, said: “Obviously we’re all absolutely delighted to welcome another calf to our black rhino family.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:delight#e-c737f348a7de6edd",
+          "text": "I’m delighted to learn that you are interested in the labor practice in our school.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:writing-application",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:writing-application:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 13
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

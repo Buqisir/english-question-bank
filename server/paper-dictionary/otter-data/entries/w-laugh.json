@@ -1,0 +1,348 @@
+{
+  "entryId": "w:laugh",
+  "headword": "laugh",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/lɑːf/",
+    "us": "/læf/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:laugh#p-main",
+      "ipa": {
+        "uk": "/lɑːf/",
+        "us": "/læf/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "laughs",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "laughed",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "laughing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 18,
+    "mock": 137
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 135
+  },
+  "senses": [
+    {
+      "senseId": "w:laugh#s1",
+      "pos": "v.",
+      "glossZh": "笑",
+      "pronunciationId": "w:laugh#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:laugh#e-120ae44ca2ee9869",
+          "text": "The family hugged and smiled through misty eyes and then laughed.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:laugh#e-40a5fe923c741b41",
+          "text": "it can bring in \"I have this old, broken-down vehicle\" or \"I rode the bus with these crazy people who were laughing at silly jokes in the back.\" It just opens up conversation.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 122
+          }
+        },
+        {
+          "exampleId": "w:laugh#e-31ed2f198717cc6f",
+          "text": "When I handed in the essay to my teacher, he read it, laughed out loud, and said, “Great.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:laugh#s2",
+      "pos": "v.",
+      "glossZh": "笑着说",
+      "pronunciationId": "w:laugh#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:laugh#e-9688a1f72d3924e8",
+          "text": "“My husband is the worst page turner,” she laughed.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:laugh#e-f675c6b0a37e294c",
+          "text": "Mum laughed, “With whose money?”",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:cloze:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:laugh#s3",
+      "pos": "短语",
+      "glossZh": "嘲笑",
+      "pronunciationId": "w:laugh#p-main",
+      "note": "laugh at。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:laugh#e-43f7f40fada65506",
+          "text": "“I was afraid that kids from other schools would laugh at him,” he explained uncomfortably.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "writing-continuation-5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:laugh#e-ccca79227e3e31ac",
+          "text": "If he seems a little defensive, it might be because even some of his coworkers occasionally laugh at his unusual methods.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:laugh#e-a2787905d170605e",
+          "text": "Ms Donohue used to be laughed at for being too old to work out, but she has proved the __54__ wrong in the best possible way and has indeed become an __55__ for many social media users.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:cloze",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-ii:cloze:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:laugh#s4",
+      "pos": "n.",
+      "glossZh": "笑声",
+      "pronunciationId": "w:laugh#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:laugh#e-e6e0ee922900bfb8",
+          "text": "the man asked with a laugh.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:laugh#s5",
+      "pos": "短语",
+      "glossZh": "笑到最后",
+      "pronunciationId": "w:laugh#p-main",
+      "note": "have the last laugh。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:laugh#e-df335290f5481b36",
+          "text": "But Farber is certain he’ll have the last laugh.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:laugh#s6",
+      "pos": "n.",
+      "glossZh": "有趣的事",
+      "pronunciationId": "w:laugh#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

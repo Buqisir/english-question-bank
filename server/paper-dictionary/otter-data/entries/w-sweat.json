@@ -1,0 +1,264 @@
+{
+  "entryId": "w:sweat",
+  "headword": "sweat",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/swet/",
+    "us": "/swet/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:sweat#p-main",
+      "ipa": {
+        "uk": "/swet/",
+        "us": "/swet/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "sweats",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "sweated",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    },
+    {
+      "form": "sweating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 36
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 29
+  },
+  "senses": [
+    {
+      "senseId": "w:sweat#s1",
+      "pos": "n.",
+      "glossZh": "汗",
+      "pronunciationId": "w:sweat#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sweat#e-9b44f6d8128fb123",
+          "text": "Manny felt sweat starting to form on his palms as he tried to find his place in his notes.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:writing-continuation:6",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:sweat#e-c0d2c71792a3085a",
+          "text": "Sweat poured down Mark’s face.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-04-second",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-04-second:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:sweat#e-9edff2e4e681955b",
+          "text": "It absorbs sweat from the skin.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-guangdong-shantou-2026-01-final:22",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sweat#s2",
+      "pos": "v.",
+      "glossZh": "出汗",
+      "pronunciationId": "w:sweat#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sweat#e-87d5f7ecb6ffec03",
+          "text": "On another occasion, I __49__ in front of the senior management team, sweating heavily.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:sweat#e-5418c88e5d28de5b",
+          "text": "But then the indicators started showing – she lost her appetite, couldn’t sleep, and sweated all the time.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:sweat#e-90192e0f5525f2dc",
+          "text": "By contrast, warm-blooded animals may be less sensitive to these effects because they can cool their bodies through sweating.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 116,
+            "end": 124
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sweat#s3",
+      "pos": "v.",
+      "glossZh": "辛苦工作",
+      "pronunciationId": "w:sweat#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sweat#e-558294d0d2346e2f",
+          "text": "I sweated my way through the garden.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sweat#s4",
+      "pos": "v.",
+      "glossZh": "担心",
+      "pronunciationId": "w:sweat#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "赛马短练、管接头焊接和硬币磨损",
+      "reason": "专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

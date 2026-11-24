@@ -1,0 +1,116 @@
+{
+  "entryId": "w:olympic",
+  "headword": "Olympic",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈlɪmpɪk/",
+    "us": "/əˈlɪmpɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:olympic#p-main",
+      "ipa": {
+        "uk": "/əˈlɪmpɪk/",
+        "us": "/əˈlɪmpɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:olympic#s1",
+      "pos": "adj.",
+      "glossZh": "奥林匹克运动会的",
+      "pronunciationId": "w:olympic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 20
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:olympic#e-b9562acfb64d81d4",
+          "text": "To become the Olympic champion in the individual (个人) all-around event, Gabby Douglas had to leave everything she __41__ best.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:olympic#e-71ed60890132d7bc",
+          "text": "As it turned out, Douglas did __50__ what she needed to do to become Olympic champion when she __51__ two Russians.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:olympic#e-3f1a55e3d3f95999",
+          "text": "There’s a reason we award Olympic medals to the athletes who swim the fastest, not the ones who train the hardest.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:seven-choices:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

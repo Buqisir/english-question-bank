@@ -1,0 +1,216 @@
+{
+  "entryId": "w:potato",
+  "headword": "potato",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pəˈteɪtəʊ/",
+    "us": "/pəˈteɪtoʊ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:potato#p-main",
+      "ipa": {
+        "uk": "/pəˈteɪtəʊ/",
+        "us": "/pəˈteɪtoʊ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "potatoes",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 35
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 30
+  },
+  "senses": [
+    {
+      "senseId": "w:potato#s1",
+      "pos": "n.",
+      "glossZh": "土豆",
+      "pronunciationId": "w:potato#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:potato#e-a98aa75476045a99",
+          "text": "She is making a cake out of sand and mud, adding in make-believe carrots, potatoes and meat.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-import-20261026-n085:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:potato#e-d7b9a2a4acda9a26",
+          "text": "Besides planting seeds, a special method allows growing new plants from parts of other plants, like rose stems or potato tubers – these copies like the mother plant are called plant clones.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 114,
+            "end": 120
+          }
+        },
+        {
+          "exampleId": "w:potato#e-0dc4fa1e8c6339a2",
+          "text": "Children grow carrots, potatoes and cucumbers, harvesting and cooking what they plant.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n085:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:potato#s2",
+      "pos": "短语",
+      "glossZh": "甘薯",
+      "pronunciationId": "w:potato#p-main",
+      "note": "sweet potato。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:potato#e-c257a9a093b8bbd9",
+          "text": "Things like kale ribs, fish collars, rejected sweet potatoes, and cucumber butts were all re-appropriated and, with the help of a number of good chefs, turned into excellent cuisine.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:potato#e-99be868a97d65e16",
+          "text": "These were carefully prepared baskets with all necessities for a traditional holiday meal: golden stuffing mix, green beans, sweet potatoes, jellied cranberry sauce, flour, butter, onions, and dessert items, and even turkeys and hams.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-2026-03-m171:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 131,
+            "end": 139
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:potato#s3",
+      "pos": "短语",
+      "glossZh": "整天坐着看电视的人",
+      "pronunciationId": "w:potato#p-main",
+      "note": "couch potato。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:potato#e-123550a5c8749d58",
+          "text": "Stay Active: Don’t Let The Cold Make You A Couch Potato!",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 55
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "性能很差的设备",
+      "reason": "网络俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

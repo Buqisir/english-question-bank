@@ -1,0 +1,400 @@
+{
+  "entryId": "w:net",
+  "headword": "net",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/net/",
+    "us": "/net/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:net#p-main",
+      "ipa": {
+        "uk": "/net/",
+        "us": "/net/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "nets",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "NETs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "netted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "netting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 47
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 36
+  },
+  "senses": [
+    {
+      "senseId": "w:net#s1",
+      "pos": "n.",
+      "glossZh": "网；网具",
+      "pronunciationId": "w:net#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:net#e-2081513db307d3fb",
+          "text": "Our oceans are full of sophisticated (精密的), perfect traps: nets, hooks, fishing lines.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:net#e-ca98ea796b2d8a91",
+          "text": "Plastic bottles, old fishing nets, and colorful bags were scattered across the sand.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:net#e-36f5bbe50b18462b",
+          "text": "There’s also a stony beach where you’ll see kids with nets exploring the rock pools.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:net#s2",
+      "pos": "n.",
+      "glossZh": "球网",
+      "pronunciationId": "w:net#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:net#e-8f709918777f8c4d",
+          "text": "On the other side of the net, number 8 covered her mouth and yawned, as if the result had already been decided.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a2",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A2 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a2:writing.continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a2:question-source-1:item-168",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:net#e-39e38b7926e82307",
+          "text": "He always stood near the free-throw line to __44__ baskets one after another until the ball finally flew through the net.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 117,
+            "end": 120
+          }
+        },
+        {
+          "exampleId": "w:net#e-2af29a5bab18d6f9",
+          "text": "With no goalkeeper to protect the net, they had no choice but to block the shots (射门) with whatever they had – arms, legs, and pure willpower.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:net#s3",
+      "pos": "adj.",
+      "glossZh": "净的（扣除相关部分后剩余的）",
+      "pronunciationId": "w:net#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:net#e-3dbf969cce155752",
+          "text": "The rate of net mangrove loss decreased by 44%, falling from 181.5 km² per year in 2000-2010 to 102.4 km² per year in 2010-2020.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:net#e-295b462f5c9ce507",
+          "text": "While this does release small amounts of greenhouse gas, the net effect is less warming power in the air.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:net#e-1d785ddd7db4527f",
+          "text": "Human-driven climate change poses one of the most urgent challenges of our time, while individuals’ decisions (e. g. how often people fly, what type of car they drive) play a substantial role in achieving net zero emissions. However, people hold widespread misperceptions regarding the effectiveness of their behaviors, affecting their commitment. Recently, a study was conducted to assess if climate action literacy （素养） interventions could influence their perceptions and willingness to act.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 205,
+            "end": 208
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:net#s4",
+      "pos": "n.",
+      "glossZh": "互联网",
+      "pronunciationId": "w:net#p-main",
+      "note": "常用 the Net。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:net#s5",
+      "pos": "v.",
+      "glossZh": "用网捕捉",
+      "pronunciationId": "w:net#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:net#s6",
+      "pos": "v.",
+      "glossZh": "净赚",
+      "pronunciationId": "w:net#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:net#s7",
+      "pos": "v.",
+      "glossZh": "把球射入网内",
+      "pronunciationId": "w:net#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:net#s8",
+      "pos": "短语",
+      "glossZh": "安全保障",
+      "pronunciationId": "w:net#p-main",
+      "note": "safety net。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:net#e-f3a228d9aee0fecf",
+          "text": "Procrastination had become a safety net; staying still meant avoiding being seen and possibly found lacking.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-b:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:net#e-c8b987ec49420c55",
+          "text": "During tough times – whether personal struggles or global crises – nostalgia acts like an emotional safety net.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 110
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "多面体展开图；中性粒细胞胞外捕获网",
+      "reason": "数学或医学专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

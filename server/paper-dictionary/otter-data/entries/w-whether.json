@@ -1,0 +1,198 @@
+{
+  "entryId": "w:whether",
+  "headword": "whether",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈweðə(r)/",
+    "us": "/ˈweðər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:whether#p-main",
+      "ipa": {
+        "uk": "/ˈweðə(r)/",
+        "us": "/ˈweðər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 30,
+    "mock": 278
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 278
+  },
+  "senses": [
+    {
+      "senseId": "w:whether#s1",
+      "pos": "conj.",
+      "glossZh": "是否",
+      "pronunciationId": "w:whether#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 22,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:whether#e-686029b75cb938d5",
+          "text": "A computer system will analyze the video to determine whether a cow is sick.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:whether#e-7cd0e14ca47af202",
+          "text": "The next step, according to the researchers, is to try and work out whether the cockatoos rely entirely on visual clues（线索）, or also use a sense of touch in making their shape selections.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:whether#e-d71066daaec695c4",
+          "text": "I really did not know whether I should continue correcting him or simply drop the matter.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:whether#s2",
+      "pos": "conj.",
+      "glossZh": "不管是……还是……",
+      "pronunciationId": "w:whether#p-main",
+      "note": "通常与 or 连用。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:whether#e-61fb6cf8b5f06150",
+          "text": "Whether you’re hiking a backcountry trail (小径), camping, or just enjoying the park’s amazing wildlife from the road, this quick workshop is for you and your family.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:whether#e-0647de6536cae1ea",
+          "text": "Whether you paint still lifes, portraits, or landscapes, paint from life as much as possible.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:whether#e-d6d74543d582a9ac",
+          "text": "Is comprehension the same whether a person reads a text onscreen or on paper?",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "两者中的哪一个",
+      "reason": "古旧的代词用法"
+    },
+    {
+      "glossZh": "Whether you ride a bicycle",
+      "reason": "g16 缺乏对应选择，语境中通常用 if"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

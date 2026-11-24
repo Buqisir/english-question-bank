@@ -1,0 +1,211 @@
+{
+  "entryId": "w:cruel",
+  "headword": "cruel",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkruːəl/",
+    "us": "/ˈkruːəl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:cruel#p-main",
+      "ipa": {
+        "uk": "/ˈkruːəl/",
+        "us": "/ˈkruːəl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "crueler",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "cruelest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "crueller",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "cruellest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more cruel",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most cruel",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "senses": [
+    {
+      "senseId": "w:cruel#s1",
+      "pos": "adj.",
+      "glossZh": "残忍的；无情的",
+      "pronunciationId": "w:cruel#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cruel#e-31dc4b8ae7d85815",
+          "text": "By the early 1970s, after centuries of cruel and continuous hunting by settlers, 600 to 800 grizzlies remained on a mere 2 percent of their former range in the Northern Rockies.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:cruel#e-c7fbc8654959cddd",
+          "text": "I thought about all the kids who came to school every day, despite knowing they would have to face cruel comments all day long.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:cruel#e-88234e937b5cf1e6",
+          "text": "The people celebrated with drums, but cruel rulers banned the instruments, wanting them to work day and night.",
+          "source": {
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cruel#s2",
+      "pos": "adj.",
+      "glossZh": "严酷的；令人痛苦的",
+      "pronunciationId": "w:cruel#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cruel#e-96d3b8383af59e93",
+          "text": "My parents and other family members supported me through cruel treatments, through my high school and the University of Michigan.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:cruel#e-a128c734b16d3c63",
+          "text": "Rents in London were pressing, apartments were tiny, yet the dream of owning one felt like a cruel joke.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 98
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "特别棒的；毁掉机会",
+      "reason": "俚语或罕见动词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

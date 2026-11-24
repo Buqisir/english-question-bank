@@ -1,0 +1,220 @@
+{
+  "entryId": "w:lack",
+  "headword": "lack",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/læk/",
+    "us": "/læk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:lack#p-main",
+      "ipa": {
+        "uk": "/læk/",
+        "us": "/læk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "lacks",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "lacked",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "lacking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 21,
+    "mock": 223
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 223
+  },
+  "senses": [
+    {
+      "senseId": "w:lack#s1",
+      "pos": "n.",
+      "glossZh": "缺乏；不足",
+      "pronunciationId": "w:lack#p-main",
+      "note": "lack of sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lack#e-d3284f8e455cdec1",
+          "text": "Due to the lack of scientific proof concerning their impacts, no one has succeeded in winning a lawsuit against cloud-seeding companies.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:lack#e-edea09fbb8bc0888",
+          "text": "Emotion was also important in convincing readers – or the lack of emotion, at least.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:lack#e-122df7dd209ab116",
+          "text": "Napping and daydreaming are habits caused by lack of involvement with the material.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lack#s2",
+      "pos": "v.",
+      "glossZh": "缺少",
+      "pronunciationId": "w:lack#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lack#e-99f791b9fee4db43",
+          "text": "He lacks experience in his job.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2022-ii:27",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:lack#e-14a1cc226f477199",
+          "text": "Living in Iowa and trying to become a photographer specializing in landscape (风景) can be quite a challenge, mainly because the corn state lacks geographical variation.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 138,
+            "end": 143
+          }
+        },
+        {
+          "exampleId": "w:lack#e-05d7b44cca5ac605",
+          "text": "The chief complaint about online courses is that they lack human interaction.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 58
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "指责、lakh 的古旧拼写",
+      "reason": "旧义或同形旧拼写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

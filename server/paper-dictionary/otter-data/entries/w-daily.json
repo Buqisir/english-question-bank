@@ -1,0 +1,233 @@
+{
+  "entryId": "w:daily",
+  "headword": "daily",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdeɪli/",
+    "us": "/ˈdeɪli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:daily#p-main",
+      "ipa": {
+        "uk": "/ˈdeɪli/",
+        "us": "/ˈdeɪli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "dailies",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 27,
+    "mock": 431
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 431
+  },
+  "senses": [
+    {
+      "senseId": "w:daily#s1",
+      "pos": "adj.",
+      "glossZh": "每天的；日常的",
+      "pronunciationId": "w:daily#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:daily#e-c124e6ff6bd5b9df",
+          "text": "All that week, Poppy didn’t seem interested in her dinner, her favorite toy, or even in her daily walk.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:daily#e-21114eec22faee51",
+          "text": "It is calculated by the amount of greenhouse gas we produce in our daily lives.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:daily#e-0d511ed789b1a2e6",
+          "text": "It offers daily shows of pig racing.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 23,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:23",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:daily#s2",
+      "pos": "adv.",
+      "glossZh": "每天；每日",
+      "pronunciationId": "w:daily#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:daily#e-0b965fcbf5b9e9f6",
+          "text": "Bonds, who bought his first cattle almost 50 years ago, still has each of his cowboys inspect 300 or 400 cattle daily and look for signs that an animal is getting sick.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 112,
+            "end": 117
+          }
+        },
+        {
+          "exampleId": "w:daily#e-c0f3fb9357ffc95e",
+          "text": "The Museum is open daily from 9:30 am to 4:30 pm.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:daily#e-53aaa4f7cac54821",
+          "text": "Fishermen go out to sea daily and sell their fish in harbor-side markets.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:10",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:daily#s3",
+      "pos": "n.",
+      "glossZh": "日报",
+      "pronunciationId": "w:daily#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:daily#e-a6cc4ba2041b92b8",
+          "text": "\"I often send postcards to family and friends,\" he says to China Daily, \"but you can imagine that after a while, you never receive as many as you send, and you realize that not everyone is into it __32__” Seeking other like-minded souls, however, Paulo started looking in a somewhat unlikely place: online.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 70
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "日常代步车；把车作为日常用车",
+      "reason": "地区口语或罕见动词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

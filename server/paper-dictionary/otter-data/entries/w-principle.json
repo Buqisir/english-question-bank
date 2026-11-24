@@ -1,0 +1,234 @@
+{
+  "entryId": "w:principle",
+  "headword": "principle",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈprɪnsəpl/",
+    "us": "/ˈprɪnsəpl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:principle#p-main",
+      "ipa": {
+        "uk": "/ˈprɪnsəpl/",
+        "us": "/ˈprɪnsəpl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "principles",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 89
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 87
+  },
+  "senses": [
+    {
+      "senseId": "w:principle#s1",
+      "pos": "n.",
+      "glossZh": "指导原则",
+      "pronunciationId": "w:principle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:principle#e-a81b31033c9c3653",
+          "text": "Actually, a true eco-friendly trip must meet the following principles:",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:grammar-fill:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:principle#e-9a8aa8308faf8527",
+          "text": "This informative walk led by Richard Smyth introduces you to the basic principles of photography in the wild.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:principle#e-8ddec7cafa0d2f69",
+          "text": "Eschewing fertilizers（化肥）and power tools, it’s based on an elegantly simple principle: to garden more like nature does.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 85
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:principle#s2",
+      "pos": "n.",
+      "glossZh": "道德准则",
+      "pronunciationId": "w:principle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:principle#e-cf2faff7587199c8",
+          "text": "Moral principles.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2021-ii:30",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:principle#s3",
+      "pos": "n.",
+      "glossZh": "原理",
+      "pronunciationId": "w:principle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:principle#e-c218191b4b242b2d",
+          "text": "A new exhibition in Halifax uses everyday activities to explain the hidden math principles we all use on a regular basis.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:17",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:principle#e-7c1d1022b5f84f73",
+          "text": "What is the principle of the ionocaloric cooling?",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-fujian-2026-04-provincial-quality-test-a1:32",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:principle#e-1336f0d79c812ae4",
+          "text": "Hagan’s classroom is full of unconventional energy: algebra becomes speed-dating as students pair up to name polynomials(多项式) and spaghetti strands (意大利面) demonstrate geometric principles.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 177,
+            "end": 187
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "principal 的误拼",
+      "reason": "与本词无关"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

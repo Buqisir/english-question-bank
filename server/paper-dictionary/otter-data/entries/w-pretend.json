@@ -1,0 +1,163 @@
+{
+  "entryId": "w:pretend",
+  "headword": "pretend",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/prɪˈtend/",
+    "us": "/prɪˈtend/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:pretend#p-main",
+      "ipa": {
+        "uk": "/prɪˈtend/",
+        "us": "/prɪˈtend/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "pretended",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "pretending",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "pretends",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 37
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 37
+  },
+  "senses": [
+    {
+      "senseId": "w:pretend#s1",
+      "pos": "v.",
+      "glossZh": "假装",
+      "pronunciationId": "w:pretend#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pretend#e-ca4d36d599bdef13",
+          "text": "Magic is a form of entertainment that is based on pretending to do things that are impossible.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:pretend#e-a1f740dd7899cd87",
+          "text": "Over the past 38 years, Mr. Wang has pretended to be someone else many times, and has even learned to __41__ different dialects（方言）, leading to him being described as an “Oscar-winning actor\".",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-ii:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:pretend#e-532508b2b1230670",
+          "text": "would memorize where her classes were and then pretend that the rest of the place didn’t exist.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pretend#s2",
+      "pos": "adj.",
+      "glossZh": "假想的",
+      "pronunciationId": "w:pretend#p-main",
+      "note": "常用于儿童游戏。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "声称有资格",
+      "reason": "旧式用法"
+    },
+    {
+      "glossZh": "伸在前面",
+      "reason": "废旧用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

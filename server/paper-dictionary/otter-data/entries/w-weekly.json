@@ -1,0 +1,194 @@
+{
+  "entryId": "w:weekly",
+  "headword": "weekly",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈwiːkli/",
+    "us": "/ˈwiːkli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:weekly#p-main",
+      "ipa": {
+        "uk": "/ˈwiːkli/",
+        "us": "/ˈwiːkli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "weeklies",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 71
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 69
+  },
+  "senses": [
+    {
+      "senseId": "w:weekly#s1",
+      "pos": "adj.",
+      "glossZh": "每周的",
+      "pronunciationId": "w:weekly#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:weekly#e-b34b1e2d87ce50cd",
+          "text": "The innovative design requires little effort to achieve a reliable weekly supply of fresh greens.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:weekly#e-882c0a288e29072f",
+          "text": "The tip that comes up most often is simple: build online courses into your weekly schedule, just like what you would do with in person courses.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:weekly#e-e9c8d47ada475624",
+          "text": "On a sunny Saturday afternoon, I was driving my daughter to her weekly swimming lesson.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:weekly#s2",
+      "pos": "adv.",
+      "glossZh": "每周",
+      "pronunciationId": "w:weekly#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:weekly#e-2ebaffab611f3f5c",
+          "text": "Groups who may have been coming together weekly at the same time and place for years, if not decades, make me feel like a valued member.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:weekly#e-2aa93d74e5caa6fa",
+          "text": "They are expected to be on site in the Docent position weekly for the first six months.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:reading-a:8",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:weekly#s3",
+      "pos": "n.",
+      "glossZh": "周刊",
+      "pronunciationId": "w:weekly#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏",
+      "reason": "专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

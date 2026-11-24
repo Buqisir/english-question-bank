@@ -1,0 +1,179 @@
+{
+  "entryId": "w:normal",
+  "headword": "normal",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈnɔːml/",
+    "us": "/ˈnɔːrml/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:normal#p-main",
+      "ipa": {
+        "uk": "/ˈnɔːml/",
+        "us": "/ˈnɔːrml/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more normal",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most normal",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "normaler",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "normalest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "normaller",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "normallest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "normals",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 62
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 62
+  },
+  "senses": [
+    {
+      "senseId": "w:normal#s1",
+      "pos": "adj.",
+      "glossZh": "正常的；平常的",
+      "pronunciationId": "w:normal#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:normal#e-3a6dcd5d3b36779d",
+          "text": "On a normal Sunday, I went to the barber shop where I always went.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:normal#e-d9662cae1e129825",
+          "text": "The right level of background noise may interrupt our normal patterns of thinking just enough to allow our imaginations to wander, without making it impossible to focus.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:normal#e-6f5d77fcc7c98942",
+          "text": "But experts say that this is a normal and necessary part of friendship for kids this age.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:normal#s2",
+      "pos": "n.",
+      "glossZh": "常态",
+      "pronunciationId": "w:normal#p-main",
+      "note": "如 return to normal。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "垂直的；当量浓度的",
+      "reason": "物理、数学或化学义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

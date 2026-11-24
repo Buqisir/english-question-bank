@@ -1,0 +1,137 @@
+{
+  "entryId": "w:none",
+  "headword": "none",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/nʌn/",
+    "us": "/nʌn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:none#p-main",
+      "ipa": {
+        "uk": "/nʌn/",
+        "us": "/nʌn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 10,
+    "mock": 46
+  },
+  "unassignedCounts": {
+    "gaokao": 7,
+    "mock": 46
+  },
+  "senses": [
+    {
+      "senseId": "w:none#s1",
+      "pos": "pron.",
+      "glossZh": "一个也没有；一点也没有",
+      "pronunciationId": "w:none#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:none#e-1cfc968a929eabca",
+          "text": "That was why none of the children thought it unusual that David had decided to join the cross-country team.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "writing-continuation-7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:none#e-de5cf6f3e3011448",
+          "text": "None of these facts has been taken into account by the fishing industry.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-four-provinces-feb:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        },
+        {
+          "exampleId": "w:none#e-e67a6481d3f12882",
+          "text": "It should be noted that none of the items on wastED’s menu was technically made from garbage.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:none#s2",
+      "pos": "adv.",
+      "glossZh": "一点也不",
+      "pronunciationId": "w:none#p-main",
+      "note": "none too 表示「一点也不」。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "第九时礼拜；无宗教归属者",
+      "reason": "宗教或调查分类专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

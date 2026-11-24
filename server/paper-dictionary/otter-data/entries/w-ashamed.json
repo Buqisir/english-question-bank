@@ -1,0 +1,131 @@
+{
+  "entryId": "w:ashamed",
+  "headword": "ashamed",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈʃeɪmd/",
+    "us": "/əˈʃeɪmd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ashamed#p-main",
+      "ipa": {
+        "uk": "/əˈʃeɪmd/",
+        "us": "/əˈʃeɪmd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more ashamed",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most ashamed",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 25
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:ashamed#s1",
+      "pos": "adj.",
+      "glossZh": "羞愧的；惭愧的",
+      "pronunciationId": "w:ashamed#p-main",
+      "note": "be ashamed of sth；be ashamed to do sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 25
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ashamed#e-639cb5ee22135023",
+          "text": "I felt a flush coming to my face, but Mike didn’t seem to be ashamed of our creation.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:ashamed#e-59b6598e3595a244",
+          "text": "He relied on voice dictation tools and felt ashamed, often lying about his literacy.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:ashamed#e-f88beb92bf39d45f",
+          "text": "Recalling what I had done, I felt so ashamed.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:writing-continuation:7",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 44
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

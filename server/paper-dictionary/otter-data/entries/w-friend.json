@@ -1,0 +1,237 @@
+{
+  "entryId": "w:friend",
+  "headword": "friend",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/frend/",
+    "us": "/frend/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:friend#p-main",
+      "ipa": {
+        "uk": "/frend/",
+        "us": "/frend/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "friends",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Friends",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "friended",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "friending",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 155,
+    "mock": 652
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 652
+  },
+  "senses": [
+    {
+      "senseId": "w:friend#s1",
+      "pos": "n.",
+      "glossZh": "朋友",
+      "pronunciationId": "w:friend#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 113,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:friend#e-b543248d4a204908",
+          "text": "It was a trait(特点) others found helpful, and I soon had friends who wanted to make things with me.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:friend#e-55669ca95fee199b",
+          "text": "The friend who is remaining needs to be sensitive to all the additional time demands placed on the friend who has moved.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:friend#e-bfa86bb21327cba7",
+          "text": "I tend to travel with a few of my friends to state parks or to the countryside to go on adventures and take photos along the way.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:friend#s2",
+      "pos": "n.",
+      "glossZh": "支持者",
+      "pronunciationId": "w:friend#p-main",
+      "note": "本文大写 Friend 指大学艺术博物馆的会员。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 42,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:friend#e-f7cbf791c3f0756e",
+          "text": "● Who are the Friends of the University Art Museum?",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:friend#e-268da2f69029d2dd",
+          "text": "As a Friend, your membership provides essential annual support to help sustain the continued excellence and diversity of the Museum’s educational programs.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:friend#e-eb88eb7cff9d2065",
+          "text": "When you become a Friend of the University Art Museum, you also become part of a great tradition.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:friend#s3",
+      "pos": "v.",
+      "glossZh": "加为好友",
+      "pronunciationId": "w:friend#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "友元",
+      "reason": "编程专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

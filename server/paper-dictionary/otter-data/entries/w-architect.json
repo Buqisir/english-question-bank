@@ -1,0 +1,142 @@
+{
+  "entryId": "w:architect",
+  "headword": "architect",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɑːkɪtekt/",
+    "us": "/ˈɑːrkɪtekt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:architect#p-main",
+      "ipa": {
+        "uk": "/ˈɑːkɪtekt/",
+        "us": "/ˈɑːrkɪtekt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "architects",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 18
+  },
+  "senses": [
+    {
+      "senseId": "w:architect#s1",
+      "pos": "n.",
+      "glossZh": "建筑师",
+      "pronunciationId": "w:architect#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:architect#e-c6807cc05d630af5",
+          "text": "Discover how architects, product designers and scientists use similar skills in their work.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:17",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:architect#e-0b9e5e63f6029d34",
+          "text": "“I am the last original client of Frank Lloyd Wright, still living in the home he designed for me,” Reisley said, sitting in the bright open living room of the home designed by the famous architect.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 188,
+            "end": 197
+          }
+        },
+        {
+          "exampleId": "w:architect#e-ff64b39e63ebc504",
+          "text": "Architect Jeff Speck studies urban roads like this one, helping cities design safe, walkable streets.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2025-nov-m1",
+            "paperTitle": "金华十校2025年11月高三模拟考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zj-jinhua-2025-nov-m1:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-jinhua-2025-nov-m1:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:architect#s2",
+      "pos": "n.",
+      "glossZh": "主要设计者；策划者",
+      "pronunciationId": "w:architect#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "策划（动词）",
+      "reason": "少见，多见于商业或技术写作。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

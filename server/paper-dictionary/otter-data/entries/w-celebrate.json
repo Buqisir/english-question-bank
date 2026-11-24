@@ -1,0 +1,280 @@
+{
+  "entryId": "w:celebrate",
+  "headword": "celebrate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈselɪbreɪt/",
+    "us": "/ˈselɪbreɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:celebrate#p-main",
+      "ipa": {
+        "uk": "/ˈselɪbreɪt/",
+        "us": "/ˈselɪbreɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "celebrated",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "celebrates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "celebrating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 126
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 124
+  },
+  "senses": [
+    {
+      "senseId": "w:celebrate#s1",
+      "pos": "v.",
+      "glossZh": "庆祝；纪念",
+      "pronunciationId": "w:celebrate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:celebrate#e-4635f9e54419fa37",
+          "text": "This year, we are celebrating our 50th anniversary.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:celebrate#e-d58187e7856eadb8",
+          "text": "This exhibition of some sixty masterpieces celebrating the life and work of Scotland’s best loved painter, Sir Henry Raeburn, comes to London.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:celebrate#e-abcdf7d56f654cd0",
+          "text": "Where will the woman go to celebrate her mom’s birthday?",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:celebrate#s2",
+      "pos": "v.",
+      "glossZh": "赞扬；肯定；颂扬",
+      "pronunciationId": "w:celebrate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:celebrate#e-64053004da541a3f",
+          "text": "Celebrate progress and keep refining（改进）toward a happy productive existence.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:celebrate#e-b81ea529dbb69d87",
+          "text": "Set small, achievable goals together with them and celebrate progress, not perfection.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:celebrate#e-1b2688c1716d5f19",
+          "text": "By creating a space where different artistic traditions can meet, it celebrates cultural diversity and encourages exchange across cultures.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:celebrate#s3",
+      "pos": "adj.",
+      "glossZh": "著名的；广受赞誉的",
+      "pronunciationId": "w:celebrate#p-main",
+      "note": "celebrated",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:celebrate#e-ad830d0d6315211b",
+          "text": "Discover and enjoy 4 centuries of history, 5 acres of celebrated and award-winning gardens with parkland walk.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:celebrate#e-66023bbff28c2273",
+          "text": "“Everyone has a child inside,” says Cai Gao, the celebrated 79-year-old picture book artist who has spent decades nurturing her inner child and her work.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 59
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:celebrate#s4",
+      "pos": "v.",
+      "glossZh": "举行（宗教仪式）",
+      "pronunciationId": "w:celebrate#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

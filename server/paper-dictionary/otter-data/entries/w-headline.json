@@ -1,0 +1,224 @@
+{
+  "entryId": "w:headline",
+  "headword": "headline",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈhedlaɪn/",
+    "us": "/ˈhedlaɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:headline#p-main",
+      "ipa": {
+        "uk": "/ˈhedlaɪn/",
+        "us": "/ˈhedlaɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "headlines",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "headlined",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "headlining",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "senses": [
+    {
+      "senseId": "w:headline#s1",
+      "pos": "n.",
+      "glossZh": "新闻标题",
+      "pronunciationId": "w:headline#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:headline#e-661bbc46942f05a4",
+          "text": "For years, media headlines have described a serious situation regarding bee populations.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:headline#e-ebafbe46a38abfb1",
+          "text": "She took a quick look at the headline: Go for the City Marathon.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:headline#e-1f4a30342eff9095",
+          "text": "Start class with a real-world headline – ideally one related to your subject area.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:headline#s2",
+      "pos": "短语",
+      "glossZh": "成为新闻焦点",
+      "pronunciationId": "w:headline#p-main",
+      "note": "make headlines。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:headline#e-0e08a3eaad4cec62",
+          "text": "The case made headlines in The New York Times, which reported that 38 witnesses heard the attack but took no action.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:headline#e-f81fee1bc0f9e3d0",
+          "text": "The grammar school boy from Stratford-Upon-Avon has made headlines again after a groundbreaking study showed that Shakespeare does benefit children’s literacy and emotional development, but only if they can act him out.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:headline#s3",
+      "pos": "v.",
+      "glossZh": "领衔演出",
+      "pronunciationId": "w:headline#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:headline#s4",
+      "pos": "v.",
+      "glossZh": "给……加新闻标题",
+      "pronunciationId": "w:headline#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "页码栏标题、船首绳",
+      "reason": "排版或航海专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

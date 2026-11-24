@@ -1,0 +1,211 @@
+{
+  "entryId": "w:provide",
+  "headword": "provide",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/prəˈvaɪd/",
+    "us": "/prəˈvaɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:provide#p-main",
+      "ipa": {
+        "uk": "/prəˈvaɪd/",
+        "us": "/prəˈvaɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "provided",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "provides",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "providing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 61,
+    "mock": 583
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 582
+  },
+  "senses": [
+    {
+      "senseId": "w:provide#s1",
+      "pos": "v.",
+      "glossZh": "提供",
+      "pronunciationId": "w:provide#p-main",
+      "note": "provide sb with sth 或 provide sth for sb。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 61,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:provide#e-14982fd13128b590",
+          "text": "The staff is friendly and helpful, providing you with a map of the city when you arrive, and offering advice if you require some.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:provide#e-41afcf98b7ec7d6e",
+          "text": "Each stop lasts an average of two days, and during that time the doctors and nurses on board provide rural（乡村）populations with basic medical care, X-ray scans and prescriptions.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:provide#e-2b506fbeabedab71",
+          "text": "Instead, she recommends applying a well-known concept among nutrition experts called the “Division of Responsibility,” where parents provide a variety of mostly healthy foods to their kids at fixed times, and the kids themselves decide what and how much they want to consume – even if that means occasionally eating more cookies than carrots.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 133,
+            "end": 140
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:provide#s2",
+      "pos": "短语",
+      "glossZh": "只要",
+      "pronunciationId": "w:provide#p-main",
+      "note": "provided that，引出条件。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:provide#e-3b4df3fcf264bdba",
+          "text": "Pilots can see full-circle rainbows provided that weather conditions permit.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:provide#s3",
+      "pos": "短语",
+      "glossZh": "供养",
+      "pronunciationId": "w:provide#p-main",
+      "note": "provide for sb。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:provide#s4",
+      "pos": "v.",
+      "glossZh": "规定",
+      "pronunciationId": "w:provide#p-main",
+      "note": "正式用语，后可接 that 从句。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "预先任命教会职位",
+      "reason": "历史专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

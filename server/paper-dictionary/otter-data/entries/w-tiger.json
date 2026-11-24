@@ -1,0 +1,135 @@
+{
+  "entryId": "w:tiger",
+  "headword": "tiger",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtaɪɡə(r)/",
+    "us": "/ˈtaɪɡər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:tiger#p-main",
+      "ipa": {
+        "uk": "/ˈtaɪɡə(r)/",
+        "us": "/ˈtaɪɡər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "tigers",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Tigers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:tiger#s1",
+      "pos": "n.",
+      "glossZh": "老虎",
+      "pronunciationId": "w:tiger#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 14
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tiger#e-2beb409b42b01065",
+          "text": "Spot and Stripe are the first tiger cubs（幼兽）that have ever been born here.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:tiger#e-7536c8661db94030",
+          "text": "I’ve got two children - the younger one, Kynan, was extremely happy about the tigers arriving - but all of us really looked forward to being part of their lives and watching them grow.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:tiger#e-3fe62b72c285f39c",
+          "text": "Why did the author bring the tiger cubs home?",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2021-ii:24",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "绞糖设备、侍从及球队昵称",
+      "reason": "罕用或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

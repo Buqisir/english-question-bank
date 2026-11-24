@@ -1,0 +1,136 @@
+{
+  "entryId": "w:historic",
+  "headword": "historic",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/hɪˈstɒrɪk/",
+    "us": "/hɪˈstɔːrɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:historic#p-main",
+      "ipa": {
+        "uk": "/hɪˈstɒrɪk/",
+        "us": "/hɪˈstɔːrɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more historic",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most historic",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 48
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:historic#s1",
+      "pos": "adj.",
+      "glossZh": "有历史意义的",
+      "pronunciationId": "w:historic#p-main",
+      "note": "修饰旧建筑、古迹时，强调其历史价值。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 48
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:historic#e-00e2de3d7bfb292a",
+          "text": "Discover, explore and enjoy award-winning Tullie House, where historic collections, contemporary art and family fun are brought together in one impressive museum and art gallery.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:13",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:historic#e-bc3427bd1055be78",
+          "text": "As we travel south from Madrid with Prof. Ronald Messier to historic Toledo, Roman Merida and into Andalucia, we explore historical monuments and architecture.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:historic#e-76fb029068a9030a",
+          "text": "The house is now listed on the National Register of Historic Places.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 60
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "历史叙事时态",
+      "reason": "语法专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,247 @@
+{
+  "entryId": "w:fashion",
+  "headword": "fashion",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfæʃn/",
+    "us": "/ˈfæʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fashion#p-main",
+      "ipa": {
+        "uk": "/ˈfæʃn/",
+        "us": "/ˈfæʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "fashions",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "fashioned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "fashioning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 84
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 82
+  },
+  "senses": [
+    {
+      "senseId": "w:fashion#s1",
+      "pos": "n.",
+      "glossZh": "时装",
+      "pronunciationId": "w:fashion#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fashion#e-3e68a1d4ee147039",
+          "text": "But some ecologists and fashion (时装)enthusiasts are trying to bring back the market for fur made from nutria(海狸鼠).",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:fashion#e-7ae172c59d100b6c",
+          "text": "Unusual fashion shows in New Orleans and Brooklyn have showcased nutria fur made into clothes in different styles.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:fashion#e-c513fa27e436a901",
+          "text": "She is trying to come up with a label to attach to nutria fashions to show it is eco-friendly.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:8",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fashion#s2",
+      "pos": "n.",
+      "glossZh": "时兴的风尚",
+      "pronunciationId": "w:fashion#p-main",
+      "note": "in fashion 表示「正流行」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fashion#e-052c44a45c00764d",
+          "text": "“Plants are in fashion right now,” says Dr. Melinda Knuth, a researcher from the University of Florida.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:fashion#e-27c1d530f432c983",
+          "text": "Fashion trends.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:fashion#e-94111ab54e474ff5",
+          "text": "As with fashion, people’s tastes in flowers change.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-import-20261026-n123:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fashion#s3",
+      "pos": "n.",
+      "glossZh": "方式",
+      "pronunciationId": "w:fashion#p-main",
+      "note": "in a particular fashion。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fashion#s4",
+      "pos": "v.",
+      "glossZh": "制成",
+      "pronunciationId": "w:fashion#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "上流社会生活",
+      "reason": "旧式引申用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,163 @@
+{
+  "entryId": "w:bell",
+  "headword": "bell",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bel/",
+    "us": "/bel/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bell#p-main",
+      "ipa": {
+        "uk": "/bel/",
+        "us": "/bel/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "bells",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Bells",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 53
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 51
+  },
+  "senses": [
+    {
+      "senseId": "w:bell#s1",
+      "pos": "n.",
+      "glossZh": "钟；铃；钟声；铃声",
+      "pronunciationId": "w:bell#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bell#e-b3d5dff4902d0c97",
+          "text": "When the final bell rang in June, I walked away with a yearbook full of messages about writing’s most powerful significance – the ability to connect people, to put us in another’s skin, to teach us what it means to be human.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:bell#e-76b4d6c5dfc5e5ca",
+          "text": "With purpose, she marched next door and rang the bell of the Carters, thinking she should give the boys a lesson.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:bell#e-d4a322af1b68d9ae",
+          "text": "Then he touched its handle, pressed its bell, and explained how he had dreamed of owning one bicycle.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation:4",
+              "sentence": 10
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bell#s2",
+      "pos": "n.",
+      "glossZh": "钟形物",
+      "pronunciationId": "w:bell#p-main",
+      "note": "如 a bell curve「钟形曲线」。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:bell#s3",
+      "pos": "短语",
+      "glossZh": "听起来耳熟",
+      "pronunciationId": "w:bell#p-main",
+      "note": "ring a bell。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Bell 姓氏与地名、航海报时钟声、乐器管口及牲畜吼叫",
+      "reason": "专名、专业或罕见义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

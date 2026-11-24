@@ -1,0 +1,207 @@
+{
+  "entryId": "w:weather",
+  "headword": "weather",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈweðə(r)/",
+    "us": "/ˈweðər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:weather#p-main",
+      "ipa": {
+        "uk": "/ˈweðə(r)/",
+        "us": "/ˈweðər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "weathers",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "weathered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "weathering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 22,
+    "mock": 184
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 183
+  },
+  "senses": [
+    {
+      "senseId": "w:weather#s1",
+      "pos": "n.",
+      "glossZh": "天气",
+      "pronunciationId": "w:weather#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 21,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:weather#e-67ffaec7dd8e8b72",
+          "text": "My parents made it a point for their two kids to spend time outside, no matter the weather or season.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:weather#e-29359dacbfb06720",
+          "text": "It’s still a little too cold for them to go out into the open, but as soon as the weather warms up, I have no doubt that the little one will be out and about exploring and playing every day.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:weather#e-c1d22027d652b860",
+          "text": "Bring layers for changing weather and a raincoat if necessary.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:9",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:weather#s2",
+      "pos": "v.",
+      "glossZh": "挺过（困难）",
+      "pronunciationId": "w:weather#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:weather#s3",
+      "pos": "v.",
+      "glossZh": "风化",
+      "pronunciationId": "w:weather#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:weather#s4",
+      "pos": "短语",
+      "glossZh": "身体不适",
+      "pronunciationId": "w:weather#p-main",
+      "note": "under the weather。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:weather#e-e452d001d82d345b",
+          "text": "under the weather",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:cloze",
+            "locator": {
+              "question": 45,
+              "questionId": "question:paper-mock-fujian-2026-01-first-quality-test:45",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 17
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Weather Modification Inc.、让鹰在户外适应天气",
+      "reason": "公司名或行业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

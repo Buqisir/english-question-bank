@@ -1,0 +1,157 @@
+{
+  "entryId": "w:friction",
+  "headword": "friction",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfrɪkʃn/",
+    "us": "/ˈfrɪkʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:friction#p-main",
+      "ipa": {
+        "uk": "/ˈfrɪkʃn/",
+        "us": "/ˈfrɪkʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "frictions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "senses": [
+    {
+      "senseId": "w:friction#s1",
+      "pos": "n.",
+      "glossZh": "摩擦力",
+      "pronunciationId": "w:friction#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:friction#e-2187475478e4e079",
+          "text": "If we’re covering friction, for example, I bring different tires (轮胎) into my classroom so that my students can conduct lab experiments with them to see how friction works in real-life applications.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:friction#e-2b5ca8c4fd5d552d",
+          "text": "Fuel consumption decreases the slower you drive, because the moving car has to overcome fewer physical forces such as air resistance and rolling friction （摩擦） between tyres and road.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n123:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 145,
+            "end": 153
+          }
+        },
+        {
+          "exampleId": "w:friction#e-cd16d0be6affc7ec",
+          "text": "This water layer prevents ions from directly touching the nanopore wall, dramatically reducing friction and allowing ions to move through much more smoothly than before.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 103
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:friction#s2",
+      "pos": "n.",
+      "glossZh": "争执",
+      "pronunciationId": "w:friction#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:friction#e-090af856a0d196bf",
+          "text": "If users get used to this, “when you encounter friction in real world interactions, you’re going to be less prepared,” Robb said.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 55
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

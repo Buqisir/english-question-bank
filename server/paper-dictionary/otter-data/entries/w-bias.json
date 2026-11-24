@@ -1,0 +1,339 @@
+{
+  "entryId": "w:bias",
+  "headword": "bias",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈbaɪəs/",
+    "us": "/ˈbaɪəs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bias#p-main",
+      "ipa": {
+        "uk": "/ˈbaɪəs/",
+        "us": "/ˈbaɪəs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more bias",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most bias",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "biases",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "biasses",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "biased",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "biasing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "biassed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "biassing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 83
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 78
+  },
+  "senses": [
+    {
+      "senseId": "w:bias#s1",
+      "pos": "n.",
+      "glossZh": "偏见；偏向",
+      "pronunciationId": "w:bias#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bias#e-fa332ef2699c3972",
+          "text": "The core issue is that body size terms are never neutral; they profoundly affect people’s self-respect, internalized weight bias, and clinical communication.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 124,
+            "end": 128
+          }
+        },
+        {
+          "exampleId": "w:bias#e-654affcaf6a4f0bf",
+          "text": "Chung believes that “artificial” intelligence still relies on human data, shaped by human biases, and it impacts human experiences in turn.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:bias#e-cfb11808d0a0e0c9",
+          "text": "It exposes the harm of unconscious bias.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:22",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bias#s2",
+      "pos": "n.",
+      "glossZh": "（统计、测量等的）系统性偏差",
+      "pronunciationId": "w:bias#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bias#e-e8a05e4c369065f3",
+          "text": "What has led to the biases according to the study?",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2024-i:34",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:bias#e-19a0c11d36428588",
+          "text": "Misleading media coverage plays a role, but publication bias（偏见）is one major source: studies that show surprising results are more likely to get published.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bias#s3",
+      "pos": "v.",
+      "glossZh": "使有偏向；使（结果等）产生偏差",
+      "pronunciationId": "w:bias#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bias#e-d632a2697ab1483d",
+          "text": "“We were particularly interested in exploring the aspects of sampling that tend to bias(使有偏差) data, like the greater likelihood of a citizen scientist to take a picture of a flowering plant instead of the grass right next to it,\" said Daru.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 87
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bias#s4",
+      "pos": "adj.",
+      "glossZh": "有偏见的；有偏向的",
+      "pronunciationId": "w:bias#p-main",
+      "note": "biased。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bias#e-76146638c85cf952",
+          "text": "Moreover, these data are biased and favor certain regions, time periods, and species.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:bias#e-df935ef4e0af7ccb",
+          "text": "These data are also biased toward certain species with attractive or eye-catching features.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:bias#e-4cd89f2043dbad67",
+          "text": "The staff were biased against his looks.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:24",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 21
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "布料斜裁、电子偏置、滚球路线、粉丝圈的最喜欢成员及姓氏",
+      "reason": "行业、圈内或专名用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

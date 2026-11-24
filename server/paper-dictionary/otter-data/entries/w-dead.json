@@ -1,0 +1,396 @@
+{
+  "entryId": "w:dead",
+  "headword": "dead",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ded/",
+    "us": "/ded/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dead#p-main",
+      "ipa": {
+        "uk": "/ded/",
+        "us": "/ded/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "deader",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "deadest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "deads",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 43
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 35
+  },
+  "senses": [
+    {
+      "senseId": "w:dead#s1",
+      "pos": "adj.",
+      "glossZh": "死的；枯死的",
+      "pronunciationId": "w:dead#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dead#e-4e44af4de321f7a1",
+          "text": "It is where dead leaves turn into food for the trees and other forest life.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:dead#e-7fe6aaf823f790a3",
+          "text": "To play dead.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:25",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:dead#e-dcf6c2e23c31e6c8",
+          "text": "Though he’d been dead for over a decade, I like to think he knew his Christmas present changed my life.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-b:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dead#s2",
+      "pos": "adj.",
+      "glossZh": "失灵的；没电的；断线的",
+      "pronunciationId": "w:dead#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dead#e-463790c0a41e1750",
+          "text": "We were stuck in the middle of the lake with a dead motor.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "cloze-3",
+              "sentence": 8
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:dead#e-3742fb7d2014a28f",
+          "text": "The remote control’s batteries are dead.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:dead#e-bd7ba6657ac51b75",
+          "text": "My parents were working far away in another state, and the phone lines had gone dead hours ago, so I had no way to reach anyone for help.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 84
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dead#s3",
+      "pos": "adj.",
+      "glossZh": "彻底的；完全的",
+      "pronunciationId": "w:dead#p-main",
+      "note": "如 dead silence。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dead#e-99ba95175ae80df0",
+          "text": "Jack, once a man who laughed so loud that the neighbors knocked to complain, now moved like a ghost: mornings without the clatter（哐啷声）of his favorite coffee mug, evenings staring at the unlit fireplace in dead silence.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 205,
+            "end": 209
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dead#s4",
+      "pos": "adj.",
+      "glossZh": "冷清的；没有生气的",
+      "pronunciationId": "w:dead#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dead#e-872748e88c223485",
+          "text": "“Not only do we give this space back to the neighborhood by __53__ life to space that’s quite __54__ dead,” says Achenbach, “but we help local insect and bird populations, and that’ll only make people’s lives better.” What __55__, indeed!",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 105
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dead#s5",
+      "pos": "adv.",
+      "glossZh": "恰好；完全",
+      "pronunciationId": "w:dead#p-main",
+      "note": "如 dead centre、dead right。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:dead#s6",
+      "pos": "短语",
+      "glossZh": "死胡同；行不通的道路或办法",
+      "pronunciationId": "w:dead#p-main",
+      "note": "dead end。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dead#e-21889b726d9b5234",
+          "text": "For the last fifteen minutes, only a lone goat and a few dancing swallows(燕子) __41__ us before we reached a dead end.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 112
+          }
+        },
+        {
+          "exampleId": "w:dead#e-0ea9335eeeee7162",
+          "text": "After months of dead ends, she shifted strategy and started looking for alternative spaces that were accessible to high-risk communities.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dead#s7",
+      "pos": "短语",
+      "glossZh": "最冷、最静等的一段时间",
+      "pronunciationId": "w:dead#p-main",
+      "note": "in the dead of winter/night。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dead#e-0a999f263d71be62",
+          "text": "Life __53__, and so do we in the green of spring and the dead of winter, in the birth of a child and the __54__ of a loved one; in the words we leave behind and the hearts of those who will __55__ us.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:cloze",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:cloze:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dead#s8",
+      "pos": "n.",
+      "glossZh": "死者",
+      "pronunciationId": "w:dead#p-main",
+      "note": "the dead。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "死球、出局、矿井废石、硬拉等",
+      "reason": "体育、工业等专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

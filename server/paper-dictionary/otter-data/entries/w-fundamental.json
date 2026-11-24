@@ -1,0 +1,227 @@
+{
+  "entryId": "w:fundamental",
+  "headword": "fundamental",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌfʌndəˈmentl/",
+    "us": "/ˌfʌndəˈmentl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fundamental#p-main",
+      "ipa": {
+        "uk": "/ˌfʌndəˈmentl/",
+        "us": "/ˌfʌndəˈmentl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more fundamental",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most fundamental",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "fundamentals",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 30
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 26
+  },
+  "senses": [
+    {
+      "senseId": "w:fundamental#s1",
+      "pos": "adj.",
+      "glossZh": "根本的",
+      "pronunciationId": "w:fundamental#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fundamental#e-6cb002cef8c26148",
+          "text": "yet they also point to a fundamental problem.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:fundamental#e-772014c0ed3dd270",
+          "text": "Yet as Martin has found in her work, gender is one of the fundamental ways people form connections with objects, particularly those designed with human characteristics.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:fundamental#e-85d220ff00cb51d4",
+          "text": "This technological revolution represents a fundamental shift in what we think of farming.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:grammar-fill:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fundamental#s2",
+      "pos": "adj.",
+      "glossZh": "基础性的",
+      "pronunciationId": "w:fundamental#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fundamental#e-95dca321c2c49ad8",
+          "text": "The lead author Dr Hannan said, “Beyond advancing fundamental neuroscience（神经科学）, our findings establish Kv4.3 as a valid target.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:fundamental#e-21c26199e3d29264",
+          "text": "The data collected will support fundamental research in solar physics and advance studies in space weather forecast.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:grammar-fill:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fundamental#s3",
+      "pos": "n.",
+      "glossZh": "基本原理",
+      "pronunciationId": "w:fundamental#p-main",
+      "note": "通常用复数 fundamentals。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fundamental#e-d2937796cab4cd55",
+          "text": "His mother, a beautician, taught him to cut hair, and his artist father introduced him to the fundamentals of art – geometric shapes, proportional faces, and 3D images.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-04-second",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2026-04-second:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 106
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "最低分音",
+      "reason": "声学术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

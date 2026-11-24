@@ -1,0 +1,157 @@
+{
+  "entryId": "w:alcohol",
+  "headword": "alcohol",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈælkəhɒl/",
+    "us": "/ˈælkəhɔːl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:alcohol#p-main",
+      "ipa": {
+        "uk": "/ˈælkəhɒl/",
+        "us": "/ˈælkəhɔːl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "alcohols",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "senses": [
+    {
+      "senseId": "w:alcohol#s1",
+      "pos": "n.",
+      "glossZh": "酒；含酒精饮料",
+      "pronunciationId": "w:alcohol#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:alcohol#e-898791291836c8a4",
+          "text": "“I often __48__ them to drink alcohol.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:alcohol#e-65581794fcaccdd7",
+          "text": "I used to work in a center for people with alcohol use disorder in Aberdeen.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:alcohol#s2",
+      "pos": "n.",
+      "glossZh": "酒精；乙醇",
+      "pronunciationId": "w:alcohol#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:alcohol#e-ea0510b2ff2df450",
+          "text": "The only __40__ to pay for the groceries was to take off the __41__ she could do without: a bottle of rubbing alcohol （医用酒精）and a bar of soap.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 110,
+            "end": 117
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:alcohol#s3",
+      "pos": "n.",
+      "glossZh": "醇类化合物",
+      "pronunciationId": "w:alcohol#p-main",
+      "note": "化学中的统称。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "极细粉末",
+      "reason": "词源相关的旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

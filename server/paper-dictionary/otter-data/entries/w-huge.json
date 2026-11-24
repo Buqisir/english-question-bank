@@ -1,0 +1,142 @@
+{
+  "entryId": "w:huge",
+  "headword": "huge",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/hjuːdʒ/",
+    "us": "/hjuːdʒ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:huge#p-main",
+      "ipa": {
+        "uk": "/hjuːdʒ/",
+        "us": "/hjuːdʒ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "huger",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "hugest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more huge",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most huge",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 102
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:huge#s1",
+      "pos": "adj.",
+      "glossZh": "巨大的",
+      "pronunciationId": "w:huge#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 102
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:huge#e-441f53b9a5310e49",
+          "text": "Things quickly got very intense due to the huge amount of energy required to look after them.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:huge#e-d48e9619e613d4e6",
+          "text": "I was able to straighten up with the huge pumpkin resting on my shoulders.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:huge#e-e369e0cfbb9317c1",
+          "text": "“The food you have available makes a huge difference.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 41
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

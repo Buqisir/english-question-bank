@@ -1,0 +1,129 @@
+{
+  "entryId": "w:passenger",
+  "headword": "passenger",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpæsɪndʒə(r)/",
+    "us": "/ˈpæsɪndʒər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:passenger#p-main",
+      "ipa": {
+        "uk": "/ˈpæsɪndʒə(r)/",
+        "us": "/ˈpæsɪndʒər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "passengers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 42
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 42
+  },
+  "senses": [
+    {
+      "senseId": "w:passenger#s1",
+      "pos": "n.",
+      "glossZh": "乘客",
+      "pronunciationId": "w:passenger#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:passenger#e-42bce69a2902bced",
+          "text": "My dog Don always sits beside me in the passenger seat.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:passenger#e-4d13dd3e4b123256",
+          "text": "In March 2008, Ginni boarded a ship with 48 passengers she’d never met before, to begin the journey towards Antarctica.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:passenger#e-c457ffa2b7dd3119",
+          "text": "The Barcelona subway pulls into the station, the doors slide open and passengers pour out to go about their daily business.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 80
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "passenger pigeon",
+      "reason": "独立鸟类名称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

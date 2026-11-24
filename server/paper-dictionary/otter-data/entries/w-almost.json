@@ -1,0 +1,117 @@
+{
+  "entryId": "w:almost",
+  "headword": "almost",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɔːlməʊst/",
+    "us": "/ˈɔːlmoʊst/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:almost#p-main",
+      "ipa": {
+        "uk": "/ˈɔːlməʊst/",
+        "us": "/ˈɔːlmoʊst/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 29,
+    "mock": 151
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:almost#s1",
+      "pos": "adv.",
+      "glossZh": "几乎；差不多",
+      "pronunciationId": "w:almost#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 29,
+        "mock": 151
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:almost#e-526a9fde0d3fb708",
+          "text": "When almost everyone has a mobile phone, why are more than half of Australian homes still paying for a landline（座机）?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:almost#e-197e67450dfacf6b",
+          "text": "However, we did not mark the route (路线) so we ended up almost missing the sunset entirely.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:5",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:almost#e-672a79291f80b8f1",
+          "text": "In the study, boiling hard water containing 300 milligrams of calcium carbonate led to an almost 90 percent drop in plastics.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 96
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

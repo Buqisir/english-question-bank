@@ -1,0 +1,279 @@
+{
+  "entryId": "w:joke",
+  "headword": "joke",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dʒəʊk/",
+    "us": "/dʒoʊk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:joke#p-main",
+      "ipa": {
+        "uk": "/dʒəʊk/",
+        "us": "/dʒoʊk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "jokes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "joked",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "joking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 62
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 59
+  },
+  "senses": [
+    {
+      "senseId": "w:joke#s1",
+      "pos": "n.",
+      "glossZh": "笑话",
+      "pronunciationId": "w:joke#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:joke#e-0c360109f33ceefc",
+          "text": "She enjoys telling jokes.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2020-ii:27",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:joke#e-759b561bf85df72a",
+          "text": "it can bring in \"I have this old, broken-down vehicle\" or \"I rode the bus with these crazy people who were laughing at silly jokes in the back.\" It just opens up conversation.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 132,
+            "end": 137
+          }
+        },
+        {
+          "exampleId": "w:joke#e-4881fe93cd4f8cda",
+          "text": "Some laughed easily, exchanging jokes with their new friends, while others eagerly compared notes on their travel experiences.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:joke#s2",
+      "pos": "n.",
+      "glossZh": "玩笑",
+      "pronunciationId": "w:joke#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:joke#e-88ba777a02acbfa2",
+          "text": "After I loaded fresh peaches into my car and was about to leave the lively farmers’ market, my car decided to play a cruel joke on me – it refused to start.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 127
+          }
+        },
+        {
+          "exampleId": "w:joke#e-8f9e660c3c6ef0e9",
+          "text": "It was supposed to be a joke.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:joke#s3",
+      "pos": "v.",
+      "glossZh": "开玩笑",
+      "pronunciationId": "w:joke#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:joke#e-f6921e1fd8455d18",
+          "text": "So I joked too.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:joke#e-c6eb55fd3e55a8eb",
+          "text": "From that day on, I __50__ stopped joking about anyone’s profession and works.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:joke#e-01bbbe7b745af01f",
+          "text": "Some looked like they had totally given up on life, while others seemed to be making the best of the situation, smiling and joking.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 124,
+            "end": 130
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:joke#s4",
+      "pos": "n.",
+      "glossZh": "荒唐可笑的事",
+      "pronunciationId": "w:joke#p-main",
+      "note": "非正式用法。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

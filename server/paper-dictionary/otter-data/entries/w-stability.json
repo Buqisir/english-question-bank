@@ -1,0 +1,124 @@
+{
+  "entryId": "w:stability",
+  "headword": "stability",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/stəˈbɪləti/",
+    "us": "/stəˈbɪləti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:stability#p-main",
+      "ipa": {
+        "uk": "/stəˈbɪləti/",
+        "us": "/stəˈbɪləti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "stabilities",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 41
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:stability#s1",
+      "pos": "n.",
+      "glossZh": "稳定性",
+      "pronunciationId": "w:stability#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 41
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:stability#e-ed8d9da58f9434ff",
+          "text": "Many people now misunderstand emotional intelligence as almost everything desirable in a person’s makeup that cannot be measured by an IQ test, such as character, motivation, confidence, mental stability, optimism and “people skills.” Research has shown that emotional skills may contribute to some of these qualities, but most of them move far beyond skill-based emotional intelligence.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 194,
+            "end": 203
+          }
+        },
+        {
+          "exampleId": "w:stability#e-af54fea2ce90adde",
+          "text": "“You don’t need to touch a pile of books to judge its stability.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:stability#e-98ea76c30e05aa02",
+          "text": "For Kimani, success in 2030 means seeing 200 thousand smallholder farmers living with dignity – affording education, healthcare, and financial stability through improved yields.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 143,
+            "end": 152
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

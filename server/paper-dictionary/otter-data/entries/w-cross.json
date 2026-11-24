@@ -1,0 +1,413 @@
+{
+  "entryId": "w:cross",
+  "headword": "cross",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/krɒs/",
+    "us": "/krɔːs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:cross#p-main",
+      "ipa": {
+        "uk": "/krɒs/",
+        "us": "/krɔːs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "crosser",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "crossest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "crosses",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "crossed",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "crossing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 95
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 90
+  },
+  "senses": [
+    {
+      "senseId": "w:cross#s1",
+      "pos": "v.",
+      "glossZh": "穿过；横越",
+      "pronunciationId": "w:cross#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cross#e-2f34922dfc540581",
+          "text": "The tractor was __48__ against the crash barrier in the central reservation, having miraculously(奇迹般地) crossed the __49__ road with fast-flowing traffic.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 103,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:cross#e-c3d89679a93c1472",
+          "text": "He rushed out of Mrs. Hill’s house and crossed the street quickly.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:cross#e-0f1065593a3f8f9c",
+          "text": "She partnered with oceanographer Bruce Heezen, who collected sonar(声呐) data from ships that crossed the Atlantic Ocean.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 99
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cross#s2",
+      "pos": "v.",
+      "glossZh": "交叉；使交叉",
+      "pronunciationId": "w:cross#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cross#e-70c2cc7615957692",
+          "text": "Never stick them upright in your food or cross them as you use them",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2022-national-a:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:cross#e-9a3e5f6e9351c8a2",
+          "text": "The streets in which people live should be a tight pattern of crossed sidewalks, which allow people to meet, talk, and get to know one another.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:cross#e-885a66fe2b5ebd37",
+          "text": "Avoid blaming phrases and defensive body language like pointing or crossing your arms.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cross#s3",
+      "pos": "短语",
+      "glossZh": "掠过心头；想到",
+      "pronunciationId": "w:cross#p-main",
+      "note": "cross one’s mind。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cross#e-3ee5c6fe7cff413e",
+          "text": "When you were trying to figure out what to buy for the environmentalist on your holiday list, fur probably didn’t cross your mind.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 119
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cross#s4",
+      "pos": "短语",
+      "glossZh": "划掉；删去",
+      "pronunciationId": "w:cross#p-main",
+      "note": "cross out。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cross#e-08aad3d44a2c2c2a",
+          "text": "As a result, these writers never get in the habit of crossing out chunks (大块) of their draft and writing revisions in the blank space.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cross#s5",
+      "pos": "n.",
+      "glossZh": "十字；十字架；叉形记号",
+      "pronunciationId": "w:cross#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cross#e-3597462f1d51e681",
+          "text": "On the passenger seat was a medical kit with a faint white cross.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 64
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cross#s6",
+      "pos": "n.",
+      "glossZh": "混合体；杂交品种",
+      "pronunciationId": "w:cross#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cross#e-e02043fb6516450b",
+          "text": "Snow Bowls, as I remember them, were wild, violent events, a cross between sport and warfare.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cross#s7",
+      "pos": "v.",
+      "glossZh": "使杂交",
+      "pronunciationId": "w:cross#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cross#e-7eccd855b3f354ea",
+          "text": "From over 3,000 rice varieties, the team identified a naturally stronger version of the gene and used traditional plant breeding (育种) to cross it into varieties carrying a weaker form.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 137,
+            "end": 142
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cross#s8",
+      "pos": "adj.",
+      "glossZh": "生气的；恼怒的",
+      "pronunciationId": "w:cross#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "向量叉积、拳击交叉拳、勒诺曼牌牌名",
+      "reason": "数理、体育或纸牌专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

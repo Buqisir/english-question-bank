@@ -1,0 +1,259 @@
+{
+  "entryId": "w:seat",
+  "headword": "seat",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/siːt/",
+    "us": "/siːt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:seat#p-main",
+      "ipa": {
+        "uk": "/siːt/",
+        "us": "/siːt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "seats",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "SEATs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "seated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "seating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 16,
+    "mock": 117
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 117
+  },
+  "senses": [
+    {
+      "senseId": "w:seat#s1",
+      "pos": "n.",
+      "glossZh": "座位",
+      "pronunciationId": "w:seat#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:seat#e-2c30647e9e2c9948",
+          "text": "It’s better to leave your listeners wishing for more than shifting restlessly in their seats waiting for your speech finally to end.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:6",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:seat#e-c2832ad9a259c4e5",
+          "text": "My dog Don always sits beside me in the passenger seat.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:seat#e-bda4af518598ba80",
+          "text": "It reserves seats for the seniors.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2024-national-a:28",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:seat#s2",
+      "pos": "v.",
+      "glossZh": "可容纳……人就座",
+      "pronunciationId": "w:seat#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:seat#e-ca3fa01fd0dfbd54",
+          "text": "Rome’s Colosseum was 157 feet tall and had 80 entrances, seating 50,000 people.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 64
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:seat#s3",
+      "pos": "v.",
+      "glossZh": "安排就座",
+      "pronunciationId": "w:seat#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:seat#s4",
+      "pos": "n.",
+      "glossZh": "入座",
+      "pronunciationId": "w:seat#p-main",
+      "note": "用 seating。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:seat#e-f093b62d38018d04",
+          "text": "Dinner hours: Tuesday through Thursday 5: 30 pm - 9: 00 pm (last seating); Friday and Saturday 5: 00 pm - 9:30pm (last seating).",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:seat#s5",
+      "pos": "n.",
+      "glossZh": "职位席位",
+      "pronunciationId": "w:seat#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:seat#s6",
+      "pos": "n.",
+      "glossZh": "机构所在地",
+      "pronunciationId": "w:seat#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "骑马时的坐姿",
+      "reason": "马术专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

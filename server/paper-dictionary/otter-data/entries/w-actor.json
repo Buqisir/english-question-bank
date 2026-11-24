@@ -1,0 +1,145 @@
+{
+  "entryId": "w:actor",
+  "headword": "actor",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈæktə(r)/",
+    "us": "/ˈæktər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:actor#p-main",
+      "ipa": {
+        "uk": "/ˈæktə(r)/",
+        "us": "/ˈæktər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "actors",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 26,
+    "mock": 41
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 41
+  },
+  "senses": [
+    {
+      "senseId": "w:actor#s1",
+      "pos": "n.",
+      "glossZh": "演员；扮演某个角色的人",
+      "note": "actor 可以泛指任何性别的演员，也可跟 actress 对举时专指男演员。",
+      "pronunciationId": "w:actor#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 25,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:actor#e-f6a52a6e9b548fa4",
+          "text": "An actor hired by the researchers grabbed her food first.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:actor#e-4147f7154f22c9e2",
+          "text": "Leslie Nielsen’s childhood was a difficult one, but he had one particular shining star in his life – his uncle, who was a well-known actor.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 133,
+            "end": 138
+          }
+        },
+        {
+          "exampleId": "w:actor#e-a9def703a6757f3c",
+          "text": "He became a successful comedy actor.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:22",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:actor#s2",
+      "pos": "n.",
+      "glossZh": "参与者；起作用的人、组织或机构",
+      "note": "常见于 political actors 等表达。",
+      "pronunciationId": "w:actor#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "起诉人；语法施事者；用例参与者",
+      "reason": "法律、语言学或软件专业义"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

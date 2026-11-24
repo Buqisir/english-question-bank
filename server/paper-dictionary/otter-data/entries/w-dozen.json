@@ -1,0 +1,202 @@
+{
+  "entryId": "w:dozen",
+  "headword": "dozen",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdʌzn/",
+    "us": "/ˈdʌzn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dozen#p-main",
+      "ipa": {
+        "uk": "/ˈdʌzn/",
+        "us": "/ˈdʌzn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "dozens",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 35
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 33
+  },
+  "senses": [
+    {
+      "senseId": "w:dozen#s1",
+      "pos": "n. / det.",
+      "glossZh": "一打；十二个",
+      "pronunciationId": "w:dozen#p-main",
+      "note": "half a dozen 指六个。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dozen#e-334202c1e4cb6759",
+          "text": "He has a dozen employees.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:dozen#e-0695768e1ee9fa2e",
+          "text": "After the coding of all submissions, half a dozen categories were noted most often as important to visitors.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:dozen#e-f1afa313a33239f2",
+          "text": "The basket in her hands held a dozen brown eggs, each one different in size.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dozen#s2",
+      "pos": "短语",
+      "glossZh": "几十个；许多",
+      "pronunciationId": "w:dozen#p-main",
+      "note": "dozens of。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dozen#e-f1e77657e226d20a",
+          "text": "To do this I have searched through dozens of plays to find the ones that I think best show the power and purpose of the short play.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:dozen#e-216499a5268f3171",
+          "text": "This unbeatable price-point encouraged me to experiment with dozens of titles that I would never normally consider buying.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:dozen#e-e3e8ea62b806c667",
+          "text": "Oakley draws on interviews with dozens of career changers to show what strategies worked and what pitfalls to avoid.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "矿石计量单位",
+      "reason": "历史行业专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

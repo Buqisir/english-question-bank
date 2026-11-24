@@ -1,0 +1,135 @@
+{
+  "entryId": "w:contradictory",
+  "headword": "contradictory",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌkɒntrəˈdɪktəri/",
+    "us": "/ˌkɑːntrəˈdɪktəri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:contradictory#p-main",
+      "ipa": {
+        "uk": "/ˌkɒntrəˈdɪktəri/",
+        "us": "/ˌkɑːntrəˈdɪktəri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more contradictory",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most contradictory",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:contradictory#s1",
+      "pos": "adj.",
+      "glossZh": "相互矛盾的；不一致的",
+      "pronunciationId": "w:contradictory#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:contradictory#e-4cfc28235ac24785",
+          "text": "However, contradictory directions from passers-by only deepened our __46__.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:contradictory#e-d761eb0727ed8e0d",
+          "text": "However, the deep rules of this effect confused researchers because experiments often produced contradictory results.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 108
+          }
+        },
+        {
+          "exampleId": "w:contradictory#e-77647dace3769707",
+          "text": "Beyond this, motion sickness fundamentally occurs when the brain receives contradictory sensory signals about body movement.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 87
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "矛盾命题之一",
+      "reason": "逻辑学专门名词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

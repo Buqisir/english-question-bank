@@ -1,0 +1,351 @@
+{
+  "entryId": "w:label",
+  "headword": "label",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈleɪbl/",
+    "us": "/ˈleɪbl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:label#p-main",
+      "ipa": {
+        "uk": "/ˈleɪbl/",
+        "us": "/ˈleɪbl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "labels",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "labeled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "labeling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "labelled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "labelling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 102
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 95
+  },
+  "senses": [
+    {
+      "senseId": "w:label#s1",
+      "pos": "n.",
+      "glossZh": "标签；标牌",
+      "pronunciationId": "w:label#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:label#e-3a2a42623530086b",
+          "text": "She is trying to come up with a label to attach to nutria fashions to show it is eco-friendly.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:8",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:label#e-8ef271c51bbb0c0e",
+          "text": "And the wine was cloudy, in a funny old bottle with no label (标签) on it.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:cloze:1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:label#e-0e4a7bbc100a448e",
+          "text": "Any restrictions established by the lending library will be indicated on the label.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:7",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 82
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:label#s2",
+      "pos": "n.",
+      "glossZh": "给人或事物贴的分类称号",
+      "pronunciationId": "w:label#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:label#e-2a6bc5cad517a94c",
+          "text": "Bossy, dominant, controlling – have these labels ever come to mind when you think of others or yourself?",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:label#e-4a931483f8a378f8",
+          "text": "Many of us are trapped by labels like “not talented enough” – as if life were a one-way road with no turns.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:label#e-f4063def74c64f6c",
+          "text": "But the label “accident” offered him no real comfort.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:label#s3",
+      "pos": "v.",
+      "glossZh": "贴标签；标注",
+      "pronunciationId": "w:label#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:label#e-030507ad419c697d",
+          "text": "Draw a large circle on the ground in chalk and label it with the first few numbers of pi: 3, 1, and 4.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-a:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:label#e-aef6c5fdcd773685",
+          "text": "For AI-assisted works, please label as “AI-generated”.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-a:17",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:label#s4",
+      "pos": "v.",
+      "glossZh": "把某人或某事归为某类",
+      "pronunciationId": "w:label#p-main",
+      "note": "label sb/sth as sth。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:label#e-7ac46bb4bb3a8476",
+          "text": "Labelling medication as cheating.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-cq-nankai-2026-03-sixth-quality-test:33",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:label#e-9aacd19220448726",
+          "text": "Which one is labeled as the most comprehensive coverage by its provider?",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:label#s5",
+      "pos": "n.",
+      "glossZh": "唱片公司",
+      "pronunciationId": "w:label#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "纹章垂饰、同位素标记",
+      "reason": "专业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

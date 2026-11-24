@@ -1,0 +1,193 @@
+{
+  "entryId": "w:soil",
+  "headword": "soil",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/sɔɪl/",
+    "us": "/sɔɪl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:soil#p-main",
+      "ipa": {
+        "uk": "/sɔɪl/",
+        "us": "/sɔɪl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "soils",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "soiled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "soiling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 122
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 121
+  },
+  "senses": [
+    {
+      "senseId": "w:soil#s1",
+      "pos": "n.",
+      "glossZh": "土壤",
+      "pronunciationId": "w:soil#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:soil#e-5831f33b0fa69c9f",
+          "text": "Turning soil, pulling weeds, and harvesting cabbage sound like tough work for middle and high school kids.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:soil#e-2a0323c5fc4e8716",
+          "text": "Over the past few years, many solar farm developers have transformed the space under their solar panels into a shelter for various kinds of pollinators, resulting in soil improvement and carbon reduction.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 166,
+            "end": 170
+          }
+        },
+        {
+          "exampleId": "w:soil#e-16b0cd4f76ad506d",
+          "text": "Led by the concept of “right plant, right place,” they match plants that enjoy the same soil, sun and weather conditions, and arrange them according to their patterns of growth.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 92
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:soil#s2",
+      "pos": "n.",
+      "glossZh": "国土",
+      "pronunciationId": "w:soil#p-main",
+      "note": "常见 on foreign soil。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:soil#s3",
+      "pos": "v.",
+      "glossZh": "弄脏",
+      "pronunciationId": "w:soil#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:soil#e-b0623acf42ec8b1e",
+          "text": "Damaged/broken/soiled on arrival",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "cell:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-a:ocr-916a21169272a7ae:2:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 21
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "猎物藏身泥地、污物袋、圈养喂草",
+      "reason": "罕见义或专业义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

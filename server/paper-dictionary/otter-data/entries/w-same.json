@@ -1,0 +1,487 @@
+{
+  "entryId": "w:same",
+  "headword": "same",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/seɪm/",
+    "us": "/seɪm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:same#p-main",
+      "ipa": {
+        "uk": "/seɪm/",
+        "us": "/seɪm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more same",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most same",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 78,
+    "mock": 425
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 424
+  },
+  "senses": [
+    {
+      "senseId": "w:same#s1",
+      "pos": "adj.",
+      "glossZh": "同一个的",
+      "pronunciationId": "w:same#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 37,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:same#e-2c886aefe44c6431",
+          "text": "He hung them above the same table he had __48__ from Turin.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:same#e-9aa306f5c437b959",
+          "text": "Researchers trained a group of 11 dogs to distinguish between images(图像)of the same person making either a happy or an angry face.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:same#e-6f98d4d445f22cd5",
+          "text": "Audio(音频) and video can feel more engaging than text, and so university teachers increasingly turn to these technologies – say, assigning an online talk instead of an article by the same person.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 182,
+            "end": 186
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:same#s2",
+      "pos": "adj.",
+      "glossZh": "相同的",
+      "pronunciationId": "w:same#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 19,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:same#e-cd5063c9d8601145",
+          "text": "The traffic signals along Factoria Boulevard in Bellevue, Washington, generally don't flash the same length of green twice in a row, especially at rush hour.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:same#e-a94816716f4474d8",
+          "text": "\"Instead, our results suggest that the successful dogs realized that a smiling mouth means the same thing as smiling eyes, and the same rule applies to an angry mouth having the same meaning as angry eyes.\"",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:same#e-01afe56b2c0d18a7",
+          "text": "Led by the concept of “right plant, right place,” they match plants that enjoy the same soil, sun and weather conditions, and arrange them according to their patterns of growth.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 87
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:same#s3",
+      "pos": "pron.",
+      "glossZh": "同样的事物",
+      "pronunciationId": "w:same#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:same#e-45bb9b683dcb43b8",
+          "text": "My mother was so __51__ by her gesture that she decided to go back to the store and give the cashier（收银员）a five-dollar bill to keep on hand __52__ the same happened to someone else if they didn’t have enough __53__ for all of their groceries.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 151,
+            "end": 155
+          }
+        },
+        {
+          "exampleId": "w:same#e-903a97e9087177d6",
+          "text": "In humans, babies can put a round shape in a round hole from around one year of age, but it will be another year before they are able to do the same with less symmetrical（对称的）shapes.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 144,
+            "end": 148
+          }
+        },
+        {
+          "exampleId": "w:same#e-fb20bf5bfe66e0fc",
+          "text": "If your child sees you enjoying your work and taking pride in a job well done, they’re far more likely to do the same.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 113,
+            "end": 117
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:same#s4",
+      "pos": "adj.",
+      "glossZh": "一样的（作表语）",
+      "pronunciationId": "w:same#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:same#e-25678c9181cd11e4",
+          "text": "Is comprehension the same whether a person reads a text onscreen or on paper?",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:same#e-9cd04e2913625894",
+          "text": "However, for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 128,
+            "end": 132
+          }
+        },
+        {
+          "exampleId": "w:same#e-8635b7e2e75f55b3",
+          "text": "It was the same each day, part of her __44__.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:same#s5",
+      "pos": "短语",
+      "glossZh": "同时",
+      "pronunciationId": "w:same#p-main",
+      "note": "at the same time。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:same#e-9d9ffb9dab98d48c",
+          "text": "He seemed to be counting mobile dots even when the scientists tried to mislead him by moving the total coloured area of the dots at the same time.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 136,
+            "end": 140
+          }
+        },
+        {
+          "exampleId": "w:same#e-86b53e204ae6438e",
+          "text": "Can a small group of drones（无人机）guarantee the safety and reliability of railways and, at the same time, help railway operators save billions of euros each year?",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:same#e-ba421532c8c822d2",
+          "text": "The exhibition takes place at the same time as this year’s 150th anniversary of the creation of Yellowstone National Park.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:same#s6",
+      "pos": "短语",
+      "glossZh": "意见一致",
+      "pronunciationId": "w:same#p-main",
+      "note": "on the same page。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:same#e-acf5e6b207a17a2a",
+          "text": "Campbell’s point is to wake up those responsible for AI - the technology companies and world leaders - so they are on the same page as all the experts currently developing it.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 122,
+            "end": 126
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:same#s7",
+      "pos": "adv.",
+      "glossZh": "同样地",
+      "pronunciationId": "w:same#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:same#e-bd483f0b4c1672a9",
+          "text": "Recently, I’ve been thinking the same about my four years at Stanford.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 37
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "专业缩写 SAME",
+      "reason": "同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

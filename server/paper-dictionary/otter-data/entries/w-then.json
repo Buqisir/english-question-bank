@@ -1,0 +1,457 @@
+{
+  "entryId": "w:then",
+  "headword": "then",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ðen/",
+    "us": "/ðen/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:then#p-main",
+      "ipa": {
+        "uk": "/ðen/",
+        "us": "/ðen/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 154,
+    "mock": 880
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 880
+  },
+  "senses": [
+    {
+      "senseId": "w:then#s1",
+      "pos": "adv.",
+      "glossZh": "然后",
+      "pronunciationId": "w:then#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 108,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:then#e-711184d8ad263e8f",
+          "text": "Then he __42__ a U-turn, circling back to take another look.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        },
+        {
+          "exampleId": "w:then#e-326a9f7a8090ada3",
+          "text": "The patient looked puzzled, and then __56__: \"Oh this isn’t for the __57__ I had.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-b:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:then#e-a849e32f46bbefe7",
+          "text": "The man stood up in a panic, then ran through the house toward the window and jumped out.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:then#s2",
+      "pos": "adv.",
+      "glossZh": "那时",
+      "pronunciationId": "w:then#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:then#e-832a5a6876696088",
+          "text": "In 2015, Melissa Ilardo, then a graduate student in genetics at the University of Copenhagen, heard about the Bajau.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:then#e-0cff7c7cc4a25a45",
+          "text": "On most weekends, my grandmother, a young girl then, and her brother would go to the __51__.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:cloze:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:then#e-1ee5479089c6d452",
+          "text": "I was working my way through university then and had little money for __43__ the car.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:cloze:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:then#s3",
+      "pos": "adv.",
+      "glossZh": "那么",
+      "pronunciationId": "w:then#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:then#e-8e51ac2c34aa7a56",
+          "text": "If your child enjoys being in the kitchen, then the culinary camp is definitely the right fit.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:then#e-8455d8f6af9e18bc",
+          "text": "If people are similar and tend to make the same errors, then their errors won’t cancel each other out.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:then#e-1114d2eaa2bd7e94",
+          "text": "If we readjust our view of arguments – from a verbal fight or tennis game to a reasoned exchange through which we all gain respect and understanding from each other -then we change the very nature of what it means to “win” an argument.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 166,
+            "end": 170
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:then#s4",
+      "pos": "adv.",
+      "glossZh": "此外",
+      "pronunciationId": "w:then#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:then#e-ad878fa40483a6f3",
+          "text": "Then there’s Righteous Fur and its unusual fashion.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:then#s5",
+      "pos": "短语",
+      "glossZh": "时不时",
+      "pronunciationId": "w:then#p-main",
+      "note": "now and then。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:then#e-4a46bbb773dbf0d4",
+          "text": "Stop to have a rest now and then.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-ii:36",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:then#e-8e8cc67f36b51e32",
+          "text": "Age is naturally a factor（因素） – only 58 percent of Generation Ys still use landlines now and then, compared to 84 percent of Baby Boomers who’ve perhaps had the same home number for 50 years.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:then#e-f7ca638898607b16",
+          "text": "To stay warm, she ran her engine for a few minutes every now and then.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
+              "sentence": 9
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:then#s6",
+      "pos": "短语",
+      "glossZh": "从那时起",
+      "pronunciationId": "w:then#p-main",
+      "note": "from then on。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:then#e-c73257b79a45eee9",
+          "text": "From then on instead of coming to ask their possessions back, the students would say, “That’s okay.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:9",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:then#e-3190f089571a3b74",
+          "text": "From then on, if I wanted to read an ending guaranteed to be happy, I’d pick up a love romance.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:then#s7",
+      "pos": "短语",
+      "glossZh": "当场",
+      "pronunciationId": "w:then#p-main",
+      "note": "right then and there。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:then#e-a1ba253ed4dc2f72",
+          "text": "Right then and there, this total __49__ examined my engine, explaining as he worked that my spark plugs （火花塞） hadn’t been changed for so long that they were __50__ to function.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 10
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Francisca Then",
+      "reason": "姓氏"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

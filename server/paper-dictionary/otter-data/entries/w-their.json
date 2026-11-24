@@ -1,0 +1,194 @@
+{
+  "entryId": "w:their",
+  "headword": "their",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ðeə(r)/",
+    "us": "/ðer/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:their#p-main",
+      "ipa": {
+        "uk": "/ðeə(r)/",
+        "us": "/ðer/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 408,
+    "mock": 2751
+  },
+  "unassignedCounts": {
+    "gaokao": 383,
+    "mock": 2750
+  },
+  "senses": [
+    {
+      "senseId": "w:their#s1",
+      "pos": "det.",
+      "glossZh": "他们的",
+      "pronunciationId": "w:their#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:their#e-fb14d7bbb9c03654",
+          "text": "The parents were asked to interact with their children as they normally would, and about half of children in the study played with puzzles at one time.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:their#e-2ca9e45b906f2f00",
+          "text": "It is said that about 20% of 25-34-year-olds live with their parents, compared with 16% in 1991.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:their#e-de4548788769adf8",
+          "text": "“We have students who say they went home and talked to their parents and now they’re eating differently,” Jaramillo says.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:their#s2",
+      "pos": "det.",
+      "glossZh": "某人的",
+      "pronunciationId": "w:their#p-main",
+      "note": "单数先行词不限定性别时可用。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:their#e-fd01865bd2d94fb2",
+          "text": "“I’ve seen those magic moments when children are talking to someone they are inspired by - their eyes are shining and their faces light up,” she said.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:their#e-44878194971c4eb8",
+          "text": "When you talk with someone who takes a stand, ask them to give you a reason for their view and spell out their argument fully.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 85
+          }
+        },
+        {
+          "exampleId": "w:their#e-338e04f0ce2a586e",
+          "text": "“Although it is a sticky mission, we’re trying our best to create a space where everyone, regardless of their abilities, can build a future in animal care,” Mcvilly said excitedly, pointing out that the dogs play an important role in the project.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 109
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "there 的误拼",
+      "reason": "拼写错误"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,201 @@
+{
+  "entryId": "w:context",
+  "headword": "context",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɒntekst/",
+    "us": "/ˈkɑːntekst/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:context#p-main",
+      "ipa": {
+        "uk": "/ˈkɒntekst/",
+        "us": "/ˈkɑːntekst/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "contexts",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 86
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 83
+  },
+  "senses": [
+    {
+      "senseId": "w:context#s1",
+      "pos": "n.",
+      "glossZh": "背景；情境；环境",
+      "pronunciationId": "w:context#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:context#e-1b646100befe9e58",
+          "text": "Though he acknowledges that engineering works can fail because the person who thought them up or engineered them simply got things wrong, in this book Dr. Petroski widens his view to consider the larger context in which such failures occur.Sometimes devices fail because a good design is constructed with low quality materials incompetently applied.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 203,
+            "end": 210
+          }
+        },
+        {
+          "exampleId": "w:context#e-8473284f3bdef6bc",
+          "text": "Weiner starts each chapter with a scene on a train ride between cities and then frames each philosopher’s work in the context (背景) of one thing they can help us do better.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 118,
+            "end": 125
+          }
+        },
+        {
+          "exampleId": "w:context#e-f3ece7de034a0c87",
+          "text": "But often, streets are named after people, which places us in a historical or political context too.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:seven-choices:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 95
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:context#s2",
+      "pos": "n.",
+      "glossZh": "上下文；语境",
+      "pronunciationId": "w:context#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:context#e-728d1168e920e216",
+          "text": "Guess from the context.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2026-i:24",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:context#e-a29af40e2a954b4e",
+          "text": "However, in recent years, Google has switched to neural (神经的) machine translation (NMT), which uses deep learning models to improve accuracy by understanding context rather than just individual words.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 158,
+            "end": 165
+          }
+        },
+        {
+          "exampleId": "w:context#e-7dd72ad3b36e0da2",
+          "text": "While the internet offers fragmented（碎片化的）information, books provide rich context and sustained logical connections.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 81
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "蘑菇肉质部分、线程状态数据",
+      "reason": "生物学或计算机专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

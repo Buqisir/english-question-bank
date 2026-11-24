@@ -1,0 +1,375 @@
+{
+  "entryId": "w:manage",
+  "headword": "manage",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmænɪdʒ/",
+    "us": "/ˈmænɪdʒ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:manage#p-main",
+      "ipa": {
+        "uk": "/ˈmænɪdʒ/",
+        "us": "/ˈmænɪdʒ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "managed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "manages",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "managing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 23,
+    "mock": 192
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 190
+  },
+  "senses": [
+    {
+      "senseId": "w:manage#s1",
+      "pos": "v.",
+      "glossZh": "管理",
+      "pronunciationId": "w:manage#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:manage#e-92545d9f8ce78aa2",
+          "text": "He manages a video department.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2022-ii:27",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:manage#e-254c1b6ac46c791b",
+          "text": "The Alberta hail project is managed by Terry Krauss, a cloud physicist who works for Weather Modification Inc.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:manage#e-e9e45b517024a5cf",
+          "text": "Each parking zone consists of multiple lots, designed to efficiently manage traffic across the venue’s network.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:manage#s2",
+      "pos": "v.",
+      "glossZh": "有效安排",
+      "pronunciationId": "w:manage#p-main",
+      "note": "如 manage one’s time。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:manage#e-4726037e98723813",
+          "text": "It is our hope that in coming decades, advances in science will offer new perspectives (视角) from which to study how people manage their lives.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 123,
+            "end": 129
+          }
+        },
+        {
+          "exampleId": "w:manage#e-c661edb57dcfb682",
+          "text": "Still, looking back on the photos, they are some of my best shots though they could have been so much better if I had been prepared and managed my time wisely.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:5",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 136,
+            "end": 143
+          }
+        },
+        {
+          "exampleId": "w:manage#e-eaf05975d3924c48",
+          "text": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 213,
+            "end": 219
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:manage#s3",
+      "pos": "v.",
+      "glossZh": "设法做到",
+      "pronunciationId": "w:manage#p-main",
+      "note": "manage to do sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:manage#e-fc54994dfcb8ab5c",
+          "text": "However, the three bears managed to pick out the bigger number of dots even in pairs of patterns where fewer dots took up a larger area.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:manage#e-5bd162c05357b5b9",
+          "text": "Finally I managed to put my whole head into it, like a cork (软木塞) forced into a bottle.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:manage#e-b8e4ea87c37b2cb1",
+          "text": "After a struggle, she managed to free the vehicle and continued inching along the snow-covered road.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:manage#s4",
+      "pos": "v.",
+      "glossZh": "控制住",
+      "pronunciationId": "w:manage#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:manage#e-35c956baf0668e7e",
+          "text": "But by learning healthier ways to manage emotions, you can regain control over the food you eat and your feelings.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-national-a:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:manage#e-44c667884bda3568",
+          "text": "Managing these anxieties requires conscious effort.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:manage#s5",
+      "pos": "v.",
+      "glossZh": "应付得来",
+      "pronunciationId": "w:manage#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:manage#e-42718da131239846",
+          "text": "People couldn’t even manage it when researchers showed them each knot next to a diagram of the knots’ construction.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 27
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "训练马匹",
+      "reason": "专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

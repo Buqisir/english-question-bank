@@ -1,0 +1,123 @@
+{
+  "entryId": "w:species",
+  "headword": "species",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈspiːʃiːz/",
+    "us": "/ˈspiːʃiːz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:species#p-main",
+      "ipa": {
+        "uk": "/ˈspiːʃiːz/",
+        "us": "/ˈspiːʃiːz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 40,
+    "mock": 287
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:species#s1",
+      "pos": "n.",
+      "glossZh": "物种",
+      "pronunciationId": "w:species#p-main",
+      "note": "单复数同形。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 40,
+        "mock": 287
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:species#e-7d372ce0ef263d30",
+          "text": "“The ecosystem down there can’t handle this non-native species(物种).",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:species#e-1d7b7ec36bfbb702",
+          "text": "In the race to document the species on Earth before they go extinct, researchers and citizen scientists have collected billions of records.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:species#e-fbeb99ababada2bd",
+          "text": "Our formative environment as a species was information-poor, so our brains developed a mechanism that prized new information.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 38
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "圣餐礼圣体、金属货币和复方药成分",
+      "reason": "宗教或历史专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

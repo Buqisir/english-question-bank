@@ -1,0 +1,189 @@
+{
+  "entryId": "w:nervous",
+  "headword": "nervous",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈnɜːvəs/",
+    "us": "/ˈnɜːrvəs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:nervous#p-main",
+      "ipa": {
+        "uk": "/ˈnɜːvəs/",
+        "us": "/ˈnɜːrvəs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more nervous",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most nervous",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 74
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 71
+  },
+  "senses": [
+    {
+      "senseId": "w:nervous#s1",
+      "pos": "adj.",
+      "glossZh": "紧张的；忐忑的",
+      "pronunciationId": "w:nervous#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:nervous#e-d71547ec752408de",
+          "text": "He said he became just as nervous as those playing instruments on stage.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:nervous#e-574b3e97dafb6589",
+          "text": "“I had no idea about what I’d find there and I wasn’t nervous, I just wanted to do it.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:nervous#e-10dba75783cb65c5",
+          "text": "For instance, if your younger brother is nervous about giving a speech at his high school graduation, acknowledge his fears directly.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 48
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:nervous#s2",
+      "pos": "adj.",
+      "glossZh": "神经的",
+      "pronunciationId": "w:nervous#p-main",
+      "note": "如 the nervous system（神经系统）。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:nervous#e-55d48882f66b1f62",
+          "text": "Everything changed one day when Nick was suddenly paralysed（瘫痪的） by Guillain-Barré syndrome (GBS), a rare condition where the nervous system got attacked.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 126,
+            "end": 133
+          }
+        },
+        {
+          "exampleId": "w:nervous#e-af0e8a4f017f9b6a",
+          "text": "It supports positive changes to our nervous system and brain.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-chongqing-kangde-2026-05-may-survey-r3:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 43
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "筋腱的；叶脉明显的",
+      "reason": "词典罕见义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

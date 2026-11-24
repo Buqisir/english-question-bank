@@ -1,0 +1,353 @@
+{
+  "entryId": "w:profile",
+  "headword": "profile",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈprəʊfaɪl/",
+    "us": "/ˈproʊfaɪl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:profile#p-main",
+      "ipa": {
+        "uk": "/ˈprəʊfaɪl/",
+        "us": "/ˈproʊfaɪl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "profiles",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "profiled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "profiling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 26
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 16
+  },
+  "senses": [
+    {
+      "senseId": "w:profile#s1",
+      "pos": "n.",
+      "glossZh": "（人的）侧面轮廓",
+      "pronunciationId": "w:profile#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:profile#s2",
+      "pos": "n.",
+      "glossZh": "简介",
+      "pronunciationId": "w:profile#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:profile#e-4083a7b06461b031",
+          "text": "First, we examined the communication strategies of 300 UK hotels engaged in environmentally friendly practices across three channels: hotel websites, profiles (简介) on travel site Booking.com, and social media platforms.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 150,
+            "end": 158
+          }
+        },
+        {
+          "exampleId": "w:profile#e-96129a04f466b9f9",
+          "text": "Kolbert notes in a profile of entomologist David Wagner that caterpillars, an under-appreciated life stage, are part of millions of undescribed species frequently ignored by humans.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:profile#e-7d54e96a5ed09b49",
+          "text": "Profiles of prominent voices for climate science and policy conclude this collection with unanswered questions: Can a muddy stream express its will?",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:profile#s3",
+      "pos": "n.",
+      "glossZh": "网上的个人资料页",
+      "pronunciationId": "w:profile#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:profile#e-4c60aa45c7e5077e",
+          "text": "For a fuller professional picture, include a link to your profile.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-guangdong-shantou-2026-01-final:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:profile#e-99353e32852659ec",
+          "text": "My profile on Instagram was a polished collection of such photos intended to __42__ my peers.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:profile#e-6d801c14f0810b80",
+          "text": "Oliver named their online profile “Wheely Good Treasures,” which is a clever __54__ on words – “wheely” because Emily uses a wheelchair, while it also sounds like “really”.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
+            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-05-second-adaptability:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:profile#s4",
+      "pos": "n.",
+      "glossZh": "一组可供识别的特征",
+      "pronunciationId": "w:profile#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:profile#e-83559b1dcee7502a",
+          "text": "“Before visitors go through the entrance, they create their ‘sense of humor profile,’” says executive director Journey Gunderson.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:profile#e-f2c157315201c7b9",
+          "text": "These VOCs, when captured and analyzed by modern detecting devices, form a unique digital “breathprint” for each individual – a specific profile of VOCs.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 137,
+            "end": 144
+          }
+        },
+        {
+          "exampleId": "w:profile#e-51d09fa695751a3c",
+          "text": "The same behavioural profiles emerged across cultures and ages.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m1:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:profile#s5",
+      "pos": "n.",
+      "glossZh": "知名度",
+      "pronunciationId": "w:profile#p-main",
+      "note": "如 keep a low profile，意为保持低调。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:profile#s6",
+      "pos": "v.",
+      "glossZh": "按特征建立画像",
+      "pronunciationId": "w:profile#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:profile#e-e68910d7c203e88c",
+          "text": "● Continuous Data Collection: Many apps collect fine-grained data 24/7, which raises concerns about profiling.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam",
+            "paperTitle": "2025年11月稽阳联谊学校高三联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-alliance-2025-11-senior-three-joint-exam:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 109
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "分析程序性能",
+      "reason": "计算机术语"
+    },
+    {
+      "glossZh": "纵断面图",
+      "reason": "工程专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

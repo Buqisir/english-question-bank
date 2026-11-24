@@ -1,0 +1,240 @@
+{
+  "entryId": "w:alarm",
+  "headword": "alarm",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈlɑːm/",
+    "us": "/əˈlɑːrm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:alarm#p-main",
+      "ipa": {
+        "uk": "/əˈlɑːm/",
+        "us": "/əˈlɑːrm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "alarms",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "alarmed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "alarming",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 49
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 46
+  },
+  "senses": [
+    {
+      "senseId": "w:alarm#s1",
+      "pos": "n.",
+      "glossZh": "闹钟；定时提醒信号",
+      "pronunciationId": "w:alarm#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:alarm#e-2c6484f856a38c15",
+          "text": "The alarm rang at 6 a.m. The pair went down the stairs quietly to the kitchen.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:alarm#e-501722a64bc57a82",
+          "text": "The phone alarm went off.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:alarm#s2",
+      "pos": "n.",
+      "glossZh": "惊恐；忧虑",
+      "pronunciationId": "w:alarm#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:alarm#e-f04df3d26e58ea90",
+          "text": "Describing her alarm at its proposed replacement with an expressway, Jane Jacobs called on her mayor（市长）to champion “New York as a decent place to live, and not just rush through.” Similar campaigns occurred in Australia in the late 1960s and 1970s as well.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:alarm#s3",
+      "pos": "v.",
+      "glossZh": "使惊恐；使担忧",
+      "pronunciationId": "w:alarm#p-main",
+      "note": "alarming 常译作「令人担忧的」。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:alarm#e-e8c155b42e274256",
+          "text": "Ms. Evans cast a glance to the auditorium（观众席）and added, “Don’t let that alarm you.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:alarm#e-d3642f1392b335d8",
+          "text": "What followed was a scene of chaos that genuinely alarmed Mark.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:alarm#s4",
+      "pos": "n.",
+      "glossZh": "警报；警报声",
+      "pronunciationId": "w:alarm#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:alarm#s5",
+      "pos": "n.",
+      "glossZh": "报警器",
+      "pronunciationId": "w:alarm#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "召集武装；突然袭击",
+      "reason": "历史用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

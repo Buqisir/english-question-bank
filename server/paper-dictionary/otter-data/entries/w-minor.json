@@ -1,0 +1,323 @@
+{
+  "entryId": "w:minor",
+  "headword": "minor",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmaɪnə(r)/",
+    "us": "/ˈmaɪnər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:minor#p-main",
+      "ipa": {
+        "uk": "/ˈmaɪnə(r)/",
+        "us": "/ˈmaɪnər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more minor",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most minor",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "minors",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "minored",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "minoring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 41
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 34
+  },
+  "senses": [
+    {
+      "senseId": "w:minor#s1",
+      "pos": "adj.",
+      "glossZh": "不严重的；轻微的",
+      "pronunciationId": "w:minor#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:minor#e-c90a6c4d50e2ea59",
+          "text": "You don’t need to apologize for a minor slip.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-i:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:minor#e-d2110d256d23dfe0",
+          "text": "As an enthusiastic rock climber, Sam was used to occasional minor injuries.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:minor#e-5f4774e416e2f286",
+          "text": "An incorrect AI-generated fact might be a minor issue in homework, but it can be extremely risky in medical records.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:minor#s2",
+      "pos": "adj.",
+      "glossZh": "次要的",
+      "pronunciationId": "w:minor#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:minor#e-5241fad59a6486a0",
+          "text": "As for humans’ role, the draft argues that humans play a relatively minor role in current warming, and implies that biased measurements are to blame for studies that claim otherwise.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:minor#e-d9d543d84f4006dd",
+          "text": "These factors weren’t just minor contributors; they maintained their influence even after researchers controlled for a host of variables like college degrees and adult income.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:minor#e-cfe4ac56b1f9ff80",
+          "text": "They take on minor responsibilities.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-anhui-hefei-2026-02-first:26",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:minor#s3",
+      "pos": "n.",
+      "glossZh": "未成年人",
+      "pronunciationId": "w:minor#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:minor#e-7abf5af7b552776e",
+          "text": "Minors (12-17) require a signed parental permission form.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:minor#e-90daf09769b3babb",
+          "text": "But a total ban on minors sparks heated debate.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-import-20261026-n093:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:minor#s4",
+      "pos": "n.",
+      "glossZh": "辅修专业",
+      "pronunciationId": "w:minor#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:minor#s5",
+      "pos": "v.",
+      "glossZh": "辅修",
+      "pronunciationId": "w:minor#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:minor#s6",
+      "pos": "adj.",
+      "glossZh": "小调的",
+      "pronunciationId": "w:minor#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "矩阵子式；桥牌副牌；夜蛾；方济各会修士",
+      "reason": "专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

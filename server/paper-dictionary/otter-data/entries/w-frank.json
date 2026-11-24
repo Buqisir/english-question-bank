@@ -1,0 +1,221 @@
+{
+  "entryId": "w:frank",
+  "headword": "frank",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fræŋk/",
+    "us": "/fræŋk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:frank#p-main",
+      "ipa": {
+        "uk": "/fræŋk/",
+        "us": "/fræŋk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "franker",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "frankest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 30
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 27
+  },
+  "senses": [
+    {
+      "senseId": "w:frank#s1",
+      "pos": "adj.",
+      "glossZh": "坦率的",
+      "pronunciationId": "w:frank#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:frank#e-cbdd0623bc67abee",
+          "text": "You have every right to be brave and frank.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:frank#s2",
+      "pos": "name.",
+      "glossZh": "弗兰克（名）",
+      "pronunciationId": "w:frank#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:frank#e-4d2082055e429944",
+          "text": "Why does Ms. McDaniel talk to Frank?",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:frank#e-7435f94c1132c0e3",
+          "text": "What did Frank do before coming to Susanna?",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:frank#e-146695f18971b56d",
+          "text": "“I am the last original client of Frank Lloyd Wright, still living in the home he designed for me,” Reisley said, sitting in the bright open living room of the home designed by the famous architect.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:frank#s3",
+      "pos": "name.",
+      "glossZh": "弗兰克（姓）",
+      "pronunciationId": "w:frank#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:frank#e-4e00d09b96d8e02f",
+          "text": "In August 1944, after two years in hiding in Amsterdam, 15-year-old Anne Frank and her family, along with four other Jews, were arrested.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:frank#e-9d7786ede8e7ab04",
+          "text": "Only Anne's father, Otto Frank, survived the Nazi concentration camps.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 30
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "免邮权",
+      "reason": "邮政专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

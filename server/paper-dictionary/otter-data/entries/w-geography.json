@@ -1,0 +1,250 @@
+{
+  "entryId": "w:geography",
+  "headword": "geography",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dʒiˈɒɡrəfi/",
+    "us": "/dʒiˈɑːɡrəfi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:geography#p-main",
+      "ipa": {
+        "uk": "/dʒiˈɒɡrəfi/",
+        "us": "/dʒiˈɑːɡrəfi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "geographies",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "senses": [
+    {
+      "senseId": "w:geography#s1",
+      "pos": "n.",
+      "glossZh": "地理学",
+      "pronunciationId": "w:geography#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:geography#e-1dab339a051da642",
+          "text": "To become a geography teacher.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:geography#e-6a27bb073bcad400",
+          "text": "A geography textbook.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:23",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:geography#e-5ff9b80509204bf8",
+          "text": "“But mapping landslides from satellite imagery by eye can be time-intensive,” said Lorenzo Nava, who is jointly based at Cambridge’s Departments of Earth Sciences and Geography.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 167,
+            "end": 176
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:geography#s2",
+      "pos": "n.",
+      "glossZh": "地理特征",
+      "pronunciationId": "w:geography#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:geography#e-3650746c9ddca792",
+          "text": "The geography of coastal regions.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:geography#e-e3bc5a549f9ad657",
+          "text": "The Lake District National Park is remarkable for its natural geography: deep valleys, uneven peaks and icy lakes.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-sep-opening:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 71
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:geography#s3",
+      "pos": "n.",
+      "glossZh": "地理分布",
+      "pronunciationId": "w:geography#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:geography#e-bf5bd2cf70f77d0e",
+          "text": "The researchers described “striking changes” in the geography of BMI.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:grammar-fill:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:geography#s4",
+      "pos": "n.",
+      "glossZh": "空间布局",
+      "pronunciationId": "w:geography#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:geography#e-19413cefd2c96823",
+          "text": "With paper, there is a literal laying on of hands, along with the visual geography of distinct pages.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 82
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "厕所",
+      "reason": "旧俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

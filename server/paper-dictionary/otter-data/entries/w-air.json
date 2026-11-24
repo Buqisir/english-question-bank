@@ -1,0 +1,258 @@
+{
+  "entryId": "w:air",
+  "headword": "air",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/eə(r)/",
+    "us": "/er/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:air#p-main",
+      "ipa": {
+        "uk": "/eə(r)/",
+        "us": "/er/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "airs",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "aired",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "airing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 25,
+    "mock": 215
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 214
+  },
+  "senses": [
+    {
+      "senseId": "w:air#s1",
+      "pos": "n.",
+      "glossZh": "空气；空中",
+      "pronunciationId": "w:air#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 21,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:air#e-ba78ffc76422626c",
+          "text": "On Thursday in an article published in Cell, a team of researchers reported a new kind of adaptation - not to air or to food, but to the ocean.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 110,
+            "end": 113
+          }
+        },
+        {
+          "exampleId": "w:air#e-eae62d456ac1f124",
+          "text": "Maybe it is because the combination of fresh air, smooth movement and exercise.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-national-b:writing-short-error-correction:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:air#e-597c38411db3b5a6",
+          "text": "At that moment, the sounds of a police car echoed（回响）in the air.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 63
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:air#s2",
+      "pos": "n.",
+      "glossZh": "航空；空运",
+      "pronunciationId": "w:air#p-main",
+      "note": "by air 表示「乘飞机；空运」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:air#e-cd55ac7cc8c470c5",
+          "text": "Trip includes round-trip air tickets, hotel stay for two nights, and tours of the National Air and Space Museum and the office of National Geographic World.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:air#e-57fb01f31443d593",
+          "text": "Air traffic controllers ensure planes’ safe navigation.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:air#s3",
+      "pos": "v.",
+      "glossZh": "播放；播出",
+      "pronunciationId": "w:air#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:air#e-dea23309cc023a97",
+          "text": "While running every aspect of our own news station, kids and their fellow campers will create and host a broadcast airing each night at dinner for the entire camp.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 115,
+            "end": 121
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:air#s4",
+      "pos": "n.",
+      "glossZh": "神情；风度；气氛",
+      "pronunciationId": "w:air#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:air#s5",
+      "pos": "v.",
+      "glossZh": "通风；公开表达（意见）",
+      "pronunciationId": "w:air#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "广播电台等缩写",
+      "reason": "同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,124 @@
+{
+  "entryId": "w:policeman",
+  "headword": "policeman",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pəˈliːsmən/",
+    "us": "/pəˈliːsmən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:policeman#p-main",
+      "ipa": {
+        "uk": "/pəˈliːsmən/",
+        "us": "/pəˈliːsmən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "policemen",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:policeman#s1",
+      "pos": "n.",
+      "glossZh": "男警察",
+      "pronunciationId": "w:policeman#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:policeman#e-cec623a5bf682db8",
+          "text": "When he was __52__ outside, the only __53__ in sight was a policeman.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-ii:cloze:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:policeman#e-a2c1fd9f8c7a61b0",
+          "text": "Paragraph 1: As I was about to turn and run, two policemen arrived.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:policeman#e-cdcbe8d7547410ad",
+          "text": "But on Wednesday, David’s excitement faded when classmates shared their relatives’ dramatic stories: Joseph’s grandfather, a retired policeman, had chased a cat that stole a purse; Ramon’s father, a firefighter, had rescued workers from a factory fire; Marisa’s aunt, a vet (兽医), had saved a mistreated dog.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期初监测 英语",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 133,
+            "end": 142
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

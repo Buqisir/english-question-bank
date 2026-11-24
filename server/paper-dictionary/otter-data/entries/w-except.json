@@ -1,0 +1,213 @@
+{
+  "entryId": "w:except",
+  "headword": "except",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪkˈsept/",
+    "us": "/ɪkˈsept/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:except#p-main",
+      "ipa": {
+        "uk": "/ɪkˈsept/",
+        "us": "/ɪkˈsept/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "excepted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "excepting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "excepts",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 25
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 22
+  },
+  "senses": [
+    {
+      "senseId": "w:except#s1",
+      "pos": "prep.",
+      "glossZh": "除……之外",
+      "pronunciationId": "w:except#p-main",
+      "note": "也可用 except for。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:except#e-5a572ffef70e8cb8",
+          "text": "Everyone in the family settled quickly into the city except me.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:except#e-84af95e14573c4cf",
+          "text": "It has taken her to every state in the US except Montana, Washington and Oregon, she says proudly.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:except#e-8670afc085901a86",
+          "text": "December 25 was unusually quiet except for the nurses complaining about holiday shifts（轮值）.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:except#s2",
+      "pos": "conj.",
+      "glossZh": "只是",
+      "pronunciationId": "w:except#p-main",
+      "note": "可接 that 从句，that 常可省略。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:except#e-5cf142896078bb89",
+          "text": "Except it didn’t work out that way.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:except#e-06f8608edd20b525",
+          "text": "The same could be said of Anne of Green Gables – except that it saw so many adaptations that it faded into the background of pop culture, almost invisible.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
+            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:except#s3",
+      "pos": "v.",
+      "glossZh": "把……排除在外",
+      "pronunciationId": "w:except#p-main",
+      "note": "正式用语。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "提出异议",
+      "reason": "罕见法律用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

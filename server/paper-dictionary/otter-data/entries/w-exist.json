@@ -1,0 +1,232 @@
+{
+  "entryId": "w:exist",
+  "headword": "exist",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪɡˈzɪst/",
+    "us": "/ɪɡˈzɪst/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:exist#p-main",
+      "ipa": {
+        "uk": "/ɪɡˈzɪst/",
+        "us": "/ɪɡˈzɪst/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "existed",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "existing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "exists",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 154
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 154
+  },
+  "senses": [
+    {
+      "senseId": "w:exist#s1",
+      "pos": "v.",
+      "glossZh": "存在",
+      "pronunciationId": "w:exist#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:exist#e-d60aa3e9c4c0dec2",
+          "text": "In my English to Italian translations, I’ve learned about social programs that I didn’t know existed.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:exist#e-f6d18e3888c7a445",
+          "text": "Language barriers will always exist.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2023-four-provinces-feb:35",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:exist#e-568e638069e25335",
+          "text": "Cloud-seeding companies will continue to exist.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:31",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:exist#s2",
+      "pos": "adj.",
+      "glossZh": "现有的",
+      "pronunciationId": "w:exist#p-main",
+      "note": "用 existing。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:exist#e-ae12d1f2e25b1746",
+          "text": "And contrary to existing research that says you should avoid eating with heavier people who order large portions（份）, it's the beanpoles with big appetites you really need to avoid.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:exist#e-25b8199cfdeba6ef",
+          "text": "Observe existing regulations on it.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2024-ii:34",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:exist#e-b26c2e071df8c63d",
+          "text": "Submissions may be from existing or newly created work.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-a:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:exist#s3",
+      "pos": "v.",
+      "glossZh": "勉强维持生计",
+      "pronunciationId": "w:exist#p-main",
+      "note": "exist on sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

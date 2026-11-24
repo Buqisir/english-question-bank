@@ -1,0 +1,206 @@
+{
+  "entryId": "w:she",
+  "headword": "she",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ʃiː/",
+    "us": "/ʃiː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:she#p-main",
+      "ipa": {
+        "uk": "/ʃiː/",
+        "us": "/ʃiː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 424,
+    "mock": 2718
+  },
+  "unassignedCounts": {
+    "gaokao": 404,
+    "mock": 2718
+  },
+  "senses": [
+    {
+      "senseId": "w:she#s1",
+      "pos": "pron.",
+      "glossZh": "她",
+      "pronunciationId": "w:she#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:she#e-c66f2a8125331315",
+          "text": "After graduation, she worked to help her sisters and brothers pay for their schooling.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:she#e-b9ea9cbba38e9982",
+          "text": "She decided to go back to college to advance her career and to be able to better support her family while doing something she loves: nursing.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 3
+          }
+        },
+        {
+          "exampleId": "w:she#e-109fa7adb03424ee",
+          "text": "She could drive to class and be home in the evening to help with her kids.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 3
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:she#s2",
+      "pos": "pron.",
+      "glossZh": "它（指雌性动物）",
+      "pronunciationId": "w:she#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:she#e-c640b2d0a01af90e",
+          "text": "Poppy welcomed them home as usual but when she saw the box, she stopped.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:she#e-a6e438bce49f742a",
+          "text": "When the tiny creature arrived on January 31, she became the 40th black rhino to be born at the reserve.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:she#e-c254255d8f168b6d",
+          "text": "When I opened my hand, the bird did not fly away; she sat looking at me with her bright eyes.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:she#s3",
+      "pos": "pron.",
+      "glossZh": "她（拟人指船等）",
+      "pronunciationId": "w:she#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "标准氢电极",
+      "reason": "大写 SHE 同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

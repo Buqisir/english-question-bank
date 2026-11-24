@@ -1,0 +1,122 @@
+{
+  "entryId": "w:seventh",
+  "headword": "seventh",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsevnθ/",
+    "us": "/ˈsevnθ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:seventh#p-main",
+      "ipa": {
+        "uk": "/ˈsevnθ/",
+        "us": "/ˈsevnθ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "sevenths",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "senses": [
+    {
+      "senseId": "w:seventh#s1",
+      "pos": "num.",
+      "glossZh": "第七",
+      "pronunciationId": "w:seventh#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:seventh#e-4a5775430aa473e4",
+          "text": "On the morning of her seventh birthday, Zahara awoke feeling excited.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:seventh#e-db74de0f9dd22a5d",
+          "text": "I felt looked down upon, degraded, and rejected that day in seventh grade.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 67
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:seventh#s2",
+      "pos": "n.",
+      "glossZh": "七分之一",
+      "pronunciationId": "w:seventh#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "七度音程",
+      "reason": "音乐专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

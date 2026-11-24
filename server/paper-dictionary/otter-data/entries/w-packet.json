@@ -1,0 +1,150 @@
+{
+  "entryId": "w:packet",
+  "headword": "packet",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpækɪt/",
+    "us": "/ˈpækɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:packet#p-main",
+      "ipa": {
+        "uk": "/ˈpækɪt/",
+        "us": "/ˈpækɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "packets",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:packet#s1",
+      "pos": "n.",
+      "glossZh": "小包；小袋",
+      "pronunciationId": "w:packet#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:packet#e-af018bb7ece0796b",
+          "text": "We opened a packet of instant cookie mix, added the required ingredients, shaped the dough (面团) into small rounds, and confidently placed them on a baking tray in the oven.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:packet#e-0066e18ad48d7dde",
+          "text": "The apartment behind her was humble – no dining table, no chairs, not even a lamp, only a mattress（床垫） and a few empty baby food packets on the floor.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:writing-continuation:4",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 129,
+            "end": 136
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:packet#s2",
+      "pos": "n.",
+      "glossZh": "一套资料",
+      "pronunciationId": "w:packet#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:packet#e-4fbf60ff8f54cdd2",
+          "text": "You will receive a personal reading log packet.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-a:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:packet#s3",
+      "pos": "n.",
+      "glossZh": "数据包",
+      "pronunciationId": "w:packet#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

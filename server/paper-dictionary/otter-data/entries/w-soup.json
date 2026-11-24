@@ -1,0 +1,196 @@
+{
+  "entryId": "w:soup",
+  "headword": "soup",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/suːp/",
+    "us": "/suːp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:soup#p-main",
+      "ipa": {
+        "uk": "/suːp/",
+        "us": "/suːp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "soups",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 47
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 44
+  },
+  "senses": [
+    {
+      "senseId": "w:soup#s1",
+      "pos": "n.",
+      "glossZh": "汤",
+      "pronunciationId": "w:soup#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:soup#e-0906f731bf7eb985",
+          "text": "For example, every morning, my dad has to have the bowl of egg soup while I had to eat an apple.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:writing-short-error-correction:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:soup#e-cbb455cf48b5e4fb",
+          "text": "I tried – and spilled a whole bowl of soup on the floor.",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:reading-b:3",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:soup#e-72db8cd1d4e3647f",
+          "text": "Junzi Kitchen highlights comforting, everyday Chinese dishes like scrambled eggs with tomatoes and beef shank soup.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:grammar-fill:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 110,
+            "end": 114
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:soup#s2",
+      "pos": "短语",
+      "glossZh": "施粥所",
+      "pronunciationId": "w:soup#p-main",
+      "note": "soup kitchen，为有需要的人免费提供餐食。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:soup#e-de2abbe61a6fa6c5",
+          "text": "It saddened me to think of how many people there were who didn’t have a place to call home and the only food they got came from a soup kitchen.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 130,
+            "end": 134
+          }
+        },
+        {
+          "exampleId": "w:soup#e-74717d7e647cde80",
+          "text": "David, a primary school student, worked as a volunteer at the soup kitchen in his community park.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:soup#s3",
+      "pos": "短语",
+      "glossZh": "陷入麻烦",
+      "pronunciationId": "w:soup#p-main",
+      "note": "in the soup，非正式。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "胶片显影和靠供食布道",
+      "reason": "技术义或历史义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

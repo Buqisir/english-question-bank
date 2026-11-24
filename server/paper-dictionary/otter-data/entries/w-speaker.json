@@ -1,0 +1,342 @@
+{
+  "entryId": "w:speaker",
+  "headword": "speaker",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈspiːkə(r)/",
+    "us": "/ˈspiːkər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:speaker#p-main",
+      "ipa": {
+        "uk": "/ˈspiːkə(r)/",
+        "us": "/ˈspiːkər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "speakers",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Speakers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 166,
+    "mock": 881
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 879
+  },
+  "senses": [
+    {
+      "senseId": "w:speaker#s1",
+      "pos": "n.",
+      "glossZh": "说话者",
+      "pronunciationId": "w:speaker#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 136,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:speaker#e-7c43febf3a3fbaa6",
+          "text": "What are the speakers mainly talking about?",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:speaker#e-0cfa162129641ec0",
+          "text": "Where are the speakers?",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:speaker#e-f905e578ebee4a62",
+          "text": "In contrast, the low intensity group perceived any amount of simultaneous (同时) chat as a rude interruption, regardless of what the speakers were saying.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 131,
+            "end": 139
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:speaker#s2",
+      "pos": "n.",
+      "glossZh": "演讲者",
+      "pronunciationId": "w:speaker#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 27,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:speaker#e-f61e35069b4aa46e",
+          "text": "Do you want to be a good public speaker?",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:speaker#e-71873c2e35c05999",
+          "text": "What does the speaker recommend at the end of his lecture?",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:speaker#e-1021e5aa5c2ff720",
+          "text": "Why does the speaker give the talk?",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:speaker#s3",
+      "pos": "n.",
+      "glossZh": "说某种语言的人",
+      "pronunciationId": "w:speaker#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:speaker#e-40b05aa44c67bd6a",
+          "text": "Using a set of controlled audio clips (录音片段), Hilton surveyed 5,000 American English speakers to better understand what affects people’s perceptions of interruptions.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:speaker#e-4bb5cf8d25352853",
+          "text": "Hilton found that American English speakers have different conversational styles.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:speaker#e-1d1c0ae21f87d2b5",
+          "text": "For native speakers",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:speaker#s4",
+      "pos": "n.",
+      "glossZh": "扬声器",
+      "pronunciationId": "w:speaker#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:speaker#e-4badee44a14082c7",
+          "text": "At Cheverton Lodge Care Home, festive jingling breaks out from 17-year-old Ted Mayer’s speaker and he launches into his Christmas set.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 94
+          }
+        },
+        {
+          "exampleId": "w:speaker#e-ace4abcaea04d5a8",
+          "text": "They have designed and built a system of microphones and speakers that link two locations across the jungle.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:speaker#s5",
+      "pos": "n.",
+      "glossZh": "议长",
+      "pronunciationId": "w:speaker#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "木管乐器发声键、挑担木杆、姓氏",
+      "reason": "专门义或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

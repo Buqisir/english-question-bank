@@ -1,0 +1,131 @@
+{
+  "entryId": "w:grandpa",
+  "headword": "grandpa",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɡrænpɑː/",
+    "us": "/ˈɡrænpɑː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:grandpa#p-main",
+      "ipa": {
+        "uk": "/ˈɡrænpɑː/",
+        "us": "/ˈɡrænpɑː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "grandpas",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 51
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:grandpa#s1",
+      "pos": "n.",
+      "glossZh": "爷爷或外公",
+      "pronunciationId": "w:grandpa#p-main",
+      "note": "非正式。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 51
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:grandpa#e-6f057cd810397994",
+          "text": "Anyway, grandpa is now an internet star – two minutes of fame!",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:grandpa#e-c948fde8f980c706",
+          "text": "He was angry with his grandpa.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2022-ii:25",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:grandpa#e-e4f7f86a3b306f0f",
+          "text": "One afternoon, while we were looking up at the sky, I turned to grandpa with a __46__, “Isn’t it incredible that we have actually sent men to the moon and back?”",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 71
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "对不相干的老年男性的贬称",
+      "reason": "语料无此义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

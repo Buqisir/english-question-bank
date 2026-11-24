@@ -1,0 +1,152 @@
+{
+  "entryId": "w:plenty",
+  "headword": "plenty",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈplenti/",
+    "us": "/ˈplenti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:plenty#p-main",
+      "ipa": {
+        "uk": "/ˈplenti/",
+        "us": "/ˈplenti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 14,
+    "mock": 44
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 44
+  },
+  "senses": [
+    {
+      "senseId": "w:plenty#s1",
+      "pos": "pron.",
+      "glossZh": "足量；大量",
+      "pronunciationId": "w:plenty#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:plenty#e-115f71a8b65234d2",
+          "text": "My brother, of course, raced off to be with his friends, while I had plenty to do myself.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:plenty#s2",
+      "pos": "短语",
+      "glossZh": "许多；充足的",
+      "pronunciationId": "w:plenty#p-main",
+      "note": "plenty of。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:plenty#e-27a789adfeea63a3",
+          "text": "Being a page turner requires plenty of practice.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:plenty#e-00cb82325e9ff345",
+          "text": "Drink plenty of water.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:plenty#e-1ad00d66b8438361",
+          "text": "There was plenty of space for the kids to run and play.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 16
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

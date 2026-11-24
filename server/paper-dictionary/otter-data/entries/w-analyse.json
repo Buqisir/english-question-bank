@@ -1,0 +1,170 @@
+{
+  "entryId": "w:analyse",
+  "headword": "analyse",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "analyze"
+  ],
+  "ipa": {
+    "uk": "/ˈænəlaɪz/",
+    "us": "/ˈænəlaɪz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:analyse#p-main",
+      "ipa": {
+        "uk": "/ˈænəlaɪz/",
+        "us": "/ˈænəlaɪz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "analysed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "analyses",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "analysing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "analyzed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "analyzes",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "analyzing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 20,
+    "mock": 141
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 141
+  },
+  "senses": [
+    {
+      "senseId": "w:analyse#s1",
+      "pos": "v.",
+      "glossZh": "分析；仔细研究",
+      "pronunciationId": "w:analyse#p-main",
+      "note": "美式拼写 analyze。analyses 在作名词时是 analysis 的复数。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:analyse#e-77256f6dcec77066",
+          "text": "The researchers analyzed video recordings of 53 child-parent pairs during everyday activities at home and found children who play with puzzles between 26 and 46 months of age have better spatial skills when assessed at 54 months of age.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:analyse#e-734364a9dfcef186",
+          "text": "A computer system will analyze the video to determine whether a cow is sick.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:analyse#e-8a083e988a1654c6",
+          "text": "In a study published in Plant Phenomics, Busch and Pereira establish a new procedure for using SLEAP to analyze plant root phenotypes – how deep and wide they grow, how massive their root systems become, and other physical qualities.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 111
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "analyses（分析结果，名词）",
+      "reason": "属于 analysis 的复数，索引同形命中留空"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,189 @@
+{
+  "entryId": "w:per",
+  "headword": "per",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pə(r)/",
+    "us": "/pər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:per#p-main",
+      "ipa": {
+        "uk": "/pə(r)/",
+        "us": "/pər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 16,
+    "mock": 168
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 168
+  },
+  "senses": [
+    {
+      "senseId": "w:per#s1",
+      "pos": "prep.",
+      "glossZh": "每；每一",
+      "pronunciationId": "w:per#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:per#e-cbac4fa3f91980eb",
+          "text": "Tickets: £7.50 per session",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:per#e-a9d793bb02ad3241",
+          "text": "First announced in April, 2016, the tax which applies to soft drinks containing more than 5g of sugar per 100ml, was introduced to help reduce childhood obesity（肥胖）.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 105
+          }
+        },
+        {
+          "exampleId": "w:per#e-a6a2ba04a0658e65",
+          "text": "•Fees: $ 365 per week.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:per#s2",
+      "pos": "短语",
+      "glossZh": "百分之……",
+      "pronunciationId": "w:per#p-main",
+      "note": "per cent。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:per#e-bc492e322b6e487d",
+          "text": "In the early 1970s, 40 per cent of children walked to school, while in 2010, it was as low as 15 per cent.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:per#e-7d269dbfaea72fe8",
+          "text": "A decrease in average rainfall and an increase in the severity of droughts (干旱) have led to an estimated 75 per cent of Tunisia’s agricultural lands being threatened by desertification.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:per#e-d0fc2ce377cbda31",
+          "text": "By September 2016, more than 130,000 acacia trees had been planted on 20 pilot farms, with farmers recording a 60 per cent survival rate.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 117
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

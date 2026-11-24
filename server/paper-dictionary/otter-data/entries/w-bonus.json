@@ -1,0 +1,222 @@
+{
+  "entryId": "w:bonus",
+  "headword": "bonus",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈbəʊnəs/",
+    "us": "/ˈboʊnəs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bonus#p-main",
+      "ipa": {
+        "uk": "/ˈbəʊnəs/",
+        "us": "/ˈboʊnəs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "bonuses",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "bonusses",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 10
+  },
+  "senses": [
+    {
+      "senseId": "w:bonus#s1",
+      "pos": "n.",
+      "glossZh": "额外的好处；意外收获",
+      "pronunciationId": "w:bonus#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bonus#e-cdd6a2faa36d7a7c",
+          "text": "As an added bonus, it’s close to the main train station.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:bonus#e-77ec07257375532d",
+          "text": "The benefits of regular exercise are well documented but there’s a new bonus to add to the ever-growing list.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:bonus#e-fc801f1a1ca0d9ea",
+          "text": "The real bonus is living among French people and experiencing their life.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:seven-choices:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bonus#s2",
+      "pos": "n.",
+      "glossZh": "奖金；额外报酬",
+      "pronunciationId": "w:bonus#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bonus#e-625e3be89a5f4733",
+          "text": "Rewarding his staff with cash bonuses.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
+            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bonus#s3",
+      "pos": "adj.",
+      "glossZh": "额外的；附赠的",
+      "pronunciationId": "w:bonus#p-main",
+      "note": "置于名词前。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bonus#e-b46af62951d9baa4",
+          "text": "Count down 24 days of brick-inspired challenges using the pieces they already have in boxes, plus extra bonus activities.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 109
+          }
+        },
+        {
+          "exampleId": "w:bonus#e-7513c5b1dd2ba201",
+          "text": "What bonus service will Karla’s Pet Care offer?",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 10
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "篮球加罚、发放奖金（动词）、姓氏和地名",
+      "reason": "专业用法、罕见用法或专名。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,195 @@
+{
+  "entryId": "w:dare",
+  "headword": "dare",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/deə(r)/",
+    "us": "/der/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dare#p-main",
+      "ipa": {
+        "uk": "/deə(r)/",
+        "us": "/der/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "dares",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "dared",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "daring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 15
+  },
+  "senses": [
+    {
+      "senseId": "w:dare#s1",
+      "pos": "v. / modal v.",
+      "glossZh": "敢；胆敢",
+      "pronunciationId": "w:dare#p-main",
+      "note": "How dare you …? 常用于表示愤怒或吃惊。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dare#e-eb1633fba4eb2930",
+          "text": "“How dare you say that!",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:dare#e-be228843f2ad65db",
+          "text": "Grace was our town’s unspoken legend – a figure everyone recognized but few dared to approach.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:dare#e-079424e9d5dc1436",
+          "text": "Courtiers(侍从) dare not say that the emperor is naked; it takes a child to point out the obvious.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dare#s2",
+      "pos": "v.",
+      "glossZh": "激将；向某人挑战",
+      "pronunciationId": "w:dare#p-main",
+      "note": "dare sb to do sth。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dare#e-3813d2edbf5d5d01",
+          "text": "However, at times she seems to dare readers to turn away from her hope, as in a story about encouraging a child’s dream of playing in the NBA.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dare#s3",
+      "pos": "n.",
+      "glossZh": "挑战；为证明胆量而做的事",
+      "pronunciationId": "w:dare#p-main",
+      "note": "如 for a dare。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "惊捕云雀；惊愕凝视；小鱼；姓氏及缩写",
+      "reason": "罕见旧义、专名或同形词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,103 @@
+{
+  "entryId": "w:bc",
+  "headword": "BC",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌbiː ˈsiː/",
+    "us": "/ˌbiː ˈsiː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bc#p-main",
+      "ipa": {
+        "uk": "/ˌbiː ˈsiː/",
+        "us": "/ˌbiː ˈsiː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:bc#s1",
+      "pos": "缩写",
+      "glossZh": "公元前",
+      "pronunciationId": "w:bc#p-main",
+      "note": "Before Christ 的缩写，通常放在年份后。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bc#e-cb825a020637e14e",
+          "text": "As long ago as the 5th century BC, Socrates was quoted as complaining that writing is not “a potion(神药) for remembering, but for reminding”.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:bc#e-8a03be0b1c3c87d2",
+          "text": "Horace, the famous Roman poet who lived from 65 BC to 8 BC, once said, “The poet’s aim is to combine the delightful and the useful.” A poet will take insights into our world covered in fog and cut through that fog to reveal the truth beneath in their poetry.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 50
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "不列颠哥伦比亚省、波士顿学院等",
+      "reason": "不同专名或领域中的同形缩写。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

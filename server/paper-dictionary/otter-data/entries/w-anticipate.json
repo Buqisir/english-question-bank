@@ -1,0 +1,191 @@
+{
+  "entryId": "w:anticipate",
+  "headword": "anticipate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ænˈtɪsɪpeɪt/",
+    "us": "/ænˈtɪsɪpeɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:anticipate#p-main",
+      "ipa": {
+        "uk": "/ænˈtɪsɪpeɪt/",
+        "us": "/ænˈtɪsɪpeɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "anticipated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "anticipates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "anticipating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 27
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 24
+  },
+  "senses": [
+    {
+      "senseId": "w:anticipate#s1",
+      "pos": "v.",
+      "glossZh": "预料；预期",
+      "pronunciationId": "w:anticipate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:anticipate#e-4af5d77b2b5b75b5",
+          "text": "Always make your presentation just a bit shorter than anticipated.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:anticipate#e-d4db8b3c7723b27d",
+          "text": "When we try to tickle ourselves, it anticipates the timing, location, and pressure of the touch and sends advance signals to suppress the tickle reflex.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:anticipate#e-cad8132f04207e70",
+          "text": "I can’t possibly anticipate what kinds of writing might engage every eighth grader, and giving them a free choice is the best way to do that.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:anticipate#s2",
+      "pos": "v.",
+      "glossZh": "预先采取行动；先于……而做",
+      "pronunciationId": "w:anticipate#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:anticipate#s3",
+      "pos": "v.",
+      "glossZh": "期待；盼望",
+      "pronunciationId": "w:anticipate#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:anticipate#e-b95362b557da8865",
+          "text": "Perhaps the most anticipated event is the Beale Street Birthday Bash on 14 September, a night of music on the legendary street.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 28
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "提前享用收入或清偿债务",
+      "reason": "旧式金融义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

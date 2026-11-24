@@ -1,0 +1,188 @@
+{
+  "entryId": "w:funny",
+  "headword": "funny",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfʌni/",
+    "us": "/ˈfʌni/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:funny#p-main",
+      "ipa": {
+        "uk": "/ˈfʌni/",
+        "us": "/ˈfʌni/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "funnier",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "funniest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 39
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 37
+  },
+  "senses": [
+    {
+      "senseId": "w:funny#s1",
+      "pos": "adj.",
+      "glossZh": "好笑的",
+      "pronunciationId": "w:funny#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:funny#e-54b1130c6ec8d863",
+          "text": "Some of our __41__ are funny, especially from the early years when our children were little.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "cloze-2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:funny#e-0d3e378508c6939f",
+          "text": "By telling a funny joke.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:funny#e-189b55b236e13aee",
+          "text": "The combination of text and visuals is so impressive that readers often laugh out loud when recalling its funny moments, even after closing the book.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 111
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:funny#s2",
+      "pos": "adj.",
+      "glossZh": "奇怪的",
+      "pronunciationId": "w:funny#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:funny#e-533f272ffe8f53bf",
+          "text": "And the wine was cloudy, in a funny old bottle with no label (标签) on it.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:cloze:1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:funny#e-b1f993544e3b29dc",
+          "text": "At a breakfast buffet at the airport, I sampled a vegan meatball, while Leopold tried a mouse bite of hash browns he said looked “funny.” Neither of us loved it, but we both agreed it wasn’t bad.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 130,
+            "end": 135
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "狭窄的双头小艇",
+      "reason": "低频船型名称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

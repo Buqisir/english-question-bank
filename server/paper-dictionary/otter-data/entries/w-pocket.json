@@ -1,0 +1,420 @@
+{
+  "entryId": "w:pocket",
+  "headword": "pocket",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpɒkɪt/",
+    "us": "/ˈpɑːkɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:pocket#p-main",
+      "ipa": {
+        "uk": "/ˈpɒkɪt/",
+        "us": "/ˈpɑːkɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "pockets",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "pocketed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "pocketing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 28
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 20
+  },
+  "senses": [
+    {
+      "senseId": "w:pocket#s1",
+      "pos": "n.",
+      "glossZh": "口袋",
+      "pronunciationId": "w:pocket#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pocket#e-cb17621cef31bf85",
+          "text": "In fact plenty of younger kids have one in their pocket.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:pocket#e-b5ac2c61fd3ac35b",
+          "text": "His hand reached for the coin habitually, which he put in his inner pocket.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:pocket#e-beed1fe2fe431a88",
+          "text": "That afternoon, I stuck it into my pocket, feeling it heavier than usual.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pocket#s2",
+      "pos": "adj.",
+      "glossZh": "小型的；可随身带的",
+      "pronunciationId": "w:pocket#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pocket#e-77a72cb1a371a387",
+          "text": "If you’re lucky, there might be a pocket park near where you live, but it’s unusual to find places in a city that are relatively wild.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:pocket#e-1706b55021716226",
+          "text": "Pocket parks are now popular.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2023-ii:32",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:pocket#e-53cce290b6cc435a",
+          "text": "Using angle lights and pocket microscopes, students examined manuscripts on the table, amazed at iridescent（泛着虹彩的）inks of the pages.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pocket#s3",
+      "pos": "n.",
+      "glossZh": "一小片；一小段",
+      "pronunciationId": "w:pocket#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pocket#e-da1b211ff923e170",
+          "text": "According to Shah, Meet Cute “[brings] entertainment into day-to-day tasks and pockets of time” when you can’t dedicate hours to a screen.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-b:12",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 86
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pocket#s4",
+      "pos": "v.",
+      "glossZh": "把……收入囊中",
+      "pronunciationId": "w:pocket#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pocket#e-680771d2a5ad5d5b",
+          "text": "For years, she’d run the corner grocery with a sharp eye and an even sharper tongue, blaming teens for pocketing candies and once running after a dog down Main Street with a broom, though rumors（传闻）said she’d slipped the dog a meatball later.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 103,
+            "end": 112
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pocket#s5",
+      "pos": "短语",
+      "glossZh": "零花钱",
+      "pronunciationId": "w:pocket#p-main",
+      "note": "pocket money。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pocket#e-5ad82ced9832dbc6",
+          "text": "A day’s work was rewarded with £ 5 in pocket money.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:pocket#e-ed0dd02e6c60fa80",
+          "text": "She had saved her pocket money for three months, skipping after-school milk teas and weekend movie tickets, just to buy it as a birthday gift for her deskmate, Ethan.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:pocket#e-c8c45a89bb85a032",
+          "text": "To help students earn pocket money.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pocket#s6",
+      "pos": "短语",
+      "glossZh": "赔了钱；蒙受损失",
+      "pronunciationId": "w:pocket#p-main",
+      "note": "out of pocket。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pocket#e-e3ac7ce126e44e0a",
+          "text": "But that leaves the solo (单独) customers out of pocket and disappointed.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pocket#s7",
+      "pos": "短语",
+      "glossZh": "自掏腰包",
+      "pronunciationId": "w:pocket#p-main",
+      "note": "pay out of pocket。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pocket#e-86d84d2d7f734ea9",
+          "text": "“Now we receive enough __55__ so that we no longer pay out of pocket.”",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 68
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

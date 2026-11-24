@@ -1,0 +1,350 @@
+{
+  "entryId": "w:dive",
+  "headword": "dive",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/daɪv/",
+    "us": "/daɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dive#p-main",
+      "ipa": {
+        "uk": "/daɪv/",
+        "us": "/daɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "dives",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "dived",
+      "tags": [
+        "past",
+        "participle",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "diving",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "dove",
+      "tags": [
+        "past",
+        "participle",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "doven",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 63
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 56
+  },
+  "senses": [
+    {
+      "senseId": "w:dive#s1",
+      "pos": "v.",
+      "glossZh": "跳水；潜水；下潜",
+      "pronunciationId": "w:dive#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dive#e-365c5fa0360fce47",
+          "text": "She wondered if centuries of diving could have led to the evolution of physical characteristics that made the task easier for them.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:dive#e-0e47dc2fbdcd0b3c",
+          "text": "She also said there were likely a number of other genes that help the Bajau dive.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 80
+          }
+        },
+        {
+          "exampleId": "w:dive#e-969df843869a8773",
+          "text": "They dive to the bottom to grab tasty food, plus sometimes rocks that they plan to use as tools.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dive#s2",
+      "pos": "v.",
+      "glossZh": "俯冲；猛扑",
+      "pronunciationId": "w:dive#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dive#e-d8500f2e40eb94dd",
+          "text": "When the older kids, skilled and confident, began flicking (挑击) the ball with incredible force, our kids had to dive and duck because they had no protective masks (面罩) on their faces.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 112,
+            "end": 116
+          }
+        },
+        {
+          "exampleId": "w:dive#e-2ac62940b7f0794e",
+          "text": "Eastern Hokkaido offers one of winter’s most amazing birdwatching experiences, with two remarkable species: red-crowned cranes performing dances against snowy landscapes, and sea eagles diving for fish.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 186,
+            "end": 192
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dive#s3",
+      "pos": "短语",
+      "glossZh": "投入；深入探究",
+      "pronunciationId": "w:dive#p-main",
+      "note": "dive into sth。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dive#e-2b0e7b1974d3c5b8",
+          "text": "From Pre-K to Upper School, students dive headfirst into the world of fact-based storytelling, learning the core principles of reporting and developing the skills to become active creators of news.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:dive#e-9a6cc2186d199bfd",
+          "text": "Paragraph 1: The girls dived into work right away.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:writing-continuation:19",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:dive#e-2e81ab5fe22f25d3",
+          "text": "Diving into research, he learned that before human settlement, the Southeast was home to expansive grasslands.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dive#s4",
+      "pos": "n.",
+      "glossZh": "跳水；潜水；俯冲",
+      "pronunciationId": "w:dive#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:dive#s5",
+      "pos": "n.",
+      "glossZh": "深入研究",
+      "pronunciationId": "w:dive#p-main",
+      "note": "常见 a deep dive into sth。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dive#e-13eb2ce35e4d424e",
+          "text": "• Digital Library Cave: An interactive online platform that offers a deep dive into the history of Cave 17, exploring its origins and showing how its rich collections of historical documents were stored, sealed, and rediscovered.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 78
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dive#s6",
+      "pos": "v.",
+      "glossZh": "（价格等）骤降",
+      "pronunciationId": "w:dive#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "破旧小酒吧；假摔；daeva 的旧拼法",
+      "reason": "俚语、体育专门用法或旧拼写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,361 @@
+{
+  "entryId": "w:security",
+  "headword": "security",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/sɪˈkjʊərəti/",
+    "us": "/sɪˈkjʊrəti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:security#p-main",
+      "ipa": {
+        "uk": "/sɪˈkjʊərəti/",
+        "us": "/sɪˈkjʊrəti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "securities",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 95
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 91
+  },
+  "senses": [
+    {
+      "senseId": "w:security#s1",
+      "pos": "n.",
+      "glossZh": "安全",
+      "pronunciationId": "w:security#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:security#e-b25b99b307556e9e",
+          "text": "The hostels in Rome offer a bed in a dorm room for around $25 a night, and for that, you’ll often get to stay in a central location（位置）with security and comfort.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 140,
+            "end": 148
+          }
+        },
+        {
+          "exampleId": "w:security#e-37d9a73eaae6eb82",
+          "text": "Measures must be taken to not only conserve ecosystems, but also sustain livelihoods and ensure food security.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 116
+          }
+        },
+        {
+          "exampleId": "w:security#e-0db1b141b309fee3",
+          "text": "Data security.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:security#s2",
+      "pos": "n.",
+      "glossZh": "安保措施",
+      "pronunciationId": "w:security#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:security#e-709accd41812fbb1",
+          "text": "With gas prices rising and airport security lines snaking longer than ever, why not book your next domestic vacation on a train?",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:security#e-4fb4d136dc62d5c9",
+          "text": "On-campus students stay in double rooms with 24-hour security and university staff ensuring safety.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
+            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:security#s3",
+      "pos": "n.",
+      "glossZh": "保安人员",
+      "pronunciationId": "w:security#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:security#e-8714ad7447bbd4fc",
+          "text": "If you’ve been a victim of a crime, please notify the campus security and/or local police.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:seven-choices",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:seven-choices:12",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:security#s4",
+      "pos": "n.",
+      "glossZh": "安全感",
+      "pronunciationId": "w:security#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:security#e-d7bc1882efcb23c2",
+          "text": "That morning I finally understood family traditions: security, __53__, and an identity larger than themselves.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:security#e-de2664a98777662a",
+          "text": "Security grows not from delicate pictures, but from genuine connection – from being truly __51__ and appreciated in daily life.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:security#s5",
+      "pos": "短语",
+      "glossZh": "给人安全感的事物",
+      "pronunciationId": "w:security#p-main",
+      "note": "security blanket。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:security#e-af88f0a7431d9e72",
+          "text": "necessary and they’re keeping it as a security blanket - 19 percent say they never use it while a further 13 percent keep it in case of emergencies.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:security#s6",
+      "pos": "短语",
+      "glossZh": "社会保障制度",
+      "pronunciationId": "w:security#p-main",
+      "note": "social security。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:security#e-6dd2a3f2d68e5752",
+          "text": "In many communities, that trust is won every day when life-saving medicine, greeting cards, social security checks, college acceptance letters – even the bills – appear in mailboxes in front of the houses.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 99,
+            "end": 107
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:security#s7",
+      "pos": "n.",
+      "glossZh": "证券",
+      "pronunciationId": "w:security#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:security#s8",
+      "pos": "n.",
+      "glossZh": "抵押品",
+      "pronunciationId": "w:security#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "粗心",
+      "reason": "罕见旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

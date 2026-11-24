@@ -1,0 +1,263 @@
+{
+  "entryId": "w:sorry",
+  "headword": "sorry",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsɒri/",
+    "us": "/ˈsɑːri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:sorry#p-main",
+      "ipa": {
+        "uk": "/ˈsɒri/",
+        "us": "/ˈsɑːri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "sorrier",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "sorriest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 47
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 43
+  },
+  "senses": [
+    {
+      "senseId": "w:sorry#s1",
+      "pos": "adj.",
+      "glossZh": "感到抱歉的",
+      "pronunciationId": "w:sorry#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sorry#e-605b62984249c77d",
+          "text": "Now he felt so sorry.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:cloze",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:sorry#e-02253a18f3edcda0",
+          "text": "“I’m really sorry for not being there on time,” he said, his voice filled with worry.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:sorry#e-75b649107e0f789c",
+          "text": "And almost immediately, I felt a bit sorry for my rude behaviors.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sorry#s2",
+      "pos": "感叹词",
+      "glossZh": "对不起",
+      "pronunciationId": "w:sorry#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sorry#e-1f03b6b79f9ba6da",
+          "text": "Sorry, kid.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:sorry#e-7bee7fbe8d9c5242",
+          "text": "Why does the man say sorry to the woman?",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:sorry#e-f1eaf8f1659b72e3",
+          "text": "“Sorry, sir,” Mohi murmured, hurrying to his seat.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 6
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sorry#s3",
+      "pos": "adj.",
+      "glossZh": "难过的",
+      "pronunciationId": "w:sorry#p-main",
+      "note": "feel sorry for somebody 表示为其遭遇难过。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:sorry#s4",
+      "pos": "adj.",
+      "glossZh": "糟糕的",
+      "pronunciationId": "w:sorry#p-main",
+      "note": "通常作定语。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sorry#e-4acffbc13d657888",
+          "text": "It was red, but a faded, sorry sort of red.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sorry#s5",
+      "pos": "感叹词",
+      "glossZh": "请再说一遍",
+      "pronunciationId": "w:sorry#p-main",
+      "note": "语调上扬。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

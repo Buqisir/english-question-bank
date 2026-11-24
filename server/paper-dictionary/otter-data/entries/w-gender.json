@@ -1,0 +1,211 @@
+{
+  "entryId": "w:gender",
+  "headword": "gender",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdʒendə(r)/",
+    "us": "/ˈdʒendər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:gender#p-main",
+      "ipa": {
+        "uk": "/ˈdʒendə(r)/",
+        "us": "/ˈdʒendər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "genders",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "gendered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "gendering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 40
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 40
+  },
+  "senses": [
+    {
+      "senseId": "w:gender#s1",
+      "pos": "n.",
+      "glossZh": "性别",
+      "pronunciationId": "w:gender#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gender#e-684327f7d09cd6cf",
+          "text": "And the more we look, the more we will see that social factors(因素)like gender, race, and class do not determine the appearance of genius.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:gender#e-4abeb5e4d99c75fb",
+          "text": "These qualities, in turn, are mapped onto products that have been assigned a gender.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:gender#e-9473877ae7689e37",
+          "text": "For instance, if an object’s name was meant to sound genderless, like Miuu, participants would still assign a gender to it – they would assume Miuu was a “he” or “she.”",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 110,
+            "end": 116
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gender#s2",
+      "pos": "v.",
+      "glossZh": "赋予性别属性",
+      "pronunciationId": "w:gender#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gender#e-ab0c74c10bb86854",
+          "text": "“People are stereotyping（形成刻板印象）their gendered objects in very traditional ways,” says Ashley Martin, a Stanford associate professor of organizational behavior.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:gender#e-3f4824921b0b02d5",
+          "text": "While gendering a product may be good marketing, it may also strengthen outdated or harmful ideas about power and identity.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gender#s3",
+      "pos": "n.",
+      "glossZh": "语法上的性",
+      "pronunciationId": "w:gender#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "连接器的公母属性",
+      "reason": "行业专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

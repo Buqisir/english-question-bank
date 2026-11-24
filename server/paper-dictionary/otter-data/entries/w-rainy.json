@@ -1,0 +1,217 @@
+{
+  "entryId": "w:rainy",
+  "headword": "rainy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈreɪni/",
+    "us": "/ˈreɪni/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:rainy#p-main",
+      "ipa": {
+        "uk": "/ˈreɪni/",
+        "us": "/ˈreɪni/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "rainier",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "rainiest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 42
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 37
+  },
+  "senses": [
+    {
+      "senseId": "w:rainy#s1",
+      "pos": "adj.",
+      "glossZh": "下雨的",
+      "pronunciationId": "w:rainy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rainy#e-e27f119ed0723d31",
+          "text": "It can be tough to begin and takes a little planning – running shoes by the front door, lunches made the night before, umbrellas on rainy days and hats on hot ones – but it’s certainly worth trying.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 132,
+            "end": 137
+          }
+        },
+        {
+          "exampleId": "w:rainy#e-5e90f48777639dc3",
+          "text": "It is a cold and rainy Friday morning.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:rainy#e-fe55d15a89f55d83",
+          "text": "Then, on a rainy Sunday morning, I heard a noise in the backyard.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:writing-continuation:6",
+              "sentence": 10
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rainy#s2",
+      "pos": "adj.",
+      "glossZh": "多雨的",
+      "pronunciationId": "w:rainy#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rainy#e-2efa9e49746cc232",
+          "text": "According to the study’s lead author, this model shows how rain can be used to generate clean electricity effectively and sustainably, especially in rainy places such as Singapore.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 149,
+            "end": 154
+          }
+        },
+        {
+          "exampleId": "w:rainy#e-bf904b29ef4566ea",
+          "text": "Soh notes this could be made larger, such as putting rain-catching tubes on roofs in rainy areas like Singapore, or near waterfalls.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 90
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rainy#s3",
+      "pos": "短语",
+      "glossZh": "将来遇到困难的时候",
+      "pronunciationId": "w:rainy#p-main",
+      "note": "for a rainy day。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rainy#e-0f0c85f86a9836c8",
+          "text": "Always prepare for a rainy day.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:27",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 26
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

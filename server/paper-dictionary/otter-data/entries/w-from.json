@@ -1,0 +1,929 @@
+{
+  "entryId": "w:from",
+  "headword": "from",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/frɒm/",
+    "us": "/frɑːm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:from#p-main",
+      "ipa": {
+        "uk": "/frɒm/",
+        "us": "/frɑːm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:from#p-weak",
+      "ipa": {
+        "uk": "/frəm/",
+        "us": "/frəm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "弱读"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 433,
+    "mock": 3633
+  },
+  "unassignedCounts": {
+    "gaokao": 257,
+    "mock": 3632
+  },
+  "senses": [
+    {
+      "senseId": "w:from#s1",
+      "pos": "prep.",
+      "glossZh": "从（出发地点）",
+      "pronunciationId": "w:from#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:from#e-d7db3dba489e6c9e",
+          "text": "We had just arrived home from a trip.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:from#e-67aef9146855ff1b",
+          "text": "Over five years, nearly 10,000 monarchs flew from the facility.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:from#e-3b6993de1596c1ac",
+          "text": "Hilda then swam across the tank following Maya’s path and emerged from the water to find Katherine removing her scuba gear.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:from#s2",
+      "pos": "prep.",
+      "glossZh": "来自（来源）",
+      "pronunciationId": "w:from#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 80,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:from#e-79bc8dd0977c5c71",
+          "text": "Jenifer received great support from her family as she worked to earn her degree: Her husband worked two jobs to cover the bills, and her 68-year-old mother helped take care of the children at times.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:from#e-7c1445c87800a231",
+          "text": "Researchers from the University of Leipzig in Germany gathered more than 1, 000 retired workers who were over age 75 and assessed the volunteers’ memory and thinking skills through a battery of tests.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:from#e-e97f1598af1f8999",
+          "text": "A few days passed, and I hadn’t heard anything from my brother.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:from#s3",
+      "pos": "prep.",
+      "glossZh": "自（起始时间）",
+      "pronunciationId": "w:from#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:from#e-6f5f2763bb16ed64",
+          "text": "He learned the value and beauty of __42__ there from a very young age.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:from#e-8e556f6d0d54dd15",
+          "text": "All non-credit courses meet from 9:00 a.m. — 11:30 a.m. daily and may have additional requirements in the afternoons or evenings.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:from#e-62cdfb2c6a02cb67",
+          "text": "The Museum is open daily from 9:30 am to 4:30 pm.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:from#s4",
+      "pos": "prep.",
+      "glossZh": "从……到……（范围）",
+      "pronunciationId": "w:from#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:from#e-0a025a5db867af47",
+          "text": "Class activities will vary from day to day, but students must be ready to complete short in-class writings or tests drawn directly from assigned readings or notes from the previous class' lecture/discussion, so it is important to take careful notes during class.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "reading-a-9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:from#e-596058eec58081e4",
+          "text": "Human speech contains more than 2,000 different sounds, from the common “m” and “a” to the rare clicks of some southern African languages.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-d-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:from#e-d0c3ca648027137f",
+          "text": "Beautiful year-round, they invite you to enjoy the smallest detail, from the sound of grasses in the gentle wind to the sculpture of odd-looking seed heads.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:from#s5",
+      "pos": "prep.",
+      "glossZh": "从……移开",
+      "pronunciationId": "w:from#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 20,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:from#e-e7e9e73ffbfb666b",
+          "text": "For the second test, in one case the thin actor took two pieces of candy from the snack bowls.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:from#e-5306a870d12cae59",
+          "text": "If you’re the host, you can ask them to help you in the kitchen with something and just remove them from the situation.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:from#e-8d4b7c0ef990da68",
+          "text": "It’s also thought that these places could help reduce the risk of flooding, remove carbon from the atmosphere and fight climate change, as well as improving the mental health of those living locally.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 94
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:from#s6",
+      "pos": "prep.",
+      "glossZh": "离（相距）",
+      "pronunciationId": "w:from#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:from#e-66d1c6d5acc6d83a",
+          "text": "And in Karakalpakstan, he is saddened by the dust storms, diseases and fishing boats stuck miles from the sea.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:from#e-66d0fd0c7c7aba9e",
+          "text": "Hotel and Hostel Des Artistes is located just a 10-minute walk from the central city station and it’s close to all of the city’s main attractions.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:from#e-ff1a894262d8b247",
+          "text": "The theater where the event was taking place was only about five blocks from the hotel, and the area around the hotel didn’t seem particularly dangerous.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 76
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:from#s7",
+      "pos": "prep.",
+      "glossZh": "使免于",
+      "pronunciationId": "w:from#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:from#e-dc9f043a9eeb50e7",
+          "text": "He __46__ that it was because there weren’t enough trees to protect them from the __47__.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:cloze:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:from#e-f38deda805d92ce3",
+          "text": "Thanks to them, a family was saved from the fire.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-ii:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:from#e-b4969f475e7d362d",
+          "text": "Keep cattle from being stolen.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2021-ii:35",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:from#s8",
+      "pos": "prep.",
+      "glossZh": "和……不同",
+      "pronunciationId": "w:from#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:from#e-5577b6e9d28a8b97",
+          "text": "Are they different from everyone else?",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:11",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:from#e-69da8d32efefdbc2",
+          "text": "How was Tan Yunxian different from the other practitioners?",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2023-national-b:22",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:from#e-86d90a4b56a995fa",
+          "text": "The pronunciation system of the Chinese language is quite different from that of English.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:from#s9",
+      "pos": "prep.",
+      "glossZh": "用……制成",
+      "pronunciationId": "w:from#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:from#e-811cbe108e7df551",
+          "text": "But some ecologists and fashion (时装)enthusiasts are trying to bring back the market for fur made from nutria(海狸鼠).",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:from#e-419f8dc0fb758345",
+          "text": "It should be noted that none of the items on wastED’s menu was technically made from garbage.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 84
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:from#s10",
+      "pos": "prep.",
+      "glossZh": "因……",
+      "pronunciationId": "w:from#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:from#e-349dbcb127c3e19f",
+          "text": "Some mornings, Rosamond and Dorothy would arrive at the schoolhouse to find the children weeping from the cold.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:from#e-6bf8ce97d9fa45a4",
+          "text": "“I know where she got it,” declared Hilda climbing out of the tank with a handful of items still wet from their watery, resting place.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 105
+          }
+        },
+        {
+          "exampleId": "w:from#e-737c9930b2dbabaf",
+          "text": "That was the first time it dawned on me how much I knew about the rest of the world, and how prepared I was for it, just from growing up in New York City – that I had been everywhere before I'd ever actually gone anywhere.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 125
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:from#s11",
+      "pos": "prep.",
+      "glossZh": "从（观察角度）",
+      "pronunciationId": "w:from#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:from#e-de72c64d2e1132e7",
+          "text": "The wall is 12 meters high and from here you can see streams of people moving inside and outside the City Wall.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:grammar-fill:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:from#e-3f3d8138dfbb1937",
+          "text": "He studied it and realized he was looking at a town’s central business district from a bird's-eye view.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:from#e-e6ab96819fc04ee7",
+          "text": "She writes from the practical angle of a business person rather than as an academic, making for a guide which is highly accessible and informative and which, by the close, will make you feel almost as smart as AI.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:from#s12",
+      "pos": "prep.",
+      "glossZh": "以（地点）为工作据点",
+      "pronunciationId": "w:from#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:from#e-46c032d2ccd1f775",
+          "text": "Why did Jim choose to work from home?",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:from#e-8f358cfc0eddf472",
+          "text": "Work from home.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:from#s13",
+      "pos": "短语",
+      "glossZh": "有时",
+      "pronunciationId": "w:from#p-main",
+      "note": "from time to time。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:from#e-ffffda097fa2d28b",
+          "text": "Additionally, from time to time I will assign group work to be completed in class or short assignments to be completed at home, both of which will be graded.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "reading-a-9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:from#e-cb17f07e6b865b31",
+          "text": "Changing the pot of your plant from time to time will also help",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-national-b:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

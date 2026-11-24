@@ -1,0 +1,271 @@
+{
+  "entryId": "w:couple",
+  "headword": "couple",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkʌpl/",
+    "us": "/ˈkʌpl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:couple#p-main",
+      "ipa": {
+        "uk": "/ˈkʌpl/",
+        "us": "/ˈkʌpl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "couples",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "coupled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "coupling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 18,
+    "mock": 98
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 96
+  },
+  "senses": [
+    {
+      "senseId": "w:couple#s1",
+      "pos": "n.",
+      "glossZh": "夫妻；情侣",
+      "pronunciationId": "w:couple#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:couple#e-66df6dfbd592d73a",
+          "text": "How much would a couple with two children under 12 pay for admission?",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2022-national-b:22",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:couple#e-78ed27ad2fb38cc9",
+          "text": "In the cafe, the couple bought Emily a hot chocolate and listened patiently as she explained her desperate situation: she was about a hundred miles from her destination, her car was completely stuck, and her entire holiday plan could be ruined.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:couple#e-9ed58a3e3c478129",
+          "text": "In The Boy That Could Fly, Michael is an orphan(孤儿) adopted by a loving couple and grows up like any ordinary boy – until something extraordinary happens.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 78
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:couple#s2",
+      "pos": "短语",
+      "glossZh": "两个；几个；少数几个",
+      "pronunciationId": "w:couple#p-main",
+      "note": "a couple of。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:couple#e-81001726657dec8e",
+          "text": "A couple of years ago film-maker David Bond realised that his children, then aged five and three, were attached to screens to the point where he was able to say “chocolate” into his three-year-old son’s ear without getting a response.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:couple#e-07b4fc877ee6a97e",
+          "text": "Habitat loss, pesticide use, and climate change have caused dramatic declines in pollinator populations over the past couple of decades, which has damaged the U.S. agricultural economy.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 118,
+            "end": 124
+          }
+        },
+        {
+          "exampleId": "w:couple#e-64eb9c844bdd377f",
+          "text": "A couple of messages came in, one wanting additional __46__, another asking for a price cut.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:couple#s3",
+      "pos": "v.",
+      "glossZh": "连接；结合；与……同时发生",
+      "pronunciationId": "w:couple#p-main",
+      "note": "常见 be coupled with。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:couple#e-7d2501fbea2a447f",
+          "text": "This variety, coupled with the fact that tiny forests grow up to ten times faster than standard forests, means they attract a rich abundance of wildlife.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:couple#e-722cdad27cfa7974",
+          "text": "But when many are coupled together, their motions quickly synchronize.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 25
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "力偶、电池极板、合并赛马赌注",
+      "reason": "物理或行业术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

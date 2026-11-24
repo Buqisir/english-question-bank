@@ -1,0 +1,311 @@
+{
+  "entryId": "w:rock",
+  "headword": "rock",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɒk/",
+    "us": "/rɑːk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:rock#p-main",
+      "ipa": {
+        "uk": "/rɒk/",
+        "us": "/rɑːk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "rocks",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "rocked",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "rocking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 20,
+    "mock": 122
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 121
+  },
+  "senses": [
+    {
+      "senseId": "w:rock#s1",
+      "pos": "n.",
+      "glossZh": "岩石",
+      "pronunciationId": "w:rock#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rock#e-2fb8b2b2578f76b8",
+          "text": "Rock salt is made of sodium chloride, the same compound（化合物）in ordinary table salt.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        },
+        {
+          "exampleId": "w:rock#e-42038337aaead114",
+          "text": "My job was to __45__ a stairway out of rock.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:rock#e-1fade5be12757826",
+          "text": "Microplastics have become a common source of pollution across the Earth – they have settled in the deep sea and on the Himalayas, stuck inside volcanic rocks, filled the stomachs of seabirds and even fallen in fresh Antarctic snow.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 152,
+            "end": 157
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rock#s2",
+      "pos": "n.",
+      "glossZh": "摇滚乐",
+      "pronunciationId": "w:rock#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rock#e-7946964a2354d3bf",
+          "text": "It presents live entertainment, including pop, rock, folk, jazz, musicals, dance, world music, films and classical music.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:rock#e-9d797c884a1c80b4",
+          "text": "Rock music.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        },
+        {
+          "exampleId": "w:rock#e-c774ff767b0081a9",
+          "text": "Rock and roll.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rock#s3",
+      "pos": "v.",
+      "glossZh": "摇晃",
+      "pronunciationId": "w:rock#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rock#e-5d2a296afae6e312",
+          "text": "After making sure that David could run if he wanted, I turned to find him coming towards me, his small body rocking from side to side as he swung his feet forward.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "writing-continuation-6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 115
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rock#s4",
+      "pos": "v.",
+      "glossZh": "轻轻摇动",
+      "pronunciationId": "w:rock#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rock#e-f84d25c0b8bac6a6",
+          "text": "Her mother tried everything – rocking her, offering snacks, water, toys – but nothing worked.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:writing-continuation:10",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rock#s5",
+      "pos": "v.",
+      "glossZh": "使震惊",
+      "pronunciationId": "w:rock#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:rock#s6",
+      "pos": "n.",
+      "glossZh": "可靠的支柱",
+      "pronunciationId": "w:rock#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "无线电晶体",
+      "reason": "无线电专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

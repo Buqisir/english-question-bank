@@ -1,0 +1,197 @@
+{
+  "entryId": "w:grocery",
+  "headword": "grocery",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɡrəʊsəri/",
+    "us": "/ˈɡroʊsəri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:grocery#p-main",
+      "ipa": {
+        "uk": "/ˈɡrəʊsəri/",
+        "us": "/ˈɡroʊsəri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "groceries",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 21,
+    "mock": 77
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 76
+  },
+  "senses": [
+    {
+      "senseId": "w:grocery#s1",
+      "pos": "n.",
+      "glossZh": "食品和日用杂货",
+      "pronunciationId": "w:grocery#p-main",
+      "note": "通常用复数 groceries。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:grocery#e-c4e7bb717a3d5da8",
+          "text": "“You have to organize the activities of the children and take care of the bills and groceries.”",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:grocery#e-5d3c190e5d2f39bf",
+          "text": "On our first morning in Paris, I went around the corner to the food market to pick up some groceries.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:grocery#e-4ad9b3d740217b64",
+          "text": "The only __40__ to pay for the groceries was to take off the __41__ she could do without: a bottle of rubbing alcohol （医用酒精）and a bar of soap.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:grocery#s2",
+      "pos": "n.",
+      "glossZh": "杂货店",
+      "pronunciationId": "w:grocery#p-main",
+      "note": "也用 grocery store。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:grocery#e-77b6039fd63cfc5a",
+          "text": "You run into the grocery store to pick up one bottle of water.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:grocery#e-f296e5117eba70c7",
+          "text": "Jaramillo’s students live in neighborhoods where fresh food and green space are not easy to find and fast food restaurants outnumber grocery stores.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 133,
+            "end": 140
+          }
+        },
+        {
+          "exampleId": "w:grocery#e-3440feb0dc074ec4",
+          "text": "For years, she’d run the corner grocery with a sharp eye and an even sharper tongue, blaming teens for pocketing candies and once running after a dog down Main Street with a broom, though rumors（传闻）said she’d slipped the dog a meatball later.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 39
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

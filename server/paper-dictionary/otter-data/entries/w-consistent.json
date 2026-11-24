@@ -1,0 +1,207 @@
+{
+  "entryId": "w:consistent",
+  "headword": "consistent",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kənˈsɪstənt/",
+    "us": "/kənˈsɪstənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:consistent#p-main",
+      "ipa": {
+        "uk": "/kənˈsɪstənt/",
+        "us": "/kənˈsɪstənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more consistent",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most consistent",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 56
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 52
+  },
+  "senses": [
+    {
+      "senseId": "w:consistent#s1",
+      "pos": "adj.",
+      "glossZh": "持续稳定的；始终如一的",
+      "pronunciationId": "w:consistent#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:consistent#e-0841d2837e1f49ca",
+          "text": "Remember, even world champion athletes practice their skills on a consistent basis.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:consistent#e-66568645ca07be16",
+          "text": "Their brainwaves also showed more consistent levels of activity, indicating that their brains were less taxed to remember what they had learned.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:consistent#e-e81bdf1b52b63023",
+          "text": "Another practice I rely on is maintaining clear and consistent communication throughout the term.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:seven-choices:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 62
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:consistent#s2",
+      "pos": "adj.",
+      "glossZh": "一致的；相符的",
+      "pronunciationId": "w:consistent#p-main",
+      "note": "常见 consistent with。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:consistent#e-5785e53bdae7262c",
+          "text": "This trend is consistent with a climate report from the National Audubon Society, which warns that two-thirds of North American bird species are at the risk of extinction due to rising global temperatures.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:consistent#e-ba75fcc6009d99dc",
+          "text": "Choose a Pleasing or Living activity you would like to engage in more, even something simple like a short walk or trying something new that is consistent with your values.",
+          "source": {
+            "paperId": "paper-mock-hunan-nine-school-alliance-2026-first-joint-exam",
+            "paperTitle": "湖南省2026届高三九校联盟第一次联考",
+            "groupId": "group:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 143,
+            "end": 153
+          }
+        },
+        {
+          "exampleId": "w:consistent#e-e1cda2a378687f2f",
+          "text": "After comparing their separate paths, the team concluded the behavior of ants that could see moonlight was consistent with what’s called a time-compensated（时间补偿的）lunar compass.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 117
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "历史上的某类悔罪者",
+      "reason": "宗教历史义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

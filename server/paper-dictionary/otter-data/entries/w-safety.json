@@ -1,0 +1,142 @@
+{
+  "entryId": "w:safety",
+  "headword": "safety",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈseɪfti/",
+    "us": "/ˈseɪfti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:safety#p-main",
+      "ipa": {
+        "uk": "/ˈseɪfti/",
+        "us": "/ˈseɪfti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "safeties",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 17,
+    "mock": 287
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 287
+  },
+  "senses": [
+    {
+      "senseId": "w:safety#s1",
+      "pos": "n.",
+      "glossZh": "安全",
+      "pronunciationId": "w:safety#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:safety#e-b214ca231192f762",
+          "text": "\"Big change requires big ideas,\" he said in a speech last month, referring broadly to the need to improve road safety.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 111,
+            "end": 117
+          }
+        },
+        {
+          "exampleId": "w:safety#e-d3ba7b7e59b9320d",
+          "text": "Can a small group of drones（无人机）guarantee the safety and reliability of railways and, at the same time, help railway operators save billions of euros each year?",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:safety#e-ef87a08016c30879",
+          "text": "Parrots are most easily hurt when feeding on the ground; membership in a group plays an important function in ensuring their safety and improving their chances of survival from attacks by predators.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 125,
+            "end": 131
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:safety#s2",
+      "pos": "n.",
+      "glossZh": "保险装置",
+      "pronunciationId": "w:safety#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "安全卫",
+      "reason": "美式橄榄球专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

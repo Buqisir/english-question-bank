@@ -1,0 +1,157 @@
+{
+  "entryId": "w:lemon",
+  "headword": "lemon",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈlemən/",
+    "us": "/ˈlemən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:lemon#p-main",
+      "ipa": {
+        "uk": "/ˈlemən/",
+        "us": "/ˈlemən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "lemons",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "senses": [
+    {
+      "senseId": "w:lemon#s1",
+      "pos": "n.",
+      "glossZh": "柠檬",
+      "pronunciationId": "w:lemon#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lemon#e-4a8cf8fa91e7bbb0",
+          "text": "The lemon tree poem.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:lemon#e-b26252cb3dbd0bf8",
+          "text": "This vibrant vegetable and chicken one-pot, finished with lemon and fresh herbs, has you covered, whatever your mood.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:lemon#e-46682f3bddd2cae0",
+          "text": "● Just before serving, add the lemon juice, mint, and basil.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lemon#s2",
+      "pos": "n.",
+      "glossZh": "柠檬黄",
+      "pronunciationId": "w:lemon#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:lemon#s3",
+      "pos": "n.",
+      "glossZh": "次品",
+      "pronunciationId": "w:lemon#p-main",
+      "note": "非正式，常用于买到的故障商品。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "柠檬鲨、同人文类型",
+      "reason": "专门用法或俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

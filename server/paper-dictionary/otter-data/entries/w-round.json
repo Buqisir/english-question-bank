@@ -1,0 +1,602 @@
+{
+  "entryId": "w:round",
+  "headword": "round",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/raʊnd/",
+    "us": "/raʊnd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:round#p-main",
+      "ipa": {
+        "uk": "/raʊnd/",
+        "us": "/raʊnd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more round",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most round",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "rounder",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "roundest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "rounds",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "rounded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "rounding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 27
+  },
+  "senses": [
+    {
+      "senseId": "w:round#s1",
+      "pos": "adj.",
+      "glossZh": "圆形的",
+      "pronunciationId": "w:round#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:round#e-cce34825da02f0c6",
+          "text": "In humans, babies can put a round shape in a round hole from around one year of age, but it will be another year before they are able to do the same with less symmetrical（对称的）shapes.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:round#e-509b330b74f2e6e8",
+          "text": "Putting a ball into a round hole.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2022-national-a:25",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:round#e-7ffb22ba753c216c",
+          "text": "But when we looked at the tomatoes, we were __46__ because they were so misshapen: not at all like the nice, round, __47__ things you get in a supermarket.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:cloze:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 109,
+            "end": 114
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:round#s2",
+      "pos": "短语",
+      "glossZh": "使完整",
+      "pronunciationId": "w:round#p-main",
+      "note": "round out。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:round#e-5c8442365c65bad5",
+          "text": "The arugula (芝麻菜)was to make a nice green salad, rounding out a roast chicken dinner.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-b-1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:round#s3",
+      "pos": "短语",
+      "glossZh": "到访",
+      "pronunciationId": "w:round#p-main",
+      "note": "come round。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:round#e-c38e500d59eb7c63",
+          "text": "come round",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:cloze",
+            "locator": {
+              "question": 60,
+              "questionId": "question:paper-gaokao-2024-national-a:60",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:round#s4",
+      "pos": "n.",
+      "glossZh": "轮次",
+      "pronunciationId": "w:round#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:round#e-78c70d8bd42b9eaa",
+          "text": "This is a points-based contest, where prizes are awarded for each round, with an overall winner of the top prize at the end of the year.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:round#e-7abf3a881dbe34f7",
+          "text": "After several intense rounds, only three finalists remained: Faizan, 14-year-old Sarvadnya Kadam, and 11-year-old Sarv Dharavane.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:round#e-76720b35ae47c21c",
+          "text": "In 2018, Celligenics secured its first round of funding from a Singapore-based company.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zaozhuang-2026-05-third-mock:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:round#s5",
+      "pos": "n.",
+      "glossZh": "圆形物",
+      "pronunciationId": "w:round#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:round#e-dd3a2a7ca4c6533a",
+          "text": "We opened a packet of instant cookie mix, added the required ingredients, shaped the dough (面团) into small rounds, and confidently placed them on a baking tray in the oven.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 113
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:round#s6",
+      "pos": "n.",
+      "glossZh": "例行巡视",
+      "pronunciationId": "w:round#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:round#e-5393017ad3d14a2d",
+          "text": "Night after night, a familiar pair makes their rounds at an apartment community: a woman collecting trash, and her loyal dog, Princess.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:round#s7",
+      "pos": "adv.",
+      "glossZh": "整段时间都",
+      "pronunciationId": "w:round#p-main",
+      "note": "all year round。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:round#e-0449009ded953d9e",
+          "text": "Actually it was so __51__ that they decided to keep it going all year round.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:round#e-429532b1acab1c03",
+          "text": "They are available all year round.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:21",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:round#e-8e437db55a7142a2",
+          "text": "Available from 10:00 — 16:00 all year round (except during cherry season)",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:round#s8",
+      "pos": "prep.",
+      "glossZh": "在……各处",
+      "pronunciationId": "w:round#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:round#e-2952110446d48e28",
+          "text": "You go in, pick up a basket, walk round the shop and choose what you want.",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qilu-2026-second-joint-exam:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:round#s9",
+      "pos": "adv.",
+      "glossZh": "到某人所在处",
+      "pronunciationId": "w:round#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:round#e-9086e1a05556a1f2",
+          "text": "How would people react when they got a letter from a total stranger asking to bring her elderly mother round, just because she’d lived there as a girl?",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 103,
+            "end": 108
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:round#s10",
+      "pos": "v.",
+      "glossZh": "围拢",
+      "pronunciationId": "w:round#p-main",
+      "note": "round up。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:round#e-932d58c0b1d758ac",
+          "text": "One cool autumn morning, while rounding up yaks near a stream, Tashi suddenly froze.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
+            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-05-second-adaptability:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:round#s11",
+      "pos": "v.",
+      "glossZh": "取整",
+      "pronunciationId": "w:round#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:round#s12",
+      "pos": "v.",
+      "glossZh": "绕过",
+      "pronunciationId": "w:round#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:round#s13",
+      "pos": "n.",
+      "glossZh": "一轮饮料",
+      "pronunciationId": "w:round#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:round#s14",
+      "pos": "n.",
+      "glossZh": "一发弹药",
+      "pronunciationId": "w:round#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "椅子横杆",
+      "reason": "家具专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

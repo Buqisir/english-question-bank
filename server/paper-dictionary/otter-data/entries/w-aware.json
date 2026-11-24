@@ -1,0 +1,149 @@
+{
+  "entryId": "w:aware",
+  "headword": "aware",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈweə(r)/",
+    "us": "/əˈwer/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:aware#p-main",
+      "ipa": {
+        "uk": "/əˈweə(r)/",
+        "us": "/əˈwer/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "awarer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "awarest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more aware",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most aware",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 60
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:aware#s1",
+      "pos": "adj.",
+      "glossZh": "知道的；意识到的；察觉到的",
+      "pronunciationId": "w:aware#p-main",
+      "note": "be aware of sth 或 be aware that …。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 60
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:aware#e-f15b1c7a171b3e27",
+          "text": "To make the public aware of food waste.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2025-ii:33",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:aware#e-a8f994a5d861e7c9",
+          "text": "First of all, become aware of when and why you are regressing.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:aware#e-aadfab2f8f16a6cc",
+          "text": "Travellers today are more aware of their impact on local community, but the problems caused by travel souvenirs are often overlooked.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 31
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "使知悉",
+      "reason": "古旧动词义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

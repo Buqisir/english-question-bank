@@ -1,0 +1,562 @@
+{
+  "entryId": "w:write",
+  "headword": "write",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/raɪt/",
+    "us": "/raɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:write#p-main",
+      "ipa": {
+        "uk": "/raɪt/",
+        "us": "/raɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "writes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "writing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "written",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "wrote",
+      "tags": [
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 190,
+    "mock": 754
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 754
+  },
+  "senses": [
+    {
+      "senseId": "w:write#s1",
+      "pos": "v.",
+      "glossZh": "写作；创作",
+      "pronunciationId": "w:write#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 122,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:write#e-50f87e0d6e2894fd",
+          "text": "Write a poem about how courage, determination, and strength have helped you face challenges in your life.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:write#e-86dc2b2e13b7f2c9",
+          "text": "A few years later, still attracted to the country, he returned to Uzbekistan to write an article about the disappearance of the Aral Sea.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 85
+          }
+        },
+        {
+          "exampleId": "w:write#e-9e68664c3eb3001b",
+          "text": "Who wrote the music for “Tom Sawyer: A River Adventure”?",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:21",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:write#s2",
+      "pos": "v.",
+      "glossZh": "写字",
+      "pronunciationId": "w:write#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:write#e-a988089a0af56580",
+          "text": "■Write by hand or type on a single sheet of paper.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:write#e-f5cde4d094e0fd26",
+          "text": "Therefore, they don’t have time to learn how to read or write and don’t get an education.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:write#e-4109a86e1f9494a3",
+          "text": "This training taught her to read and write her Chinese upside down – a skill that has turned out to be quite __50__, especially whenever we share the newspaper.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:write#s3",
+      "pos": "v.",
+      "glossZh": "写下；记录",
+      "pronunciationId": "w:write#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:write#e-80956856caaf4f50",
+          "text": "■On the same sheet of paper, write or type your name, address, telephone number, and birth date.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:write#e-438c1bbf0016ea37",
+          "text": "To remember all the questions you have when you are not in the doctor’s office, write them down and bring the list with you to your appointment.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 85
+          }
+        },
+        {
+          "exampleId": "w:write#e-cbd506cfccc36d5c",
+          "text": "Whatever it is, no matter how small it might seem, write it down.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-i:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:write#s4",
+      "pos": "v.",
+      "glossZh": "写信给某人",
+      "pronunciationId": "w:write#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 25,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:write#e-2a8a34f21c2a51ed",
+          "text": "I’m writing to ask for your help.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-application",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-application:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:write#e-11ceca55e66971af",
+          "text": "However, because they are usually writing to family and friends, they use informal language most of the time.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:write#e-9609ea6889fcf03c",
+          "text": "Write an email.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:write#s5",
+      "pos": "adj.",
+      "glossZh": "书面的；写成的",
+      "pronunciationId": "w:write#p-main",
+      "note": "形式为 written。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:write#e-e49286dab8df0799",
+          "text": "Written communications can often read as cold and dull.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:write#e-6c87b62bb9b550f1",
+          "text": "Students will experience college-level courses given by some of our college’s leading experts and will receive written feedback（反馈）on their work at the end of the course.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 111,
+            "end": 118
+          }
+        },
+        {
+          "exampleId": "w:write#e-a48805b854e27364",
+          "text": "Written communication will give your audience more time to review it, think it over, and follow up with questions.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:write#s6",
+      "pos": "n.",
+      "glossZh": "书写文字",
+      "pronunciationId": "w:write#p-main",
+      "note": "形式为 writing。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:write#e-e1fd4cb7d8d76783",
+          "text": "Writing is one of humanity’s later achievements, and until fairly recently even many literate (有文字的) societies recorded their concerns not only in writing but in things.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 147,
+            "end": 154
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:write#s7",
+      "pos": "n.",
+      "glossZh": "写出的文章或作品",
+      "pronunciationId": "w:write#p-main",
+      "note": "形式为 writing。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:write#e-90f541d0e421d4b2",
+          "text": "The sweep of the land and the stoicism（坚忍）of the people move her to some beautiful writing.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:write#e-b64a506727381e14",
+          "text": "Which part of Wickenden’s writing is hair-raising?",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2022-national-b:26",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:write#e-701305b4f4be6595",
+          "text": "His humorous writing.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:write#s8",
+      "pos": "v.",
+      "glossZh": "将数据写入存储介质",
+      "pronunciationId": "w:write#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "卖出期权、绘制宗教图像",
+      "reason": "专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

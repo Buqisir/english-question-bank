@@ -1,0 +1,135 @@
+{
+  "entryId": "w:primitive",
+  "headword": "primitive",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈprɪmətɪv/",
+    "us": "/ˈprɪmətɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:primitive#p-main",
+      "ipa": {
+        "uk": "/ˈprɪmətɪv/",
+        "us": "/ˈprɪmətɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more primitive",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most primitive",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:primitive#s1",
+      "pos": "adj.",
+      "glossZh": "简陋的",
+      "pronunciationId": "w:primitive#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:primitive#e-9ff461b524b8c5eb",
+          "text": "The method turned out too primitive to serve scientific research.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-hunan-changjun-2025-10-monthly-exam-2:29",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:primitive#s2",
+      "pos": "adj.",
+      "glossZh": "处于早期阶段的",
+      "pronunciationId": "w:primitive#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:primitive#e-efe739cdffeb67c1",
+          "text": "While Berthelot’s understanding of photosynthesis was primitive a century ago, he was ahead of his time in many ways, and his vision was remarkably foresighted.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 63
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "基本数据类型",
+      "reason": "计算机术语"
+    },
+    {
+      "glossZh": "原函数",
+      "reason": "数学术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

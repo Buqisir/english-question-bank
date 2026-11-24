@@ -1,0 +1,209 @@
+{
+  "entryId": "w:dialogue",
+  "headword": "dialogue",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "dialog"
+  ],
+  "ipa": {
+    "uk": "/ˈdaɪəlɒɡ/",
+    "us": "/ˈdaɪəlɔːɡ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dialogue#p-main",
+      "ipa": {
+        "uk": "/ˈdaɪəlɒɡ/",
+        "us": "/ˈdaɪəlɔːɡ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "dialogs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "dialogues",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 34
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 31
+  },
+  "senses": [
+    {
+      "senseId": "w:dialogue#s1",
+      "pos": "n.",
+      "glossZh": "对白；台词",
+      "pronunciationId": "w:dialogue#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dialogue#e-1425a63fce824100",
+          "text": "Each play has a theme or central idea which the playwright(剧作家) hopes to get across through dialogue and action.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:dialogue#e-69d96cb6353d3a98",
+          "text": "The curtains are about to open, and in a few minutes the action and dialogue will tell you the story.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:dialogue#e-d337f6fda41e6b46",
+          "text": "With the invention of synchronized sound, films slowly added talking dialogue in scenes occasionally.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 77
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dialogue#s2",
+      "pos": "n.",
+      "glossZh": "对话；交流",
+      "pronunciationId": "w:dialogue#p-main",
+      "note": "美式拼写也作 dialog。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dialogue#e-d07037f58a919515",
+          "text": "When we consider contact (联系) between literate and non-literate societies such as these, all our first-hand accounts are necessarily twisted, only one half of a dialogue.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 161,
+            "end": 169
+          }
+        },
+        {
+          "exampleId": "w:dialogue#e-41241f746605ac89",
+          "text": "She explained that doing this allows you to turn the interview into a back-and-forth dialogue, transforming it into a conversation.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:dialogue#e-0997c159b19769c7",
+          "text": "Through such events, the festival not only highlights artistic dialogue across cultures, but also helps Xi’an further build its image as a cultural destination where the ancient and the modern meet.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-a:8",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 71
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "对话框；写成对话体（动词）",
+      "reason": "前者通常见于 dialog box，后者罕见"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

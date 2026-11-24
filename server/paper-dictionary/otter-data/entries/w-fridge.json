@@ -1,0 +1,138 @@
+{
+  "entryId": "w:fridge",
+  "headword": "fridge",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "refrigerator"
+  ],
+  "ipa": {
+    "uk": "/frɪdʒ/",
+    "us": "/frɪdʒ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fridge#p-main",
+      "ipa": {
+        "uk": "/frɪdʒ/",
+        "us": "/frɪdʒ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "fridges",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "refrigerators",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 28
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 25
+  },
+  "senses": [
+    {
+      "senseId": "w:fridge#s1",
+      "pos": "n.",
+      "glossZh": "冰箱",
+      "pronunciationId": "w:fridge#p-main",
+      "note": "refrigerator 的常用简称。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fridge#e-57e9e21ae80699a1",
+          "text": "Paragraph 1: I remembered the frozen cookie dough I’d saved in the fridge.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:fridge#e-d7c3eeac0df3baec",
+          "text": "One day I found the milk in the fridge was lukewarm(温热的) but we could not afford to call a repairman.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:fridge#e-e18b2859accb4841",
+          "text": "Living in someone else’s space builds a unique closeness – admiring their bookshelf picks, the way they arrange potted plants, or family photos on the fridge turns virtual strangers into familiar faces.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 151,
+            "end": 157
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "refrigerator 语料命中",
+      "reason": "全称作为另一个拼写词形，不分配给简称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

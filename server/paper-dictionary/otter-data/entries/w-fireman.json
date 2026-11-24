@@ -1,0 +1,75 @@
+{
+  "entryId": "w:fireman",
+  "headword": "fireman",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfaɪəmən/",
+    "us": "/ˈfaɪərmən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fireman#p-main",
+      "ipa": {
+        "uk": "/ˈfaɪəmən/",
+        "us": "/ˈfaɪərmən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "firemen",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:fireman#s1",
+      "pos": "n.",
+      "glossZh": "消防员",
+      "pronunciationId": "w:fireman#p-main",
+      "note": "如今更常用不分性别的 firefighter。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "棒球救援投手",
+      "reason": "体育俚语"
+    },
+    {
+      "glossZh": "蒸汽锅炉司炉工",
+      "reason": "旧式工种"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,136 @@
+{
+  "entryId": "w:diamond",
+  "headword": "diamond",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdaɪəmənd/",
+    "us": "/ˈdaɪəmənd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:diamond#p-main",
+      "ipa": {
+        "uk": "/ˈdaɪəmənd/",
+        "us": "/ˈdaɪəmənd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "diamonds",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "senses": [
+    {
+      "senseId": "w:diamond#s1",
+      "pos": "n.",
+      "glossZh": "钻石；金刚石",
+      "pronunciationId": "w:diamond#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:diamond#e-554c78dc583892e7",
+          "text": "The city that never sleeps fell into an icy silence – every street, sidewalk and rooftop all buried under a thick, unbroken blanket of snow that glinted like crushed diamonds in the faint gray light.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 166,
+            "end": 174
+          }
+        },
+        {
+          "exampleId": "w:diamond#e-57ef75a05b7bfb0c",
+          "text": "They are like uncut diamonds.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-b:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:diamond#s2",
+      "pos": "n.",
+      "glossZh": "菱形；（纸牌的）方块",
+      "pronunciationId": "w:diamond#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:diamond#s3",
+      "pos": "n.",
+      "glossZh": "棒球内场",
+      "pronunciationId": "w:diamond#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "人名、地名；纹章黑貂色、旧式字号",
+      "reason": "专名或行业专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

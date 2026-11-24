@@ -1,0 +1,193 @@
+{
+  "entryId": "w:chew",
+  "headword": "chew",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tʃuː/",
+    "us": "/tʃuː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:chew#p-main",
+      "ipa": {
+        "uk": "/tʃuː/",
+        "us": "/tʃuː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "chewed",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    },
+    {
+      "form": "chewing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "chews",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "senses": [
+    {
+      "senseId": "w:chew#s1",
+      "pos": "v.",
+      "glossZh": "咀嚼；嚼；啃",
+      "pronunciationId": "w:chew#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chew#e-03338a4d87e917b5",
+          "text": "Food became easier to chew at this point.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "reading-d-4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:chew#e-e27b7c993430ed10",
+          "text": "This involved patiently imitating them – chewing wild grass, making deep sounds, and walking on all fours – as a way to build mutual understanding.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:chew#e-470769ffc41277e6",
+          "text": "On day two, Dion and the dog took some time to warm up to each other, and she even tried to chew his running equipment.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 96
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chew#s2",
+      "pos": "短语",
+      "glossZh": "承担自己应付不了的事",
+      "pronunciationId": "w:chew#p-main",
+      "note": "bite off more than one can chew",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chew#e-c69eeea8eec5a264",
+          "text": "By 2 a. m., sitting on a cold rock with sweat freezing beneath my clothes, I felt I had bitten off more than I could chew – this mountain was too much for me.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 117,
+            "end": 121
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chew#s3",
+      "pos": "短语",
+      "glossZh": "反复考虑；仔细琢磨",
+      "pronunciationId": "w:chew#p-main",
+      "note": "chew over",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "嚼烟、机械磨损等",
+      "reason": "专门名词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,138 @@
+{
+  "entryId": "w:phenomenon",
+  "headword": "phenomenon",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fəˈnɒmɪnən/",
+    "us": "/fəˈnɑːmɪnən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:phenomenon#p-main",
+      "ipa": {
+        "uk": "/fəˈnɒmɪnən/",
+        "us": "/fəˈnɑːmɪnən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "phenomena",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 79
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 78
+  },
+  "senses": [
+    {
+      "senseId": "w:phenomenon#s1",
+      "pos": "n.",
+      "glossZh": "现象",
+      "pronunciationId": "w:phenomenon#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:phenomenon#e-fffbfc99630439e7",
+          "text": "To explain a cultural phenomenon.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2020-i:31",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:phenomenon#e-b8fd340ad01efe40",
+          "text": "But a new study led by Joaquin Navajas offered an interesting twist（转折）on this classic phenomenon.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:phenomenon#e-60b8da2564f42d18",
+          "text": "But what if I told you that the opposite of procrastination, a phenomenon called pre-crastination, could be just as bad?",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:phenomenon#s2",
+      "pos": "n.",
+      "glossZh": "令人瞩目的事物或人物",
+      "pronunciationId": "w:phenomenon#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

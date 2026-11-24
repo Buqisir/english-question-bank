@@ -1,0 +1,482 @@
+{
+  "entryId": "w:throw",
+  "headword": "throw",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/θrəʊ/",
+    "us": "/θroʊ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:throw#p-main",
+      "ipa": {
+        "uk": "/θrəʊ/",
+        "us": "/θroʊ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "throws",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "threw",
+      "tags": [
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "throwing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "thrown",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "thrun",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 30,
+    "mock": 135
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 132
+  },
+  "senses": [
+    {
+      "senseId": "w:throw#s1",
+      "pos": "v.",
+      "glossZh": "扔",
+      "pronunciationId": "w:throw#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:throw#e-d5e4d1ba8abae25a",
+          "text": "Jenna threw the burnt piece into the sink and put in the other slice of bread.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 10
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:throw#e-49f381f53d829913",
+          "text": "As we all sat there __52__, a fisherman pulled up, threw us a rope and towed (拖) us back.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "cloze-3",
+              "sentence": 9
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:throw#e-d3719f664473cde9",
+          "text": "Jacky shouts as I throw him skywards and catch him on the way back down again.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:throw#s2",
+      "pos": "v.",
+      "glossZh": "甩开",
+      "pronunciationId": "w:throw#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:throw#e-62b3bc55dd97596a",
+          "text": "He throws his arms and legs out __37__ he were flying, his eyes wide with __38__.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:throw#s3",
+      "pos": "v.",
+      "glossZh": "举办",
+      "pronunciationId": "w:throw#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:throw#e-9ac424e93264068a",
+          "text": "The person who bought the house or moved is the one who throws the party.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 62
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:throw#s4",
+      "pos": "v.",
+      "glossZh": "拉坯",
+      "pronunciationId": "w:throw#p-main",
+      "note": "陶艺用语。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:throw#e-13f89accd845fba0",
+          "text": "Wheel Throwing",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:throw#s5",
+      "pos": "n.",
+      "glossZh": "盖毯",
+      "pronunciationId": "w:throw#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:throw#e-343f3c38ecd0883d",
+          "text": "Hoping to impress some talented actors to come and work for me for nothing, I spread some throws over the sofas and lit candles to make it seem a bit more “young professional”.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 96
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:throw#s6",
+      "pos": "n.",
+      "glossZh": "投掷",
+      "pronunciationId": "w:throw#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:throw#s7",
+      "pos": "短语",
+      "glossZh": "丢弃",
+      "pronunciationId": "w:throw#p-main",
+      "note": "throw away 或 throw out。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:throw#e-393e9923b771ec11",
+          "text": "Clothing takes a huge amount of natural resources（资源）to make, and buying loads of new clothing ( or throwing out old clothing ) is not healthy for the environment.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 108
+          }
+        },
+        {
+          "exampleId": "w:throw#e-fe5bf8a9f984e759",
+          "text": "Does your soul die a little every time you throw away unused food?",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:throw#e-c6455b3d87aa047c",
+          "text": "Up to 84.3% is simply thrown out.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:throw#s8",
+      "pos": "短语",
+      "glossZh": "阐明",
+      "pronunciationId": "w:throw#p-main",
+      "note": "throw light on。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:throw#e-0bc132ded1b7934a",
+          "text": "The Nobel Prize winner Daniel Kahneman threw light on this tendency via his “wheel of fortune” experiment.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:throw#e-3756dd56886a3530",
+          "text": "Today, science throws light on the distinct roles of dreams.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:throw#s9",
+      "pos": "短语",
+      "glossZh": "全身心投入",
+      "pronunciationId": "w:throw#p-main",
+      "note": "throw oneself into。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:throw#e-d5313bd792f9f6c5",
+          "text": "When I moved to London, I threw myself into work while my housemates were endlessly trying new things.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:throw#s10",
+      "pos": "短语",
+      "glossZh": "呕吐",
+      "pronunciationId": "w:throw#p-main",
+      "note": "throw up。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "曲轴曲拐、特定板球表现及抛出异常",
+      "reason": "具体领域用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

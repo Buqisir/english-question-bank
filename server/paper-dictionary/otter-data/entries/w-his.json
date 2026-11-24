@@ -1,0 +1,149 @@
+{
+  "entryId": "w:his",
+  "headword": "his",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/hɪz/",
+    "us": "/hɪz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:his#p-main",
+      "ipa": {
+        "uk": "/hɪz/",
+        "us": "/hɪz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:his#p-weak",
+      "ipa": {
+        "uk": "/ɪz/",
+        "us": "/ɪz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "弱读"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 380,
+    "mock": 2924
+  },
+  "unassignedCounts": {
+    "gaokao": 357,
+    "mock": 2924
+  },
+  "senses": [
+    {
+      "senseId": "w:his#s1",
+      "pos": "det.",
+      "glossZh": "他的（名词前）",
+      "pronunciationId": "w:his#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 23,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:his#e-c3f718d36e556abf",
+          "text": "However, Molai went looking on his own and __50__ a nearby island where he began to plant trees.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:his#e-325990b71f1a55cd",
+          "text": "“That’s the garden in our picture,” Nicolo’s son told his father.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:his#e-a81749a52b8d0754",
+          "text": "Leslie Nielsen’s childhood was a difficult one, but he had one particular shining star in his life – his uncle, who was a well-known actor.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 104
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:his#s2",
+      "pos": "pron.",
+      "glossZh": "他的（代替名词）",
+      "pronunciationId": "w:his#p-main",
+      "note": "如 This book is his。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "健康信息系统、医院信息系统",
+      "reason": "大写 HIS 是专门缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

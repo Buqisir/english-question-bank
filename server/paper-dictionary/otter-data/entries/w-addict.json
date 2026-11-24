@@ -1,0 +1,175 @@
+{
+  "entryId": "w:addict",
+  "headword": "addict",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈædɪkt/",
+    "us": "/ˈædɪkt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:addict#p-main",
+      "ipa": {
+        "uk": "/ˈædɪkt/",
+        "us": "/ˈædɪkt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:addict#p-verb",
+      "ipa": {
+        "uk": "/əˈdɪkt/",
+        "us": "/əˈdɪkt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "动词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "addicts",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "addicted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "addicting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 25
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 22
+  },
+  "senses": [
+    {
+      "senseId": "w:addict#s1",
+      "pos": "n.",
+      "glossZh": "成瘾者；对某事着迷的人",
+      "pronunciationId": "w:addict#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:addict#e-f1a89a693facb210",
+          "text": "The “fast-food addict” says he followed every meal with dessert – and that he once spent $500 a month on snacks like ice cream, chips, and candy.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:addict#e-b790e6cd405b4ec7",
+          "text": "They are mainly intended for phone addicts.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-guangdong-guangzhou-2025-12-survey:29",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:addict#s2",
+      "pos": "v.",
+      "glossZh": "使上瘾",
+      "pronunciationId": "w:addict#p-verb",
+      "note": "常见 be 或 become addicted to。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:addict#e-258a6d598394e8f1",
+          "text": "Still, it’s interesting to see that parents’ concerns about their children becoming addicted to smartphones and other smart devices, are also perfectly true the other way around.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 92
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "依法交付",
+      "reason": "古旧法律义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,150 @@
+{
+  "entryId": "w:contribution",
+  "headword": "contribution",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌkɒntrɪˈbjuːʃn/",
+    "us": "/ˌkɑːntrɪˈbjuːʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:contribution#p-main",
+      "ipa": {
+        "uk": "/ˌkɒntrɪˈbjuːʃn/",
+        "us": "/ˌkɑːntrɪˈbjuːʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "contributions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 41
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 40
+  },
+  "senses": [
+    {
+      "senseId": "w:contribution#s1",
+      "pos": "n.",
+      "glossZh": "贡献；促成某结果的作用",
+      "pronunciationId": "w:contribution#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:contribution#e-90c2eb71fa5d0daf",
+          "text": "Among the writers of the plays in this collection, Paul Green, Susan Glaspell, Maxwell Anderson, Thornton Wilder, William Saroyan, and Tennessee Williams have all received Pulitzer Prizes for their contributions to the theater.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 198,
+            "end": 211
+          }
+        },
+        {
+          "exampleId": "w:contribution#e-a90ee6286c012291",
+          "text": "China, on its part, will also embrace（拥抱） the world with greater openness and make new contributions to the international community.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:contribution#e-8716d07174381839",
+          "text": "If these limitations can be addressed, this bacterial treatment could have a major impact on reducing agriculture’s contribution to climate change.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-d:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 116,
+            "end": 128
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:contribution#s2",
+      "pos": "n.",
+      "glossZh": "捐助；捐款",
+      "pronunciationId": "w:contribution#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:contribution#s3",
+      "pos": "n.",
+      "glossZh": "投稿；（会议或讨论中的）发言",
+      "pronunciationId": "w:contribution#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

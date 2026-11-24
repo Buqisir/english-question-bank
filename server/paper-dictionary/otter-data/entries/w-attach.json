@@ -1,0 +1,326 @@
+{
+  "entryId": "w:attach",
+  "headword": "attach",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈtætʃ/",
+    "us": "/əˈtætʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:attach#p-main",
+      "ipa": {
+        "uk": "/əˈtætʃ/",
+        "us": "/əˈtætʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "attached",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "attaches",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "attaching",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 51
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 46
+  },
+  "senses": [
+    {
+      "senseId": "w:attach#s1",
+      "pos": "v.",
+      "glossZh": "把……固定到……上；使附着",
+      "pronunciationId": "w:attach#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:attach#e-76c4b3b2ab6c1f80",
+          "text": "She is trying to come up with a label to attach to nutria fashions to show it is eco-friendly.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:8",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:attach#e-bd8b8d203462f255",
+          "text": "Another approach is pingers – devices attached to fishing gear that emit sounds to warn echolocating animals away.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:attach#e-51f15b1d49853a7c",
+          "text": "Cameras were attached to their helmets.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-b:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:attach#s2",
+      "pos": "v.",
+      "glossZh": "喜爱；依恋；舍不得离开",
+      "pronunciationId": "w:attach#p-main",
+      "note": "常用 be 或 become attached to。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:attach#e-7bb805067276f546",
+          "text": "They are attached to their family.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2021-national-b:26",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:attach#e-8bdf1019dacd8bf7",
+          "text": "He is attached to the old ferries.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2022-national-a:33",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:attach#e-0eb23dcc9b5666be",
+          "text": "He is very attached to Wright buildings.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2026-ii:27",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:attach#s3",
+      "pos": "v.",
+      "glossZh": "附上；随附",
+      "pronunciationId": "w:attach#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:attach#e-51e06eb07e54abee",
+          "text": ", return it with your annual membership fee in the attached envelope, and begin enjoying your benefits immediately.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:attach#e-658c0a5092276032",
+          "text": "Do not attach zipped files.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:attach#s4",
+      "pos": "v.",
+      "glossZh": "认为……重要；赋予（价值、意义等）",
+      "pronunciationId": "w:attach#p-main",
+      "note": "attach importance to sth。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:attach#e-ee815447ef58091f",
+          "text": "What does the author’s mother attach most importance to?",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:25",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:attach#e-4831c4e4f0f254bd",
+          "text": "They attach little importance to the Olympic Games.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:33",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "逮捕、依法扣押、生效等",
+      "reason": "法律专门义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

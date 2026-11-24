@@ -1,0 +1,162 @@
+{
+  "entryId": "w:zoo",
+  "headword": "zoo",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/zuː/",
+    "us": "/zuː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:zoo#p-main",
+      "ipa": {
+        "uk": "/zuː/",
+        "us": "/zuː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "zoos",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 56
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 56
+  },
+  "senses": [
+    {
+      "senseId": "w:zoo#s1",
+      "pos": "n.",
+      "glossZh": "动物园",
+      "pronunciationId": "w:zoo#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:zoo#e-6c018a7a2ec466ea",
+          "text": "I have worked as a keeper at the National Zoo for 11 years.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:zoo#e-909e6e1d15fa4a6f",
+          "text": "I’m hands-on with them every day at the zoo, and I do look back very fondly on the time that we had them.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:zoo#e-524dbe2575ef0369",
+          "text": "Whenever I tell people that I teach English at the Berlin Zoo, I almost always get a questioning look.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:zoo#s2",
+      "pos": "n.",
+      "glossZh": "乱糟糟的地方",
+      "pronunciationId": "w:zoo#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:zoo#e-f1ddb5bf2ceacb0e",
+          "text": "We’d come down in the morning to find they’d turned the room upside down, and left it looking like a zoo.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 104
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "杂合体、兽亲者",
+      "reason": "专业或少见俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

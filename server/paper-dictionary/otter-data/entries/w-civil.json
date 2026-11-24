@@ -1,0 +1,221 @@
+{
+  "entryId": "w:civil",
+  "headword": "civil",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsɪvl/",
+    "us": "/ˈsɪvl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:civil#p-main",
+      "ipa": {
+        "uk": "/ˈsɪvl/",
+        "us": "/ˈsɪvl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "civiler",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "civilest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more civil",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most civil",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:civil#s1",
+      "pos": "短语",
+      "glossZh": "内战",
+      "pronunciationId": "w:civil#p-main",
+      "note": "civil war",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:civil#e-ecc486ce0354cb1b",
+          "text": "His most remarkable and politically charged work was “Guernica”, produced in response to the Spanish Civil War when the town suffered a horrifying bombing.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 106
+          }
+        },
+        {
+          "exampleId": "w:civil#e-8a73620a69ab9a5f",
+          "text": "A new study conducted by the Max Planck Institute and published in the Proceedings of the National Academy of Sciences reveals that human-caused air pollution may cause civil wars within ant colonies.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 169,
+            "end": 174
+          }
+        },
+        {
+          "exampleId": "w:civil#e-9978a67e937bf1d6",
+          "text": "From escaping Somalia’s civil war to stepping into the Olympic ring, she’s turned her own story of struggle into a powerful mission to uplift others.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:civil#s2",
+      "pos": "adj.",
+      "glossZh": "公民的；公民社会的",
+      "pronunciationId": "w:civil#p-main",
+      "note": "civil rights 意为公民权利。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:civil#e-10524b922d3d22b5",
+          "text": "The event features a mini-exhibition of King’s original scripts, arts and food honoring the cultural and social contributions of both King and civil rights activist Medgar Evers, a fellow Mississippian who would also have turned 100 this year.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 143,
+            "end": 148
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:civil#s3",
+      "pos": "adj.",
+      "glossZh": "民事的",
+      "pronunciationId": "w:civil#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:civil#s4",
+      "pos": "adj.",
+      "glossZh": "文明有礼的；客气的",
+      "pronunciationId": "w:civil#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:civil#s5",
+      "pos": "adj.",
+      "glossZh": "世俗的；非宗教的",
+      "pronunciationId": "w:civil#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏",
+      "reason": "专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

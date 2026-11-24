@@ -1,0 +1,219 @@
+{
+  "entryId": "w:reform",
+  "headword": "reform",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈfɔːm/",
+    "us": "/rɪˈfɔːrm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:reform#p-main",
+      "ipa": {
+        "uk": "/rɪˈfɔːm/",
+        "us": "/rɪˈfɔːrm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "reforms",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Reforms",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "reformed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "reforming",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "senses": [
+    {
+      "senseId": "w:reform#s1",
+      "pos": "n.",
+      "glossZh": "改革",
+      "pronunciationId": "w:reform#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reform#e-d3113e6245810236",
+          "text": "As with previous science reform, discussions about science are often limited to what concepts and practices should be learned, where, when, and how.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:reform#e-df7d64b952c2a0d1",
+          "text": "Constant reforms in the funding system created __45__, leaving me in a cycle of writing proposals and being __46__ on time and patience.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:reform#e-e2f6c487b433b687",
+          "text": "“We looked at the electrification reform taking place on land and in the air and wondered why the sea sector was so far behind,” said engineer Reo Baird.",
+          "source": {
+            "paperId": "paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test",
+            "paperTitle": "山东省聊城、济宁两地市2025~2026学年度第一学期期中教学质量检测 高三英语试题",
+            "groupId": "group:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-liaocheng-jining-2025-11-senior-three-first-semester-midterm-teaching-quality-test:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:reform#s2",
+      "pos": "v.",
+      "glossZh": "改革",
+      "pronunciationId": "w:reform#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reform#e-8f443ed9b450c46f",
+          "text": "Take the chance to reform education.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-guangdong-guangzhou-2026-03-first:31",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:reform#e-4f3d18aa72832fdc",
+          "text": "Reforming education policies.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-jiangsu-nantong-2026-05-third-survey-test:27",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:reform#s3",
+      "pos": "v.",
+      "glossZh": "改过自新",
+      "pronunciationId": "w:reform#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "重新形成",
+      "reason": "另用 re-form，属于同形异义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

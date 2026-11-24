@@ -1,0 +1,205 @@
+{
+  "entryId": "w:confident",
+  "headword": "confident",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɒnfɪdənt/",
+    "us": "/ˈkɑːnfɪdənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:confident#p-main",
+      "ipa": {
+        "uk": "/ˈkɒnfɪdənt/",
+        "us": "/ˈkɑːnfɪdənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more confident",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most confident",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 104
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 101
+  },
+  "senses": [
+    {
+      "senseId": "w:confident#s1",
+      "pos": "adj.",
+      "glossZh": "自信的；有信心的",
+      "pronunciationId": "w:confident#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:confident#e-8f3fef580f4dfaf8",
+          "text": "One in four adults say that TV chefs have made them much more confident about expanding their cookery knowledge and skills, and young people are also getting more interested in cooking.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:confident#e-12644457ddc9a6f7",
+          "text": "As teachers, we can introduce several strategies to help students overcome this fear and become more confident speakers.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 117
+          }
+        },
+        {
+          "exampleId": "w:confident#e-df4ea3c2084c8896",
+          "text": "One student started out quiet and unsure, but over time grew into a most independent and confident young researcher.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 98
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:confident#s2",
+      "pos": "adj.",
+      "glossZh": "确信的；有把握的",
+      "pronunciationId": "w:confident#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:confident#e-be6ebb7cb3f777b5",
+          "text": "She is confident that small land areas can bring large returns if farmers are able to adapt by planting sustainable crops, using new technologies for water treatment and focusing on natural products and fertilisers (肥料) rather than chemicals.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:confident#e-cbe403a366fe1463",
+          "text": "Did they tend to go with those most confident about their estimates?",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:confident#e-e3e4c9c1914b22e7",
+          "text": "However, by utilizing upgraded implant technology and mapping more of the brain for thought cues, the researchers are confident that the system can be quickly improved over the next few years.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 118,
+            "end": 127
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "心腹；知己",
+      "reason": "古旧名词义，现代常写 confidant"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

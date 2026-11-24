@@ -1,0 +1,204 @@
+{
+  "entryId": "w:ink",
+  "headword": "ink",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪŋk/",
+    "us": "/ɪŋk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ink#p-main",
+      "ipa": {
+        "uk": "/ɪŋk/",
+        "us": "/ɪŋk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "inks",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "inked",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "inking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 34
+  },
+  "senses": [
+    {
+      "senseId": "w:ink#s1",
+      "pos": "n.",
+      "glossZh": "墨水；油墨",
+      "pronunciationId": "w:ink#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ink#e-b0eb4102b3977afb",
+          "text": "As students handled the papers, ink and paints before them, they studied the evidence manuscripts offer researchers and the complexities of preservation.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:ink#e-ba1a22e0d7dde895",
+          "text": "After class, ink stained my palm, my shoulder ached terribly, and my handwriting was as messy as a doctor’s prescription (处方).",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:ink#e-a9f92baa2e07cc52",
+          "text": "As you press the pointed tip down on the paper, the slit opens slightly to let ink run down.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:seven-choices:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 82
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ink#s2",
+      "pos": "n.",
+      "glossZh": "（乌贼等喷出的）墨汁",
+      "pronunciationId": "w:ink#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ink#e-9c2d7a0eaa192d47",
+          "text": "When threatened by hunters, it releases a cloud of bio-fluorescent ink.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ink#s3",
+      "pos": "v.",
+      "glossZh": "签署（协议）",
+      "pronunciationId": "w:ink#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ink#s4",
+      "pos": "v.",
+      "glossZh": "用墨水描绘",
+      "pronunciationId": "w:ink#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "廉价红酒、纹身（名词）",
+      "reason": "俚语用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

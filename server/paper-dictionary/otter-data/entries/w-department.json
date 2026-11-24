@@ -1,0 +1,131 @@
+{
+  "entryId": "w:department",
+  "headword": "department",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈpɑːtmənt/",
+    "us": "/dɪˈpɑːrtmənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:department#p-main",
+      "ipa": {
+        "uk": "/dɪˈpɑːtmənt/",
+        "us": "/dɪˈpɑːrtmənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "departments",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 48
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:department#s1",
+      "pos": "n.",
+      "glossZh": "（机构中的）部门；系；科",
+      "pronunciationId": "w:department#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 48
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:department#e-6300073d3de73635",
+          "text": "He is a department head.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:department#e-08d9908d20136403",
+          "text": "He manages a video department.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2022-ii:27",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:department#e-6283c0cb8e105a6c",
+          "text": "In 2010, the UN Department of Global Communications instituted language days for each of the organization’s six official languages.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 26
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "法国等国的地方行政区；离去",
+      "reason": "专门用法或旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

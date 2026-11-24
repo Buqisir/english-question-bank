@@ -1,0 +1,499 @@
+{
+  "entryId": "w:miss",
+  "headword": "Miss",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "miss"
+  ],
+  "ipa": {
+    "uk": "/mɪs/",
+    "us": "/mɪs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:miss#p-main",
+      "ipa": {
+        "uk": "/mɪs/",
+        "us": "/mɪs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "misses",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Misses",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Mlles",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "missed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "missing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 25,
+    "mock": 190
+  },
+  "unassignedCounts": {
+    "gaokao": 6,
+    "mock": 185
+  },
+  "senses": [
+    {
+      "senseId": "w:miss#s1",
+      "pos": "n.",
+      "glossZh": "小姐（置于姓氏前的称呼）",
+      "pronunciationId": "w:miss#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:miss#e-77d14d8f647e1ab1",
+          "text": "In that class, Miss Zhao, our biology teacher, showed we insects on stamps.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:writing-short-error-correction",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:writing-short-error-correction:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:miss#e-6c82505be6e9766e",
+          "text": "What made Miss Johnson choose teaching as a profession?",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:miss#s2",
+      "pos": "n.",
+      "glossZh": "对女教师的称呼",
+      "pronunciationId": "w:miss#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:miss#e-52aaf62e473dc1ba",
+          "text": "And then, at the end of the lesson, one child asked me a question: “Have you always wanted to be a __46__, Miss?” I explained that when I was his age, I actually wanted to be a writer, but I didn’t think I quite had what it __47__.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 111
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:miss#s3",
+      "pos": "v.",
+      "glossZh": "想念",
+      "pronunciationId": "w:miss#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:miss#e-0d6cdb74a3020bea",
+          "text": "“I’m going to miss you so much, Poppy,” said the tall, thin teenager.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:miss#e-963b7897d8c3efbd",
+          "text": "“I’ll miss these old boats,” he said as we parted.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:miss#e-2a0c50a17c9ed69c",
+          "text": "I’ve started a list of Old Things I Miss:",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:writing-continuation",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:writing-continuation:15",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:miss#s4",
+      "pos": "v.",
+      "glossZh": "错过（未能到场或赶上）",
+      "pronunciationId": "w:miss#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:miss#e-c805ee0ef788bf5f",
+          "text": "David had not missed a single practice, and although he always finished his run long after the other children, he did always finish.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "writing-continuation-7",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:miss#e-84a2e5dd570105f7",
+          "text": "I have missed plenty of beautiful sunsets/sunrises due to being on the spot only five minutes before the best moment.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:miss#e-deab595c79a0006e",
+          "text": "She explained that she usually took a bus but had missed the last one.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:miss#s5",
+      "pos": "v.",
+      "glossZh": "没注意到；漏掉",
+      "pronunciationId": "w:miss#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:miss#e-1e6cd1ec818ac58b",
+          "text": "After a short way, the farmer stopped and pointed at a weed which we missed.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:miss#e-0a652a448527a273",
+          "text": "I missed that paragraph because I was thinking of something else, but I’m going to keep on going and start paying close attention.”",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:miss#e-48e04178a04a2d1c",
+          "text": "These activities slow the pace of travel, making it easier to notice details like wildflowers or bird songs that are often missed.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a2",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A2 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a2:reading.a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a2:question-source-1:item-64",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 129
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:miss#s6",
+      "pos": "v.",
+      "glossZh": "没理解要点",
+      "pronunciationId": "w:miss#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:miss#e-7723c379a7f67b70",
+          "text": "This distaste for arguments is common, but it depends on a mistaken view of arguments that causes problems for our personal and social lives – and in many ways misses the point of arguing in the first place.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 160,
+            "end": 166
+          }
+        },
+        {
+          "exampleId": "w:miss#e-b78b1e334b13064f",
+          "text": "“We had the experience but missed the meaning,” T.S. Eliot wrote in 1941.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:miss#s7",
+      "pos": "短语",
+      "glossZh": "错过参加或享受某事的机会",
+      "pronunciationId": "w:miss#p-main",
+      "note": "miss out (on sth)。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:miss#s8",
+      "pos": "v.",
+      "glossZh": "未击中",
+      "pronunciationId": "w:miss#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:miss#s9",
+      "pos": "n.",
+      "glossZh": "未命中",
+      "pronunciationId": "w:miss#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:miss#e-d6c5ab62d9307dcb",
+          "text": "We had hits and misses but mostly hits.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 22
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "密西西比州缩写；缓存未命中；斯诺克犯规",
+      "reason": "缩写或专业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

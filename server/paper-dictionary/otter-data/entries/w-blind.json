@@ -1,0 +1,483 @@
+{
+  "entryId": "w:blind",
+  "headword": "blind",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/blaɪnd/",
+    "us": "/blaɪnd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:blind#p-main",
+      "ipa": {
+        "uk": "/blaɪnd/",
+        "us": "/blaɪnd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "blinder",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "blindest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "blinds",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "blinded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "blinding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 90
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 79
+  },
+  "senses": [
+    {
+      "senseId": "w:blind#s1",
+      "pos": "adj.",
+      "glossZh": "失明的；视力严重受损的",
+      "pronunciationId": "w:blind#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blind#e-8ffc3821d5da891b",
+          "text": "I was born legally blind.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:blind#e-4007f27cfbed4c90",
+          "text": "Colin and I were both blind from birth.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:blind#e-119297d1dfe2cebf",
+          "text": "In an effort to make art more accessible to the blind and people with vision loss, the garden features several sculptures meant to be touched.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blind#s2",
+      "pos": "adj.",
+      "glossZh": "盲目的；未加判断的",
+      "pronunciationId": "w:blind#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blind#e-04c96272cb89b3ac",
+          "text": "“I feel quite strongly about being able to visit frequently, so it’s not going to become a one-a-week blind expansion,” he said.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:blind#e-5034effa2ea1df44",
+          "text": "Darwin showed how you can get the appearance of purpose and design out of blind processes of natural selection.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blind#s3",
+      "pos": "adj.",
+      "glossZh": "看不清前方的；事先不知道内容的",
+      "pronunciationId": "w:blind#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blind#e-aee8fa1e80c01118",
+          "text": "Victoire, a POP MART fan from France, has been collecting the brand’s blind box figurines (小像) for a year and a half.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:grammar-fill:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:blind#e-25ec1bf12539f295",
+          "text": "Then, a blind turn led us to a narrow street where a store drew our attention.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blind#s4",
+      "pos": "adj.",
+      "glossZh": "令人看不清的；刺眼的",
+      "pronunciationId": "w:blind#p-main",
+      "note": "blinding。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blind#e-c8882505619e1e4a",
+          "text": "A hair-raising section concerns the building of the railroads, which entailed（牵涉）drilling through the Rockies, often in blinding snowstorms.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 120,
+            "end": 128
+          }
+        },
+        {
+          "exampleId": "w:blind#e-56172b6fac659eda",
+          "text": "The blinding whiteout made driving nearly impossible.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blind#s5",
+      "pos": "n.",
+      "glossZh": "百叶窗；遮光帘",
+      "pronunciationId": "w:blind#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blind#e-f2bd867380c49034",
+          "text": "Sunlight streamed through the blinds.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blind#s6",
+      "pos": "v.",
+      "glossZh": "使失明；使暂时看不清",
+      "pronunciationId": "w:blind#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blind#e-75e8e07044157bf6",
+          "text": "Many drivers find themselves temporarily blinded while driving directly into the glare of the sun.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 48
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blind#s7",
+      "pos": "v.",
+      "glossZh": "使看不清事实；蒙蔽",
+      "pronunciationId": "w:blind#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blind#e-9a9b74b184a08cc0",
+          "text": "was completely blinded by my own anger and disappointment.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:writing-continuation",
+            "locator": {
+              "paragraph": 16,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:writing-continuation:16",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blind#s8",
+      "pos": "短语",
+      "glossZh": "对……视而不见",
+      "pronunciationId": "w:blind#p-main",
+      "note": "turn a blind eye to sth。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blind#e-c2d653ebabb079d3",
+          "text": "A woman turns a blind eye to her credit card bills.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:32",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blind#s9",
+      "pos": "短语",
+      "glossZh": "盲区；意识不到的问题",
+      "pronunciationId": "w:blind#p-main",
+      "note": "blind spot。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blind#e-67e5367f5eba3a74",
+          "text": "The study in the journal Open Mind reveals a new blind spot in our physical reasoning.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 54
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "盲注、观察动物的掩蔽处、空烤及姓氏",
+      "reason": "行业用法或专名。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

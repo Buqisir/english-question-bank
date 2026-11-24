@@ -1,0 +1,194 @@
+{
+  "entryId": "w:hair",
+  "headword": "hair",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/heə(r)/",
+    "us": "/her/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:hair#p-main",
+      "ipa": {
+        "uk": "/heə(r)/",
+        "us": "/her/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "hairs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 71
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 69
+  },
+  "senses": [
+    {
+      "senseId": "w:hair#s1",
+      "pos": "n.",
+      "glossZh": "头发",
+      "pronunciationId": "w:hair#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hair#e-1aa79375205b591c",
+          "text": "No, this is for setting my hair yesterday.\"",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-b:cloze:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:hair#e-fc32c512253b5083",
+          "text": "My classmates ranged from those kids with pale skin and large blue eyes to those with rich brown skin and dark hair.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 111,
+            "end": 115
+          }
+        },
+        {
+          "exampleId": "w:hair#e-94f874e8495982d7",
+          "text": "However, instead of the brownish red hair she had hoped for, she final got purple hair.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-b:writing-short-error-correction:8",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hair#s2",
+      "pos": "n.",
+      "glossZh": "一根毛发",
+      "pronunciationId": "w:hair#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hair#e-f2544383d8feedee",
+          "text": "Imagine trying to aim at something a distance of a strand (股) of hair from a distance of 10 km.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n123:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:hair#e-ad889007053e689b",
+          "text": "“This is wonderful, Lila,” she’d always say, brushing a strand of hair from my face.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:writing-continuation:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hair#s3",
+      "pos": "n.",
+      "glossZh": "体毛",
+      "pronunciationId": "w:hair#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "给琴弓装弓毛",
+      "reason": "制琴专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,223 @@
+{
+  "entryId": "w:summary",
+  "headword": "summary",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsʌməri/",
+    "us": "/ˈsʌməri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:summary#p-main",
+      "ipa": {
+        "uk": "/ˈsʌməri/",
+        "us": "/ˈsʌməri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more summary",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most summary",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "summaries",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 16
+  },
+  "senses": [
+    {
+      "senseId": "w:summary#s1",
+      "pos": "n.",
+      "glossZh": "摘要",
+      "pronunciationId": "w:summary#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:summary#e-be033dcc69b18713",
+          "text": "Make a summary.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:summary#e-8b5c15ec60af6c64",
+          "text": "They surveyed several hundred park-goers, asking them to submit a written summary online of a meaningful interaction they had with nature in the park.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:summary#e-0f2919a94e8d6347",
+          "text": "To find patterns in the visitors' summaries.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2023-ii:33",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:summary#s2",
+      "pos": "adj.",
+      "glossZh": "简要的",
+      "pronunciationId": "w:summary#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:summary#e-7c4a855731cbb8ec",
+          "text": "Why do people share summary charts?",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:summary#s3",
+      "pos": "adj.",
+      "glossZh": "不经充分程序的",
+      "pronunciationId": "w:summary#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:summary#s4",
+      "pos": "短语",
+      "glossZh": "总之",
+      "pronunciationId": "w:summary#p-main",
+      "note": "in summary。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:summary#e-dc8a2571019b1bb8",
+          "text": "In summary, classical music is a rich and diverse tradition that has evolved over centuries,",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a",
+            "locator": {
+              "paragraph": 28,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a:28",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 10
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏",
+      "reason": "专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

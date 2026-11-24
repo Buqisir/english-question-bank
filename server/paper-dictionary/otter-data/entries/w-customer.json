@@ -1,0 +1,143 @@
+{
+  "entryId": "w:customer",
+  "headword": "customer",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkʌstəmə(r)/",
+    "us": "/ˈkʌstəmər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:customer#p-main",
+      "ipa": {
+        "uk": "/ˈkʌstəmə(r)/",
+        "us": "/ˈkʌstəmər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "customers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 26,
+    "mock": 150
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 150
+  },
+  "senses": [
+    {
+      "senseId": "w:customer#s1",
+      "pos": "n.",
+      "glossZh": "顾客；客户",
+      "pronunciationId": "w:customer#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 26,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:customer#e-149b917abfae72b1",
+          "text": "As a businesswoman, I care deeply about my customers.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:customer#e-44bff530b2dca82c",
+          "text": "Catherine Murphy, a cafe worker in a green shirt and black hat, makes sure that each customer gets exactly what they order.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:customer#e-0a8325051ee98891",
+          "text": "The spacious dining room is regularly filled with customers enjoying dumplings and a variety of noodle and rice dishes.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 59
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:customer#s2",
+      "pos": "n.",
+      "glossZh": "（有某种特点的）家伙",
+      "pronunciationId": "w:customer#p-main",
+      "note": "如 a tough customer 表示难对付的人。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "征收关税的官员",
+      "reason": "历史义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

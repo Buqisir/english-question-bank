@@ -1,0 +1,111 @@
+{
+  "entryId": "w:obviously",
+  "headword": "obviously",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɒbviəsli/",
+    "us": "/ˈɑːbviəsli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:obviously#p-main",
+      "ipa": {
+        "uk": "/ˈɒbviəsli/",
+        "us": "/ˈɑːbviəsli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more obviously",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most obviously",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:obviously#s1",
+      "pos": "adv.",
+      "glossZh": "显然；明显地",
+      "pronunciationId": "w:obviously#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 19
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:obviously#e-eb0769405f3609e6",
+          "text": "Paul Beer, head of rhino section at Port Lympne, said: “Obviously we’re all absolutely delighted to welcome another calf to our black rhino family.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:obviously#e-9bd16c6b438d9cf9",
+          "text": "Someone had bought the kettle and discovered an obviously used cut-glass Easter basket inside.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 57
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

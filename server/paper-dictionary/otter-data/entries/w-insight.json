@@ -1,0 +1,163 @@
+{
+  "entryId": "w:insight",
+  "headword": "insight",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɪnsaɪt/",
+    "us": "/ˈɪnsaɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:insight#p-main",
+      "ipa": {
+        "uk": "/ˈɪnsaɪt/",
+        "us": "/ˈɪnsaɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "insights",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 142
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 141
+  },
+  "senses": [
+    {
+      "senseId": "w:insight#s1",
+      "pos": "n.",
+      "glossZh": "深刻理解；洞见",
+      "pronunciationId": "w:insight#p-main",
+      "note": "常用 insight into sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:insight#e-0f65474a580564ca",
+          "text": "Mr Bissell skillfully organizes historical insights and cultural references, making his tale a well-rounded picture of Uzbekistan, seen from Western eyes.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:insight#e-569c8aea33065b21",
+          "text": "This mountain walk provides an insight into the skills required for hillwalking to ensure you get the most from future walking trips.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:insight#e-eca46c5ee1f4962e",
+          "text": "These digital assistants engage visitors in dynamic conversations and offer context-sensitive insights that deepen understanding and satisfy curiosity.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 109
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:insight#s2",
+      "pos": "n.",
+      "glossZh": "洞察力",
+      "pronunciationId": "w:insight#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:insight#e-1adea6404c601025",
+          "text": "Hanley-Dafoe writes with heartening insight about resiliency and offers clear, flexible guidance for finding ways to be more hopeful.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 43
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "精神病病识感",
+      "reason": "临床专业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

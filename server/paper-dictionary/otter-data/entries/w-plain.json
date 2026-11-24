@@ -1,0 +1,379 @@
+{
+  "entryId": "w:plain",
+  "headword": "plain",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pleɪn/",
+    "us": "/pleɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:plain#p-main",
+      "ipa": {
+        "uk": "/pleɪn/",
+        "us": "/pleɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "plainer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "plainest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "plains",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 30
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 22
+  },
+  "senses": [
+    {
+      "senseId": "w:plain#s1",
+      "pos": "adj.",
+      "glossZh": "朴素的；无装饰的",
+      "pronunciationId": "w:plain#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:plain#e-084ceb9699caece0",
+          "text": "It is simple and plain.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2023-national-b:28",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:plain#e-58626de077088bbc",
+          "text": "She found a piece of sparkling gold fabric for wings and a plain eye mask as a base.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:plain#e-8ac879d772a7be16",
+          "text": "Requirements for the Carrier Envelope: We ask that all contest entry envelopes (≤7×9 inches, with original artwork and calligraphy) be placed inside a plain carrier envelope (any size, no external art) that is clearly marked on the front with the contest address (see below) and with correct postage（邮资）.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 151,
+            "end": 156
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:plain#s2",
+      "pos": "adj.",
+      "glossZh": "清楚的；直白的",
+      "pronunciationId": "w:plain#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:plain#e-408726650f8f7e9d",
+          "text": "The words were plain, but they breathed with true love.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:plain#s3",
+      "pos": "adj.",
+      "glossZh": "十足的；纯粹的",
+      "pronunciationId": "w:plain#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:plain#e-7ee8b2f99e510c43",
+          "text": "Plain laziness.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:25",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:plain#e-155421cda5d52d8e",
+          "text": "They provide shade, lower surface temperatures, absorb a surprising amount of airborne carbon, remove tiny pollutants, and provide wildlife habitat along with just plain beauty.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 164,
+            "end": 169
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:plain#s4",
+      "pos": "adv.",
+      "glossZh": "完全；简直",
+      "pronunciationId": "w:plain#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:plain#e-8b1937cc91d90601",
+          "text": "He built a hugely successful career with little more than plain old hard work and determination.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:plain#e-2494fa37adb01d80",
+          "text": "Athletes and just plain everyday active people experience joint pain too.",
+          "source": {
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:reading-c:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:plain#s5",
+      "pos": "n.",
+      "glossZh": "平原",
+      "pronunciationId": "w:plain#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:plain#e-16089b7d1265ac5c",
+          "text": "This may involve guided forest walks to spot birds, watching elephants walking across open plains, or observing whales from a distance.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a2",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A2 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a2:reading.a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a2:question-source-1:item-60",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:plain#e-fb4622eeb002d580",
+          "text": "Visitors come and express admiration, wondering how the Hanging Gardens once rose from the desert plain.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 103
+          }
+        },
+        {
+          "exampleId": "w:plain#e-0576c6a7ecf303bc",
+          "text": "But a bustling city is not an ideal place for a wild wolf to thrive, so Li returned to the plains to follow the trails of the wolves.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 97
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:plain#s6",
+      "pos": "adj.",
+      "glossZh": "清淡的；未加调味的",
+      "pronunciationId": "w:plain#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:plain#e-1c94a1c5fdb34ec3",
+          "text": "Chen cites another common complaint: tomatoes that taste plain compared to childhood memories.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-04-second:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 62
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

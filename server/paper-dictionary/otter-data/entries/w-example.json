@@ -1,0 +1,268 @@
+{
+  "entryId": "w:example",
+  "headword": "example",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪɡˈzɑːmpl/",
+    "us": "/ɪɡˈzæmpl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:example#p-main",
+      "ipa": {
+        "uk": "/ɪɡˈzɑːmpl/",
+        "us": "/ɪɡˈzæmpl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "examples",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 34,
+    "mock": 314
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 313
+  },
+  "senses": [
+    {
+      "senseId": "w:example#s1",
+      "pos": "n.",
+      "glossZh": "例子",
+      "pronunciationId": "w:example#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:example#e-9854d3f9b61364f1",
+          "text": "As scientists look deeper into our genes (基因), they are finding examples of human evolution in just the past few thousand years.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:example#e-5543ff57f714724e",
+          "text": "The clearest example of this between literate and non-literate history is perhaps the first conflict, at Botany Bay, between Captain Cook’s voyage and the Australian Aboriginals.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:example#e-69984e1a17b030a8",
+          "text": "However, if I need to check the origin of a word or to look up examples of its usage, there’s nothing better.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 78
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:example#s2",
+      "pos": "短语",
+      "glossZh": "例如",
+      "pronunciationId": "w:example#p-main",
+      "note": "for example。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:example#e-7a3bcf3e90bd4f6e",
+          "text": "A waiter’s job, for example, that requires multitasking, teamwork and decision-making could be just as stimulating as any high-level office work.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:example#e-40a2f09d4d37077d",
+          "text": "For example, one participant’s experience of “We sat and listened to the waves at the beach for a while” was assigned the categories “sitting at beach” and “listening to waves.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:example#e-bc256af5582ba590",
+          "text": "If we’re covering friction, for example, I bring different tires (轮胎) into my classroom so that my students can conduct lab experiments with them to see how friction works in real-life applications.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:example#s3",
+      "pos": "n.",
+      "glossZh": "榜样",
+      "pronunciationId": "w:example#p-main",
+      "note": "set an example 树立榜样，lead by example 以身作则。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:example#e-0077e76bd684250b",
+          "text": "Ancient philosophers set good examples for debaters.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:31",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:example#e-e1b56df22d7acab6",
+          "text": "My colleagues and I then joined the Labos 1point5 program, a collective of around 600 researchers who believe science should lead by example in reducing society’s carbon footprint.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 133,
+            "end": 140
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:example#s4",
+      "pos": "n.",
+      "glossZh": "例题",
+      "pronunciationId": "w:example#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "用作动词「体现」",
+      "reason": "罕见，现代常用 exemplify"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

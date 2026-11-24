@@ -1,0 +1,180 @@
+{
+  "entryId": "w:blog",
+  "headword": "blog",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/blɒɡ/",
+    "us": "/blɑːɡ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:blog#p-main",
+      "ipa": {
+        "uk": "/blɒɡ/",
+        "us": "/blɑːɡ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "blogs",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "blogged",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "blogging",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 24
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 21
+  },
+  "senses": [
+    {
+      "senseId": "w:blog#s1",
+      "pos": "n.",
+      "glossZh": "博客；网络日志",
+      "pronunciationId": "w:blog#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blog#e-ec87092f41afd987",
+          "text": "Update his blog.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:blog#e-885a585299da31f9",
+          "text": "In rare free moments, she shares her innovative methods through her blog, appropriately titled Math Equals Love – a philosophy that continues to transform lives in this unlikely corner of rural Oklahoma.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:blog#e-287d8335e03238e1",
+          "text": "How does the speaker write book reviews on his blog?",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blog#s2",
+      "pos": "v.",
+      "glossZh": "写博客；在博客上发表",
+      "pronunciationId": "w:blog#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blog#e-5462d377664b3b16",
+          "text": "When did the speaker start blogging?",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 35
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "偷取、闷闷不乐及特定大会饮料",
+      "reason": "罕见旧义或圈内用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

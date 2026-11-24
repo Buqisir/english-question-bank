@@ -1,0 +1,220 @@
+{
+  "entryId": "w:invite",
+  "headword": "invite",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪnˈvaɪt/",
+    "us": "/ɪnˈvaɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:invite#p-main",
+      "ipa": {
+        "uk": "/ɪnˈvaɪt/",
+        "us": "/ɪnˈvaɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "invites",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "invited",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "inviting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 21,
+    "mock": 134
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 134
+  },
+  "senses": [
+    {
+      "senseId": "w:invite#s1",
+      "pos": "v.",
+      "glossZh": "邀请",
+      "pronunciationId": "w:invite#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:invite#e-43c81021a7623483",
+          "text": "95 undergraduate women were individually invited into a lab to ostensibly（表面上）participate in a study about movie viewership.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:invite#e-b68b28f484e31e14",
+          "text": "I was invited to a cookout on an old friend's farm in western Washington.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:invite#e-25294365dfd8b6d6",
+          "text": "Paragraph 1: In a class discussion, I was invited to explain the meaning of my name.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:invite#s2",
+      "pos": "v.",
+      "glossZh": "引起做某事的意愿",
+      "pronunciationId": "w:invite#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:invite#e-eb612f43022434b6",
+          "text": "The resulting blank space invites you to revise.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:invite#e-318a880e43a4fc8e",
+          "text": "Beautiful year-round, they invite you to enjoy the smallest detail, from the sound of grasses in the gentle wind to the sculpture of odd-looking seed heads.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:invite#s3",
+      "pos": "v.",
+      "glossZh": "招致（不良结果）",
+      "pronunciationId": "w:invite#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:invite#s4",
+      "pos": "n.",
+      "glossZh": "请柬",
+      "pronunciationId": "w:invite#p-main",
+      "note": "非正式用法。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

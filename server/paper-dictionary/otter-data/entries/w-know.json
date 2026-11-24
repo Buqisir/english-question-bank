@@ -1,0 +1,706 @@
+{
+  "entryId": "w:know",
+  "headword": "know",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/nəʊ/",
+    "us": "/noʊ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:know#p-main",
+      "ipa": {
+        "uk": "/nəʊ/",
+        "us": "/noʊ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "knew",
+      "tags": [
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "knowing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "known",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "knows",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 175,
+    "mock": 1075
+  },
+  "unassignedCounts": {
+    "gaokao": 7,
+    "mock": 1075
+  },
+  "senses": [
+    {
+      "senseId": "w:know#s1",
+      "pos": "v.",
+      "glossZh": "知道；明白",
+      "pronunciationId": "w:know#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 112,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:know#e-f61b5a6a0283ecb6",
+          "text": "And when your employees begin adding smiling emojis to their business communication, you’ll know you have succeeded in improving your work culture.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:know#e-99795532837c60c1",
+          "text": "He remembered landmarks, but since he didn’t know his town’s name, finding a small neighborhood in a vast country proved to be impossible.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:know#e-0fddfe8c5e6363af",
+          "text": "Little do they know that as they do so, a burst of energy is sent up to street level to help charge an electric car.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:know#s2",
+      "pos": "v.",
+      "glossZh": "认识；熟悉",
+      "pronunciationId": "w:know#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:know#e-feb579fba76aaf1b",
+          "text": "How do you know the host",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-national-b:36",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:know#e-cb516c9f9ab040fa",
+          "text": "The streets in which people live should be a tight pattern of crossed sidewalks, which allow people to meet, talk, and get to know one another.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 126,
+            "end": 130
+          }
+        },
+        {
+          "exampleId": "w:know#e-29325eb9ff536f7e",
+          "text": "They are also safe places to be, because the higher density means that there are more “eyes on the street”: shopkeepers and locals who know their area and maintain a close watch over the neighbourhood.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 135,
+            "end": 139
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:know#s3",
+      "pos": "v.",
+      "glossZh": "懂得怎样做",
+      "pronunciationId": "w:know#p-main",
+      "note": "常接 how to do。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:know#e-4393c68ae1c82a99",
+          "text": "However, you need to know how to use them properly to really benefit.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:know#e-8cfd32011e78bc61",
+          "text": "The very best communicators are those who know how to adjust their language to match their audience.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:know#e-f049f6bb907a92e6",
+          "text": "Suddenly it occurred to me that he did not even know how to use a dictionary.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 52
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:know#s4",
+      "pos": "v.",
+      "glossZh": "体验过；熟悉某种感受",
+      "pronunciationId": "w:know#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:know#e-00c1696c66ef70a1",
+          "text": "In this way, they know how it feels to walk a long distance carrying heavy bottles.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jan:31",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:know#e-2f7f6b687b21946e",
+          "text": "We all know that unpleasant feeling when we’re talking about something interesting and halfway through our sentence we’re interrupted.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:know#e-d00015ed542cba8a",
+          "text": "You may know the “feel-good” emotions that come with helping others, but there are even more unexpected ways volunteering will positively affect the whole family.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:know#s5",
+      "pos": "v.",
+      "glossZh": "分辨",
+      "pronunciationId": "w:know#p-main",
+      "note": "know A from B。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:know#e-9f9f3d2dc450abde",
+          "text": "You don’t know left from right!” These __53__ made the father very angry.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:know#s6",
+      "pos": "短语",
+      "glossZh": "被称作",
+      "pronunciationId": "w:know#p-main",
+      "note": "be known as。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:know#e-b7c2b409f7299b28",
+          "text": "These lights, known as adaptive signals, have led to significant declines in both the trouble and cost of travels between work and home.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:know#e-8ed246b4af468899",
+          "text": "On March 7,1907, the English statistician Francis Galton published a paper which illustrated what has come to be known as the “wisdom of crowds” effect.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 113,
+            "end": 118
+          }
+        },
+        {
+          "exampleId": "w:know#e-f1eaa55eb6cbfdb1",
+          "text": "“You enter the fare gates（检票口）and you’ll see a kiosk that is lit up and it tells you you can get a one-minute, a three-minute, or a five-minute story,\" says Alicia Trost, the chief communications officer for the San Francisco Bay Area Rapid Transit - known as BART.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 251,
+            "end": 256
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:know#s7",
+      "pos": "短语",
+      "glossZh": "因……而著名",
+      "pronunciationId": "w:know#p-main",
+      "note": "be known for。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:know#e-493a384489fdcca5",
+          "text": "And officials at Port Lympne were delighted with the new arrival, especially as black rhinos are known for being difficult to breed in captivity (圈养).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:know#e-a3934923ce21e0f2",
+          "text": "Dogs are known for their impressive fetching habit, but cats take this behavior up a notch.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:know#e-bbc702a4c8f29221",
+          "text": "It’s known for its flower festival.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2025-ii:22",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:know#s8",
+      "pos": "短语",
+      "glossZh": "被……所知",
+      "pronunciationId": "w:know#p-main",
+      "note": "be known to。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:know#e-ca1e004352e4b041",
+          "text": "Why are more geniuses known to the public?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2021-national-a:34",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:know#s9",
+      "pos": "短语",
+      "glossZh": "听说过",
+      "pronunciationId": "w:know#p-main",
+      "note": "know of。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:know#e-aa820d46e70919e4",
+          "text": "That said, we know of many postcrossing members, including Chinese, who have actually improved their English skills through their use of postcrossing,\" Paulo says.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:know#s10",
+      "pos": "短语",
+      "glossZh": "告诉；让知晓",
+      "pronunciationId": "w:know#p-main",
+      "note": "let sb know。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:know#e-378249fa35f5e4e1",
+          "text": "He was __44__, and his crying let the whole campground know it.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "cloze-2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:know#e-15a4800a281f362f",
+          "text": "Let their teacher know.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:know#s11",
+      "pos": "短语",
+      "glossZh": "你知道的（口语插入语）",
+      "pronunciationId": "w:know#p-main",
+      "note": "you know。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:know#e-08a4eee8b9aa2441",
+          "text": "But she came forth and walked forward, and I walked forward, and my feelings and tears and the chemical in my brain, you know, it was like a nuclear fusion（核聚变）.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 121,
+            "end": 125
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "知情状态（名词）",
+      "reason": "通常见于 in the know，无真题例证"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

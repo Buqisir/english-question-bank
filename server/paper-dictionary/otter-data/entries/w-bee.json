@@ -1,0 +1,174 @@
+{
+  "entryId": "w:bee",
+  "headword": "bee",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/biː/",
+    "us": "/biː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bee#p-main",
+      "ipa": {
+        "uk": "/biː/",
+        "us": "/biː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "been",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "bees",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Bees",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 51
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 49
+  },
+  "senses": [
+    {
+      "senseId": "w:bee#s1",
+      "pos": "n.",
+      "glossZh": "蜜蜂",
+      "pronunciationId": "w:bee#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bee#e-59c26b535fd6c03d",
+          "text": "Baby bees were still in the honeycombs(蜂巢).",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:bee#e-90c685dff47de7e9",
+          "text": "The adult bees were __54__ and kept attacking as Ziyad escaped from the tree.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:bee#e-ebc952b99a175665",
+          "text": "Sunflowers towered over the fence, attracting bees and butterflies.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bee#s2",
+      "pos": "n.",
+      "glossZh": "为比赛或共同劳动而举办的聚会",
+      "pronunciationId": "w:bee#p-main",
+      "note": "如 spelling bee「拼写比赛」，多见于美式英语。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bee#e-27663b149562eea4",
+          "text": "Faizan Zaki, a 13-year-old from Texas, was awarded the champion of the Scripps National Spelling Bee (SNSB) on May 29.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 100
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏、人名缩写、船木构件及 be 的过时拼写",
+      "reason": "专名、技术或过时用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

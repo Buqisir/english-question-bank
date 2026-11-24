@@ -1,0 +1,299 @@
+{
+  "entryId": "w:specific",
+  "headword": "specific",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/spəˈsɪfɪk/",
+    "us": "/spəˈsɪfɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:specific#p-main",
+      "ipa": {
+        "uk": "/spəˈsɪfɪk/",
+        "us": "/spəˈsɪfɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more specific",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most specific",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "specifics",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 15,
+    "mock": 157
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 153
+  },
+  "senses": [
+    {
+      "senseId": "w:specific#s1",
+      "pos": "adj.",
+      "glossZh": "特定的",
+      "pronunciationId": "w:specific#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:specific#e-b37cc10947b83171",
+          "text": "In a piece from 2018, Von Wong wanted to illustrate（说明）a specific statistic:",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:specific#e-fd9f876ec46546c9",
+          "text": "This ability to recognize that a shape will need to be turned in a specific direction before it will fit is called an “allocentric frame of reference”.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:specific#e-1b72f5b350ccd69c",
+          "text": "Daji, or big open-air fairs, typically take place on specific dates of the lunar calendar, for example, on dates with five or seven as the last digit.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:specific#s2",
+      "pos": "adj.",
+      "glossZh": "具体明确的",
+      "pronunciationId": "w:specific#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:specific#e-3d176d8e05355e0a",
+          "text": "In order to make surely all of us are in good health, and she makes specific plans for us.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:writing-short-error-correction:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:specific#e-9e35e6bedc16b86c",
+          "text": "It turns out that people who use more detailed and specific words to describe their feelings go to the doctor less frequently.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:specific#e-5e24292d6977f94a",
+          "text": "I want specific details.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:specific#s3",
+      "pos": "adj.",
+      "glossZh": "特有的",
+      "pronunciationId": "w:specific#p-main",
+      "note": "常见 specific to。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:specific#e-710bf713e4c8e6be",
+          "text": "Each mode of transport has its specific fuel needs.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:specific#e-2478d410f728a9af",
+          "text": "Which benefit of exercise is specific to children and youth?",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-cq-nankai-2025-11-third-quality-test:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:specific#s4",
+      "pos": "n.",
+      "glossZh": "具体细节",
+      "pronunciationId": "w:specific#p-main",
+      "note": "此义常用复数 specifics。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:specific#e-52312b7fa9117f96",
+          "text": "From there, you will want to weigh the pros and cons and consider the specifics of your situation to decide what the right call is.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 86
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "按质量归一化、种级的、特异性结合",
+      "reason": "理科专用义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

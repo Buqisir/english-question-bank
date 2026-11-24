@@ -1,0 +1,230 @@
+{
+  "entryId": "w:replace",
+  "headword": "replace",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈpleɪs/",
+    "us": "/rɪˈpleɪs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:replace#p-main",
+      "ipa": {
+        "uk": "/rɪˈpleɪs/",
+        "us": "/rɪˈpleɪs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "replaced",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "replaces",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "replacing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 26,
+    "mock": 232
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 232
+  },
+  "senses": [
+    {
+      "senseId": "w:replace#s1",
+      "pos": "v.",
+      "glossZh": "用别的东西替换",
+      "pronunciationId": "w:replace#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:replace#e-9230ae5b41823d57",
+          "text": "“Oh, they’re replacing them with catamarans.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:replace#e-ced67087455e6f5b",
+          "text": "He had the old carpets replaced.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:replace#e-4dc07c1478f9f0e9",
+          "text": "After harvest, users simply replace the plants with a new pre-seeded pod (容器) to get the next growth cycle started.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:3",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:replace#s2",
+      "pos": "v.",
+      "glossZh": "取代",
+      "pronunciationId": "w:replace#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:replace#e-e631f5d64bd0f036",
+          "text": "Which of the following can replace the underlined word “charts” in paragraph 2?",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:26",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:replace#e-958f9283b9ddab06",
+          "text": "Print texts cannot be entirely replaced in education.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2024-i:31",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:replace#e-9ac25480901b24bb",
+          "text": "Furthermore, AI-powered virtual guides are replacing traditional tour guides.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-i:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 52
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:replace#s3",
+      "pos": "v.",
+      "glossZh": "放回原处",
+      "pronunciationId": "w:replace#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

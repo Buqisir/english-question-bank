@@ -1,0 +1,164 @@
+{
+  "entryId": "w:climate",
+  "headword": "climate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈklaɪmət/",
+    "us": "/ˈklaɪmət/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:climate#p-main",
+      "ipa": {
+        "uk": "/ˈklaɪmət/",
+        "us": "/ˈklaɪmət/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "climates",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 232
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 231
+  },
+  "senses": [
+    {
+      "senseId": "w:climate#s1",
+      "pos": "n.",
+      "glossZh": "气候",
+      "pronunciationId": "w:climate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:climate#e-a276b9914e5a50a9",
+          "text": "The extreme climate of Auburn.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2022-national-b:26",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:climate#e-00e6aa4f9136c63a",
+          "text": "Habitat loss, pesticide use, and climate change have caused dramatic declines in pollinator populations over the past couple of decades, which has damaged the U.S. agricultural economy.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:climate#e-167c8ca657aa9b7d",
+          "text": "To study climate patterns.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2026-zhejiang-jan:33",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:climate#s2",
+      "pos": "n.",
+      "glossZh": "（社会、政治等）风气；氛围",
+      "pronunciationId": "w:climate#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:climate#e-d6540e4427ab9859",
+          "text": "Furthermore, the flattening of ability differences means widespread overconfidence in AI-assisted tasks, particularly among the most experienced users, leading to an increased climate of miscalculated decision-making and a gradual destruction of skills.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 176,
+            "end": 183
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "纬度地带；居住",
+      "reason": "历史或古旧用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

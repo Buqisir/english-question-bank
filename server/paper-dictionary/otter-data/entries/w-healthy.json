@@ -1,0 +1,298 @@
+{
+  "entryId": "w:healthy",
+  "headword": "healthy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈhelθi/",
+    "us": "/ˈhelθi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:healthy#p-main",
+      "ipa": {
+        "uk": "/ˈhelθi/",
+        "us": "/ˈhelθi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "healthier",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "healthiest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more healthy",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most healthy",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 33,
+    "mock": 224
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 224
+  },
+  "senses": [
+    {
+      "senseId": "w:healthy#s1",
+      "pos": "adj.",
+      "glossZh": "健康的；身体状况良好的",
+      "pronunciationId": "w:healthy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:healthy#e-b1b9799cc3158c96",
+          "text": "She’s healthy, strong and already eager to play and explore.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:healthy#e-8770176df79be6e2",
+          "text": "Levine and his research team selected volunteers aged between 45 and 64 who did not exercise much but were otherwise healthy.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 117,
+            "end": 124
+          }
+        },
+        {
+          "exampleId": "w:healthy#e-8859baee61a4f1e6",
+          "text": "Participants – 72 healthy male and female adults – were first asked to perform a computer test that challenged their visual and spatial learning.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:healthy#s2",
+      "pos": "adj.",
+      "glossZh": "有益于健康的（饮食或生活方式）",
+      "pronunciationId": "w:healthy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 16,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:healthy#e-a6893b3ce9914f8c",
+          "text": "Curtin is CEO of DC Central Kitchen in Washington, D.C., which recovers food and turns it into healthy meals.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "reading-b-4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:healthy#e-8f880a12726a781c",
+          "text": "The program aims to help students develop science skills, environmental awareness, and healthy lifestyles.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 94
+          }
+        },
+        {
+          "exampleId": "w:healthy#e-44205558ec55dd22",
+          "text": "Instead, she recommends applying a well-known concept among nutrition experts called the “Division of Responsibility,” where parents provide a variety of mostly healthy foods to their kids at fixed times, and the kids themselves decide what and how much they want to consume – even if that means occasionally eating more cookies than carrots.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 161,
+            "end": 168
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:healthy#s3",
+      "pos": "adj.",
+      "glossZh": "有利于良好发展的",
+      "pronunciationId": "w:healthy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:healthy#e-bcca84f4832b93b1",
+          "text": "Clothing takes a huge amount of natural resources（资源）to make, and buying loads of new clothing ( or throwing out old clothing ) is not healthy for the environment.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 135,
+            "end": 142
+          }
+        },
+        {
+          "exampleId": "w:healthy#e-7b4417164ce1b422",
+          "text": "Another way to encourage healthy social interaction is by encouraging kids to use words- not fists-to express how they feel.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:healthy#e-cfe29288e5e4d9f1",
+          "text": "“It just creates some worries and insecurities in kids that aren’t necessarily healthy.”",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 86
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:healthy#s4",
+      "pos": "adj.",
+      "glossZh": "相当大的（数量）",
+      "pronunciationId": "w:healthy#p-main",
+      "note": "如 a healthy profit。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

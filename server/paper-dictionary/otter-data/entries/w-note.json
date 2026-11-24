@@ -1,0 +1,638 @@
+{
+  "entryId": "w:note",
+  "headword": "note",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/nəʊt/",
+    "us": "/noʊt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:note#p-main",
+      "ipa": {
+        "uk": "/nəʊt/",
+        "us": "/noʊt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "notes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "noted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "noting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 44,
+    "mock": 337
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 332
+  },
+  "senses": [
+    {
+      "senseId": "w:note#s1",
+      "pos": "n.",
+      "glossZh": "笔记；记录",
+      "pronunciationId": "w:note#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 20,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:note#e-54e40a0130e3ed0c",
+          "text": "What should you pay most attention to when taking notes?",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:note#e-4d1fdf77dfd66e5a",
+          "text": "Make a note of any page which is of special importance.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-ii:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:note#e-b31ef56a12f2d166",
+          "text": "Class activities will vary from day to day, but students must be ready to complete short in-class writings or tests drawn directly from assigned readings or notes from the previous class' lecture/discussion, so it is important to take careful notes during class.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "reading-a-9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 243,
+            "end": 248
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:note#s2",
+      "pos": "n.",
+      "glossZh": "便条",
+      "pronunciationId": "w:note#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:note#e-250489d512b3bee1",
+          "text": "Emoji can help communication feel friendlier, and even a serious note can be softened with an encouraging smile.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:note#e-9b69c6a048c85788",
+          "text": "In short, he loves postcards, and the excitement of getting a hand-written note from someone far away.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:31",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:note#e-8dbe1d35b258cab3",
+          "text": "There was also a note: “Dear Dr. Perlak, I saw you this morning and wanted to make sure you had __49__.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:note#s3",
+      "pos": "n.",
+      "glossZh": "音符",
+      "pronunciationId": "w:note#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:note#e-e47023001950c67a",
+          "text": "“He’s interested in the music, feeling every note, and I have to say: ‘Turn, turn!’ “Robert is the best page turner I’ve had in my entire life.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:note#e-1be40302d78b6b4f",
+          "text": "Cage used coin tosses to choose notes – random in note height, length, and volume.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:note#e-258bf4fde2a79c6a",
+          "text": "Professional musicians constantly switch between musical notes, rhythms, and emotional expressions, requiring frequent cognitive adjustments.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 62
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:note#s4",
+      "pos": "n.",
+      "glossZh": "纸币",
+      "pronunciationId": "w:note#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:note#e-caa031b5577c1359",
+          "text": "When she __53__ one nurse, she tried to press a five-pound note into her hand.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:cloze:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 63
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:note#s5",
+      "pos": "v.",
+      "glossZh": "注意；留意",
+      "pronunciationId": "w:note#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:note#e-05213bd9bf26e94c",
+          "text": "Note also the facts important for your purpose as well as anything which leads you to further research.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:note#e-ba9a1dae85767666",
+          "text": "Note: The times listed on the schedules are departure times, not arrival times.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:note#e-3d6299f04e84b1c5",
+          "text": "Please note: Only original, physical IDs are accepted (no photocopies or digital images).",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:note#s6",
+      "pos": "v.",
+      "glossZh": "指出；提到",
+      "pronunciationId": "w:note#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:note#e-2e0e935f05c2d25d",
+          "text": "As someone noted in this paper a couple of weeks ago, they eat great food and never gain weight.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:note#e-789a5f24889096e8",
+          "text": "More than 30 years ago, the scholar Charles Hockett noted that speech sounds called labiodentals, such as “f” and “v”, were more common in the languages of societies that ate softer foods.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "reading-d-2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:note#e-aa31c10875260e5d",
+          "text": "Jacobs notes that the built form of a city is crucial to the life of an urban community, especially the sidewalks.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:note#s7",
+      "pos": "v.",
+      "glossZh": "记下",
+      "pronunciationId": "w:note#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:note#e-377b6e7114293459",
+          "text": "note down",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:cloze",
+            "locator": {
+              "question": 51,
+              "questionId": "question:paper-gaokao-2021-ii:51",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        },
+        {
+          "exampleId": "w:note#e-0756a41788f3b2a5",
+          "text": "All due dates are noted on the label.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:note#s8",
+      "pos": "短语",
+      "glossZh": "留意",
+      "pronunciationId": "w:note#p-main",
+      "note": "take note of。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:note#e-92ed43ad5b190d86",
+          "text": "He knew all the kids and their pets by name; he carried in the groceries; he took note of unlocked doors, offered gardening advice and taught more than a few young boys the art of the curveball.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 86
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:note#s9",
+      "pos": "adj.",
+      "glossZh": "著名的",
+      "pronunciationId": "w:note#p-main",
+      "note": "noted。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:note#e-4c6d6c91f45f27a3",
+          "text": "Klein, a noted historian of technology, spins a narrative so lively that at times it reads like a novel.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:note#s10",
+      "pos": "n.",
+      "glossZh": "提示说明",
+      "pronunciationId": "w:note#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:note#e-227acc01fb1311da",
+          "text": "Note to teachers: Children’s Theatre has a study guide demonstrating how math and science can be taught",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        },
+        {
+          "exampleId": "w:note#e-a4b08e4b55cbc322",
+          "text": "Note: The peak season is during official holidays and summer vacation (June 15 to August 31); other times are in the off- season.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a",
+            "locator": {
+              "paragraph": 21,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "冰球队名；节奏游戏音符",
+      "reason": "同形专名或具体应用"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

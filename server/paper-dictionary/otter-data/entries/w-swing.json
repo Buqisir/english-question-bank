@@ -1,0 +1,349 @@
+{
+  "entryId": "w:swing",
+  "headword": "swing",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/swɪŋ/",
+    "us": "/swɪŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:swing#p-main",
+      "ipa": {
+        "uk": "/swɪŋ/",
+        "us": "/swɪŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "swings",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "swinging",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "swung",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "senses": [
+    {
+      "senseId": "w:swing#s1",
+      "pos": "v.",
+      "glossZh": "摆动",
+      "pronunciationId": "w:swing#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:swing#e-1f8df1b6ccf6ea40",
+          "text": "After making sure that David could run if he wanted, I turned to find him coming towards me, his small body rocking from side to side as he swung his feet forward.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "writing-continuation-6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 140,
+            "end": 145
+          }
+        },
+        {
+          "exampleId": "w:swing#e-ae7cb8d7db4cb5c4",
+          "text": "As I rushed outdoors to empty the wastepaper baskets, the door swung shut behind me.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:swing#e-405770f507055b9f",
+          "text": "Powered by a continuous stream of air alone, each of the robot's soft, tubular legs begins to swing.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 99
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:swing#s2",
+      "pos": "v.",
+      "glossZh": "剧烈波动",
+      "pronunciationId": "w:swing#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:swing#e-43445b9b8aeaacec",
+          "text": "Temperatures swing sharply between day and night.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:swing#s3",
+      "pos": "n.",
+      "glossZh": "秋千",
+      "pronunciationId": "w:swing#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:swing#e-3f2d5db950e69e9c",
+          "text": "I __48__ tying a swing to one of its branches when my daughter was little, and sitting in the __49__ on hot summer afternoons.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:cloze",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:cloze:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:swing#e-c0f7dd1d769332cb",
+          "text": "Vivian tried to guide Ben to the swings, but he made a beeline for the sandbox.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:swing#e-9d2ecdf13655181b",
+          "text": "One evening, Clara found a new note in pink crayon, “Dear friends, Bunny really wants a toy swing（秋千）.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+            "paperTitle": "宁波市2025学年第一学期高考模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-ningbo-2025-11-first-mock:writing-continuation:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 97
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:swing#s4",
+      "pos": "n.",
+      "glossZh": "挥动",
+      "pronunciationId": "w:swing#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:swing#e-5a0bc4dda00d04fc",
+          "text": "Despite my new can-do __47__, my swings were often met with nothing but air.",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:swing#s5",
+      "pos": "n.",
+      "glossZh": "摇摆乐",
+      "pronunciationId": "w:swing#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:swing#e-a241dde7ea7e058f",
+          "text": "The problem, according to the Songs of Love Foundation founder and president John Beltzer, is how to engage a population growing up listening to music from the past, like big band and swing.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期初监测 英语",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 184,
+            "end": 189
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:swing#s6",
+      "pos": "n.",
+      "glossZh": "能替演多个角色的演员",
+      "pronunciationId": "w:swing#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:swing#e-feaf80b1cfc083d0",
+          "text": "“But,” she went on, “I think the understudies, the swings and the standbys do so much work with so little recognition – this is a little piece of paper that makes sure they’re acknowledged by the people who are watching them.”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 57
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "车床直径能力、船随风潮转向",
+      "reason": "专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

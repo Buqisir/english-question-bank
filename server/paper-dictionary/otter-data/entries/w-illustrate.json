@@ -1,0 +1,198 @@
+{
+  "entryId": "w:illustrate",
+  "headword": "illustrate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɪləstreɪt/",
+    "us": "/ˈɪləstreɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:illustrate#p-main",
+      "ipa": {
+        "uk": "/ˈɪləstreɪt/",
+        "us": "/ˈɪləstreɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "illustrated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "illustrates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "illustrating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 100
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 98
+  },
+  "senses": [
+    {
+      "senseId": "w:illustrate#s1",
+      "pos": "v.",
+      "glossZh": "说明；阐明",
+      "pronunciationId": "w:illustrate#p-main",
+      "note": "常借助例子或图示。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:illustrate#e-5bf5fe1e9db849f5",
+          "text": "On March 7,1907, the English statistician Francis Galton published a paper which illustrated what has come to be known as the “wisdom of crowds” effect.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:illustrate#e-d6c7c8a27bdf72fb",
+          "text": "\"To make dictionaries is dull (乏味) work,\" wrote Johnson, illustrating one definition of “dull”.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:illustrate#e-1564ca2827d3bd03",
+          "text": "What does the author try to illustrate by mentioning bottled water in paragraph 4?",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2025-i:34",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:illustrate#s2",
+      "pos": "v.",
+      "glossZh": "给书刊配插图",
+      "pronunciationId": "w:illustrate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:illustrate#e-7b83f73a61bd4223",
+          "text": "This is a beautifully illustrated tale about a young boy living under the watchful eye of his overly cautious family.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:illustrate#e-5a16182b1b92a751",
+          "text": "If your child was literate, one of the 20 volumes of the Oxford English Dictionary or an illustrated Collins was the surest way to keep them happily occupied, setting them off on hunts for lost or forgotten words.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 100
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "照亮、使增光",
+      "reason": "过时用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

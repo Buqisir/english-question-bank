@@ -1,0 +1,157 @@
+{
+  "entryId": "w:horse",
+  "headword": "horse",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/hɔːs/",
+    "us": "/hɔːrs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:horse#p-main",
+      "ipa": {
+        "uk": "/hɔːs/",
+        "us": "/hɔːrs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "horses",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 50
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 50
+  },
+  "senses": [
+    {
+      "senseId": "w:horse#s1",
+      "pos": "n.",
+      "glossZh": "马",
+      "pronunciationId": "w:horse#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:horse#e-e092a5d117806cd4",
+          "text": "Years of experience in the industry - and failed attempts to use technology - have convinced him that the best way to check cattle is with a man on a horse.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 150,
+            "end": 155
+          }
+        },
+        {
+          "exampleId": "w:horse#e-d896f2aadbd6c61e",
+          "text": "Paul Revere was a silversmith（银匠）in Boston who rode a horse at night on April 18,1775 to Lexington to warn people that British soldiers were coming.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:horse#e-1b1fdeff3aa88021",
+          "text": "And Priscilla Dewing reports that her horse, Nappy, “moves more easily and rides more comfortably” after a chiropractic adjustment.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:horse#s2",
+      "pos": "短语",
+      "glossZh": "本末倒置",
+      "pronunciationId": "w:horse#p-main",
+      "note": "put the cart before the horse。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:horse#s3",
+      "pos": "短语",
+      "glossZh": "胡闹；嬉闹",
+      "pronunciationId": "w:horse#p-main",
+      "note": "horse around。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "骑兵单位、夹石或海洛因",
+      "reason": "历史、行业或俚语专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

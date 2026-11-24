@@ -1,0 +1,169 @@
+{
+  "entryId": "w:ultimately",
+  "headword": "ultimately",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈʌltɪmətli/",
+    "us": "/ˈʌltɪmətli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ultimately#p-main",
+      "ipa": {
+        "uk": "/ˈʌltɪmətli/",
+        "us": "/ˈʌltɪmətli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 83
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 80
+  },
+  "senses": [
+    {
+      "senseId": "w:ultimately#s1",
+      "pos": "adv.",
+      "glossZh": "最终",
+      "pronunciationId": "w:ultimately#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ultimately#e-0deb1517a36e21ea",
+          "text": "Such a complex but ultimately enriching set of encounters helps individuals know their neighbors and neighbourhood better.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:ultimately#e-6815b0b4311950e8",
+          "text": "In reality, what we call multitasking is often rapid task-switching, which divides attention, reduces focus, and ultimately leads to lower-quality results.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 113,
+            "end": 123
+          }
+        },
+        {
+          "exampleId": "w:ultimately#e-78dac9dad6bcb976",
+          "text": "Through the training of horses, Grant Golliher helps humans gain a deeper understanding of themselves, get along well with others, find their proper place in society and nature, and ultimately become a better version of themselves.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 182,
+            "end": 192
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ultimately#s2",
+      "pos": "adv.",
+      "glossZh": "归根结底",
+      "pronunciationId": "w:ultimately#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ultimately#e-dbfd422445ba8432",
+          "text": "And it wasn’t, ultimately, the dictionary that got me there – not really.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:4",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:ultimately#e-52e52121e5f484ad",
+          "text": "Its effectiveness ultimately depends on both teachers and learners.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 28
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

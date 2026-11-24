@@ -1,0 +1,129 @@
+{
+  "entryId": "w:mom",
+  "headword": "mom",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/mɒm/",
+    "us": "/mɑːm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:mom#p-main",
+      "ipa": {
+        "uk": "/mɒm/",
+        "us": "/mɑːm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "moms",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 156
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:mom#s1",
+      "pos": "n.",
+      "glossZh": "妈妈",
+      "pronunciationId": "w:mom#p-main",
+      "note": "美式常用；英式通常写 mum。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 156
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:mom#e-47ae872902250a84",
+          "text": "“I have an idea, but it might be a little crazy,” smiled Mom.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:mom#e-be5e45d913c53fb9",
+          "text": "All of us were hard at work at the kitchen table, with my mom filming the annual event.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:mom#e-243033e3baea74c3",
+          "text": "After a while, he looked at me and asked, “Do you know all these words, Mom?”",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 75
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "环比；市场中端；消息中间件",
+      "reason": "同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

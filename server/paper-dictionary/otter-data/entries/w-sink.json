@@ -1,0 +1,407 @@
+{
+  "entryId": "w:sink",
+  "headword": "sink",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/sɪŋk/",
+    "us": "/sɪŋk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:sink#p-main",
+      "ipa": {
+        "uk": "/sɪŋk/",
+        "us": "/sɪŋk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "sinks",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "sank",
+      "tags": [
+        "past"
+      ]
+    },
+    {
+      "form": "sinking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "sunk",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 91
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 85
+  },
+  "senses": [
+    {
+      "senseId": "w:sink#s1",
+      "pos": "v.",
+      "glossZh": "沉没",
+      "pronunciationId": "w:sink#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sink#e-11b49409c4acfe9f",
+          "text": "In this book, he includes the loss of the space shuttles (航天飞机) Challenger and Columbia, and the sinking of the Titanic.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 104
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sink#s2",
+      "pos": "n.",
+      "glossZh": "水槽",
+      "pronunciationId": "w:sink#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sink#e-9755ffaab0dcd964",
+          "text": "Jenna threw the burnt piece into the sink and put in the other slice of bread.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 10
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:sink#e-d66a16d6071d608b",
+          "text": "Suddenly she recalled how he’d taught her to develop film in the bathroom sink as a kid – now, she knew what she should do.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 78
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sink#s3",
+      "pos": "v.",
+      "glossZh": "下沉",
+      "pronunciationId": "w:sink#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sink#e-ce6ea1aa54be6fe9",
+          "text": "The sun was beginning to sink as I set off into the Harenna Forest.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:sink#e-62a565c22d1e4822",
+          "text": "In winter, the zooplankton sink about 1,600 feet below the ocean surface and slowly breathe out the carbon dioxide from the phytoplankton they have eaten, releasing it into the water.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sink#s4",
+      "pos": "短语",
+      "glossZh": "突然感到失落",
+      "pronunciationId": "w:sink#p-main",
+      "note": "one’s heart sinks。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sink#e-f6d6c30371f90f0a",
+          "text": "But one day when I heard her saying “I think I’m too fat,” my heart sank.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:sink#e-6042ee3ddffc4b45",
+          "text": "On Ethan’s birthday, Lily’s heart sank when she suddenly forgot where she had exactly put the gift and failed to find it.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sink#s5",
+      "pos": "短语",
+      "glossZh": "渐渐被理解",
+      "pronunciationId": "w:sink#p-main",
+      "note": "sink in。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sink#e-e84a42eb263d3b96",
+          "text": "Progress can be slow, and you’ll wonder if it’s all sinking in.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-ii:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 59
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sink#s6",
+      "pos": "v.",
+      "glossZh": "（身体）下坐",
+      "pronunciationId": "w:sink#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sink#e-4a8f6cec2ff29e4d",
+          "text": "Discouraged, I laid my bike aside, and sank down under a tree with a heavy sigh.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:sink#e-2bb4eb0386e3a659",
+          "text": "On boarding the bus, Frank sank himself into the seat while his mind remained trapped outside the locker room.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sink#s7",
+      "pos": "v.",
+      "glossZh": "投入大量资金",
+      "pronunciationId": "w:sink#p-main",
+      "note": "sink money into something。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:sink#s8",
+      "pos": "n.",
+      "glossZh": "吸收并储存某物的地方",
+      "pronunciationId": "w:sink#p-main",
+      "note": "carbon sink 指吸收并储存二氧化碳的自然系统等。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sink#e-ce9f6bc918da8bae",
+          "text": "Tropical Forests: Global Carbon Sinks",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-fujian-fuzhou-2026-03-quality-test:35",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 37
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "挥霍饮酒、隐瞒、印版凹痕、舞台暗门和游戏资源消耗机制",
+      "reason": "罕见的历史义或专业义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

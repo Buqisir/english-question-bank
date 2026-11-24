@@ -1,0 +1,130 @@
+{
+  "entryId": "w:successful",
+  "headword": "successful",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/səkˈsesfl/",
+    "us": "/səkˈsesfl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:successful#p-main",
+      "ipa": {
+        "uk": "/səkˈsesfl/",
+        "us": "/səkˈsesfl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more successful",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most successful",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 67
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:successful#s1",
+      "pos": "adj.",
+      "glossZh": "成功的",
+      "pronunciationId": "w:successful#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 19,
+        "mock": 67
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:successful#e-55e144d052dd5255",
+          "text": "Even the most successful public speaker will make mistakes.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:successful#e-910a2cb11ab594e1",
+          "text": "Little wonder the Federal Duck Stamp Program has been called one of the most successful conservation programs ever initiated.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 87
+          }
+        },
+        {
+          "exampleId": "w:successful#e-69e61c3c43d82f38",
+          "text": "Today, there are about 2,000 or more grizzly bears in the U.S. Their recovery has been so successful that the U.S. Fish and Wildlife Service has twice attempted to delist grizzlies, which would loosen legal protections and allow them to be hunted.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 100
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

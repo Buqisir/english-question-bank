@@ -1,0 +1,161 @@
+{
+  "entryId": "w:jaw",
+  "headword": "jaw",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dʒɔː/",
+    "us": "/dʒɔː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:jaw#p-main",
+      "ipa": {
+        "uk": "/dʒɔː/",
+        "us": "/dʒɔː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "jaws",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:jaw#s1",
+      "pos": "n.",
+      "glossZh": "颌骨",
+      "pronunciationId": "w:jaw#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:jaw#e-9ef7ccf2eaf3e71d",
+          "text": "Later, our jaws changed to an overbite structure (结构), making it easier to produce such sounds.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "reading-d-3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:jaw#e-48f71dfe6c51d6a0",
+          "text": "Sweat ran down Jake’s forehead, his eyes fixed on the basket, jaw set tight.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:jaw#s2",
+      "pos": "n.",
+      "glossZh": "下颌部",
+      "pronunciationId": "w:jaw#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:jaw#e-ff3ef6d6da91a03f",
+          "text": "Jack’s jaw tightened.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:jaw#s3",
+      "pos": "n.",
+      "glossZh": "夹爪；钳口",
+      "pronunciationId": "w:jaw#p-main",
+      "note": "常用复数 jaws。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "《大白鲨》",
+      "reason": "电影标题，m2 留空"
+    },
+    {
+      "glossZh": "帆杆支承部、台球袋口",
+      "reason": "行业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

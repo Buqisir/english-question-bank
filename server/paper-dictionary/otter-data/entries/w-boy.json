@@ -1,0 +1,219 @@
+{
+  "entryId": "w:boy",
+  "headword": "boy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bɔɪ/",
+    "us": "/bɔɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:boy#p-main",
+      "ipa": {
+        "uk": "/bɔɪ/",
+        "us": "/bɔɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "boys",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "boyz",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 32,
+    "mock": 175
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 175
+  },
+  "senses": [
+    {
+      "senseId": "w:boy#s1",
+      "pos": "n.",
+      "glossZh": "男孩；小伙子",
+      "pronunciationId": "w:boy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 28,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:boy#e-762e12c814e31f8d",
+          "text": "Higher-income parents tended to have children play with puzzles more frequently, and both boys and girls who played with puzzles had better spatial skills.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 94
+          }
+        },
+        {
+          "exampleId": "w:boy#e-f2ef6b5e85e62203",
+          "text": "His parents had raised the 12-year-old to be a good boy.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:boy#e-a445d47cde20bf69",
+          "text": "Having milked cows as a boy and worked with beef cattle, I knew – so I thought – all about cows.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:boy#s2",
+      "pos": "n.",
+      "glossZh": "儿子",
+      "pronunciationId": "w:boy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:boy#e-edd46709dc807d6a",
+          "text": "There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:boy#e-410045a9a0cccca4",
+          "text": "I was __43__ that our 15-month-old boy would fall into the creek (小溪).",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "cloze-2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:boy#e-e19b2e2f7ccdfa27",
+          "text": "Though friendly, he could easily knock over my niece’s small boys and my six-month-old granddaughter.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:boy#s3",
+      "pos": "感叹词",
+      "glossZh": "哎呀；嗬（表示惊讶、激动等）",
+      "pronunciationId": "w:boy#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "男仆、旧军阶、海洛因、侮辱性称呼等",
+      "reason": "旧义、俚语或冒犯义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

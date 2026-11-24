@@ -1,0 +1,148 @@
+{
+  "entryId": "w:impossible",
+  "headword": "impossible",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪmˈpɒsəbl/",
+    "us": "/ɪmˈpɑːsəbl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:impossible#p-main",
+      "ipa": {
+        "uk": "/ɪmˈpɒsəbl/",
+        "us": "/ɪmˈpɑːsəbl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more impossible",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most impossible",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 58
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 58
+  },
+  "senses": [
+    {
+      "senseId": "w:impossible#s1",
+      "pos": "adj.",
+      "glossZh": "不可能的；无法做到的",
+      "pronunciationId": "w:impossible#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:impossible#e-3d76400fa8adb03c",
+          "text": "Magic is a form of entertainment that is based on pretending to do things that are impossible.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:impossible#e-750f16e5e454a2bd",
+          "text": "He remembered landmarks, but since he didn’t know his town’s name, finding a small neighborhood in a vast country proved to be impossible.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 127,
+            "end": 137
+          }
+        },
+        {
+          "exampleId": "w:impossible#e-fda3e6cf75353001",
+          "text": "The blinding whiteout made driving nearly impossible.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 52
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:impossible#s2",
+      "pos": "adj.",
+      "glossZh": "难以相处的（人）",
+      "pronunciationId": "w:impossible#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "滑板动作、虚数",
+      "reason": "专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

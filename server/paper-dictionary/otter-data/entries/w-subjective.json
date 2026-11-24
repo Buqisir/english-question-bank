@@ -1,0 +1,135 @@
+{
+  "entryId": "w:subjective",
+  "headword": "subjective",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/səbˈdʒektɪv/",
+    "us": "/səbˈdʒektɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:subjective#p-main",
+      "ipa": {
+        "uk": "/səbˈdʒektɪv/",
+        "us": "/səbˈdʒektɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more subjective",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most subjective",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:subjective#s1",
+      "pos": "adj.",
+      "glossZh": "主观的",
+      "pronunciationId": "w:subjective#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 14
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:subjective#e-b4920d450823eb8c",
+          "text": "Art is subjective, which is why people have different interpretations or feel different emotions when looking at a piece of art.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:subjective#e-92128d2c0146fadc",
+          "text": "It is developed through continuous learning, actively seeking constructive criticism, and, most crucially, by grounding self-assessment in measurable standards, such as test scores, recorded progress, or expert feedback, rather than merely relying on subjective feelings.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-04-second",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-2026-04-second:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-2026-04-second:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 251,
+            "end": 261
+          }
+        },
+        {
+          "exampleId": "w:subjective#e-9dc8d268c0c25275",
+          "text": "The findings match up with the results of previous many-analyst studies, and show “the powerful role of subjective researcher choices in scientific projects,” says Eric Uhlmann, an organizational psychologist.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 114
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "主格、荣格心理类型",
+      "reason": "语法或心理学专义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,231 @@
+{
+  "entryId": "w:opinion",
+  "headword": "opinion",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈpɪnjən/",
+    "us": "/əˈpɪnjən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:opinion#p-main",
+      "ipa": {
+        "uk": "/əˈpɪnjən/",
+        "us": "/əˈpɪnjən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "opinions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 81
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 80
+  },
+  "senses": [
+    {
+      "senseId": "w:opinion#s1",
+      "pos": "n.",
+      "glossZh": "意见；看法",
+      "pronunciationId": "w:opinion#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:opinion#e-4406426883236c71",
+          "text": "Designer Jennifer Anderson admits it took her a while to come around to the opinion that using nutria fur for her creations is morally acceptable.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:opinion#e-a28df08c735e519d",
+          "text": "What is Trost’s opinion about BART’s future?",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2024-ii:27",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:opinion#e-82ada0cbd1d02006",
+          "text": "As a result, students are more likely to accept statements such as “I think people can have different opinions about the same thing”.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 110
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:opinion#s2",
+      "pos": "n.",
+      "glossZh": "专业意见",
+      "pronunciationId": "w:opinion#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:opinion#e-2e4da66206758b05",
+          "text": "Reconsider expert opinions about it.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2024-ii:34",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:opinion#e-d0f195f0ddeff48c",
+          "text": "The value of professional opinions.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2025-ii:30",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:opinion#s3",
+      "pos": "短语",
+      "glossZh": "在我看来",
+      "pronunciationId": "w:opinion#p-main",
+      "note": "in my opinion。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:opinion#e-a52d2fa99ff6e840",
+          "text": "In my opinion, where in trouble, we should seek help from those we trust mostly.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2021-national-a:writing-short-error-correction:8",
+              "sentence": 9
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:opinion#e-9e16a6f9ad6682ed",
+          "text": "In my opinion, students can benefit a lot doing some housework.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-national-b:writing-short-error-correction:9",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 13
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

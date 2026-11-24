@@ -1,0 +1,336 @@
+{
+  "entryId": "w:simple",
+  "headword": "simple",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsɪmpl/",
+    "us": "/ˈsɪmpl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:simple#p-main",
+      "ipa": {
+        "uk": "/ˈsɪmpl/",
+        "us": "/ˈsɪmpl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more simple",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most simple",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "simpler",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "simplest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 42,
+    "mock": 417
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 415
+  },
+  "senses": [
+    {
+      "senseId": "w:simple#s1",
+      "pos": "adj.",
+      "glossZh": "容易的",
+      "pronunciationId": "w:simple#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:simple#e-645d827ffa4d64d0",
+          "text": "The good news is that it’s simple to learn and can be worth the effort.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:simple#e-1e56ed21ec0a0036",
+          "text": "It had simple words and colorful pictures – a perfect match for his age.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:simple#e-39357f4de64cdc06",
+          "text": "The benefits of print reading particularly shine through when experimenters move from posing simple tasks – like identifying the main idea in a reading passage – to ones that require mental abstraction – such as drawing inferences from a text.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 99
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:simple#s2",
+      "pos": "adj.",
+      "glossZh": "不复杂的",
+      "pronunciationId": "w:simple#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 22,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:simple#e-f0a093c43eb815a0",
+          "text": "Carson uses a simple, direct style common to fable.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-a:grammar-fill:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:simple#e-bb180500b050ee31",
+          "text": "Eschewing fertilizers（化肥）and power tools, it’s based on an elegantly simple principle: to garden more like nature does.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:simple#e-b325a89d9c15f4b2",
+          "text": "Keeping your message simple and clear will make it easier for people to understand.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:simple#s3",
+      "pos": "adj.",
+      "glossZh": "朴素的",
+      "pronunciationId": "w:simple#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:simple#e-b4c10d655c35c417",
+          "text": "Advocating a simple digital lifestyle.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2023-i:28",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:simple#e-b5e9ed611dc5b854",
+          "text": "Her simple blue dress looked old but was neatly ironed.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:simple#s4",
+      "pos": "adj.",
+      "glossZh": "纯粹的",
+      "pronunciationId": "w:simple#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:simple#e-7e7594cab09f5aee",
+          "text": "As a writer says, future geniuses come from those with “intelligence, creativity, perseverance(毅力), and simple good fortune, who are able to change the world.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:simple#e-ecfd53e30d4dc574",
+          "text": "Our idea was to forget about sensing altogether and replace it with the simple act of taking repeated steps.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 78
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:simple#s5",
+      "pos": "adj.",
+      "glossZh": "头脑简单的",
+      "pronunciationId": "w:simple#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "单方草药、织机及其部件、原子命题",
+      "reason": "旧义或专业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,246 @@
+{
+  "entryId": "w:dish",
+  "headword": "dish",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪʃ/",
+    "us": "/dɪʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dish#p-main",
+      "ipa": {
+        "uk": "/dɪʃ/",
+        "us": "/dɪʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "dishes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "dished",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "dishing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 16,
+    "mock": 130
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 130
+  },
+  "senses": [
+    {
+      "senseId": "w:dish#s1",
+      "pos": "n.",
+      "glossZh": "盘；碟；餐具",
+      "pronunciationId": "w:dish#p-main",
+      "note": "do the dishes 指「洗餐具」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dish#e-b43460881bed4873",
+          "text": "Things like dishes, clothes and furniture fall into the “secondary footprint” group, so less is more and we can focus on finding used goods to avoid the added production.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:dish#e-e12733893d3b3ed2",
+          "text": "While the adults were busy with their serious talk outside, I was left alone in the __41__ to help my grandmother wash dishes.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 119,
+            "end": 125
+          }
+        },
+        {
+          "exampleId": "w:dish#e-8c4a861d89a1cb31",
+          "text": "Help their parents do the dishes.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:26",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dish#s2",
+      "pos": "n.",
+      "glossZh": "一道菜；菜肴",
+      "pronunciationId": "w:dish#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dish#e-29d8fb3661c4533a",
+          "text": "“Everyone can play a part in reducing waste, whether by not purchasing more food than necessary in your weekly shopping or by asking restaurants to not include the side dish you won’t eat,” Curtin says.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "reading-b-5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 169,
+            "end": 173
+          }
+        },
+        {
+          "exampleId": "w:dish#e-02aa6d8e751b75a7",
+          "text": "Serving hard-to-find Thai dishes in an elegant atmosphere, the restaurant is true to Thai cuisine’s roots, yet still manages to add a special twist.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:dish#e-02e314a9c3796a28",
+          "text": "Sometimes she prepares traditional Brazilian dishes __48__ her native home; other times she __49__ dinner courses with her favorite beers.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dish#s3",
+      "pos": "n.",
+      "glossZh": "碟形天线",
+      "pronunciationId": "w:dish#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:dish#s4",
+      "pos": "v.",
+      "glossZh": "把食物装盘；盛出",
+      "pronunciationId": "w:dish#p-main",
+      "note": "常用 dish up。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "矿石计量槽、矿主份额、本垒；八卦用法",
+      "reason": "专门用法或俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

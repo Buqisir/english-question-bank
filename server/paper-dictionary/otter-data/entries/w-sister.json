@@ -1,0 +1,209 @@
+{
+  "entryId": "w:sister",
+  "headword": "sister",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsɪstə(r)/",
+    "us": "/ˈsɪstər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:sister#p-main",
+      "ipa": {
+        "uk": "/ˈsɪstə(r)/",
+        "us": "/ˈsɪstər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "sisters",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Sisters",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 17,
+    "mock": 101
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 100
+  },
+  "senses": [
+    {
+      "senseId": "w:sister#s1",
+      "pos": "n.",
+      "glossZh": "姐妹",
+      "pronunciationId": "w:sister#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sister#e-e9aeaa0d34ef8a48",
+          "text": "After graduation, she worked to help her sisters and brothers pay for their schooling.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:sister#e-5fe049b10ca89169",
+          "text": "In the pumpkin field, I compete with my three brothers and sister to seek out the biggest pumpkin.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:sister#e-3a9de735b3ce249d",
+          "text": "I asked my older sister to correct my grammar.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:5",
+              "sentence": 16
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sister#s2",
+      "pos": "n.",
+      "glossZh": "修女",
+      "pronunciationId": "w:sister#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:sister#s3",
+      "pos": "n.",
+      "glossZh": "护士长",
+      "pronunciationId": "w:sister#p-main",
+      "note": "英国用语。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:sister#s4",
+      "pos": "n.",
+      "glossZh": "情同姐妹的女性",
+      "pronunciationId": "w:sister#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sister#e-7070778f1b5123da",
+          "text": "He planted over 2,000 trees and formed a deep bond with Yuzhen, calling her his “sister”.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 87
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sister#s5",
+      "pos": "adj.",
+      "glossZh": "有姊妹关系的",
+      "pronunciationId": "w:sister#p-main",
+      "note": "如 sister city。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "蝴蝶、同时生成的龙卷风、同父节点、加梁加固",
+      "reason": "生物、气象、计算机或建筑专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

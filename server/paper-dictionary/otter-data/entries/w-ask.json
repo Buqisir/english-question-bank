@@ -1,0 +1,295 @@
+{
+  "entryId": "w:ask",
+  "headword": "ask",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɑːsk/",
+    "us": "/æsk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ask#p-main",
+      "ipa": {
+        "uk": "/ɑːsk/",
+        "us": "/æsk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "asks",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "aks",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "aksed",
+      "tags": [
+        "past",
+        "singular",
+        "third-person",
+        "plural",
+        "participle"
+      ]
+    },
+    {
+      "form": "akses",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "aksing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "asked",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "asking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 139,
+    "mock": 787
+  },
+  "unassignedCounts": {
+    "gaokao": 6,
+    "mock": 787
+  },
+  "senses": [
+    {
+      "senseId": "w:ask#s1",
+      "pos": "v.",
+      "glossZh": "问；询问；提问",
+      "pronunciationId": "w:ask#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 49,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ask#e-fd4e2d14d960841a",
+          "text": "Do not be afraid to ask your doctor any questions you have.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:ask#e-a4fae99ab19a55d4",
+          "text": "I asked the little girl where they lived.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:ask#e-c2907ab31aafc0a7",
+          "text": "When you state your position, formulate（阐述）an argument for what you claim and honestly ask yourself whether your argument is any good.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 90
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ask#s2",
+      "pos": "v.",
+      "glossZh": "请求；索要；要求",
+      "pronunciationId": "w:ask#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 84,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ask#e-b8a08870f6c4ee58",
+          "text": "Sometimes, students would ask me to describe all the things I had in it.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:ask#e-4f3db0048b94d276",
+          "text": "I’m writing to ask for your help.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-application",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-application:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:ask#e-46d9dfd2b6cc9c89",
+          "text": "Ask for a receipt.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 3
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ask#s3",
+      "pos": "v.",
+      "glossZh": "邀请",
+      "pronunciationId": "w:ask#p-main",
+      "note": "ask sb to dinner；ask sb out。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ask#s4",
+      "pos": "v.",
+      "glossZh": "要价",
+      "pronunciationId": "w:ask#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ask#s5",
+      "pos": "n.",
+      "glossZh": "请求；要求",
+      "pronunciationId": "w:ask#p-main",
+      "note": "口语，如 a big ask。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "蝾螈、北欧神话人名及振幅移键控",
+      "reason": "方言、专名或专业缩写。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

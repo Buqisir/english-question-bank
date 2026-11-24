@@ -1,0 +1,302 @@
+{
+  "entryId": "w:action",
+  "headword": "action",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈækʃn/",
+    "us": "/ˈækʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:action#p-main",
+      "ipa": {
+        "uk": "/ˈækʃn/",
+        "us": "/ˈækʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "actions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 227
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 226
+  },
+  "senses": [
+    {
+      "senseId": "w:action#s1",
+      "pos": "n.",
+      "glossZh": "行动；采取的办法或措施",
+      "note": "take action 指「采取行动」；put sth into action 指「把……付诸实践」。",
+      "pronunciationId": "w:action#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:action#e-0937f170be4be7e4",
+          "text": "In 1934, with the passage of the Migratory Bird Hunting Stamp Act (Act), an increasingly concerned nation took firm action to stop the destruction of migratory (迁徙的) waterfowl and the wetlands so vital to their survival.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 116,
+            "end": 122
+          }
+        },
+        {
+          "exampleId": "w:action#e-ff1a2701b51bc8d1",
+          "text": "She moved to Tunisia, and set up a programme named Acacias for All to put her sustainable farming philosophy into action.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 120
+          }
+        },
+        {
+          "exampleId": "w:action#e-71ac32da4b8c2593",
+          "text": "Given the astonishing potential of AI to transform our lives, we all need to take action to deal with our AI-powered future, and this is where AI by Design: A Plan for Living with Artificial Intelligence comes in.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:action#s2",
+      "pos": "n.",
+      "glossZh": "动作；举动；正在进行的事情",
+      "note": "in action 表示「在行动中；在运作中」。",
+      "pronunciationId": "w:action#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:action#e-e9dde1b6bfbdddbf",
+          "text": "\"The vagueness of the gesture meanings suggests either that the chimps have little to communicate, or we are still missing a lot of the information contained in their gestures and actions,\" she said.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 180,
+            "end": 187
+          }
+        },
+        {
+          "exampleId": "w:action#e-aca6425d82f86aa8",
+          "text": "The best table in this two-story colonial Thai home offers a window right into the kitchen, where you can see chef Gaggan and his staff in action.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 139,
+            "end": 145
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:action#s3",
+      "pos": "n.",
+      "glossZh": "情节；表演中的动作；刺激的场面",
+      "pronunciationId": "w:action#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:action#e-c508d48a40e84c8c",
+          "text": "Each play has a theme or central idea which the playwright(剧作家) hopes to get across through dialogue and action.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:action#e-4e18a476fb3a159d",
+          "text": "The curtains are about to open, and in a few minutes the action and dialogue will tell you the story.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:action#e-47e282dd69d5e203",
+          "text": "An action movie.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:action#s4",
+      "pos": "n.",
+      "glossZh": "（机械等的）运作；作用",
+      "pronunciationId": "w:action#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:action#e-5099a2d897043763",
+          "text": "They consist of an electric motor which collects energy used in the braking action that would be lost as heat by conventional brakes.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 82
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:action#s5",
+      "pos": "n.",
+      "glossZh": "诉讼；法律行动",
+      "note": "常见于 take legal action。",
+      "pronunciationId": "w:action#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "物理作用量；键盘乐器击弦机构；保龄球旋转",
+      "reason": "专业细义"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

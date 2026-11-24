@@ -1,0 +1,362 @@
+{
+  "entryId": "w:star",
+  "headword": "star",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/stɑː(r)/",
+    "us": "/stɑːr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:star#p-main",
+      "ipa": {
+        "uk": "/stɑː(r)/",
+        "us": "/stɑːr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "stars",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "starred",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "starring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 78
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 77
+  },
+  "senses": [
+    {
+      "senseId": "w:star#s1",
+      "pos": "n.",
+      "glossZh": "星星",
+      "pronunciationId": "w:star#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:star#e-9137032295745e85",
+          "text": "Walk 3 - Moonlight Under the Stars",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:13",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:star#e-fd83eac230953b9c",
+          "text": "His curiosity about the stars.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:star#e-c3121e658d12d63c",
+          "text": "The night sky had __54__ into a deep blue, decorated with countless stars and a silvery moon.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:star#s2",
+      "pos": "n.",
+      "glossZh": "明星",
+      "pronunciationId": "w:star#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:star#e-382117a4adbe9fbd",
+          "text": "The project results from the difficulties many schools have in getting artists of any sort - whether an up-and-coming local musician or a major movie star - into schools to work with and inspire children.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 150,
+            "end": 154
+          }
+        },
+        {
+          "exampleId": "w:star#e-7bdc40d82a221a2a",
+          "text": "Anyway, grandpa is now an internet star – two minutes of fame!",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:star#e-43d855a60dad6bf9",
+          "text": "He is a star actor of Children’s Theatre, having played leading roles in “The Legend of Sleepy Hollow” and “The Wizard of Oz,” and is fresh from Jersey Production “Ragtime.”",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:star#s3",
+      "pos": "n.",
+      "glossZh": "给人希望的人",
+      "pronunciationId": "w:star#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:star#e-927a2130b8d47b1b",
+          "text": "Leslie Nielsen’s childhood was a difficult one, but he had one particular shining star in his life – his uncle, who was a well-known actor.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 86
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:star#s4",
+      "pos": "n.",
+      "glossZh": "星形",
+      "pronunciationId": "w:star#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:star#e-9ed0d8a5d54f0285",
+          "text": "He asked the father to look only in the mirror and __47__ the lines of the star with the pencil.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:star#s5",
+      "pos": "n.",
+      "glossZh": "等级评定中的星级",
+      "pronunciationId": "w:star#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:star#e-fb6f719729df25da",
+          "text": "That’s when things went __49__ “I remember walking down the long __50__ and opening the door to my room to find an entire flock of seagulls,” Burchill said in a recent letter of __51__ to the 4-star hotel.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 194,
+            "end": 198
+          }
+        },
+        {
+          "exampleId": "w:star#e-1a8003e430e298dc",
+          "text": "Head Chef David Thompson, who received a Michelin star for his London-based Thai restaurant of the same name, opened this branch in the Metropolitan Hotel in 2010.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:star#s6",
+      "pos": "v.",
+      "glossZh": "主演",
+      "pronunciationId": "w:star#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:star#s7",
+      "pos": "v.",
+      "glossZh": "用星号标记",
+      "pronunciationId": "w:star#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "各地地名、机构缩写及星状爆炸物",
+      "reason": "专名、缩写或专业义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

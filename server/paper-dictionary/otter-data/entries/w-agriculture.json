@@ -1,0 +1,124 @@
+{
+  "entryId": "w:agriculture",
+  "headword": "agriculture",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈæɡrɪkʌltʃə(r)/",
+    "us": "/ˈæɡrɪkʌltʃər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:agriculture#p-main",
+      "ipa": {
+        "uk": "/ˈæɡrɪkʌltʃə(r)/",
+        "us": "/ˈæɡrɪkʌltʃər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "agricultures",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 41
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:agriculture#s1",
+      "pos": "n.",
+      "glossZh": "农业；农耕",
+      "pronunciationId": "w:agriculture#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 41
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:agriculture#e-672a5e3fe1f189d9",
+          "text": "The team showed that this change in bite was connected with the development of agriculture in the Neolithic period.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "reading-d-4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:agriculture#e-aca7b21d3bbe7bda",
+          "text": "After studying agriculture, medicine, and fisheries in college, John went back to observing nature and asking questions.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:agriculture#e-7397808ac4c5e660",
+          "text": "Scientists from the University of Leeds launched the largest and longest experiment ever designed to examine how nutrients shape forest regrowth in tropical areas cleared for agriculture.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 175,
+            "end": 186
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

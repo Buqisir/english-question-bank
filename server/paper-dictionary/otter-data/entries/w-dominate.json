@@ -1,0 +1,178 @@
+{
+  "entryId": "w:dominate",
+  "headword": "dominate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdɒmɪneɪt/",
+    "us": "/ˈdɑːmɪneɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dominate#p-main",
+      "ipa": {
+        "uk": "/ˈdɒmɪneɪt/",
+        "us": "/ˈdɑːmɪneɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "dominated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "dominates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "dominating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 28
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 24
+  },
+  "senses": [
+    {
+      "senseId": "w:dominate#s1",
+      "pos": "v.",
+      "glossZh": "支配；主宰；占主导地位",
+      "pronunciationId": "w:dominate#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dominate#e-b4a3185a787eea2f",
+          "text": "Laboratory data suggest that at – 30°C, this battery can deliver nearly three times the discharge power of equivalent lithium iron phosphate (LFP) batteries, the cheap, standard-range batteries that dominate the EV market.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 199,
+            "end": 207
+          }
+        },
+        {
+          "exampleId": "w:dominate#e-a17f17a948ea3ff6",
+          "text": "He recognized this reflected a common human tendency to dominate rather than coexist with nature.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:dominate#e-5e112bb57ea39b5c",
+          "text": "In an era when screens dominate our daily lives, digital eye strain has emerged as a significant public health issue affecting millions worldwide.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dominate#s2",
+      "pos": "v.",
+      "glossZh": "高耸于；俯视",
+      "pronunciationId": "w:dominate#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dominate#e-05d4e97e3b8adf25",
+          "text": "This flashy postmodern tower dominates the Thames, mixing ocean liner elegance and old storehouse solidity while taking inspiration from local marine history.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 38
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "罗马帝国后期的专制时期；支配后续节点",
+      "reason": "历史或图论专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,285 @@
+{
+  "entryId": "w:regret",
+  "headword": "regret",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈɡret/",
+    "us": "/rɪˈɡret/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:regret#p-main",
+      "ipa": {
+        "uk": "/rɪˈɡret/",
+        "us": "/rɪˈɡret/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "regrets",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "regretted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "regretting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 69
+  },
+  "unassignedCounts": {
+    "gaokao": 7,
+    "mock": 63
+  },
+  "senses": [
+    {
+      "senseId": "w:regret#s1",
+      "pos": "n.",
+      "glossZh": "懊悔",
+      "pronunciationId": "w:regret#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:regret#e-69803b93f6997431",
+          "text": "The end result is a read in which we learn to wonder like Socrates, see like Thoreau, listen like Schopenhauer, and have no regrets like Nietzsche.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 124,
+            "end": 131
+          }
+        },
+        {
+          "exampleId": "w:regret#e-6b0fdbddc7a45ee2",
+          "text": "Although I __42__ recovered and achieved a decent result, the regret remained: what if I hadn’t __43__?",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-04-second:cloze:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:regret#e-1f29163108c9f506",
+          "text": "Instead of getting lost in regret, it’s crucial to learn how to heal and grow from those experiences.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:regret#s2",
+      "pos": "n.",
+      "glossZh": "遗憾",
+      "pronunciationId": "w:regret#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:regret#e-6281d56bea73ea97",
+          "text": "To express his regret.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:regret#e-e590a85603e78431",
+          "text": "Also, let yourself feel all your emotions, whether it’s a little embarrassment or a lot of regret.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 97
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:regret#s3",
+      "pos": "v.",
+      "glossZh": "为做过的事而后悔",
+      "pronunciationId": "w:regret#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:regret#e-ccb34f1041c32f80",
+          "text": "Occasionally, it explodes, and I say things I regret.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:regret#e-2d4c3950747b9fe0",
+          "text": "Let us remember that advertisers are well aware of the way our minds work, and they can easily make us purchase what we may later regret buying.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 130,
+            "end": 136
+          }
+        },
+        {
+          "exampleId": "w:regret#e-eb17a382a2f547e1",
+          "text": "The adoptive parents regretted having adopted Jane.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:25",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:regret#s4",
+      "pos": "v.",
+      "glossZh": "遗憾地告知",
+      "pronunciationId": "w:regret#p-main",
+      "note": "I regret to inform you … 是正式表达。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "错误选择造成的可避免损失",
+      "reason": "决策理论术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

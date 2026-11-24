@@ -1,0 +1,143 @@
+{
+  "entryId": "w:violence",
+  "headword": "violence",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈvaɪələns/",
+    "us": "/ˈvaɪələns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:violence#p-main",
+      "ipa": {
+        "uk": "/ˈvaɪələns/",
+        "us": "/ˈvaɪələns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "violences",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "senses": [
+    {
+      "senseId": "w:violence#s1",
+      "pos": "n.",
+      "glossZh": "暴力",
+      "pronunciationId": "w:violence#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:violence#e-b59f7de1db7dd594",
+          "text": "What follows is a raw, immersive journey into the chaos of war: endless shifts in overcrowded field hospitals, limited supplies, and the constant threat of violence.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 156,
+            "end": 164
+          }
+        },
+        {
+          "exampleId": "w:violence#e-5d6e79df96dda0f8",
+          "text": "They repeatedly encountered discrimination and racial violence, such as fistfights with white players and fans.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:violence#e-21895a71907e1005",
+          "text": "It’s a symbol of power, ambition as well as creativity, independence and peace – things the movie’s main character, Celie, does not have due to years of abuse, family violence and racism.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 167,
+            "end": 175
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:violence#s2",
+      "pos": "n.",
+      "glossZh": "猛烈的力量",
+      "pronunciationId": "w:violence#p-main",
+      "note": "如 the violence of the storm。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "歪曲原意、作为动词",
+      "reason": "罕见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

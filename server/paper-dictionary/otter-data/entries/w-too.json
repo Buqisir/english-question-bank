@@ -1,0 +1,194 @@
+{
+  "entryId": "w:too",
+  "headword": "too",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tuː/",
+    "us": "/tuː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:too#p-main",
+      "ipa": {
+        "uk": "/tuː/",
+        "us": "/tuː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 89,
+    "mock": 594
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 594
+  },
+  "senses": [
+    {
+      "senseId": "w:too#s1",
+      "pos": "adv.",
+      "glossZh": "也",
+      "pronunciationId": "w:too#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 23,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:too#e-1859113c75ade86f",
+          "text": "When Mrs. Meredith heard of John's idea, she thought it was a good one, too.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:given-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:too#e-01dd0041b1ac6d63",
+          "text": "Cheese brine has a downside too: a smell similar to that of bad milk.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:too#e-3d63bed720f38fe9",
+          "text": "Some of my friends had signed up to spend time at a soup kitchen, so I did, too.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:too#s2",
+      "pos": "adv.",
+      "glossZh": "太",
+      "pronunciationId": "w:too#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 65,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:too#e-1b6690f7cb6056c3",
+          "text": "He conveyed through her that he had a jack but that it was too small for the Jeep, so we would need something to support it.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:too#e-a85850b015a469c3",
+          "text": "The adorable female calf is the second black rhino born this year at the reserve, but it is too early to tell if the calves will make good candidates to be returned to protected areas of the wild.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:too#e-3d87b5c4b323226e",
+          "text": "Young people are too busy to interact with nature.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2023-ii:34",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 20
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "too…that",
+      "reason": "g51 搭配有误"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

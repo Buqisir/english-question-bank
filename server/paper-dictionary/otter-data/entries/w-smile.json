@@ -1,0 +1,264 @@
+{
+  "entryId": "w:smile",
+  "headword": "smile",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/smaɪl/",
+    "us": "/smaɪl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:smile#p-main",
+      "ipa": {
+        "uk": "/smaɪl/",
+        "us": "/smaɪl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "smiles",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "smiled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "smiling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 43,
+    "mock": 244
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 244
+  },
+  "senses": [
+    {
+      "senseId": "w:smile#s1",
+      "pos": "v.",
+      "glossZh": "微笑",
+      "pronunciationId": "w:smile#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 20,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:smile#e-614947d7c9f1213a",
+          "text": "He stood up, hugged his parents, and smiled, trying not to let his emotions（情绪）get the better of him.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:smile#e-be5469ba01e92176",
+          "text": "She smiled at me and said if I needed help, she’d be right there, which I found quite comforting.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:4",
+              "sentence": 8
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:smile#e-31052aee5e3c3a7d",
+          "text": "Instead of correcting others when they were struggling to pronounce my name, I just smiled and nodded approvingly.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 90
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:smile#s2",
+      "pos": "n.",
+      "glossZh": "笑容",
+      "pronunciationId": "w:smile#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 20,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:smile#e-0c88c6e94fc24dda",
+          "text": "The boy lifted the last bag onto his shoulder, and flashed a bright smile.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:smile#e-c767ba1dec413dc0",
+          "text": "Gunter parked the taxi behind the bus, turned around, and looked at me with a big smile on his face.“We made it,” he said.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 87
+          }
+        },
+        {
+          "exampleId": "w:smile#e-4b1470c303d87a0a",
+          "text": "I forced a smile, unsure how to respond further.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:5",
+              "sentence": 8
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:smile#s3",
+      "pos": "v.",
+      "glossZh": "微笑着说",
+      "pronunciationId": "w:smile#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:smile#e-a12f146fb2f1c430",
+          "text": "“I have an idea, but it might be a little crazy,” smiled Mom.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:smile#s4",
+      "pos": "短语",
+      "glossZh": "眷顾",
+      "pronunciationId": "w:smile#p-main",
+      "note": "smile on/upon。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "请人喝一杯；果实成熟裂开",
+      "reason": "罕见旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,129 @@
+{
+  "entryId": "w:guitar",
+  "headword": "guitar",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɡɪˈtɑː(r)/",
+    "us": "/ɡɪˈtɑːr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:guitar#p-main",
+      "ipa": {
+        "uk": "/ɡɪˈtɑː(r)/",
+        "us": "/ɡɪˈtɑːr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "guitars",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 31
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:guitar#s1",
+      "pos": "n.",
+      "glossZh": "吉他",
+      "pronunciationId": "w:guitar#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 31
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:guitar#e-32494a9a056d6064",
+          "text": "Why does Amanda want to learn to play the guitar?",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:guitar#e-3e4733b5d9d006fb",
+          "text": "He knew exactly what he wanted to do with his life – to play the guitar in his own band.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:guitar#e-be0a0b2e8fa3d1e8",
+          "text": "Visitors can see one of King’s famous Gibson guitars, which he named Lucille, at the Delta Blues Museum, and watch interviews with musicians who played with King.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 52
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "弹吉他（动词）",
+      "reason": "极少独立作动词，语料仅见名词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

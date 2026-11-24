@@ -1,0 +1,236 @@
+{
+  "entryId": "w:integrity",
+  "headword": "integrity",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪnˈteɡrəti/",
+    "us": "/ɪnˈteɡrəti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:integrity#p-main",
+      "ipa": {
+        "uk": "/ɪnˈteɡrəti/",
+        "us": "/ɪnˈteɡrəti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "integrities",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 40
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 33
+  },
+  "senses": [
+    {
+      "senseId": "w:integrity#s1",
+      "pos": "n.",
+      "glossZh": "正直诚信",
+      "pronunciationId": "w:integrity#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:integrity#e-72231b54539a8a9d",
+          "text": "The Academy team lost the game but won something far greater: their integrity.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:integrity#e-15e1d62e988aabd6",
+          "text": "The wind bit into his thin jacket, and his old shoes grew heavy with mud, but the thought of keeping his promise and maintaining his integrity kept him moving forward through the dimly lit urban landscape.",
+          "source": {
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 133,
+            "end": 142
+          }
+        },
+        {
+          "exampleId": "w:integrity#e-2ef0b7f4929548a2",
+          "text": "Honesty is one of the most important aspects of integrity.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:integrity#s2",
+      "pos": "n.",
+      "glossZh": "完整性；完好无损",
+      "pronunciationId": "w:integrity#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:integrity#e-32bed3669b67672c",
+          "text": "“We always respect the integrity of the materials and only make changes that can be reversed, which is important in our conservation standards.”",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:integrity#e-79904c1ff09c2f4a",
+          "text": "A new study mapping the planetary boundary of “functional biosphere (生物圈) integrity” in spatial detail and over centuries finds that human activity has pushed most of Earth’s land beyond safe biosphere limits.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 83
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:integrity#s3",
+      "pos": "n.",
+      "glossZh": "学术诚信",
+      "pronunciationId": "w:integrity#p-main",
+      "note": "academic integrity。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:integrity#e-21f1ee283040939a",
+          "text": "The findings also suggest that academic journals and institutions may need to develop new standards and tools to safeguard the integrity of published research in an era of AI-assisted writing.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 127,
+            "end": 136
+          }
+        },
+        {
+          "exampleId": "w:integrity#e-f255349038747a17",
+          "text": "AI References: A Risk for Academic Integrity",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-shandong-dongying-2026-04-adaptability:35",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 44
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "系统可靠性警示能力",
+      "reason": "行业术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

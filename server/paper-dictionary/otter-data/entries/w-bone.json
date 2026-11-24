@@ -1,0 +1,193 @@
+{
+  "entryId": "w:bone",
+  "headword": "bone",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bəʊn/",
+    "us": "/boʊn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bone#p-main",
+      "ipa": {
+        "uk": "/bəʊn/",
+        "us": "/boʊn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "bones",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "boned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "boning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 47
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 43
+  },
+  "senses": [
+    {
+      "senseId": "w:bone#s1",
+      "pos": "n.",
+      "glossZh": "骨；骨头；骨骼",
+      "pronunciationId": "w:bone#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bone#e-1f0297d032cb4fc5",
+          "text": "A board to keep broken bones in place.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-guangdong-guangzhou-2025-12-survey:34",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:bone#e-220ac40754348b98",
+          "text": "The arm bones of women who lived 7,000 years ago show a surprising level of strength – even higher than today’s professional athletes.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:bone#e-2b5ba7022cc82a55",
+          "text": "Adults typically have 206 bones and 350 joints, which are made of bones plus the tissues that hold the bones together: cartilage(软骨), tendons(腱), ligaments(韧带), and nerves.",
+          "source": {
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bone#s2",
+      "pos": "n.",
+      "glossZh": "鱼刺",
+      "pronunciationId": "w:bone#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bone#e-d30ff5e1c8a0273c",
+          "text": "The question has stuck with me like a fish bone in the throat.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:seven-choices:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bone#s3",
+      "pos": "v.",
+      "glossZh": "去骨；剔去骨头",
+      "pronunciationId": "w:bone#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "一美元、长号、骰子、擦靴子等",
+      "reason": "俚语或罕见义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

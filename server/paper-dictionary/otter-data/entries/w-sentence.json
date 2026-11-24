@@ -1,0 +1,211 @@
+{
+  "entryId": "w:sentence",
+  "headword": "sentence",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsentəns/",
+    "us": "/ˈsentəns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:sentence#p-main",
+      "ipa": {
+        "uk": "/ˈsentəns/",
+        "us": "/ˈsentəns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "sentences",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "sentenced",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "sentencing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 51
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 50
+  },
+  "senses": [
+    {
+      "senseId": "w:sentence#s1",
+      "pos": "n.",
+      "glossZh": "句子",
+      "pronunciationId": "w:sentence#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sentence#e-fa29d67eff02803d",
+          "text": "“The footprint” underlined in the last sentence refers to the CO2 produced in __.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:27",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:sentence#e-694c358b3f48ce9f",
+          "text": "But every time I tried to __43__ a sentence of Italian together, the locals smiled at me and __44__ my language skills.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-ii:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:sentence#e-0cf0f241e70f3824",
+          "text": "During your initial reading of material, do you ever go back and reread sentences or paragraphs?",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sentence#s2",
+      "pos": "n.",
+      "glossZh": "刑罚",
+      "pronunciationId": "w:sentence#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sentence#e-9dad41568c04c77d",
+          "text": "The prison was looking for new activities to improve the mental health of those serving long-term sentences.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:sentence#e-d0b867b96b242ff4",
+          "text": "For instance, jurors (陪审员) asked to consider a 30-year prison sentence before discussion often settle closer to this figure, while those given a 10-year reference tend to suggest much shorter punishments.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sentence#s3",
+      "pos": "v.",
+      "glossZh": "判处",
+      "pronunciationId": "w:sentence#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "逻辑命题",
+      "reason": "逻辑学专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

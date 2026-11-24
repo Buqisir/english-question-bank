@@ -1,0 +1,143 @@
+{
+  "entryId": "w:college",
+  "headword": "college",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɒlɪdʒ/",
+    "us": "/ˈkɑːlɪdʒ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:college#p-main",
+      "ipa": {
+        "uk": "/ˈkɒlɪdʒ/",
+        "us": "/ˈkɑːlɪdʒ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "colleges",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 54,
+    "mock": 256
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 256
+  },
+  "senses": [
+    {
+      "senseId": "w:college#s1",
+      "pos": "n.",
+      "glossZh": "学院；专科学校；（美）大学；大学教育",
+      "pronunciationId": "w:college#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 51,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:college#e-405c932fc0e15a1d",
+          "text": "Jenifer Mauer has needed more willpower than the typical college student to pursue her goal of earning a nursing degree.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:college#e-7a4cd72faccfff26",
+          "text": "After high school, Jennifer attended a local technical college, working to pay her tuition（学费）, because there was no extra money set aside for a college education.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:college#e-6256f1f5cfe0f9dd",
+          "text": "The girls had gone to Smith College.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:college#s2",
+      "pos": "n.",
+      "glossZh": "由具有同一职能的人组成的团体",
+      "pronunciationId": "w:college#p-main",
+      "note": "如 electoral college「选举团」。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "State College、College Station 等",
+      "reason": "地名中的同形词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

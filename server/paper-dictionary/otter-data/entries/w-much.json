@@ -1,0 +1,831 @@
+{
+  "entryId": "w:much",
+  "headword": "much",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/mʌtʃ/",
+    "us": "/mʌtʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:much#p-main",
+      "ipa": {
+        "uk": "/mʌtʃ/",
+        "us": "/mʌtʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 123,
+    "mock": 688
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 687
+  },
+  "senses": [
+    {
+      "senseId": "w:much#s1",
+      "pos": "det. / pron.",
+      "glossZh": "许多；大量",
+      "pronunciationId": "w:much#p-main",
+      "note": "作限定词时修饰不可数名词。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 22,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:much#e-47c1ceed0dc75e77",
+          "text": "The food is so delicious that you don’t need much of it to make you happy.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-i:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:much#e-bccb4486885c5229",
+          "text": "Shirley Fitzgerald, the city’s official historian, told me that in its rush to modernity in the 1970s, Sydney swept aside much of its past, including many of its finest buildings.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 122,
+            "end": 126
+          }
+        },
+        {
+          "exampleId": "w:much#e-91a34b3d263be9d5",
+          "text": "Much is still to be settled, but here are some of the solutions to get us going green.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:much#s2",
+      "pos": "adv.",
+      "glossZh": "很；非常",
+      "pronunciationId": "w:much#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:much#e-d162893a23af3cc1",
+          "text": "The little boy -his name was Bernard-had interested her very much.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:much#e-5c4b7d46ed22f550",
+          "text": "“I’m going to miss you so much, Poppy,” said the tall, thin teenager.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:much#e-c3689e19273638df",
+          "text": "If the only reading you ever do is the novel or magazine, the speed at which you read -probably does not matter very much.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 117,
+            "end": 121
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:much#s3",
+      "pos": "adv.",
+      "glossZh": "（比较级前）……得多",
+      "pronunciationId": "w:much#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 32,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:much#e-f02e897b87389670",
+          "text": "“We were so amazed that they could stay underwater much longer than us local islanders,” Dr. Jubilado said.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:much#e-a1e0fbb486fe9271",
+          "text": "Fortunately, nowadays it is much easier to make eco-friendly lifestyle choices than, let’s say, 20 years ago.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:much#e-e86d35dfccf3f29d",
+          "text": "With three registers, this method is much faster than the traditional approach.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:31",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:much#s4",
+      "pos": "adv.",
+      "glossZh": "经常",
+      "pronunciationId": "w:much#p-main",
+      "note": "常用于否定句。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:much#e-670d4453c96990cd",
+          "text": "Levine and his research team selected volunteers aged between 45 and 64 who did not exercise much but were otherwise healthy.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 97
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:much#s5",
+      "pos": "短语",
+      "glossZh": "多少（询问量、价格或程度）",
+      "pronunciationId": "w:much#p-main",
+      "note": "how much。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 23,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:much#e-25744b6fe747f184",
+          "text": "How much time does the man have to read the book?",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:much#e-f9f958f0ecb64536",
+          "text": "How much is the ticket for Felt Picture Making?",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2021-ii:22",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:much#e-72a1738c256a2ebd",
+          "text": "It’s jaw-dropping how much perfectly good food is thrown away – from “ugly” (but quite eatable) vegetables rejected by grocers to large amounts of uneaten dishes thrown into restaurant garbage cans.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "reading-b-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:much#s6",
+      "pos": "短语",
+      "glossZh": "多达",
+      "pronunciationId": "w:much#p-main",
+      "note": "as much as 后接数词，强调数量之大。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:much#e-afd7de58ff82669f",
+          "text": "At least 80 inches of rain a year is normal-and in some areas there may be as much as 430 inches of rain annually.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:much#e-8c3b98a395e8888f",
+          "text": "The __59__ called the Italian Culture Ministry; the official confirmed that the paintings were __60__ and worth as much as $50 million.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:cloze:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 115,
+            "end": 119
+          }
+        },
+        {
+          "exampleId": "w:much#e-b7051d36925b3651",
+          "text": "The research, carried out by scientists at the Columbia Climate School and other institutions, found that if the city maintains past species patterns in new plantings, isoprene production in Manhattan in coming decades will go up by about 140%, and resulting summer ozone levels as much as 30%.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 282,
+            "end": 286
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:much#s7",
+      "pos": "短语",
+      "glossZh": "与……一样多；在同等程度上",
+      "pronunciationId": "w:much#p-main",
+      "note": "as much … as …。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:much#e-65c23e2f484ca53f",
+          "text": "There is an amazing world out there, and it needs our children as much as they need it.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:much#e-14437014ed4d9699",
+          "text": "The Government’s sugar tax on soft drinks has brought in half as much money as Ministers first predicted it would generate, the first official data on the policy has shown.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:much#e-f9e8baef787854d4",
+          "text": "Basically, it means eating only as much food as your body needs.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:much#s8",
+      "pos": "短语",
+      "glossZh": "过多",
+      "pronunciationId": "w:much#p-main",
+      "note": "too much。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:much#e-becc52997abf21d7",
+          "text": "What about that person who has had too much to drink or won’t stop talking",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-national-b:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:much#e-dea2f655397f712b",
+          "text": "Even worse, I had unthinkingly bought way too much; I could have made six salads with what I threw out.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-b-1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:much#e-5b78c1c741cae992",
+          "text": "Many parents say there’s too much traffic on the roads for their children to walk safely to school, so they pack them into the car instead.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:much#s9",
+      "pos": "短语",
+      "glossZh": "与……很相像",
+      "pronunciationId": "w:much#p-main",
+      "note": "much like。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:much#e-1460f955b2307a63",
+          "text": "New immigrants much like the little girl in the lunch line flooded our office seeking help.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:much#e-6eb8dc7867c78927",
+          "text": "After more than three decades, Jim approached his final days on the job much like any other.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:much#e-00b21845f5b291cc",
+          "text": "She assumed that, much like in Michigan, police would simply detour（使绕道）traffic around any closed sections of the highway.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:much#s10",
+      "pos": "短语",
+      "glossZh": "尽可能多地",
+      "pronunciationId": "w:much#p-main",
+      "note": "as much as possible。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:much#e-f2ac3d48121c3e0f",
+          "text": "Whether you paint still lifes, portraits, or landscapes, paint from life as much as possible.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 80
+          }
+        },
+        {
+          "exampleId": "w:much#e-5db1272db2f0d08a",
+          "text": "By speaking as much as possible.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:much#s11",
+      "pos": "短语",
+      "glossZh": "称不上什么像样的……",
+      "pronunciationId": "w:much#p-main",
+      "note": "not much of a …。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:much#e-f26a864dfcafa84e",
+          "text": "She says: “I’m sure I wasn’t much of a help to start with painting the rooms and putting down the flooring throughout the house.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:much#s12",
+      "pos": "短语",
+      "glossZh": "更不用说",
+      "pronunciationId": "w:much#p-main",
+      "note": "much less。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:much#e-448f732e034018bb",
+          "text": "Often students come to the classroom believing that learning can’t be fun and that what they learn isn’t relevant to the real world – much less to their personal interests.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 134,
+            "end": 138
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:much#s13",
+      "pos": "短语",
+      "glossZh": "主要并非……",
+      "pronunciationId": "w:much#p-main",
+      "note": "not so much A as B 常表示「与其说是 A，不如说是 B」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:much#e-b692cf78311771bf",
+          "text": "In some cases, it’s not so much the treatment of the animals on set in the studio that has activists worried; it’s the off-set training and living conditions that are raising concerns.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 31
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏；修饰可数复数名词",
+      "reason": "同形专名或非现代标准用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,224 @@
+{
+  "entryId": "w:digest",
+  "headword": "digest",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/daɪˈdʒest/",
+    "us": "/daɪˈdʒest/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:digest#p-main",
+      "ipa": {
+        "uk": "/daɪˈdʒest/",
+        "us": "/daɪˈdʒest/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:digest#p-noun",
+      "ipa": {
+        "uk": "/ˈdaɪdʒest/",
+        "us": "/ˈdaɪdʒest/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "名词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "digests",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "digested",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "digesting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "senses": [
+    {
+      "senseId": "w:digest#s1",
+      "pos": "v.",
+      "glossZh": "消化；分解",
+      "pronunciationId": "w:digest#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:digest#e-ef946dfd20911b90",
+          "text": "Cattle-raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:digest#e-68463b2d4d3d37e6",
+          "text": "Within weeks, it had all been digested, and all that was left was pure water.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:digest#e-07ee0d3aeae77514",
+          "text": "Some species can even digest chemical pollutants.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:digest#s2",
+      "pos": "v.",
+      "glossZh": "理解；领会（信息）",
+      "pronunciationId": "w:digest#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:digest#s3",
+      "pos": "n.",
+      "glossZh": "文摘；摘要；汇编",
+      "pronunciationId": "w:digest#p-noun",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:digest#e-80f9e678805999e2",
+          "text": "That’s why this issue (期) of Writer’s Digest aims to help you figure out how to write the best ending for whatever kind of writing you’re doing.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:digest#e-52c2825b3e4889f6",
+          "text": "Please note that we do not offer financial rewards; if selected, your reward is the honor of being featured in Reader’s Digest.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-a:13",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 120,
+            "end": 126
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "哈希摘要；化脓；加热处理化学物质",
+      "reason": "专门用法或旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

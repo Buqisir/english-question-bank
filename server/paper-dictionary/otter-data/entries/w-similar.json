@@ -1,0 +1,135 @@
+{
+  "entryId": "w:similar",
+  "headword": "similar",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsɪmələ(r)/",
+    "us": "/ˈsɪmələr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:similar#p-main",
+      "ipa": {
+        "uk": "/ˈsɪmələ(r)/",
+        "us": "/ˈsɪmələr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more similar",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most similar",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 172
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:similar#s1",
+      "pos": "adj.",
+      "glossZh": "相似的",
+      "pronunciationId": "w:similar#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 19,
+        "mock": 172
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:similar#e-4d680fffe3424b3a",
+          "text": "The results were similar to the first test: the participants followed suit but took significantly more candy when the thin actor took 30 pieces.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:similar#e-bd01e9b2e5752511",
+          "text": "It should give you a precise definition of each word, thus differentiating it from other words whose meanings are similar, but not identical.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 121,
+            "end": 128
+          }
+        },
+        {
+          "exampleId": "w:similar#e-bbcabe273c12c6f6",
+          "text": "Similar campaigns occurred in Australia in the late 1960s and 1970s as well.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "矩阵相似的；类似症状的物质",
+      "reason": "超出通用义的数学和顺势疗法术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

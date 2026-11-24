@@ -1,0 +1,383 @@
+{
+  "entryId": "w:shadow",
+  "headword": "shadow",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈʃædəʊ/",
+    "us": "/ˈʃædoʊ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:shadow#p-main",
+      "ipa": {
+        "uk": "/ˈʃædəʊ/",
+        "us": "/ˈʃædoʊ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more shadow",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most shadow",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "shadows",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "shadowed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "shadowing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 39
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 31
+  },
+  "senses": [
+    {
+      "senseId": "w:shadow#s1",
+      "pos": "n.",
+      "glossZh": "影子",
+      "pronunciationId": "w:shadow#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shadow#e-098cbd6b3324db5f",
+          "text": "Instead, she focused on reaching the shadow cast on the track by an oak tree up ahead.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:7",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:shadow#e-49f854c61d797e41",
+          "text": "Ms. Hart’s shadow shifted behind the curtain.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:writing-continuation:14",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:shadow#e-75e5095d9425ef30",
+          "text": "Walking home on different sides of the street, the setting sun created two separate shadows stretching behind them – a perfect picture of the sudden space that had grown between them.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 91
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shadow#s2",
+      "pos": "n.",
+      "glossZh": "阴暗处",
+      "pronunciationId": "w:shadow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shadow#e-41df600a5b94cae9",
+          "text": "Last night, I heard a story that left me thinking: a friend was driving home late on a rainy day when a cat suddenly dashed out from the shadows.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 137,
+            "end": 144
+          }
+        },
+        {
+          "exampleId": "w:shadow#e-1331b9927127ea09",
+          "text": "We entered the shadows of the forest.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shadow#s3",
+      "pos": "n.",
+      "glossZh": "使人忧虑的影响",
+      "pronunciationId": "w:shadow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shadow#e-0e933ec586288352",
+          "text": "However, during the 1920s and 1930s, a short period between the two World Wars, the shadow of war was lifted temporarily, allowing photographers to capture the ordinary lives of people in peacetime.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 90
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shadow#s4",
+      "pos": "短语",
+      "glossZh": "在……的光环下",
+      "pronunciationId": "w:shadow#p-main",
+      "note": "in sb's shadow。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shadow#e-739c5474710a886e",
+          "text": "But he was tired of living in his brother’s shadow.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-04-second",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-04-second:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shadow#s5",
+      "pos": "短语",
+      "glossZh": "丝毫",
+      "pronunciationId": "w:shadow#p-main",
+      "note": "a shadow of doubt。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shadow#e-0431813f40b7fb62",
+          "text": "“The most difficult subjects,” novelist Leo Tolstoy once wrote, “can be explained to the most slow witted (智力的) man if he has not formed any idea of them already; but the simplest thing cannot be made clear to the most intelligent man if he is firmly persuaded that he knows already, without a shadow of doubt, what is laid before him.” __36__ Fortunately, a new paper offers some grounds for optimism, which has uncovered many techniques to open our minds.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
+            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 294,
+            "end": 300
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shadow#s6",
+      "pos": "v.",
+      "glossZh": "秘密跟踪",
+      "pronunciationId": "w:shadow#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:shadow#s7",
+      "pos": "v.",
+      "glossZh": "跟随他人学习工作",
+      "pronunciationId": "w:shadow#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:shadow#s8",
+      "pos": "adj.",
+      "glossZh": "非官方的",
+      "pronunciationId": "w:shadow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shadow#e-cf1b814dbb723d1c",
+          "text": "However, his excitement was short-lived when he discovered that some of his self-published books had been pirated (盗版) and appeared on LibGen, a shadow library that hosts millions of books and papers taken without permission.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 145,
+            "end": 151
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shadow#s9",
+      "pos": "adj.",
+      "glossZh": "影子内阁的",
+      "pronunciationId": "w:shadow#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "遮蔽变量名",
+      "reason": "计算机专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

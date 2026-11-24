@@ -1,0 +1,327 @@
+{
+  "entryId": "w:ready",
+  "headword": "ready",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈredi/",
+    "us": "/ˈredi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ready#p-main",
+      "ipa": {
+        "uk": "/ˈredi/",
+        "us": "/ˈredi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "readier",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "readiest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 21,
+    "mock": 142
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 139
+  },
+  "senses": [
+    {
+      "senseId": "w:ready#s1",
+      "pos": "adj.",
+      "glossZh": "准备好的",
+      "pronunciationId": "w:ready#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ready#e-1ce379e3ff4b44f0",
+          "text": "With everything ready, Bernard started out on his new business.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:given-2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:ready#e-574ffddcc2d57a0b",
+          "text": "But she recovered, though __48__, and was ready for discharge（出院）after four weeks.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:cloze:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:ready#e-0b8c677097c9560d",
+          "text": "Going to the cafe starts her day off good and gets her ready for class.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-i:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ready#s2",
+      "pos": "adj.",
+      "glossZh": "愿意的",
+      "pronunciationId": "w:ready#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ready#e-d622aaa5e4906b57",
+          "text": "Chances are that if you're looking to live a more sustainable lifestyle, not everyone around you will be ready to jump on that bandwagon.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:ready#e-0fa886ee61ef1f06",
+          "text": "Back in 1951, Reisley was just 26, newly married and ready to put down roots.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:ready#e-11140f146d1027cb",
+          "text": "Do you have a home full of things you’re ready to part with?",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ready#s3",
+      "pos": "adj.",
+      "glossZh": "可以立即使用的",
+      "pronunciationId": "w:ready#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ready#e-62dccc036b68677a",
+          "text": "Become ready to use.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2024-i:28",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:ready#e-b8333c3dad1cbf58",
+          "text": "“If you could use algorithms to improve resource allocation, there are many high-value use cases in areas where we don’t have ready or clear solutions,” he says.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:reading-c:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 126,
+            "end": 131
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ready#s4",
+      "pos": "短语",
+      "glossZh": "随时可用",
+      "pronunciationId": "w:ready#p-main",
+      "note": "at the ready。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ready#e-e379bb7204e8f092",
+          "text": "It’s more challenging to eat in moderation if you have unhealthy snacks at the ready, like cookies.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-national-a:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 84
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ready#s5",
+      "pos": "adj.",
+      "glossZh": "很自然地流露的",
+      "pronunciationId": "w:ready#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ready#e-958a52a588b0f92d",
+          "text": "Hannah, who used to seem so sure of herself, __50__ her with a ready smile.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 68
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "现金",
+      "reason": "较少见的旧式名词用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,129 @@
+{
+  "entryId": "w:chaos",
+  "headword": "chaos",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkeɪɒs/",
+    "us": "/ˈkeɪɑːs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:chaos#p-main",
+      "ipa": {
+        "uk": "/ˈkeɪɒs/",
+        "us": "/ˈkeɪɑːs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "chaoses",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 37
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:chaos#s1",
+      "pos": "n.",
+      "glossZh": "混乱；杂乱无序",
+      "pronunciationId": "w:chaos#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 37
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chaos#e-343a03c49b30f10e",
+          "text": "My daily posts and the __50__ I received became a precious ray of light in the chaos of my house.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:chaos#e-976dab34fa57325f",
+          "text": "What follows is a raw, immersive journey into the chaos of war: endless shifts in overcrowded field hospitals, limited supplies, and the constant threat of violence.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:chaos#e-caea40e5070dc280",
+          "text": "To Mrs. Henderson’s ordered mind, their home was a symphony of cheerful chaos: brightly colored plastic toys spreading across the yard, a tricycle lying on its side by the walkway, and the constant energetic screams of children at play.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 77
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "创世前的混沌、柯伊伯带天体、混沌现象等",
+      "reason": "神话、专名或学科用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

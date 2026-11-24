@@ -1,0 +1,213 @@
+{
+  "entryId": "w:barbecue",
+  "headword": "barbecue",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈbɑːbɪkjuː/",
+    "us": "/ˈbɑːrbɪkjuː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:barbecue#p-main",
+      "ipa": {
+        "uk": "/ˈbɑːbɪkjuː/",
+        "us": "/ˈbɑːrbɪkjuː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "barbecues",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "barbecued",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "barbecueing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "barbecuing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:barbecue#s1",
+      "pos": "n.",
+      "glossZh": "烧烤聚会；户外烧烤",
+      "pronunciationId": "w:barbecue#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:barbecue#e-8f0fb818cb9e6acf",
+          "text": "Have a barbecue.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:listening.short-dialogue",
+            "locator": {
+              "question": 3,
+              "questionId": "question:listening:3",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:barbecue#e-d206da1e1f30e3ae",
+          "text": "Mr. Torres began hosting weekly barbecues using vegetables from the garden.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:barbecue#e-6d40928db4438133",
+          "text": "How will the speakers go to the barbecue?",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:barbecue#s2",
+      "pos": "n.",
+      "glossZh": "烧烤架；烧烤炉",
+      "pronunciationId": "w:barbecue#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:barbecue#s3",
+      "pos": "n.",
+      "glossZh": "烧烤的食物；烤肉",
+      "pronunciationId": "w:barbecue#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:barbecue#s4",
+      "pos": "v.",
+      "glossZh": "（在烤架上）烧烤",
+      "pronunciationId": "w:barbecue#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:barbecue#e-c6fe8b18a69ae67b",
+          "text": "After taking a moment to set the tent back up, we lit a campfire and started barbecuing in the bright moonlight.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 87
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "咖啡豆晾晒场、木棍架及烧毁",
+      "reason": "地方或罕见用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

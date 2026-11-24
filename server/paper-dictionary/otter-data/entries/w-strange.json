@@ -1,0 +1,206 @@
+{
+  "entryId": "w:strange",
+  "headword": "strange",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/streɪndʒ/",
+    "us": "/streɪndʒ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:strange#p-main",
+      "ipa": {
+        "uk": "/streɪndʒ/",
+        "us": "/streɪndʒ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "stranger",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "strangest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 17,
+    "mock": 63
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 63
+  },
+  "senses": [
+    {
+      "senseId": "w:strange#s1",
+      "pos": "adj.",
+      "glossZh": "奇怪的",
+      "pronunciationId": "w:strange#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:strange#e-a24c4aa28c604d5e",
+          "text": "In Ferghana, he attends a mountain funeral（葬礼）followed by a strange drinking party.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:strange#e-876b44993a418de2",
+          "text": "His comment struck me as strange.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:strange#e-86fecd7fe4488c43",
+          "text": "The couple had both gone to work, so it was strange that someone was over there.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:strange#s2",
+      "pos": "adj.",
+      "glossZh": "陌生的",
+      "pronunciationId": "w:strange#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:strange#e-381efc7176e75e3d",
+          "text": "It is the story of an American travelling to a strange land, and of the people he meets on his way: Rustam, his translator, a lovely 24-year-old who picked up his colorful",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:strange#e-cf80545ee568dee7",
+          "text": "That train took him a thousand miles across the country to a totally strange city.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:strange#e-3e37394e9999833d",
+          "text": "However, in this case, I was a woman all alone, in a strange neighborhood, at night, and there were twenty or so very large men – all wearing insignia（徽章） that indicated they were in some sort of club – standing before me.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 60
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "奇异夸克、分形、姓氏",
+      "reason": "专门义或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,248 @@
+{
+  "entryId": "w:want",
+  "headword": "want",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/wɒnt/",
+    "us": "/wɑːnt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:want#p-main",
+      "ipa": {
+        "uk": "/wɒnt/",
+        "us": "/wɑːnt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "wants",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "wanted",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "wanting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 171,
+    "mock": 798
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 797
+  },
+  "senses": [
+    {
+      "senseId": "w:want#s1",
+      "pos": "v.",
+      "glossZh": "想要",
+      "pronunciationId": "w:want#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 168,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:want#e-6e15d70c92f3330b",
+          "text": "It was a big deal for us to load up and go to the local library, where my kids could pick out books to read or books they wanted me to read to them.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 122,
+            "end": 128
+          }
+        },
+        {
+          "exampleId": "w:want#e-e9602904ed801752",
+          "text": "He moved their family from Canada to California when she was one year old, because he wanted them to explore a new place together.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:want#e-9bc2a18fce84815f",
+          "text": "Allowing kids to eat what they want also exposes them to the natural consequences of their decisions.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:want#s2",
+      "pos": "v.",
+      "glossZh": "最好做某事",
+      "pronunciationId": "w:want#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:want#e-35f9ffc99375504e",
+          "text": "“You want to make the homeowner feel that they made the right __55__,” she says.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-ii:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:want#e-4c410bd9b9e4aad7",
+          "text": "You’ll want to look back on your journey to see how far you’ve come.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:want#e-565e17b9f292638c",
+          "text": "From there, you will want to weigh the pros and cons and consider the specifics of your situation to decide what the right call is.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:want#s3",
+      "pos": "n.",
+      "glossZh": "缺乏",
+      "pronunciationId": "w:want#p-main",
+      "note": "常见 for want of sth（由于缺少……）。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:want#s4",
+      "pos": "v.",
+      "glossZh": "通缉",
+      "pronunciationId": "w:want#p-main",
+      "note": "常见 be wanted for sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "煤层凹陷、鼹鼠",
+      "reason": "专门或地域用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,172 @@
+{
+  "entryId": "w:interpret",
+  "headword": "interpret",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪnˈtɜːprət/",
+    "us": "/ɪnˈtɜːrprət/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:interpret#p-main",
+      "ipa": {
+        "uk": "/ɪnˈtɜːprət/",
+        "us": "/ɪnˈtɜːrprət/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "interpreted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "interpreting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "interprets",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 37
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 37
+  },
+  "senses": [
+    {
+      "senseId": "w:interpret#s1",
+      "pos": "v.",
+      "glossZh": "理解；解读",
+      "pronunciationId": "w:interpret#p-main",
+      "note": "interpret A as B 表示「把 A 理解为 B」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:interpret#e-6262ae105baf242b",
+          "text": "If we want to reconstruct what was actually going on that day, the shield must be questioned and interpreted as deeply and strictly as the",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 108
+          }
+        },
+        {
+          "exampleId": "w:interpret#e-e1ab4e18133c606b",
+          "text": "They are able to have entire conversations with humans using meows and you’re able to interpret it.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:interpret#e-ad57895cacf2e723",
+          "text": "Most of the essays filled less than one page, and few contained a sentence that could be interpreted as a thesis（论点）statement.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 100
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:interpret#s2",
+      "pos": "v.",
+      "glossZh": "口译",
+      "pronunciationId": "w:interpret#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:interpret#s3",
+      "pos": "v.",
+      "glossZh": "（以自己的方式）演绎作品",
+      "pronunciationId": "w:interpret#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "解释执行程序",
+      "reason": "计算机专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

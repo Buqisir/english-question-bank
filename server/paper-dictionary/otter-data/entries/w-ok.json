@@ -1,0 +1,344 @@
+{
+  "entryId": "w:ok",
+  "headword": "OK",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌəʊˈkeɪ/",
+    "us": "/ˌoʊˈkeɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ok#p-main",
+      "ipa": {
+        "uk": "/ˌəʊˈkeɪ/",
+        "us": "/ˌoʊˈkeɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "OKer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "OKest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more OK",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most OK",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "OK's",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "OKs",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "OK'd",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "OK'ed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "OK'ing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "OKed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "OKing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "senses": [
+    {
+      "senseId": "w:ok#s1",
+      "pos": "adj.",
+      "glossZh": "没事的；安然无恙的",
+      "pronunciationId": "w:ok#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ok#e-97d0a6e35d87cd69",
+          "text": "The boy is in the hospital and doctors say he’ll be OK.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:ok#e-3d41b73dd486f50a",
+          "text": "“Is she OK?”",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:ok#e-3a1513a430fd4ce6",
+          "text": "A couple __47__ my window and asked if I was OK.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:cloze:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ok#s2",
+      "pos": "adj.",
+      "glossZh": "可以接受的；允许的",
+      "pronunciationId": "w:ok#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ok#e-9e0c06dad07d9344",
+          "text": "We’re used to filling those awkward silences and pauses, often by speaking up ourselves, but sometimes, a little silence is OK!",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 124,
+            "end": 126
+          }
+        },
+        {
+          "exampleId": "w:ok#e-af0aa07621f4d693",
+          "text": "For me, this __52__ isn’t just about valuing what’s on our plate but also __53__ it’s OK to be different in social environments.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 88
+          }
+        },
+        {
+          "exampleId": "w:ok#e-bff7bc92b8be85e5",
+          "text": "I’d shown my son the __55__ of perseverance and that not winning is OK as long as you try your hardest.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:cloze:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ok#s3",
+      "pos": "int.",
+      "glossZh": "好；行",
+      "pronunciationId": "w:ok#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ok#e-b0954ecf59d2f161",
+          "text": "Say, “OK.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:ok#e-d5043b7f641c2be3",
+          "text": "He responded, “OK.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b:3",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ok#s4",
+      "pos": "v.",
+      "glossZh": "批准",
+      "pronunciationId": "w:ok#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ok#s5",
+      "pos": "n.",
+      "glossZh": "批准；许可",
+      "pronunciationId": "w:ok#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

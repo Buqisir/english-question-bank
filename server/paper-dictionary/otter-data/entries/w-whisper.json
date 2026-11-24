@@ -1,0 +1,225 @@
+{
+  "entryId": "w:whisper",
+  "headword": "whisper",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈwɪspə(r)/",
+    "us": "/ˈwɪspər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:whisper#p-main",
+      "ipa": {
+        "uk": "/ˈwɪspə(r)/",
+        "us": "/ˈwɪspər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "whispers",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "whispered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "whispering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 99
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 94
+  },
+  "senses": [
+    {
+      "senseId": "w:whisper#s1",
+      "pos": "v.",
+      "glossZh": "低声说",
+      "pronunciationId": "w:whisper#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:whisper#e-90894449731fe8c1",
+          "text": "“No,” he whispered, his voice shaking.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a3",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A3 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:whisper#e-f63032ecb3ddf3c6",
+          "text": "Just as the instructor approached, she whispered, “Dad, can I quit?” The waves sounded louder, the gear (设备) heavier.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:whisper#e-eddb76bb15e5ab18",
+          "text": "We had just crossed a stream when the guide whispered, “There’s a bear.” I looked up in disbelief and saw not one, but two, about ten meters above us – the brown mother in front, her cub behind.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:whisper#s2",
+      "pos": "n.",
+      "glossZh": "低语",
+      "pronunciationId": "w:whisper#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:whisper#e-a0a54692cafd5c1b",
+          "text": "I thought you might like some,” she said in a voice that was almost a whisper.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 77
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:whisper#s3",
+      "pos": "n.",
+      "glossZh": "一丝（迹象）",
+      "pronunciationId": "w:whisper#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:whisper#e-588f56cb48738845",
+          "text": "A sentence, half an idea, a small whisper of a scene.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:whisper#s4",
+      "pos": "v.",
+      "glossZh": "沙沙作响",
+      "pronunciationId": "w:whisper#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "网络私信、训练动物、心灵感应",
+      "reason": "特定语境或少见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

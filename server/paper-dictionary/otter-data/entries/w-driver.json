@@ -1,0 +1,215 @@
+{
+  "entryId": "w:driver",
+  "headword": "driver",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdraɪvə(r)/",
+    "us": "/ˈdraɪvər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:driver#p-main",
+      "ipa": {
+        "uk": "/ˈdraɪvə(r)/",
+        "us": "/ˈdraɪvər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "drivers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 123
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 120
+  },
+  "senses": [
+    {
+      "senseId": "w:driver#s1",
+      "pos": "n.",
+      "glossZh": "司机；驾驶员",
+      "pronunciationId": "w:driver#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:driver#e-2012deab6daf5a39",
+          "text": "Mom lifted me out of the car and __38__ to speak to the driver.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:cloze:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:driver#e-232d21073d15d6f0",
+          "text": "The technology could determine whether a driver had just texted, emailed or done anything else that is not allowed under New York’s hands-free driving laws.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:driver#e-4c0d5b38a65a7d61",
+          "text": "How fast a driver was going.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2022-ii:29",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:driver#s2",
+      "pos": "n.",
+      "glossZh": "驱动因素；推动因素",
+      "pronunciationId": "w:driver#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:driver#e-070afd48ef7d23bf",
+          "text": "Beyond AI: Uncovering the Real Drivers of Rising Power Costs",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:35",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:driver#e-114487f07ab68628",
+          "text": "Nonetheless, changes in the drivers of mangrove loss have led to encouraging results.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:driver#e-56d61e35baede9fe",
+          "text": "What is a fundamental driver for the Caspian Sea's water crisis?",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-hubei-tengyun-2025-08:28",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:driver#s3",
+      "pos": "n.",
+      "glossZh": "（计算机）驱动程序",
+      "pronunciationId": "w:driver#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏、澳美地名、机车驱动轮",
+      "reason": "同形专名或行业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

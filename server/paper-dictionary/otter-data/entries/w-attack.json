@@ -1,0 +1,319 @@
+{
+  "entryId": "w:attack",
+  "headword": "attack",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈtæk/",
+    "us": "/əˈtæk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:attack#p-main",
+      "ipa": {
+        "uk": "/əˈtæk/",
+        "us": "/əˈtæk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "attacks",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "attacked",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "attacking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 72
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 69
+  },
+  "senses": [
+    {
+      "senseId": "w:attack#s1",
+      "pos": "v.",
+      "glossZh": "攻击；袭击；侵袭",
+      "pronunciationId": "w:attack#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:attack#e-e7f85a2119063082",
+          "text": "While I was __44__ that he was an animal lover, I __45__ that three dogs were perhaps too many, and my dogs might attack __46__, the cat.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:cloze:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 120
+          }
+        },
+        {
+          "exampleId": "w:attack#e-832203c19798207a",
+          "text": "The adult bees were __54__ and kept attacking as Ziyad escaped from the tree.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:attack#e-297f9de6cbe402b7",
+          "text": "In the early hours of March 13, 1964, Kitty Genovese was attacked violently near her New York apartment despite neighbors hearing her screams.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:attack#s2",
+      "pos": "n.",
+      "glossZh": "攻击；袭击；进攻",
+      "pronunciationId": "w:attack#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:attack#e-144705fbf594e4de",
+          "text": "Parrots are most easily hurt when feeding on the ground; membership in a group plays an important function in ensuring their safety and improving their chances of survival from attacks by predators.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 177,
+            "end": 184
+          }
+        },
+        {
+          "exampleId": "w:attack#e-d419ef7a2b9eca5a",
+          "text": "What is important for parrots to better survive from attacks in the wild?",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:24",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:attack#s3",
+      "pos": "n.",
+      "glossZh": "（疾病）发作",
+      "pronunciationId": "w:attack#p-main",
+      "note": "heart attack 指心脏病发作。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:attack#e-dc81e1dd046ddb34",
+          "text": "One afternoon, while __45__ to get into bed she collapsed (倒下) from what was __46__ discovered to be a heart attack.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:cloze:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 109,
+            "end": 115
+          }
+        },
+        {
+          "exampleId": "w:attack#e-7cdf79c391feae85",
+          "text": "After Charlie had a heart attack, Tindale says, she was prepared to put him to sleep, but Farber’s treatments eased her dog’s suffering so much that she was able to keep him alive for an additional five months.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:attack#e-d24fa6194573800e",
+          "text": "Among them was Mia, who stopped flying after a sudden panic attack.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:attack#s4",
+      "pos": "n. / v.",
+      "glossZh": "抨击；严厉批评",
+      "pronunciationId": "w:attack#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:attack#e-aa76b6d061dea686",
+          "text": "Ironically (讽刺地), the answer may lie in a field often under attack: the humanities.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:attack#s5",
+      "pos": "v.",
+      "glossZh": "着手处理（难题等）",
+      "pronunciationId": "w:attack#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "球类阵容、起音力度、葡萄酒入口感、形成化学键",
+      "reason": "专业用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

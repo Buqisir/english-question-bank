@@ -1,0 +1,348 @@
+{
+  "entryId": "w:base",
+  "headword": "base",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/beɪs/",
+    "us": "/beɪs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:base#p-main",
+      "ipa": {
+        "uk": "/beɪs/",
+        "us": "/beɪs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "baser",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "basest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more base",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most base",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "bases",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "based",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "basing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 18,
+    "mock": 167
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 163
+  },
+  "senses": [
+    {
+      "senseId": "w:base#s1",
+      "pos": "v.",
+      "glossZh": "以……为基础；以……为依据",
+      "pronunciationId": "w:base#p-main",
+      "note": "be based on/upon sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:base#e-cc4c999d07a4b289",
+          "text": "Based on this understanding, we have a good deal of control and responsibility over our carbon footprint.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:base#e-0c481ad915e9a373",
+          "text": "Magic is a form of entertainment that is based on pretending to do things that are impossible.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:base#e-3423c887abc85591",
+          "text": "\"We can rule out that the dogs simply distinguish between the pictures based on a simple cue, such as the sight of teeth,\" said study author Corsin Muller.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 76
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:base#s2",
+      "pos": "v.",
+      "glossZh": "把（总部、工作点等）设在某处",
+      "pronunciationId": "w:base#p-main",
+      "note": "be based in/at。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:base#e-0ff7db70a2a34c8b",
+          "text": "They are based in hotels.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2023-national-a:21",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:base#e-8622874ff25d1f2c",
+          "text": "Ava Noe, a teenager based in the Boston area, has amassed more than 25,000 followers.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:base#e-20984dddb919a738",
+          "text": "Christian Fong at the Rocky Mountain Institute, a research organization based in Colorado, is optimistic about the idea of giving retired coal plants a new purpose.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-d:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 77
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:base#s3",
+      "pos": "n.",
+      "glossZh": "基地；总部；活动据点",
+      "pronunciationId": "w:base#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:base#e-5295f0e02ccc3be2",
+          "text": "“This project is a game-changer for desert regions,” said Ahmed Soliman, ZPEC's base manager.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:grammar-fill:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:base#e-cbe1414a0cb9f505",
+          "text": "Researchers have found evidence of a huge underground cave on the moon that is accessible from the surface, making the spot a favourable location to build a future lunar base.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
+            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 170,
+            "end": 174
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:base#s4",
+      "pos": "n.",
+      "glossZh": "底部；底座；底边",
+      "pronunciationId": "w:base#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:base#s5",
+      "pos": "n.",
+      "glossZh": "基础；根基；基础原料",
+      "pronunciationId": "w:base#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:base#s6",
+      "pos": "n.",
+      "glossZh": "（棒球等的）垒；（化学的）碱",
+      "pronunciationId": "w:base#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:base#s7",
+      "pos": "adj.",
+      "glossZh": "卑鄙的；卑劣的",
+      "pronunciationId": "w:base#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "托举表演者、游离碱可卡因、拓扑基、小型火炮及旧裙甲等",
+      "reason": "专业、历史或罕见用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

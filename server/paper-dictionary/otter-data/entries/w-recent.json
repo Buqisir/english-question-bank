@@ -1,0 +1,134 @@
+{
+  "entryId": "w:recent",
+  "headword": "recent",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈriːsnt/",
+    "us": "/ˈriːsnt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:recent#p-main",
+      "ipa": {
+        "uk": "/ˈriːsnt/",
+        "us": "/ˈriːsnt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more recent",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most recent",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 139
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:recent#s1",
+      "pos": "adj.",
+      "glossZh": "最近的",
+      "pronunciationId": "w:recent#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 139
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:recent#e-dbbf5dacfb94f525",
+          "text": "According to a recent study in the Journal of Consumer Research, both the size and consumption habits of our eating companions can influence our food intake.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:recent#e-5ac3517b6727aae6",
+          "text": "That’s when things went __49__ “I remember walking down the long __50__ and opening the door to my room to find an entire flock of seagulls,” Burchill said in a recent letter of __51__ to the 4-star hotel.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 161,
+            "end": 167
+          }
+        },
+        {
+          "exampleId": "w:recent#e-6e0700dad7696ca0",
+          "text": "Earning first place on the latest “Asia’s 50 best restaurants” list, progressive Indian restaurant Gaggan is one of the most exciting venues(场所) to arrive in Bangkok in recent years.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 169,
+            "end": 175
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "全新世",
+      "reason": "地质学旧称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

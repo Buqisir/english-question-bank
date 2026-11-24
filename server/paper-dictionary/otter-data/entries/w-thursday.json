@@ -1,0 +1,123 @@
+{
+  "entryId": "w:thursday",
+  "headword": "Thursday",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈθɜːzdeɪ/",
+    "us": "/ˈθɜːrzdeɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:thursday#p-main",
+      "ipa": {
+        "uk": "/ˈθɜːzdeɪ/",
+        "us": "/ˈθɜːrzdeɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "Thursdays",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 35
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:thursday#s1",
+      "pos": "n.",
+      "glossZh": "星期四",
+      "pronunciationId": "w:thursday#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 35
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:thursday#e-982b5582e4a86b1d",
+          "text": "On Thursday in an article published in Cell, a team of researchers reported a new kind of adaptation - not to air or to food, but to the ocean.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:thursday#e-2bfee4f43a0f61af",
+          "text": "Organ music is played on Thursday afternoons.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:17",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:thursday#e-724a3d2e40bbc80e",
+          "text": "Dinner hours: Tuesday through Thursday 5: 30 pm - 9: 00 pm (last seating); Friday and Saturday 5: 00 pm - 9:30pm (last seating).",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:13",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 38
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

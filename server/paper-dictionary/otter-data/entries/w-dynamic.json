@@ -1,0 +1,286 @@
+{
+  "entryId": "w:dynamic",
+  "headword": "dynamic",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/daɪˈnæmɪk/",
+    "us": "/daɪˈnæmɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dynamic#p-main",
+      "ipa": {
+        "uk": "/daɪˈnæmɪk/",
+        "us": "/daɪˈnæmɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more dynamic",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most dynamic",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "dynamics",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 57
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 51
+  },
+  "senses": [
+    {
+      "senseId": "w:dynamic#s1",
+      "pos": "adj.",
+      "glossZh": "动态的；不断变化的",
+      "pronunciationId": "w:dynamic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dynamic#e-cbf5fdb52b24fea4",
+          "text": "It is a complex and dynamic system.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2022-i:35",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:dynamic#e-f875f53e16c1b182",
+          "text": "Her work proved that the ocean floor was not static (静态的) but a dynamic, changing landscape.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:dynamic#e-30e4403f36e8984e",
+          "text": "It is about establishing a complex and dynamic plant “community”, reconnecting native species that co-evolved together for thousands of years.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dynamic#s2",
+      "pos": "adj.",
+      "glossZh": "充满活力的；生动的",
+      "pronunciationId": "w:dynamic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dynamic#e-6f85a16a8d866b2e",
+          "text": "A city built on ancient cultures is more dynamic.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2022-national-a:35",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:dynamic#e-7ebcf5b3bf00ce83",
+          "text": "These digital assistants engage visitors in dynamic conversations and offer context-sensitive insights that deepen understanding and satisfy curiosity.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:dynamic#e-ff1192f3018ee28e",
+          "text": "Accompanied throughout by passionate naturalist James Costa, who will bring the islands to life through dynamic lectures and engaging discussions.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-a",
+            "locator": {
+              "paragraph": 16,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-a:16",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 111
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dynamic#s3",
+      "pos": "n.",
+      "glossZh": "相互作用；变化过程；互动模式",
+      "pronunciationId": "w:dynamic#p-main",
+      "note": "此义常用复数 dynamics。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dynamic#e-a1f5a538020f8d17",
+          "text": "While understanding market dynamics can be helpful, the most rewarding aspects of art appreciation come from genuine personal connections with artworks and their creators.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:dynamic#e-e207c6cb45f2cbf7",
+          "text": "Raphael Trouve, who researches forest dynamics at the University of Melbourne in Australia and was not involved in the study, told The Guardian that data sets like this one can help track changes in the climate and environment.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:dynamic#e-1ce98caad48137e6",
+          "text": "This has profound meanings for romantic relationships, friendships, family dynamics and even healing old wounds.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 83
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "音乐力度标记、动态动词",
+      "reason": "音乐或语法专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

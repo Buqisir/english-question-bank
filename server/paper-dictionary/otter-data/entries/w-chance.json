@@ -1,0 +1,399 @@
+{
+  "entryId": "w:chance",
+  "headword": "chance",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tʃɑːns/",
+    "us": "/tʃæns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:chance#p-main",
+      "ipa": {
+        "uk": "/tʃɑːns/",
+        "us": "/tʃæns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "chances",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "chanced",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "chancing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 48,
+    "mock": 233
+  },
+  "unassignedCounts": {
+    "gaokao": 6,
+    "mock": 232
+  },
+  "senses": [
+    {
+      "senseId": "w:chance#s1",
+      "pos": "n.",
+      "glossZh": "机会；时机",
+      "pronunciationId": "w:chance#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 21,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chance#e-0cda6d5a1fdd4f2b",
+          "text": "Our tour also includes a chance to walk in the footsteps of Van Gogh and Gauguin.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:chance#e-255c72f724b83f97",
+          "text": "It’s the last chance to make your point.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:chance#e-1ca3daa2775b782b",
+          "text": "It’s a chance not to be missed.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chance#s2",
+      "pos": "n.",
+      "glossZh": "可能性；概率；希望",
+      "pronunciationId": "w:chance#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chance#e-6e38f69b2eb8eb75",
+          "text": "The chances of your line being the fastest are only one in three.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:31",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:chance#e-49e2a9d7437535f8",
+          "text": "After some quick research, we concluded that the best way to give the squirrel a fighting chance was to care for him ourselves.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:chance#e-3ed38490c58c0a21",
+          "text": "Parrots are most easily hurt when feeding on the ground; membership in a group plays an important function in ensuring their safety and improving their chances of survival from attacks by predators.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 152,
+            "end": 159
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chance#s3",
+      "pos": "n.",
+      "glossZh": "偶然；碰巧",
+      "pronunciationId": "w:chance#p-main",
+      "note": "by chance",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chance#e-781c134f2618958a",
+          "text": "to pick the angry or happy face by touching a picture of it with their noses more often than one would expect by random chance.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 120,
+            "end": 126
+          }
+        },
+        {
+          "exampleId": "w:chance#e-dbdb7034e300ff42",
+          "text": "To prove it doesn’t happen by chance, Rosie’s trainers keep changing the order of the pots around.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chance#s4",
+      "pos": "短语",
+      "glossZh": "很可能……",
+      "pronunciationId": "w:chance#p-main",
+      "note": "chances are",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chance#e-2edc13a25ee86a96",
+          "text": "It turns out, it’s just math working against you; chances are, the other line really is faster.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:chance#e-1598103df0412752",
+          "text": "Chances are that if you're looking to live a more sustainable lifestyle, not everyone around you will be ready to jump on that bandwagon.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chance#s5",
+      "pos": "短语",
+      "glossZh": "绝无可能；想都别想",
+      "pronunciationId": "w:chance#p-main",
+      "note": "not a chance",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chance#e-e40a012e20506dd1",
+          "text": "His reply came as a surprise – a shock, actually: “Not a chance.” Clearly, he was unhappy over the way we had parted.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 63
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chance#s6",
+      "pos": "adj.",
+      "glossZh": "偶然的",
+      "pronunciationId": "w:chance#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:chance#s7",
+      "pos": "v.",
+      "glossZh": "碰巧；偶然遇到",
+      "pronunciationId": "w:chance#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:chance#s8",
+      "pos": "v.",
+      "glossZh": "冒险尝试",
+      "pronunciationId": "w:chance#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "地名、人名、插队或欺骗等",
+      "reason": "专名、俚语或少见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,295 @@
+{
+  "entryId": "w:refresh",
+  "headword": "refresh",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈfreʃ/",
+    "us": "/rɪˈfreʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:refresh#p-main",
+      "ipa": {
+        "uk": "/rɪˈfreʃ/",
+        "us": "/rɪˈfreʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "refreshed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "refreshes",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "refreshing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 41
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 34
+  },
+  "senses": [
+    {
+      "senseId": "w:refresh#s1",
+      "pos": "v.",
+      "glossZh": "使恢复精神",
+      "pronunciationId": "w:refresh#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:refresh#e-71313cf538140039",
+          "text": "Kids are easy to get angry when they’re sleepy or hungry, so schedule playtime when they’re refreshed.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:refresh#e-b5158b980cfaf83c",
+          "text": "To offer the man a way to refresh himself.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:refresh#e-01ee7b7478e97996",
+          "text": "And getting early morning sunlight in your eyes will help refresh you.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:refresh#s2",
+      "pos": "adj.",
+      "glossZh": "让人耳目一新的",
+      "pronunciationId": "w:refresh#p-main",
+      "note": "用 refreshing。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:refresh#e-240bc43ed64a021c",
+          "text": "The youngest volunteer of the day, Mariella Hafalla, 16, finds the frankness of the older generation refreshing.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:refresh#e-5aca5cc35c994b13",
+          "text": "A refreshing comfort.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-shandong-jining-2026-05-third-mock:24",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:refresh#e-dc005e7853393316",
+          "text": "A refreshing discovery.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:25",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:refresh#s3",
+      "pos": "v.",
+      "glossZh": "重新加载（屏幕或网页）",
+      "pronunciationId": "w:refresh#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:refresh#e-33bc339f4c63e393",
+          "text": "Without thinking, she reached for her phone and refreshed the screen.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:refresh#s4",
+      "pos": "v.",
+      "glossZh": "使焕然一新",
+      "pronunciationId": "w:refresh#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:refresh#e-36cc0060a1b6d28f",
+          "text": "For fans, styling them with luxury handbags helps show off their personality and refresh their style.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 95
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:refresh#s5",
+      "pos": "短语",
+      "glossZh": "唤起某人的记忆",
+      "pronunciationId": "w:refresh#p-main",
+      "note": "refresh sb’s memory。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

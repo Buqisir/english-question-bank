@@ -1,0 +1,131 @@
+{
+  "entryId": "w:insurance",
+  "headword": "insurance",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪnˈʃʊərəns/",
+    "us": "/ɪnˈʃʊrəns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:insurance#p-main",
+      "ipa": {
+        "uk": "/ɪnˈʃʊərəns/",
+        "us": "/ɪnˈʃʊrəns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "insurances",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 35
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:insurance#s1",
+      "pos": "n.",
+      "glossZh": "保险",
+      "pronunciationId": "w:insurance#p-main",
+      "note": "take out insurance 表示「投保」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 35
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:insurance#e-d4700475e33bbe29",
+          "text": "Selling insurance.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:insurance#e-a1d40d35c56c02c0",
+          "text": "As a result, since 1996 a group of insurance companies have spent about $2 million per year on the Alberta Hail Suppression Project.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:insurance#e-8ac01e7e4efbddd7",
+          "text": "Benefits include health insurance and training in defensive driving, First Aid/CPR, and Wilderness First Aid.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 33
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "二十一点保险投注",
+      "reason": "牌戏术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

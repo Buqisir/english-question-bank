@@ -1,0 +1,147 @@
+{
+  "entryId": "w:donate",
+  "headword": "donate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dəʊˈneɪt/",
+    "us": "/ˈdoʊneɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:donate#p-main",
+      "ipa": {
+        "uk": "/dəʊˈneɪt/",
+        "us": "/ˈdoʊneɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "donated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "donates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "donating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 55
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:donate#s1",
+      "pos": "v.",
+      "glossZh": "捐赠；捐献",
+      "pronunciationId": "w:donate#p-main",
+      "note": "donate sth to sb/sth，也可用于献血或捐献器官。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 55
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:donate#e-a9b708a2b98f7daf",
+          "text": "Donate whatever clothes are left over",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-national-a:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:donate#e-80f5151c3aabdfb6",
+          "text": "One poster from the exhibition – Henry Wellge’s “Yellowstone National Park” from1904 – was recently purchased with donated funds and is now part of UW Libraries' Emmett D. Chisum Special Collections.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 115,
+            "end": 122
+          }
+        },
+        {
+          "exampleId": "w:donate#e-0bb03164c70e7f16",
+          "text": "Faizan now plans to save half the prize for university – he hopes to become a neurosurgeon – and donate the rest to charity.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 103
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏",
+      "reason": "同形专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,403 @@
+{
+  "entryId": "w:measure",
+  "headword": "measure",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmeʒə(r)/",
+    "us": "/ˈmeʒər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:measure#p-main",
+      "ipa": {
+        "uk": "/ˈmeʒə(r)/",
+        "us": "/ˈmeʒər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "measures",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "measured",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "measuring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 21,
+    "mock": 169
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 169
+  },
+  "senses": [
+    {
+      "senseId": "w:measure#s1",
+      "pos": "v.",
+      "glossZh": "测量；测定",
+      "pronunciationId": "w:measure#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:measure#e-d58aeb7c735df4ff",
+          "text": "Radio tags（标签）on the animals will measure temperature changes.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:measure#e-e860413e4ea289f6",
+          "text": "For the study, 191 women with an average age of 50 took a bicycle exercise test until they were exhausted to measure their peak（最大值的） cardiovascular capacity.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 109,
+            "end": 116
+          }
+        },
+        {
+          "exampleId": "w:measure#e-f320093ec8af097f",
+          "text": "The average peak workload was measured at 103 watts.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:measure#s2",
+      "pos": "v.",
+      "glossZh": "衡量；评估",
+      "pronunciationId": "w:measure#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:measure#e-962c4ef2a6447226",
+          "text": "Many people now misunderstand emotional intelligence as almost everything desirable in a person’s makeup that cannot be measured by an IQ test, such as character, motivation, confidence, mental stability, optimism and “people skills.” Research has shown that emotional skills may contribute to some of these qualities, but most of them move far beyond skill-based emotional intelligence.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 120,
+            "end": 128
+          }
+        },
+        {
+          "exampleId": "w:measure#e-3e0540b17c7993a3",
+          "text": "I decided that I wanted to learn as many words as I could and started marking every entry I looked up with a pencil to measure my progress.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 119,
+            "end": 126
+          }
+        },
+        {
+          "exampleId": "w:measure#e-e475f7f8004a0070",
+          "text": "Emotional states of participants were also measured by asking about their feelings while completing the gallery task.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:measure#s3",
+      "pos": "n.",
+      "glossZh": "衡量标准；衡量指标",
+      "pronunciationId": "w:measure#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:measure#e-ce0e597fc0c78b9b",
+          "text": "A carbon footprint is the measure of influence our activities have on the environment, in particular climate change.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:measure#e-83b8fb03b4735896",
+          "text": "The primary footprint is a measure of our direct emissions（排放）of carbon dioxide (CO2) from the burning of fuels, including household energy consumption and transportation.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:measure#e-97ac7a00ac512517",
+          "text": "Yet the problem, by just about any measure, appears to be getting worse.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:measure#s4",
+      "pos": "n.",
+      "glossZh": "措施",
+      "pronunciationId": "w:measure#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:measure#e-5dcdbe3534b4e669",
+          "text": "Conservation measures will have to be put in place if these deep-sea fish are to survive.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:measure#e-e2cf6653782422d9",
+          "text": "The government has struggled to come up with measures to address the problem, particularly in the poorer, rural areas east of the Volga River, including arranging doctor’s appointments by video chat and expanding financial aid programs to motivate doctors to practice medicine in remote parts of the country like Krasnoyarsk.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:measure#e-fbef8712561726c5",
+          "text": "Now, new research suggests that a simple, cheap measure may significantly reduce the level of microplastics in water from your tap（水龙头）: boiling and filtering（过滤）it.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:measure#s5",
+      "pos": "v.",
+      "glossZh": "尺寸为",
+      "pronunciationId": "w:measure#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:measure#s6",
+      "pos": "n.",
+      "glossZh": "计量单位",
+      "pronunciationId": "w:measure#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:measure#s7",
+      "pos": "n.",
+      "glossZh": "一定程度；一定量",
+      "pronunciationId": "w:measure#p-main",
+      "note": "a measure of sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "诗歌格律；按等距划分；走遍",
+      "reason": "专门或少见的用法"
+    },
+    {
+      "glossZh": "沉着审慎的（measured）",
+      "reason": "独立形容词用法，本批仅一条模拟例证"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

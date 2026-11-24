@@ -1,0 +1,135 @@
+{
+  "entryId": "w:enormous",
+  "headword": "enormous",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈnɔːməs/",
+    "us": "/ɪˈnɔːrməs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:enormous#p-main",
+      "ipa": {
+        "uk": "/ɪˈnɔːməs/",
+        "us": "/ɪˈnɔːrməs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more enormous",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most enormous",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 26
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:enormous#s1",
+      "pos": "adj.",
+      "glossZh": "巨大的",
+      "pronunciationId": "w:enormous#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 26
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:enormous#e-8b55c6b4c70f212c",
+          "text": "Although the studies led by Navajas have limitations and many questions remain, the potential implications for group discussion and decision-making are enormous.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 152,
+            "end": 160
+          }
+        },
+        {
+          "exampleId": "w:enormous#e-a89abeeec3ddc4ae",
+          "text": "On this remote Pacific island, beginning about 1,000 years ago, native people carved the enormous stone moai.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:enormous#e-b8a1c66c12308c65",
+          "text": "However, probing deeper into the corona (日冕) — without overheating, exploding, or falling directly into the Sun – is an enormous engineering challenge.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 120,
+            "end": 128
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "邪恶的",
+      "reason": "古旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,205 @@
+{
+  "entryId": "w:alert",
+  "headword": "alert",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈlɜːt/",
+    "us": "/əˈlɜːrt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:alert#p-main",
+      "ipa": {
+        "uk": "/əˈlɜːt/",
+        "us": "/əˈlɜːrt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more alert",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most alert",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "alerts",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "alerted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "alerting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 29
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 25
+  },
+  "senses": [
+    {
+      "senseId": "w:alert#s1",
+      "pos": "adj.",
+      "glossZh": "警觉的；留心的",
+      "pronunciationId": "w:alert#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:alert#e-244e209348d54bb4",
+          "text": "Meanwhile, countries experiencing population growth must remain alert to emerging threats to safeguard their long-term ecological progress and stability.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:alert#e-c8bc9676ec1cb97a",
+          "text": "Zero-Trust Policy: Never trust, always be alert.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-a:12",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:alert#s2",
+      "pos": "v.",
+      "glossZh": "提醒；警告",
+      "pronunciationId": "w:alert#p-main",
+      "note": "alert sb to sth。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:alert#e-c4a15d1a66d4136c",
+          "text": "You open your Playbill and a little piece of paper slips out, alerting you that a member of the cast is out and someone unexpected will be performing.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:alert#s3",
+      "pos": "n.",
+      "glossZh": "警报；提醒",
+      "pronunciationId": "w:alert#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:alert#e-e8cc36081b9f319f",
+          "text": "FDA.gov has a Recalls, Market Withdrawals & Safety Alerts page with recalls of drugs, medical devices, cosmetics, tobacco products and more, in addition to foods.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-a:13",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 57
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "个别村镇地名",
+      "reason": "专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

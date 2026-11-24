@@ -1,0 +1,175 @@
+{
+  "entryId": "w:temple",
+  "headword": "temple",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtempl/",
+    "us": "/ˈtempl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:temple#p-main",
+      "ipa": {
+        "uk": "/ˈtempl/",
+        "us": "/ˈtempl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "temples",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "senses": [
+    {
+      "senseId": "w:temple#s1",
+      "pos": "n.",
+      "glossZh": "寺庙",
+      "pronunciationId": "w:temple#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:temple#e-82d2a0cab1879d1c",
+          "text": "Discover the China of “past ages,” its walled cities, temples and mountain scenery with Prof. Robert Thorp.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:temple#e-0b5e25cafb6f66a4",
+          "text": "Highlights(精彩之处)include China’s most sacred peaks at Mount Tai and Hangzhou’s rolling hills, waterways and peaceful temples.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 116,
+            "end": 123
+          }
+        },
+        {
+          "exampleId": "w:temple#e-b35fdf60642e800a",
+          "text": "At the Beijing Stone Carving Art Museum, formerly a temple, stand two giant ginkgos (银杏树).",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:temple#s2",
+      "pos": "n.",
+      "glossZh": "太阳穴",
+      "pronunciationId": "w:temple#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:temple#s3",
+      "pos": "n.",
+      "glossZh": "被视为神圣的地方",
+      "pronunciationId": "w:temple#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:temple#e-bc20c800be187509",
+          "text": "I can well remember that when I was young, the workshop was a temple of __41__.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 68
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "伦敦法律学院区、耶路撒冷圣殿、眼镜镜腿及织机装置",
+      "reason": "专名或专业义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

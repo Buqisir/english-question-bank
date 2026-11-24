@@ -1,0 +1,157 @@
+{
+  "entryId": "w:toy",
+  "headword": "toy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tɔɪ/",
+    "us": "/tɔɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:toy#p-main",
+      "ipa": {
+        "uk": "/tɔɪ/",
+        "us": "/tɔɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "toys",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 15,
+    "mock": 130
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 130
+  },
+  "senses": [
+    {
+      "senseId": "w:toy#s1",
+      "pos": "n.",
+      "glossZh": "玩具",
+      "pronunciationId": "w:toy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:toy#e-5a8e6f0672662eab",
+          "text": "“It’s a large wooden chest full of toys for my grandchildren,” I replied,",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:toy#e-59b7ea2853bcabec",
+          "text": "I tried making toy cars with cardboard boxes and constructing buildings from leftover cardboard and bits of wood my father gave me.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:toy#e-e1112848b4d93f0a",
+          "text": "Involve your child in the daily running of the house: tidying toys, feeding the dog, watering the plants.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:toy#s2",
+      "pos": "短语",
+      "glossZh": "随意摆弄",
+      "pronunciationId": "w:toy#p-main",
+      "note": "toy with。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:toy#s3",
+      "pos": "短语",
+      "glossZh": "并不认真地考虑",
+      "pronunciationId": "w:toy#p-main",
+      "note": "toy with。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "鸦片罐、古乐曲等",
+      "reason": "罕用义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

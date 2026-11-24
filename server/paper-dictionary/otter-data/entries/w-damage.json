@@ -1,0 +1,231 @@
+{
+  "entryId": "w:damage",
+  "headword": "damage",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdæmɪdʒ/",
+    "us": "/ˈdæmɪdʒ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:damage#p-main",
+      "ipa": {
+        "uk": "/ˈdæmɪdʒ/",
+        "us": "/ˈdæmɪdʒ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "damages",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "damaged",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "damaging",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 175
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 174
+  },
+  "senses": [
+    {
+      "senseId": "w:damage#s1",
+      "pos": "n.",
+      "glossZh": "损坏；损害",
+      "pronunciationId": "w:damage#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:damage#e-57f5096b549d1510",
+          "text": "“I come to you, __57__, to apologize for the damage I had __58__ caused and to ask you to __59__ my lifetime ban from the hotel.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-a:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:damage#e-112583cefebb3c82",
+          "text": "The damage done by overfishing goes beyond the sea environment.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:damage#e-b7981bd6079e13c8",
+          "text": "Clothes stores change their product ranges every few weeks, generating a constant production cycle that causes significant damage to nature.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 129
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:damage#s2",
+      "pos": "v.",
+      "glossZh": "损坏；损害",
+      "pronunciationId": "w:damage#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:damage#e-818598ede9da9d58",
+          "text": "Nutria damage the ecosystem seriously.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2020-national-ii:29",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:damage#e-0898ca8cd94871cb",
+          "text": "Once, when trying a certain trick on the beam (横杆), I fell onto the stones, damaging a nerve in my hand, and Toby came over, helping me up: Safe, man.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:2",
+              "sentence": 9
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:damage#e-9246a4a045f3fc0d",
+          "text": "Habitat loss, pesticide use, and climate change have caused dramatic declines in pollinator populations over the past couple of decades, which has damaged the U.S. agricultural economy.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 147,
+            "end": 154
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:damage#s3",
+      "pos": "n.",
+      "glossZh": "赔偿金（damages）",
+      "pronunciationId": "w:damage#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "账单总额、下架处理受损商品",
+      "reason": "口语或行业专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,169 @@
+{
+  "entryId": "w:delicious",
+  "headword": "delicious",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈlɪʃəs/",
+    "us": "/dɪˈlɪʃəs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:delicious#p-main",
+      "ipa": {
+        "uk": "/dɪˈlɪʃəs/",
+        "us": "/dɪˈlɪʃəs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more delicious",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most delicious",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 14
+  },
+  "senses": [
+    {
+      "senseId": "w:delicious#s1",
+      "pos": "adj.",
+      "glossZh": "美味的；好吃的",
+      "pronunciationId": "w:delicious#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:delicious#e-ab13f6e96b53f207",
+          "text": "The food is so delicious that you don’t need much of it to make you happy.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-i:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:delicious#e-35a496047c2937b6",
+          "text": "Just quickly turn around and say, \"This cake is extremely delicious and you have to tell me all about it.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:delicious#e-191da1266768f7b6",
+          "text": "She was making spaghetti, which smelled delicious.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:delicious#s2",
+      "pos": "adj.",
+      "glossZh": "令人愉悦的",
+      "pronunciationId": "w:delicious#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:delicious#e-701edbae3f641998",
+          "text": "But for the experienced art lover, the real joy is in the build-up, the delicious journey, the awesome pay-off.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 81
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "性感迷人的",
+      "reason": "俚语性比喻，缺少教学例证"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

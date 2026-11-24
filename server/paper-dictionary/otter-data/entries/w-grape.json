@@ -1,0 +1,92 @@
+{
+  "entryId": "w:grape",
+  "headword": "grape",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɡreɪp/",
+    "us": "/ɡreɪp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:grape#p-main",
+      "ipa": {
+        "uk": "/ɡreɪp/",
+        "us": "/ɡreɪp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "grapes",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:grape#s1",
+      "pos": "n.",
+      "glossZh": "葡萄",
+      "pronunciationId": "w:grape#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:grape#e-5ad6801344a8dee4",
+          "text": "Grapes.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.short-dialogue",
+            "locator": {
+              "question": 3,
+              "questionId": "question:listening:3",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "枪炮散弹",
+      "reason": "旧时军事专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

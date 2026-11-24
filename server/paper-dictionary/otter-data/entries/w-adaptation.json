@@ -1,0 +1,119 @@
+{
+  "entryId": "w:adaptation",
+  "headword": "adaptation",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌædæpˈteɪʃn/",
+    "us": "/ˌædæpˈteɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:adaptation#p-main",
+      "ipa": {
+        "uk": "/ˌædæpˈteɪʃn/",
+        "us": "/ˌædæpˈteɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "adaptations",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 60
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 59
+  },
+  "senses": [
+    {
+      "senseId": "w:adaptation#s1",
+      "pos": "n.",
+      "glossZh": "适应；适应性变化或特征",
+      "pronunciationId": "w:adaptation#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:adaptation#e-355f68703cdf54ae",
+          "text": "On Thursday in an article published in Cell, a team of researchers reported a new kind of adaptation - not to air or to food, but to the ocean.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 100
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:adaptation#s2",
+      "pos": "n.",
+      "glossZh": "改编；改编作品",
+      "pronunciationId": "w:adaptation#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:adaptation#e-49570a1b7e4caef0",
+          "text": "Students watching a live play outperform those seeing the same play as a film adaptation on knowledge of content and vocabulary.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 88
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,401 @@
+{
+  "entryId": "w:fair",
+  "headword": "fair",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/feə(r)/",
+    "us": "/fer/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fair#p-main",
+      "ipa": {
+        "uk": "/feə(r)/",
+        "us": "/fer/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "fairer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "fairest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more fair",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most fair",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "fairs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 75
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 70
+  },
+  "senses": [
+    {
+      "senseId": "w:fair#s1",
+      "pos": "adj.",
+      "glossZh": "公平的",
+      "pronunciationId": "w:fair#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fair#e-f8127dfc0373108b",
+          "text": "I decided it was not fair that I had to contribute my money.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:fair#e-d48051d28587e114",
+          "text": "Museums are working together with AI ethicists to develop fair algorithms.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:fair#e-a03a5e8fe960b6db",
+          "text": "If Blake doesn’t think Alex’s split was fair, Chris looks to see if there are two pieces he would take.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fair#s2",
+      "pos": "adj.",
+      "glossZh": "合理的",
+      "pronunciationId": "w:fair#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fair#e-234a2851d69bbb6e",
+          "text": "● Fair, expert valuation, with one clear offer for the whole box",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:fair#e-466e9cb07825a26a",
+          "text": "fair to say most developers still favor Claude.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-a",
+            "locator": {
+              "paragraph": 20,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-a:20",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fair#s3",
+      "pos": "adj.",
+      "glossZh": "浅色的",
+      "pronunciationId": "w:fair#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fair#s4",
+      "pos": "adj.",
+      "glossZh": "晴朗的",
+      "pronunciationId": "w:fair#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fair#s5",
+      "pos": "adj.",
+      "glossZh": "尚可的",
+      "pronunciationId": "w:fair#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fair#s6",
+      "pos": "n.",
+      "glossZh": "展会",
+      "pronunciationId": "w:fair#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fair#e-d78c7260bdaba48c",
+          "text": "Sponsor book fairs.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2020-national-ii:34",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:fair#e-0239658154c2cd59",
+          "text": "He went to a tech fair.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:fair#e-ce740d41e8f3dc85",
+          "text": "In a job fair.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fair#s7",
+      "pos": "n.",
+      "glossZh": "集市",
+      "pronunciationId": "w:fair#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fair#e-41f67abc9ebb2bb6",
+          "text": "Daji, or big open-air fairs, typically take place on specific dates of the lunar calendar, for example, on dates with five or seven as the last digit.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:fair#e-80dfe0cac5be2fc3",
+          "text": "It includes art shows, concerts, farm tours, a fun run, bike rides, and the Downtown Mount Vernon Street Fair.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
+            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2025-10-first-baseline-test:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 109
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fair#s8",
+      "pos": "n.",
+      "glossZh": "游乐会",
+      "pronunciationId": "w:fair#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fair#s9",
+      "pos": "adv.",
+      "glossZh": "公平地",
+      "pronunciationId": "w:fair#p-main",
+      "note": "play fair。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "界内的",
+      "reason": "棒球等专门用法"
+    },
+    {
+      "glossZh": "美丽的",
+      "reason": "如今主要见于文学文本"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

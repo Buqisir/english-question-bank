@@ -1,0 +1,536 @@
+{
+  "entryId": "w:support",
+  "headword": "support",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/səˈpɔːt/",
+    "us": "/səˈpɔːrt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:support#p-main",
+      "ipa": {
+        "uk": "/səˈpɔːt/",
+        "us": "/səˈpɔːrt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "supports",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "supported",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "supporting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 36,
+    "mock": 540
+  },
+  "unassignedCounts": {
+    "gaokao": 5,
+    "mock": 540
+  },
+  "senses": [
+    {
+      "senseId": "w:support#s1",
+      "pos": "v.",
+      "glossZh": "供养",
+      "pronunciationId": "w:support#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:support#e-c0bdb92e4db3ee92",
+          "text": "She decided to go back to college to advance her career and to be able to better support her family while doing something she loves: nursing.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 88
+          }
+        },
+        {
+          "exampleId": "w:support#e-5e26d820562c5cbb",
+          "text": "She supported herself through college.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2020-i:24",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:support#e-bbc9d17c50b48313",
+          "text": "Over several hours, he would tell me about how he had __45__ a two-year professional school to quickly find a job __46__ highways in order to help support his family.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 147,
+            "end": 154
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:support#s2",
+      "pos": "v.",
+      "glossZh": "支持",
+      "pronunciationId": "w:support#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:support#e-d31171a414226280",
+          "text": "Libraries, in their own way, help fight book piracy(盗版行为) and I think all writers should support libraries in a significant way when they can.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:support#e-dcbe51af40d7c413",
+          "text": "Many primary schools support walking school-bus routes（路线）, with days of regular, parent-accompanied walks.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:support#e-39e3e94dbd15c11c",
+          "text": "To support her DIY projects.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2023-national-a:25",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:support#s3",
+      "pos": "v.",
+      "glossZh": "托住",
+      "pronunciationId": "w:support#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:support#e-5bb6951a62177a82",
+          "text": "He conveyed through her that he had a jack but that it was too small for the Jeep, so we would need something to support it.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 113,
+            "end": 120
+          }
+        },
+        {
+          "exampleId": "w:support#e-68792105251f04de",
+          "text": "You need a seat which supports your back and the book should be at the right distance from your eyes.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:support#e-567e05137c562a2d",
+          "text": "“I’m going to set it down, now,” I said, and with Jason helping to support its weight， I bent back over the table to give it somewhere to rest.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 74
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:support#s4",
+      "pos": "v.",
+      "glossZh": "为……提供证据",
+      "pronunciationId": "w:support#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:support#e-71667803b02419a4",
+          "text": "Although popular beliefs regarding emotional intelligence run far ahead of what research can reasonably support, the overall effects of the publicity have been more beneficial than harmful.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:support#e-3fb3aa291368a802",
+          "text": "To support her argument.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:24",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:support#e-2817447dd7625068",
+          "text": "Supporting evidence for the research results.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2022-i:34",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:support#s5",
+      "pos": "n.",
+      "glossZh": "援助",
+      "pronunciationId": "w:support#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:support#e-07e83de94121c59b",
+          "text": "Jenifer received great support from her family as she worked to earn her degree: Her husband worked two jobs to cover the bills, and her 68-year-old mother helped take care of the children at times.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:support#e-32629bcdc5628a8b",
+          "text": "I owe the speed of progress I made in Italian to the support from Jim, my partner in study time.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:support#e-aea1691b05b2c8ae",
+          "text": "Technical support.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:23",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:support#s6",
+      "pos": "n.",
+      "glossZh": "资助",
+      "pronunciationId": "w:support#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:support#e-91df083ff4cf9fb4",
+          "text": "There are now 700 elderly people looking after hens in 20 care homes in the North East, and the charity has been given financial support to roll it out countrywide.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "reading-c-6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 129,
+            "end": 136
+          }
+        },
+        {
+          "exampleId": "w:support#e-edc68ce3e337d597",
+          "text": "As a Friend, your membership provides essential annual support to help sustain the continued excellence and diversity of the Museum’s educational programs.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:support#e-b552fe01f66bd7b5",
+          "text": "It got lots of financial support.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2025-ii:28",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:support#s7",
+      "pos": "n.",
+      "glossZh": "支撑物",
+      "pronunciationId": "w:support#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:support#s8",
+      "pos": "v.",
+      "glossZh": "兼容",
+      "pronunciationId": "w:support#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "网页路径、数学支撑集和演出伴奏",
+      "reason": "误配或专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

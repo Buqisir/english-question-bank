@@ -1,0 +1,417 @@
+{
+  "entryId": "w:fish",
+  "headword": "fish",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fɪʃ/",
+    "us": "/fɪʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fish#p-main",
+      "ipa": {
+        "uk": "/fɪʃ/",
+        "us": "/fɪʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "fishes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "fished",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "fishing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 51,
+    "mock": 145
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 145
+  },
+  "senses": [
+    {
+      "senseId": "w:fish#s1",
+      "pos": "n.",
+      "glossZh": "鱼",
+      "pronunciationId": "w:fish#p-main",
+      "note": "通常单复数同形。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fish#e-8fd2fb4d25443e41",
+          "text": "Conservation measures will have to be put in place if these deep-sea fish are to survive.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:fish#e-a406d885ea67ed0d",
+          "text": "Which kinds of fish can eat cancer-causing chemicals?",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:fish#e-652adc255804ff30",
+          "text": "The gardens are beautifully laid out with two lakes, which are home to a vast collection of fish.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 96
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fish#s2",
+      "pos": "n.",
+      "glossZh": "鱼肉",
+      "pronunciationId": "w:fish#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 19,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fish#e-c1c9db6fac0a175c",
+          "text": "How to fry fish.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:fish#e-be22299d00fa08ec",
+          "text": "Billions of people rely on fish for protein.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-four-provinces-feb:36",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:fish#e-b2e245ea70dae5d4",
+          "text": "Probably fish and chips, or a Sunday dinner of meat and two vegetables.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fish#s3",
+      "pos": "n.",
+      "glossZh": "捕鱼",
+      "pronunciationId": "w:fish#p-main",
+      "note": "fishing。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fish#e-78f4d9b385efa3bf",
+          "text": "And in Karakalpakstan, he is saddened by the dust storms, diseases and fishing boats stuck miles from the sea.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:fish#e-dc4747f5321c960a",
+          "text": "Millions of people make a living in the fishing industry.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:fish#e-586ac3a378fe7777",
+          "text": "Even if you haven’t been to the small fishing village Mevagissey, you’ve probably seen it in a movie or British TV show.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fish#s4",
+      "pos": "v.",
+      "glossZh": "钓鱼",
+      "pronunciationId": "w:fish#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fish#e-ec415f30c9f65dfb",
+          "text": "My husband stopped fishing to __50__ the motor.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "cloze-3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:fish#e-c299bf01df89946b",
+          "text": "Go fishing.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:listening.short-dialogue",
+            "locator": {
+              "question": 3,
+              "questionId": "question:listening:3",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:fish#e-292453f122127e7b",
+          "text": "Go fishing in the sea.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2025-ii:23",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fish#s5",
+      "pos": "短语",
+      "glossZh": "（从某处）摸出",
+      "pronunciationId": "w:fish#p-main",
+      "note": "fish out。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fish#e-1e01618d10445e32",
+          "text": "When I was about to give up, Gunter fished out his little phone and rang up a friend.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fish#s6",
+      "pos": "短语",
+      "glossZh": "旁敲侧击地索取",
+      "pronunciationId": "w:fish#p-main",
+      "note": "fish for compliments 设法引人夸奖。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "荧光原位杂交",
+      "reason": "缩写 FISH"
+    },
+    {
+      "glossZh": "船桅加固件",
+      "reason": "航海专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

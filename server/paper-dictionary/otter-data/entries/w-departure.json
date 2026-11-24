@@ -1,0 +1,143 @@
+{
+  "entryId": "w:departure",
+  "headword": "departure",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈpɑːtʃə(r)/",
+    "us": "/dɪˈpɑːrtʃər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:departure#p-main",
+      "ipa": {
+        "uk": "/dɪˈpɑːtʃə(r)/",
+        "us": "/dɪˈpɑːrtʃər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "departures",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "senses": [
+    {
+      "senseId": "w:departure#s1",
+      "pos": "n.",
+      "glossZh": "离开；出发；启程",
+      "pronunciationId": "w:departure#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:departure#e-09f182f8e757c01e",
+          "text": "Note: The times listed on the schedules are departure times, not arrival times.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:departure#e-f9bc9f77484d325d",
+          "text": "I touched down in Vienna just 30 minutes before the departure of the last bus to Prague.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:departure#e-f988319a36c9e077",
+          "text": "Paragraph 2: Upon my departure, the man thanked me for my meal notes for all staff.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:departure#s2",
+      "pos": "n.",
+      "glossZh": "背离；与惯例不同的做法",
+      "pronunciationId": "w:departure#p-main",
+      "note": "a departure from sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "死亡的委婉说法；东西向航程分量；改变诉讼立场",
+      "reason": "旧式或专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

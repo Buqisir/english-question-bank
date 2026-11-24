@@ -1,0 +1,283 @@
+{
+  "entryId": "w:pair",
+  "headword": "pair",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/peə(r)/",
+    "us": "/per/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:pair#p-main",
+      "ipa": {
+        "uk": "/peə(r)/",
+        "us": "/per/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "pairs",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "paired",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "pairing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 95
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 92
+  },
+  "senses": [
+    {
+      "senseId": "w:pair#s1",
+      "pos": "n.",
+      "glossZh": "一对；一双；一副",
+      "pronunciationId": "w:pair#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pair#e-461552b6cc4e9ec8",
+          "text": "Join the Harvard Undergraduate Knitting Circle to make pom-poms and tassels out of thread, or pick up a pair of needles and learn to knit（编织）.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 108
+          }
+        },
+        {
+          "exampleId": "w:pair#e-aec0c3ce01df8c4c",
+          "text": "The most important piece of equipment for running is a good pair of running shoes, so be sure to do some research before you purchase a pair.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:pair#e-9453e5859bc97f98",
+          "text": "To understand the true cost, we can look at a common item: a pair of jeans.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:reading-a:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pair#s2",
+      "pos": "n.",
+      "glossZh": "两个人组成的一对",
+      "pronunciationId": "w:pair#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pair#e-c40aff10df74ef31",
+          "text": "The researchers analyzed video recordings of 53 child-parent pairs during everyday activities at home and found children who play with puzzles between 26 and 46 months of age have better spatial skills when assessed at 54 months of age.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:pair#e-b830f1e1e3968a68",
+          "text": "The alarm rang at 6 a.m. The pair went down the stairs quietly to the kitchen.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:pair#e-d2dc7c41ef9d9da2",
+          "text": "Pairs of opponents hit the ball back and forth until one winner comes out from all who entered.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pair#s3",
+      "pos": "v.",
+      "glossZh": "把……配成一对",
+      "pronunciationId": "w:pair#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pair#e-66ec911c22fe735c",
+          "text": "When Dr. Henderson was assigning(指定) project mates for his psychology class, I secretly hoped he would pair me with my best friend or at least a classmate I could have some fun with.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 103,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:pair#e-88cc1a076cdda3d7",
+          "text": "Last week in biology class, the teacher had the students pair up to care for a plant or a small animal for a month.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:pair#e-2c444c08c1516c7d",
+          "text": "Free of charge (including travel, housing and meals), it lasts 10 days and pairs participants with professional journalists.",
+          "source": {
+            "paperId": "paper-mock-henan-four-cities-2026-01",
+            "paperTitle": "河南省洛阳、许昌、平顶山、济源四市2025—2026学年高三年级第二次质量检测英语试题",
+            "groupId": "group:paper-mock-henan-four-cities-2026-01:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-henan-four-cities-2026-01:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 80
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

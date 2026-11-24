@@ -1,0 +1,214 @@
+{
+  "entryId": "w:basket",
+  "headword": "basket",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈbɑːskɪt/",
+    "us": "/ˈbæskɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:basket#p-main",
+      "ipa": {
+        "uk": "/ˈbɑːskɪt/",
+        "us": "/ˈbæskɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "baskets",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 45
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 42
+  },
+  "senses": [
+    {
+      "senseId": "w:basket#s1",
+      "pos": "n.",
+      "glossZh": "篮子；筐；篓",
+      "pronunciationId": "w:basket#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:basket#e-be0f3add74c38892",
+          "text": "So two by two,I read library books as fast as I could go: rushing them home in the basket of my bicycle.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:basket#e-95467354336f4c5f",
+          "text": "Flowers are everywhere – hanging baskets, window boxes, and planters – just what you imagine in an attractive English market town.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:8",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:basket#e-a648ec44d1e0ad2a",
+          "text": "The basket in her hands held a dozen brown eggs, each one different in size.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:basket#s2",
+      "pos": "n.",
+      "glossZh": "（篮球）篮筐；投篮得分",
+      "pronunciationId": "w:basket#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:basket#e-a4a2d561e59b4153",
+          "text": "Summers in the mid-70s were spent at home shooting baskets, hitting a baseball, or throwing a football, preparing for my future as a quarterback on a football team.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:basket#e-0283e7b2ed8e9a81",
+          "text": "The crowd roared, sure that it was bound to drop into the basket ...",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:basket#e-65e8edc8b097d01c",
+          "text": "They scored two baskets.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:basket#s3",
+      "pos": "n.",
+      "glossZh": "一篮子（商品、货币等）；一组事物",
+      "pronunciationId": "w:basket#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "加油伞锥套、剑护手、柱头部位及辱骂用语",
+      "reason": "技术、历史或冒犯性用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

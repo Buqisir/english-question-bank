@@ -1,0 +1,192 @@
+{
+  "entryId": "w:exam",
+  "headword": "exam",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "examination"
+  ],
+  "ipa": {
+    "uk": "/ɪɡˈzæm/",
+    "us": "/ɪɡˈzæm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:exam#p-main",
+      "ipa": {
+        "uk": "/ɪɡˈzæm/",
+        "us": "/ɪɡˈzæm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "exams",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "examinations",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 109
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 108
+  },
+  "senses": [
+    {
+      "senseId": "w:exam#s1",
+      "pos": "n.",
+      "glossZh": "考试",
+      "pronunciationId": "w:exam#p-main",
+      "note": "examination 的常用缩写形式。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:exam#e-528015e675026c38",
+          "text": "\"Some nights my heart was breaking to have to pick between my kids and studying for exams or papers,\" she says.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:exam#e-c303262dab0f6580",
+          "text": "However, Tan passed the official exam.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-a:figure-d47b575dce95546b:cell-1-1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:exam#e-0a83ce42651ac3ca",
+          "text": "Want to learn a new language or get A’s in college exams?",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:exam#s2",
+      "pos": "n.",
+      "glossZh": "体检",
+      "pronunciationId": "w:exam#p-main",
+      "note": "英美均有 examination，美式常简写为 exam。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:exam#e-0b80038182fdd220",
+          "text": "To do a medical examination.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2025-eight-provinces-jan:34",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:exam#e-e7de5a8f90ee3f23",
+          "text": "It now serves as a silent helper in offices, an uncredited partner in classrooms, and even “ears” in exam rooms.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 105
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "examination 表示审查",
+      "reason": "该意义通常不用 exam"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

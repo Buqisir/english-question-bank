@@ -1,0 +1,155 @@
+{
+  "entryId": "w:evaluate",
+  "headword": "evaluate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈvæljueɪt/",
+    "us": "/ɪˈvæljueɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:evaluate#p-main",
+      "ipa": {
+        "uk": "/ɪˈvæljueɪt/",
+        "us": "/ɪˈvæljueɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "evaluated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "evaluates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "evaluating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 58
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 57
+  },
+  "senses": [
+    {
+      "senseId": "w:evaluate#s1",
+      "pos": "v.",
+      "glossZh": "评估",
+      "pronunciationId": "w:evaluate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:evaluate#e-d1911ff575f3fd18",
+          "text": "To evaluate their work habits.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jul:28",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:evaluate#e-aa67812952382048",
+          "text": "Evaluate your performance and, if needed, redefine your role.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-ii:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:evaluate#e-9ac4188c998fa873",
+          "text": "Social studies researchers often describe this kind of critical thinking as “historical thinking”: a way to evaluate evidence about the past and assess its reliability.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 116
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:evaluate#s2",
+      "pos": "v.",
+      "glossZh": "求出（数学表达式）的值",
+      "pronunciationId": "w:evaluate#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

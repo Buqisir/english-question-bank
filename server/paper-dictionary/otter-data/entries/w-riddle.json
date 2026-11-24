@@ -1,0 +1,193 @@
+{
+  "entryId": "w:riddle",
+  "headword": "riddle",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈrɪdl/",
+    "us": "/ˈrɪdl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:riddle#p-main",
+      "ipa": {
+        "uk": "/ˈrɪdl/",
+        "us": "/ˈrɪdl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "riddles",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "riddled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "riddling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "senses": [
+    {
+      "senseId": "w:riddle#s1",
+      "pos": "n.",
+      "glossZh": "谜语",
+      "pronunciationId": "w:riddle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:riddle#e-1597350f652796fb",
+          "text": "Here’s a riddle: What do traffic jams, long lines and waiting for a vacation to start all have in common?",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:riddle#e-a2b17381751446e3",
+          "text": "The challenge required us to solve riddles in English and find hidden clues.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:riddle#e-b329e6cc0541da7e",
+          "text": "They then tested their knowledge by __49__ with students from other schools and creating, exchanging, and solving many riddles related to the content.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 119,
+            "end": 126
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:riddle#s2",
+      "pos": "n.",
+      "glossZh": "谜团",
+      "pronunciationId": "w:riddle#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:riddle#e-05592e9ad2971def",
+          "text": "We are still dreamers, still seekers, still interpreters of the night’s riddles.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:riddle#s3",
+      "pos": "v.",
+      "glossZh": "使布满（孔洞等）",
+      "pronunciationId": "w:riddle#p-main",
+      "note": "be riddled with。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "粗筛",
+      "reason": "少见的器具义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

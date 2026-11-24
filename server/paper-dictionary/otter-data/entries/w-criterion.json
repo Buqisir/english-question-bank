@@ -1,0 +1,132 @@
+{
+  "entryId": "w:criterion",
+  "headword": "criterion",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "criteria"
+  ],
+  "ipa": {
+    "uk": "/kraɪˈtɪəriən/",
+    "us": "/kraɪˈtɪriən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:criterion#p-main",
+      "ipa": {
+        "uk": "/kraɪˈtɪəriən/",
+        "us": "/kraɪˈtɪriən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "criterias",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 36
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:criterion#s1",
+      "pos": "n.",
+      "glossZh": "（评判或决定的）标准",
+      "pronunciationId": "w:criterion#p-main",
+      "note": "复数为 criteria。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 36
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:criterion#e-dfdea2a91cc32e39",
+          "text": "A total of 40 women met the criteria for a high fitness level, or 120 watts or higher.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:criterion#e-af57554eeda5591d",
+          "text": "My main criterion for choosing a school was that I wanted to live in a country where I could __41__ English alone.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:criterion#e-7cd8c58938d76f87",
+          "text": "Scholarship applicants must exhibit leadership skills, which is the first criterion.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 83
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "把 criteria 当作单数",
+      "reason": "非规范用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

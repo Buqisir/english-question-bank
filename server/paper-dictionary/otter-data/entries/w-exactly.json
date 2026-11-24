@@ -1,0 +1,269 @@
+{
+  "entryId": "w:exactly",
+  "headword": "exactly",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪɡˈzæktli/",
+    "us": "/ɪɡˈzæktli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:exactly#p-main",
+      "ipa": {
+        "uk": "/ɪɡˈzæktli/",
+        "us": "/ɪɡˈzæktli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more exactly",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most exactly",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 112
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 109
+  },
+  "senses": [
+    {
+      "senseId": "w:exactly#s1",
+      "pos": "adv.",
+      "glossZh": "准确地",
+      "pronunciationId": "w:exactly#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:exactly#e-614feef898225ab6",
+          "text": "It’s hard to tell exactly how many people agree with him, but research indicates that the numbers have been rising for some time.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:exactly#e-6ca0f25ee207c3ec",
+          "text": "But the study was small and needs to be repeated with far larger groups of people to determine exactly which aspects of an exercise routine make the biggest difference.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:exactly#e-d6060d3d4686f488",
+          "text": "Rates are exactly $900 nightly.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:21",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:exactly#s2",
+      "pos": "adv.",
+      "glossZh": "正是",
+      "pronunciationId": "w:exactly#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:exactly#e-2ded2680b0ed3876",
+          "text": "Catherine Murphy, a cafe worker in a green shirt and black hat, makes sure that each customer gets exactly what they order.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 99,
+            "end": 106
+          }
+        },
+        {
+          "exampleId": "w:exactly#e-a86ca9b1a475436f",
+          "text": "Then, one day last term, I did exactly that.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:exactly#e-f0fa40a43da3f4b6",
+          "text": "Dr. Kaiser puts it like this: When you feel so overwhelmed with your life that you feel like you can’t fit one more thing in, that’s exactly when you need to write your own nature prescription.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 133,
+            "end": 140
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:exactly#s3",
+      "pos": "短语",
+      "glossZh": "算不上",
+      "pronunciationId": "w:exactly#p-main",
+      "note": "not exactly，用于委婉或反讽地否定。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:exactly#e-df8d3fc5ed888b35",
+          "text": "Of course, with its 2,672 pages, it’s not exactly short.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:exactly#e-6ab026d8cc63ff9f",
+          "text": "It is not exactly a rule.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:exactly#s4",
+      "pos": "int.",
+      "glossZh": "完全正确",
+      "pronunciationId": "w:exactly#p-main",
+      "note": "用于回答，表示完全同意。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

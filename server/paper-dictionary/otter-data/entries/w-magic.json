@@ -1,0 +1,392 @@
+{
+  "entryId": "w:magic",
+  "headword": "magic",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmædʒɪk/",
+    "us": "/ˈmædʒɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:magic#p-main",
+      "ipa": {
+        "uk": "/ˈmædʒɪk/",
+        "us": "/ˈmædʒɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "magics",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 78
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 71
+  },
+  "senses": [
+    {
+      "senseId": "w:magic#s1",
+      "pos": "n.",
+      "glossZh": "魔法",
+      "pronunciationId": "w:magic#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:magic#e-d5cdac2f8df5db3c",
+          "text": "She asked in a bright voice, “Auntie, was this made with magic?",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:magic#e-ad727e8052d7e06c",
+          "text": "She began capturing and questioning illegal hunters, burning down their camps, and pretending to use black magic to make locals believe she was a witch.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b:7",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 112
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:magic#s2",
+      "pos": "n.",
+      "glossZh": "魔术",
+      "pronunciationId": "w:magic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:magic#e-d5d291ed100b3bcc",
+          "text": "Magic is a form of entertainment that is based on pretending to do things that are impossible.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:magic#e-a682fb85008897e1",
+          "text": "To explain the art of magic.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:28",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:magic#e-f4d6cde775268c7f",
+          "text": "It takes practice to perform magic.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:31",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:magic#s3",
+      "pos": "n.",
+      "glossZh": "魅力",
+      "pronunciationId": "w:magic#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:magic#e-c72fbf92145011e6",
+          "text": ", for me, the true magic of this art happens when a living statue goes from stillness to movement.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:magic#e-7e2340f127860353",
+          "text": "Nosrat writes about the magic that holds her weekly dinners together and shares her all-time favorite dishes in Good Things: Recipes and Rituals to Share with People You Love.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:magic#e-c53ead1c92e912b5",
+          "text": "For an educator who firmly believes that quotes deserve to be written in cursive, Kenerson wanted to give students a chance to understand the magic of the loopy writing.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 142,
+            "end": 147
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:magic#s4",
+      "pos": "adj.",
+      "glossZh": "奇妙的",
+      "pronunciationId": "w:magic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:magic#e-e9941e96492cec45",
+          "text": "“I’ve seen those magic moments when children are talking to someone they are inspired by - their eyes are shining and their faces light up,” she said.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:magic#s5",
+      "pos": "adj.",
+      "glossZh": "有神奇功效的",
+      "pronunciationId": "w:magic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:magic#e-03f03dfd622c1d29",
+          "text": "Unfortunately, there is no magic list I can offer.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:magic#e-826c319d89eb752d",
+          "text": "After all, no question or magic phrase can control another person’s perception.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d:5",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:magic#e-5c51a5cfdf7449c4",
+          "text": "Glance through your WeChat Moments or TikTok feed, and you’ll see all kinds of posts: a friend strongly recommending a “magic study method” that guarantees top grades or a video claiming “eating chocolate every day prevents colds”.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 120,
+            "end": 125
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:magic#s6",
+      "pos": "短语",
+      "glossZh": "神奇般地",
+      "pronunciationId": "w:magic#p-main",
+      "note": "like magic。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:magic#e-0a9a05a2801d0e90",
+          "text": "My imaginary Grandma’s Box worked like magic that spring, and later.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 44
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "幻数、密码分析项目",
+      "reason": "专业用法或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

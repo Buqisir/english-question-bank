@@ -1,0 +1,227 @@
+{
+  "entryId": "w:fun",
+  "headword": "fun",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fʌn/",
+    "us": "/fʌn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fun#p-main",
+      "ipa": {
+        "uk": "/fʌn/",
+        "us": "/fʌn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "funner",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "funnest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more fun",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most fun",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 39,
+    "mock": 215
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 215
+  },
+  "senses": [
+    {
+      "senseId": "w:fun#s1",
+      "pos": "n.",
+      "glossZh": "乐趣",
+      "pronunciationId": "w:fun#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 25,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fun#e-291fc0a90113372e",
+          "text": "Discover, explore and enjoy award-winning Tullie House, where historic collections, contemporary art and family fun are brought together in one impressive museum and art gallery.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:13",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 112,
+            "end": 115
+          }
+        },
+        {
+          "exampleId": "w:fun#e-7363f51426362da2",
+          "text": "That said, to be honest the only people who ever ring our home phone are our Baby Boomer parents, to the point where we play a game and guess who is calling before we pick up the phone (using Caller ID would take the fun out of it).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 217,
+            "end": 220
+          }
+        },
+        {
+          "exampleId": "w:fun#e-ffa100a939d04ebe",
+          "text": "My mum would find fun even when completing the most boring of tasks.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:grammar-fill:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fun#s2",
+      "pos": "adj.",
+      "glossZh": "有趣的",
+      "pronunciationId": "w:fun#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fun#e-4a589275c822e59f",
+          "text": "Catamarans are faster, but they’re not so elegant, and they’re not fun to pilot.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:fun#e-6a86101915d93a5c",
+          "text": "Mesa Arts Center is hosting an eight-week youth arts course on Saturdays to teach artistic skills and knowledge through fun and challenging art classes in a wide variety of art materials, including painting, drawing, mixed media and sculpture, ensuring mentally stimulating sessions for all.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 120,
+            "end": 123
+          }
+        },
+        {
+          "exampleId": "w:fun#e-978c8451fbd4ae59",
+          "text": "Often students come to the classroom believing that learning can’t be fun and that what they learn isn’t relevant to the real world – much less to their personal interests.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fun#s3",
+      "pos": "短语",
+      "glossZh": "取笑",
+      "pronunciationId": "w:fun#p-main",
+      "note": "make fun of。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

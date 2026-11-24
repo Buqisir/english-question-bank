@@ -1,0 +1,126 @@
+{
+  "entryId": "w:athlete",
+  "headword": "athlete",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈæθliːt/",
+    "us": "/ˈæθliːt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:athlete#p-main",
+      "ipa": {
+        "uk": "/ˈæθliːt/",
+        "us": "/ˈæθliːt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "athletes",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 73
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:athlete#s1",
+      "pos": "n.",
+      "glossZh": "运动员；擅长体育运动的人",
+      "pronunciationId": "w:athlete#p-main",
+      "note": "在英式语境中也常特指田径运动员。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 73
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:athlete#e-df63291346d8788d",
+          "text": "Remember, even world champion athletes practice their skills on a consistent basis.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:athlete#e-dcdc49533ddecb21",
+          "text": "Do you want to be a better athlete in your favorite sport?",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2022-i:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:athlete#e-b3b1f8b05fc9f8bf",
+          "text": "Speeding up and flying over a car while switching hands with a between-the-legs movement to throw the ball home, Chen Dengxing, aged 39 and standing 1.76 meters, made history by becoming the first athlete from China to win the dunk（扣篮） contest of the world’s biggest streetball competition in 2025.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 197,
+            "end": 204
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

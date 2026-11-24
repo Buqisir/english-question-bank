@@ -1,0 +1,135 @@
+{
+  "entryId": "w:exciting",
+  "headword": "exciting",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪkˈsaɪtɪŋ/",
+    "us": "/ɪkˈsaɪtɪŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:exciting#p-main",
+      "ipa": {
+        "uk": "/ɪkˈsaɪtɪŋ/",
+        "us": "/ɪkˈsaɪtɪŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more exciting",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most exciting",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 71
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:exciting#s1",
+      "pos": "adj.",
+      "glossZh": "令人兴奋的",
+      "pronunciationId": "w:exciting#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 71
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:exciting#e-e15df40cf0053fd0",
+          "text": "Pali Overnight Adventures offers children and teens exciting experiences this summer.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:exciting#e-44666ccd97451744",
+          "text": "Lead researcher Dr. Helena Horder, of the University of Gothenburg in Sweden, said: “These findings are exciting because it’s possible that improving people’s cardiovascular(心血管的) fitness in middle age could delay or even prevent them from developing dementia.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 112
+          }
+        },
+        {
+          "exampleId": "w:exciting#e-ef3ec0747265e709",
+          "text": "Kevin sighed（叹息）and hoped something exciting would happen.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:2",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 44
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "excite 的动词形式",
+      "reason": "另一词头的屈折形式"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

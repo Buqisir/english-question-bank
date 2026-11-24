@@ -1,0 +1,218 @@
+{
+  "entryId": "w:forecast",
+  "headword": "forecast",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfɔːkɑːst/",
+    "us": "/ˈfɔːrkæst/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:forecast#p-main",
+      "ipa": {
+        "uk": "/ˈfɔːkɑːst/",
+        "us": "/ˈfɔːrkæst/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "forecasts",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "forecasted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "forecasting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 33
+  },
+  "senses": [
+    {
+      "senseId": "w:forecast#s1",
+      "pos": "v.",
+      "glossZh": "预测",
+      "pronunciationId": "w:forecast#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:forecast#e-5dcfe31c8fdf4f6a",
+          "text": "Forecast disastrous hailstorms.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:28",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:forecast#e-021437ede0b26482",
+          "text": "We worked outside and traveled by its light; we planted and harvested by its phases; we looked to it to forecast the weather.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 112
+          }
+        },
+        {
+          "exampleId": "w:forecast#e-a9df20b743cceef1",
+          "text": "Reconstructing ice thickness and flow patterns during the last ice age (around 20,000 years ago) allows researchers to improve ice sheet computer models, which are essential for forecasting how Antarctica may respond to ongoing climate change.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 178,
+            "end": 189
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:forecast#s2",
+      "pos": "n.",
+      "glossZh": "预测结果",
+      "pronunciationId": "w:forecast#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:forecast#e-e8ae0eef8f4a9cff",
+          "text": "Punishing heat waves and extreme weather events like hurricanes and floods are going to become more common as the climate crisis worsens, making it more important than ever before to produce accurate weather forecasts.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 208,
+            "end": 217
+          }
+        },
+        {
+          "exampleId": "w:forecast#e-e54457a530c6f100",
+          "text": "“The forecast mentioned snow showers, but this looks more serious.”",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:forecast#e-f7d05d4d07840db2",
+          "text": "One recent forecast estimates that by 2050, 39 million people worldwide could die as a direct consequence of not finding new and efficient weapons against bacteria.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 19
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "赛马前两名的准确预测",
+      "reason": "博彩专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

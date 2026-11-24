@@ -1,0 +1,248 @@
+{
+  "entryId": "w:kingdom",
+  "headword": "kingdom",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɪŋdəm/",
+    "us": "/ˈkɪŋdəm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:kingdom#p-main",
+      "ipa": {
+        "uk": "/ˈkɪŋdəm/",
+        "us": "/ˈkɪŋdəm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "kingdoms",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "senses": [
+    {
+      "senseId": "w:kingdom#s1",
+      "pos": "n.",
+      "glossZh": "王国",
+      "pronunciationId": "w:kingdom#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:kingdom#e-00b57a5d5f5f1af9",
+          "text": "15 Jan - 25 Mar 2026: Hawaii, a kingdom crossing oceans",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:kingdom#e-a0b2e43d90f95693",
+          "text": "In Milan, she will share the stage with fellow chefs from every corner of the world: chefs from Hong Kong, Panama, Slovenia, South Africa, the United States and the United Kingdom.",
+          "source": {
+            "paperId": "paper-mock-zj-ningbo-2026-mar",
+            "paperTitle": "宁波“十校”2026届高三3月联考",
+            "groupId": "group:paper-mock-zj-ningbo-2026-mar:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-ningbo-2026-mar:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 172,
+            "end": 179
+          }
+        },
+        {
+          "exampleId": "w:kingdom#e-62b776dd5f33876b",
+          "text": "In 1824, King Liholiho voyaged from the North Pacific to seek an alliance (结盟) with the British Crown, a turning point for his kingdom.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 127,
+            "end": 134
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:kingdom#s2",
+      "pos": "n.",
+      "glossZh": "（生物分类的）界",
+      "pronunciationId": "w:kingdom#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:kingdom#e-0b41c13695f7d48a",
+          "text": "Dr Catherine Hobaiter, who led the research, said that this was the only form of intentional communication to be recorded in the animal kingdom.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 136,
+            "end": 143
+          }
+        },
+        {
+          "exampleId": "w:kingdom#e-ebb47b2e7bad5a08",
+          "text": "Chimpanzees: the smartest species in the animal kingdom",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:30",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:kingdom#e-6bbf3d575bc966e3",
+          "text": "It turns out they use a previously unknown type of Moon compass（指南针）— never seen before in the animal kingdom.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 109
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:kingdom#s3",
+      "pos": "n.",
+      "glossZh": "个人的天地",
+      "pronunciationId": "w:kingdom#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:kingdom#e-805601e162612763",
+          "text": "I handed out old hats and gloves – comically large on Sam – and explained our mission: reclaim the kingdom from the weeds.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 106
+          }
+        },
+        {
+          "exampleId": "w:kingdom#e-8df446aa3043a381",
+          "text": "The community library was Megan’s peaceful kingdom, a place of quiet whispers and turning pages.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 50
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

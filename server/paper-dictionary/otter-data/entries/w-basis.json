@@ -1,0 +1,203 @@
+{
+  "entryId": "w:basis",
+  "headword": "basis",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈbeɪsɪs/",
+    "us": "/ˈbeɪsɪs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:basis#p-main",
+      "ipa": {
+        "uk": "/ˈbeɪsɪs/",
+        "us": "/ˈbeɪsɪs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "bases",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 28
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 27
+  },
+  "senses": [
+    {
+      "senseId": "w:basis#s1",
+      "pos": "n.",
+      "glossZh": "基础；依据；根据",
+      "pronunciationId": "w:basis#p-main",
+      "note": "on the basis of sth 指「根据……」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:basis#e-3a70fbbc9f7dd7b1",
+          "text": "On what basis do we “adjust the influence” according to the last paragraph?",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2020-i:35",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:basis#e-ac7cc9a3c87ff6b1",
+          "text": "Communication is the basis of life.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2023-four-provinces-feb:35",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:basis#e-0f5bb5d6c5cfdf63",
+          "text": "On the basis of that __53__, I applied to go back to university and study creative writing.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:basis#s2",
+      "pos": "短语",
+      "glossZh": "以某种方式；按某个频率",
+      "pronunciationId": "w:basis#p-main",
+      "note": "on a … basis。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:basis#e-901ad959af106229",
+          "text": "Remember, even world champion athletes practice their skills on a consistent basis.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:basis#e-5435c9da83e3d5c4",
+          "text": "A new exhibition in Halifax uses everyday activities to explain the hidden math principles we all use on a regular basis.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:17",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 115,
+            "end": 120
+          }
+        },
+        {
+          "exampleId": "w:basis#e-3837d7f28abc29e5",
+          "text": "Spaces for these free trial lessons are limited and available on a first-come-first-served basis.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 96
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "期现价差、向量空间或拓扑的基及投资成本基础",
+      "reason": "专业用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,159 @@
+{
+  "entryId": "w:wonderful",
+  "headword": "wonderful",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈwʌndəfl/",
+    "us": "/ˈwʌndərfl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:wonderful#p-main",
+      "ipa": {
+        "uk": "/ˈwʌndəfl/",
+        "us": "/ˈwʌndərfl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more wonderful",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most wonderful",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "wonderfuler",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "wonderfulest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "wonderfuller",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "wonderfullest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:wonderful#s1",
+      "pos": "adj.",
+      "glossZh": "极好的；令人赞叹的",
+      "pronunciationId": "w:wonderful#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 38
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wonderful#e-667a457fbff60280",
+          "text": "Fields of flowers, tile-roofed(瓦屋顶)villages and tasty meals enrich this wonderful experience.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:wonderful#e-d6b6963da15c018d",
+          "text": "Bring along your camera and enjoy the wonderful views along this well-surfaced forest path.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:19",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:wonderful#e-b249fcb22a9c0325",
+          "text": "The family-run park is set in a wonderful woodland environment.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 23,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:23",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 41
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "极其；十分",
+      "reason": "非通常的现代副词用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,511 @@
+{
+  "entryId": "w:second",
+  "headword": "second",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsekənd/",
+    "us": "/ˈsekənd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:second#p-main",
+      "ipa": {
+        "uk": "/ˈsekənd/",
+        "us": "/ˈsekənd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:second#p-loan",
+      "ipa": {
+        "uk": "/sɪˈkɒnd/",
+        "us": "/sɪˈkɑːnd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "借调义"
+    }
+  ],
+  "forms": [
+    {
+      "form": "seconds",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "seconded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "seconding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 45,
+    "mock": 284
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 280
+  },
+  "senses": [
+    {
+      "senseId": "w:second#s1",
+      "pos": "num.",
+      "glossZh": "第二",
+      "pronunciationId": "w:second#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 23,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:second#e-09219e0baf4c2e75",
+          "text": "On the second floor, he __45__ every apartment door.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:second#e-1431d7711aad0dd8",
+          "text": "The adorable female calf is the second black rhino born this year at the reserve, but it is too early to tell if the calves will make good candidates to be returned to protected areas of the wild.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:second#e-5aa49d888a294b74",
+          "text": "Now, Cao has started the second part of his dream to walk along the Belt and Road route.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:grammar-fill",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-a:grammar-fill:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:second#s2",
+      "pos": "adj.",
+      "glossZh": "再一个的",
+      "pronunciationId": "w:second#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:second#e-a60e0156d380f0d1",
+          "text": "At the top of a second page, put the heading “Acts of kindness.” On this one, list all the positive things you’ve done for others.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:second#e-e09eabfd3bb190ab",
+          "text": "Each child was told if they waited for 15 minutes before eating the treat, they would be given a second treat.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 103
+          }
+        },
+        {
+          "exampleId": "w:second#e-ffe9cdac9c307ab0",
+          "text": "I encourage my daughter to make healthy snack choices and often dissuade（劝阻）her from a second dessert.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 93
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:second#s3",
+      "pos": "n.",
+      "glossZh": "秒",
+      "pronunciationId": "w:second#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:second#e-f39023379d5f9436",
+          "text": "At 9:30am, the full red/yellow/green signal cycle might be 140 seconds.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:second#e-ce41b1fc67ee40e0",
+          "text": "Every 60 seconds, a truckload’s worth of plastic enters the ocean.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:second#e-2f622d74e28530bb",
+          "text": "To calculate your speed as you do, divide 3,600 (the number of seconds in an hour) by the number of seconds it takes you to travel one mile (the distance between two mileposts).",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:second#s4",
+      "pos": "n.",
+      "glossZh": "片刻",
+      "pronunciationId": "w:second#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:second#e-0259c5293456ca6a",
+          "text": "The man froze for a second, but when he saw the skinny boy he breathed a sigh of relief.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:second#e-3b2e94163f962995",
+          "text": "The woman froze for a second, and then broke into a faint smile.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:second#e-87115ac870978107",
+          "text": "For a second, I wondered if we had lost more than just a game.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a2",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A2 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a2:writing.continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a2:question-source-1:item-172",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:second#s5",
+      "pos": "短语",
+      "glossZh": "毫不犹豫",
+      "pronunciationId": "w:second#p-main",
+      "note": "without a second thought。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:second#e-b9af00b0bb82bff2",
+          "text": "The moment I got off the plane, I ran like crazy through the airport building and jumped into the first taxi on the rank without a second thought.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 131,
+            "end": 137
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:second#s6",
+      "pos": "adv.",
+      "glossZh": "其次",
+      "pronunciationId": "w:second#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:second#e-e72b753ab41dcb89",
+          "text": "Second, sentence structures may be incorrect, especially in non-European languages.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:second#e-e37c9056e2af2327",
+          "text": "Second, conventional lithium batteries, which rely on graphite anodes（石墨负极）, are rapidly hitting their energy limit of 300 watt-hours per kilogram, which falls short of the ever-increasing demands of electric vehicles.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:second#s7",
+      "pos": "n.",
+      "glossZh": "次品",
+      "pronunciationId": "w:second#p-main",
+      "note": "多用复数 seconds。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:second#s8",
+      "pos": "n.",
+      "glossZh": "补添的一份食物",
+      "pronunciationId": "w:second#p-main",
+      "note": "用复数 seconds。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:second#s9",
+      "pos": "v.",
+      "glossZh": "附议",
+      "pronunciationId": "w:second#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:second#s10",
+      "pos": "v.",
+      "glossZh": "借调",
+      "pronunciationId": "w:second#p-loan",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "二度音程",
+      "reason": "音乐专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

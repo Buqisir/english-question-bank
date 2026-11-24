@@ -1,0 +1,250 @@
+{
+  "entryId": "w:treasure",
+  "headword": "treasure",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtreʒə(r)/",
+    "us": "/ˈtreʒər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:treasure#p-main",
+      "ipa": {
+        "uk": "/ˈtreʒə(r)/",
+        "us": "/ˈtreʒər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "treasures",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "treasured",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "treasuring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 63
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 58
+  },
+  "senses": [
+    {
+      "senseId": "w:treasure#s1",
+      "pos": "v.",
+      "glossZh": "珍视",
+      "pronunciationId": "w:treasure#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:treasure#e-d4a487c028ddf0f2",
+          "text": "They’re all memories I treasure today.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:treasure#e-b46b5a96feacd28b",
+          "text": "Before the wide use of the printing press, books were treasured objects and could be works of art in their own right.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 63
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:treasure#s2",
+      "pos": "n.",
+      "glossZh": "珍贵的财物",
+      "pronunciationId": "w:treasure#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:treasure#e-06fce629c7b9ec2b",
+          "text": "Fraser is making her way around the room with a trolley of assorted old treasures.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:treasure#e-45ebaf949330b056",
+          "text": "You can expect ticketed and timed temporary exhibitions that showcase everything from the treasures of China to the culture of Cuba.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 99
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:treasure#s3",
+      "pos": "n.",
+      "glossZh": "极珍贵的人或事物",
+      "pronunciationId": "w:treasure#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:treasure#e-fed8a0744c562a93",
+          "text": "One person’s trash is another’s treasure.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:treasure#e-efe04923b1cd3b7d",
+          "text": "However, for others like Lambrecht, the preservation of HSL is more than saving a language – it means protecting a cultural treasure for their children.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:reading-b:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 124,
+            "end": 132
+          }
+        },
+        {
+          "exampleId": "w:treasure#e-2a3ef489e480f3c9",
+          "text": "“Farmer painting is a local treasure.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n090:grammar-fill:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 36
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏、人名、使富足",
+      "reason": "专名或过时用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

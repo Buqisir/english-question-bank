@@ -1,0 +1,130 @@
+{
+  "entryId": "w:optimistic",
+  "headword": "optimistic",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌɒptɪˈmɪstɪk/",
+    "us": "/ˌɑːptɪˈmɪstɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:optimistic#p-main",
+      "ipa": {
+        "uk": "/ˌɒptɪˈmɪstɪk/",
+        "us": "/ˌɑːptɪˈmɪstɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more optimistic",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most optimistic",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 53
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:optimistic#s1",
+      "pos": "adj.",
+      "glossZh": "乐观的",
+      "pronunciationId": "w:optimistic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 53
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:optimistic#e-fc0c65c420b590f2",
+          "text": "Thankfulness has a lot of benefits: Research shows it makes us happier, less stressed and even more optimistic.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:optimistic#e-cc18e892add38064",
+          "text": "Christian Fong at the Rocky Mountain Institute, a research organization based in Colorado, is optimistic about the idea of giving retired coal plants a new purpose.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-d:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:optimistic#e-9e65a1ffd44b534e",
+          "text": "He didn’t understand why Dad was so optimistic that he’d get better.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 46
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

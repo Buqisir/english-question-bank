@@ -1,0 +1,129 @@
+{
+  "entryId": "w:tendency",
+  "headword": "tendency",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtendənsi/",
+    "us": "/ˈtendənsi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:tendency#p-main",
+      "ipa": {
+        "uk": "/ˈtendənsi/",
+        "us": "/ˈtendənsi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "tendencies",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 52
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:tendency#s1",
+      "pos": "n.",
+      "glossZh": "倾向",
+      "pronunciationId": "w:tendency#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 52
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tendency#e-f6a2fae2d7fee444",
+          "text": "The answers to both questions are often “no.” The reasons relate to a variety of factors, including reduced concentration, an entertainment mindset (心态) and a tendency to multitask while consuming digital content.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 159,
+            "end": 167
+          }
+        },
+        {
+          "exampleId": "w:tendency#e-ce783e4ceeab36f1",
+          "text": "However, the only participants to experience a significant reduction in stress levels after exercising were those with a high tendency to worry, suggesting tailored exercise offers them particular stress relief benefits.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 126,
+            "end": 134
+          }
+        },
+        {
+          "exampleId": "w:tendency#e-66ed95e75d26f3c1",
+          "text": "Many see this as harmless fun, but the increasing tendency to treat pets as “children” can have severe health and welfare consequences for the animals involved.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 58
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "组织内的政治派别",
+      "reason": "少见专义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,303 @@
+{
+  "entryId": "w:connect",
+  "headword": "connect",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəˈnekt/",
+    "us": "/kəˈnekt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:connect#p-main",
+      "ipa": {
+        "uk": "/kəˈnekt/",
+        "us": "/kəˈnekt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "connected",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "connecting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "connects",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 256
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 256
+  },
+  "senses": [
+    {
+      "senseId": "w:connect#s1",
+      "pos": "v.",
+      "glossZh": "连接；接通；使相连",
+      "pronunciationId": "w:connect#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:connect#e-aea050cd1144ab13",
+          "text": "First, he constructed a series of clear fiberglass tanks connected to each other.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:connect#e-3c3be35b764d2580",
+          "text": "By connecting through the Cloud, BMF is remotely monitored.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:connect#e-b1c01abea905be72",
+          "text": "Two days later, all of the participants returned to the lab for a recall test, and they were connected to MRI (磁共振成像) machines to assess their brain activity.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 102
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:connect#s2",
+      "pos": "v.",
+      "glossZh": "把……与……联系起来；有关系",
+      "pronunciationId": "w:connect#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:connect#e-26a4a5e8a1cc3a56",
+          "text": "The team showed that this change in bite was connected with the development of agriculture in the Neolithic period.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "reading-d-4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:connect#e-5eef322181c6e8e0",
+          "text": "If I ever get trapped outside my house again, my local telephone box will, sadly no longer be able to connect me with my keys.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 109
+          }
+        },
+        {
+          "exampleId": "w:connect#e-7ba3e548da1f6d7c",
+          "text": "Because of this, I’m careful not to connect what my kids weigh with their worth as people.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:connect#s3",
+      "pos": "v.",
+      "glossZh": "建立联系；拉近关系；产生共鸣",
+      "pronunciationId": "w:connect#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:connect#e-2f598fbdd89312cd",
+          "text": "When the final bell rang in June, I walked away with a yearbook full of messages about writing’s most powerful significance – the ability to connect people, to put us in another’s skin, to teach us what it means to be human.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 141,
+            "end": 148
+          }
+        },
+        {
+          "exampleId": "w:connect#e-cd564564b0e26126",
+          "text": "Everyone brings something unique to the table and can connect with each other in a new way.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:connect#e-b4cba24ff1df3775",
+          "text": "When I let them see an aspect of my life outside of school, some students who were also interested in cars connected with me more and became more engaged in my courses.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 116
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:connect#s4",
+      "pos": "v.",
+      "glossZh": "（交通）转乘；衔接",
+      "pronunciationId": "w:connect#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "击中；人脉",
+      "reason": "体育专门义或罕见名词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,221 @@
+{
+  "entryId": "w:awkward",
+  "headword": "awkward",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɔːkwəd/",
+    "us": "/ˈɔːkwərd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:awkward#p-main",
+      "ipa": {
+        "uk": "/ˈɔːkwəd/",
+        "us": "/ˈɔːkwərd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more awkward",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most awkward",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 20,
+    "mock": 42
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 38
+  },
+  "senses": [
+    {
+      "senseId": "w:awkward#s1",
+      "pos": "adj.",
+      "glossZh": "令人尴尬的；不自在的",
+      "pronunciationId": "w:awkward#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 16,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:awkward#e-32620cc54ae040a6",
+          "text": "If you’re faced with an awkward silence at a dinner party, the only thing that always gets everyone talking again is to give the host a compliment（赞扬）.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:awkward#e-50dbf735113259d0",
+          "text": "It was an awkward moment.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:awkward#e-eec9bb7edab279c4",
+          "text": "Still, I felt awkward and out of place living in a right-handed world.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:writing-continuation:7",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:awkward#s2",
+      "pos": "adj.",
+      "glossZh": "笨拙的；难以操作的",
+      "pronunciationId": "w:awkward#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:awkward#e-8a93fbe8a7fbad20",
+          "text": "The basketball felt awkward in my hands as I watched my teenage opponent effortlessly dribble (运球) past me for the twentieth time.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:awkward#e-b41a57d8c7d004f3",
+          "text": "A grandparent who finds new tech devices awkward.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年8月高三联考 英语试题",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-zhejiang-qiangji-alliance-2025-08-senior-three-joint-exam:29",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 48
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:awkward#s3",
+      "pos": "adj.",
+      "glossZh": "棘手的；不便处理的",
+      "pronunciationId": "w:awkward#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:awkward#e-100b38afca15b41d",
+          "text": "Naturally, we wanted to figure out why this awkward dynamic plays out.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 51
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "难对付的人（名词）",
+      "reason": "罕见名词用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,163 @@
+{
+  "entryId": "w:consultation",
+  "headword": "consultation",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌkɒnslˈteɪʃn/",
+    "us": "/ˌkɑːnslˈteɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:consultation#p-main",
+      "ipa": {
+        "uk": "/ˌkɒnslˈteɪʃn/",
+        "us": "/ˌkɑːnslˈteɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "consultations",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "senses": [
+    {
+      "senseId": "w:consultation#s1",
+      "pos": "n.",
+      "glossZh": "咨询；征询意见；磋商",
+      "pronunciationId": "w:consultation#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:consultation#e-6ad17c2e7cbf6132",
+          "text": "Seek expert consultation.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-second:26",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:consultation#s2",
+      "pos": "n.",
+      "glossZh": "（与医师等专业人士的）咨询会面；诊察",
+      "pronunciationId": "w:consultation#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:consultation#e-431726f6a70bfd95",
+          "text": "Over the last three months alone, the new tech has __52__ over 250,000 specialist consultations in New Zealand and Australia.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:cloze:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:consultation#e-d3fffe86138ea2dd",
+          "text": "And unlike many US clinics that charge additional fees for consultations, medications, or follow-ups, Turkish clinics provide all-inclusive packages that cover hotel accommodation, airport transportation, and postoperative care.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "盐城市2025/2026学年度高三第一学期期中考试 英语",
+            "groupId": "group:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-jiangsu-yancheng-2025-11-senior-three-first-semester-midterm-exam:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:consultation#e-d86237ace397790e",
+          "text": "For years, Alma has been the Emergency Poet, travelling around British festivals and literary events in an old ambulance, and giving one-to-one consultations.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 144,
+            "end": 157
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "《古兰经》第四十二章名",
+      "reason": "专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

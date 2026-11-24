@@ -1,0 +1,127 @@
+{
+  "entryId": "w:millimetre",
+  "headword": "millimetre",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "millimeter"
+  ],
+  "ipa": {
+    "uk": "/ˈmɪlimiːtə(r)/",
+    "us": "/ˈmɪlimiːtər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:millimetre#p-main",
+      "ipa": {
+        "uk": "/ˈmɪlimiːtə(r)/",
+        "us": "/ˈmɪlimiːtər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "millimeters",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:millimetre#s1",
+      "pos": "n.",
+      "glossZh": "毫米",
+      "pronunciationId": "w:millimetre#p-main",
+      "note": "美式拼写 millimeter。1 毫米等于 0.001 米。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 8
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:millimetre#e-2fda401df937dd94",
+          "text": "At both ends of the device – the top of the newly-designed tube (about 2 millimeters in width), and the water-collecting cup at the bottom – electrical wires were placed to harvest charges.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:millimetre#e-33e3e23077babde9",
+          "text": "When a quick pulse of laser light hits a pixel, the film heats up, causing the trapped air to expand, making the surface swell upward in just 2 to 100 milliseconds, by about a millimeter (0.04 inch).",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 176,
+            "end": 186
+          }
+        },
+        {
+          "exampleId": "w:millimetre#e-2e9095e1b2c27862",
+          "text": "To make a piece, Gu must stretch metal threads 5 millimeters in diameter into thin filaments – some as fine as 0.16 millimeters.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 116,
+            "end": 127
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

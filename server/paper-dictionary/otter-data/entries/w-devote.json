@@ -1,0 +1,232 @@
+{
+  "entryId": "w:devote",
+  "headword": "devote",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈvəʊt/",
+    "us": "/dɪˈvoʊt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:devote#p-main",
+      "ipa": {
+        "uk": "/dɪˈvəʊt/",
+        "us": "/dɪˈvoʊt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more devote",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most devote",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "devoted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "devotes",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "devoting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 39
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 36
+  },
+  "senses": [
+    {
+      "senseId": "w:devote#s1",
+      "pos": "v.",
+      "glossZh": "把（时间、精力等）投入；献身于",
+      "pronunciationId": "w:devote#p-main",
+      "note": "devote sth/oneself to sth，to 后接名词或动名词。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:devote#e-b295eaba5d26c90a",
+          "text": "According to this theory, people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 131,
+            "end": 137
+          }
+        },
+        {
+          "exampleId": "w:devote#e-76918e38b109b44b",
+          "text": "I’ve always cared about birds and have written about them as a science writer, but the moment I decided with purpose to devote time and energy to bird-watching marked my transformation into a birder.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 120,
+            "end": 126
+          }
+        },
+        {
+          "exampleId": "w:devote#e-e5976765804867f6",
+          "text": "Fueled by newfound excitement, Arizona devoted herself to the project.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:devote#s2",
+      "pos": "adj.",
+      "glossZh": "投入的；忠实的；深爱的",
+      "pronunciationId": "w:devote#p-main",
+      "note": "devoted。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:devote#e-61d9107d5b705551",
+          "text": "They are devoted to community service.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2024-ii:30",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:devote#e-334c233a3494173b",
+          "text": "He is devoted to health education.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2026-ii:27",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:devote#e-8cd159192b959cc8",
+          "text": "Surrounded by crowds of joyful families and devoted lifelong fans, I unexpectedly found myself genuinely cheering loudly for every goal and groaning disappointedly at all the missed chances.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 51
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "交给毁灭；诅咒",
+      "reason": "旧式用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

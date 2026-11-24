@@ -1,0 +1,360 @@
+{
+  "entryId": "w:narrow",
+  "headword": "narrow",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈnærəʊ/",
+    "us": "/ˈnæroʊ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:narrow#p-main",
+      "ipa": {
+        "uk": "/ˈnærəʊ/",
+        "us": "/ˈnæroʊ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "narrower",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "narrowest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "narrowed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "narrowing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "narrows",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 51
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 42
+  },
+  "senses": [
+    {
+      "senseId": "w:narrow#s1",
+      "pos": "adj.",
+      "glossZh": "狭窄的",
+      "pronunciationId": "w:narrow#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:narrow#e-858e61e17fa11b09",
+          "text": "While Emily was driving on a narrow stretch of road, her car slid into a ditch（沟）.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:narrow#e-7d6616a5edfa231a",
+          "text": "The way tunnel-boring machines efficiently handle hard soil and rock in narrow spaces inspired the creation.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:narrow#e-2f7420a5329f204f",
+          "text": "Then, a blind turn led us to a narrow street where a store drew our attention.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:narrow#s2",
+      "pos": "adj.",
+      "glossZh": "范围或眼界有限的",
+      "pronunciationId": "w:narrow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:narrow#e-159e5f00588ebdf9",
+          "text": "After all, the study had a tiny sample size and focused on a single narrow task.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:narrow#e-91d37df05af55ab4",
+          "text": "However, Tierra Curry, a scientist and activist, believes that valuing the natural world in terms of how each individual species benefits humans may be too narrow a view.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 156,
+            "end": 162
+          }
+        },
+        {
+          "exampleId": "w:narrow#e-329f4fb5db18e43d",
+          "text": "“To address AI-energy risks and unlock long-term value, companies and investors must move beyond their narrow roles in the AI value chain.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 103,
+            "end": 109
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:narrow#s3",
+      "pos": "adj.",
+      "glossZh": "勉强的；差距很小的",
+      "pronunciationId": "w:narrow#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:narrow#s4",
+      "pos": "v.",
+      "glossZh": "使缩小",
+      "pronunciationId": "w:narrow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:narrow#e-a806551e96796605",
+          "text": "Interestingly, AI assistance narrows the gap between high and low-skill users because large language models improve everyone’s performance to some degree.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:narrow#e-d60cbc439df6d817",
+          "text": "Narrow its wealth gap.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:28",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:narrow#s5",
+      "pos": "v.",
+      "glossZh": "变窄",
+      "pronunciationId": "w:narrow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:narrow#e-33873bb4c70bb2db",
+          "text": "Their gill arch (鳃弓) system forms a structure that is widest at the mouth and narrows towards the gullet (食道).",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 85
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:narrow#s6",
+      "pos": "v.",
+      "glossZh": "眯起（眼睛）",
+      "pronunciationId": "w:narrow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:narrow#e-6eb124f556ad9b3e",
+          "text": "As they rowed through the moving ice, Mira narrowed her eyes at the shore, hoping to see the legendary animal she had often dreamed about.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 51
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "窄元音；织物收针；转换为较窄类型",
+      "reason": "语言学、纺织或编程术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

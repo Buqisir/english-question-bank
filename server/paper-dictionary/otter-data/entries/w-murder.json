@@ -1,0 +1,173 @@
+{
+  "entryId": "w:murder",
+  "headword": "murder",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmɜːdə(r)/",
+    "us": "/ˈmɜːrdər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:murder#p-main",
+      "ipa": {
+        "uk": "/ˈmɜːdə(r)/",
+        "us": "/ˈmɜːrdər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "murders",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "murdered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "murdering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:murder#s1",
+      "pos": "n.",
+      "glossZh": "谋杀",
+      "pronunciationId": "w:murder#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:murder#e-2c4450a2c0e9d46f",
+          "text": "She tells potential writers to use snowstorms to isolate murder scenes (as they bring down telephone wires) and cites the clue-generating value of railway timetables, ink stains and cut-up newspapers.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-c:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:murder#e-4e4b033fce6ba187",
+          "text": "What could be the main reason behind her murder?",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-cq-nankai-2026-03-sixth-quality-test:26",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:murder#s2",
+      "pos": "v.",
+      "glossZh": "谋杀",
+      "pronunciationId": "w:murder#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:murder#e-fd746febbffb9ac9",
+          "text": "She was found murdered in her cabin.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b:14",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:murder#s3",
+      "pos": "v.",
+      "glossZh": "糟蹋（表演、歌曲等）",
+      "pronunciationId": "w:murder#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "一群乌鸦；很棒的事物",
+      "reason": "文学集合名词或俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

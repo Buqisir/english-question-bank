@@ -1,0 +1,123 @@
+{
+  "entryId": "w:hers",
+  "headword": "hers",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/hɜːz/",
+    "us": "/hɜːrz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:hers#p-main",
+      "ipa": {
+        "uk": "/hɜːz/",
+        "us": "/hɜːrz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:hers#s1",
+      "pos": "pron.",
+      "glossZh": "她的（人或物）",
+      "pronunciationId": "w:hers#p-main",
+      "note": "名词性物主代词，后面不再接名词。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 9
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hers#e-55770e95e566bb77",
+          "text": "My childhood is quite __55__ compared with hers.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-national-a:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:hers#e-ae94302f20f4cffc",
+          "text": "Seeing Sylvia’s struggle with both pride and loneliness, Jenny, a close companion of hers, decided to act.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:hers#e-9b98244a3d7c9830",
+          "text": "The familiar smell of baby powder lingered; the small blue bed, once hers, was now covered in rocket stickers, and the nightlight by the bed cast a warm yellow glow.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 73
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "在她家",
+      "reason": "某些口语里省略了所指的住所"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

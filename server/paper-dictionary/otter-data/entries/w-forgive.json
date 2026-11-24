@@ -1,0 +1,213 @@
+{
+  "entryId": "w:forgive",
+  "headword": "forgive",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fəˈɡɪv/",
+    "us": "/fərˈɡɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:forgive#p-main",
+      "ipa": {
+        "uk": "/fəˈɡɪv/",
+        "us": "/fərˈɡɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "forgave",
+      "tags": [
+        "past"
+      ]
+    },
+    {
+      "form": "forgiven",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "forgives",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "forgiving",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 24
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 20
+  },
+  "senses": [
+    {
+      "senseId": "w:forgive#s1",
+      "pos": "v.",
+      "glossZh": "原谅",
+      "pronunciationId": "w:forgive#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:forgive#e-3b444274e7ea3455",
+          "text": "Those viewing the quality of Abbot Hall’s temporary exhibitions may be forgiven for thinking they are in a city gallery.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:forgive#e-3b17cfb94a8c2188",
+          "text": "Paragraph 2: I couldn’t believe they forgave me so quickly.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:forgive#e-a7e69fc377cfc13d",
+          "text": "But if the result is more kindness in the world, maybe we can forgive a little mixed motivation.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:forgive#s2",
+      "pos": "adj.",
+      "glossZh": "宽容的",
+      "pronunciationId": "w:forgive#p-main",
+      "note": "forgiving。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:forgive#e-548b18d270326f3c",
+          "text": "Fortunately, plants are fairly forgiving about their watering schedule.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:forgive#e-8cee63a8458b4179",
+          "text": "I’m a forgiving person at heart.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:36",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:forgive#s3",
+      "pos": "v.",
+      "glossZh": "免除（债务）",
+      "pronunciationId": "w:forgive#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

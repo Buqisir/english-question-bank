@@ -1,0 +1,274 @@
+{
+  "entryId": "w:ahead",
+  "headword": "ahead",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈhed/",
+    "us": "/əˈhed/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ahead#p-main",
+      "ipa": {
+        "uk": "/əˈhed/",
+        "us": "/əˈhed/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 11,
+    "mock": 81
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 79
+  },
+  "senses": [
+    {
+      "senseId": "w:ahead#s1",
+      "pos": "adv.",
+      "glossZh": "向前；在前方",
+      "pronunciationId": "w:ahead#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ahead#e-c09d9444b141409e",
+          "text": "Very small drones with advanced sensors and AI and travelling ahead of the train could guide it like a co-pilot.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:ahead#e-24b95d0936013491",
+          "text": "Fearing that I would pick out something awful, I desperately tried to ask the boy ahead of me for a recommendation.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 87
+          }
+        },
+        {
+          "exampleId": "w:ahead#e-a361cb66a34d744c",
+          "text": "Instead, she focused on reaching the shadow cast on the track by an oak tree up ahead.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:7",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 85
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ahead#s2",
+      "pos": "adv.",
+      "glossZh": "领先；进度更快",
+      "pronunciationId": "w:ahead#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ahead#e-733dae29efe11fe5",
+          "text": "Although popular beliefs regarding emotional intelligence run far ahead of what research can reasonably support, the overall effects of the publicity have been more beneficial than harmful.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:ahead#e-07c94a7a962c8af6",
+          "text": "However, while some of her classmates edged ahead, others actually fell behind.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ahead#s3",
+      "pos": "adv.",
+      "glossZh": "预先；朝将来看",
+      "pronunciationId": "w:ahead#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ahead#e-d26a8504737297dc",
+          "text": "If you enter through the wrong access point, you’ll be turned around and redirected – so plan ahead.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 94,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:ahead#e-d12125c6ba5982af",
+          "text": "Looking ahead, the rapid advancement of AI promises both exciting possibilities and ethical (伦理的) challenges.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:ahead#e-cc54b95239031169",
+          "text": "• Book at least 1 hour ahead, with a maximum usage of 8-hours per trip.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a",
+            "locator": {
+              "paragraph": 23,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ahead#s4",
+      "pos": "短语",
+      "glossZh": "继续进行；开始做",
+      "pronunciationId": "w:ahead#p-main",
+      "note": "go ahead。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ahead#e-97e1ad5eabec9641",
+          "text": "● Free postage label and free returns if you decide not to go ahead",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 67
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,182 @@
+{
+  "entryId": "w:genuine",
+  "headword": "genuine",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdʒenjuɪn/",
+    "us": "/ˈdʒenjuɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:genuine#p-main",
+      "ipa": {
+        "uk": "/ˈdʒenjuɪn/",
+        "us": "/ˈdʒenjuɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more genuine",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most genuine",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 84
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 81
+  },
+  "senses": [
+    {
+      "senseId": "w:genuine#s1",
+      "pos": "adj.",
+      "glossZh": "真诚的",
+      "pronunciationId": "w:genuine#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:genuine#e-3b3a2977233e6c16",
+          "text": "Even when the line is getting longer, she doesn’t let it get in the way of her genuine conversations.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:genuine#e-2db4ff9082d1b0f1",
+          "text": "With genuine warmth in her voice, Rachel said they could take Emily to a nearby cafe they knew.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:genuine#e-7f40f8d31ca75601",
+          "text": "His voice held no embarrassment, only a genuine desire to understand.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:writing-continuation:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:genuine#s2",
+      "pos": "adj.",
+      "glossZh": "货真价实的",
+      "pronunciationId": "w:genuine#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:genuine#e-2efbdf6024f921a9",
+          "text": "Though many people saw the family’s hardship, there were still plenty of onlookers and few genuine customers.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 98
+          }
+        },
+        {
+          "exampleId": "w:genuine#e-0fa02329386bbb37",
+          "text": "Where can participants observe a genuine brain firsthand?",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:21",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 40
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

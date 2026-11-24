@@ -1,0 +1,379 @@
+{
+  "entryId": "w:table",
+  "headword": "table",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈteɪbl/",
+    "us": "/ˈteɪbl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:table#p-main",
+      "ipa": {
+        "uk": "/ˈteɪbl/",
+        "us": "/ˈteɪbl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "tables",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "tabled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "tabling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 24,
+    "mock": 161
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 160
+  },
+  "senses": [
+    {
+      "senseId": "w:table#s1",
+      "pos": "n.",
+      "glossZh": "桌子",
+      "pronunciationId": "w:table#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:table#e-b36f9ef262426527",
+          "text": "There, among many other things, Nicolo spotted two paintings he thought would look __45__ above his dining room table.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:cloze:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 112,
+            "end": 117
+          }
+        },
+        {
+          "exampleId": "w:table#e-ce620ef1bde6823e",
+          "text": "All of us were hard at work at the kitchen table, with my mom filming the annual event.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:table#e-682de6484fafb335",
+          "text": "To reserve a table.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:table#s2",
+      "pos": "n.",
+      "glossZh": "表格",
+      "pronunciationId": "w:table#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:table#e-8c2ed7ee7714501c",
+          "text": "The table below introduces the app’s three main modes.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:table#s3",
+      "pos": "v.",
+      "glossZh": "提交议案讨论",
+      "pronunciationId": "w:table#p-main",
+      "note": "英式用法。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:table#s4",
+      "pos": "v.",
+      "glossZh": "暂缓讨论",
+      "pronunciationId": "w:table#p-main",
+      "note": "美式用法。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:table#s5",
+      "pos": "短语",
+      "glossZh": "食盐",
+      "pronunciationId": "w:table#p-main",
+      "note": "table salt。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:table#e-7956e9a5dbd35c39",
+          "text": "Rock salt is made of sodium chloride, the same compound（化合物）in ordinary table salt.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 77
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:table#s6",
+      "pos": "短语",
+      "glossZh": "目录",
+      "pronunciationId": "w:table#p-main",
+      "note": "table of contents。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:table#e-11558bc6e444e50d",
+          "text": "Look at the table of contents, the preface, the chapter heading, etc.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:table#s7",
+      "pos": "短语",
+      "glossZh": "餐桌礼仪",
+      "pronunciationId": "w:table#p-main",
+      "note": "table manners。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:table#e-919642e8f7b9c1c7",
+          "text": "Table manners in the UK.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2023-national-b:31",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:table#s8",
+      "pos": "短语",
+      "glossZh": "乒乓球",
+      "pronunciationId": "w:table#p-main",
+      "note": "table tennis。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:table#e-8e607a4d44bd73f2",
+          "text": "Glad to know that you want to learn to play table tennis.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-application",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-application:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:table#s9",
+      "pos": "短语",
+      "glossZh": "带来助益",
+      "pronunciationId": "w:table#p-main",
+      "note": "bring something to the table。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:table#e-e568de3be01ffdb4",
+          "text": "Everyone brings something unique to the table and can connect with each other in a new way.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 52
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "钻石台面、弦乐器面板和帆边加固",
+      "reason": "行业专义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

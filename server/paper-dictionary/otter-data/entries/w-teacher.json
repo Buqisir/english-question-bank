@@ -1,0 +1,129 @@
+{
+  "entryId": "w:teacher",
+  "headword": "teacher",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtiːtʃə(r)/",
+    "us": "/ˈtiːtʃər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:teacher#p-main",
+      "ipa": {
+        "uk": "/ˈtiːtʃə(r)/",
+        "us": "/ˈtiːtʃər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "teachers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 67,
+    "mock": 479
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:teacher#s1",
+      "pos": "n.",
+      "glossZh": "教师",
+      "pronunciationId": "w:teacher#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 67,
+        "mock": 479
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:teacher#e-e1d12bb826ecab06",
+          "text": "Andria Zafirakou, a north London secondary school teacher, said she wanted to bring about a classroom revolution（变革）.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:teacher#e-7ac9047d9066b579",
+          "text": "And at first it is, says Abby Jaramillo, who with another teacher started Urban Sprouts, a school garden program at four low-income schools.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:teacher#e-74ffb07ec73b9a19",
+          "text": "“I’m a coach, an adviser, and a comforter, and that's what it means to be a hospital teacher.”",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 92
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "食指、特定宗教职位",
+      "reason": "借喻或专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

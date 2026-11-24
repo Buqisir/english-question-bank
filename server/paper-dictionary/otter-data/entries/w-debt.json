@@ -1,0 +1,143 @@
+{
+  "entryId": "w:debt",
+  "headword": "debt",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/det/",
+    "us": "/det/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:debt#p-main",
+      "ipa": {
+        "uk": "/det/",
+        "us": "/det/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "debts",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 17
+  },
+  "senses": [
+    {
+      "senseId": "w:debt#s1",
+      "pos": "n.",
+      "glossZh": "债务；欠款",
+      "pronunciationId": "w:debt#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:debt#e-bcc07109049840a1",
+          "text": "In societies where digital credit is easily accessible but financial education is limited, this behaviour can fall into lasting debt.",
+          "source": {
+            "paperId": "paper-mock-hunan-nine-school-alliance-2026-first-joint-exam",
+            "paperTitle": "湖南省2026届高三九校联盟第一次联考",
+            "groupId": "group:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-nine-school-alliance-2026-first-joint-exam:reading-d:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 132
+          }
+        },
+        {
+          "exampleId": "w:debt#e-30604e7beab239d0",
+          "text": "The shop sells remedies consisting of poems sealed in bottles, poetic greetings cards and of course, lots of books: “I’ve managed to get the stock without going into debt, which has been difficult.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 166,
+            "end": 170
+          }
+        },
+        {
+          "exampleId": "w:debt#e-b57bf45204594e60",
+          "text": "The US spends the most on healthcare globally, yet individuals face limited access and high out-of-pocket costs, leading to stress, anxiety and medical debt.",
+          "source": {
+            "paperId": "paper-mock-zj-shaoxing-2026-apr-m181",
+            "paperTitle": "浙江省高考科目考试绍兴市适应性试卷（2026年4月）",
+            "groupId": "group:paper-mock-zj-shaoxing-2026-apr-m181:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-shaoxing-2026-apr-m181:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 152,
+            "end": 156
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:debt#s2",
+      "pos": "n.",
+      "glossZh": "人情债；应报答的恩情",
+      "pronunciationId": "w:debt#p-main",
+      "note": "如 a debt of gratitude。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "追讨欠款的诉讼",
+      "reason": "法律旧用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,432 @@
+{
+  "entryId": "w:quarter",
+  "headword": "quarter",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkwɔːtə(r)/",
+    "us": "/ˈkwɔːrtər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:quarter#p-main",
+      "ipa": {
+        "uk": "/ˈkwɔːtə(r)/",
+        "us": "/ˈkwɔːrtər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "quarters",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "quartered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "quartering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "senses": [
+    {
+      "senseId": "w:quarter#s1",
+      "pos": "n.",
+      "glossZh": "四分之一",
+      "pronunciationId": "w:quarter#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:quarter#e-5c3b089ee771de3d",
+          "text": "Still, 55 percent of Australians have a landline phone at home and only just over a quarter（29%）rely only on their smartphones, according to a survey（调查）.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 91
+          }
+        },
+        {
+          "exampleId": "w:quarter#e-daf575fa11f4a36b",
+          "text": "As the world races to decarbonize everything, it faces particular problems with transportation – which accounts for about a quarter of our energy-related greenhouse gas emissions.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 124,
+            "end": 131
+          }
+        },
+        {
+          "exampleId": "w:quarter#e-145696f2abc94dc1",
+          "text": "What’s more, three quarters claimed that they didn’t respond to celebrity endorsement in any way.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:quarter#s2",
+      "pos": "n.",
+      "glossZh": "一刻钟",
+      "pronunciationId": "w:quarter#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:quarter#e-568294fe2ce634b2",
+          "text": "Murphy gets up at a quarter to five and drives thirty minutes every day to get to work on time.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:quarter#s3",
+      "pos": "n.",
+      "glossZh": "季度",
+      "pronunciationId": "w:quarter#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:quarter#e-fc7ecff93d94aa27",
+          "text": "Both Jiang and Wang received official awards from local authorities and were recommended as candidates for the “China Good Person List” for the second quarter of 2025.",
+          "source": {
+            "paperId": "paper-mock-henan-four-cities-2026-01",
+            "paperTitle": "河南省洛阳、许昌、平顶山、济源四市2025—2026学年高三年级第二次质量检测英语试题",
+            "groupId": "group:paper-mock-henan-four-cities-2026-01:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-henan-four-cities-2026-01:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 151,
+            "end": 158
+          }
+        },
+        {
+          "exampleId": "w:quarter#e-0769a58b9b7d78d8",
+          "text": "This approach has seen the county welcome approximately 867,100 visitors, generating 940.8 million yuan from tourism in the first quarter of 2025.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:grammar-fill:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 130,
+            "end": 137
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:quarter#s4",
+      "pos": "n.",
+      "glossZh": "二十五美分硬币",
+      "pronunciationId": "w:quarter#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:quarter#e-996ec1267abcf924",
+          "text": "to buy a loaf of bread, for which he received a dirty quarter.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:quarter#e-76e5d350bdf2465c",
+          "text": "I counted quarters and dollar bills, hiding them in a shoebox under my bed.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:quarter#e-2c787f93250d7fcb",
+          "text": "These municipal parking facilities accept quarters, dollar coins, credit cards, and the ParkNYC app.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-zaozhuang-2026-05-third-mock:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:quarter#s5",
+      "pos": "n.",
+      "glossZh": "（比赛的）一节",
+      "pronunciationId": "w:quarter#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:quarter#e-7116bd98d549ea86",
+          "text": "Scoring was back and forth until the fourth quarter, when Apache pulled away by 14 points.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:quarter#e-be37311bf07d3ddb",
+          "text": "The last match was against the undefeated first-place team, and by the fourth quarter, they had been 30 points behind.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 85
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:quarter#s6",
+      "pos": "n.",
+      "glossZh": "圈舍；动物的栖身处",
+      "pronunciationId": "w:quarter#p-main",
+      "note": "常用复数 quarters。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:quarter#e-27e1515d9f5a71a2",
+          "text": "Putting electric fencing around chicken houses and other farm animal quarters is also highly effective at getting grizzlies away.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 77
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:quarter#s7",
+      "pos": "n.",
+      "glossZh": "城区",
+      "pronunciationId": "w:quarter#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:quarter#s8",
+      "pos": "v.",
+      "glossZh": "分成四份",
+      "pronunciationId": "w:quarter#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:quarter#s9",
+      "pos": "n.",
+      "glossZh": "住宿处；营房",
+      "pronunciationId": "w:quarter#p-main",
+      "note": "常用复数 quarters。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "旧制计量单位",
+      "reason": "历史专门用法"
+    },
+    {
+      "glossZh": "饶命",
+      "reason": "历史军事义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

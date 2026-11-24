@@ -1,0 +1,191 @@
+{
+  "entryId": "w:precious",
+  "headword": "precious",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpreʃəs/",
+    "us": "/ˈpreʃəs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:precious#p-main",
+      "ipa": {
+        "uk": "/ˈpreʃəs/",
+        "us": "/ˈpreʃəs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more precious",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most precious",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 57
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 55
+  },
+  "senses": [
+    {
+      "senseId": "w:precious#s1",
+      "pos": "adj.",
+      "glossZh": "珍贵的",
+      "pronunciationId": "w:precious#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:precious#e-7dda89628eea6569",
+          "text": "Native Americans had taken care of these precious natural resources wisely.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:precious#e-0c9c95f4062d3be8",
+          "text": "But farmers in east-central Alberta -downwind of the hail project flights-worry that precious moisture(水分) is being stolen from their thirsty land by the cloud seeding.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:precious#e-efd3b348dc89e59e",
+          "text": "My daily posts and the __50__ I received became a precious ray of light in the chaos of my house.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:precious#s2",
+      "pos": "adj.",
+      "glossZh": "珍爱的",
+      "pronunciationId": "w:precious#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:precious#e-b65115bc54120232",
+          "text": "One afternoon, I entered the lab to find my observation box broken, ants running everywhere, and my precious notebook – the very proof of my “brightness” – was torn apart.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 108
+          }
+        },
+        {
+          "exampleId": "w:precious#e-5089802fe75eda68",
+          "text": "This pen was his most precious possession, bought with his first month’s salary.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 30
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "矫饰的",
+      "reason": "较少见的贬义用法"
+    },
+    {
+      "glossZh": "十足的",
+      "reason": "旧式强调用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

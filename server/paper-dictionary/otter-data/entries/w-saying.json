@@ -1,0 +1,162 @@
+{
+  "entryId": "w:saying",
+  "headword": "saying",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈseɪɪŋ/",
+    "us": "/ˈseɪɪŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:saying#p-main",
+      "ipa": {
+        "uk": "/ˈseɪɪŋ/",
+        "us": "/ˈseɪɪŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "sayings",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 148
+  },
+  "unassignedCounts": {
+    "gaokao": 13,
+    "mock": 145
+  },
+  "senses": [
+    {
+      "senseId": "w:saying#s1",
+      "pos": "n.",
+      "glossZh": "谚语",
+      "pronunciationId": "w:saying#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:saying#e-00b2a3f1d6d07904",
+          "text": "As the saying goes, “Time flies when you’re having fun.” Perhaps time crawls when you’re depressed.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:saying#e-e10bcd10f1f67e31",
+          "text": "Confucius’ saying “I hear and I forget.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:saying#e-65e40ab12bda1898",
+          "text": "This reflects the saying, “You are what you do.” Some famous musicians travel with their own instruments, which proves how deeply music can shape personal identity.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:saying#s2",
+      "pos": "n.",
+      "glossZh": "话语",
+      "pronunciationId": "w:saying#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:saying#e-adfe257491f60784",
+          "text": "In 1511, Tan wrote a book, Sayings of a Female Doctor, describing her life as a physician.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-a:figure-d47b575dce95546b:cell-1-1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "say 的现在分词",
+      "reason": "屈折动词用法归入 say"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

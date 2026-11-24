@@ -1,0 +1,214 @@
+{
+  "entryId": "w:audience",
+  "headword": "audience",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɔːdiəns/",
+    "us": "/ˈɔːdiəns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:audience#p-main",
+      "ipa": {
+        "uk": "/ˈɔːdiəns/",
+        "us": "/ˈɔːdiəns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "audiences",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 35,
+    "mock": 112
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 111
+  },
+  "senses": [
+    {
+      "senseId": "w:audience#s1",
+      "pos": "n.",
+      "glossZh": "听众；观众",
+      "pronunciationId": "w:audience#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 26,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:audience#e-7a10d20873d73797",
+          "text": "Talk directly to your audience, be yourself and make a connection.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:audience#e-6edc5c74d3dae9c2",
+          "text": "To get the most out of reading these plays, try to picture the play on stage, with you, the reader, in the audience.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 115
+          }
+        },
+        {
+          "exampleId": "w:audience#e-c76e23a93eb83042",
+          "text": "The audience is too busy watching the cloth and listening to the magician’s words to notice that his other hand is hiding the ball.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:audience#s2",
+      "pos": "n.",
+      "glossZh": "读者；受众；服务对象",
+      "pronunciationId": "w:audience#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:audience#e-1ac5ae82b04f56f4",
+          "text": "When children write for real audiences and real purposes, they can learn to choose their words accordingly.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:audience#e-c5c732da4b680601",
+          "text": "Written communication will give your audience more time to review it, think it over, and follow up with questions.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:audience#e-cc7a8973f4c712b6",
+          "text": "Deinfluencers are content creators that try to educate and inform their audience about whether those purchases are really worth it.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:audience#s3",
+      "pos": "n.",
+      "glossZh": "正式会见；觐见",
+      "pronunciationId": "w:audience#p-main",
+      "note": "have an audience with sb。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "西班牙帝国司法辖区",
+      "reason": "历史专名。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

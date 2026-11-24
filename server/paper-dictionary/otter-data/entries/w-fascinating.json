@@ -1,0 +1,129 @@
+{
+  "entryId": "w:fascinating",
+  "headword": "fascinating",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfæsɪneɪtɪŋ/",
+    "us": "/ˈfæsɪneɪtɪŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fascinating#p-main",
+      "ipa": {
+        "uk": "/ˈfæsɪneɪtɪŋ/",
+        "us": "/ˈfæsɪneɪtɪŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more fascinating",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most fascinating",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 36
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:fascinating#s1",
+      "pos": "adj.",
+      "glossZh": "引人入胜的",
+      "pronunciationId": "w:fascinating#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 36
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fascinating#e-2bf1afa2d0ae3d24",
+          "text": "These cultural achievements offer a window into a fascinating civilization.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:grammar-fill:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:fascinating#e-71d4e79407d16f9b",
+          "text": "A student shared, “I used to find ancient writing boring, but now I realize each character is like a fascinating story.”",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-2025-11-zero-mock",
+            "paperTitle": "江苏省徐州市2026届高三零模考试 英语",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-2025-11-zero-mock:grammar-fill:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 112
+          }
+        },
+        {
+          "exampleId": "w:fascinating#e-7b30e35b09f2319e",
+          "text": "There was nothing better than to spend a day with Muh, which meant you were going to hear fascinating stories about her growing up, while savoring her tea and cakes.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:writing-continuation:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 101
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

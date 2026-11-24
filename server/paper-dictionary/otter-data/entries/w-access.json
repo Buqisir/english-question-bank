@@ -1,0 +1,271 @@
+{
+  "entryId": "w:access",
+  "headword": "access",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈækses/",
+    "us": "/ˈækses/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:access#p-main",
+      "ipa": {
+        "uk": "/ˈækses/",
+        "us": "/ˈækses/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "accesses",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "accessed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "accessing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 197
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 196
+  },
+  "senses": [
+    {
+      "senseId": "w:access#s1",
+      "pos": "n.",
+      "glossZh": "获得、使用或接触的机会或权利",
+      "note": "常用 have 或 gain access to。",
+      "pronunciationId": "w:access#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:access#e-c5303cded7158812",
+          "text": "Nobody is better able to understand the impact of desertification and climate change than somebody who is living with no access to water.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 121,
+            "end": 127
+          }
+        },
+        {
+          "exampleId": "w:access#e-2f8b16ef061376f3",
+          "text": "As cities balloon with growth, access to nature for people living in urban areas is becoming harder to find.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:access#e-120ab6d847126c9b",
+          "text": "Interlibrary Loan (ILL) provides teachers, students and staff with access to books that are checked out or not owned by our own libraries, as well as digitized copies of articles and book chapters from our collection.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:access#s2",
+      "pos": "n.",
+      "glossZh": "进入的通道或入口；通行",
+      "pronunciationId": "w:access#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:access#e-d84d84662ed3c231",
+          "text": "The authorities closed access to the bridge and tens of thousands of people made their way back to land.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:access#e-5ff7aef02a799d91",
+          "text": "If you enter through the wrong access point, you’ll be turned around and redirected – so plan ahead.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:access#e-4c02bfa5cfd6440e",
+          "text": "Its access was blocked by many people.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2020-ii:28",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:access#s3",
+      "pos": "v.",
+      "glossZh": "进入；到达；访问（信息、系统等）",
+      "pronunciationId": "w:access#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:access#e-9e73fe6643e40f5a",
+          "text": "We accessed the wall through the South Gate.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:grammar-fill:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:access#e-86092809cdaf1d02",
+          "text": "You can access these through the official app, 24/7 hotline, or service stations, where cash payments are also accommodated for greater convenience.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 14
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "疾病发作；非监护父母的探视权",
+      "reason": "旧义或法律专业义"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

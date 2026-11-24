@@ -1,0 +1,146 @@
+{
+  "entryId": "w:river",
+  "headword": "river",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈrɪvə(r)/",
+    "us": "/ˈrɪvər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:river#p-main",
+      "ipa": {
+        "uk": "/ˈrɪvə(r)/",
+        "us": "/ˈrɪvər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "rivers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 103
+  },
+  "unassignedCounts": {
+    "gaokao": 8,
+    "mock": 103
+  },
+  "senses": [
+    {
+      "senseId": "w:river#s1",
+      "pos": "n.",
+      "glossZh": "河流",
+      "pronunciationId": "w:river#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:river#e-0da78f57d60769ca",
+          "text": "The wise old man told him to travel to the Li River ~ perhaps he could learn a little from the greatest artist in the world.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:grammar-fill:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:river#e-1b8db3070f298ceb",
+          "text": "From a classic viewpoint, enjoy Lower Falls, the Yellowstone River, and the breathtaking colors of the canyon (峡谷) while learning about the area’s natural and human history.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:river#e-e4c6eab1e1d34e3f",
+          "text": "The River Severn has a significant turn through town, almost making an island of Shrewsbury Town Center.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:river#s2",
+      "pos": "n.",
+      "glossZh": "大量流淌的液体",
+      "pronunciationId": "w:river#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "扑克中的最后一张牌",
+      "reason": "游戏专门义"
+    },
+    {
+      "glossZh": "排版中的白色竖缝",
+      "reason": "印刷专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

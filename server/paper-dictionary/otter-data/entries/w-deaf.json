@@ -1,0 +1,188 @@
+{
+  "entryId": "w:deaf",
+  "headword": "deaf",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/def/",
+    "us": "/def/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:deaf#p-main",
+      "ipa": {
+        "uk": "/def/",
+        "us": "/def/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "deafer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "deafest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "senses": [
+    {
+      "senseId": "w:deaf#s1",
+      "pos": "adj.",
+      "glossZh": "聋的；失聪的",
+      "pronunciationId": "w:deaf#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:deaf#e-b0988b97d5607938",
+          "text": "Born in 1944 in Honolulu, Hawaii, Linda Yuen Lambrecht was completely deaf since birth and was exposed to Hawaii Sign Language (HSL) by her older deaf brothers who had learned to sign.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:deaf#e-eb1d7ae9187fee56",
+          "text": "Mrs. Glover noticed Sarah used American Sign Language (ASL) with Isaac and realized the boy was deaf.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:deaf#e-c277b7d24134c6d2",
+          "text": "At that time, however, the great majority of deaf children grew up without exposure to structured language until they started school, especially those with hearing parents.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:deaf#s2",
+      "pos": "短语",
+      "glossZh": "对……充耳不闻",
+      "pronunciationId": "w:deaf#p-main",
+      "note": "fall on deaf ears 或 turn a deaf ear to sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:deaf#e-6551b89e04e208f8",
+          "text": "My parents urged me to get out of this so-called unhealthy habit, but their repeated requests fell on deaf ears.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 106
+          }
+        },
+        {
+          "exampleId": "w:deaf#e-cad930646c0b2366",
+          "text": "I turned a deaf ear to him.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "低沉的；腐坏的；使失聪",
+      "reason": "罕见旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

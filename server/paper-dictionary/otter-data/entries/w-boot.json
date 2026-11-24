@@ -1,0 +1,199 @@
+{
+  "entryId": "w:boot",
+  "headword": "boot",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/buːt/",
+    "us": "/buːt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:boot#p-main",
+      "ipa": {
+        "uk": "/buːt/",
+        "us": "/buːt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "boots",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "booted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "booting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 23
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 20
+  },
+  "senses": [
+    {
+      "senseId": "w:boot#s1",
+      "pos": "n.",
+      "glossZh": "靴子",
+      "pronunciationId": "w:boot#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:boot#e-6a1494616421d3cd",
+          "text": "I had to quickly invent a story that Pip wore special rubber boots.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:boot#e-0d05b227780d8990",
+          "text": "People who visited my parents were always astonished that we kids got our barn boots and headed out the door for milking time without a word said.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam",
+            "paperTitle": "2025-2026学年第二学期浙江省精诚联盟适应性联考高三英语学科练习",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2026-may-adaptive-joint-exam:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:boot#e-b489859cadfe2585",
+          "text": "My lungs burned, and my new boots rubbed my heels.",
+          "source": {
+            "paperId": "paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first",
+            "paperTitle": "2026年沈阳市高中三年级教学质量监测（一）英语试卷",
+            "groupId": "group:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-liaoning-shenyang-2026-01-senior-three-teaching-quality-monitoring-first:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:boot#s2",
+      "pos": "n.",
+      "glossZh": "汽车行李厢",
+      "pronunciationId": "w:boot#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:boot#s3",
+      "pos": "v.",
+      "glossZh": "启动（计算机或系统）",
+      "pronunciationId": "w:boot#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:boot#s4",
+      "pos": "v.",
+      "glossZh": "猛踢；赶走",
+      "pronunciationId": "w:boot#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:boot#s5",
+      "pos": "短语",
+      "glossZh": "而且；另外",
+      "pronunciationId": "w:boot#p-main",
+      "note": "to boot",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "马车乘务位置、除冰气囊、步兵、旗叶鞘等",
+      "reason": "历史、俚语或行业专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

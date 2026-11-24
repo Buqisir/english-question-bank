@@ -1,0 +1,272 @@
+{
+  "entryId": "w:consumption",
+  "headword": "consumption",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kənˈsʌmpʃn/",
+    "us": "/kənˈsʌmpʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:consumption#p-main",
+      "ipa": {
+        "uk": "/kənˈsʌmpʃn/",
+        "us": "/kənˈsʌmpʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "consumptions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 62
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 58
+  },
+  "senses": [
+    {
+      "senseId": "w:consumption#s1",
+      "pos": "n.",
+      "glossZh": "食用；饮用；摄入量",
+      "pronunciationId": "w:consumption#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:consumption#e-5c585c591fcf3cd6",
+          "text": "According to a recent study in the Journal of Consumer Research, both the size and consumption habits of our eating companions can influence our food intake.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 94
+          }
+        },
+        {
+          "exampleId": "w:consumption#e-c3f7a4d7e82f36e4",
+          "text": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:consumption#e-87afebb60dcb9f82",
+          "text": "Tests had revealed that the water available for daily consumption was highly polluted by microplastics.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:consumption#s2",
+      "pos": "n.",
+      "glossZh": "消耗；消耗量",
+      "pronunciationId": "w:consumption#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:consumption#e-1c06f7340e0bb69e",
+          "text": "The primary footprint is a measure of our direct emissions（排放）of carbon dioxide (CO2) from the burning of fuels, including household energy consumption and transportation.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 140,
+            "end": 151
+          }
+        },
+        {
+          "exampleId": "w:consumption#e-87a16ba33c6c3047",
+          "text": "It is related to our consumption of fuels.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:25",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:consumption#e-6473657eb20b8228",
+          "text": "Fuel consumption decreases the slower you drive, because the moving car has to overcome fewer physical forces such as air resistance and rolling friction （摩擦） between tyres and road.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n123:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:consumption#s3",
+      "pos": "n.",
+      "glossZh": "消费；对信息或文化内容的使用",
+      "pronunciationId": "w:consumption#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:consumption#e-ce649f4ecf26cff0",
+          "text": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 137,
+            "end": 148
+          }
+        },
+        {
+          "exampleId": "w:consumption#e-cd42e570e5a75c04",
+          "text": "The expanding influence of online communication helps raise sustainability awareness, encouraging mindful consumption and driving industry change.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:reading-a:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 117
+          }
+        },
+        {
+          "exampleId": "w:consumption#e-38005d450b18853e",
+          "text": "At its core, it cut overall digital media consumption, which in turn freed up daily time for meaningful offline activities.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 60
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "肺结核、消耗性衰弱",
+      "reason": "历史医学用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

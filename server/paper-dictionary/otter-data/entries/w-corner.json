@@ -1,0 +1,290 @@
+{
+  "entryId": "w:corner",
+  "headword": "corner",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɔːnə(r)/",
+    "us": "/ˈkɔːrnər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:corner#p-main",
+      "ipa": {
+        "uk": "/ˈkɔːnə(r)/",
+        "us": "/ˈkɔːrnər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "corners",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "cornered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "cornering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 115
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 114
+  },
+  "senses": [
+    {
+      "senseId": "w:corner#s1",
+      "pos": "n.",
+      "glossZh": "角；角落；街角；拐弯处",
+      "pronunciationId": "w:corner#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:corner#e-2c343920d2fc370e",
+          "text": "On our first morning in Paris, I went around the corner to the food market to pick up some groceries.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:corner#e-548c0367326826c0",
+          "text": "I managed to find the street the theater was on, but when I turned the corner, I stopped in shock.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:corner#e-7a53ec4cab6e5b30",
+          "text": "Bent over my laptop while sitting on the bed in the corner of my room, I suddenly felt a pounding headache, and had to lie down.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:corner#s2",
+      "pos": "n.",
+      "glossZh": "（地区或领域的）一角；偏远处",
+      "pronunciationId": "w:corner#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:corner#e-3910e6316c1b3848",
+          "text": "photographers from all corners of the UK and beyond.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:corner#e-141fe35f45ffa544",
+          "text": "Grizzly bears, which may grow to about 2.5 m long and weigh over 400 kg, occupy a conflicted corner of the American psyche-we revere (敬畏) them even as they give us frightening dreams.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 99
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:corner#s3",
+      "pos": "短语",
+      "glossZh": "即将发生；就在眼前",
+      "pronunciationId": "w:corner#p-main",
+      "note": "just around the corner。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:corner#e-39498f1e7c1cae94",
+          "text": "Yes and no. He was thrilled to be doing the comedy that he always felt he should do, but even during his last few years, he always had a sense of curiosity, wondering what new role or challenge might be just around the corner.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 219,
+            "end": 225
+          }
+        },
+        {
+          "exampleId": "w:corner#e-7447a3799521ad40",
+          "text": "They frequently warn that a global decline in bee species is just around the corner.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 83
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:corner#s4",
+      "pos": "n.",
+      "glossZh": "（足球）角球",
+      "pronunciationId": "w:corner#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:corner#s5",
+      "pos": "v.",
+      "glossZh": "逼到角落；逼入困境",
+      "pronunciationId": "w:corner#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:corner#s6",
+      "pos": "v.",
+      "glossZh": "垄断（市场）",
+      "pronunciationId": "w:corner#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "塔特萨尔斯马匹交易场、惠斯特牌戏得分、腌制者",
+      "reason": "专名、牌戏或同形误配"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

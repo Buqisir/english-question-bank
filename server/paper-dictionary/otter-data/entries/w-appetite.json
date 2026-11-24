@@ -1,0 +1,177 @@
+{
+  "entryId": "w:appetite",
+  "headword": "appetite",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈæpɪtaɪt/",
+    "us": "/ˈæpɪtaɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:appetite#p-main",
+      "ipa": {
+        "uk": "/ˈæpɪtaɪt/",
+        "us": "/ˈæpɪtaɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "appetites",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 24
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 21
+  },
+  "senses": [
+    {
+      "senseId": "w:appetite#s1",
+      "pos": "n.",
+      "glossZh": "食欲；胃口",
+      "pronunciationId": "w:appetite#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:appetite#e-e16010700221cbd5",
+          "text": "And contrary to existing research that says you should avoid eating with heavier people who order large portions（份）, it's the beanpoles with big appetites you really need to avoid.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 145,
+            "end": 154
+          }
+        },
+        {
+          "exampleId": "w:appetite#e-60a4127b639e26c5",
+          "text": "On hot summer days, when high temperatures often reduce people’s appetite, cold desserts tend to sound far more refreshing than a bowl of hot noodles.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:appetite#e-a8651e00e2df7f06",
+          "text": "Since I needed to be on medications that had a side effect of stimulating my appetite, I was thankful to have three tasty meals each day.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 85
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:appetite#s2",
+      "pos": "n.",
+      "glossZh": "强烈欲望；渴望",
+      "pronunciationId": "w:appetite#p-main",
+      "note": "常用 an appetite for sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:appetite#e-4c9feb2d65a034e5",
+          "text": "It’s not about the words themselves or how we learn them, but the wanting to know them, the curiosity and the appetite.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 110,
+            "end": 118
+          }
+        },
+        {
+          "exampleId": "w:appetite#e-4a62d2e06a94a061",
+          "text": "This has led to an undeniable increase in “kidult” customers in recent years, with a real appetite for nostalgic（怀旧的）joy and perhaps a simpler time.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 105
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

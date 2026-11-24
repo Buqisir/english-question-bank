@@ -1,0 +1,278 @@
+{
+  "entryId": "w:early",
+  "headword": "early",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɜːli/",
+    "us": "/ˈɜːrli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:early#p-main",
+      "ipa": {
+        "uk": "/ˈɜːli/",
+        "us": "/ˈɜːrli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "earlier",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "earliest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 61,
+    "mock": 439
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 439
+  },
+  "senses": [
+    {
+      "senseId": "w:early#s1",
+      "pos": "adj.",
+      "glossZh": "早期的；初期的；（一天、季节等）开始不久的",
+      "pronunciationId": "w:early#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:early#e-5acc63e0da190cc4",
+          "text": "Of all the stories of my early childhood, the one about a __36__ is my mother’s favorite.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:early#e-885bfb0a7a229f21",
+          "text": "In the early 1970s, 40 per cent of children walked to school, while in 2010, it was as low as 15 per cent.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:early#e-ce831590e03eaf88",
+          "text": "My wife and I wanted to share our new home with family and friends by hosting a small gathering in the early summer.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 103,
+            "end": 108
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:early#s2",
+      "pos": "adj.",
+      "glossZh": "提早的；提前的；过早的",
+      "pronunciationId": "w:early#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:early#e-f3d341cc1ba6babc",
+          "text": "Taking early retirement.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:early#e-f41010c29d62f9c5",
+          "text": "The adorable female calf is the second black rhino born this year at the reserve, but it is too early to tell if the calves will make good candidates to be returned to protected areas of the wild.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:early#e-1bb8c543717b7bea",
+          "text": "Since the exhibits in museums sustain natural decay (破损) over time, early detection is vital.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:early#s3",
+      "pos": "adv.",
+      "glossZh": "提早；及早；早些时候",
+      "pronunciationId": "w:early#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 42,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:early#e-51ca9a6455fc28e4",
+          "text": "A flood had hit the area earlier that year and the __44__ it caused had driven away a number of birds.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:early#e-de4655cbca925433",
+          "text": "I often leave early to seek the right destinations so I can set up early to avoid missing the moment I am attempting to photograph.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:early#e-d92835e1d179b5e8",
+          "text": "My roommates would tell me to go to bed and get up early the following morning to do it instead.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 56
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "恒星早型；姓氏",
+      "reason": "天文专门用法或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

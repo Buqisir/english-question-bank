@@ -1,0 +1,325 @@
+{
+  "entryId": "w:fund",
+  "headword": "fund",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fʌnd/",
+    "us": "/fʌnd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fund#p-main",
+      "ipa": {
+        "uk": "/fʌnd/",
+        "us": "/fʌnd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "funds",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "funded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "funding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 107
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 104
+  },
+  "senses": [
+    {
+      "senseId": "w:fund#s1",
+      "pos": "n.",
+      "glossZh": "资金",
+      "pronunciationId": "w:fund#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fund#e-29cbfcd4054bf98b",
+          "text": "One poster from the exhibition – Henry Wellge’s “Yellowstone National Park” from1904 – was recently purchased with donated funds and is now part of UW Libraries' Emmett D. Chisum Special Collections.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 123,
+            "end": 128
+          }
+        },
+        {
+          "exampleId": "w:fund#e-6703a3ba6af9b3a9",
+          "text": "To raise funds for Coe Library.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:22",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:fund#e-c911f36d2704d2ff",
+          "text": "To raise funds for the postal service.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2025-eight-provinces-jan:27",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fund#s2",
+      "pos": "n.",
+      "glossZh": "专项基金",
+      "pronunciationId": "w:fund#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fund#e-013e6fef76aab95f",
+          "text": "About 98 cents of every duck stamp dollar goes directly into the Migratory Bird Conservation Fund to purchase wetlands and wildlife habitat for inclusion into the National Wildlife Refuge System – a fact that ensures this land will be protected and available for all generations to come.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:fund#e-05097648e3dca863",
+          "text": "Since 1934, better than half a billion dollars has gone into that Fund to purchase more than 5 million acres of habitat.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fund#s3",
+      "pos": "n.",
+      "glossZh": "基金机构",
+      "pronunciationId": "w:fund#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fund#e-0fa3aff0e23d2797",
+          "text": "According to the World Wildlife Fund, the global black rhino population has dropped as low as 5500, giving the rhinos a “critically endangered” status.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:fund#e-9ab1172a97552ddc",
+          "text": "It will continue to work with the World Wildlife Fund.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2021-national-a:27",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fund#s4",
+      "pos": "v.",
+      "glossZh": "资助",
+      "pronunciationId": "w:fund#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fund#e-6985f370c9b6d502",
+          "text": "To fund new museum construction.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:21",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:fund#e-6697b0376bb8c1bd",
+          "text": "Who funds “Playful Learning”?",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-cq-nankai-2026-03-sixth-quality-test:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:fund#e-72966503e9fd89e4",
+          "text": "It stands out as a fully funded option for low-income students caring about media.",
+          "source": {
+            "paperId": "paper-mock-henan-four-cities-2026-01",
+            "paperTitle": "河南省洛阳、许昌、平顶山、济源四市2025—2026学年高三年级第二次质量检测英语试题",
+            "groupId": "group:paper-mock-henan-four-cities-2026-01:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-henan-four-cities-2026-01:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 31
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "将债务转为有息股票",
+      "reason": "金融专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

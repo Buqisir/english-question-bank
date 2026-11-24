@@ -1,0 +1,140 @@
+{
+  "entryId": "w:eve",
+  "headword": "eve",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/iːv/",
+    "us": "/iːv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:eve#p-main",
+      "ipa": {
+        "uk": "/iːv/",
+        "us": "/iːv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "eves",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "EVEs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:eve#s1",
+      "pos": "n.",
+      "glossZh": "前夕",
+      "pronunciationId": "w:eve#p-main",
+      "note": "on the eve of sth 在某事发生前夕。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 13
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:eve#e-70be514f7ad21467",
+          "text": "Every New Year’s Eve, our family holds a special gift exchange.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:eve#e-82646657f2c1c646",
+          "text": "It was the family’s own version of “Make-A-Wish,” proposed on the eve of Jeff’s major spinal (脊椎的) surgery.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-04-second",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-04-second:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:eve#e-53926d9875355ddd",
+          "text": "It was a bitterly cold, snow-choked Christmas Eve when Yvonne White got a call from an unknown number.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 49
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "夏娃或伊芙",
+      "reason": "人名，与普通名词 eve 分开"
+    },
+    {
+      "glossZh": "Eve Energy",
+      "reason": "产品专名，索引同形命中留空"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

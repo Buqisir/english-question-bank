@@ -1,0 +1,264 @@
+{
+  "entryId": "w:which",
+  "headword": "which",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/wɪtʃ/",
+    "us": "/wɪtʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:which#p-main",
+      "ipa": {
+        "uk": "/wɪtʃ/",
+        "us": "/wɪtʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 205,
+    "mock": 1495
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1495
+  },
+  "senses": [
+    {
+      "senseId": "w:which#s1",
+      "pos": "pron. / det.",
+      "glossZh": "哪一个；哪一种",
+      "pronunciationId": "w:which#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 96,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:which#e-511177d8578b221a",
+          "text": "Which camp will attract children who are interested in cooking?",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2020-ii:23",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:which#e-0d619b9ed0772ac0",
+          "text": "Pack a bag, cut a cake, guess which juice container holds the most liquid, and much more.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:17",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:which#e-c41e35ce20d1ebcb",
+          "text": "If it’s short stories, Peter Mountford breaks down six techniques you can try to see which one helps you stick the landing.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 90
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:which#s2",
+      "pos": "关系代词",
+      "glossZh": "指前面提到的人以外的事物",
+      "pronunciationId": "w:which#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 95,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:which#e-6cb56b176213bb83",
+          "text": "But in half the cases she wore a specially designed fat suit which increased her weight to 180 pounds.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:which#e-0e944f71c80ee99f",
+          "text": "If the only reading you ever do is the novel or magazine, the speed at which you read -probably does not matter very much.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:which#e-3ad2013aadd04c2d",
+          "text": "Road accidents, which had fallen for years, are now rising sharply.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:which#s3",
+      "pos": "关系代词",
+      "glossZh": "承接前面整件事",
+      "pronunciationId": "w:which#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:which#e-0ea43e470934ec27",
+          "text": "Rome can be pricey for travelers, which is why many choose to stay in a hostel（旅社）.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:which#e-013671b3c6987518",
+          "text": "She smiled at me and said if I needed help, she’d be right there, which I found quite comforting.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:4",
+              "sentence": 8
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:which#e-6ca6ea16ac6d79fa",
+          "text": "Habitat loss, pesticide use, and climate change have caused dramatic declines in pollinator populations over the past couple of decades, which has damaged the U.S. agricultural economy.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 137,
+            "end": 142
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "古旧用法中指人",
+      "reason": "现代通常用 who 或 whom"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

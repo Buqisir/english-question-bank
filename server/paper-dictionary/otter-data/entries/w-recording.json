@@ -1,0 +1,340 @@
+{
+  "entryId": "w:recording",
+  "headword": "recording",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈkɔːdɪŋ/",
+    "us": "/rɪˈkɔːrdɪŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:recording#p-main",
+      "ipa": {
+        "uk": "/rɪˈkɔːdɪŋ/",
+        "us": "/rɪˈkɔːrdɪŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "recordings",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 67
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 61
+  },
+  "senses": [
+    {
+      "senseId": "w:recording#s1",
+      "pos": "n.",
+      "glossZh": "录音",
+      "pronunciationId": "w:recording#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:recording#e-d62272e991b19b90",
+          "text": "She even played some recordings of their singing, what was fun.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:writing-short-error-correction",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:writing-short-error-correction:7",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:recording#e-117eb0b6ddd1bd0f",
+          "text": "Play some recordings.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:recording#e-1622f70886f68b1f",
+          "text": "To investigate further, Will Feeney’s team played recordings of such alarm calls – originally from birds on other continents – to potential host birds in Australia and China.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:recording#s2",
+      "pos": "n.",
+      "glossZh": "录像",
+      "pronunciationId": "w:recording#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:recording#e-236c1991019d3918",
+          "text": "The researchers analyzed video recordings of 53 child-parent pairs during everyday activities at home and found children who play with puzzles between 26 and 46 months of age have better spatial skills when assessed at 54 months of age.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:recording#s3",
+      "pos": "n.",
+      "glossZh": "录制过程",
+      "pronunciationId": "w:recording#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:recording#e-a7b8af04ad1b5be3",
+          "text": "By then, the bird had already fallen silent, and Corinne stopped the recording.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 78
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:recording#s4",
+      "pos": "n.",
+      "glossZh": "记录的数据",
+      "pronunciationId": "w:recording#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:recording#e-995cf49e7716e9e3",
+          "text": "Using EEG(脑电图) recordings, the team found that during the test periods, participants’ brains produced more",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-c",
+            "locator": {
+              "paragraph": 16,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-c:16",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:recording#e-2d017f0b41d128df",
+          "text": "By analyzing the recordings, they found that the visual cortex produced waves of synchronized activity in time with the flashing cartoons.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:recording#e-4e3802d169ef047f",
+          "text": "By analyzing the brain recordings, the researchers found that an area called the fusiform gyrus was more active when people saw lines more vividly.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:recording#s5",
+      "pos": "v.",
+      "glossZh": "记录",
+      "pronunciationId": "w:recording#p-main",
+      "note": "record 的 -ing 形式。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:recording#e-e9373ee27b1ab84c",
+          "text": "By September 2016, more than 130,000 acacia trees had been planted on 20 pilot farms, with farmers recording a 60 per cent survival rate.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 99,
+            "end": 108
+          }
+        },
+        {
+          "exampleId": "w:recording#e-2c88de0afddc420e",
+          "text": "This makes sense because the people who get observational biodiversity data on mobile devices are often citizen scientists recording their encounters with species in areas nearby.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 123,
+            "end": 132
+          }
+        },
+        {
+          "exampleId": "w:recording#e-51e0abd10d716d43",
+          "text": "Recording daily reading habits.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "登记报名",
+      "reason": "语料未见的少见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

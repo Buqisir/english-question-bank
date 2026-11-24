@@ -1,0 +1,148 @@
+{
+  "entryId": "w:boring",
+  "headword": "boring",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈbɔːrɪŋ/",
+    "us": "/ˈbɔːrɪŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:boring#p-main",
+      "ipa": {
+        "uk": "/ˈbɔːrɪŋ/",
+        "us": "/ˈbɔːrɪŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "boringer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "boringest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more boring",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most boring",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 63
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:boring#s1",
+      "pos": "adj.",
+      "glossZh": "无聊的；令人厌烦的",
+      "pronunciationId": "w:boring#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 63
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:boring#e-987042851a41e51d",
+          "text": "She found it boring.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:boring#e-7c0fbeeecb3402bb",
+          "text": "My mum would find fun even when completing the most boring of tasks.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:grammar-fill:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:boring#e-be6047fef169aa7f",
+          "text": "As the speaker stood in front of the entire grade, attempting to get our attention, my friends and I sat back, prepared to sit through another boring speech, but as soon as she started talking, I snapped to attention (立即站立).",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 143,
+            "end": 149
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "钻孔过程、钻屑、钻孔用的、地名",
+      "reason": "专业用法或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

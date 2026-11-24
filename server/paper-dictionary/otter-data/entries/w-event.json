@@ -1,0 +1,267 @@
+{
+  "entryId": "w:event",
+  "headword": "event",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈvent/",
+    "us": "/ɪˈvent/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:event#p-main",
+      "ipa": {
+        "uk": "/ɪˈvent/",
+        "us": "/ɪˈvent/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "events",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 35,
+    "mock": 298
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 297
+  },
+  "senses": [
+    {
+      "senseId": "w:event#s1",
+      "pos": "n.",
+      "glossZh": "活动",
+      "pronunciationId": "w:event#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 27,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:event#e-ab668fbfdf251610",
+          "text": "This free event features everything from bounce houses to rides, games, snowflake crafts and face painting to go with various stands set up by local sellers, with food and other offerings for sale at the event.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:event#e-d90c682dcf7f8b57",
+          "text": "The festival is a public event for Harvard and community members of all ages.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-a:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:event#e-9e8e51d50720d451",
+          "text": "I love animals, and I felt an urge to go to this fundraising event.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:event#s2",
+      "pos": "n.",
+      "glossZh": "发生的事",
+      "pronunciationId": "w:event#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:event#e-33b08fd657440b0b",
+          "text": "How past events should be presented.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2023-national-b:32",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:event#e-37976d2bae582f71",
+          "text": "She explains we are at a “tipping point\" in history and must act now to prevent an extinction-level event for humanity.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 105
+          }
+        },
+        {
+          "exampleId": "w:event#e-4384b46210db1024",
+          "text": "Upset but not discouraged by this event, Hilda decided to do some spying on Maya.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:event#s3",
+      "pos": "n.",
+      "glossZh": "比赛项目",
+      "pronunciationId": "w:event#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:event#e-11773be3ac40d008",
+          "text": "To become the Olympic champion in the individual (个人) all-around event, Gabby Douglas had to leave everything she __41__ best.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:event#e-144fc74d4ff04b8a",
+          "text": "Tom explained that no one else had signed up for the long jump event, and without a participant, their class wouldn’t get any points in the school sports meeting.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:event#s4",
+      "pos": "短语",
+      "glossZh": "如果……发生",
+      "pronunciationId": "w:event#p-main",
+      "note": "in the event of sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "程序事件",
+      "reason": "计算机专用语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

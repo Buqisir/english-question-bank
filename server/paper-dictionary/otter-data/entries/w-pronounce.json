@@ -1,0 +1,232 @@
+{
+  "entryId": "w:pronounce",
+  "headword": "pronounce",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/prəˈnaʊns/",
+    "us": "/prəˈnaʊns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:pronounce#p-main",
+      "ipa": {
+        "uk": "/prəˈnaʊns/",
+        "us": "/prəˈnaʊns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "pronounced",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "pronounces",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "pronouncing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 10
+  },
+  "senses": [
+    {
+      "senseId": "w:pronounce#s1",
+      "pos": "v.",
+      "glossZh": "发音",
+      "pronunciationId": "w:pronounce#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pronounce#e-0865b842e3f868b3",
+          "text": "It will also usually show how the word is pronounced.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:pronounce#e-640fd7c95df4f5bc",
+          "text": "of English, some Chinese words are rather difficult to pronounce.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:pronounce#e-5b94d3b4183c1b8a",
+          "text": "Every time I gave a self-introduction, I had to explain how to pronounce my name at least five times, yet they still could not say it the way I did.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pronounce#s2",
+      "pos": "v.",
+      "glossZh": "正式宣布",
+      "pronunciationId": "w:pronounce#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pronounce#e-4fa7a13dedadd21c",
+          "text": "— her poetry circle regular – pronounced the rent increase unreasonable.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:reading-b:17",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pronounce#s3",
+      "pos": "adj.",
+      "glossZh": "显著的",
+      "pronunciationId": "w:pronounce#p-main",
+      "note": "只用 pronounced。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pronounce#e-b4f35bc79ee7c96e",
+          "text": "But this drop was less pronounced in expert birders, suggesting that birding may help build cognitive reserve, the brain’s ability to defend itself against ageing and adapt to damage.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:pronounce#e-36fbed52801f68e8",
+          "text": "And the effect is especially pronounced in team sports.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-03-seventh:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 39
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "代词的复数",
+      "reason": "与本词无关的误写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

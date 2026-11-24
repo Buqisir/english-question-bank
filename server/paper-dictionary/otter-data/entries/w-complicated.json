@@ -1,0 +1,135 @@
+{
+  "entryId": "w:complicated",
+  "headword": "complicated",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɒmplɪkeɪtɪd/",
+    "us": "/ˈkɑːmplɪkeɪtɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:complicated#p-main",
+      "ipa": {
+        "uk": "/ˈkɒmplɪkeɪtɪd/",
+        "us": "/ˈkɑːmplɪkeɪtɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more complicated",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most complicated",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 60
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:complicated#s1",
+      "pos": "adj.",
+      "glossZh": "复杂的；难懂的；难处理的",
+      "pronunciationId": "w:complicated#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 60
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:complicated#e-0de6e9517b4b4361",
+          "text": "In the wrong hands, such a book could prove as complicated to process as the computer code (代码) that powers AI but, thankfully, Campbell has more than two decades’ professional experience translating the heady into the understandable.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:complicated#e-17e545327004f51c",
+          "text": "Johnston, a journalist, has complicated feelings about her Instagram-beloved neighborhood.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:complicated#e-0e40071aaf6b4c57",
+          "text": "Fluent readers sometimes think of dyslexia as a tendency to put letters in the wrong order, but it’s more complicated than that.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 117
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "沿纵向折叠的",
+      "reason": "植物形态专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

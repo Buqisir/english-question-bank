@@ -1,0 +1,137 @@
+{
+  "entryId": "w:disc",
+  "headword": "disc",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪsk/",
+    "us": "/dɪsk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:disc#p-main",
+      "ipa": {
+        "uk": "/dɪsk/",
+        "us": "/dɪsk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "discs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:disc#s1",
+      "pos": "n.",
+      "glossZh": "圆盘；圆盘状物",
+      "pronunciationId": "w:disc#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:disc#e-0247a7cdda0ba3a1",
+          "text": "To conserve momentum, particles could not fall directly inward but were forced to orbit, gradually collapsing into a single, spinning disc over billions of years.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 134,
+            "end": 138
+          }
+        },
+        {
+          "exampleId": "w:disc#e-f69a672d6052fbf8",
+          "text": "As these waves travel through the galaxy’s disc, they squeeze gas, starting the birth of bright young star groups that outline the arms.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:disc#s2",
+      "pos": "n.",
+      "glossZh": "唱片；光盘",
+      "pronunciationId": "w:disc#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:disc#s3",
+      "pos": "n.",
+      "glossZh": "椎间盘",
+      "pronunciationId": "w:disc#p-main",
+      "note": "如 slipped disc 指「椎间盘突出」。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "DISC 人格测试；用圆盘耙耕地；使螺旋桨迎风增阻",
+      "reason": "同形缩写或专门动词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

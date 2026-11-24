@@ -1,0 +1,255 @@
+{
+  "entryId": "w:instruction",
+  "headword": "instruction",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪnˈstrʌkʃn/",
+    "us": "/ɪnˈstrʌkʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:instruction#p-main",
+      "ipa": {
+        "uk": "/ɪnˈstrʌkʃn/",
+        "us": "/ɪnˈstrʌkʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "instructions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 94
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 88
+  },
+  "senses": [
+    {
+      "senseId": "w:instruction#s1",
+      "pos": "n.",
+      "glossZh": "操作说明；指示步骤",
+      "pronunciationId": "w:instruction#p-main",
+      "note": "常用复数 instructions。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:instruction#e-edc8a9477a047fad",
+          "text": "It provides step-by-step instructions.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2024-ii:33",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:instruction#e-1f7807ce9d8264ec",
+          "text": "Follow the instructions on the clay package for baking.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:instruction#e-96a28a6ebf209bfd",
+          "text": "I’d never baked cookies, so we followed the instructions carefully.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:instruction#s2",
+      "pos": "n.",
+      "glossZh": "命令；指令",
+      "pronunciationId": "w:instruction#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:instruction#e-850f9d29b6295175",
+          "text": "He nodded, then silently handed me a small bottle of hot water – the first real gesture of warmth he had offered beyond his necessary instructions since we started.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 134,
+            "end": 146
+          }
+        },
+        {
+          "exampleId": "w:instruction#e-f46ed1771e46bf38",
+          "text": "He was shocked, but after checking my location, he calmly gave me instructions.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 78
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:instruction#s3",
+      "pos": "n.",
+      "glossZh": "教学；指导",
+      "pronunciationId": "w:instruction#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:instruction#e-5213ef0f243fb572",
+          "text": "I find that doing so energizes my instruction, engages my students, and demonstrates to them how abstract concepts play out in the real world.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:instruction#e-14446a5234c0cad6",
+          "text": "Importantly, deliberate practice is not restricted to classroom instruction.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-2026-01-first-quality-test:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:instruction#e-9f5d5fdaefe904ac",
+          "text": "To make the most of your time in Zermatt, explore the following schools and guides for expert instruction.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-04-second",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-2026-04-second:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-guangdong-2026-04-second:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 105
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "当事人的委托要求",
+      "reason": "法律专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

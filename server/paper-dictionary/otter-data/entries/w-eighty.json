@@ -1,0 +1,121 @@
+{
+  "entryId": "w:eighty",
+  "headword": "eighty",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈeɪti/",
+    "us": "/ˈeɪti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:eighty#p-main",
+      "ipa": {
+        "uk": "/ˈeɪti/",
+        "us": "/ˈeɪti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "senses": [
+    {
+      "senseId": "w:eighty#s1",
+      "pos": "num.",
+      "glossZh": "八十；八十个",
+      "pronunciationId": "w:eighty#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:eighty#e-d93b8049bb740b87",
+          "text": "“Eighty percent is schoolwork, ten percent the SAT, and ten percent extracurriculars.” She then looked at me with deep emotion and said, “But most importantly, at one hundred percent, is your mental health.”",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:eighty#e-ae1a552974670a09",
+          "text": "An Italian scholar writes that he, as well as many others, was amazed to discover that the creator of such delicate works is “a lady who is well over the age of eighty.” Of course, this reaction says as much about the limitations of the observer’s imagination as it does about the reaches of Ducrot’s.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 161,
+            "end": 167
+          }
+        },
+        {
+          "exampleId": "w:eighty#e-178674648218d169",
+          "text": "We produced over eighty items with reasonable prices: candles at $6, bracelets at $4, keychains at $3.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 23
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "公司名 10Eighty",
+      "reason": "专名中含该拼写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

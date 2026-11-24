@@ -1,0 +1,173 @@
+{
+  "entryId": "w:fond",
+  "headword": "fond",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fɒnd/",
+    "us": "/fɑːnd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fond#p-main",
+      "ipa": {
+        "uk": "/fɒnd/",
+        "us": "/fɑːnd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "fonder",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "fondest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "senses": [
+    {
+      "senseId": "w:fond#s1",
+      "pos": "adj.",
+      "glossZh": "喜欢的",
+      "pronunciationId": "w:fond#p-main",
+      "note": "be fond of sb/sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fond#e-b7c6385d1ed9a4e3",
+          "text": "He was fond of traveling.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2023-i:24",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:fond#e-b2fb964513c27e9c",
+          "text": "They are fond of sharing daily experiences.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2024-ii:30",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:fond#e-1150bc7d12ef9015",
+          "text": "They are fond of their playmates.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:32",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fond#s2",
+      "pos": "adj.",
+      "glossZh": "带着喜爱的",
+      "pronunciationId": "w:fond#p-main",
+      "note": "如 fond memories 美好的回忆。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fond#e-6ec7dc277521dbf3",
+          "text": "Those trips are among my fondest memories.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-b:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "锅底焦香残渣",
+      "reason": "烹饪专业借词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

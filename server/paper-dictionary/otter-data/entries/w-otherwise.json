@@ -1,0 +1,221 @@
+{
+  "entryId": "w:otherwise",
+  "headword": "otherwise",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈʌðəwaɪz/",
+    "us": "/ˈʌðərwaɪz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:otherwise#p-main",
+      "ipa": {
+        "uk": "/ˈʌðəwaɪz/",
+        "us": "/ˈʌðərwaɪz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 71
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 68
+  },
+  "senses": [
+    {
+      "senseId": "w:otherwise#s1",
+      "pos": "adv.",
+      "glossZh": "否则；不然",
+      "pronunciationId": "w:otherwise#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:otherwise#e-5004258e64e00516",
+          "text": "As they grew more mobile, we let them move freely around the house during the day, but when we were asleep we had to contain them in a large room, otherwise they’d get up to mischief.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 147,
+            "end": 156
+          }
+        },
+        {
+          "exampleId": "w:otherwise#e-0be2e241c387c626",
+          "text": "Last year it recovered more than 807,500 pounds of food by taking donations and collecting blemished (有瑕疵的) produce that otherwise would have rotted in fields.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "reading-b-4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 121,
+            "end": 130
+          }
+        },
+        {
+          "exampleId": "w:otherwise#e-f86f7b5a8bf87cd9",
+          "text": "But last month, one popular New York City restaurant tried a different way: It changed its menu to exclusively（专门）offer food that would otherwise be thrown away.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 136,
+            "end": 145
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:otherwise#s2",
+      "pos": "adv.",
+      "glossZh": "在其他方面",
+      "pronunciationId": "w:otherwise#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:otherwise#e-cc7495df64fa50f1",
+          "text": "Levine and his research team selected volunteers aged between 45 and 64 who did not exercise much but were otherwise healthy.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 116
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:otherwise#s3",
+      "pos": "adv.",
+      "glossZh": "用别的方式；不同地",
+      "pronunciationId": "w:otherwise#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:otherwise#e-f62c05fe5680c372",
+          "text": "But Lisa Feldman Barrett, a clinical psychologist at Northeastern University, thinks otherwise.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 94
+          }
+        },
+        {
+          "exampleId": "w:otherwise#e-b0da97f0107cfa37",
+          "text": "Movement is clockwise around the board (unless instructed otherwise!) and play passes to the left.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:otherwise#e-be485164777446fe",
+          "text": "Unless otherwise specified by your instructor, it is prohibited by the HGSE Academic Policy to",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 16
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

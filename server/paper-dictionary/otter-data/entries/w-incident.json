@@ -1,0 +1,129 @@
+{
+  "entryId": "w:incident",
+  "headword": "incident",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɪnsɪdənt/",
+    "us": "/ˈɪnsɪdənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:incident#p-main",
+      "ipa": {
+        "uk": "/ˈɪnsɪdənt/",
+        "us": "/ˈɪnsɪdənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "incidents",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 24
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:incident#s1",
+      "pos": "n.",
+      "glossZh": "事件；事端",
+      "pronunciationId": "w:incident#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 24
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:incident#e-6c4d8584b6aaa515",
+          "text": "It is one of the most __51__ incidents in my life, which taught me to __52__ the profession and works of a person, no matter how __53__ they are.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:incident#e-33b9b83550a41568",
+          "text": "Older and wiser now, Burchill chalked up the incident to youthful indiscretion (莽撞).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:incident#e-a185a408eb4c4fcc",
+          "text": "After that incident, I stopped acting as a “Chinese teacher.” Instead of correcting others when they were struggling to pronounce my name, I just smiled and nodded approvingly.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 19
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "入射的、附属于主要事项的",
+      "reason": "物理或法律专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,202 @@
+{
+  "entryId": "w:tennis",
+  "headword": "tennis",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtenɪs/",
+    "us": "/ˈtenɪs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:tennis#p-main",
+      "ipa": {
+        "uk": "/ˈtenɪs/",
+        "us": "/ˈtenɪs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "tennises",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 36
+  },
+  "senses": [
+    {
+      "senseId": "w:tennis#s1",
+      "pos": "n.",
+      "glossZh": "网球",
+      "pronunciationId": "w:tennis#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tennis#e-d20c8f4ae07fbdf7",
+          "text": "and on all kinds of unloved pieces of land across towns and cities, tiny forests barely the size of tennis courts are appearing, making a great place for both wildlife and local people who may not normally have easy access to nature.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 106
+          }
+        },
+        {
+          "exampleId": "w:tennis#e-53a8da21d178a4ae",
+          "text": "You would be feeling almost as bad if arguments were even just competitions- like, say, tennis tournaments.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 94
+          }
+        },
+        {
+          "exampleId": "w:tennis#e-fe2617255a275632",
+          "text": "When I first learned to play tennis, my coach’s advice was simple: “Practice, practice, practice.” Though this saying is common, is it entirely scientific?",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:tennis#s2",
+      "pos": "短语",
+      "glossZh": "乒乓球",
+      "pronunciationId": "w:tennis#p-main",
+      "note": "table tennis。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tennis#e-2e0b1b1f1baa8b80",
+          "text": "Glad to know that you want to learn to play table tennis.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-application",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-application:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:tennis#e-ddd503114e47c634",
+          "text": "Playing table tennis.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:tennis#e-5121a93f6e1704a0",
+          "text": "However, they are over-represented in certain one-on-one sports like fencing (击剑) and table tennis.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 98
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "美国地名、来回驱动",
+      "reason": "专名或罕用动词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

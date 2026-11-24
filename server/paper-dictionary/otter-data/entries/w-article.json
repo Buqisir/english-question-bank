@@ -1,0 +1,170 @@
+{
+  "entryId": "w:article",
+  "headword": "article",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɑːtɪkl/",
+    "us": "/ˈɑːrtɪkl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:article#p-main",
+      "ipa": {
+        "uk": "/ˈɑːtɪkl/",
+        "us": "/ˈɑːrtɪkl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "articles",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 17,
+    "mock": 82
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 82
+  },
+  "senses": [
+    {
+      "senseId": "w:article#s1",
+      "pos": "n.",
+      "glossZh": "文章；报道；论文",
+      "pronunciationId": "w:article#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:article#e-ce8c990ce37cfeb1",
+          "text": "A few years later, still attracted to the country, he returned to Uzbekistan to write an article about the disappearance of the Aral Sea.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:article#e-cfacf1823fdb9296",
+          "text": "On Thursday in an article published in Cell, a team of researchers reported a new kind of adaptation - not to air or to food, but to the ocean.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:article#e-beced6aa6c515869",
+          "text": "Fitness Magazine recently ran an article titled “Five Reasons to Thank Your Workout Partner.” One reason was: “You’ll actually show up if you know someone is waiting for you at the gym,” while another read: “__36__” With a workout partner, you will increase your training effort as there is a subtle (微妙) competition.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "seven-choices-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:article#s2",
+      "pos": "n.",
+      "glossZh": "物件；物品",
+      "pronunciationId": "w:article#p-main",
+      "note": "如 an article of clothing。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:article#s3",
+      "pos": "n.",
+      "glossZh": "（法律、协议等的）条款",
+      "pronunciationId": "w:article#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:article#s4",
+      "pos": "n.",
+      "glossZh": "冠词",
+      "pronunciationId": "w:article#p-main",
+      "note": "英语的 a、an 和 the。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "按约收徒；分条指控；某个家伙",
+      "reason": "历史用法或罕见义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

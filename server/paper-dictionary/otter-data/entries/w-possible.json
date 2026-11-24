@@ -1,0 +1,282 @@
+{
+  "entryId": "w:possible",
+  "headword": "possible",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpɒsəbl/",
+    "us": "/ˈpɑːsəbl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:possible#p-main",
+      "ipa": {
+        "uk": "/ˈpɒsəbl/",
+        "us": "/ˈpɑːsəbl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more possible",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most possible",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 22,
+    "mock": 171
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 169
+  },
+  "senses": [
+    {
+      "senseId": "w:possible#s1",
+      "pos": "adj.",
+      "glossZh": "可能发生或存在的",
+      "pronunciationId": "w:possible#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:possible#e-0937270ca2db36bb",
+          "text": "A possible reason for the study findings.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:30",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:possible#e-3b0c628b722b571b",
+          "text": "Lead researcher Dr. Helena Horder, of the University of Gothenburg in Sweden, said: “These findings are exciting because it’s possible that improving people’s cardiovascular(心血管的) fitness in middle age could delay or even prevent them from developing dementia.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 126,
+            "end": 134
+          }
+        },
+        {
+          "exampleId": "w:possible#e-108a288ba44956fa",
+          "text": "To indicate a possible danger of cloud seeding.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:30",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:possible#s2",
+      "pos": "adj.",
+      "glossZh": "可以做到的",
+      "pronunciationId": "w:possible#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:possible#e-14c548fa7e212c32",
+          "text": "What makes the application of drones to rail lines possible?",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2022-national-b:28",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:possible#e-856e214c53e49d44",
+          "text": "Whether you paint still lifes, portraits, or landscapes, paint from life as much as possible.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:possible#e-657fde8546912e3b",
+          "text": "If you take an online course, what can you do to ensure the best possible grade?",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:possible#s3",
+      "pos": "adj.",
+      "glossZh": "可考虑的",
+      "pronunciationId": "w:possible#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:possible#e-af9904b5f0d829df",
+          "text": "Possible direction for further study.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2025-i:35",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:possible#e-95c4cbd20b32cc8e",
+          "text": "Offering a possible interpretation.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-second:30",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:possible#e-4ca922474aa038ce",
+          "text": "The app even drafted possible replies for layer-two messages.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-d:16",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 29
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "可能人选（名词）",
+      "reason": "较少见的省略用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

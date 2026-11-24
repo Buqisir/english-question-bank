@@ -1,0 +1,171 @@
+{
+  "entryId": "w:proportion",
+  "headword": "proportion",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/prəˈpɔːʃn/",
+    "us": "/prəˈpɔːrʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:proportion#p-main",
+      "ipa": {
+        "uk": "/prəˈpɔːʃn/",
+        "us": "/prəˈpɔːrʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "proportions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:proportion#s1",
+      "pos": "n.",
+      "glossZh": "比例",
+      "pronunciationId": "w:proportion#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:proportion#e-8a74db14418c6137",
+          "text": "A higher proportion of athletic left-handers.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:34",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:proportion#s2",
+      "pos": "n.",
+      "glossZh": "整体的一部分",
+      "pronunciationId": "w:proportion#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:proportion#e-36183321afb6729e",
+          "text": "The flood of AI “art” shows a proportion of society is willing to __41__ writers more than ever before.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:proportion#s3",
+      "pos": "n.",
+      "glossZh": "规模",
+      "pronunciationId": "w:proportion#p-main",
+      "note": "此义常用复数 proportions。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:proportion#e-35dabb0235ed067a",
+          "text": "Small obstacles can take on huge proportions if you lose your motivation, and soon you find you have given up on your dream.",
+          "source": {
+            "paperId": "paper-mock-henan-four-cities-2026-01",
+            "paperTitle": "河南省洛阳、许昌、平顶山、济源四市2025—2026学年高三年级第二次质量检测英语试题",
+            "groupId": "group:paper-mock-henan-four-cities-2026-01:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-henan-four-cities-2026-01:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:proportion#s4",
+      "pos": "n.",
+      "glossZh": "各部分的协调关系",
+      "pronunciationId": "w:proportion#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "三项求第四项",
+      "reason": "历史数学专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

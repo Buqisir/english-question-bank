@@ -1,0 +1,379 @@
+{
+  "entryId": "w:wonder",
+  "headword": "wonder",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈwʌndə(r)/",
+    "us": "/ˈwʌndər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:wonder#p-main",
+      "ipa": {
+        "uk": "/ˈwʌndə(r)/",
+        "us": "/ˈwʌndər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "wonders",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Wonders",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "wondered",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "wondering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 24,
+    "mock": 137
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 132
+  },
+  "senses": [
+    {
+      "senseId": "w:wonder#s1",
+      "pos": "v.",
+      "glossZh": "想知道；琢磨",
+      "pronunciationId": "w:wonder#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wonder#e-45307c8105dd669c",
+          "text": "She wondered if centuries of diving could have led to the evolution of physical characteristics that made the task easier for them.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:wonder#e-bdb29db5b11c5bf3",
+          "text": "Yes and no. He was thrilled to be doing the comedy that he always felt he should do, but even during his last few years, he always had a sense of curiosity, wondering what new role or challenge might be just around the corner.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 157,
+            "end": 166
+          }
+        },
+        {
+          "exampleId": "w:wonder#e-5aead4d29b77531f",
+          "text": "Nevertheless, I wondered if I should rush back to my hotel instead of walking through that crowd of bikers.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:wonder#s2",
+      "pos": "v.",
+      "glossZh": "感到惊奇",
+      "pronunciationId": "w:wonder#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:wonder#s3",
+      "pos": "n.",
+      "glossZh": "惊奇；惊叹",
+      "pronunciationId": "w:wonder#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wonder#e-d392ecafa6d3336f",
+          "text": "It is a heartwarming winter tale about a reluctant young girl who discovers wonder at an ice festival.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:wonder#e-2d0fa2a457fcfd03",
+          "text": "By __55__ a little chaos, we don’t just find new interests – we rediscover our own capacity for wonder.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:wonder#e-4fef05c886a361c4",
+          "text": "The neighborhood children would sometimes look over the fence, their eyes wide with wonder.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 90
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:wonder#s4",
+      "pos": "n.",
+      "glossZh": "奇观；奇妙的事物",
+      "pronunciationId": "w:wonder#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wonder#e-8129270cc74035a2",
+          "text": "In Samarkand, Mr Bissell admires the architectural wonders, while on his way to Bukhara he gets a taste of police methods when suspected of drug dealing.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:wonder#e-040dbc2961d1d428",
+          "text": "If I had insisted on __53__ my plans, I would have missed a natural wonder.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:cloze",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:cloze:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 74
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:wonder#s5",
+      "pos": "短语",
+      "glossZh": "难怪",
+      "pronunciationId": "w:wonder#p-main",
+      "note": "little wonder / no wonder。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wonder#e-75f28abc510a03e0",
+          "text": "Little wonder the Federal Duck Stamp Program has been called one of the most successful conservation programs ever initiated.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:wonder#e-4d5d1eb937098791",
+          "text": "It’s no wonder researchers refer to this as a fundamental human contradiction: we start out in life as curious explorers, eager as possible to absorb whatever knowledge we can.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:wonder#s6",
+      "pos": "短语",
+      "glossZh": "产生奇效",
+      "pronunciationId": "w:wonder#p-main",
+      "note": "work wonders。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wonder#e-693f067602bda3e9",
+          "text": "Old garden plots work WONDERS",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:31",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 29
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "一种甜甜圈",
+      "reason": "地域用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

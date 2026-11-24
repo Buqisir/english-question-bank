@@ -1,0 +1,130 @@
+{
+  "entryId": "w:equipment",
+  "headword": "equipment",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈkwɪpmənt/",
+    "us": "/ɪˈkwɪpmənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:equipment#p-main",
+      "ipa": {
+        "uk": "/ɪˈkwɪpmənt/",
+        "us": "/ɪˈkwɪpmənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "equipments",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 108
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:equipment#s1",
+      "pos": "n.",
+      "glossZh": "设备",
+      "pronunciationId": "w:equipment#p-main",
+      "note": "通常不可数，一件设备用 a piece of equipment。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 108
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:equipment#e-b6e30640f5f7578c",
+          "text": "The magician must keep people from noticing all the movements of his hands and from thinking about the secret parts of his equipment.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 123,
+            "end": 132
+          }
+        },
+        {
+          "exampleId": "w:equipment#e-13472447edb2704c",
+          "text": "The train’s equipment allows for basic checkups.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:equipment#e-eae41a9ea99af185",
+          "text": "The most important piece of equipment for running is a good pair of running shoes, so be sure to do some research before you purchase a pair.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 37
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "男性生殖器官",
+      "reason": "俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

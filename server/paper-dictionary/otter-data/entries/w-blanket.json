@@ -1,0 +1,351 @@
+{
+  "entryId": "w:blanket",
+  "headword": "blanket",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈblæŋkɪt/",
+    "us": "/ˈblæŋkɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:blanket#p-main",
+      "ipa": {
+        "uk": "/ˈblæŋkɪt/",
+        "us": "/ˈblæŋkɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "blankets",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "blanketed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "blanketing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "blanketted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "blanketting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 28
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 22
+  },
+  "senses": [
+    {
+      "senseId": "w:blanket#s1",
+      "pos": "n.",
+      "glossZh": "毯子；毛毯",
+      "pronunciationId": "w:blanket#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blanket#e-1aaf59eccda39a93",
+          "text": "Our __59__ suggest when a child “hides” by putting a blanket over her head, it is not a result of egocentrism.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-national-b:cloze:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:blanket#e-5854bb04610ef049",
+          "text": "When you’re riding on trains, you won't be provided with a blanket for free, even if your trip is an overnight one.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:blanket#e-580f90727d188b6a",
+          "text": "We ducked into the tent and wrapped ourselves in warm blankets.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:cloze:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 62
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blanket#s2",
+      "pos": "n.",
+      "glossZh": "覆盖层；厚厚的一层",
+      "pronunciationId": "w:blanket#p-main",
+      "note": "常用 a blanket of sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blanket#e-732db11d602004b4",
+          "text": "They moved in with a local family, the Harrisons, and, like them, had little privacy, rare baths, and a blanket of snow on their quilt when they woke up in the morning.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:blanket#e-19d26e791f1586b0",
+          "text": "The city that never sleeps fell into an icy silence – every street, sidewalk and rooftop all buried under a thick, unbroken blanket of snow that glinted like crushed diamonds in the faint gray light.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 124,
+            "end": 131
+          }
+        },
+        {
+          "exampleId": "w:blanket#e-a9a81f380d98213d",
+          "text": "The unstoppable march of nature took over: grass crept over the sidewalk, wild shrubs（灌木丛）pressed against the front windows, and a thick blanket of leaves gathered in corners she could no longer reach.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 137,
+            "end": 144
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blanket#s3",
+      "pos": "短语",
+      "glossZh": "给人安全感的东西",
+      "pronunciationId": "w:blanket#p-main",
+      "note": "security blanket。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blanket#e-6db7cc3b31ade7d5",
+          "text": "necessary and they’re keeping it as a security blanket - 19 percent say they never use it while a further 13 percent keep it in case of emergencies.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blanket#s4",
+      "pos": "adj.",
+      "glossZh": "全面的；一概适用的",
+      "pronunciationId": "w:blanket#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blanket#e-41657e904932696c",
+          "text": "What if we could fight farm weeds with a precise strike instead of blanket chemicals?",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-04-second",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-2026-04-second:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-2026-04-second:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:blanket#e-d1f3d645328326e6",
+          "text": "She believes that blanket bans on internet use may overlook the emotional support certain online spaces provide.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-02-first",
+            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
+            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-02-first:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blanket#s5",
+      "pos": "v.",
+      "glossZh": "覆盖；笼罩",
+      "pronunciationId": "w:blanket#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blanket#e-1da8fad9699f04f0",
+          "text": "One winter day, the temperature suddenly dropped sharply, with icy winds howling outside and heavy snow blanketing the farm.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 114
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "橡皮印刷布、鲸脂层及航海挡风义",
+      "reason": "行业专门义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

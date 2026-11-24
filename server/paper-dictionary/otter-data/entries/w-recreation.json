@@ -1,0 +1,130 @@
+{
+  "entryId": "w:recreation",
+  "headword": "recreation",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌrekriˈeɪʃn/",
+    "us": "/ˌrekriˈeɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:recreation#p-main",
+      "ipa": {
+        "uk": "/ˌrekriˈeɪʃn/",
+        "us": "/ˌrekriˈeɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "recreations",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:recreation#s1",
+      "pos": "n.",
+      "glossZh": "消遣",
+      "pronunciationId": "w:recreation#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 16
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:recreation#e-17aa82813843842d",
+          "text": "They are designed for recreation.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-second:23",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:recreation#e-6989dc6198c13a44",
+          "text": "There are almost no activities he can enjoy at our local parks and recreation program, and he spends a few afternoons a week in physical treatment.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:recreation#e-312149a628087a48",
+          "text": "Hiking and recreation ecotourism activities might include cycling along coastlines, or snowshoeing through valleys.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a2",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A2 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a2:reading.a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a2:question-source-1:item-64",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 21
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "重新创造",
+      "reason": "另读 /ˌriːkriˈeɪʃn/，通常加连字符写作 re-creation"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

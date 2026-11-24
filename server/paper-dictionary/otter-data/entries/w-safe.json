@@ -1,0 +1,251 @@
+{
+  "entryId": "w:safe",
+  "headword": "safe",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/seɪf/",
+    "us": "/seɪf/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:safe#p-main",
+      "ipa": {
+        "uk": "/seɪf/",
+        "us": "/seɪf/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more safe",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most safe",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "safer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "safest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "safes",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 35,
+    "mock": 184
+  },
+  "unassignedCounts": {
+    "gaokao": 5,
+    "mock": 184
+  },
+  "senses": [
+    {
+      "senseId": "w:safe#s1",
+      "pos": "adj.",
+      "glossZh": "安全的",
+      "pronunciationId": "w:safe#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:safe#e-736b65dc0ca9dd6b",
+          "text": "But using cheese brine could help both cheese producers and cities save money, while keeping roads safe.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 99,
+            "end": 103
+          }
+        },
+        {
+          "exampleId": "w:safe#e-18de5ac52ed18ab0",
+          "text": "It is important to expose your bird to safe experiences and changes starting at a very young age to build flexibility and improve their adaptability.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:safe#e-5356fac163979368",
+          "text": "When Emily rolled down the window, Rachel asked if she was okay and told her it was not safe to stay overnight in the car.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 92
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:safe#s2",
+      "pos": "感叹词",
+      "glossZh": "真棒",
+      "pronunciationId": "w:safe#p-main",
+      "note": "文中为滑板圈俚语。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:safe#e-d0afe5d1ee5e729a",
+          "text": "Safe meant cool.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        },
+        {
+          "exampleId": "w:safe#e-4304b3cc97315f26",
+          "text": "A few minutes later, when I landed the trick, my friends beat their boards loud, shouting: “Safe!",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:2",
+              "sentence": 11
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:safe#e-760feef5f88a9dbb",
+          "text": "Safe!” And that’s what mattered – landing tricks, being a good skater.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:2",
+              "sentence": 13
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:safe#s3",
+      "pos": "n.",
+      "glossZh": "保险箱",
+      "pronunciationId": "w:safe#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:safe#s4",
+      "pos": "adj.",
+      "glossZh": "保险的（不大可能失败的）",
+      "pronunciationId": "w:safe#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "国家外汇管理局",
+      "reason": "大写 SAFE 缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,341 @@
+{
+  "entryId": "w:travel",
+  "headword": "travel",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtrævl/",
+    "us": "/ˈtrævl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:travel#p-main",
+      "ipa": {
+        "uk": "/ˈtrævl/",
+        "us": "/ˈtrævl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "travels",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "traveled",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "traveling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "travelled",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "travelling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 70,
+    "mock": 520
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 520
+  },
+  "senses": [
+    {
+      "senseId": "w:travel#s1",
+      "pos": "v.",
+      "glossZh": "旅行",
+      "pronunciationId": "w:travel#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 35,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:travel#e-93b2755c7986f0ce",
+          "text": "As we travel south from Madrid with Prof. Ronald Messier to historic Toledo, Roman Merida and into Andalucia, we explore historical monuments and architecture.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:travel#e-84a8ead558612215",
+          "text": "Like many young people, Jessica wants to travel the globe.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-ii:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:travel#e-5d7fdea137d66198",
+          "text": "But no matter when you travel, it's a good idea to make your reservations at least 90 days in advance.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:travel#s2",
+      "pos": "v.",
+      "glossZh": "移动",
+      "pronunciationId": "w:travel#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:travel#e-5a2100634cd9731a",
+          "text": "The humidity (湿气) of large rainforests contributes to the formation of rainclouds that may travel to other countries in need of rain.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:4",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:travel#e-717e9758af3d1a76",
+          "text": "Very small drones with advanced sensors and AI and travelling ahead of the train could guide it like a co-pilot.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:travel#e-079d6a840838a388",
+          "text": "If it takes the train 53 seconds to travel one mile, you’re going 67.92 mph.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:travel#s3",
+      "pos": "n.",
+      "glossZh": "旅行",
+      "pronunciationId": "w:travel#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 21,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:travel#e-67c7b4f8dabe3a7d",
+          "text": "Ecotourism is commonly regarded as low impact（影响）travel to undisturbed places.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:travel#e-bd16e5231293e2de",
+          "text": "Ever since her childhood, Ginni, now 71, has had a deep love for travel.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:travel#e-ee6ed882248c65e9",
+          "text": "Travel promotes understanding, expands our minds, makes us better people, and boosts local economies and communities, but the rapid growth of travel has led to overtourism in certain regions and destinations.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:travel#s4",
+      "pos": "n.",
+      "glossZh": "移动过程",
+      "pronunciationId": "w:travel#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:travel#e-48ff558750bffc19",
+          "text": "However, most produce at the store went through weeks of travel and covered hundreds of miles before reaching the table.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 63
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "机械行程、分娩阵痛及篮球走步",
+      "reason": "专业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

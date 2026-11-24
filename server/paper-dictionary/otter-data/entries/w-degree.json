@@ -1,0 +1,234 @@
+{
+  "entryId": "w:degree",
+  "headword": "degree",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈɡriː/",
+    "us": "/dɪˈɡriː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:degree#p-main",
+      "ipa": {
+        "uk": "/dɪˈɡriː/",
+        "us": "/dɪˈɡriː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "degrees",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 17,
+    "mock": 89
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 87
+  },
+  "senses": [
+    {
+      "senseId": "w:degree#s1",
+      "pos": "n.",
+      "glossZh": "学位",
+      "pronunciationId": "w:degree#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:degree#e-e574f781df7bdf0b",
+          "text": "Jenifer Mauer has needed more willpower than the typical college student to pursue her goal of earning a nursing degree.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 113,
+            "end": 119
+          }
+        },
+        {
+          "exampleId": "w:degree#e-5ef86dfdcca3b6dd",
+          "text": "After taking a degree at Chichester University in Related Arts, Ginni began to travel the world, eventually getting work teaching English in Japan and Chile.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:degree#e-1593fa2f960ebd7a",
+          "text": "After my undergraduate degree, convinced that writing wasn’t for me, I __43__ to study teaching.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:degree#s2",
+      "pos": "n.",
+      "glossZh": "程度",
+      "pronunciationId": "w:degree#p-main",
+      "note": "to some degree 表示「在某种程度上」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:degree#e-ac68b25f4eaf6aa6",
+          "text": "It is not entirely surprising that bears should have a high degree of intelligence.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:degree#e-d366577ebc2bbf56",
+          "text": "Given the degree of doubt, Mr. Stienwand suggests,“it would be wise to stop cloud seeding.” In practice, doubt has had the opposite effect.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:degree#e-bf5d3e9938d3335e",
+          "text": "“We need to know the degree to which odors influence color perception.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:degree#s3",
+      "pos": "n.",
+      "glossZh": "度（温度、角度等的单位）",
+      "pronunciationId": "w:degree#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:degree#e-b5cbcb4f47682143",
+          "text": "degrees Fahrenheit.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "图论顶点度数；多项式次数；姓氏等",
+      "reason": "数学、语法等专门术语或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

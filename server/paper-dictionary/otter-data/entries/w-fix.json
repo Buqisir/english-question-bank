@@ -1,0 +1,412 @@
+{
+  "entryId": "w:fix",
+  "headword": "fix",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fɪks/",
+    "us": "/fɪks/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fix#p-main",
+      "ipa": {
+        "uk": "/fɪks/",
+        "us": "/fɪks/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "fixes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "FIXs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "fixed",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "fixing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "fixt",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 21,
+    "mock": 213
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 210
+  },
+  "senses": [
+    {
+      "senseId": "w:fix#s1",
+      "pos": "v.",
+      "glossZh": "修理",
+      "pronunciationId": "w:fix#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fix#e-6d32bccdc9189d92",
+          "text": "Fixing an air conditioner.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:fix#e-4594a9fe433e0ea5",
+          "text": "He fixed a TV set.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:fix#e-8e0c16487ee13a00",
+          "text": "Fix the gas cooker.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 3
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fix#s2",
+      "pos": "v.",
+      "glossZh": "解决",
+      "pronunciationId": "w:fix#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fix#e-d27e6bcdad85f839",
+          "text": "“It’s not going to fix everything, but adaptive signals have some benefits for smaller cities,” he says.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:fix#e-c603931491a39b36",
+          "text": "Removing gender from the picture altogether seems like a simple way to fix this.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:fix#e-dbb370d85a798991",
+          "text": "The trick is to let them struggle a bit – resist the urge to help fix things the moment they experience a setback.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fix#s3",
+      "pos": "v.",
+      "glossZh": "固定",
+      "pronunciationId": "w:fix#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fix#e-36ea50b959bcf503",
+          "text": "A low-tech approach may help small-scale fisheries reduce the bycatch of echolocating animals: fixing plastic water bottles to their nets.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:fix#e-14db1e08a1e78caa",
+          "text": "The most common fossil the team found is an animal that fixed itself to the seabed at one end and had a tube-like structure that could be extended outward at the other end.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fix#s4",
+      "pos": "adj.",
+      "glossZh": "固定的",
+      "pronunciationId": "w:fix#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fix#e-835298a0fe48fc10",
+          "text": "Whatever the mistake, remember it isn’t a fixed aspect of your personality.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-i:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:fix#e-a87b30fd7a0b9689",
+          "text": "Instead, she recommends applying a well-known concept among nutrition experts called the “Division of Responsibility,” where parents provide a variety of mostly healthy foods to their kids at fixed times, and the kids themselves decide what and how much they want to consume – even if that means occasionally eating more cookies than carrots.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 192,
+            "end": 197
+          }
+        },
+        {
+          "exampleId": "w:fix#e-2d06005dc0e21ac9",
+          "text": "Building a structured daily routine is also advised: individuals can begin by measuring their current focus duration, then set realistic goals and stick to a fixed schedule for important tasks.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 158,
+            "end": 163
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fix#s5",
+      "pos": "v.",
+      "glossZh": "准备（食物或饮料）",
+      "pronunciationId": "w:fix#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fix#s6",
+      "pos": "v.",
+      "glossZh": "操纵（比赛等结果）",
+      "pronunciationId": "w:fix#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fix#s7",
+      "pos": "n.",
+      "glossZh": "解决办法",
+      "pronunciationId": "w:fix#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fix#s8",
+      "pos": "n.",
+      "glossZh": "困境",
+      "pronunciationId": "w:fix#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "凝血因子九",
+      "reason": "专业缩写 FIX"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

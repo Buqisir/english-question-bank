@@ -1,0 +1,163 @@
+{
+  "entryId": "w:certainly",
+  "headword": "certainly",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsɜːtnli/",
+    "us": "/ˈsɜːrtnli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:certainly#p-main",
+      "ipa": {
+        "uk": "/ˈsɜːtnli/",
+        "us": "/ˈsɜːrtnli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more certainly",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most certainly",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 43
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 43
+  },
+  "senses": [
+    {
+      "senseId": "w:certainly#s1",
+      "pos": "adv.",
+      "glossZh": "肯定；无疑；的确",
+      "pronunciationId": "w:certainly#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:certainly#e-ffb42bb194b2a675",
+          "text": "It can be tough to begin and takes a little planning – running shoes by the front door, lunches made the night before, umbrellas on rainy days and hats on hot ones – but it’s certainly worth trying.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 175,
+            "end": 184
+          }
+        },
+        {
+          "exampleId": "w:certainly#e-7545f59c00f03625",
+          "text": "Language is certainly a barrier for many people.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:certainly#e-14959e3038012f76",
+          "text": "But it can certainly keep me entertained while I wait for my wife to rescue me.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:certainly#s2",
+      "pos": "adv.",
+      "glossZh": "当然（用于肯定或否定的答复）",
+      "pronunciationId": "w:certainly#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:certainly#e-8a4580ca670c92b7",
+          "text": "Certainly not.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 16
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,569 @@
+{
+  "entryId": "w:ride",
+  "headword": "ride",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/raɪd/",
+    "us": "/raɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ride#p-main",
+      "ipa": {
+        "uk": "/raɪd/",
+        "us": "/raɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "rides",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "ridden",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "riding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "rode",
+      "tags": [
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 20,
+    "mock": 138
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 131
+  },
+  "senses": [
+    {
+      "senseId": "w:ride#s1",
+      "pos": "v.",
+      "glossZh": "骑",
+      "pronunciationId": "w:ride#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ride#e-22a2d68dbba7a7dd",
+          "text": "Whether you ride a bicycle, you don’t use petrol.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-national-b:writing-short-error-correction:8",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:ride#e-6fd9e90f64e5381b",
+          "text": "Paul Revere was a silversmith（银匠）in Boston who rode a horse at night on April 18,1775 to Lexington to warn people that British soldiers were coming.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:ride#e-53134b0ffe916135",
+          "text": "When I got back home, suddenly riding my bike didn’t seem quite as __53__.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+              "sentence": 8
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ride#s2",
+      "pos": "v.",
+      "glossZh": "乘坐",
+      "pronunciationId": "w:ride#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ride#e-1af9e23a8cc21508",
+          "text": "it can bring in \"I have this old, broken-down vehicle\" or \"I rode the bus with these crazy people who were laughing at silly jokes in the back.\" It just opens up conversation.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:ride#e-f8e741147643bed4",
+          "text": "He explained our basic task, the tractor fired up and we were off, riding down the field looking for weeds to spray with chemicals.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:ride#e-8a3b8cdfcae62032",
+          "text": "When you’re riding on trains, you won't be provided with a blanket for free, even if your trip is an overnight one.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ride#s3",
+      "pos": "n.",
+      "glossZh": "乘车行程",
+      "pronunciationId": "w:ride#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ride#e-ab43d33f97b59f98",
+          "text": "Weiner starts each chapter with a scene on a train ride between cities and then frames each philosopher’s work in the context (背景) of one thing they can help us do better.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:ride#e-c2d890d2144ca8c7",
+          "text": "While taking a 20-hour train ride along the edge of the Taklimakan Desert in northwestern China, I had the kind of humbling, educational, and above all else, wonderful __41__ with a local that all travelers long for.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:ride#e-fd85ad2e3018db16",
+          "text": "When attending an event at SoFi Stadium, you’re just a short walk or ride from several comfortable and classy hotels.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ride#s4",
+      "pos": "n.",
+      "glossZh": "骑行",
+      "pronunciationId": "w:ride#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ride#e-6dc50b6d0bd79210",
+          "text": "While she was at work one day, I __49__ her bike and went for a ride.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:ride#e-a7de33d96b2b5ca5",
+          "text": "He’d bought it decades ago in Paris, and often told her it captured their summers: chasing fireflies, eating strawberry shortcake by the lake, her first bike ride.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 158,
+            "end": 162
+          }
+        },
+        {
+          "exampleId": "w:ride#e-daf12f8ae48c12e2",
+          "text": "It includes art shows, concerts, farm tours, a fun run, bike rides, and the Downtown Mount Vernon Street Fair.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
+            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2025-10-first-baseline-test:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ride#s5",
+      "pos": "n.",
+      "glossZh": "游乐设施",
+      "pronunciationId": "w:ride#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ride#e-2f5abc7c5a4ea559",
+          "text": "This free event features everything from bounce houses to rides, games, snowflake crafts and face painting to go with various stands set up by local sellers, with food and other offerings for sale at the event.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:ride#e-52e7b376ca818b28",
+          "text": "They fire questions at me, asking if their whole magazine can be about adventure rides, or the vast mystery of space.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 86
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ride#s6",
+      "pos": "n.",
+      "glossZh": "搭便车",
+      "pronunciationId": "w:ride#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ride#e-2ac23b77159a88a1",
+          "text": "Slowing down, I opened the window and called out, “Need a ride?",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:ride#e-3589f20a0ac29bed",
+          "text": "Sharing a ride means sharing personal space.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:ride#e-26598ac830cb1bc6",
+          "text": "He relies on co-workers for rides.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ride#s7",
+      "pos": "v.",
+      "glossZh": "供骑乘",
+      "pronunciationId": "w:ride#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ride#e-efe28bf39093cfd3",
+          "text": "And Priscilla Dewing reports that her horse, Nappy, “moves more easily and rides more comfortably” after a chiropractic adjustment.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ride#s8",
+      "pos": "n.",
+      "glossZh": "一段经历",
+      "pronunciationId": "w:ride#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ride#e-b6d36a22a42189a1",
+          "text": "But until then, he is enjoying the ride.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:cloze",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:cloze:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ride#s9",
+      "pos": "短语",
+      "glossZh": "取决于",
+      "pronunciationId": "w:ride#p-main",
+      "note": "ride on sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "骨片重叠",
+      "reason": "医学专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

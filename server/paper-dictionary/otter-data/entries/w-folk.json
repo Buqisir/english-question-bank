@@ -1,0 +1,243 @@
+{
+  "entryId": "w:folk",
+  "headword": "folk",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fəʊk/",
+    "us": "/foʊk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:folk#p-main",
+      "ipa": {
+        "uk": "/fəʊk/",
+        "us": "/foʊk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "folks",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 23
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 19
+  },
+  "senses": [
+    {
+      "senseId": "w:folk#s1",
+      "pos": "n.",
+      "glossZh": "人们",
+      "pronunciationId": "w:folk#p-main",
+      "note": "非正式。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:folk#e-f880b814a8f461ca",
+          "text": "I’ve been motivated - and demotivated - by other folks' achievements all my life.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:folk#e-7a0ab79cf0953329",
+          "text": "Then I noticed folk conducting spring cleans dropping boxes of voluminous books on various subjects there.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:folk#e-5d240071074317ea",
+          "text": "In worn but neat clothes, he tipped his faded cap and greeted everyone with a warm “Good afternoon, folks.” Most ignored him, with cold blank faces.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 105
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:folk#s2",
+      "pos": "n.",
+      "glossZh": "民间音乐",
+      "pronunciationId": "w:folk#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:folk#e-395ab6dbc523b723",
+          "text": "It presents live entertainment, including pop, rock, folk, jazz, musicals, dance, world music, films and classical music.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:folk#s3",
+      "pos": "adj.",
+      "glossZh": "民间的",
+      "pronunciationId": "w:folk#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:folk#e-bb3f0da6ce0d685d",
+          "text": "Fish lanterns, known as yudeng in Chinese, are vibrant folk art pieces deeply rooted in China’s cultural heritage.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:folk#e-901f41e2b03dd185",
+          "text": "Say something like: “I love Kathakali, which is a form of folk dance, in which the dancers present a drama wearing unique masks.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:seven-choices:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:folk#e-fc1683d160e96ecf",
+          "text": "Eager to share Australian folk stories, I confidently told the kids that a mysterious creature lived there – but stumbled when they asked me follow-up questions.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:folk#s4",
+      "pos": "n.",
+      "glossZh": "家人",
+      "pronunciationId": "w:folk#p-main",
+      "note": "my folks 常指父母。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

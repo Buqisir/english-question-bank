@@ -1,0 +1,129 @@
+{
+  "entryId": "w:emotion",
+  "headword": "emotion",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈməʊʃn/",
+    "us": "/ɪˈmoʊʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:emotion#p-main",
+      "ipa": {
+        "uk": "/ɪˈməʊʃn/",
+        "us": "/ɪˈmoʊʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "emotions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 213
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:emotion#s1",
+      "pos": "n.",
+      "glossZh": "情绪",
+      "pronunciationId": "w:emotion#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 213
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:emotion#e-4dacfc49b53e7d00",
+          "text": "He stood up, hugged his parents, and smiled, trying not to let his emotions（情绪）get the better of him.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:emotion#e-4acdbb183b25a34d",
+          "text": "Many of us also turn to food to deal with unpleasant emotions such as sadness, loneliness, or boredom.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-national-a:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:emotion#e-09c17e9c106effb3",
+          "text": "Emotion was also important in convincing readers – or the lack of emotion, at least.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "动荡",
+      "reason": "历史旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,374 @@
+{
+  "entryId": "w:shock",
+  "headword": "shock",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ʃɒk/",
+    "us": "/ʃɑːk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:shock#p-main",
+      "ipa": {
+        "uk": "/ʃɒk/",
+        "us": "/ʃɑːk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "shocks",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "shocked",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "shocking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 74
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 68
+  },
+  "senses": [
+    {
+      "senseId": "w:shock#s1",
+      "pos": "v.",
+      "glossZh": "使震惊",
+      "pronunciationId": "w:shock#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shock#e-466153196fd7843a",
+          "text": "“People from cultures that value relationships more than ours does are shocked by the thought of eating alone in front of a computer”, says Art Markman, a professor of psychology at the University of Texas, Austin.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:shock#e-9d3b79c69b2f3e15",
+          "text": "In her first PE class, Eva was shocked when Coach Pitt announced that everyone had to run one mile around the track outside.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:shock#e-da1366b90a9105d7",
+          "text": "When Tanya Eby was in sixth grade, her friends made a decision that shocked her.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shock#s2",
+      "pos": "n.",
+      "glossZh": "震惊",
+      "pronunciationId": "w:shock#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shock#e-3c6b84263489a015",
+          "text": "I managed to find the street the theater was on, but when I turned the corner, I stopped in shock.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:shock#e-c3c2096cc618421d",
+          "text": "The public shock exposed widespread structural faults in high-rises, though hundreds of such blocks still lack proper strengthening today.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:shock#e-07c1a173b9e9a1d0",
+          "text": "However, her grief turned to shock and anger upon reading the will: Mia inherited their family home, while Ella received only an old baby stroller and a dirty doll.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shock#s3",
+      "pos": "n.",
+      "glossZh": "令人震惊的事",
+      "pronunciationId": "w:shock#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shock#e-f0e9968fda080b60",
+          "text": "His reply came as a surprise – a shock, actually: “Not a chance.” Clearly, he was unhappy over the way we had parted.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shock#s4",
+      "pos": "adj.",
+      "glossZh": "令人震惊的",
+      "pronunciationId": "w:shock#p-main",
+      "note": "用 shocking。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shock#e-30bdba4e7fe74052",
+          "text": "To better understand these risks, an institute has analyzed 5.6 billion online activities over the past decade, revealing shocking facts about teens’ unsafe online interactions.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 122,
+            "end": 130
+          }
+        },
+        {
+          "exampleId": "w:shock#e-40665f8ad3df6821",
+          "text": "These statistics were shocking to me too, but in entirely the opposite way: so few?",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:shock#e-cc95386f830bcd39",
+          "text": "For decades, it lay forgotten in a dusty basement until a shocking discovery in 2017 by an art appraiser (评估人) and a city arts commissioner.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shock#s5",
+      "pos": "n.",
+      "glossZh": "触电",
+      "pronunciationId": "w:shock#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:shock#s6",
+      "pos": "n.",
+      "glossZh": "冲击",
+      "pronunciationId": "w:shock#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:shock#s7",
+      "pos": "n.",
+      "glossZh": "休克",
+      "pronunciationId": "w:shock#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:shock#s8",
+      "pos": "n.",
+      "glossZh": "一簇",
+      "pronunciationId": "w:shock#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "成排晾晒的禾捆",
+      "reason": "传统农业专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

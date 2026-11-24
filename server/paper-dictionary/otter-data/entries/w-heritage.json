@@ -1,0 +1,141 @@
+{
+  "entryId": "w:heritage",
+  "headword": "heritage",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈherɪtɪdʒ/",
+    "us": "/ˈherɪtɪdʒ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:heritage#p-main",
+      "ipa": {
+        "uk": "/ˈherɪtɪdʒ/",
+        "us": "/ˈherɪtɪdʒ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "heritages",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 57
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 54
+  },
+  "senses": [
+    {
+      "senseId": "w:heritage#s1",
+      "pos": "n.",
+      "glossZh": "文化遗产；历史传承",
+      "pronunciationId": "w:heritage#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:heritage#e-6b6c483232f8d14e",
+          "text": "These communities serve as guardians of an ancient wisdom and heritage passed down through generations.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:heritage#e-453a0622f4ecdc30",
+          "text": "It is an excellent way for visitors to gain some fascinating insights into the city’s rich heritage.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:heritage#e-28c54b3ed690a4a7",
+          "text": "The U.S. National Museum of Asian Art has recently achieved a remarkable breakthrough in preserving cultural heritage by returning two priceless ancient Chinese silk manuscripts (帛书) to China.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 117
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:heritage#s2",
+      "pos": "n.",
+      "glossZh": "祖传财产",
+      "pronunciationId": "w:heritage#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏",
+      "reason": "同形专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

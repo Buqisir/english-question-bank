@@ -1,0 +1,182 @@
+{
+  "entryId": "w:passive",
+  "headword": "passive",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpæsɪv/",
+    "us": "/ˈpæsɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:passive#p-main",
+      "ipa": {
+        "uk": "/ˈpæsɪv/",
+        "us": "/ˈpæsɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more passive",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most passive",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "passives",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 29
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 25
+  },
+  "senses": [
+    {
+      "senseId": "w:passive#s1",
+      "pos": "adj.",
+      "glossZh": "被动的；消极的",
+      "pronunciationId": "w:passive#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:passive#e-d50eeb2fb22458bb",
+          "text": "Critical thinking turns you from a passive learner into an active one who takes charge of their own education.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:passive#e-9e41966ac86ac276",
+          "text": "Rick Schulting from the University of Oxford notes: “These communities were not passive victims but actively adapted to changing circumstances.”",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 87
+          }
+        },
+        {
+          "exampleId": "w:passive#e-cf312c38efc2ae04",
+          "text": "Far from being passive observers, these young scientists are the vital engine of the project.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2",
+            "paperTitle": "2025-2026学年德州市“优高联盟”高三上学期期中诊断性测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:passive#s2",
+      "pos": "adj.",
+      "glossZh": "不主动发出信号的",
+      "pronunciationId": "w:passive#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:passive#e-175d52a4824f8699",
+          "text": "We believe there needs to be a shift in wildlife monitoring and a large-scale change to using passive acoustic (声学) techniques.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 101
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:passive#s3",
+      "pos": "adj. / n.",
+      "glossZh": "被动语态的；被动语态",
+      "pronunciationId": "w:passive#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

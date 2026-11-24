@@ -1,0 +1,342 @@
+{
+  "entryId": "w:shade",
+  "headword": "shade",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ʃeɪd/",
+    "us": "/ʃeɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:shade#p-main",
+      "ipa": {
+        "uk": "/ʃeɪd/",
+        "us": "/ʃeɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "shades",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "shaded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "shading",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 25
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 18
+  },
+  "senses": [
+    {
+      "senseId": "w:shade#s1",
+      "pos": "n.",
+      "glossZh": "色调",
+      "pronunciationId": "w:shade#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shade#e-f59843a33d8c9610",
+          "text": "He passed milky white waterfalls and mountains in many shades of blue.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:grammar-fill:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:shade#e-617764a490a773a0",
+          "text": "I look at the notebooks in front of me, whose covers hold pages of slightly different shades of white.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:shade#e-23329c5851e17d2e",
+          "text": "Sunlight __46__ the room, making our floor a warm shade of gold.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shade#s2",
+      "pos": "n.",
+      "glossZh": "阴凉",
+      "pronunciationId": "w:shade#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shade#e-07a40f9af42ef9b1",
+          "text": "They provide shade, lower surface temperatures, absorb a surprising amount of airborne carbon, remove tiny pollutants, and provide wildlife habitat along with just plain beauty.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:shade#e-73d1d030253992cb",
+          "text": "The shade from the trees did little to ease the burning sun as I struggled to make sense of the maps.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:shade#e-995401a2e365e464",
+          "text": "UV rays are strongest between 10 a.m. and 4 p.m., so it’s best to stay indoors or in the shade during these hours.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhuji-2025-12-first:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 94
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shade#s3",
+      "pos": "v.",
+      "glossZh": "遮住光线",
+      "pronunciationId": "w:shade#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shade#e-8dc66e1ae9bff45a",
+          "text": "It's actually the marriage of solar panels and reservoirs（水库）: Known as floatovoltaics, these devices on simple floats（浮体）generate power while shading the water below.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 143,
+            "end": 150
+          }
+        },
+        {
+          "exampleId": "w:shade#e-76fcd05111842027",
+          "text": "Older “mother trees” often act as hubs, sending extra sugars to younger saplings struggling in shaded areas – a phenomenon called “forest family connections”.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 101
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shade#s4",
+      "pos": "n.",
+      "glossZh": "含蓄的挖苦",
+      "pronunciationId": "w:shade#p-main",
+      "note": "非正式用语。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shade#e-0a15242f18a40cc2",
+          "text": "No shade to conventional grocery stores though; shop where you can, however it works best for you!",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-a:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shade#s5",
+      "pos": "n.",
+      "glossZh": "灯罩",
+      "pronunciationId": "w:shade#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:shade#s6",
+      "pos": "n.",
+      "glossZh": "细微差别",
+      "pronunciationId": "w:shade#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:shade#s7",
+      "pos": "v.",
+      "glossZh": "画阴影",
+      "pronunciationId": "w:shade#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "邮票色差版本",
+      "reason": "集邮专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

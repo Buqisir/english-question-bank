@@ -1,0 +1,351 @@
+{
+  "entryId": "w:greet",
+  "headword": "greet",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɡriːt/",
+    "us": "/ɡriːt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:greet#p-main",
+      "ipa": {
+        "uk": "/ɡriːt/",
+        "us": "/ɡriːt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "greeted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "greeting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "greets",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "grat",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "grutten",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 47
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 41
+  },
+  "senses": [
+    {
+      "senseId": "w:greet#s1",
+      "pos": "v.",
+      "glossZh": "迎接",
+      "pronunciationId": "w:greet#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:greet#e-ba47edf2ecd648ed",
+          "text": "As Ginni Bazlinton reached Antarctica, she found herself greeted by a group of little Gentoo penguins（企鹅）longing to say hello.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:greet#e-a129ba17a995087b",
+          "text": "On their first trip out, they were greeted with such enthusiasm from the 10 families who’d already established homes there that they decided to join.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:greet#e-5f86ed99c8b3e428",
+          "text": "My mother greeted us at the door.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:greet#s2",
+      "pos": "v.",
+      "glossZh": "问候",
+      "pronunciationId": "w:greet#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:greet#e-d8af7ee1fdd196d0",
+          "text": "Greet a friend.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:greet#e-68f4699e8df0a114",
+          "text": "Paragraph 2: People greet me cheerfully each morning because they see my character.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:greet#s3",
+      "pos": "v.",
+      "glossZh": "映入眼帘",
+      "pronunciationId": "w:greet#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:greet#e-c09eefc5b06c13f3",
+          "text": "When you check the predicted temperature, you may sometimes be greeted with two values: the air temperature and the “feels like” temperature.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:greet#e-1cfff1fe8b9acf5c",
+          "text": "Spotting a way leading to its sun deck (甲板), I climbed up and was greeted by a(n) __48__ scene.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:greet#s4",
+      "pos": "n.",
+      "glossZh": "问候",
+      "pronunciationId": "w:greet#p-main",
+      "note": "派生词 greeting。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:greet#e-b936df8c591cb9ee",
+          "text": "On school grounds, I walked past her without a greeting – paying a thousand euros as punishment would do!",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:greet#e-259f3d58ddd39497",
+          "text": "Yet as the day went on, it seemed his special day would still receive no care at all – no cupcakes, no party favors, nothing but a simple greeting from me.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-import-20261026-n093:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 138,
+            "end": 146
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:greet#s5",
+      "pos": "短语",
+      "glossZh": "贺卡",
+      "pronunciationId": "w:greet#p-main",
+      "note": "greeting card。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:greet#e-93f0919553d4c02b",
+          "text": "In many communities, that trust is won every day when life-saving medicine, greeting cards, social security checks, college acceptance letters – even the bills – appear in mailboxes in front of the houses.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 84
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "哭泣",
+      "reason": "方言，语料未见"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

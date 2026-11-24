@@ -1,0 +1,144 @@
+{
+  "entryId": "w:homework",
+  "headword": "homework",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈhəʊmwɜːk/",
+    "us": "/ˈhoʊmwɜːrk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:homework#p-main",
+      "ipa": {
+        "uk": "/ˈhəʊmwɜːk/",
+        "us": "/ˈhoʊmwɜːrk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "homeworks",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 70
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 70
+  },
+  "senses": [
+    {
+      "senseId": "w:homework#s1",
+      "pos": "n.",
+      "glossZh": "课后作业",
+      "pronunciationId": "w:homework#p-main",
+      "note": "不可数名词。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:homework#e-225b365a29de3de6",
+          "text": "It might be the time when you helped a friend with their homework, when you did the ironing without being asked, or when you baked cookies after the family had had a tiring day.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:homework#e-d9cf3f4a6b60aaba",
+          "text": "I would feel completely at ease doing my homework in bed, with light music on.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:homework#e-0389a55a6ea5bd95",
+          "text": "Unable to keep my eyes open, I decided I had no choice but to finish my homework the next morning.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:homework#s2",
+      "pos": "n.",
+      "glossZh": "事先的调查和准备",
+      "pronunciationId": "w:homework#p-main",
+      "note": "do your homework 也可指充分做好准备。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "家务",
+      "reason": "普通英语用 housework"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,432 @@
+{
+  "entryId": "w:sound",
+  "headword": "sound",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/saʊnd/",
+    "us": "/saʊnd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:sound#p-main",
+      "ipa": {
+        "uk": "/saʊnd/",
+        "us": "/saʊnd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "sounder",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "soundest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "sounds",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "sounded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "sounding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 39,
+    "mock": 441
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 441
+  },
+  "senses": [
+    {
+      "senseId": "w:sound#s1",
+      "pos": "n.",
+      "glossZh": "声音",
+      "pronunciationId": "w:sound#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sound#e-85bdb27283ad32d2",
+          "text": "At the Jorvik Centre in York, the city’s Viking settlement is recreated, and people experience the sights, sounds and smells of the old town.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:grammar-fill:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 113
+          }
+        },
+        {
+          "exampleId": "w:sound#e-33f1b624227056fd",
+          "text": "Walking through the streets of Brooklyn today, I am no longer confused by this city’s sounds and smells.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:sound#e-c2118485dbbcc37a",
+          "text": "At that moment, the sounds of a police car echoed（回响）in the air.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sound#s2",
+      "pos": "n.",
+      "glossZh": "语音",
+      "pronunciationId": "w:sound#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sound#e-9c7ab84868d7c3c9",
+          "text": "Human speech contains more than 2,000 different sounds, from the common “m” and “a” to the rare clicks of some southern African languages.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-d-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:sound#e-4aed08d8c2f697b1",
+          "text": "More than 30 years ago, the scholar Charles Hockett noted that speech sounds called labiodentals, such as “f” and “v”, were more common in the languages of societies that ate softer foods.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "reading-d-2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:sound#e-3f4e7d8c93bf42bd",
+          "text": "“The set of speech sounds we use has not necessarily remained stable since the appearance of human beings, but rather the huge variety of speech sounds that we find today is the product of a complex interplay of things like biological change and cultural evolution,” said Steven Moran, a member of the research team.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "reading-d-6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 145,
+            "end": 151
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sound#s3",
+      "pos": "v.",
+      "glossZh": "听起来",
+      "pronunciationId": "w:sound#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 16,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sound#e-a6b493e6eb1232a5",
+          "text": "“It sounds crazy to talk about guilt-free fur-unless you understand that the nutria are destroying vast wetlands every year”, says Cree McCree, project director of Righteous Fur.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:sound#e-10ef3230967c7bcd",
+          "text": "I shouted, my voice sounding unnaturally loud in the enclosed space.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
+              "sentence": 8
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:sound#e-f32da1b6b4f75bcf",
+          "text": "The man’s words sounded pretty convincing.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:7",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sound#s4",
+      "pos": "v.",
+      "glossZh": "响起",
+      "pronunciationId": "w:sound#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sound#e-a8215bc0ab26a5af",
+          "text": "Warning bells began to sound in my head, and my heart was pounding.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sound#s5",
+      "pos": "adj.",
+      "glossZh": "合理可靠的",
+      "pronunciationId": "w:sound#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sound#e-404fd9c97c63514f",
+          "text": "I hope Jacky will always trust me fully, but I know that, as he gets __41__, it will need more effort and sound judgment __42__.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 106,
+            "end": 111
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sound#s6",
+      "pos": "adj.",
+      "glossZh": "完好无损的",
+      "pronunciationId": "w:sound#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:sound#s7",
+      "pos": "adj.",
+      "glossZh": "（睡眠）安稳的",
+      "pronunciationId": "w:sound#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:sound#s8",
+      "pos": "v.",
+      "glossZh": "试探",
+      "pronunciationId": "w:sound#p-main",
+      "note": "sound somebody out。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:sound#s9",
+      "pos": "n.",
+      "glossZh": "海峡",
+      "pronunciationId": "w:sound#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:sound#s10",
+      "pos": "v.",
+      "glossZh": "测量水深",
+      "pronunciationId": "w:sound#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "鱼鳔、医用探条和鲸下潜",
+      "reason": "罕用义或行业专称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

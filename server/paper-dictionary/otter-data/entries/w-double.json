@@ -1,0 +1,357 @@
+{
+  "entryId": "w:double",
+  "headword": "double",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdʌbl/",
+    "us": "/ˈdʌbl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:double#p-main",
+      "ipa": {
+        "uk": "/ˈdʌbl/",
+        "us": "/ˈdʌbl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "doubles",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Doubles",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "doubled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "doubling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 34
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 27
+  },
+  "senses": [
+    {
+      "senseId": "w:double#s1",
+      "pos": "adj. / det.",
+      "glossZh": "两倍的；双份的",
+      "pronunciationId": "w:double#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:double#e-f76c8d7ed3919b3e",
+          "text": "First, a girl I met one day told me she was __43__ for a \"super,\" referring to a 52.4-mile double marathon.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:double#e-517379cee0e603eb",
+          "text": "More than 20 million foreign visitors entered without a visa in 2024 – more than double the number in the previous year, according to the National Immigration Administration.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 87
+          }
+        },
+        {
+          "exampleId": "w:double#e-4dca09bbedec9c88",
+          "text": "Angus Atkinson, who worked on the study, explained that without the seasonal migrant pump, the levels of carbon dioxide in the atmosphere would be double what they are now.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 147,
+            "end": 153
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:double#s2",
+      "pos": "adj.",
+      "glossZh": "双重的；由两部分组成的；供两人用的",
+      "pronunciationId": "w:double#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:double#e-f445e98dc1e1c205",
+          "text": "Living a double life between work and family.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-hz-2026-apr-gaosan-quality:24",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:double#e-b22f250e303c2cda",
+          "text": "On-campus students stay in double rooms with 24-hour security and university staff ensuring safety.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
+            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:double#e-47c26b06d07779e6",
+          "text": "Who will go out of the building through the double doors?",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:double#s3",
+      "pos": "v.",
+      "glossZh": "（使）加倍；翻一番",
+      "pronunciationId": "w:double#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:double#e-1e17b4874ae56c7a",
+          "text": "Most of us need to double the amount we eat.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-national-a:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:double#e-e0fb79c044e04d65",
+          "text": "It’s estimated that the global demand for electricity could more than double by 2050.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:double#e-2aa8fd1e0ce31be6",
+          "text": "According to NPD Group which tracks the bicycle industry, electric bike sales have more than doubled since 2019.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 100
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:double#s4",
+      "pos": "短语",
+      "glossZh": "折返；原路返回",
+      "pronunciationId": "w:double#p-main",
+      "note": "double back。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:double#e-44d412e3664de54b",
+          "text": "Wearily, I pushed myself upright, remounted my bike and started to double back in the hope of spotting clear trail markers, but this only made things worse: the trees seemed to press in around me as I desperately scanned for landmarks – and the cicadas (蝉) had erupted into a deafening chorus.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:double#s5",
+      "pos": "短语",
+      "glossZh": "兼作；同时充当",
+      "pronunciationId": "w:double#p-main",
+      "note": "double as sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:double#s6",
+      "pos": "n.",
+      "glossZh": "替身；长得很像的人",
+      "pronunciationId": "w:double#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "二垒安打、双精度数、桥牌叫倍、旧硬币等",
+      "reason": "运动、游戏、计算机或历史专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

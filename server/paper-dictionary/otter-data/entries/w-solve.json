@@ -1,0 +1,211 @@
+{
+  "entryId": "w:solve",
+  "headword": "solve",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/sɒlv/",
+    "us": "/sɑːlv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:solve#p-main",
+      "ipa": {
+        "uk": "/sɒlv/",
+        "us": "/sɑːlv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "solved",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "solves",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "solving",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 161
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 157
+  },
+  "senses": [
+    {
+      "senseId": "w:solve#s1",
+      "pos": "v.",
+      "glossZh": "解决",
+      "pronunciationId": "w:solve#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:solve#e-f3d3c518061f2d56",
+          "text": "When John Todd was a child, he loved to explore the woods around his house, observing how nature solved problems.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 103
+          }
+        },
+        {
+          "exampleId": "w:solve#e-8d119b269037305d",
+          "text": "To solve this, the city council replaced motorways with green areas, walking zones, and cycleways.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a3",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A3 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a3:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a3:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:solve#s2",
+      "pos": "v.",
+      "glossZh": "解答",
+      "pronunciationId": "w:solve#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:solve#e-f9e09a40ae400e16",
+          "text": "Throughout the year, I noticed that Juan had an unusual ability to solve equations (等式), and to correlate abstract relationships between concepts.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:solve#e-1259a1e41f8b74ad",
+          "text": "The challenge required us to solve riddles in English and find hidden clues.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:solve#s3",
+      "pos": "v.",
+      "glossZh": "侦破",
+      "pronunciationId": "w:solve#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:solve#e-f0f18ded4a8cf78d",
+          "text": "The crime was never solved – many believe it was linked to illegal hunting, smuggling (走私), or conflicts over land and money.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b:14",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 26
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "松开、分解溶解、答案的名词义",
+      "reason": "过时用法或行业简写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

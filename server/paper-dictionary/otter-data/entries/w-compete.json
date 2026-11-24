@@ -1,0 +1,193 @@
+{
+  "entryId": "w:compete",
+  "headword": "compete",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəmˈpiːt/",
+    "us": "/kəmˈpiːt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:compete#p-main",
+      "ipa": {
+        "uk": "/kəmˈpiːt/",
+        "us": "/kəmˈpiːt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "competed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "competes",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "competing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 57
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 55
+  },
+  "senses": [
+    {
+      "senseId": "w:compete#s1",
+      "pos": "v.",
+      "glossZh": "竞争；争夺",
+      "pronunciationId": "w:compete#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:compete#e-8aba895a568ee6ad",
+          "text": "In the pumpkin field, I compete with my three brothers and sister to seek out the biggest pumpkin.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:compete#e-670a24d5a83429da",
+          "text": "You'll compete with fewer tourists, save money, experience a different side of a popular place, and boost the economy when tourism is traditionally slower.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:compete#e-7cf32db248cd077f",
+          "text": "Seabirds compete for their food.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-hubei-tengyun-2025-08:29",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:compete#s2",
+      "pos": "v.",
+      "glossZh": "参加竞赛",
+      "pronunciationId": "w:compete#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:compete#e-ce7aa908689830d2",
+          "text": "On Oct.11, hundreds of runners competed in a cross-country race in Minnesota.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-i:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:compete#e-51d2c56947982dda",
+          "text": "After finishing sixth in a South African race, he traveled to China to compete in a 155-mile race across the Gobi Desert.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 78
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

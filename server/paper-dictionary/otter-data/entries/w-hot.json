@@ -1,0 +1,229 @@
+{
+  "entryId": "w:hot",
+  "headword": "hot",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/hɒt/",
+    "us": "/hɑːt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:hot#p-main",
+      "ipa": {
+        "uk": "/hɒt/",
+        "us": "/hɑːt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "hotter",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "hottest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 94
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 93
+  },
+  "senses": [
+    {
+      "senseId": "w:hot#s1",
+      "pos": "adj.",
+      "glossZh": "热的；烫的",
+      "pronunciationId": "w:hot#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hot#e-75dda13b87e2b9f3",
+          "text": "The pan was too hot and the bread turned black within seconds.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 9
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:hot#e-289cbd2a1045cb44",
+          "text": "It was a hot day.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:hot#e-831d5a667623ff17",
+          "text": "The dumplings arrive steaming and dangerously hot.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hot#s2",
+      "pos": "短语",
+      "glossZh": "热衷于……",
+      "pronunciationId": "w:hot#p-main",
+      "note": "be hot on sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hot#e-4cb5f62f06bd335b",
+          "text": "In fact, Hollywood has been hot on live animals lately.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hot#s3",
+      "pos": "adj.",
+      "glossZh": "辣的",
+      "pronunciationId": "w:hot#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:hot#s4",
+      "pos": "adj.",
+      "glossZh": "热门的；抢手的",
+      "pronunciationId": "w:hot#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:hot#s5",
+      "pos": "adj.",
+      "glossZh": "性情急躁的",
+      "pronunciationId": "w:hot#p-main",
+      "note": "如 a hot temper。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hot#e-1fc3db6adf80f637",
+          "text": "Humans aren’t the only animals with hot tempers(脾气).",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 39
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "通电的、强信号的、高载客量车道",
+      "reason": "专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

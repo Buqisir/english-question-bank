@@ -1,0 +1,123 @@
+{
+  "entryId": "w:me",
+  "headword": "me",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/miː/",
+    "us": "/miː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:me#p-main",
+      "ipa": {
+        "uk": "/miː/",
+        "us": "/miː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 183,
+    "mock": 1635
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 1635
+  },
+  "senses": [
+    {
+      "senseId": "w:me#s1",
+      "pos": "pron.",
+      "glossZh": "我",
+      "pronunciationId": "w:me#p-main",
+      "note": "I 的宾格，也用于非正式表达或强调结构中。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 182,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:me#e-14a95339a367f17a",
+          "text": "“Please bring that pistol to me,” I said.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:me#e-ddb49daea8923f1e",
+          "text": "Sometimes, students would ask me to describe all the things I had in it.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:me#e-7ed049b76327d6f0",
+          "text": "Paragraph 1: I realized it was me who was at fault.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 33
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "自我（名词）、缅因州或专业缩写",
+      "reason": "真题无证"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

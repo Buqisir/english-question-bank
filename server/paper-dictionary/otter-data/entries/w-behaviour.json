@@ -1,0 +1,186 @@
+{
+  "entryId": "w:behaviour",
+  "headword": "behaviour",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "behavior"
+  ],
+  "ipa": {
+    "uk": "/bɪˈheɪvjə(r)/",
+    "us": "/bɪˈheɪvjər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:behaviour#p-main",
+      "ipa": {
+        "uk": "/bɪˈheɪvjə(r)/",
+        "us": "/bɪˈheɪvjər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "behaviors",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "behaviours",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 24,
+    "mock": 267
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 265
+  },
+  "senses": [
+    {
+      "senseId": "w:behaviour#s1",
+      "pos": "n.",
+      "glossZh": "行为；举止；表现方式",
+      "pronunciationId": "w:behaviour#p-main",
+      "note": "美式拼写 behavior。可指人或动物。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 23,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:behaviour#e-dad02d8c3b920e1b",
+          "text": "Chimpanzee behaviour study achieved a breakthrough",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:30",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:behaviour#e-1413be506231a3b5",
+          "text": "●Teachers and chaperones should model good behavior for the group and remain with students at all times.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:behaviour#e-be1c963627a42af6",
+          "text": "Playing together also helps these kids practice social behaviors, such as kindness, sharing, and cooperation.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 64
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:behaviour#s2",
+      "pos": "n.",
+      "glossZh": "（系统、物质等的）运作表现",
+      "pronunciationId": "w:behaviour#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:behaviour#e-53bbb3c403b45b96",
+          "text": "“My alpha state drives the robot’s behavior, translating an internal experience into tangible gestures,” says Chung.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:behaviour#e-e9cd3f7e348586b9",
+          "text": "The research challenges the conventional idea that robots need complicated control systems to realize lifelike behavior.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 111,
+            "end": 119
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

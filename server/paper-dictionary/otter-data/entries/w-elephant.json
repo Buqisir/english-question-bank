@@ -1,0 +1,129 @@
+{
+  "entryId": "w:elephant",
+  "headword": "elephant",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈelɪfənt/",
+    "us": "/ˈelɪfənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:elephant#p-main",
+      "ipa": {
+        "uk": "/ˈelɪfənt/",
+        "us": "/ˈelɪfənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "elephants",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 42
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:elephant#s1",
+      "pos": "n.",
+      "glossZh": "大象",
+      "pronunciationId": "w:elephant#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 42
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:elephant#e-796774e29c75bc2e",
+          "text": "It is like killing elephants as if they reproduced at the same rate as rabbits.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:elephant#e-1b939320cbc7a1b5",
+          "text": "This may involve guided forest walks to spot birds, watching elephants walking across open plains, or observing whales from a distance.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a2",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A2 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a2:reading.a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a2:question-source-1:item-60",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:elephant#e-d9701e0ffa70aabc",
+          "text": "In India, when an elephant tramples crops or a leopard attacks livestock, or worse, a person, the fallout can be disastrous for families.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 26
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "特殊规格的纸张",
+      "reason": "造纸术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

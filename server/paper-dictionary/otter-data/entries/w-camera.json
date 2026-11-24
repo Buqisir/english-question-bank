@@ -1,0 +1,142 @@
+{
+  "entryId": "w:camera",
+  "headword": "camera",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkæmərə/",
+    "us": "/ˈkæmərə/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:camera#p-main",
+      "ipa": {
+        "uk": "/ˈkæmərə/",
+        "us": "/ˈkæmərə/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "cameras",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 16,
+    "mock": 128
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 128
+  },
+  "senses": [
+    {
+      "senseId": "w:camera#s1",
+      "pos": "n.",
+      "glossZh": "照相机；摄像机",
+      "pronunciationId": "w:camera#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 16,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:camera#e-fc7a13dc28153705",
+          "text": "When I'm face to face with a polar bear, I like it to be through a camera with a telephoto lens.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:camera#e-2d8d92201e482cf7",
+          "text": "It will use cameras and sensors to monitor the animals.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:camera#e-0188786164a1218d",
+          "text": "Once we found the place, it was stressful getting lights and cameras set up in the limited time.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:5",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:camera#s2",
+      "pos": "短语",
+      "glossZh": "在镜头前；被拍摄",
+      "pronunciationId": "w:camera#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "游戏视角、拱顶房间、法官私室",
+      "reason": "行业或古义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

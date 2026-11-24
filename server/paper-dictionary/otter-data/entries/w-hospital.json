@@ -1,0 +1,130 @@
+{
+  "entryId": "w:hospital",
+  "headword": "hospital",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈhɒspɪtl/",
+    "us": "/ˈhɑːspɪtl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:hospital#p-main",
+      "ipa": {
+        "uk": "/ˈhɒspɪtl/",
+        "us": "/ˈhɑːspɪtl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "hospitals",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 17,
+    "mock": 120
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:hospital#s1",
+      "pos": "n.",
+      "glossZh": "医院",
+      "pronunciationId": "w:hospital#p-main",
+      "note": "英式 in hospital 和美式 in the hospital 均可表示「住院」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 120
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hospital#e-1e29658ba1293c16",
+          "text": "One day I got word that he was admitted to hospital for a serious disease.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:15",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:hospital#e-14b802200e34799e",
+          "text": "Once there, Lenoue was __49__ and later taken to a hospital, where she learned that she had serious injuries in one of her knees.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:hospital#e-797103280ca78903",
+          "text": "Ho recognizes the psychological benefit of helping kids keep up with their peers（同龄人）outside the hospital.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 105
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "落脚处、好客的",
+      "reason": "历史用法或旧词性"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

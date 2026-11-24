@@ -1,0 +1,295 @@
+{
+  "entryId": "w:formal",
+  "headword": "formal",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfɔːml/",
+    "us": "/ˈfɔːrml/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:formal#p-main",
+      "ipa": {
+        "uk": "/ˈfɔːml/",
+        "us": "/ˈfɔːrml/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more formal",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most formal",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 56
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 51
+  },
+  "senses": [
+    {
+      "senseId": "w:formal#s1",
+      "pos": "adj.",
+      "glossZh": "正式的",
+      "pronunciationId": "w:formal#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:formal#e-80786ff10d3013e8",
+          "text": "It’s formal.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2020-national-ii:31",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:formal#e-c40c8b2c6c374bc4",
+          "text": "Even a formal email can seem cold and unfriendly",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-national-ii:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:formal#e-a0d997ed0030cc5e",
+          "text": "There’s no value in delivering any kind of communication, whether written, spoken, formal, or informal, if the message doesn’t come across clearly.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 96
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:formal#s2",
+      "pos": "adj.",
+      "glossZh": "按正规方式进行的",
+      "pronunciationId": "w:formal#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:formal#e-290ff9e33f65d5f7",
+          "text": "She had formal education.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2023-national-b:22",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:formal#e-a92bdf543dcee1cf",
+          "text": "Yet integrating play into a formal school setting can be challenging because the nature of play and the nature of school are often in conflict.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-a:14",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:formal#e-dfe2bafa213d6fab",
+          "text": "It is assumed that professional excellence requires formal training, while excellence in the rest of life, such as leisure, does not.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:formal#s3",
+      "pos": "adj.",
+      "glossZh": "官方承认的",
+      "pronunciationId": "w:formal#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:formal#e-d3ea5b6dcbf52364",
+          "text": "A failure to gain formal recognition.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:27",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:formal#e-7bba326ee7455449",
+          "text": "After 28 years of debate, its 168 member states still lack formal agreement.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:formal#s4",
+      "pos": "adj.",
+      "glossZh": "形式上的",
+      "pronunciationId": "w:formal#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:formal#e-16d60029117b80e6",
+          "text": "is characterized by its complexity, formal structure, and the use of notation to guide performance.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 42
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "甲醛缩醛",
+      "reason": "化学专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

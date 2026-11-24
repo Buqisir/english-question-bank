@@ -1,0 +1,358 @@
+{
+  "entryId": "w:instant",
+  "headword": "instant",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɪnstənt/",
+    "us": "/ˈɪnstənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:instant#p-main",
+      "ipa": {
+        "uk": "/ˈɪnstənt/",
+        "us": "/ˈɪnstənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "instants",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 47
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 38
+  },
+  "senses": [
+    {
+      "senseId": "w:instant#s1",
+      "pos": "adj.",
+      "glossZh": "立即发生的；即时的",
+      "pronunciationId": "w:instant#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:instant#e-f1ea8424dee877bf",
+          "text": "Instant gratification (满足) may seem like the most “feel good” option at the time, but psychology research suggests waiting for things actually makes us happier in the long run.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:instant#e-456c61857d9fc24f",
+          "text": "The use of technology in sports is supposed to be able to provide accurate and instant feedback, with better",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:instant#e-92fade902131e8e9",
+          "text": "Beijing E-Town explained that the system uses AI to detect dangers such as fire threats and can send instant warnings through the 5G network.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:grammar-fill",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:grammar-fill:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 108
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:instant#s2",
+      "pos": "n.",
+      "glossZh": "瞬间",
+      "pronunciationId": "w:instant#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:instant#e-fd103dbfc8276f6d",
+          "text": "In an instant, a woman raced into my house and left happily with the vase.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:cloze:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:instant#e-1d5f0c59a070d449",
+          "text": "Lily and Chloe found their names in an instant among the neat rows of letters.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:instant#e-12e38430dc581d56",
+          "text": "In that instant, I was struck by a harsh and humbling truth: my overwhelming paranoia（偏执）had impacted his young mind, narrowing not just my own world but limiting his too.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:instant#s3",
+      "pos": "短语",
+      "glossZh": "一……就……",
+      "pronunciationId": "w:instant#p-main",
+      "note": "the instant 后接分句。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:instant#e-9d2b737814259d9d",
+          "text": "She ceased her struggle the instant I picked her up.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:instant#e-0c9fc6416a9fc37b",
+          "text": "Coined by Swedish author Fredrik Haren from the Latin “we see,” it describes the instant someone else truly grasps your idea and says, “Oh, I see!” That recognition makes innovators feel they are no longer alone.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
+            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 88
+          }
+        },
+        {
+          "exampleId": "w:instant#e-f6f0a8ff32277894",
+          "text": "Her heart ached the instant she recognized its __45__.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:instant#s4",
+      "pos": "adj.",
+      "glossZh": "速溶的",
+      "pronunciationId": "w:instant#p-main",
+      "note": "如 instant coffee。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:instant#e-87f222ca19ca2374",
+          "text": "Which type of coffee is used in cheap instant coffee?",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:instant#s5",
+      "pos": "adj.",
+      "glossZh": "即冲即用的（预制食品）",
+      "pronunciationId": "w:instant#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:instant#e-fe4889152c89bbad",
+          "text": "We opened a packet of instant cookie mix, added the required ingredients, shaped the dough (面团) into small rounds, and confidently placed them on a baking tray in the oven.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:instant#e-caa1d9c8616f1888",
+          "text": "Apart from the deliciousness of those snacks, the majority of other UPFs, such as ready-to-eat meals and instant mixes, contain artificial flavors and preservatives.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 112
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "本月的、当前案件的",
+      "reason": "旧式书信用语或法律用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

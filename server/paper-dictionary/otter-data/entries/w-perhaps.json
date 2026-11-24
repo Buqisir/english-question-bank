@@ -1,0 +1,117 @@
+{
+  "entryId": "w:perhaps",
+  "headword": "perhaps",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pəˈhæps/",
+    "us": "/pərˈhæps/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:perhaps#p-main",
+      "ipa": {
+        "uk": "/pəˈhæps/",
+        "us": "/pərˈhæps/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 20,
+    "mock": 99
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:perhaps#s1",
+      "pos": "adv.",
+      "glossZh": "也许；或许",
+      "pronunciationId": "w:perhaps#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 20,
+        "mock": 99
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:perhaps#e-51c9c71f4021070a",
+          "text": "Or perhaps a design works so well it is adopted elsewhere again and again, with seemingly harmless improvements, until,suddenly, it does not work at all anymore.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:perhaps#e-036b1104830329eb",
+          "text": "To serve its function, a book must be activated by a user: the cover opened, the pages parted, the contents reviewed, perhaps notes written down or words underlined.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 118,
+            "end": 125
+          }
+        },
+        {
+          "exampleId": "w:perhaps#e-bdbbaac10f84d5cc",
+          "text": "Still, she made no attempt to fly, perhaps she had been struggling against the window too long and was too tired?",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 42
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,249 @@
+{
+  "entryId": "w:promote",
+  "headword": "promote",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/prəˈməʊt/",
+    "us": "/prəˈmoʊt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:promote#p-main",
+      "ipa": {
+        "uk": "/prəˈməʊt/",
+        "us": "/prəˈmoʊt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "promoted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "promotes",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "promoting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 22,
+    "mock": 239
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 239
+  },
+  "senses": [
+    {
+      "senseId": "w:promote#s1",
+      "pos": "v.",
+      "glossZh": "推广",
+      "pronunciationId": "w:promote#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:promote#e-6b9ffd5c3914c74e",
+          "text": "Hunters bring in more than 300,000 nutria tails a year, so part of Mouton’s job these days is trying to promote fur.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:promote#e-03fba5c2a436b5e4",
+          "text": "To promote a magic show.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:28",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:promote#e-316fd78eb7f469e7",
+          "text": "To promote the idea of work-life balance.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:promote#s2",
+      "pos": "v.",
+      "glossZh": "促进",
+      "pronunciationId": "w:promote#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:promote#e-1b27e9e6f881e370",
+          "text": "The most positive aspect of this popularization is a new and much needed emphasis (重视) on emotion by employers, educators and others interested in promoting social well-being.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 147,
+            "end": 156
+          }
+        },
+        {
+          "exampleId": "w:promote#e-1d81ebeb2706e6e4",
+          "text": ", but studies have shown that they can promote people’s wellbeing by improving their mood (心情), reducing stress and helping their memory.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:promote#e-c53d5d13db60833d",
+          "text": "Interdisciplinary approach promotes creativity.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2026-zhejiang-jan:35",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:promote#s3",
+      "pos": "v.",
+      "glossZh": "晋升",
+      "pronunciationId": "w:promote#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:promote#s4",
+      "pos": "v.",
+      "glossZh": "（体育队伍）升入更高组别",
+      "pronunciationId": "w:promote#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "提高催化剂活性",
+      "reason": "化学术语"
+    },
+    {
+      "glossZh": "兵升变",
+      "reason": "国际象棋术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

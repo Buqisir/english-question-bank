@@ -1,0 +1,324 @@
+{
+  "entryId": "w:kill",
+  "headword": "kill",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kɪl/",
+    "us": "/kɪl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:kill#p-main",
+      "ipa": {
+        "uk": "/kɪl/",
+        "us": "/kɪl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "killed",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "killing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "kills",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 46
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 41
+  },
+  "senses": [
+    {
+      "senseId": "w:kill#s1",
+      "pos": "v.",
+      "glossZh": "使死亡；杀死",
+      "pronunciationId": "w:kill#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:kill#e-6148f285dda09a28",
+          "text": "Millions of waterfowl（水禽）were killed at the hands of market hunters and a handful of overly ambitious sportsmen.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:kill#e-3275e992ed0bca8c",
+          "text": "Obviously, if precautions (预防) aren’t taken, grizzlies can become troublesome, sometimes killing farm animals or walking through yards in search of food.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:kill#e-9f020bcc97b0b97a",
+          "text": "Tragedy struck again when Robyn was killed by a drunk driver.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:kill#s2",
+      "pos": "v.",
+      "glossZh": "使某事物消失或终止",
+      "pronunciationId": "w:kill#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:kill#e-ef0c376a7cff5e1f",
+          "text": "Nothing kills the love for philosophy faster than people who think they understand Foucault, Baudrillard, or Confucius better than you – and then try to explain them.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:kill#e-ac1a2bd294e191e4",
+          "text": "Technology kills real experience.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-guangdong-guangzhou-2025-08-stage-training:27",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:kill#s3",
+      "pos": "短语",
+      "glossZh": "消磨时间",
+      "pronunciationId": "w:kill#p-main",
+      "note": "kill time。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:kill#e-811c131287eff83e",
+          "text": "To kill his spare time.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-fujian-putian-2026-01-first-quality-test:24",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:kill#s4",
+      "pos": "短语",
+      "glossZh": "使彻底消亡",
+      "pronunciationId": "w:kill#p-main",
+      "note": "kill off。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:kill#e-4ae56a6026732354",
+          "text": "Lybarger realized that he had killed off an area with a wild seed bank of countless species that were ideal for attracting wildlife, all in order to plant two or three species that weren’t part of the native ecosystem.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:kill#e-f9ab657ecd96833f",
+          "text": "Lybarger realized he had nearly killed off an area with a wild seed bank of countless species just to plant a few foreign ones.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:kill#s5",
+      "pos": "短语",
+      "glossZh": "一举两得",
+      "pronunciationId": "w:kill#p-main",
+      "note": "kill two birds with one stone。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:kill#e-5f352d524b7530db",
+          "text": "killing two birds with one stone",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jan:26",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "排球扣杀得分、纽约地区水道",
+      "reason": "专业用法或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

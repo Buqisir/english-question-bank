@@ -1,0 +1,939 @@
+{
+  "entryId": "w:right",
+  "headword": "right",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/raɪt/",
+    "us": "/raɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:right#p-main",
+      "ipa": {
+        "uk": "/raɪt/",
+        "us": "/raɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "farther right",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "farthest right",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "further right",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "furthest right",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more right",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most right",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "righter",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "rightest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "rightmost",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "rights",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "righted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "righting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 92,
+    "mock": 390
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 379
+  },
+  "senses": [
+    {
+      "senseId": "w:right#s1",
+      "pos": "adj.",
+      "glossZh": "合适的",
+      "pronunciationId": "w:right#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 37,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:right#e-9d99799b22c55116",
+          "text": "If your child enjoys being in the kitchen, then the culinary camp is definitely the right fit.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:right#e-7d710acb316de6a4",
+          "text": "But since the results at 70 decibels were significant, the study also suggests that the right level of background noise – not too loud and not total silence – may actually improve one’s creative thinking ability.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:right#e-eca9e18891ea51d1",
+          "text": "Being at the right place at the right time is decisive in any style of photography.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:right#s2",
+      "pos": "adj.",
+      "glossZh": "正确的",
+      "pronunciationId": "w:right#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:right#e-2679c3253220fc86",
+          "text": "Too many writers try to get their drafts right the first time.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2022-ii:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:right#e-243fde37f5015dcc",
+          "text": "He is right, but I can’t help wishing they would keep those old ferries.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:right#e-344d78ecb1c97ac0",
+          "text": "He proved Mary Hussey right.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:right#s3",
+      "pos": "adj.",
+      "glossZh": "正当的",
+      "pronunciationId": "w:right#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:right#e-658f0d278eb20d30",
+          "text": "I knew the coach meant well – he thought he was doing the right thing.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "writing-continuation-6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:right#e-981c0ad64dc98e47",
+          "text": "“I feel like I was just doing the right thing.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-i:cloze:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:right#e-a729355a89c16119",
+          "text": "Somehow he wasn’t sure he had done the right thing.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:right#s4",
+      "pos": "adj.",
+      "glossZh": "右边的",
+      "pronunciationId": "w:right#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:right#e-320739f088d5b62a",
+          "text": "I didn’t know why, but all the science fiction I had read seemed to have fled from my head, leaving just one sentence echoing in the wilderness (荒野) of my mind, “My right brain has nothing left; my left brain has nothing right.”",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 165,
+            "end": 170
+          }
+        },
+        {
+          "exampleId": "w:right#e-8573892c490be9e5",
+          "text": "Sabrina recalled that Claire had __43__ a right turn, so we __44__ along the dusty yellow path, and spotted a narrow path covered with colorful wildflowers.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:right#s5",
+      "pos": "n.",
+      "glossZh": "右边",
+      "pronunciationId": "w:right#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:right#e-f8459b15911feeb8",
+          "text": "You don’t know left from right!” These __53__ made the father very angry.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:right#s6",
+      "pos": "n.",
+      "glossZh": "权利",
+      "pronunciationId": "w:right#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:right#e-208548c0647e980c",
+          "text": "Then, start denying yourself the right in order to break the habit.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-zhejiang-jan:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:right#e-8317f4fe3c94ecc5",
+          "text": "Learn about how the United Nations addresses issues such as climate change, peace and security, human rights, and how you can support the Sustainable Development Goals.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-a:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 108
+          }
+        },
+        {
+          "exampleId": "w:right#e-f8a139451456fc87",
+          "text": "The $10/month Pro Plan gives you 2,500 credits, commercial rights, faster",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-a",
+            "locator": {
+              "paragraph": 16,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-a:16",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:right#s7",
+      "pos": "adv.",
+      "glossZh": "恰好就在（加强时间或地点）",
+      "pronunciationId": "w:right#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 23,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:right#e-241f96f790cd4c1c",
+          "text": "Where will Jessica go right after the phone call?",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:right#e-f7268a5a5b58c0e2",
+          "text": "“We were particularly interested in exploring the aspects of sampling that tend to bias(使有偏差) data, like the greater likelihood of a citizen scientist to take a picture of a flowering plant instead of the grass right next to it,\" said Daru.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 211,
+            "end": 216
+          }
+        },
+        {
+          "exampleId": "w:right#e-e80234e9d1d98832",
+          "text": "You must leave right now!” he called out, holding the branch with both hands.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:right#s8",
+      "pos": "adv.",
+      "glossZh": "一直（加强动作的持续）",
+      "pronunciationId": "w:right#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:right#e-437c6e59dc1d26e1",
+          "text": "Then I __42__ myself up and kept right on going.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:cloze:2",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:right#s9",
+      "pos": "adv.",
+      "glossZh": "正确地",
+      "pronunciationId": "w:right#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:right#e-c59aea6cadc8c05f",
+          "text": "What’s more, the few times they guessed right, they did so for the wrong reasons, pointing to aspects of the knot that had nothing to do with its strength.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:right#e-42eb9dc9a23b04e0",
+          "text": "You’re doing everything right according to the productivity experts.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:right#e-baf172296f8b16bf",
+          "text": "These dogs picked a new toy right most of the time.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-c:12",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:right#s10",
+      "pos": "adv.",
+      "glossZh": "向右",
+      "pronunciationId": "w:right#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:right#s11",
+      "pos": "短语",
+      "glossZh": "对吧",
+      "pronunciationId": "w:right#p-main",
+      "note": "用于确认对方是否同意。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:right#e-9eab7ba501514a85",
+          "text": "Sounds harmless, right?",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:right#e-8caf4e27d803a5bf",
+          "text": "You keep hearing about recycling, right?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:right#e-2448494d0d10043c",
+          "text": "Ages ago, right?",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:right#s12",
+      "pos": "短语",
+      "glossZh": "凭自身资格",
+      "pronunciationId": "w:right#p-main",
+      "note": "in one's own right。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:right#e-cc3a15afad6ef742",
+          "text": "Before the wide use of the printing press, books were treasured objects and could be works of art in their own right.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 111,
+            "end": 116
+          }
+        },
+        {
+          "exampleId": "w:right#e-095d19ce7b45cf46",
+          "text": "Instead, it is a vital, dynamic body part, an organ in its own right that works with the brain, the bones and more to help keep us healthy.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:right#e-c2579bc4f1a3ddef",
+          "text": "What the new survey suggests is that management is now seen as a career-ladder move, not something good in its own right.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 115,
+            "end": 120
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:right#s13",
+      "pos": "短语",
+      "glossZh": "立刻",
+      "pronunciationId": "w:right#p-main",
+      "note": "right away。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:right#e-3e7098d79eaace53",
+          "text": "However, it’s important to remember that there are hidden dangers that many young people may not notice right away.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 109
+          }
+        },
+        {
+          "exampleId": "w:right#e-9130d420c9e69241",
+          "text": "Putting in an offer right away.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:right#s14",
+      "pos": "adj.",
+      "glossZh": "右翼的",
+      "pronunciationId": "w:right#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:right#s15",
+      "pos": "n.",
+      "glossZh": "右翼",
+      "pronunciationId": "w:right#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:right#s16",
+      "pos": "v.",
+      "glossZh": "纠正",
+      "pronunciationId": "w:right#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:right#s17",
+      "pos": "v.",
+      "glossZh": "扶正",
+      "pronunciationId": "w:right#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "露脊鲸的",
+      "reason": "仅见专名 right whale 等"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,421 @@
+{
+  "entryId": "w:freeze",
+  "headword": "freeze",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/friːz/",
+    "us": "/friːz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:freeze#p-main",
+      "ipa": {
+        "uk": "/friːz/",
+        "us": "/friːz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "freezes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "freezing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "froze",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    },
+    {
+      "form": "frozen",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 119
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 114
+  },
+  "senses": [
+    {
+      "senseId": "w:freeze#s1",
+      "pos": "v.",
+      "glossZh": "结冰",
+      "pronunciationId": "w:freeze#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:freeze#e-a2670438be84ddba",
+          "text": "The salt lowers water’s freezing point, causing ice to melt（融化）.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:freeze#e-7f6014e1081cb306",
+          "text": "By 2 a. m., sitting on a cold rock with sweat freezing beneath my clothes, I felt I had bitten off more than I could chew – this mountain was too much for me.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:freeze#e-b937ce38bf8096f5",
+          "text": "I’d read that if the pond froze solid in winter, the fish would run out of oxygen.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-04-second:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:freeze#s2",
+      "pos": "adj.",
+      "glossZh": "极冷的",
+      "pronunciationId": "w:freeze#p-main",
+      "note": "freezing。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:freeze#e-0db99f03b2354c9a",
+          "text": "It was an extremely cold winter’s evening and freezing fog hung in the air.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-a:figure-8f50d0ac5d38cb0b:cell-1-2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:freeze#e-5acb72acf6b99f88",
+          "text": "You’ve seen this on a winter road – salt on ice causes it to melt, even in freezing temperatures.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 83
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:freeze#s3",
+      "pos": "v.",
+      "glossZh": "僵住",
+      "pronunciationId": "w:freeze#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:freeze#e-83f4cdb2a3bd3318",
+          "text": "My heart froze in my chest as I __43__ the tractor heading towards the __44__.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:freeze#e-022c3b907a94d388",
+          "text": "The man froze for a second, but when he saw the skinny boy he breathed a sigh of relief.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:freeze#e-ebcdae54d36dc169",
+          "text": "She froze for a moment, wondering if her mind was playing tricks on her.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:freeze#s4",
+      "pos": "v.",
+      "glossZh": "使定格",
+      "pronunciationId": "w:freeze#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:freeze#e-ae5a8d5e6e200fe0",
+          "text": "At the beginning of the year, the artist built a piece called “Strawpocalypse,” a pair of 10-foot-tall plastic waves, frozen mid-crash.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 118,
+            "end": 124
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:freeze#s5",
+      "pos": "v.",
+      "glossZh": "冷冻",
+      "pronunciationId": "w:freeze#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:freeze#e-d0246179377c370f",
+          "text": "Volunteers will wash, cut, and freeze or dry them for use in meals down the road.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "reading-b-4",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:freeze#e-348980053a894641",
+          "text": "We began preparing the food, from mixing salad dressing to separating frozen meat.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:freeze#e-1c81dc3cb78ca1b1",
+          "text": "Last week, frozen cookie dough（面团）helped me in repairing a neighborhood conflict.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:freeze#s6",
+      "pos": "v.",
+      "glossZh": "卡住（程序）",
+      "pronunciationId": "w:freeze#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:freeze#s7",
+      "pos": "v.",
+      "glossZh": "冻结（款项）",
+      "pronunciationId": "w:freeze#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:freeze#s8",
+      "pos": "n.",
+      "glossZh": "冻结",
+      "pronunciationId": "w:freeze#p-main",
+      "note": "限制工资、招聘等。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "冰壶中的贴靠击球",
+      "reason": "体育术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

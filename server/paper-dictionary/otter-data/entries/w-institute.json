@@ -1,0 +1,231 @@
+{
+  "entryId": "w:institute",
+  "headword": "institute",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɪnstɪtjuːt/",
+    "us": "/ˈɪnstɪtuːt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:institute#p-main",
+      "ipa": {
+        "uk": "/ˈɪnstɪtjuːt/",
+        "us": "/ˈɪnstɪtuːt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "institutes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "instituted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "instituting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 49
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 46
+  },
+  "senses": [
+    {
+      "senseId": "w:institute#s1",
+      "pos": "n.",
+      "glossZh": "研究或专业机构",
+      "pronunciationId": "w:institute#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:institute#e-0b6f21226e1bab92",
+          "text": "Kevin Balke, a research engineer at the Texas A&M University Transportation Institute, says that while smart lights can be particularly beneficial for some cities, others are so jammed that only a sharp reduction in the number of cars on the road will make a meaningful difference.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 85
+          }
+        },
+        {
+          "exampleId": "w:institute#e-e2a2f04e1025b846",
+          "text": "Scientists at Salk Institute are making use of the natural capacity of plants to absorb carbon dioxide by enhancing their root systems.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:institute#e-e59740c45a9db97c",
+          "text": "Since 2019, our institute, the Institute of Biology and Chemistry of Proteins in Lyon, has reduced its carbon footprint by about 13% through changes in lab practices.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:institute#s2",
+      "pos": "n.",
+      "glossZh": "学院",
+      "pronunciationId": "w:institute#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:institute#e-63cb7a8fcaa05889",
+          "text": "• are eligible (有资格的) to apply for scholarships to Columbus College of Art and Design, Maryland Institute College of Art, and The Art Institute (Seniors only);",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-a:13",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 96,
+            "end": 105
+          }
+        },
+        {
+          "exampleId": "w:institute#e-1dc6f2567b0bd8fe",
+          "text": "Led by physicist Yao Xuri from Beijing Institute of Technology, the team has built a device that photographs the tiny, imperceptible vibrations that sound waves generate on objects.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-03-first:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 48
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:institute#s3",
+      "pos": "v.",
+      "glossZh": "设立；实行",
+      "pronunciationId": "w:institute#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:institute#e-4524f071f7ee2db2",
+          "text": "In 2010, the UN Department of Global Communications instituted language days for each of the organization’s six official languages.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 62
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "指定继承人、授予宗教职务",
+      "reason": "法律或宗教专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

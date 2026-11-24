@@ -1,0 +1,393 @@
+{
+  "entryId": "w:inside",
+  "headword": "inside",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌɪnˈsaɪd/",
+    "us": "/ˌɪnˈsaɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:inside#p-main",
+      "ipa": {
+        "uk": "/ˌɪnˈsaɪd/",
+        "us": "/ˌɪnˈsaɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "insides",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 23,
+    "mock": 185
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 183
+  },
+  "senses": [
+    {
+      "senseId": "w:inside#s1",
+      "pos": "prep.",
+      "glossZh": "在……里面",
+      "pronunciationId": "w:inside#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:inside#e-d4e2692c793b337f",
+          "text": "In a recent experiment, cockatoos were presented with a box with a nut inside it.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:inside#e-90f9dc946a6ffc77",
+          "text": "Inside the office, they encourage recycling and waste reduction by limiting garbage cans and avoiding single-use plastic.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:inside#e-0feb94bc5a887062",
+          "text": "Microplastics have become a common source of pollution across the Earth – they have settled in the deep sea and on the Himalayas, stuck inside volcanic rocks, filled the stomachs of seabirds and even fallen in fresh Antarctic snow.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 136,
+            "end": 142
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:inside#s2",
+      "pos": "prep.",
+      "glossZh": "到……里面",
+      "pronunciationId": "w:inside#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:inside#e-e6f33be2b1cc810c",
+          "text": "I’m unsure now why I thought forcing my head inside the pumpkin would settle the matter, but it seemed to make perfect sense at the time.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:inside#s3",
+      "pos": "adv.",
+      "glossZh": "在里面；在室内",
+      "pronunciationId": "w:inside#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:inside#e-f303d4b16a3a3980",
+          "text": "Instead, they grow better inside, where it is warmer",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-national-b:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:inside#e-e843f3a37b858539",
+          "text": "My mobile phone was inside, but luckily there was a telephone box across the street.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:inside#e-fc9ed483ebe22d98",
+          "text": "Paragraph 1: I hurried into the theater, only to find there were even more bikers inside.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:inside#s4",
+      "pos": "adv.",
+      "glossZh": "到里面",
+      "pronunciationId": "w:inside#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:inside#e-36bb4c7c948057c3",
+          "text": "Paragraph 2: As her parents stepped inside, Siya spotted an adult cat in the doorway.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:writing-continuation:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:inside#e-a41623d0986c78c3",
+          "text": "She nodded, her face brightening as she stepped inside.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:inside#s5",
+      "pos": "n.",
+      "glossZh": "内部",
+      "pronunciationId": "w:inside#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:inside#e-6b489ede663b6d96",
+          "text": "What matters is not just the outside of a string of symbols, but the inside too, not just how they are arranged but what they mean.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
+              "sentence": 9
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:inside#s6",
+      "pos": "n.",
+      "glossZh": "内瓤",
+      "pronunciationId": "w:inside#p-main",
+      "note": "用复数 insides，也可指内脏。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:inside#e-a0cdef6eccfc9012",
+          "text": "Unfortunately we forgot to weigh them before taking out their insides, but I was determined to prove my point.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:inside#s7",
+      "pos": "adj.",
+      "glossZh": "里面的；内侧的",
+      "pronunciationId": "w:inside#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:inside#s8",
+      "pos": "adj.",
+      "glossZh": "内部人士才知道的",
+      "pronunciationId": "w:inside#p-main",
+      "note": "如 inside information。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:inside#s9",
+      "pos": "prep.",
+      "glossZh": "在（某段时间）以内",
+      "pronunciationId": "w:inside#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "球靠近击球员、道路内圈",
+      "reason": "体育或交通专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

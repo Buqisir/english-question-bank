@@ -1,0 +1,123 @@
+{
+  "entryId": "w:everyday",
+  "headword": "everyday",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈevrideɪ/",
+    "us": "/ˈevrideɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:everyday#p-main",
+      "ipa": {
+        "uk": "/ˈevrideɪ/",
+        "us": "/ˈevrideɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 103
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:everyday#s1",
+      "pos": "adj.",
+      "glossZh": "日常的",
+      "pronunciationId": "w:everyday#p-main",
+      "note": "形容词写作一个词。表示「每天」时用 every day。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 103
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:everyday#e-b48af8cf2c9c6dc3",
+          "text": "The researchers analyzed video recordings of 53 child-parent pairs during everyday activities at home and found children who play with puzzles between 26 and 46 months of age have better spatial skills when assessed at 54 months of age.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:everyday#e-0c994e658a4addc8",
+          "text": "In my everyday life, I am on an ongoing journey to figure out different ways to reduce my carbon footprint on the planet.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:everyday#e-6d67a29ec521a046",
+          "text": "Reading Art: Art for Book Lovers is a celebration of an everyday object – the book, represented here in almost three hundred artworks from museums around the world.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 64
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "副词「每天」",
+      "reason": "every day 的非标准合写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

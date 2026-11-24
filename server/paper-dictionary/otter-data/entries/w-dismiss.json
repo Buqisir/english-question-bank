@@ -1,0 +1,185 @@
+{
+  "entryId": "w:dismiss",
+  "headword": "dismiss",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪsˈmɪs/",
+    "us": "/dɪsˈmɪs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dismiss#p-main",
+      "ipa": {
+        "uk": "/dɪsˈmɪs/",
+        "us": "/dɪsˈmɪs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "dismissed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "dismisses",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "dismissing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 36
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 33
+  },
+  "senses": [
+    {
+      "senseId": "w:dismiss#s1",
+      "pos": "v.",
+      "glossZh": "不予考虑；不当一回事",
+      "pronunciationId": "w:dismiss#p-main",
+      "note": "dismiss sth as … 指「认为……是……而不予考虑」。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dismiss#e-25ae6fb389a0acfa",
+          "text": "Some may dismiss all these as unnecessary complaints about language, yet evidence shows that disrespectful terms can prevent individuals from seeking medical care and reduce trust in healthcare providers.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:dismiss#e-29dede086dfc1745",
+          "text": "On the other hand, if users view recommendations as overly complex or irrelevant, they may dismiss them altogether, forgoing any advantages algorithmic recommendations may provide.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 98
+          }
+        },
+        {
+          "exampleId": "w:dismiss#e-ddc53ee645af23d5",
+          "text": "For example, imagine you’re scrolling through your social media feed and immediately dismiss a news article because it comes from a source you don’t typically trust.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 92
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dismiss#s2",
+      "pos": "v.",
+      "glossZh": "解雇；免职",
+      "pronunciationId": "w:dismiss#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:dismiss#s3",
+      "pos": "v.",
+      "glossZh": "解散；准许离开",
+      "pronunciationId": "w:dismiss#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:dismiss#s4",
+      "pos": "v.",
+      "glossZh": "驳回（诉讼、上诉等）",
+      "pronunciationId": "w:dismiss#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "使击球员出局；罚下场",
+      "reason": "体育专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

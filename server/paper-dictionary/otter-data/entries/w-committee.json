@@ -1,0 +1,129 @@
+{
+  "entryId": "w:committee",
+  "headword": "committee",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəˈmɪti/",
+    "us": "/kəˈmɪti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:committee#p-main",
+      "ipa": {
+        "uk": "/kəˈmɪti/",
+        "us": "/kəˈmɪti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "committees",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:committee#s1",
+      "pos": "n.",
+      "glossZh": "委员会；专门小组",
+      "pronunciationId": "w:committee#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 14
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:committee#e-047e854c46850a29",
+          "text": "Zhu Yarong, director of the Sanxingdui management committee, notes that one of the greatest challenges facing digital exhibitions today lies in talent development.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:grammar-fill:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:committee#e-ef91b702f275b15f",
+          "text": "Entries will be judged by an NYPL staff committee (around May 1, 2025) on the basis of three criteria:",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-a:19",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:committee#e-fdb67f87c8031fc5",
+          "text": "And the most stressful moment was when we presented our plan to the review committee.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 84
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "受托监护人",
+      "reason": "法律专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

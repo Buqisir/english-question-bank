@@ -1,0 +1,323 @@
+{
+  "entryId": "w:communication",
+  "headword": "communication",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəˌmjuːnɪˈkeɪʃn/",
+    "us": "/kəˌmjuːnɪˈkeɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:communication#p-main",
+      "ipa": {
+        "uk": "/kəˌmjuːnɪˈkeɪʃn/",
+        "us": "/kəˌmjuːnɪˈkeɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "communications",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 54,
+    "mock": 188
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 187
+  },
+  "senses": [
+    {
+      "senseId": "w:communication#s1",
+      "pos": "n.",
+      "glossZh": "沟通；交流；信息的传递",
+      "pronunciationId": "w:communication#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 44,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:communication#e-13e1ecfafd288788",
+          "text": "In any given office, employees can range from age 22 to 70 and beyond, and finding common ground in communication style can be a challenge.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 113
+          }
+        },
+        {
+          "exampleId": "w:communication#e-dcd0a260d5ca6cbd",
+          "text": "Only humans and chimps, she said, had a system of communication where they deliberately sent a message to another group member.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:communication#e-45f7c27f3689078f",
+          "text": "I walked into class believing that writing is important as a means of communication.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 83
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:communication#s2",
+      "pos": "n.",
+      "glossZh": "信息；函件；传达的内容",
+      "pronunciationId": "w:communication#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:communication#e-174d97adcd7db4cb",
+          "text": "Written communications can often read as cold and dull.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:communication#e-0513316391af9124",
+          "text": "There’s no value in delivering any kind of communication, whether written, spoken, formal, or informal, if the message doesn’t come across clearly.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:communication#e-e2cdfe3bd2bb046f",
+          "text": "Your audience will naturally be more interested and engaged when you tailor your communications to their interests.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 95
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:communication#s3",
+      "pos": "n.",
+      "glossZh": "通信；通信系统",
+      "pronunciationId": "w:communication#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:communication#e-c6753e75eff171ee",
+          "text": "By providing long-distance communication and energy, electricity created the modern world.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:communication#e-a14ceef4b13aa3a8",
+          "text": "Continued developments in communication technologies were once believed to make the printed page outdated.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:communication#e-db61de0a6c1e82e5",
+          "text": "Natural disasters like earthquakes usually cause interruptions to communications, posing great challenges to rescue efforts.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:communication#s4",
+      "pos": "n.",
+      "glossZh": "对外传播；公关传播",
+      "pronunciationId": "w:communication#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:communication#e-802f3f551cf44e15",
+          "text": "“You enter the fare gates（检票口）and you’ll see a kiosk that is lit up and it tells you you can get a one-minute, a three-minute, or a five-minute story,\" says Alicia Trost, the chief communications officer for the San Francisco Bay Area Rapid Transit - known as BART.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 181,
+            "end": 195
+          }
+        },
+        {
+          "exampleId": "w:communication#e-a3bf70a0deaebffc",
+          "text": "In 2010, the UN Department of Global Communications instituted language days for each of the organization’s six official languages.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 51
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "领圣餐、修辞中的「我们」",
+      "reason": "宗教或修辞专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

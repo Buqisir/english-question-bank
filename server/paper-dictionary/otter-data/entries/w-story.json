@@ -1,0 +1,240 @@
+{
+  "entryId": "w:story",
+  "headword": "story",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈstɔːri/",
+    "us": "/ˈstɔːri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:story#p-main",
+      "ipa": {
+        "uk": "/ˈstɔːri/",
+        "us": "/ˈstɔːri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "stories",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 82,
+    "mock": 586
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 585
+  },
+  "senses": [
+    {
+      "senseId": "w:story#s1",
+      "pos": "n.",
+      "glossZh": "故事",
+      "pronunciationId": "w:story#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 76,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:story#e-808975560bb1b2d9",
+          "text": "It is the story of an American travelling to a strange land, and of the people he meets on his way: Rustam, his translator, a lovely 24-year-old who picked up his colorful",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:story#e-cda1c50612892e46",
+          "text": "\"You choose which length you want and it gives you a receipt-like short story.\"",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:story#e-b1918a2adba4129b",
+          "text": "my grandmother would tell me stories about her childhood.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:story#s2",
+      "pos": "n.",
+      "glossZh": "新闻报道",
+      "pronunciationId": "w:story#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:story#e-5a91d111819988f3",
+          "text": "In a world where nearly 800 million people a year go hungry, “food waste goes against the moral grain,” as Elizabeth Royte writes in this month’s cover story.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "reading-b-2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 152,
+            "end": 157
+          }
+        },
+        {
+          "exampleId": "w:story#e-1781b682aef2bfe1",
+          "text": "However, psychologists have demonstrated that when adults read news stories, they remember more of the content than if they listen to or view identical pieces.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:story#e-d3c7f777b4dcd41b",
+          "text": "Huawei’s Pangu-Weather, Nvidia’s FourcastNet, and Google DeepMind’s GraphCast are making meteorologists(气象学家) reconsider how we use machine learning and weather forecasts, Peter Dueben, head of Earth system modeling at the European Centre for Medium-Range Weather Forecasts(ECMWF), told me for the story.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 298,
+            "end": 303
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:story#s3",
+      "pos": "n.",
+      "glossZh": "楼层",
+      "pronunciationId": "w:story#p-main",
+      "note": "美式英语，英式常拼作 storey。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:story#s4",
+      "pos": "n.",
+      "glossZh": "编造的话",
+      "pronunciationId": "w:story#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:story#s5",
+      "pos": "n.",
+      "glossZh": "限时动态",
+      "pronunciationId": "w:story#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "地名和姓氏",
+      "reason": "专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

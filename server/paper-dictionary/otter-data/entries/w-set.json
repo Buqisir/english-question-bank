@@ -1,0 +1,1180 @@
+{
+  "entryId": "w:set",
+  "headword": "set",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/set/",
+    "us": "/set/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:set#p-main",
+      "ipa": {
+        "uk": "/set/",
+        "us": "/set/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more set",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most set",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "sets",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "setten",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "setting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "setted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 56,
+    "mock": 450
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 443
+  },
+  "senses": [
+    {
+      "senseId": "w:set#s1",
+      "pos": "n.",
+      "glossZh": "一组",
+      "pronunciationId": "w:set#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-7d89ac9e88c27289",
+          "text": "We prefer to describe emotional intelligence as a specific set of skills that can be used for either good or bad purposes.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:set#e-d836def61ecd0a54",
+          "text": "Using a set of controlled audio clips (录音片段), Hilton surveyed 5,000 American English speakers to better understand what affects people’s perceptions of interruptions.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:set#e-9660d457ccbce871",
+          "text": "Each subject got eight reviews to read: a balanced set of two positive fake, two positive real, two negative fake and two negative real, presented in a random order.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s2",
+      "pos": "n.",
+      "glossZh": "一套物品",
+      "pronunciationId": "w:set#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-2951dcf75494076e",
+          "text": "To my __47__ , the gentleman told me that he had a daughter my age, and then he opened his trunk and __48__ a tool set.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:cloze:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 115,
+            "end": 118
+          }
+        },
+        {
+          "exampleId": "w:set#e-9bbdff790ad1c91f",
+          "text": "This set includes activities, worksheets, and colorful posters to teach how animals survive the cold winter months.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:set#e-c8e6e9b4a673f27b",
+          "text": "The program works with more than 140 foster youth headed to college, hosting an annual event in July to kit out each student with sheet sets, pillows and connections to other people in the same situation.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 136,
+            "end": 140
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s3",
+      "pos": "n.",
+      "glossZh": "电视机",
+      "pronunciationId": "w:set#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-c6ca441660740ca9",
+          "text": "He fixed a TV set.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s4",
+      "pos": "n.",
+      "glossZh": "片场",
+      "pronunciationId": "w:set#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-0a7ee3172009316d",
+          "text": "In some cases, it’s not so much the treatment of the animals on set in the studio that has activists worried; it’s the off-set training and living conditions that are raising concerns.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 67
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s5",
+      "pos": "adj.",
+      "glossZh": "固定的",
+      "pronunciationId": "w:set#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-fb6c2b254c492be3",
+          "text": "For those extremely hungry there’s a large set menu.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:8",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:set#e-4153987555f2f8b1",
+          "text": "Be sure to schedule set times to watch your lectures, read materials and contribute to online discussion boards.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s6",
+      "pos": "adj.",
+      "glossZh": "准备就绪的",
+      "pronunciationId": "w:set#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-fdcd0d8ffa06ce31",
+          "text": "“Your car is all set, ma’am,” the mechanic called out to the woman.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s7",
+      "pos": "v.",
+      "glossZh": "放置",
+      "pronunciationId": "w:set#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-1708bf633a64a548",
+          "text": "Walking up a path through the forest towards Shutlingsloe, a local high point, I came across a small clearing and immediately noticed the dead yellow grasses set against the fresh snow.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-a:figure-8f50d0ac5d38cb0b:cell-2-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 158,
+            "end": 161
+          }
+        },
+        {
+          "exampleId": "w:set#e-196c1ec3bc4e1c2e",
+          "text": "“It showed one of my very favourite books arranged on a table with a glass of wine, set against a square in Florence.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 87
+          }
+        },
+        {
+          "exampleId": "w:set#e-629b2702b3bd18fe",
+          "text": "She taped a __43__ to the outside that read “Book Bank – Please __44__ Me” and set it on the kitchen window.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 82
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s8",
+      "pos": "v.",
+      "glossZh": "设定",
+      "pronunciationId": "w:set#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-a88978392340e820",
+          "text": "It’s said that history is written by the victors, and those victors set the standards for admission to the genius club.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:set#e-42d64496145daf7e",
+          "text": "●Set a starting time.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 4
+          }
+        },
+        {
+          "exampleId": "w:set#e-f1fd8259f174bc5f",
+          "text": "Set small, achievable goals together with them and celebrate progress, not perfection.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 3
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s9",
+      "pos": "v.",
+      "glossZh": "布置任务",
+      "pronunciationId": "w:set#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-46b1b40508eaa05b",
+          "text": "What task did the scientists set for the three bears?",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:32",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:set#e-342f6672561b9555",
+          "text": "The task John set for himself was to remove harmful substances from some sludge(污泥).",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s10",
+      "pos": "v.",
+      "glossZh": "树立（榜样）",
+      "pronunciationId": "w:set#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-2e0856993806cbc1",
+          "text": "Ancient philosophers set good examples for debaters.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:31",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s11",
+      "pos": "v.",
+      "glossZh": "位于",
+      "pronunciationId": "w:set#p-main",
+      "note": "用 be set in。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-efc6fce0d3eddd09",
+          "text": "The family-run park is set in a wonderful woodland environment.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 23,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:23",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s12",
+      "pos": "v.",
+      "glossZh": "（日月）落下",
+      "pronunciationId": "w:set#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-b98f9f6ea67431c0",
+          "text": "I was sitting on the grass nearby waiting for the sun to set.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s13",
+      "pos": "短语",
+      "glossZh": "留出",
+      "pronunciationId": "w:set#p-main",
+      "note": "set aside。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-383223f7a1ea0f64",
+          "text": "After high school, Jennifer attended a local technical college, working to pay her tuition（学费）, because there was no extra money set aside for a college education.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 129,
+            "end": 132
+          }
+        },
+        {
+          "exampleId": "w:set#e-a3e5c0683ab9b6ed",
+          "text": "Those with damage will be set aside for later repair.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s14",
+      "pos": "短语",
+      "glossZh": "踏上",
+      "pronunciationId": "w:set#p-main",
+      "note": "set foot on。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-0264f0395028b5ab",
+          "text": "When the explorers first set foot upon the continent of North America, the skies and lands were alive with an astonishing variety of wildlife.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s15",
+      "pos": "短语",
+      "glossZh": "放下",
+      "pronunciationId": "w:set#p-main",
+      "note": "set down。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-62b099133767c861",
+          "text": "“I’m going to set it down, now,” I said, and with Jason helping to support its weight， I bent back over the table to give it somewhere to rest.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s16",
+      "pos": "短语",
+      "glossZh": "着手",
+      "pronunciationId": "w:set#p-main",
+      "note": "set about doing；set out to do。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-e2bd4fe8400c7a45",
+          "text": "He documented his journey as he set about treating nature as a brand to be marketed to young people.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:set#e-2c16b288b3a36a4e",
+          "text": "This is why Campbell has set out to raise awareness of AI and its future now - several decades before these developments are expected to take place.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s17",
+      "pos": "短语",
+      "glossZh": "建立",
+      "pronunciationId": "w:set#p-main",
+      "note": "set up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-12338015cc62d903",
+          "text": "The Chinese government recently finalized a plan to set up a Giant Panda National Park(GPNP).",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "grammar-fill-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:set#e-d026763a26f038c8",
+          "text": "She moved to Tunisia, and set up a programme named Acacias for All to put her sustainable farming philosophy into action.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:set#e-dfca1d9c922f98e6",
+          "text": "To set up his own business.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s18",
+      "pos": "短语",
+      "glossZh": "布置就绪",
+      "pronunciationId": "w:set#p-main",
+      "note": "set up。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-987a55cc6a26b694",
+          "text": "The project required each team to develop a hypothesis（假说）, set up an experiment to test the hypothesis, do the statistical analysis and present the findings.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:set#e-5d44226fbcfb6d4f",
+          "text": "This free event features everything from bounce houses to rides, games, snowflake crafts and face painting to go with various stands set up by local sellers, with food and other offerings for sale at the event.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 133,
+            "end": 136
+          }
+        },
+        {
+          "exampleId": "w:set#e-dae3ee52efb88411",
+          "text": "Once we found the place, it was stressful getting lights and cameras set up in the limited time.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:5",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s19",
+      "pos": "短语",
+      "glossZh": "出发",
+      "pronunciationId": "w:set#p-main",
+      "note": "set off；set out。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-3a6bea74cb105d62",
+          "text": "The sun was beginning to sink as I set off into the Harenna Forest.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:set#e-5f831bae3c2b0fa2",
+          "text": "I gathered up my wallet and room key and set off.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:set#e-9773965d30b15848",
+          "text": "Emily Sanders, a 25-year-old from Detroit, Michigan, set out on December 23rd with high hopes of reaching Toronto to meet her boyfriend for Christmas.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s20",
+      "pos": "短语",
+      "glossZh": "开始并持续",
+      "pronunciationId": "w:set#p-main",
+      "note": "set in。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-c96edee952af380c",
+          "text": "As night fell, panic set in.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s21",
+      "pos": "n.",
+      "glossZh": "一盘比赛",
+      "pronunciationId": "w:set#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:set#s22",
+      "pos": "n.",
+      "glossZh": "一组连续演出",
+      "pronunciationId": "w:set#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:set#e-853b4ab76de68137",
+          "text": "At Cheverton Lodge Care Home, festive jingling breaks out from 17-year-old Ted Mayer’s speaker and he launches into his Christmas set.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 130,
+            "end": 133
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:set#s23",
+      "pos": "v.",
+      "glossZh": "凝固",
+      "pronunciationId": "w:set#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:set#s24",
+      "pos": "v.",
+      "glossZh": "镶嵌",
+      "pronunciationId": "w:set#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "锻铁修整工具",
+      "reason": "工艺专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

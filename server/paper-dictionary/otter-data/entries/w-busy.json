@@ -1,0 +1,277 @@
+{
+  "entryId": "w:busy",
+  "headword": "busy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈbɪzi/",
+    "us": "/ˈbɪzi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:busy#p-main",
+      "ipa": {
+        "uk": "/ˈbɪzi/",
+        "us": "/ˈbɪzi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "busier",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "busiest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "busied",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "busies",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "busying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 32,
+    "mock": 154
+  },
+  "unassignedCounts": {
+    "gaokao": 5,
+    "mock": 153
+  },
+  "senses": [
+    {
+      "senseId": "w:busy#s1",
+      "pos": "adj.",
+      "glossZh": "忙碌的；忙于（做某事）的",
+      "pronunciationId": "w:busy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:busy#e-05545ed9a6d4e58b",
+          "text": "The audience is too busy watching the cloth and listening to the magician’s words to notice that his other hand is hiding the ball.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:busy#e-f0b27ae1df500803",
+          "text": "Her mother was busy working.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:busy#e-cc0710e1d2f64ee6",
+          "text": "While the adults were busy with their serious talk outside, I was left alone in the __41__ to help my grandmother wash dishes.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:busy#s2",
+      "pos": "adj.",
+      "glossZh": "繁忙的；活动或工作多的",
+      "pronunciationId": "w:busy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:busy#e-eef289cbddec48d7",
+          "text": "But sometimes, as on a Sunday afternoon, the system gets particularly busy.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:31",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:busy#e-aba3e087803c0bd5",
+          "text": "With busy schedules, squeezing in phone calls can be a challenge.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:busy#e-1656b155b032fbb9",
+          "text": "That's particularly true during busy summer months.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:busy#s3",
+      "pos": "v.",
+      "glossZh": "使忙于；忙着做",
+      "pronunciationId": "w:busy#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:busy#e-36c3ca6cad3f49f6",
+          "text": "As my son busies himself, I remind him to __55__ his uniform in the laundry basket (洗衣篮).",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:cloze",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:cloze:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:busy#s4",
+      "pos": "adj.",
+      "glossZh": "（图案、版面）花哨的；元素过多的",
+      "pronunciationId": "w:busy#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "警察",
+      "reason": "贬义俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

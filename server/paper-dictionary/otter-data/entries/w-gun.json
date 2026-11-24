@@ -1,0 +1,240 @@
+{
+  "entryId": "w:gun",
+  "headword": "gun",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɡʌn/",
+    "us": "/ɡʌn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:gun#p-main",
+      "ipa": {
+        "uk": "/ɡʌn/",
+        "us": "/ɡʌn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "guns",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "gunned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "gunning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "senses": [
+    {
+      "senseId": "w:gun#s1",
+      "pos": "n.",
+      "glossZh": "枪",
+      "pronunciationId": "w:gun#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gun#e-6acd5ef895ce7cfe",
+          "text": "Minutes earlier, the man had passed a note to the teller demanding cash and saying he had a gun.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:gun#e-1eed20203b12c989",
+          "text": "Feeling fascinated, my partner Hugh and I enthusiastically booked one, the sort where you shoot wildlife with a camera rather than a gun.",
+          "source": {
+            "paperId": "paper-mock-t8-joint-2026-04-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学4月联合测评英语试卷",
+            "groupId": "group:paper-mock-t8-joint-2026-04-joint-assessment:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-t8-joint-2026-04-joint-assessment:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 133,
+            "end": 136
+          }
+        },
+        {
+          "exampleId": "w:gun#e-d9e9d3487e68f2d3",
+          "text": "For example, the English sentence “he fired the gun” is usually phrased as “the gun went off” in Japanese.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gun#s2",
+      "pos": "n.",
+      "glossZh": "炮",
+      "pronunciationId": "w:gun#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:gun#s3",
+      "pos": "n.",
+      "glossZh": "枪形工具",
+      "pronunciationId": "w:gun#p-main",
+      "note": "如 flare gun 信号枪。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gun#e-898de3e295fa418b",
+          "text": "Reaching for her flare gun（信号枪）, Mira caught sight of something through the storm – fur striped with silver, eyes pale as ice.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:gun#e-3ee45bf047721257",
+          "text": "She raised the flare gun and hesitated.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-continuation:7",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gun#s4",
+      "pos": "v.",
+      "glossZh": "猛踩油门",
+      "pronunciationId": "w:gun#p-main",
+      "note": "非正式。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:gun#s5",
+      "pos": "短语",
+      "glossZh": "竭力争取",
+      "pronunciationId": "w:gun#p-main",
+      "note": "gun for。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "大浪冲浪板",
+      "reason": "冲浪术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

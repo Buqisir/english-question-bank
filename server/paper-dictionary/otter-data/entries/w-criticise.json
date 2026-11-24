@@ -1,0 +1,178 @@
+{
+  "entryId": "w:criticise",
+  "headword": "criticise",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "criticize"
+  ],
+  "ipa": {
+    "uk": "/ˈkrɪtɪsaɪz/",
+    "us": "/ˈkrɪtɪsaɪz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:criticise#p-main",
+      "ipa": {
+        "uk": "/ˈkrɪtɪsaɪz/",
+        "us": "/ˈkrɪtɪsaɪz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "criticised",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "criticises",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "criticising",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "criticized",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "criticizes",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "criticizing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 53
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 51
+  },
+  "senses": [
+    {
+      "senseId": "w:criticise#s1",
+      "pos": "v.",
+      "glossZh": "批评；指责",
+      "pronunciationId": "w:criticise#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:criticise#e-8eb56b5754b73e07",
+          "text": "It is criticized by top chefs.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2025-ii:35",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:criticise#e-0adf375b65565100",
+          "text": "The other writers at the workshops she attended criticized her work with a tone she couldn’t bear.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:criticise#e-c0fe966b71b9cdbd",
+          "text": "Gen Z is often criticized for being antisocial, but I expect there are other factors at play, such as a better understanding of how to look after their mental health.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:criticise#s2",
+      "pos": "v.",
+      "glossZh": "评论；评价作品的优缺点",
+      "pronunciationId": "w:criticise#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

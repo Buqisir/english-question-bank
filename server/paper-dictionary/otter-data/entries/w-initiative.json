@@ -1,0 +1,163 @@
+{
+  "entryId": "w:initiative",
+  "headword": "initiative",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈnɪʃətɪv/",
+    "us": "/ɪˈnɪʃətɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:initiative#p-main",
+      "ipa": {
+        "uk": "/ɪˈnɪʃətɪv/",
+        "us": "/ɪˈnɪʃətɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "initiatives",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 52
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 50
+  },
+  "senses": [
+    {
+      "senseId": "w:initiative#s1",
+      "pos": "n.",
+      "glossZh": "倡议；新举措",
+      "pronunciationId": "w:initiative#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:initiative#e-e3a6a28ca1afd15a",
+          "text": "A four-year tea promotion – Tea Road Cooperative Plan – was also issued in accordance with the initiative.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-b:grammar-fill:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 105
+          }
+        },
+        {
+          "exampleId": "w:initiative#e-2f336cd57841c451",
+          "text": "In line with longstanding initiatives to expand its green spaces, New York City is planting tens of thousands of trees each year.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:initiative#e-d6100889e77f02da",
+          "text": "AI TEACH for ASEAN, a joint initiative by the ASEAN Foundation and Microsoft, aims to equip TVET (Technical and Vocational Education and Training) educators across ASEAN with practical AI skills.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:initiative#s2",
+      "pos": "n.",
+      "glossZh": "主动性",
+      "pronunciationId": "w:initiative#p-main",
+      "note": "take the initiative 表示「主动采取行动」。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:initiative#e-b20ec98d8bb7fdf7",
+          "text": "He has already taken the initiative to educate local fire stations on safe bee removal, in the hope of saving local hives.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 35
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "选民提案权",
+      "reason": "特定政治制度的专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

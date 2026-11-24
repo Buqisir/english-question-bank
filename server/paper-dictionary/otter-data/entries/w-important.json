@@ -1,0 +1,135 @@
+{
+  "entryId": "w:important",
+  "headword": "important",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪmˈpɔːtnt/",
+    "us": "/ɪmˈpɔːrtnt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:important#p-main",
+      "ipa": {
+        "uk": "/ɪmˈpɔːtnt/",
+        "us": "/ɪmˈpɔːrtnt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more important",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most important",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 86,
+    "mock": 390
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:important#s1",
+      "pos": "adj.",
+      "glossZh": "重要的",
+      "pronunciationId": "w:important#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 86,
+        "mock": 390
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:important#e-c7204b3001c206de",
+          "text": "Class activities will vary from day to day, but students must be ready to complete short in-class writings or tests drawn directly from assigned readings or notes from the previous class' lecture/discussion, so it is important to take careful notes during class.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "reading-a-9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 217,
+            "end": 226
+          }
+        },
+        {
+          "exampleId": "w:important#e-3f2be1b4e276437e",
+          "text": "The work helps researchers identify ideal places to plant milkweed and other vegetation that are important to the life cycle of West Coast monarch butterflies.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 106
+          }
+        },
+        {
+          "exampleId": "w:important#e-5a1179b57d511476",
+          "text": "The most important piece of equipment for running is a good pair of running shoes, so be sure to do some research before you purchase a pair.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 18
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "自命不凡的",
+      "reason": "罕见义，常用 self-important 明确表示"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

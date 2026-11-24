@@ -1,0 +1,278 @@
+{
+  "entryId": "w:chocolate",
+  "headword": "chocolate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtʃɒklət/",
+    "us": "/ˈtʃɑːklət/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:chocolate#p-main",
+      "ipa": {
+        "uk": "/ˈtʃɒklət/",
+        "us": "/ˈtʃɑːklət/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more chocolate",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most chocolate",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "chocolates",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 42
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 36
+  },
+  "senses": [
+    {
+      "senseId": "w:chocolate#s1",
+      "pos": "n.",
+      "glossZh": "巧克力；巧克力糖",
+      "pronunciationId": "w:chocolate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chocolate#e-fb24541f01877909",
+          "text": "Stop eating chocolate.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:chocolate#e-7118d7fe11a324fd",
+          "text": "Two bars of chocolate sat on top ready for their big moment when, or if, it arrived.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:chocolate#e-85fa3957f25e4d43",
+          "text": "What does the man like best about the box of chocolates?",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
+            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chocolate#s2",
+      "pos": "n.",
+      "glossZh": "巧克力饮料；热巧克力",
+      "pronunciationId": "w:chocolate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chocolate#e-4ebbe68f1d34fcdd",
+          "text": "In the cafe, the couple bought Emily a hot chocolate and listened patiently as she explained her desperate situation: she was about a hundred miles from her destination, her car was completely stuck, and her entire holiday plan could be ruined.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:chocolate#e-5e8b6fcf38a7b29d",
+          "text": "As the temperature drops, it’s not just about warm sweaters and hot chocolate.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:chocolate#e-099d33d6fffbafdc",
+          "text": "Christmas time with kids is filled with warm traditions: Listening to Christmas music while decorating the tree, going to look at Christmas lights with hot chocolate in hand, and taking the kids to visit Santa Claus.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 156,
+            "end": 165
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chocolate#s3",
+      "pos": "adj.",
+      "glossZh": "巧克力制成或调味的",
+      "pronunciationId": "w:chocolate#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chocolate#e-2a83f85cdc01ce36",
+          "text": "As a finishing touch, I sprinkled (撒) a few chocolate chips on top, hoping to add a bit of chocolate flavor to the cookies that didn’t look very appetizing.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:chocolate#e-989d48479d5451cf",
+          "text": "Afterwards, I brought out a big chocolate cake and we covered it with candles, singing “Happy Birthday” for my grandma back in America in five different languages.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n123:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chocolate#s4",
+      "pos": "n. / adj.",
+      "glossZh": "巧克力色（的）；深褐色（的）",
+      "pronunciationId": "w:chocolate#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "对人的冒犯性俚语、培养基处理",
+      "reason": "冒犯义或实验专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

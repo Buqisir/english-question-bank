@@ -1,0 +1,159 @@
+{
+  "entryId": "w:flour",
+  "headword": "flour",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈflaʊə(r)/",
+    "us": "/ˈflaʊər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:flour#p-main",
+      "ipa": {
+        "uk": "/ˈflaʊə(r)/",
+        "us": "/ˈflaʊər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "flours",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "floured",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "flouring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "senses": [
+    {
+      "senseId": "w:flour#s1",
+      "pos": "n.",
+      "glossZh": "面粉",
+      "pronunciationId": "w:flour#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:flour#e-d800ec8f5f8b8f3d",
+          "text": "“Add flour until the dough feels soft but not sticky.” To a child who wanted clear answers, this sounded almost unfair.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-b:1",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:flour#e-8b971f86294890e6",
+          "text": "These were carefully prepared baskets with all necessities for a traditional holiday meal: golden stuffing mix, green beans, sweet potatoes, jellied cranberry sauce, flour, butter, onions, and dessert items, and even turkeys and hams.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-2026-03-m171:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 166,
+            "end": 171
+          }
+        },
+        {
+          "exampleId": "w:flour#e-86dfa5b747786c96",
+          "text": "To anyone else, “flour, eggs, milk, sugar” was hardly a recipe.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:flour#s2",
+      "pos": "v.",
+      "glossZh": "在……上撒面粉",
+      "pronunciationId": "w:flour#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "把汞分散为细珠",
+      "reason": "冶金专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

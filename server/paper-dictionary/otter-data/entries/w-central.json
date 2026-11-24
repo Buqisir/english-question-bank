@@ -1,0 +1,276 @@
+{
+  "entryId": "w:central",
+  "headword": "central",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsentrəl/",
+    "us": "/ˈsentrəl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:central#p-main",
+      "ipa": {
+        "uk": "/ˈsentrəl/",
+        "us": "/ˈsentrəl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "centermost",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "centralmost",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "centremost",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more central",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most central",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 15,
+    "mock": 58
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 57
+  },
+  "senses": [
+    {
+      "senseId": "w:central#s1",
+      "pos": "adj.",
+      "glossZh": "中央的；中心的；位于中部的",
+      "pronunciationId": "w:central#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:central#e-fb60ca3cb1048514",
+          "text": "Hence this book, Chasing the Sea: Lost Among the Ghosts of Empire in Central Asia, which talks about a road trip from Tashkent to Karakalpakstan, where millions of lives have been destroyed by the slow drying up of the sea.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:central#e-f29f6c6412bcab44",
+          "text": "The hostels in Rome offer a bed in a dorm room for around $25 a night, and for that, you’ll often get to stay in a central location（位置）with security and comfort.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 115,
+            "end": 122
+          }
+        },
+        {
+          "exampleId": "w:central#e-3b27e6672734a3ec",
+          "text": "The Saint Lukas is one of five government-sponsored medical trains that travel to remote towns in central and eastern Russia.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 105
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:central#s2",
+      "pos": "adj.",
+      "glossZh": "最重要的；核心的",
+      "pronunciationId": "w:central#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:central#e-54328f348509c9ed",
+          "text": "Each play has a theme or central idea which the playwright(剧作家) hopes to get across through dialogue and action.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:central#e-1dc1183836612078",
+          "text": "It is not my intention to point out the central theme of each of the plays in this collection, for that would, indeed, ruin the pleasure of reading, discussing, and thinking about the plays and the effectiveness of the playwright.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:central#e-752368dfcc8e9f87",
+          "text": "What Hammond is referring to is the question of meaning, and meaning is central to what distinguishes the least intelligent of humans from the most intelligent of machines.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:central#s3",
+      "pos": "adj.",
+      "glossZh": "集中控制的；集中的",
+      "pronunciationId": "w:central#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:central#e-c0563fe0f96af106",
+          "text": "Now most homes have central heating and don’t use fires to keep warm.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:central#e-746c44bdb3234a82",
+          "text": "To send energy from a VPP to the grid, a central controller monitors VPP resources from hundreds or thousands of buildings and dispatches(调度) their energy when it’s needed most.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 48
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "香港中环、伦敦地铁中央线等",
+      "reason": "专名或行业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

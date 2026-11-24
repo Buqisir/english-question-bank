@@ -1,0 +1,385 @@
+{
+  "entryId": "w:many",
+  "headword": "many",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmeni/",
+    "us": "/ˈmeni/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:many#p-main",
+      "ipa": {
+        "uk": "/ˈmeni/",
+        "us": "/ˈmeni/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 180,
+    "mock": 987
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 987
+  },
+  "senses": [
+    {
+      "senseId": "w:many#s1",
+      "pos": "det.",
+      "glossZh": "许多",
+      "pronunciationId": "w:many#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 126,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:many#e-5ad0b281d117c5a7",
+          "text": "His efforts have resulted in 1,360 acres of naturally-grown land that has become home to many plants and animals.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:many#e-2e828b037224c91a",
+          "text": "The project results from the difficulties many schools have in getting artists of any sort - whether an up-and-coming local musician or a major movie star - into schools to work with and inspire children.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:many#e-444ede9d478f5fd9",
+          "text": "Although the studies led by Navajas have limitations and many questions remain, the potential implications for group discussion and decision-making are enormous.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:many#s2",
+      "pos": "det.",
+      "glossZh": "多少",
+      "pronunciationId": "w:many#p-main",
+      "note": "how many。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:many#e-380fc7575ce11cd5",
+          "text": "How many people will be travelling?",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:many#e-bbc609ec7432c921",
+          "text": "Her notice included what kind of training she wanted to do, how many days a week and how many hours she wanted to spend on each session, and her age.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "seven-choices-5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:many#e-ab751ecb6b998301",
+          "text": "How many hours of class will you have altogether if you register for a single week?",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:23",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:many#s3",
+      "pos": "pron.",
+      "glossZh": "许多人或事物",
+      "pronunciationId": "w:many#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 37,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:many#e-b906551a72e9adeb",
+          "text": "Many of their families were struggling to make ends meet.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        },
+        {
+          "exampleId": "w:many#e-5ef348626025cbc9",
+          "text": "Rome can be pricey for travelers, which is why many choose to stay in a hostel（旅社）.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:many#e-fa4645a1b470f8ff",
+          "text": "Besides, working in the garden seems to have a calming effect on Jaramillo’s special education students, many of whom have emotional control issues.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 109
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:many#s4",
+      "pos": "短语",
+      "glossZh": "多达",
+      "pronunciationId": "w:many#p-main",
+      "note": "as many as 后接具体数字。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:many#e-b554c737df524ba3",
+          "text": "Instead, as many as 800, 000 crowded the roads to the bridge.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:many#s5",
+      "pos": "短语",
+      "glossZh": "同样多",
+      "pronunciationId": "w:many#p-main",
+      "note": "as many … as。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:many#e-ad5abfb7924b64bf",
+          "text": "\"I often send postcards to family and friends,\" he says to China Daily, \"but you can imagine that after a while, you never receive as many as you send, and you realize that not everyone is into it __32__” Seeking other like-minded souls, however, Paulo started looking in a somewhat unlikely place: online.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 134,
+            "end": 138
+          }
+        },
+        {
+          "exampleId": "w:many#e-2c98198d7162aef9",
+          "text": "I decided that I wanted to learn as many words as I could and started marking every entry I looked up with a pencil to measure my progress.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:many#e-4aba064731641ae5",
+          "text": "Make as many notes as possible.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 12
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏、地名",
+      "reason": "专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

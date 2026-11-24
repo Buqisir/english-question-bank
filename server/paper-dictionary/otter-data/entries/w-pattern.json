@@ -1,0 +1,273 @@
+{
+  "entryId": "w:pattern",
+  "headword": "pattern",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpætn/",
+    "us": "/ˈpætərn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:pattern#p-main",
+      "ipa": {
+        "uk": "/ˈpætn/",
+        "us": "/ˈpætərn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "patterns",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "patterned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "patterning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 193
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 193
+  },
+  "senses": [
+    {
+      "senseId": "w:pattern#s1",
+      "pos": "n.",
+      "glossZh": "图案",
+      "pronunciationId": "w:pattern#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pattern#e-a7c539f6a987248d",
+          "text": "In return for a food reward one bear, Brutus, would touch the more heavily dotted pattern with his nose.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:pattern#e-3b168d5b537cb635",
+          "text": "However, the three bears managed to pick out the bigger number of dots even in pairs of patterns where fewer dots took up a larger area.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:pattern#e-811ee7b4a97c0eba",
+          "text": "the dot patterns were regular in shape",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:33",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pattern#s2",
+      "pos": "n.",
+      "glossZh": "规律；呈现出的有规律的形式",
+      "pronunciationId": "w:pattern#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pattern#e-771c79ae2309f42d",
+          "text": "The right level of background noise may interrupt our normal patterns of thinking just enough to allow our imaginations to wander, without making it impossible to focus.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:pattern#e-97198cf7f02004b6",
+          "text": "For years, David James, who studies insects at Washington State University, had wanted to examine the migration (迁徙) patterns of West Coast monarch butterflies (黑脉金斑蝶).",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 117,
+            "end": 125
+          }
+        },
+        {
+          "exampleId": "w:pattern#e-9346fc889a2491ca",
+          "text": "To study climate patterns.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2026-zhejiang-jan:33",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pattern#s3",
+      "pos": "n.",
+      "glossZh": "排列方式",
+      "pronunciationId": "w:pattern#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pattern#e-c759e7d613e4f899",
+          "text": "The streets in which people live should be a tight pattern of crossed sidewalks, which allow people to meet, talk, and get to know one another.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pattern#s4",
+      "pos": "n.",
+      "glossZh": "样板；纸样",
+      "pronunciationId": "w:pattern#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:pattern#s5",
+      "pos": "v.",
+      "glossZh": "按某种样式制作",
+      "pronunciationId": "w:pattern#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

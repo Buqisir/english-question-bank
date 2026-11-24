@@ -1,0 +1,60 @@
+{
+  "entryId": "w:congratulation",
+  "headword": "congratulation",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kənˌɡrætʃuˈleɪʃn/",
+    "us": "/kənˌɡrætʃuˈleɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:congratulation#p-main",
+      "ipa": {
+        "uk": "/kənˌɡrætʃuˈleɪʃn/",
+        "us": "/kənˌɡrætʃuˈleɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:congratulation#s1",
+      "pos": "n.",
+      "glossZh": "祝贺；贺词",
+      "pronunciationId": "w:congratulation#p-main",
+      "note": "常用复数 congratulations；表示「祝贺某人某事」用 congratulations to somebody on something。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

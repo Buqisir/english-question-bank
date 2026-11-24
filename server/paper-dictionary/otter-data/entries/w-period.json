@@ -1,0 +1,255 @@
+{
+  "entryId": "w:period",
+  "headword": "period",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpɪəriəd/",
+    "us": "/ˈpɪriəd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:period#p-main",
+      "ipa": {
+        "uk": "/ˈpɪəriəd/",
+        "us": "/ˈpɪriəd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "periods",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 141
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 140
+  },
+  "senses": [
+    {
+      "senseId": "w:period#s1",
+      "pos": "n.",
+      "glossZh": "一段时间",
+      "pronunciationId": "w:period#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:period#e-1a4534398ffd3cdf",
+          "text": "After a three-year pilot period, the GPNP will be officially set up next year.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "grammar-fill-2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:period#e-3813c3b6d3e8113e",
+          "text": "Moreover, these data are biased and favor certain regions, time periods, and species.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:period#e-946d5e2b4caa31a5",
+          "text": "Loan periods are established by the lending library.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:period#s2",
+      "pos": "n.",
+      "glossZh": "历史时期",
+      "pronunciationId": "w:period#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:period#e-46cf78a45349bb2b",
+          "text": "The team showed that this change in bite was connected with the development of agriculture in the Neolithic period.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "reading-d-4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 114
+          }
+        },
+        {
+          "exampleId": "w:period#e-c05dc538f22849a3",
+          "text": "It is a little-studied period of history.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jan:24",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:period#e-bd1366bc1685a089",
+          "text": "Once, Babylon was the jewel of Mesopotamia, the city that gave its name to entire eras – the Old, Middle, and New Babylonian periods.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 132
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:period#s3",
+      "pos": "n.",
+      "glossZh": "一节课",
+      "pronunciationId": "w:period#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:period#e-560a72b7ab280236",
+          "text": "An essay not submitted in class on the due date will lose a letter grade for each class period it is late.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "reading-a-11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 94
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:period#s4",
+      "pos": "n.",
+      "glossZh": "月经",
+      "pronunciationId": "w:period#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:period#s5",
+      "pos": "n.",
+      "glossZh": "句号（美式）",
+      "pronunciationId": "w:period#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

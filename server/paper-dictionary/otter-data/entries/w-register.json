@@ -1,0 +1,413 @@
+{
+  "entryId": "w:register",
+  "headword": "register",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈredʒɪstə(r)/",
+    "us": "/ˈredʒɪstər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:register#p-main",
+      "ipa": {
+        "uk": "/ˈredʒɪstə(r)/",
+        "us": "/ˈredʒɪstər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "registers",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "registered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "registering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 25,
+    "mock": 52
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 51
+  },
+  "senses": [
+    {
+      "senseId": "w:register#s1",
+      "pos": "v.",
+      "glossZh": "登记",
+      "pronunciationId": "w:register#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:register#e-56d5dbffe6c12d51",
+          "text": "Some people register a list of things they want or need for their new home at a local store.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:register#e-5b3dcd297d30dd2c",
+          "text": "Today his hobby has developed into the website postcrossing.com, a social network that has grown to 575,217 registered users in 214 countries and regions since he started it 10 years ago.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 118
+          }
+        },
+        {
+          "exampleId": "w:register#e-166fe590bd75e015",
+          "text": "Register an account.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-a:10",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:register#s2",
+      "pos": "v.",
+      "glossZh": "报名",
+      "pronunciationId": "w:register#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:register#e-cb872f29e95ebfd8",
+          "text": "Register online or fill out a Group Play Registration Form with multiple date and start time options.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 16,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:16",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:register#e-60b82439b3c96591",
+          "text": "•Register for a single week or multiple weeks.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:register#e-d17ba05060a0d700",
+          "text": "A survey found that 29 percent of college students registered for online courses.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:register#s3",
+      "pos": "n.",
+      "glossZh": "收银机",
+      "pronunciationId": "w:register#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:register#e-b38e6e13bf41e280",
+          "text": "If there are three lines in the store, delays will happen randomly at different registers.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:register#e-5fa0e497f1247f6c",
+          "text": "Make all customers stand in one long, snaking line – called a serpentine line – and serve each person at the front with the next available register.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 139,
+            "end": 147
+          }
+        },
+        {
+          "exampleId": "w:register#e-a3970bcec2d14bc1",
+          "text": "It takes many registers to keep one line moving quickly and some stores can’t afford the space or manpower.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:register#s4",
+      "pos": "n.",
+      "glossZh": "登记簿",
+      "pronunciationId": "w:register#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:register#e-90100cf7dd860f65",
+          "text": "The house is now listed on the National Register of Historic Places.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 48
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:register#s5",
+      "pos": "短语",
+      "glossZh": "登记处",
+      "pronunciationId": "w:register#p-main",
+      "note": "register office，英国英语。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:register#e-1e3c6720b21db9c0",
+          "text": "In the register office.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:register#s6",
+      "pos": "v.",
+      "glossZh": "（仪器）显示（读数）",
+      "pronunciationId": "w:register#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:register#s7",
+      "pos": "v.",
+      "glossZh": "注意到；意识到",
+      "pronunciationId": "w:register#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:register#s8",
+      "pos": "n.",
+      "glossZh": "语体",
+      "pronunciationId": "w:register#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:register#s9",
+      "pos": "n.",
+      "glossZh": "音域",
+      "pronunciationId": "w:register#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "寄存器",
+      "reason": "计算机术语"
+    },
+    {
+      "glossZh": "管风琴音栓",
+      "reason": "乐器术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,214 @@
+{
+  "entryId": "w:candy",
+  "headword": "candy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkændi/",
+    "us": "/ˈkændi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:candy#p-main",
+      "ipa": {
+        "uk": "/ˈkændi/",
+        "us": "/ˈkændi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "candies",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "candied",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "candying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 31
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 28
+  },
+  "senses": [
+    {
+      "senseId": "w:candy#s1",
+      "pos": "n.",
+      "glossZh": "糖果；一颗糖",
+      "pronunciationId": "w:candy#p-main",
+      "note": "英式英语常用 sweets。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:candy#e-409bb4ba35b2d13e",
+          "text": "For the second test, in one case the thin actor took two pieces of candy from the snack bowls.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:candy#e-173b5c1fcf69923b",
+          "text": "However, one day after cleaning, one of the dolphins, Maya, presented Hilda with a candy wrapper from the tank.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 88
+          }
+        },
+        {
+          "exampleId": "w:candy#e-e6301faf04d4b1de",
+          "text": "She gave me an oil-paper wrapped candy: “Young man, take care – these stairs are slippery.” I thanked her quickly and hurried on.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n123:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:candy#s2",
+      "pos": "v.",
+      "glossZh": "用糖腌渍；给……裹糖",
+      "pronunciationId": "w:candy#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:candy#e-122f3e7c61c8d119",
+          "text": "People are kind, but there are only so many candied nut tins, caramel popcorn towers, and sugar cookies one family can consume.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:candy#s3",
+      "pos": "短语",
+      "glossZh": "只供视觉享受的东西",
+      "pronunciationId": "w:candy#p-main",
+      "note": "eye candy",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:candy#e-d3bc4d9c0f68f7be",
+          "text": "Their contents are just eye candy for shrinking attention spans.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 33
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "可卡因、彩珠饰品、旧重量单位等",
+      "reason": "俚语或历史专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

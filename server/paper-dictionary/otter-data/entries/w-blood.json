@@ -1,0 +1,168 @@
+{
+  "entryId": "w:blood",
+  "headword": "blood",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/blʌd/",
+    "us": "/blʌd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:blood#p-main",
+      "ipa": {
+        "uk": "/blʌd/",
+        "us": "/blʌd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "bloods",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Bloods",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 80
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 78
+  },
+  "senses": [
+    {
+      "senseId": "w:blood#s1",
+      "pos": "n.",
+      "glossZh": "血；血液",
+      "pronunciationId": "w:blood#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blood#e-d551e033a592c312",
+          "text": "“And the reason they got so much stronger and fitter was that their hearts could now fill a lot better and pump (泵送) a lot more blood during exercise.” But the hearts of those who participated in less intense exercise didn’t change, he says.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 128,
+            "end": 133
+          }
+        },
+        {
+          "exampleId": "w:blood#e-06eeac7444d8832d",
+          "text": "A total of 92 women were in the medium fitness category; and 59 women were in the low fitness category, defined as a peak workload of 80 watts or less, or having their exercise tests stopped because of high blood pressure, chest pain or other cardiovascular problems.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 207,
+            "end": 212
+          }
+        },
+        {
+          "exampleId": "w:blood#e-f3dc7ef9bdda42f7",
+          "text": "Blood poured out of the cut.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blood#s2",
+      "pos": "n.",
+      "glossZh": "血缘；血统",
+      "pronunciationId": "w:blood#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blood#e-5e586eb43e43f8c1",
+          "text": "But when you’re a child, it’s true whether or not you’re talking about blood relatives.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-b:10",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 76
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "古代体液说用法、阔少、帮派成员及使初次见血",
+      "reason": "历史、俚语或罕见用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

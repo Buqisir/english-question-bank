@@ -1,0 +1,190 @@
+{
+  "entryId": "w:sympathy",
+  "headword": "sympathy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsɪmpəθi/",
+    "us": "/ˈsɪmpəθi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:sympathy#p-main",
+      "ipa": {
+        "uk": "/ˈsɪmpəθi/",
+        "us": "/ˈsɪmpəθi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "sympathies",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 29
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 26
+  },
+  "senses": [
+    {
+      "senseId": "w:sympathy#s1",
+      "pos": "n.",
+      "glossZh": "同情",
+      "pronunciationId": "w:sympathy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sympathy#e-a1268883c0e0f667",
+          "text": "I watched with great sympathy as elderly Italians tried to hold a conversation in Italian with people who did not speak the language.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:sympathy#e-a5b4d73b6f2f0eff",
+          "text": "Some teachers don’t give the kids any assignments; they express sympathy instead.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:sympathy#e-608a0cb48b4175f9",
+          "text": "When I explained the situation, they showed sincere sympathy.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sympathy#s2",
+      "pos": "n.",
+      "glossZh": "认同",
+      "pronunciationId": "w:sympathy#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sympathy#e-a7c4bde0e9cac0fe",
+          "text": "To show public sympathy for authors.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:32",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:sympathy#e-8fcae1c1030ce54c",
+          "text": "Nelly was a teenager and had Nazi sympathies.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sympathy#s3",
+      "pos": "n.",
+      "glossZh": "共鸣",
+      "pronunciationId": "w:sympathy#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

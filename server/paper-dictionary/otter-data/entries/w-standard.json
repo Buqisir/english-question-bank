@@ -1,0 +1,253 @@
+{
+  "entryId": "w:standard",
+  "headword": "standard",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈstændəd/",
+    "us": "/ˈstændərd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:standard#p-main",
+      "ipa": {
+        "uk": "/ˈstændəd/",
+        "us": "/ˈstændərd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "most standard",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "standards",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 120
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 116
+  },
+  "senses": [
+    {
+      "senseId": "w:standard#s1",
+      "pos": "n.",
+      "glossZh": "标准",
+      "pronunciationId": "w:standard#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:standard#e-1811981330067d59",
+          "text": "It’s said that history is written by the victors, and those victors set the standards for admission to the genius club.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 85
+          }
+        },
+        {
+          "exampleId": "w:standard#e-bf5b1edfda7aaa5a",
+          "text": "This sign proves that the product meets all relevant EU standards.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-a:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:standard#e-95f31b09931afd1b",
+          "text": "It fits the needs of mentees（被指导者） well, who neither want to be held to an impossible standard, nor want to feel overprotected or dismissed.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 94
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:standard#s2",
+      "pos": "adj.",
+      "glossZh": "通常的",
+      "pronunciationId": "w:standard#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:standard#e-0bb66547212e7c30",
+          "text": "This variety, coupled with the fact that tiny forests grow up to ten times faster than standard forests, means they attract a rich abundance of wildlife.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:standard#e-1b04a2d0f5be74d5",
+          "text": "AI transforms a standard museum trip into a personalized and interactive adventure.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:standard#e-458866bf2da0e23f",
+          "text": "“Teachers would recognise what we do and it doesn't take any more planning than the standard approach.” With play-based learning in place for her year 1 and 2 children, Farr then looked at where else she could change any practices that weren't working.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 92
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:standard#s3",
+      "pos": "adj.",
+      "glossZh": "标准配置的",
+      "pronunciationId": "w:standard#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:standard#e-a6979b1ccd7666b5",
+          "text": "It has a standard version at a low price.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:standard#s4",
+      "pos": "adj.",
+      "glossZh": "公认权威的",
+      "pronunciationId": "w:standard#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "旗瓣、护颈锁子甲、木材计量单位及手动挡车简称",
+      "reason": "专业义和地区简称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

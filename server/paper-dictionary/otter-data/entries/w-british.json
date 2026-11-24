@@ -1,0 +1,168 @@
+{
+  "entryId": "w:british",
+  "headword": "British",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈbrɪtɪʃ/",
+    "us": "/ˈbrɪtɪʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:british#p-main",
+      "ipa": {
+        "uk": "/ˈbrɪtɪʃ/",
+        "us": "/ˈbrɪtɪʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more British",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most British",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 58
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 57
+  },
+  "senses": [
+    {
+      "senseId": "w:british#s1",
+      "pos": "adj.",
+      "glossZh": "英国的；英国人的",
+      "pronunciationId": "w:british#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:british#e-d91d0c0b8c27c948",
+          "text": "A British woman who won a $1 million prize after she was named the World’s Best Teacher will use the cash to bring inspirational figures into UK schools.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:british#e-b3e14f837318f142",
+          "text": "Southbank, at an eastern bend in the Thames, is the center of British skateboarding, where the continuous crashing of skateboards left your head ringing.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:british#e-ca239f053798e266",
+          "text": "What comes into your mind when you think of British food?",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:british#s2",
+      "pos": "n.",
+      "glossZh": "英国人（统称）",
+      "pronunciationId": "w:british#p-main",
+      "note": "the British",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:british#e-805f8413b71bd584",
+          "text": "When did the British first use umbrellas?",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "古布立吞语、威尔士人旧称",
+      "reason": "历史用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

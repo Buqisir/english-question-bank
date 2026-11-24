@@ -1,0 +1,129 @@
+{
+  "entryId": "w:whale",
+  "headword": "whale",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/weɪl/",
+    "us": "/weɪl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:whale#p-main",
+      "ipa": {
+        "uk": "/weɪl/",
+        "us": "/weɪl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "whales",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:whale#s1",
+      "pos": "n.",
+      "glossZh": "鲸",
+      "pronunciationId": "w:whale#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 16
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:whale#e-71d8c61a2b80d4ff",
+          "text": "“I remember the first time I saw a humpback whale; it just rose out of the water like some prehistoric creature and I thought it was smiling at us.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:whale#e-83d9e9cdcd6636f4",
+          "text": "Activists are concerned that overharvesting could affect the food chain in the ocean, noting that krill are not only a food source for whales, seals and seabirds but also help fight climate change.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-d:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 135,
+            "end": 141
+          }
+        },
+        {
+          "exampleId": "w:whale#e-6eb51711c86a04e5",
+          "text": "The charm of the ocean has always been a powerful force, and among its most grand inhabitants is the humpback whale (驼背鲸).",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 110,
+            "end": 115
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏、捕鲸动词、大额下注者",
+      "reason": "专名、少见词性或行业俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

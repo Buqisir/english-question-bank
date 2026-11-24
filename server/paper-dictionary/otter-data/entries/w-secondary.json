@@ -1,0 +1,259 @@
+{
+  "entryId": "w:secondary",
+  "headword": "secondary",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsekəndri/",
+    "us": "/ˈsekənderi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:secondary#p-main",
+      "ipa": {
+        "uk": "/ˈsekəndri/",
+        "us": "/ˈsekənderi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more secondary",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most secondary",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "senses": [
+    {
+      "senseId": "w:secondary#s1",
+      "pos": "adj.",
+      "glossZh": "次级的",
+      "pronunciationId": "w:secondary#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:secondary#e-12ca40dd087e9dc6",
+          "text": "A carbon footprint is made up of two parts, the primary footprint and the secondary footprint.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:secondary#e-278fe470394b5911",
+          "text": "The secondary footprint is a measure of the indirect CO2 emissions from the whole lifecycle of products we use – those related to their production and breakdown.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:secondary#e-ebc87e5b62eccc34",
+          "text": "•Apply primary and secondary research methods to investigate existing conservation initiatives and identify local freshwater issues.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:secondary#s2",
+      "pos": "adj.",
+      "glossZh": "中等教育的",
+      "pronunciationId": "w:secondary#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:secondary#e-748a5cbbc84a3db0",
+          "text": "Andria Zafirakou, a north London secondary school teacher, said she wanted to bring about a classroom revolution（变革）.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:secondary#e-4a5dd42fa98c793f",
+          "text": "She has established the School at the Museum program with her colleagues to integrate museum education into the school curriculum（课程）for primary and secondary schools in Montreal.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 149,
+            "end": 158
+          }
+        },
+        {
+          "exampleId": "w:secondary#e-31047c10fff69650",
+          "text": "As you move from primary to secondary school, you may experience significant changes – new school, new friends, new teachers.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:secondary#s3",
+      "pos": "adj.",
+      "glossZh": "次要的",
+      "pronunciationId": "w:secondary#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:secondary#e-bb4db5690ce3d3cd",
+          "text": "Market research is secondary to personal connection with artworks.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:secondary#e-c8743b8d5c58ee7e",
+          "text": "Wood and Waring do not believe we are there yet, but predict that in the long term, culture will continue to grow in influence over human evolution until genes become secondary and are ultimately controlled by culture.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock",
+            "paperTitle": "嘉兴市2026届高三第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-12-senior-three-first-mock:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 167,
+            "end": 176
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "变压器副线圈",
+      "reason": "电工专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

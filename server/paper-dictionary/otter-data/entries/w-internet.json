@@ -1,0 +1,132 @@
+{
+  "entryId": "w:internet",
+  "headword": "internet",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "Internet"
+  ],
+  "ipa": {
+    "uk": "/ˈɪntənet/",
+    "us": "/ˈɪntərnet/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:internet#p-main",
+      "ipa": {
+        "uk": "/ˈɪntənet/",
+        "us": "/ˈɪntərnet/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "internets",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 116
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:internet#s1",
+      "pos": "n.",
+      "glossZh": "互联网",
+      "pronunciationId": "w:internet#p-main",
+      "note": "常用 the internet 或 the Internet。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 116
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:internet#e-99842e179ed6948d",
+          "text": "Today’s children spend an average of four and a half hours a day looking at screens, split between watching television and using the Internet.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 133,
+            "end": 141
+          }
+        },
+        {
+          "exampleId": "w:internet#e-c240592e58133798",
+          "text": "Many would say the Internet is a place for people who have given up on the traditional postal service, but Paulo’s hunch（直觉）paid off.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:internet#e-b562d9d4367bb6ca",
+          "text": "Anyway, grandpa is now an internet star – two minutes of fame!",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 34
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "网上虚构积分、使设备联网",
+      "reason": "俚语或罕见词性"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

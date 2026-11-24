@@ -1,0 +1,162 @@
+{
+  "entryId": "w:uncle",
+  "headword": "uncle",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈʌŋkl/",
+    "us": "/ˈʌŋkl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:uncle#p-main",
+      "ipa": {
+        "uk": "/ˈʌŋkl/",
+        "us": "/ˈʌŋkl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "uncles",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 25
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 24
+  },
+  "senses": [
+    {
+      "senseId": "w:uncle#s1",
+      "pos": "n.",
+      "glossZh": "父亲或母亲的兄弟，或其姐妹的丈夫",
+      "pronunciationId": "w:uncle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:uncle#e-cddc63e7739fb779",
+          "text": "Leslie Nielsen’s childhood was a difficult one, but he had one particular shining star in his life – his uncle, who was a well-known actor.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:uncle#e-c04f88436b4364e2",
+          "text": "I was about 13 when an uncle gave me a copy of Jostein Gaarder’s Sophie’s World.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:uncle#e-9d3ba9a625207d54",
+          "text": "Those tomatoes had __53__ that reminded me of the ones my uncle used to grow when I was a child.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-a:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 63
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:uncle#s2",
+      "pos": "n.",
+      "glossZh": "对年长男性的亲切称呼",
+      "pronunciationId": "w:uncle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:uncle#e-675b31baa2a279a3",
+          "text": "As word of Harry’s project spread, neighbors admirably called him Uncle Harry, and they kept him busy with a steady supply of bikes, helmets and even locks.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 71
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "认输呼语、当铺老板、通话字母代码",
+      "reason": "特定地区口语、旧义或专用名称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

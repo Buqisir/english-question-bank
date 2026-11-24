@@ -1,0 +1,167 @@
+{
+  "entryId": "w:clue",
+  "headword": "clue",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kluː/",
+    "us": "/kluː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:clue#p-main",
+      "ipa": {
+        "uk": "/kluː/",
+        "us": "/kluː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "clues",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "clued",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "clueing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "cluing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 53
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 51
+  },
+  "senses": [
+    {
+      "senseId": "w:clue#s1",
+      "pos": "n.",
+      "glossZh": "线索；提示；迹象",
+      "pronunciationId": "w:clue#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:clue#e-855346d6aae58f26",
+          "text": "The next step, according to the researchers, is to try and work out whether the cockatoos rely entirely on visual clues（线索）, or also use a sense of touch in making their shape selections.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 119
+          }
+        },
+        {
+          "exampleId": "w:clue#e-25deb5d6a957f31b",
+          "text": "Even so, many people who are obese don’t experience these ill effects, a clue that something more complex is going on.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:clue#e-111e0e1b7c410be3",
+          "text": "The professor shares crossword clues; we celebrate the first steps of the young mother’s baby.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:cloze",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:cloze:11",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:clue#s2",
+      "pos": "v.",
+      "glossZh": "给……提供线索；告知",
+      "pronunciationId": "w:clue#p-main",
+      "note": "clue somebody in 指把情况告诉某人。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "给帆索具装索；引路的线",
+      "reason": "航海专门义或旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

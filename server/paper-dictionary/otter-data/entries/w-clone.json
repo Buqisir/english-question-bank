@@ -1,0 +1,208 @@
+{
+  "entryId": "w:clone",
+  "headword": "clone",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kləʊn/",
+    "us": "/kloʊn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:clone#p-main",
+      "ipa": {
+        "uk": "/kləʊn/",
+        "us": "/kloʊn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "clones",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "cloned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "cloning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "senses": [
+    {
+      "senseId": "w:clone#s1",
+      "pos": "n.",
+      "glossZh": "克隆体；无性繁殖形成的生物或细胞",
+      "pronunciationId": "w:clone#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:clone#e-8dca927cb9e221ef",
+          "text": "Besides planting seeds, a special method allows growing new plants from parts of other plants, like rose stems or potato tubers – these copies like the mother plant are called plant clones.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 182,
+            "end": 188
+          }
+        },
+        {
+          "exampleId": "w:clone#e-365c60c927ec00c2",
+          "text": "Non-sexual reproduction involves transplanting fragments of healthy corals, which is faster but produces genetically identical clones vulnerable to mass disease outbreaks.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 127,
+            "end": 133
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:clone#s2",
+      "pos": "n.",
+      "glossZh": "复制品；酷似另一个人的人",
+      "pronunciationId": "w:clone#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:clone#e-bc02212005ea537d",
+          "text": "Every man wants his son to be somewhat of a clone, not in features but in footsteps.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:clone#e-d32895ab5ffda546",
+          "text": "Most important, I have learned that fathers don’t need clones in footsteps or anywhere else.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:reading-b",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:reading-b:10",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:clone#s3",
+      "pos": "v.",
+      "glossZh": "克隆；复制",
+      "pronunciationId": "w:clone#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:clone#e-0f564e60c56cf4d2",
+          "text": "He received a call with a cloned voice.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 32
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,117 @@
+{
+  "entryId": "w:furthermore",
+  "headword": "furthermore",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌfɜːðəˈmɔː(r)/",
+    "us": "/ˌfɜːrðərˈmɔːr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:furthermore#p-main",
+      "ipa": {
+        "uk": "/ˌfɜːðəˈmɔː(r)/",
+        "us": "/ˌfɜːrðərˈmɔːr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 27
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:furthermore#s1",
+      "pos": "adv.",
+      "glossZh": "此外",
+      "pronunciationId": "w:furthermore#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 27
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:furthermore#e-fb8d4f891a05c67a",
+          "text": "Furthermore, AI-powered virtual guides are replacing traditional tour guides.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-i:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:furthermore#e-ad7b1ee7085756cd",
+          "text": "Furthermore, additional support is available for seniors and the disabled to ensure that the program remains accessible to a broad group.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a",
+            "locator": {
+              "paragraph": 27,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a:12",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:furthermore#e-cdc07506fbbe2c5e",
+          "text": "Furthermore, the book includes notable literary references, providing insights into classic works and figures.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 11
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

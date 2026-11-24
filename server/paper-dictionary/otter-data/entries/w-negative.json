@@ -1,0 +1,383 @@
+{
+  "entryId": "w:negative",
+  "headword": "negative",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈneɡətɪv/",
+    "us": "/ˈneɡətɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:negative#p-main",
+      "ipa": {
+        "uk": "/ˈneɡətɪv/",
+        "us": "/ˈneɡətɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more negative",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most negative",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "negatives",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 135
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 131
+  },
+  "senses": [
+    {
+      "senseId": "w:negative#s1",
+      "pos": "adj.",
+      "glossZh": "不利的；有害的",
+      "pronunciationId": "w:negative#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:negative#e-dea0e520fc9033d3",
+          "text": "The negative impact of installing solar panels.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:32",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:negative#e-6fe8a8bd931e0d98",
+          "text": "It made me wonder if giving her advice on snacks was having an unintentionally negative impact.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 87
+          }
+        },
+        {
+          "exampleId": "w:negative#e-94f2755d2117f8cf",
+          "text": "When women are put into positions of leadership like running companies, it reduces negative stereotypes about women.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 91
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:negative#s2",
+      "pos": "adj.",
+      "glossZh": "批评的；表达不满的",
+      "pronunciationId": "w:negative#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:negative#e-72c17662f8de8c55",
+          "text": "Each subject got eight reviews to read: a balanced set of two positive fake, two positive real, two negative fake and two negative real, presented in a random order.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 108
+          }
+        },
+        {
+          "exampleId": "w:negative#e-a79971437129804e",
+          "text": "The results show that consumers generally trust negative reviews more than positive ones.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:negative#e-d90ab1d911cb0d1e",
+          "text": "A long, negative review of a hotel, complete with lots of information, tended to convince participants.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:negative#s3",
+      "pos": "adj.",
+      "glossZh": "消极的；悲观的",
+      "pronunciationId": "w:negative#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:negative#e-09199661189f117d",
+          "text": "Negative thoughts crowded my mind, echoing with every labored breath: You’re too fat, too unfit – a fool for even trying this.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:negative#e-fc222f7bc6690401",
+          "text": "Critical thinking doesn’t mean being negative or arguing with everyone.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:negative#s4",
+      "pos": "adj.",
+      "glossZh": "负的；小于零的",
+      "pronunciationId": "w:negative#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:negative#e-dabf2ef160ca2661",
+          "text": "When wind chill reduces the temperature far into negative values, skin temperature will decrease rapidly, followed by your internal body temperature.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:negative#s5",
+      "pos": "adj.",
+      "glossZh": "带负电的",
+      "pronunciationId": "w:negative#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:negative#e-687bf29bbf526754",
+          "text": "The movement of electrons, each carrying a negative charge, toward the front surface of the cell creates an imbalance of electrical charge between the cell’s front and back surfaces.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:negative#s6",
+      "pos": "adj.",
+      "glossZh": "阴性的（检测结果）",
+      "pronunciationId": "w:negative#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:negative#s7",
+      "pos": "adj.",
+      "glossZh": "表示否定的",
+      "pronunciationId": "w:negative#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:negative#s8",
+      "pos": "n.",
+      "glossZh": "不利因素",
+      "pronunciationId": "w:negative#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:negative#s9",
+      "pos": "n.",
+      "glossZh": "底片",
+      "pronunciationId": "w:negative#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "药球或举重的离心动作；负极板",
+      "reason": "训练或电学专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

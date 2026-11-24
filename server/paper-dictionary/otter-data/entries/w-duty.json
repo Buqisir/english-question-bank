@@ -1,0 +1,177 @@
+{
+  "entryId": "w:duty",
+  "headword": "duty",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdjuːti/",
+    "us": "/ˈduːti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:duty#p-main",
+      "ipa": {
+        "uk": "/ˈdjuːti/",
+        "us": "/ˈduːti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "duties",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 63
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 60
+  },
+  "senses": [
+    {
+      "senseId": "w:duty#s1",
+      "pos": "n.",
+      "glossZh": "责任；义务；职务",
+      "pronunciationId": "w:duty#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:duty#e-830404a09ba6c214",
+          "text": "This balance helps us grow with a sense of duty.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:duty#e-e2accf21675135ca",
+          "text": "She takes her gate duties seriously.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:duty#e-404349df4f3dcf23",
+          "text": "Major duties include translating, carefully editing, and proofreading translated text.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-a:17",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:duty#s2",
+      "pos": "短语",
+      "glossZh": "值班；执勤",
+      "pronunciationId": "w:duty#p-main",
+      "note": "on duty，反义为 off duty。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:duty#e-383aa1a64c2a086b",
+          "text": "I managed to get to a gas station, but it was Sunday in the early fall, and there was no __42__ on duty.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 99,
+            "end": 103
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:duty#s3",
+      "pos": "n.",
+      "glossZh": "税；关税",
+      "pronunciationId": "w:duty#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "发动机效率；排泄；姓氏",
+      "reason": "专门或历史用法和专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,634 @@
+{
+  "entryId": "w:left",
+  "headword": "left",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/left/",
+    "us": "/left/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:left#p-main",
+      "ipa": {
+        "uk": "/left/",
+        "us": "/left/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "farther left",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "farthest left",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "further left",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "furthest left",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "lefter",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "leftest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "leftmost",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more left",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most left",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "lefts",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 58,
+    "mock": 251
+  },
+  "unassignedCounts": {
+    "gaokao": 8,
+    "mock": 249
+  },
+  "senses": [
+    {
+      "senseId": "w:left#s1",
+      "pos": "adj.",
+      "glossZh": "左边的",
+      "pronunciationId": "w:left#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:left#e-8077e515b01b480c",
+          "text": "In India and the Middle East, it’s considered very rude to eat with your left hand.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-a:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 77
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:left#s2",
+      "pos": "n.",
+      "glossZh": "左方",
+      "pronunciationId": "w:left#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:left#e-b63a4f0bf1bdb98c",
+          "text": "You don’t know left from right!” These __53__ made the father very angry.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:left#e-035e736f13a8b9dd",
+          "text": "Movement is clockwise around the board (unless instructed otherwise!) and play passes to the left.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:left#e-5c3134795f004caf",
+          "text": "Across the aisle（通道）to Mary’s left, a tiny girl, barely three years old, began to cry.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:writing-continuation:10",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:left#s3",
+      "pos": "adv.",
+      "glossZh": "向左",
+      "pronunciationId": "w:left#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:left#s4",
+      "pos": "n.",
+      "glossZh": "政治左翼",
+      "pronunciationId": "w:left#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:left#s5",
+      "pos": "v.",
+      "glossZh": "离开",
+      "pronunciationId": "w:left#p-main",
+      "note": "leave 的过去式。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:left#e-a25ed4fc212e0864",
+          "text": "After their mother left the room, the children sat thinking about Bernard.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:left#e-0dfe277f1d58b2a9",
+          "text": "As soon as she graduated from high school she left home to live on Catalina Island off the Californian coast, away from her parents, where she enjoyed a life of sailing and off-road biking.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:left#e-b9a9c64421a92ae0",
+          "text": "In an instant, a woman raced into my house and left happily with the vase.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:cloze:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:left#s6",
+      "pos": "v.",
+      "glossZh": "把……留下",
+      "pronunciationId": "w:left#p-main",
+      "note": "leave 的过去式或过去分词。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:left#e-740502fa66b6481d",
+          "text": "Spain has lovely white towns and the scent(芳香)of oranges, but it is also a treasury of ancient remains including the cities left by the Greeks, Romans and Arabs.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 124,
+            "end": 128
+          }
+        },
+        {
+          "exampleId": "w:left#e-4b789649a0db7990",
+          "text": "They’ll __43__ that they left it in the changing room, create havoc (混乱) and then __44__ it had been in their car all the time.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:cloze:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:left#e-b96df2d5f344f927",
+          "text": "Antarctica left an impression on me that no other place has,” Ginni says.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:left#s7",
+      "pos": "v.",
+      "glossZh": "使保持某种状态",
+      "pronunciationId": "w:left#p-main",
+      "note": "leave 的过去式或过去分词。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:left#e-756a0b0f3e984911",
+          "text": "They put some rice into a pot of water and left it to boil while they made the French toast.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:left#e-901d9d7424ee548f",
+          "text": "The firm went broke and left her looking for a new job.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:left#e-1a0a8278966abb4d",
+          "text": "Another question left unanswered is the level of exercise that might best improve learning.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:left#s8",
+      "pos": "短语",
+      "glossZh": "被落下",
+      "pronunciationId": "w:left#p-main",
+      "note": "be left behind。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:left#e-8e51bd65eda56541",
+          "text": "You may be the friend who left or the one who was left behind",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2022-national-b:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:left#s9",
+      "pos": "短语",
+      "glossZh": "远远落后",
+      "pronunciationId": "w:left#p-main",
+      "note": "be left in the dust。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:left#e-dceb90f5025f3bad",
+          "text": "When Coach Pitt blew his whistle(哨子), Eva figured she would be left in the dust.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 67
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:left#s10",
+      "pos": "v.",
+      "glossZh": "托付照顾",
+      "pronunciationId": "w:left#p-main",
+      "note": "leave 的过去分词。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:left#e-225e8e8931f0e8b9",
+          "text": "Therefore, he was left in the care of Mrs. Hill, an old lady who lived next door.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:left#s11",
+      "pos": "v.",
+      "glossZh": "剩余",
+      "pronunciationId": "w:left#p-main",
+      "note": "常用过去分词 left。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:left#e-39778b4034af5fe2",
+          "text": "They’ll have out half the __45__ in the shop, and want the only style you don’t have left in a __46__ colour.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:cloze:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:left#e-9013221512c7ee76",
+          "text": "Donate whatever clothes are left over",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-national-a:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:left#e-b86273f92895ff80",
+          "text": "Within weeks, it had all been digested, and all that was left was pure water.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 61
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "拳击左拳、冲浪浪向",
+      "reason": "专业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

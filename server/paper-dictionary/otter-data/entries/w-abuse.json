@@ -1,0 +1,147 @@
+{
+  "entryId": "w:abuse",
+  "headword": "abuse",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈbjuːs/",
+    "us": "/əˈbjuːs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:abuse#p-main",
+      "ipa": {
+        "uk": "/əˈbjuːs/",
+        "us": "/əˈbjuːs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:abuse#p-verb",
+      "ipa": {
+        "uk": "/əˈbjuːz/",
+        "us": "/əˈbjuːz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "动词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "abuses",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "abused",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "abusing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "senses": [
+    {
+      "senseId": "w:abuse#s1",
+      "pos": "n.",
+      "glossZh": "虐待；伤害",
+      "pronunciationId": "w:abuse#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:abuse#e-c3c90f9d3c3f535c",
+          "text": "It’s a symbol of power, ambition as well as creativity, independence and peace – things the movie’s main character, Celie, does not have due to years of abuse, family violence and racism.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 153,
+            "end": 158
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:abuse#s2",
+      "pos": "n.",
+      "glossZh": "滥用（权力、药物等）；辱骂",
+      "pronunciationId": "w:abuse#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:abuse#s3",
+      "pos": "v.",
+      "glossZh": "虐待；辱骂；滥用",
+      "pronunciationId": "w:abuse#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "语言误用；掺假和停用",
+      "reason": "罕见或专业用法"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

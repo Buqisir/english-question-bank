@@ -1,0 +1,313 @@
+{
+  "entryId": "w:plot",
+  "headword": "plot",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/plɒt/",
+    "us": "/plɑːt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:plot#p-main",
+      "ipa": {
+        "uk": "/plɒt/",
+        "us": "/plɑːt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "plots",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "plotted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "plotting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 30
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 23
+  },
+  "senses": [
+    {
+      "senseId": "w:plot#s1",
+      "pos": "n.",
+      "glossZh": "一小块土地",
+      "pronunciationId": "w:plot#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:plot#e-ebb8dc129c983f50",
+          "text": "Compared to traditional garden plots, they increase carbon absorption, reduce stormwater runoff and boost habitat and biodiversity significantly.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:plot#e-9f71386e052a42f9",
+          "text": "Old garden plots work WONDERS",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:31",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:plot#e-af8f7dbd2902eae3",
+          "text": "On her small plot of land, she dug waffle (华夫饼) gardens – grid-like (网格状的) sunken beds with earthen walls that look like a waffle – to keep moisture (水分) and avoid runoff when the occasional rains did come.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:plot#s2",
+      "pos": "n.",
+      "glossZh": "情节",
+      "pronunciationId": "w:plot#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:plot#e-597dc198aa714542",
+          "text": "The plot was too simple.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:plot#e-40b1e52f2130ee95",
+          "text": "For Brittany Neeley, contests push her to make quick, thoughtful decisions about plot, pacing, and character, and that's helped her become more __53__ in her work overall.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:cloze:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 85
+          }
+        },
+        {
+          "exampleId": "w:plot#e-85e172b6f300cbb1",
+          "text": "Learning the types and forms of fiction, where to find fiction ideas, and the basics of creating a story – characters, plots, and points of view",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "cell:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-a:ocr-916a21169272a7ae:3:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 119,
+            "end": 124
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:plot#s3",
+      "pos": "n.",
+      "glossZh": "阴谋",
+      "pronunciationId": "w:plot#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:plot#e-d8f549dd4bc701f2",
+          "text": "Held on the 5th November every single year in London, Bonfire Night celebrates the failed Gunpowder Plot.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 104
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:plot#s4",
+      "pos": "v.",
+      "glossZh": "在图表或地图上标绘",
+      "pronunciationId": "w:plot#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:plot#e-18b57a85c6e0e237",
+          "text": "She began plotting thousands of data points, a painstaking process that required a mix of mathematical skill and artistic intuition.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:plot#e-703d97ac9b552424",
+          "text": "He excelled in plotting running routes.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:24",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:plot#s5",
+      "pos": "v.",
+      "glossZh": "密谋",
+      "pronunciationId": "w:plot#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,174 @@
+{
+  "entryId": "w:guilty",
+  "headword": "guilty",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɡɪlti/",
+    "us": "/ˈɡɪlti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:guilty#p-main",
+      "ipa": {
+        "uk": "/ˈɡɪlti/",
+        "us": "/ˈɡɪlti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "guiltier",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "guiltiest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more guilty",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most guilty",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 17
+  },
+  "senses": [
+    {
+      "senseId": "w:guilty#s1",
+      "pos": "adj.",
+      "glossZh": "内疚的",
+      "pronunciationId": "w:guilty#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:guilty#e-e12b987083e2a03a",
+          "text": "This strategy makes it easier to act in satisfying personal interests without feeling guilty.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:guilty#e-925302a705706388",
+          "text": "Maybe it’s time we stopped feeling guilty about our occasional obsessions and started seeing them for what they are: the catalysts that make our steady progress meaningful.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:guilty#e-4f30015b07c3103c",
+          "text": "I felt guilty for not stopping.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:guilty#s2",
+      "pos": "adj.",
+      "glossZh": "有罪的",
+      "pronunciationId": "w:guilty#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:guilty#s3",
+      "pos": "adj.",
+      "glossZh": "对过错负有责任的",
+      "pronunciationId": "w:guilty#p-main",
+      "note": "常接 of。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "有罪判决（名词）",
+      "reason": "常见结构为 guilty verdict，guilty 作形容词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

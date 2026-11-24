@@ -1,0 +1,146 @@
+{
+  "entryId": "w:generate",
+  "headword": "generate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdʒenəreɪt/",
+    "us": "/ˈdʒenəreɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:generate#p-main",
+      "ipa": {
+        "uk": "/ˈdʒenəreɪt/",
+        "us": "/ˈdʒenəreɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "generated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "generates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "generating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 154
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:generate#s1",
+      "pos": "v.",
+      "glossZh": "产生",
+      "pronunciationId": "w:generate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 154
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:generate#e-50464d24cf3a7fb0",
+          "text": "Rainforests can generate 75%of their own rain.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:generate#e-9aefe11865114a94",
+          "text": "At present it is expected to generate £240m for the year ending in April 2019, which will go to school sports.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:generate#e-073d8e53709cebe7",
+          "text": "It generates jobs for the locals.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2026-ii:35",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 12
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "繁殖后代",
+      "reason": "今义少用，语料未见"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

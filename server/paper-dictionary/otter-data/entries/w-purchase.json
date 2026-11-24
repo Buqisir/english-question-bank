@@ -1,0 +1,254 @@
+{
+  "entryId": "w:purchase",
+  "headword": "purchase",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpɜːtʃəs/",
+    "us": "/ˈpɜːrtʃəs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:purchase#p-main",
+      "ipa": {
+        "uk": "/ˈpɜːtʃəs/",
+        "us": "/ˈpɜːrtʃəs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "purchases",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "purchased",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "purchasing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 103
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 99
+  },
+  "senses": [
+    {
+      "senseId": "w:purchase#s1",
+      "pos": "v.",
+      "glossZh": "购买",
+      "pronunciationId": "w:purchase#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:purchase#e-6b8369c597542993",
+          "text": "I encourage readers to go to their local library when they can’t afford to purchase a book.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:purchase#e-9bb238e53ecb1b49",
+          "text": "“Everyone can play a part in reducing waste, whether by not purchasing more food than necessary in your weekly shopping or by asking restaurants to not include the side dish you won’t eat,” Curtin says.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "reading-b-5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:purchase#e-a43b5fddf5dc7fce",
+          "text": "The most important piece of equipment for running is a good pair of running shoes, so be sure to do some research before you purchase a pair.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 125,
+            "end": 133
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:purchase#s2",
+      "pos": "n.",
+      "glossZh": "购买行为",
+      "pronunciationId": "w:purchase#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:purchase#e-d26a634f5be9f90a",
+          "text": "• Return conditions: items must be in the same condition as received, with labels, in original packaging, and with a receipt of purchase.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-a:14",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 136
+          }
+        },
+        {
+          "exampleId": "w:purchase#e-3bf34d97655eb7bd",
+          "text": "With each purchase, you can create a digital card for your loved ones that tells them about the incredible impact their Inspired Gifts will have.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-a:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:purchase#e-b87d5782b9a9af67",
+          "text": "After getting __48__, she will make the purchase and fly to the destination with her friend Hastings.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 48
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:purchase#s3",
+      "pos": "n.",
+      "glossZh": "购得的物品",
+      "pronunciationId": "w:purchase#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:purchase#e-4bb18b8c7cab9c57",
+          "text": "Practical steps include journaling about feelings toward money and taking the time to evaluate the value of purchases.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 117
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "滑轮组；机械抓力",
+      "reason": "技术用法"
+    },
+    {
+      "glossZh": "非继承取得土地",
+      "reason": "法律专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

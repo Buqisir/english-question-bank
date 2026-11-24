@@ -1,0 +1,194 @@
+{
+  "entryId": "w:amateur",
+  "headword": "amateur",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈæmətə(r)/",
+    "us": "/ˈæmətʃər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:amateur#p-main",
+      "ipa": {
+        "uk": "/ˈæmətə(r)/",
+        "us": "/ˈæmətʃər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more amateur",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most amateur",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "amateurs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 9
+  },
+  "senses": [
+    {
+      "senseId": "w:amateur#s1",
+      "pos": "n.",
+      "glossZh": "业余爱好者；非专业人士",
+      "pronunciationId": "w:amateur#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:amateur#e-1073f467ca56a7b4",
+          "text": "As they __50__ the rules of the game to me, I worriedly declared, “I’m an amateur!",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:amateur#e-7fc4c60e4e899d6b",
+          "text": "It’s easy for amateurs to pick up.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:36",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:amateur#s2",
+      "pos": "adj.",
+      "glossZh": "业余的；非专业的",
+      "pronunciationId": "w:amateur#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:amateur#e-1a0de6a8db54e05f",
+          "text": "Amateur Photographer of the Year",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:amateur#e-76a9563a1f985d1d",
+          "text": "The turning point of his life came in 2011 at an amateur dunk contest, where Cha Tianyi, founder of China’s dunk team told him, “With your bounce and explosiveness, you don’t belong behind a bank counter.” Cha’s encouragement and guidance set him on the path to becoming a professional dunker.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:amateur#e-b5f012fd7fd9a13d",
+          "text": "The platform, which hosts a global community of 3.7 million nature enthusiasts, from amateur observers to professional taxonomists（分类学家）, has logged over 250 million wildlife observations covering half a million species.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 92
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "指外行的贬义称呼",
+      "reason": "与「非专业人士」重叠，贬义取决于语境"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

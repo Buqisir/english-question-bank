@@ -1,0 +1,374 @@
+{
+  "entryId": "w:represent",
+  "headword": "represent",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌreprɪˈzent/",
+    "us": "/ˌreprɪˈzent/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:represent#p-main",
+      "ipa": {
+        "uk": "/ˌreprɪˈzent/",
+        "us": "/ˌreprɪˈzent/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "represented",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "representing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "represents",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 109
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 105
+  },
+  "senses": [
+    {
+      "senseId": "w:represent#s1",
+      "pos": "v.",
+      "glossZh": "象征",
+      "pronunciationId": "w:represent#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:represent#e-ec4f9b223fd7d205",
+          "text": "They represent the promise of spring and a renewal of life.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:grammar-fill",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:grammar-fill:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:represent#e-cdb6aa9bd99ed791",
+          "text": "For example, a balloon may represent a hawk or a vacuum hose（吸尘器软管）may be the same as a snake in your bird’s mind.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:represent#e-7029e00571993371",
+          "text": "What does the lucky bamboo with eight sticks represent?",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:represent#s2",
+      "pos": "v.",
+      "glossZh": "代表（某人或群体）",
+      "pronunciationId": "w:represent#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:represent#e-6c17f231983efc47",
+          "text": "Representing Botswana.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:represent#e-9f7747c0a133ac47",
+          "text": "He represented the local people.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2023-national-b:33",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:represent#e-d8dc2e3a76db6afa",
+          "text": "When shown a list of well-known organisations and famous people who represent them, over half of respondents were unable to match the celebrity with the cause.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 77
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:represent#s3",
+      "pos": "v.",
+      "glossZh": "呈现",
+      "pronunciationId": "w:represent#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:represent#e-2ec7bd8d5a5552bd",
+          "text": "However, a variety of types is represented here.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:represent#e-8429e6102d2273f6",
+          "text": "Using a global dataset of 1.9 billion records of plants, insects, birds, and animals, Daru and his team tested how well these data represent actual global biodiversity patterns.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 131,
+            "end": 140
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:represent#s4",
+      "pos": "v.",
+      "glossZh": "描绘",
+      "pronunciationId": "w:represent#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:represent#e-baec0f218f375485",
+          "text": "Reading Art: Art for Book Lovers is a celebration of an everyday object – the book, represented here in almost three hundred artworks from museums around the world.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:represent#e-81a3fb9691da953c",
+          "text": "One of Picasso’s amazing feats was representing realism and contemporary culture through art.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:represent#s5",
+      "pos": "v.",
+      "glossZh": "构成（某个组成部分等）",
+      "pronunciationId": "w:represent#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:represent#e-801c26c270c613b3",
+          "text": "Hutongs represent an important cultural element of the city of Beijing.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:grammar-fill:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:represent#e-c06dcdda2d768504",
+          "text": "Lina’s attitude represents a growing trend among today’s youth: light socializing, a pattern that prioritizes self-expression over intensive emotional bonds in the virtual world.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 26
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "再次提交",
+      "reason": "另用 re-present"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

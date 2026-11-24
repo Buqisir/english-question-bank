@@ -1,0 +1,143 @@
+{
+  "entryId": "w:definition",
+  "headword": "definition",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌdefɪˈnɪʃn/",
+    "us": "/ˌdefɪˈnɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:definition#p-main",
+      "ipa": {
+        "uk": "/ˌdefɪˈnɪʃn/",
+        "us": "/ˌdefɪˈnɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "definitions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 31
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 30
+  },
+  "senses": [
+    {
+      "senseId": "w:definition#s1",
+      "pos": "n.",
+      "glossZh": "定义；释义；界定",
+      "pronunciationId": "w:definition#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:definition#e-df16700a607a2ab0",
+          "text": "It should give you a precise definition of each word, thus differentiating it from other words whose meanings are similar, but not identical.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:definition#e-48ba173008fe0ae0",
+          "text": "\"To make dictionaries is dull (乏味) work,\" wrote Johnson, illustrating one definition of “dull”.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:definition#e-d5d0304b4765898f",
+          "text": "Broadening the definition of wealth to include relationships, health, and purpose helps balance financial goals with personal well-being.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:definition#s2",
+      "pos": "n.",
+      "glossZh": "（图像、声音等的）清晰度",
+      "pronunciationId": "w:definition#p-main",
+      "note": "如 high definition。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "程序声明、填字谜释义部分",
+      "reason": "专门语境下的用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

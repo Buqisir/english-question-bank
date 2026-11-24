@@ -1,0 +1,206 @@
+{
+  "entryId": "w:crop",
+  "headword": "crop",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/krɒp/",
+    "us": "/krɑːp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:crop#p-main",
+      "ipa": {
+        "uk": "/krɒp/",
+        "us": "/krɑːp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "crops",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "cropped",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "cropping",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 94
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 92
+  },
+  "senses": [
+    {
+      "senseId": "w:crop#s1",
+      "pos": "n.",
+      "glossZh": "庄稼；农作物；收成",
+      "pronunciationId": "w:crop#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:crop#e-cd0cb11bc9ac2489",
+          "text": "Machines have largely taken over planting, watering and harvesting crops such as corn and wheat, but the monitoring of cattle has gone through fewer changes.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:crop#e-e10264914ba1b1ea",
+          "text": "She is confident that small land areas can bring large returns if farmers are able to adapt by planting sustainable crops, using new technologies for water treatment and focusing on natural products and fertilisers (肥料) rather than chemicals.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 116,
+            "end": 121
+          }
+        },
+        {
+          "exampleId": "w:crop#e-847fe2f6ff169b61",
+          "text": "Now, over 150 wells have been drilled, watering crops like sugar beets, alfalfa, and barley.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:grammar-fill:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:crop#s2",
+      "pos": "n.",
+      "glossZh": "一批；一群（同时出现的人或物）",
+      "pronunciationId": "w:crop#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:crop#e-e3e0df0fc027e0b1",
+          "text": "At the beginning of every school year, a new crop of 15-year-olds pile into my classroom.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:crop#s3",
+      "pos": "v.",
+      "glossZh": "裁剪（图片）；剪短（头发等）",
+      "pronunciationId": "w:crop#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:crop#s4",
+      "pos": "短语",
+      "glossZh": "突然出现",
+      "pronunciationId": "w:crop#p-main",
+      "note": "crop up。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "鸟的嗉囊、矿脉露头、马鞭",
+      "reason": "动物学、矿业或马术专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

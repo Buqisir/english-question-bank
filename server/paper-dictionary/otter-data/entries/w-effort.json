@@ -1,0 +1,201 @@
+{
+  "entryId": "w:effort",
+  "headword": "effort",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈefət/",
+    "us": "/ˈefərt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:effort#p-main",
+      "ipa": {
+        "uk": "/ˈefət/",
+        "us": "/ˈefərt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "efforts",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 34,
+    "mock": 306
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 305
+  },
+  "senses": [
+    {
+      "senseId": "w:effort#s1",
+      "pos": "n.",
+      "glossZh": "努力；投入的精力",
+      "pronunciationId": "w:effort#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 19,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:effort#e-993fe8b412d8975c",
+          "text": "The good news is that it’s simple to learn and can be worth the effort.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:effort#e-37c416aad279f9ab",
+          "text": "According to this theory, people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 150,
+            "end": 156
+          }
+        },
+        {
+          "exampleId": "w:effort#e-fb305c4270680cce",
+          "text": "Building effective communication skills takes time, but the effects are worth the effort.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:effort#s2",
+      "pos": "n.",
+      "glossZh": "尝试；为达到目标采取的行动",
+      "pronunciationId": "w:effort#p-main",
+      "note": "make an effort to do sth 指「努力做某事」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:effort#e-6753293f2322558a",
+          "text": "Drinks now contain 45 million fewer kilos of sugar as a result of manufacturers’ efforts to avoid the charge, according to Treasury figures.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 88
+          }
+        },
+        {
+          "exampleId": "w:effort#e-67a41ec2570feb18",
+          "text": "Knowing the route is vital to conservation efforts, but James had no way to figure it out – until he got a phone call from Washington State Penitentiary in Walla Walla.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:effort#e-a986df948657abc8",
+          "text": "It wasn’t until my 50s that I made an effort to understand Cage.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 44
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "机械力学中的作用力；鼓舞（动词）",
+      "reason": "专业或罕见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

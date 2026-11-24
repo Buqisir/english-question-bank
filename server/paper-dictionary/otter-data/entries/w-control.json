@@ -1,0 +1,375 @@
+{
+  "entryId": "w:control",
+  "headword": "control",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kənˈtrəʊl/",
+    "us": "/kənˈtroʊl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:control#p-main",
+      "ipa": {
+        "uk": "/kənˈtrəʊl/",
+        "us": "/kənˈtroʊl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "controls",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "controlled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "controlling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 37,
+    "mock": 312
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 309
+  },
+  "senses": [
+    {
+      "senseId": "w:control#s1",
+      "pos": "n.",
+      "glossZh": "控制；支配权；自制力",
+      "pronunciationId": "w:control#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:control#e-3675fe8bf7b12286",
+          "text": "His parents were not quite able to keep theirs under control.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:control#e-0d88b550e118aa1f",
+          "text": "Besides, working in the garden seems to have a calming effect on Jaramillo’s special education students, many of whom have emotional control issues.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 133,
+            "end": 140
+          }
+        },
+        {
+          "exampleId": "w:control#e-125ff2a027124437",
+          "text": "She says it is essential that we keep control of artificial intelligence, or risk being sidelined and perhaps even worse.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:control#s2",
+      "pos": "v.",
+      "glossZh": "控制；限制；操纵",
+      "pronunciationId": "w:control#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:control#e-572f1b2cffa926ba",
+          "text": "It aims to control the number of the animals.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2021-national-a:27",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:control#e-10aae7602404f249",
+          "text": "How to control the budget when buying groceries.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:27",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:control#e-60ff69a38a0adaba",
+          "text": "On weekends, Harold would let children control the trains, their small hands carefully managing the controllers and their faces lit with pure joy.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:control#s3",
+      "pos": "v.",
+      "glossZh": "控制或排除（实验或统计变量）",
+      "pronunciationId": "w:control#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:control#e-ec3a04d4c6d6d8a2",
+          "text": "Puzzle play was found to be a significant predictor of cognition(认知) after controlling for differences in parents’ income, education and the amount of parent talk, Levine said.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:control#e-ce2b395627b0cbff",
+          "text": "Using a set of controlled audio clips (录音片段), Hilton surveyed 5,000 American English speakers to better understand what affects people’s perceptions of interruptions.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:control#s4",
+      "pos": "n.",
+      "glossZh": "（实验中的）对照组；对照对象",
+      "pronunciationId": "w:control#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:control#e-55f8cff67efd9ab3",
+          "text": "Participants were randomly divided into two groups: the “beauty” group was asked to actively consider and then rate the beauty of each object they viewed, while the control group just matched a line drawing of the object with the artwork itself.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 165,
+            "end": 172
+          }
+        },
+        {
+          "exampleId": "w:control#e-38f0f1095b0fc2fc",
+          "text": "Importantly, however, the beauty group did not report feeling any happier than the control group, suggesting that it was the engagement with beauty that influenced abstract thinking, rather than any overall positivity from the experience.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:control#e-ec1064bf8dc402e7",
+          "text": "Some meat was left untreated as controls.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:control#s5",
+      "pos": "n.",
+      "glossZh": "操控装置；控制键",
+      "pronunciationId": "w:control#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:control#e-b3329c15b5d3a76d",
+          "text": "• Stepless dimming (10%-100%): Adjust brightness smoothly with a one-touch control.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 82
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "灵媒控制灵、赛道检查点、气候控制因子",
+      "reason": "超出通用学习范围的专业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,203 @@
+{
+  "entryId": "w:nut",
+  "headword": "nut",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/nʌt/",
+    "us": "/nʌt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:nut#p-main",
+      "ipa": {
+        "uk": "/nʌt/",
+        "us": "/nʌt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "nuts",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "senses": [
+    {
+      "senseId": "w:nut#s1",
+      "pos": "n.",
+      "glossZh": "坚果",
+      "pronunciationId": "w:nut#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:nut#e-31c5ac386726d9aa",
+          "text": "In a recent experiment, cockatoos were presented with a box with a nut inside it.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:nut#e-cc36e27c2fbe87ab",
+          "text": "Inserting the correct “key” would let out the nut.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:nut#e-416df3d83aef9191",
+          "text": "They have turned their attention to a part of the cashew nut (腰果) that is often thrown away – the shell.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:nut#s2",
+      "pos": "n.",
+      "glossZh": "螺母",
+      "pronunciationId": "w:nut#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:nut#s3",
+      "pos": "n.",
+      "glossZh": "狂热爱好者",
+      "pronunciationId": "w:nut#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:nut#s4",
+      "pos": "n.",
+      "glossZh": "疯子（非正式）",
+      "pronunciationId": "w:nut#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:nut#s5",
+      "pos": "短语",
+      "glossZh": "棘手的人或事",
+      "pronunciationId": "w:nut#p-main",
+      "note": "a hard nut to crack。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:nut#e-59a74a86542fc1ec",
+          "text": "A hard nut to crack.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-zj-2026-03-m171:26",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 10
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "埃及天空女神；工会简称",
+      "reason": "同形专名或缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

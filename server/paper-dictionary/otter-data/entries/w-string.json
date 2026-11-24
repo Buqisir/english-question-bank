@@ -1,0 +1,324 @@
+{
+  "entryId": "w:string",
+  "headword": "string",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/strɪŋ/",
+    "us": "/strɪŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:string#p-main",
+      "ipa": {
+        "uk": "/strɪŋ/",
+        "us": "/strɪŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "strings",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "strang",
+      "tags": [
+        "past"
+      ]
+    },
+    {
+      "form": "stringed",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    },
+    {
+      "form": "stringing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "strung",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 14
+  },
+  "senses": [
+    {
+      "senseId": "w:string#s1",
+      "pos": "n.",
+      "glossZh": "细绳",
+      "pronunciationId": "w:string#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:string#e-dea44d3991788393",
+          "text": "to instruct the children whose shoes were held together with string was a surprise.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:string#e-0c47c613f3204c36",
+          "text": "He __45__ handfuls of damp tree leaves, wrapped them with string, and __46__ the bunch to create a torch(火把).",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:string#e-f8e9397ce7ccfa0f",
+          "text": "The necklace fell from his hand, and the string broke.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:string#s2",
+      "pos": "n.",
+      "glossZh": "一连串",
+      "pronunciationId": "w:string#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:string#e-372c20ed3de2cd3a",
+          "text": "English in California, Oleg and Natasha, his hosts in Tashkent, and a string of foreign aid workers.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:string#e-825222b59c2e8cf6",
+          "text": "Its program specifies a set of rules to transform one string of symbols into another.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:string#e-93b4f07b7e119672",
+          "text": "But as colonies damaged by human activities struggle to recover, a string of disasters has knocked them down.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:string#s3",
+      "pos": "n.",
+      "glossZh": "弦",
+      "pronunciationId": "w:string#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:string#s4",
+      "pos": "v.",
+      "glossZh": "串联",
+      "pronunciationId": "w:string#p-main",
+      "note": "常用 string together。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:string#e-226c053716a3dfe4",
+          "text": "It takes sentences from its library of documents and prebuilt arguments and strings them together.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 83
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:string#s5",
+      "pos": "v.",
+      "glossZh": "给某物装上线",
+      "pronunciationId": "w:string#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:string#e-72e8d896a89f472a",
+          "text": "At first, neighbors watched the process with doubt as she strung hundreds of thin, upright wires across a solid wooden frame.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 64
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:string#s6",
+      "pos": "短语",
+      "glossZh": "附加条件",
+      "pronunciationId": "w:string#p-main",
+      "note": "常见 no strings attached。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "台球发球线、书籍装帧带和钻柱",
+      "reason": "专业义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

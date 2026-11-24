@@ -1,0 +1,144 @@
+{
+  "entryId": "w:ambition",
+  "headword": "ambition",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/æmˈbɪʃn/",
+    "us": "/æmˈbɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ambition#p-main",
+      "ipa": {
+        "uk": "/æmˈbɪʃn/",
+        "us": "/æmˈbɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "ambitions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 36
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 33
+  },
+  "senses": [
+    {
+      "senseId": "w:ambition#s1",
+      "pos": "n.",
+      "glossZh": "志向；追求成功的强烈愿望",
+      "pronunciationId": "w:ambition#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ambition#e-dbd054928776c391",
+          "text": "The new ending held both love and distance, ambition and sacrifice.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-b:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:ambition#e-2d5bab71325f2cdf",
+          "text": "They’re not rejecting ambition – they’re redirecting it toward sustainable career paths that prioritize both financial security and personal fulfillment.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-d:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ambition#s2",
+      "pos": "n.",
+      "glossZh": "抱负；想实现的目标",
+      "pronunciationId": "w:ambition#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ambition#e-3e459bbd605a8943",
+          "text": "Her ambition to study at MIT.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:24",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 12
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "攀求官职",
+      "reason": "历史专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

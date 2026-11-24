@@ -1,0 +1,143 @@
+{
+  "entryId": "w:cinema",
+  "headword": "cinema",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsɪnəmə/",
+    "us": "/ˈsɪnəmə/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:cinema#p-main",
+      "ipa": {
+        "uk": "/ˈsɪnəmə/",
+        "us": "/ˈsɪnəmə/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "cinemas",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 20
+  },
+  "senses": [
+    {
+      "senseId": "w:cinema#s1",
+      "pos": "n.",
+      "glossZh": "电影院",
+      "pronunciationId": "w:cinema#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cinema#e-a852c831bdc21770",
+          "text": "Go to the cinema.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:cinema#e-1c7e9d57a17b8811",
+          "text": "The experience brought back the pastime of going to the cinema – one that I think we should continue to enjoy.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:cinema#e-8bfd46650476b9e0",
+          "text": "He wandered out into the rapidly worsening white-out, heading toward the cinema where he’d worked for over twenty years, only to get lost within blocks.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cinema#s2",
+      "pos": "n.",
+      "glossZh": "电影；电影业；电影艺术",
+      "pronunciationId": "w:cinema#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "太有电影感了",
+      "reason": "社交媒体的省略感叹用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

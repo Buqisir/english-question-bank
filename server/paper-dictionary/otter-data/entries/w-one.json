@@ -1,0 +1,604 @@
+{
+  "entryId": "w:one",
+  "headword": "one",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/wʌn/",
+    "us": "/wʌn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:one#p-main",
+      "ipa": {
+        "uk": "/wʌn/",
+        "us": "/wʌn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "ones",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 272,
+    "mock": 2130
+  },
+  "unassignedCounts": {
+    "gaokao": 6,
+    "mock": 2130
+  },
+  "senses": [
+    {
+      "senseId": "w:one#s1",
+      "pos": "num.",
+      "glossZh": "一；一个",
+      "pronunciationId": "w:one#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 76,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:one#e-9effdd2da74903c7",
+          "text": "About 480 varieties of trees may be found in just one hectare of rainforest.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:one#e-9d346b782b8eed1a",
+          "text": "That’s around one in 10 people in the world.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:one#e-431d0ba13c08ee5a",
+          "text": "To calculate your speed as you do, divide 3,600 (the number of seconds in an hour) by the number of seconds it takes you to travel one mile (the distance between two mileposts).",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 131,
+            "end": 134
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:one#s2",
+      "pos": "det.",
+      "glossZh": "某个；某一天",
+      "pronunciationId": "w:one#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 51,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:one#e-b784d948bcadd84c",
+          "text": "One morning she told her children about a family she had visited the day before.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 3
+          }
+        },
+        {
+          "exampleId": "w:one#e-20132a1b64cdea50",
+          "text": "At one school in the UK, children between the ages of 10 and 15 walk 6km with six litres of water.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:one#e-e268e64613c94923",
+          "text": "But one day when I heard her saying “I think I’m too fat,” my heart sank.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:one#s3",
+      "pos": "pron.",
+      "glossZh": "代替前面提及的一类人或事物",
+      "pronunciationId": "w:one#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 70,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:one#e-f6e2be9778953135",
+          "text": "So, don’t stop speaking when you make a mistake unless it’s a truly serious one.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:one#e-f9ed9f6f99444cda",
+          "text": "To do this I have searched through dozens of plays to find the ones that I think best show the power and purpose of the short play.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:one#e-fe8ad7afb9ac5fb1",
+          "text": "The results show that consumers generally trust negative reviews more than positive ones.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:one#s4",
+      "pos": "pron.",
+      "glossZh": "其中一个",
+      "pronunciationId": "w:one#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 43,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:one#e-feb4dfb7ecc2d007",
+          "text": "For example, the magician puts a small ball under one of several cups.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:one#e-26432c69018eda00",
+          "text": "What did Mark find inside one of the books he bought?",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:one#e-f4d02ede771969de",
+          "text": "According to Charlotte Markey, a professor of psychology, food is one of the rare subjects where, as parents, saying less is more.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:one#s5",
+      "pos": "pron.",
+      "glossZh": "人；任何人（泛指）",
+      "pronunciationId": "w:one#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:one#e-c27e2777a7ed3791",
+          "text": "Being emotionally intelligent does not necessarily make one a moral person.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:one#e-daefcbdf95bed7f6",
+          "text": "to pick the angry or happy face by touching a picture of it with their noses more often than one would expect by random chance.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:one#e-011d0c3c02c0968e",
+          "text": "As cool as it may be to receive a postcard written in Chinese, the concept doesn’t work if one doesn’t understand it.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 94
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:one#s6",
+      "pos": "短语",
+      "glossZh": "互相；彼此",
+      "pronunciationId": "w:one#p-main",
+      "note": "one another。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:one#e-ca3cc232927ef48e",
+          "text": "They say wild chimps communicate 19 specific messages to one another with a \"vocabulary\" of 66 gestures.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:one#e-e6c857ed99331fdc",
+          "text": "She had participants listen to audio clips and then answer questions about whether the speakers seemed to be friendly and engaged, listening to one another, or trying to interrupt.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 144,
+            "end": 147
+          }
+        },
+        {
+          "exampleId": "w:one#e-23082da751babfc8",
+          "text": "The streets in which people live should be a tight pattern of crossed sidewalks, which allow people to meet, talk, and get to know one another.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 131,
+            "end": 134
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:one#s7",
+      "pos": "短语",
+      "glossZh": "接二连三",
+      "pronunciationId": "w:one#p-main",
+      "note": "one after another。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:one#e-d5f6535eb5aaade8",
+          "text": "Then, one after another, Sydney discovered lots of things that were just sort of there – broad parks, superb beaches, and a culturally diverse population.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:one#e-f03d1098782a1d04",
+          "text": "Low intensity speakers find it rude to talk at the same time and prefer people speak one after another in conversation.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:one#s8",
+      "pos": "短语",
+      "glossZh": "没有人",
+      "pronunciationId": "w:one#p-main",
+      "note": "no one。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:one#e-b420fd33df606caa",
+          "text": "Producing food that no one eats wastes the water, fuel, and other resources used to grow it.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "reading-b-3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:one#e-58c0649b463febc1",
+          "text": "“It is curious that no one has put together a history of both the steam and electric revolutions,” writes Maury Klein in his book The Power Makers, Steam, Electricity, and the Men Who Invented Modern America.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:one#e-3a32b150ee794be5",
+          "text": "No one really knows, of course, but the seeding goes on.”",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

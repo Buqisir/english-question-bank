@@ -1,0 +1,144 @@
+{
+  "entryId": "w:bird",
+  "headword": "bird",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bɜːd/",
+    "us": "/bɜːrd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bird#p-main",
+      "ipa": {
+        "uk": "/bɜːd/",
+        "us": "/bɜːrd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "birds",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 34,
+    "mock": 324
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 324
+  },
+  "senses": [
+    {
+      "senseId": "w:bird#s1",
+      "pos": "n.",
+      "glossZh": "鸟；禽",
+      "pronunciationId": "w:bird#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 33,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bird#e-c2e604327f653398",
+          "text": "Rainforests are home to a rich variety of medicinal plants, food, birds and animals.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:bird#e-34466a11e1763b5b",
+          "text": "The migratory birds have flown away.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2021-i:30",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:bird#e-326a4618876e0086",
+          "text": "With the bird in my cupped hand, I looked around to see how she had gotten in.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bird#s2",
+      "pos": "短语",
+      "glossZh": "一举两得；一石二鸟",
+      "pronunciationId": "w:bird#p-main",
+      "note": "kill two birds with one stone。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "女人、家伙、狱中服刑时间及飞机等",
+      "reason": "俚语、过时义或行业别称。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

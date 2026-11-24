@@ -1,0 +1,180 @@
+{
+  "entryId": "w:slave",
+  "headword": "slave",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/sleɪv/",
+    "us": "/sleɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:slave#p-main",
+      "ipa": {
+        "uk": "/sleɪv/",
+        "us": "/sleɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "slaves",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Slaves",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "slaved",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "slaving",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:slave#s1",
+      "pos": "n.",
+      "glossZh": "奴隶",
+      "pronunciationId": "w:slave#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slave#e-f862b91a50e4637d",
+          "text": "She moved to Virginia in 1865, where she provided medical care to freed slaves.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-a:figure-d47b575dce95546b:cell-1-2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:slave#e-131c364523f64cf7",
+          "text": "What does the author realize about African slaves?",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-cq-nankai-2025-11-third-quality-test:25",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:slave#s2",
+      "pos": "n.",
+      "glossZh": "受某物支配的人",
+      "pronunciationId": "w:slave#p-main",
+      "note": "a slave to something。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slave#e-3de00c0a55b62593",
+          "text": "“But at the same time, they are slaves to it.”",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:reading-c:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:slave#s3",
+      "pos": "v.",
+      "glossZh": "苦干",
+      "pronunciationId": "w:slave#p-main",
+      "note": "常用 slave away。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "从属设备、Slavey 或 Slav 的异称",
+      "reason": "工程术语或族名异词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

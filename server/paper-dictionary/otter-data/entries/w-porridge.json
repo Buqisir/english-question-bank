@@ -1,0 +1,129 @@
+{
+  "entryId": "w:porridge",
+  "headword": "porridge",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpɒrɪdʒ/",
+    "us": "/ˈpɔːrɪdʒ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:porridge#p-main",
+      "ipa": {
+        "uk": "/ˈpɒrɪdʒ/",
+        "us": "/ˈpɔːrɪdʒ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "porridges",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:porridge#s1",
+      "pos": "n.",
+      "glossZh": "粥",
+      "pronunciationId": "w:porridge#p-main",
+      "note": "英国早餐语境下通常指燕麦粥。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:porridge#e-134464c25fd09d6d",
+          "text": "They planned to make French toast and chicken porridge.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:porridge#e-5f88b3b00a28a6e1",
+          "text": "The next minute, the porridge boiled over and put out the fire.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:porridge#e-522376ddff8cadf4",
+          "text": "Jenna told Jeff to clean it up so they could continue to cook the rest of the porridge.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 86
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "刑期",
+      "reason": "英国俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

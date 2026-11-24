@@ -1,0 +1,479 @@
+{
+  "entryId": "w:day",
+  "headword": "day",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/deɪ/",
+    "us": "/deɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:day#p-main",
+      "ipa": {
+        "uk": "/deɪ/",
+        "us": "/deɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "days",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 210,
+    "mock": 1420
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 1419
+  },
+  "senses": [
+    {
+      "senseId": "w:day#s1",
+      "pos": "n.",
+      "glossZh": "一天；一日；某一天",
+      "pronunciationId": "w:day#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 168,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:day#e-30dd260759f9e7f9",
+          "text": "I was always an enthusiastic reader sometimes reading up to three books a day as a child.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:day#e-5d689446fbbfb936",
+          "text": "On her day of discharge, we shared in her __50__ at her recovery.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:day#e-a2e744a0c2995997",
+          "text": "1 day(24 hours)",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:figure-070ef7cfc7976a0c:cell-4-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:day#s2",
+      "pos": "n.",
+      "glossZh": "白天；日间",
+      "pronunciationId": "w:day#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:day#e-f161bc61bfaabc38",
+          "text": "By day, Robert Titterton is a lawyer.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:day#e-df6a6092ec3123a1",
+          "text": "As they grew more mobile, we let them move freely around the house during the day, but when we were asleep we had to contain them in a large room, otherwise they’d get up to mischief.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:day#e-1daa3a35a6f088ce",
+          "text": "Some predators make attacks only during the day while others hunt in the night.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:day#s3",
+      "pos": "n.",
+      "glossZh": "节日；纪念日；为某事设立的日子",
+      "pronunciationId": "w:day#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:day#e-05687a1aaea861cd",
+          "text": "A MOTHER’S DAY SURPRISE",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:day#e-44674608d51eecb0",
+          "text": "June 8th was named by the UN in 2009 as World Oceans Day.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:writing-application",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2022-national-a:writing-application:external-given-opening",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:day#e-e8a03a19aff51d92",
+          "text": "In 2010, the UN Department of Global Communications instituted language days for each of the organization’s six official languages.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 76
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:day#s4",
+      "pos": "n.",
+      "glossZh": "时期；时代；如今（these days）",
+      "pronunciationId": "w:day#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:day#e-0cbbf28299f56c42",
+          "text": "I used classical techniques, translated from my college days spent in the darkroom into Photoshop, to achieve the black-and-white image (图像).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-a:figure-8f50d0ac5d38cb0b:cell-1-2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:day#e-a84bce8215dd18ee",
+          "text": "People have been pouring into stadiums since the days of ancient Greece.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:day#e-6ef8c28616593d7a",
+          "text": "These days you’d be hard pressed to find anyone in Australia over the age of 15 who doesn’t own a mobile phone.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:day#s5",
+      "pos": "短语",
+      "glossZh": "前几天",
+      "pronunciationId": "w:day#p-main",
+      "note": "the other day。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:day#e-d97504fb70d24bce",
+          "text": "I caught sight of myself in a cafe window the other day, bent over my phone, with my head down and shoulders tense near my ears.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:day#s6",
+      "pos": "短语",
+      "glossZh": "使某人非常高兴",
+      "pronunciationId": "w:day#p-main",
+      "note": "make sb's day。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:day#e-bdb307d0e1ce733b",
+          "text": "made her day",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:cloze",
+            "locator": {
+              "question": 55,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:55",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:day#s7",
+      "pos": "短语",
+      "glossZh": "获胜；取得最终成功",
+      "pronunciationId": "w:day#p-main",
+      "note": "win the day。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:day#e-b5b9d9aef5028f01",
+          "text": "Neither won the race, but the __55__ of human kindness won the day.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:day#s8",
+      "pos": "短语",
+      "glossZh": "归根结底；到头来",
+      "pronunciationId": "w:day#p-main",
+      "note": "at the end of the day，也可以表示「一天结束时」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:day#e-79dc474f209f1e10",
+          "text": "\"At the end of the day all transit agencies right now are doing everything they can to improve the rider experience.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 22
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏；地名；旅馆名；乍得语言名",
+      "reason": "同形专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

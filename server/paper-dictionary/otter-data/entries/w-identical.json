@@ -1,0 +1,171 @@
+{
+  "entryId": "w:identical",
+  "headword": "identical",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/aɪˈdentɪkl/",
+    "us": "/aɪˈdentɪkl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:identical#p-main",
+      "ipa": {
+        "uk": "/aɪˈdentɪkl/",
+        "us": "/aɪˈdentɪkl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more identical",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most identical",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "senses": [
+    {
+      "senseId": "w:identical#s1",
+      "pos": "adj.",
+      "glossZh": "完全相同的",
+      "pronunciationId": "w:identical#p-main",
+      "note": "identical to sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:identical#e-2c4ad7d7bff94cac",
+          "text": "However, for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 157,
+            "end": 166
+          }
+        },
+        {
+          "exampleId": "w:identical#e-2afee882bf9fe6fe",
+          "text": "It should give you a precise definition of each word, thus differentiating it from other words whose meanings are similar, but not identical.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 138,
+            "end": 147
+          }
+        },
+        {
+          "exampleId": "w:identical#e-23cfce60c812e723",
+          "text": "Identical testing procedures using the exact same materials frequently resulted in different charges, going against the established ranking.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:identical#s2",
+      "pos": "adj.",
+      "glossZh": "同卵的（双胞胎）",
+      "pronunciationId": "w:identical#p-main",
+      "note": "此例把金星比作地球的同卵双胞胎。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:identical#e-32bd74c059a9066b",
+          "text": "Venus is Earth's identical twin.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:28",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 26
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "同音韵词、近似相等的",
+      "reason": "术语义或非核心义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

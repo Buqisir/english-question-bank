@@ -1,0 +1,130 @@
+{
+  "entryId": "w:salary",
+  "headword": "salary",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsæləri/",
+    "us": "/ˈsæləri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:salary#p-main",
+      "ipa": {
+        "uk": "/ˈsæləri/",
+        "us": "/ˈsæləri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "salaries",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:salary#s1",
+      "pos": "n.",
+      "glossZh": "薪水",
+      "pronunciationId": "w:salary#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 18
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:salary#e-e5fb8b5404ecffe1",
+          "text": "In this course we will analyze many interesting aspects of the sports industry: sports leagues, ticket pricing, salary negotiations, discrimination, and NCAA policies to name a few.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 112,
+            "end": 118
+          }
+        },
+        {
+          "exampleId": "w:salary#e-69b1803720de9979",
+          "text": "She earns a basic and tax-free salary.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jan:23",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:salary#e-e838396d7d46c501",
+          "text": "But what they liked, they couldn’t afford on his sound engineer’s salary and what they could, they didn’t like.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 72
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "咸的",
+      "reason": "旧式形容词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

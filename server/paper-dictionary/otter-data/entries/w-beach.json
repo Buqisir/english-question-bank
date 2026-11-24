@@ -1,0 +1,159 @@
+{
+  "entryId": "w:beach",
+  "headword": "beach",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/biːtʃ/",
+    "us": "/biːtʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:beach#p-main",
+      "ipa": {
+        "uk": "/biːtʃ/",
+        "us": "/biːtʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "beaches",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "beached",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "beaching",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 16,
+    "mock": 109
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 109
+  },
+  "senses": [
+    {
+      "senseId": "w:beach#s1",
+      "pos": "n.",
+      "glossZh": "海滩；海滨沙滩",
+      "pronunciationId": "w:beach#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:beach#e-cb6880cd4c78c052",
+          "text": "Our journey takes us to picturesque Berber villages and lovely beaches.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:9",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:beach#e-7f30ffca05d3a04b",
+          "text": "For example, one participant’s experience of “We sat and listened to the waves at the beach for a while” was assigned the categories “sitting at beach” and “listening to waves.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 91
+          }
+        },
+        {
+          "exampleId": "w:beach#e-e73c3c7890071af1",
+          "text": "A month after visiting the French Riviera and enjoying the sandy beaches of Nice and Menton, I went hiking with friends in the Pala group.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:beach#s2",
+      "pos": "v.",
+      "glossZh": "使上岸；使搁浅；搁浅",
+      "pronunciationId": "w:beach#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏、赛车缓冲区、委婉脏话",
+      "reason": "专名、专业或罕见用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

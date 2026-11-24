@@ -1,0 +1,191 @@
+{
+  "entryId": "w:staff",
+  "headword": "staff",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/stɑːf/",
+    "us": "/stæf/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:staff#p-main",
+      "ipa": {
+        "uk": "/stɑːf/",
+        "us": "/stæf/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "staffs",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "staves",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "staffed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "staffing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 18,
+    "mock": 112
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 112
+  },
+  "senses": [
+    {
+      "senseId": "w:staff#s1",
+      "pos": "n.",
+      "glossZh": "全体员工",
+      "pronunciationId": "w:staff#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:staff#e-8c1d382cc94e6400",
+          "text": "Staff members hold plenty of bar events for guests like free shots, bar crawls and karaoke.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:staff#e-f0267974651e10d7",
+          "text": "The best table in this two-story colonial Thai home offers a window right into the kitchen, where you can see chef Gaggan and his staff in action.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 130,
+            "end": 135
+          }
+        },
+        {
+          "exampleId": "w:staff#e-eed5d7d41b1c3a41",
+          "text": "Interlibrary Loan (ILL) provides teachers, students and staff with access to books that are checked out or not owned by our own libraries, as well as digitized copies of articles and book chapters from our collection.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:staff#s2",
+      "pos": "n.",
+      "glossZh": "长手杖",
+      "pronunciationId": "w:staff#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:staff#s3",
+      "pos": "n.",
+      "glossZh": "五线谱",
+      "pronunciationId": "w:staff#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:staff#s4",
+      "pos": "v.",
+      "glossZh": "给……配备员工",
+      "pronunciationId": "w:staff#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "火车路签、外科导槽和 staph 的误拼",
+      "reason": "专业义或拼写误配"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

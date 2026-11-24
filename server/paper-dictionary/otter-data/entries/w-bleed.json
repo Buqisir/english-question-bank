@@ -1,0 +1,171 @@
+{
+  "entryId": "w:bleed",
+  "headword": "bleed",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bliːd/",
+    "us": "/bliːd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bleed#p-main",
+      "ipa": {
+        "uk": "/bliːd/",
+        "us": "/bliːd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "bled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "bleeding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "bleeds",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "senses": [
+    {
+      "senseId": "w:bleed#s1",
+      "pos": "v.",
+      "glossZh": "流血；出血",
+      "pronunciationId": "w:bleed#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bleed#e-b9c5edd350e126e2",
+          "text": "Two-hour practices were like endless marathons: holding the dragon’s bamboo spine (脊椎) until our hands bled, bending our bodies to follow the dragon head’s lead until our muscles screamed, with pains on our knees and exhaustion in our bones.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 103,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:bleed#e-339ace565602a285",
+          "text": "He fell into the bushes, and both knees bled.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:writing-continuation:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:bleed#e-6c480cfe62995173",
+          "text": "She couldn’t get up, she was bleeding heavily, and she had left her __44__ in the car.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam",
+            "paperTitle": "2025-2026学年第一学期浙江北斗星盟阶段性考试 高三年级 英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2025-12-senior-three-stage-exam:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bleed#s2",
+      "pos": "v.",
+      "glossZh": "渗开；洇开",
+      "pronunciationId": "w:bleed#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:bleed#s3",
+      "pos": "v.",
+      "glossZh": "榨取钱财；使不断亏损",
+      "pronunciationId": "w:bleed#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "引气、排气、印刷出血边及录音串音",
+      "reason": "专门义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

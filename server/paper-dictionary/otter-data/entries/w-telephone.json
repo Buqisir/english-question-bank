@@ -1,0 +1,180 @@
+{
+  "entryId": "w:telephone",
+  "headword": "telephone",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtelɪfəʊn/",
+    "us": "/ˈtelɪfoʊn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:telephone#p-main",
+      "ipa": {
+        "uk": "/ˈtelɪfəʊn/",
+        "us": "/ˈtelɪfoʊn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "telephones",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "telephoned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "telephoning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 25
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 24
+  },
+  "senses": [
+    {
+      "senseId": "w:telephone#s1",
+      "pos": "n.",
+      "glossZh": "电话",
+      "pronunciationId": "w:telephone#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:telephone#e-a68aa968d1e23dcf",
+          "text": "■On the same sheet of paper, write or type your name, address, telephone number, and birth date.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:telephone#e-2c44f5d56fb558d4",
+          "text": "My mobile phone was inside, but luckily there was a telephone box across the street.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:telephone#e-6b7f9d2f109addf4",
+          "text": "As it has been many years since I last used one, I should hardly be surprised that there are no longer any public telephones near my house.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 124
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:telephone#s2",
+      "pos": "v.",
+      "glossZh": "打电话给",
+      "pronunciationId": "w:telephone#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:telephone#e-928739437a253332",
+          "text": "Telephone their family.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "传话游戏",
+      "reason": "地区用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

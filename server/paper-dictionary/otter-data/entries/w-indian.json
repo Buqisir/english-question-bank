@@ -1,0 +1,245 @@
+{
+  "entryId": "w:indian",
+  "headword": "Indian",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɪndiən/",
+    "us": "/ˈɪndiən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:indian#p-main",
+      "ipa": {
+        "uk": "/ˈɪndiən/",
+        "us": "/ˈɪndiən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more Indian",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most Indian",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more indian",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most indian",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "Indians",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "indians",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "senses": [
+    {
+      "senseId": "w:indian#s1",
+      "pos": "adj.",
+      "glossZh": "印度的；印度人的",
+      "pronunciationId": "w:indian#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:indian#e-a4f211994e33380d",
+          "text": "Earning first place on the latest “Asia’s 50 best restaurants” list, progressive Indian restaurant Gaggan is one of the most exciting venues(场所) to arrive in Bangkok in recent years.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 87
+          }
+        },
+        {
+          "exampleId": "w:indian#e-ff796ea405d91f83",
+          "text": "The difference between me and Indian women is what we wear.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:seven-choices:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:indian#e-dd20e169352c1dc4",
+          "text": "The earliest examples demonstrate an influence of Indian design, with later native Chinese styles becoming more popular.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:grammar-fill:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:indian#s2",
+      "pos": "n.",
+      "glossZh": "印度人",
+      "pronunciationId": "w:indian#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:indian#e-5b643266f4904a2e",
+          "text": "Indians dislike living alongside wild animals.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-jiangsu-nantong-2026-05-third-survey-test:25",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:indian#e-ecc7dd79b7b13d81",
+          "text": "Two Kiwis, one Singaporean, and one Indian walked into a bar.",
+          "source": {
+            "paperId": "paper-mock-wuhan-2026-03-sanyue-diaoyan",
+            "paperTitle": "武汉市2026届高中毕业生三月调研考试英语试题",
+            "groupId": "group:paper-mock-wuhan-2026-03-sanyue-diaoyan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-wuhan-2026-03-sanyue-diaoyan:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:indian#e-bd0ffd935e285924",
+          "text": "Indians and animals compete for living space.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-jiangsu-nantong-2026-05-third-survey-test:25",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:indian#s3",
+      "pos": "adj. / n.",
+      "glossZh": "美洲原住民的；美洲原住民",
+      "pronunciationId": "w:indian#p-main",
+      "note": "旧称。当代英语常用 Indigenous 或 Native American，具体用法随地区和个人偏好而异。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "弹珠、国际象棋开局",
+      "reason": "专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

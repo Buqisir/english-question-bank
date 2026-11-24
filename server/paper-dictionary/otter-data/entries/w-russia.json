@@ -1,0 +1,128 @@
+{
+  "entryId": "w:russia",
+  "headword": "Russia",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈrʌʃə/",
+    "us": "/ˈrʌʃə/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:russia#p-main",
+      "ipa": {
+        "uk": "/ˈrʌʃə/",
+        "us": "/ˈrʌʃə/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "Russias",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:russia#s1",
+      "pos": "n.",
+      "glossZh": "俄罗斯",
+      "pronunciationId": "w:russia#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 14
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:russia#e-cc457d557c1ba20b",
+          "text": "The Saint Lukas is one of five government-sponsored medical trains that travel to remote towns in central and eastern Russia.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 118,
+            "end": 124
+          }
+        },
+        {
+          "exampleId": "w:russia#e-571025417a42baa8",
+          "text": "In a similar time frame, a group of countries – led by China and including Russia, South Africa, Belarus and others – have announced their intention to cooperate on an International Lunar Research Station (ILRS) of their own.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-a:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:russia#e-7cb207886a4f020a",
+          "text": "The Caspian Sea touches five countries – Azerbaijan, Iran, Kazakhstan, Russia, and Turkmenistan – and a drop in water levels could seriously impact trade routes vital to the economies of these countries, as low water levels could prevent ships from docking (入港).",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 77
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "苏联或俄罗斯帝国",
+      "reason": "对应特定历史政体"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

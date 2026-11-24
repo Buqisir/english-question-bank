@@ -1,0 +1,220 @@
+{
+  "entryId": "w:car",
+  "headword": "car",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kɑː(r)/",
+    "us": "/kɑːr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:car#p-main",
+      "ipa": {
+        "uk": "/kɑː(r)/",
+        "us": "/kɑːr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "cars",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "CARs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 88,
+    "mock": 401
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 401
+  },
+  "senses": [
+    {
+      "senseId": "w:car#s1",
+      "pos": "n.",
+      "glossZh": "汽车；轿车",
+      "pronunciationId": "w:car#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 74,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:car#e-334f55fba7d6f714",
+          "text": "Kevin Balke, a research engineer at the Texas A&M University Transportation Institute, says that while smart lights can be particularly beneficial for some cities, others are so jammed that only a sharp reduction in the number of cars on the road will make a meaningful difference.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 230,
+            "end": 234
+          }
+        },
+        {
+          "exampleId": "w:car#e-cf8f98769218db03",
+          "text": "I parked my car outside the farm and walked past a milking house which had apparently not been used in many years.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:car#e-d6decd5627f7ea8b",
+          "text": "Little do they know that as they do so, a burst of energy is sent up to street level to help charge an electric car.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 112,
+            "end": 115
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:car#s2",
+      "pos": "n.",
+      "glossZh": "（火车的）车厢",
+      "pronunciationId": "w:car#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:car#e-4962c39e7146c513",
+          "text": "Most long-distance trains, especially the sleeping car accommodations, sell out very quickly.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:car#e-3101c08ad634e9c8",
+          "text": "Then you won’t have to walk through several cars on a moving train three times a day for your meals.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:car#e-e97ce1f0eb1f74f2",
+          "text": "He may also book you in a sleeping car that's right next to the diner.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:car#s3",
+      "pos": "n.",
+      "glossZh": "（电梯或游乐设施的）轿厢；吊舱",
+      "pronunciationId": "w:car#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "列表首元素、嵌合抗原受体等",
+      "reason": "专业术语或缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

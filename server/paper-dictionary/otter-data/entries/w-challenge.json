@@ -1,0 +1,400 @@
+{
+  "entryId": "w:challenge",
+  "headword": "challenge",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtʃælɪndʒ/",
+    "us": "/ˈtʃælɪndʒ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:challenge#p-main",
+      "ipa": {
+        "uk": "/ˈtʃælɪndʒ/",
+        "us": "/ˈtʃælɪndʒ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "challenges",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "challenged",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "challenging",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 48,
+    "mock": 694
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 694
+  },
+  "senses": [
+    {
+      "senseId": "w:challenge#s1",
+      "pos": "n.",
+      "glossZh": "挑战；难题",
+      "pronunciationId": "w:challenge#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 27,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:challenge#e-b5526ca633c7ce7e",
+          "text": "In any given office, employees can range from age 22 to 70 and beyond, and finding common ground in communication style can be a challenge.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 129,
+            "end": 138
+          }
+        },
+        {
+          "exampleId": "w:challenge#e-abc8f8a6cf2d6998",
+          "text": "As a special education teacher at the school, I was familiar with the challenges David faced and was proud of his strong determination.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "writing-continuation-7",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 80
+          }
+        },
+        {
+          "exampleId": "w:challenge#e-5e7e52420fc0caed",
+          "text": "Living in Iowa and trying to become a photographer specializing in landscape (风景) can be quite a challenge, mainly because the corn state lacks geographical variation.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 106
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:challenge#s2",
+      "pos": "n.",
+      "glossZh": "挑战活动；挑战赛",
+      "pronunciationId": "w:challenge#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:challenge#e-7810e96cf6a265d3",
+          "text": "POETRY CHALLENGE",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:challenge#e-6cec79646063fc50",
+          "text": "I once took up a challenge to create a painting every day for a month and post the works online.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:challenge#s3",
+      "pos": "adj.",
+      "glossZh": "有挑战性的；难办的",
+      "pronunciationId": "w:challenge#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:challenge#e-96c0c2f787ae5d6c",
+          "text": "Challenging work that requires lots of analytical thinking, planning and other managerial skills might help your brain stay sharp as you age, a study published Wednesday in the journal Neurology suggests.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:challenge#e-7bb44563550eab46",
+          "text": "Mesa Arts Center is hosting an eight-week youth arts course on Saturdays to teach artistic skills and knowledge through fun and challenging art classes in a wide variety of art materials, including painting, drawing, mixed media and sculpture, ensuring mentally stimulating sessions for all.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 128,
+            "end": 139
+          }
+        },
+        {
+          "exampleId": "w:challenge#e-c2d9b085c9adcef4",
+          "text": "Getting to Shrewsbury Town Center from London is challenging but worth the anxiety.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:challenge#s4",
+      "pos": "v.",
+      "glossZh": "使……接受挑战；考验；激励",
+      "pronunciationId": "w:challenge#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:challenge#e-c83dfc8f2c5f5605",
+          "text": "Still, continuing to challenge yourself mentally and keeping your mind busy can only help.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:challenge#e-01f16f538bbd9de5",
+          "text": "●Continually challenge yourself to try something new.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:challenge#e-034b695f896f96a9",
+          "text": "Participants – 72 healthy male and female adults – were first asked to perform a computer test that challenged their visual and spatial learning.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 110
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:challenge#s5",
+      "pos": "adj.",
+      "glossZh": "（在某方面）有困难的",
+      "pronunciationId": "w:challenge#p-main",
+      "note": "常用副词说明困难所在，例句为幽默用法。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:challenge#e-cfcfea7755810602",
+          "text": "Well, I may be old, but I’m not hopelessly challenged, digitally speaking.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:challenge#s6",
+      "pos": "v.",
+      "glossZh": "质疑；对……提出异议",
+      "pronunciationId": "w:challenge#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:challenge#s7",
+      "pos": "v.",
+      "glossZh": "向……挑战；邀请……参加竞赛",
+      "pronunciationId": "w:challenge#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "陪审员回避异议、盘问口令、猎犬叫声等",
+      "reason": "法律、军事或狩猎专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

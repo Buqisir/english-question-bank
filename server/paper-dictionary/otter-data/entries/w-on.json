@@ -1,0 +1,1047 @@
+{
+  "entryId": "w:on",
+  "headword": "on",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɒn/",
+    "us": "/ɑːn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:on#p-main",
+      "ipa": {
+        "uk": "/ɒn/",
+        "us": "/ɑːn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 764,
+    "mock": 5423
+  },
+  "unassignedCounts": {
+    "gaokao": 716,
+    "mock": 5418
+  },
+  "senses": [
+    {
+      "senseId": "w:on#s1",
+      "pos": "prep.",
+      "glossZh": "在……上面",
+      "pronunciationId": "w:on#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-2444289923343d0f",
+          "text": "■Write by hand or type on a single sheet of paper.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:on#e-1a946ac553cb32c2",
+          "text": "The water would then drip(滴落)on the plants below.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:on#e-d306dae095f8f7c7",
+          "text": "By the time 250,000 were on the bridge, engineers noticed something terrible: the roadway was flattening under what turned out to be the heaviest load it had ever been asked to carry.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s2",
+      "pos": "prep.",
+      "glossZh": "在……的时候（日期或场合）",
+      "pronunciationId": "w:on#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-b1ef9c82a3544118",
+          "text": "Mailing your entry on October 30.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2020-i:23",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:on#e-b4405c8973a41bd1",
+          "text": "What happened to the Golden Gate Bridge on its 50th birthday?",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2020-ii:28",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s3",
+      "pos": "prep.",
+      "glossZh": "关于……",
+      "pronunciationId": "w:on#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-a9eb0ecf98aa763b",
+          "text": "Before your doctor’s visit, keep notes on how you are feeling.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-ii:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:on#e-5e665200f68e91ee",
+          "text": "In 1992, my senior year, Perloff hosted a conference on a composer known for his rule-breaking style, John Cage.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s4",
+      "pos": "prep.",
+      "glossZh": "受事对象；作用于……",
+      "pronunciationId": "w:on#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-bceac4467c340b7a",
+          "text": "To test the effect of social influence on eating habits, the researchers conducted two experiments.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:on#e-39802ed7f32ae346",
+          "text": "Their deforestation and burning of tropical rainforests are already having severe effects on global climate, biodiversity, human health, and local and regional socioeconomics.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 92
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s5",
+      "pos": "prep.",
+      "glossZh": "以……为依据",
+      "pronunciationId": "w:on#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-eaa4d983435ee6e9",
+          "text": "On what basis do we “adjust the influence” according to the last paragraph?",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2020-i:35",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 2
+          }
+        },
+        {
+          "exampleId": "w:on#e-284b3d83ce018400",
+          "text": "Remember, even world champion athletes practice their skills on a consistent basis.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 63
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s6",
+      "pos": "prep.",
+      "glossZh": "在……进行中；参与……",
+      "pronunciationId": "w:on#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-195e786deb1bb8b7",
+          "text": "How many people can each grand prize winner take on the free trip?",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2020-i:21",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:on#e-5cf72d921cd12c15",
+          "text": "With everything ready, Bernard started out on his new business.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:given-2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s7",
+      "pos": "prep.",
+      "glossZh": "在……平台上",
+      "pronunciationId": "w:on#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-64cba49510691c35",
+          "text": "Every night it goes on the web, keeping parents and the world informed of the happenings at Pali.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:on#e-6f4c35c09a034fe2",
+          "text": "A comprehensive instruction book is provided on the official app for all new users.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a",
+            "locator": {
+              "paragraph": 27,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a:12",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s8",
+      "pos": "prep.",
+      "glossZh": "在……地方",
+      "pronunciationId": "w:on#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-c12e9a53939c19d4",
+          "text": "Mauer, of Edgar, Wisconsin, grew up on a farm in a family of 10 children.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:on#e-2aab97e3a99dec72",
+          "text": "On this remote Pacific island, beginning about 1,000 years ago, native people carved the enormous stone moai.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 2
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s9",
+      "pos": "adv.",
+      "glossZh": "继续",
+      "pronunciationId": "w:on#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-60cd1aca55d8a0fe",
+          "text": "It seemed to go on forever!",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:on#e-15d8d1a8c467bb6c",
+          "text": "Yet, motorists struggle on despite being blinded by the sun’s glare.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s10",
+      "pos": "短语",
+      "glossZh": "独自",
+      "pronunciationId": "w:on#p-main",
+      "note": "on one’s own。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-6b18fdf959ffb24f",
+          "text": "She ran the family farm on her own.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2020-i:24",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:on#e-6442ca7fd7af6328",
+          "text": "However, Molai went looking on his own and __50__ a nearby island where he began to plant trees.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s11",
+      "pos": "短语",
+      "glossZh": "在路上",
+      "pronunciationId": "w:on#p-main",
+      "note": "on one’s way。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-94a59fe5bb1a025b",
+          "text": "In Samarkand, Mr Bissell admires the architectural wonders, while on his way to Bukhara he gets a taste of police methods when suspected of drug dealing.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:on#e-39e8f988c782429d",
+          "text": "To enjoy the scenery on the way.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s12",
+      "pos": "短语",
+      "glossZh": "集中注意力于……",
+      "pronunciationId": "w:on#p-main",
+      "note": "focus on。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-bbe2a47a9329e9a9",
+          "text": "Too often when you stand up to give a speech, you focus on the “public” at the expense of the” speaking.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:on#e-0affd8b767bc14d4",
+          "text": "“__37__ Focus on the speaking.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:on#e-f497265b79320df7",
+          "text": "Take the fear out of public speaking by focusing on your listeners",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-i:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s13",
+      "pos": "短语",
+      "glossZh": "步行",
+      "pronunciationId": "w:on#p-main",
+      "note": "on foot。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-d4dbfd803fd66d6b",
+          "text": "On foot",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 2
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s14",
+      "pos": "短语",
+      "glossZh": "另一方面",
+      "pronunciationId": "w:on#p-main",
+      "note": "on the other hand。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-fe73a1e3e02757f3",
+          "text": "“On the other hand, you probably can’t count the times that you’ve thought, “I’m glad that talk is over.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 1,
+            "end": 3
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s15",
+      "pos": "短语",
+      "glossZh": "支持某人",
+      "pronunciationId": "w:on#p-main",
+      "note": "on sb’s side。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-42ebf9f98f012d73",
+          "text": "Remember, your doctor and other caregivers are on your side.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-ii:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s16",
+      "pos": "adj. / adv.",
+      "glossZh": "开着；运行中",
+      "pronunciationId": "w:on#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:on#s17",
+      "pos": "短语",
+      "glossZh": "打开；启动",
+      "pronunciationId": "w:on#p-main",
+      "note": "turn on 或 switch on。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-deb0ddf8efce965e",
+          "text": "Turn on the light.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:on#e-60bf09051d8d0f7a",
+          "text": "Next, Jeff turned on the second stove burner to heat up the frying pan.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:on#e-02f1d41db47f5f56",
+          "text": "Maybe you say “go,” or turn on a certain song, or whatever.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s18",
+      "pos": "短语",
+      "glossZh": "平均而言",
+      "pronunciationId": "w:on#p-main",
+      "note": "on average。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-03e1701b38ac3a81",
+          "text": "It isn’t just that people are, on average, living longer.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:grammar-fill:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:on#e-e8cfd73662a1dde5",
+          "text": "Across all participants, those in the beauty group scored almost 14% higher on average than the control group in abstract thinking.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:on#e-2e761566f3fd7836",
+          "text": "Which participants got the highest score on average in the test?",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2026-i:33",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s19",
+      "pos": "短语",
+      "glossZh": "故意",
+      "pronunciationId": "w:on#p-main",
+      "note": "on purpose。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-ab5bf03639a45174",
+          "text": "Communicating messages on purpose.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:27",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:on#s20",
+      "pos": "短语",
+      "glossZh": "准时",
+      "pronunciationId": "w:on#p-main",
+      "note": "on time。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:on#e-db8faa553b08cc29",
+          "text": "Murphy gets up at a quarter to five and drives thirty minutes every day to get to work on time.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 89
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,264 @@
+{
+  "entryId": "w:tolerate",
+  "headword": "tolerate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtɒləreɪt/",
+    "us": "/ˈtɑːləreɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:tolerate#p-main",
+      "ipa": {
+        "uk": "/ˈtɒləreɪt/",
+        "us": "/ˈtɑːləreɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "tolerated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "tolerates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "tolerating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 7
+  },
+  "senses": [
+    {
+      "senseId": "w:tolerate#s1",
+      "pos": "v.",
+      "glossZh": "容许",
+      "pronunciationId": "w:tolerate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tolerate#e-3d76f06668a3131e",
+          "text": "No editor is likely to tolerate a writer who does not take the trouble to spell words correctly.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:tolerate#e-372be6254a13e773",
+          "text": "“Aggressive Tom” would not be __48__ tolerated; I had to become “Gentle Tom.” Relaxed, __49__, and calm.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:cloze:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:tolerate#e-94d57cedb1f75f5a",
+          "text": "The life there was simple yet __41__—unspoken rules governed everything and new ideas were rarely tolerated.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-04-second-mock",
+            "paperTitle": "2026届山东省潍坊市高考第二次模拟考试英语试卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-04-second-mock:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-04-second-mock:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 107
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:tolerate#s2",
+      "pos": "v.",
+      "glossZh": "忍受",
+      "pronunciationId": "w:tolerate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tolerate#e-e898ad2335774ab4",
+          "text": "So many of us have the belief that being comfortable is the only state we will tolerate, and when we experience something outside of our comfort zone, we get impatient about the circumstances.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 87
+          }
+        },
+        {
+          "exampleId": "w:tolerate#e-0718257b3d35e69c",
+          "text": "Learning to tolerate discomfort, rather than avoiding it at all costs, can foster both toughness and closeness.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:tolerate#e-a9abce4f4a86e5e8",
+          "text": "Tolerate the disturbing noise.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-nb-2026-m2:27",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:tolerate#s3",
+      "pos": "v.",
+      "glossZh": "耐受",
+      "pronunciationId": "w:tolerate#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tolerate#e-ea8ab76461b0a870",
+          "text": "Water the bulbs regularly during growth – there’s no need for frequent watering, as they tolerate slight dryness well.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:tolerate#e-003b72ce2eacc1e3",
+          "text": "And it will tolerate temperatures of 1,500°C.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-d:1",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 20
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

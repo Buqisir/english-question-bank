@@ -1,0 +1,206 @@
+{
+  "entryId": "w:disturb",
+  "headword": "disturb",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈstɜːb/",
+    "us": "/dɪˈstɜːrb/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:disturb#p-main",
+      "ipa": {
+        "uk": "/dɪˈstɜːb/",
+        "us": "/dɪˈstɜːrb/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "disturbed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "disturbing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "disturbs",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 55
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 51
+  },
+  "senses": [
+    {
+      "senseId": "w:disturb#s1",
+      "pos": "v.",
+      "glossZh": "打扰；惊扰；扰乱",
+      "pronunciationId": "w:disturb#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:disturb#e-1af89cca9296073e",
+          "text": "We watched it from a distance, not wanting to disturb it or scare off its mother.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:disturb#e-76617d82c3202298",
+          "text": "Schedule demanding tasks for your peak productivity hours and defend these blocks using visual signals (e.g. “Do not disturb” signs) to minimize interruptions.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 117,
+            "end": 124
+          }
+        },
+        {
+          "exampleId": "w:disturb#e-c169fc05392e476c",
+          "text": "Energy flows drive all of life, but humans are disturbing nature’s dynamic processes.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:disturb#s2",
+      "pos": "v.",
+      "glossZh": "使不安；使烦恼",
+      "pronunciationId": "w:disturb#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:disturb#s3",
+      "pos": "adj.",
+      "glossZh": "令人不安的",
+      "pronunciationId": "w:disturb#p-main",
+      "note": "disturbing。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:disturb#e-a8347515949e09b4",
+          "text": "They believe it could lead to non-invasive（无创的）tests, which would be particularly transformative for illnesses, where people often delay checks due to embarrassment until they experience disturbing symptoms.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 187,
+            "end": 197
+          }
+        },
+        {
+          "exampleId": "w:disturb#e-a134b80ea26014e9",
+          "text": "We can also use breath to move our attention from disturbing thoughts back to ourselves.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:seven-choices:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 60
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,210 @@
+{
+  "entryId": "w:dam",
+  "headword": "dam",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dæm/",
+    "us": "/dæm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dam#p-main",
+      "ipa": {
+        "uk": "/dæm/",
+        "us": "/dæm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "dams",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "dammed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "damming",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 4
+  },
+  "senses": [
+    {
+      "senseId": "w:dam#s1",
+      "pos": "n.",
+      "glossZh": "水坝；堤坝",
+      "pronunciationId": "w:dam#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dam#e-6ab0303261b3dd1f",
+          "text": "Many dams trap the sand that flows down rivers, piling it up in reservoirs (水库).",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:dam#e-b60cf551f2a0718b",
+          "text": "Throughout the entire conservation journey, concrete efforts including field surveys, the construction of flood-prevention dams and protective fencing have been made by workers from the Helan Mountain rock art administration.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 127
+          }
+        },
+        {
+          "exampleId": "w:dam#e-ab996a19d2151a76",
+          "text": "That sudden drop aligns with human activities on the river, especially dam construction in the 1950s that blocked off the porpoise’s movement to and from the river’s main channel.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:reading-d:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 74
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dam#s2",
+      "pos": "n.",
+      "glossZh": "水库；坝拦成的水域",
+      "pronunciationId": "w:dam#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dam#e-1d3999ac1aba1636",
+          "text": "There in front of me lay Logue Brook Dam, with boats pulling water skiers and folks sunbathing out in the open.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:dam#e-5db52f344071d9c2",
+          "text": "I went back to my bicycle, pushed it up the hill, and let it coast into the lovely cool waters of the dam, where I rolled around wearing my full cycling gear.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-b:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 105
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dam#s3",
+      "pos": "v.",
+      "glossZh": "筑坝拦水",
+      "pronunciationId": "w:dam#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Dam Square、母兽、牙科隔湿片、旧铜币",
+      "reason": "专名、同形词或专业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

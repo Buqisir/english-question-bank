@@ -1,0 +1,227 @@
+{
+  "entryId": "w:splendid",
+  "headword": "splendid",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsplendɪd/",
+    "us": "/ˈsplendɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:splendid#p-main",
+      "ipa": {
+        "uk": "/ˈsplendɪd/",
+        "us": "/ˈsplendɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more splendid",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most splendid",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "splendider",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "splendidest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "senses": [
+    {
+      "senseId": "w:splendid#s1",
+      "pos": "adj.",
+      "glossZh": "出色的",
+      "pronunciationId": "w:splendid#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:splendid#e-145cff3517999c3e",
+          "text": "A joyful journey with an ordinary goal and a painful one aimed at a splendid achievement, which one is more worthwhile?",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:splendid#e-2bdf68cbaa1b5b7c",
+          "text": "● Baroque Era (1600-1750) is marked by splendid musical forms, with composers like Johann",
+          "source": {
+            "paperId": "paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey",
+            "paperTitle": "常州市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-mock-jiangsu-changzhou-2026-01-senior-three-first-semester-final-survey:reading-a:14",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:splendid#s2",
+      "pos": "adj.",
+      "glossZh": "壮丽的",
+      "pronunciationId": "w:splendid#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:splendid#e-3a3e45e0a4d95856",
+          "text": "With dramatic peaks and splendid lakes, Yellowstone National Park is an outdoor enthusiast’s paradise.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:splendid#e-5b272ba777bda72e",
+          "text": "People have long shaped the area, but their impact is just a thin layer on a remarkably splendid landscape.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-sep-opening:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 96
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:splendid#s3",
+      "pos": "adj.",
+      "glossZh": "华丽的",
+      "pronunciationId": "w:splendid#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:splendid#e-061892263a9cbd47",
+          "text": "The London production is famous for its splendid set design, including a turning stage, a grand staircase, and a large luxurious light that hangs from the ceiling.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-a:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:splendid#e-dad6c6ad60e28d4f",
+          "text": "On the flight north, which was booked by Brown, everything felt unreal – leather seats, fresh fruit, and, after landing, a reception in a splendid hall.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 138,
+            "end": 146
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

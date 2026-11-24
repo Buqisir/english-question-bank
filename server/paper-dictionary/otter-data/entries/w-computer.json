@@ -1,0 +1,129 @@
+{
+  "entryId": "w:computer",
+  "headword": "computer",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəmˈpjuːtə(r)/",
+    "us": "/kəmˈpjuːtər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:computer#p-main",
+      "ipa": {
+        "uk": "/kəmˈpjuːtə(r)/",
+        "us": "/kəmˈpjuːtər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "computers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 30,
+    "mock": 180
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:computer#s1",
+      "pos": "n.",
+      "glossZh": "计算机；电脑",
+      "pronunciationId": "w:computer#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 30,
+        "mock": 180
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:computer#e-02823de1ea49c459",
+          "text": "His father frequently amused the boy with a tablet computer which was loaded with colorful pictures that come alive when you poke them.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:computer#e-a440c688199a1465",
+          "text": "Whenever you have to write a paper, a letter, or any other document for work or school, you probably head toward the computer.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 117,
+            "end": 125
+          }
+        },
+        {
+          "exampleId": "w:computer#e-3c3dcbc52a9dc806",
+          "text": "SLEAP uses computer vision (the ability for computers to understand images) and deep learning (an AI approach for training a computer to learn and work like the human brain) to help researchers process images much more quickly.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 53
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "计算员；使用电脑",
+      "reason": "过时名词或罕见动词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

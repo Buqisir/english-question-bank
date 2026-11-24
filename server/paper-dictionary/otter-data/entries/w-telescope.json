@@ -1,0 +1,159 @@
+{
+  "entryId": "w:telescope",
+  "headword": "telescope",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtelɪskəʊp/",
+    "us": "/ˈtelɪskoʊp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:telescope#p-main",
+      "ipa": {
+        "uk": "/ˈtelɪskəʊp/",
+        "us": "/ˈtelɪskoʊp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "telescopes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "telescoped",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "telescoping",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "senses": [
+    {
+      "senseId": "w:telescope#s1",
+      "pos": "n.",
+      "glossZh": "望远镜",
+      "pronunciationId": "w:telescope#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:telescope#e-9cbda13313523603",
+          "text": "But he didn’t just want to watch the meteors; he wanted to see them through his own telescope.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a3",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A3 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a3:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:telescope#e-58fffdbc184f6b39",
+          "text": "The signal was returned to Earth in less than a second, captured by a telescope in Yunnan in South-Western China.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n123:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:telescope#e-9559a3ac8d575690",
+          "text": "The Dark Sky Project offers a range of tours, including the option to visit New Zealand’s only professional research observatory, where you can view the night sky through their state-of-the-art 16\" telescopes.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam",
+            "paperTitle": "南京师范大学附中、杭州二中、长郡中学三校2026年三省联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 198,
+            "end": 208
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:telescope#s2",
+      "pos": "v.",
+      "glossZh": "套叠收缩",
+      "pronunciationId": "w:telescope#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "数学中因约去而缩减、凸眼金鱼",
+      "reason": "专业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

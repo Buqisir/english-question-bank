@@ -1,0 +1,180 @@
+{
+  "entryId": "w:downstairs",
+  "headword": "downstairs",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌdaʊnˈsteəz/",
+    "us": "/ˌdaʊnˈsterz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:downstairs#p-main",
+      "ipa": {
+        "uk": "/ˌdaʊnˈsteəz/",
+        "us": "/ˌdaʊnˈsterz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "farther downstairs",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "farthest downstairs",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "further downstairs",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "furthest downstairs",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "senses": [
+    {
+      "senseId": "w:downstairs#s1",
+      "pos": "adv. / n.",
+      "glossZh": "在楼下；往楼下；楼下",
+      "pronunciationId": "w:downstairs#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:downstairs#e-177d86ae705e6739",
+          "text": "When she dashed downstairs and saw the large, ribbon-topped box waiting, her heart soared.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:downstairs#e-81ebbbf586d44a07",
+          "text": "“I have a chair downstairs that might calm your baby,” I smiled softly.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:downstairs#e-4871ddfd3a9da875",
+          "text": "Everything seemed peaceful until that evening, when we were reading by the fire in the living room and a strange sound suddenly came from downstairs.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 138,
+            "end": 148
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:downstairs#s2",
+      "pos": "adj.",
+      "glossZh": "楼下的",
+      "pronunciationId": "w:downstairs#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:downstairs#e-76c5244485fd20e9",
+          "text": "I thought I might find it with my downstairs neighbors, a grad-student couple with an army of cats.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 44
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "地狱、下体",
+      "reason": "俚语性委婉用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,414 @@
+{
+  "entryId": "w:baby",
+  "headword": "baby",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈbeɪbi/",
+    "us": "/ˈbeɪbi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:baby#p-main",
+      "ipa": {
+        "uk": "/ˈbeɪbi/",
+        "us": "/ˈbeɪbi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "babier",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "babiest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "baby-er",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "baby-est",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "babyer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "babyest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "babies",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "babied",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "babying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 18,
+    "mock": 94
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 93
+  },
+  "senses": [
+    {
+      "senseId": "w:baby#s1",
+      "pos": "n.",
+      "glossZh": "婴儿",
+      "pronunciationId": "w:baby#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:baby#e-bdda579ff88ed24c",
+          "text": "He kicked it wide open,finding a __49__ woman in a wheelchair with a little boy and a tiny baby.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:cloze:3",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:baby#e-a9ad6820878501cc",
+          "text": "In humans, babies can put a round shape in a round hole from around one year of age, but it will be another year before they are able to do the same with less symmetrical（对称的）shapes.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:baby#e-85ed16d29caa3c46",
+          "text": "How Your Baby Learns to Love",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:35",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:baby#s2",
+      "pos": "n.",
+      "glossZh": "幼崽；幼兽",
+      "pronunciationId": "w:baby#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:baby#e-793bb1648d515705",
+          "text": "In one case, a mother presents her foot to her crying baby, signaling: \"Climb on me.\" The youngster immediately jumps on to its mother’s back and they travel off together.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:baby#s3",
+      "pos": "adj.",
+      "glossZh": "幼小的；供婴儿用的",
+      "pronunciationId": "w:baby#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:baby#e-f0897762747c89e5",
+          "text": "We had to have a bit of a production line going, making up “tiger milk”, washing baby bottles, and cleaning the floors.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 85
+          }
+        },
+        {
+          "exampleId": "w:baby#e-4c301feccf2dea7b",
+          "text": "Beneath the steps was a baby red squirrel.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:baby#e-ad8ccbf41b1037c4",
+          "text": "Meowing starts as soon as a baby cat is brought to life and uses it to get the mother’s attention and be fed.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:baby#s4",
+      "pos": "短语",
+      "glossZh": "婴儿潮一代的人",
+      "pronunciationId": "w:baby#p-main",
+      "note": "baby boomer，常指第二次世界大战后出生于人口高峰的一代。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:baby#e-d3b3d1014ded2a19",
+          "text": "Age is naturally a factor（因素） – only 58 percent of Generation Ys still use landlines now and then, compared to 84 percent of Baby Boomers who’ve perhaps had the same home number for 50 years.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 125,
+            "end": 129
+          }
+        },
+        {
+          "exampleId": "w:baby#e-3c884d45d02f0738",
+          "text": "That said, to be honest the only people who ever ring our home phone are our Baby Boomer parents, to the point where we play a game and guess who is calling before we pick up the phone (using Caller ID would take the fun out of it).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:baby#s5",
+      "pos": "短语",
+      "glossZh": "小步前进；先做一小步",
+      "pronunciationId": "w:baby#p-main",
+      "note": "baby steps。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:baby#e-6424a16bc0edbe7f",
+          "text": "By doing so, you're taking baby steps toward the process of submitting the demanding college essays.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:baby#s6",
+      "pos": "n.",
+      "glossZh": "宝贝；亲爱的",
+      "pronunciationId": "w:baby#p-main",
+      "note": "亲昵称呼。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:baby#s7",
+      "pos": "n.",
+      "glossZh": "自己珍视或负责的项目",
+      "pronunciationId": "w:baby#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:baby#s8",
+      "pos": "v.",
+      "glossZh": "娇惯；过分照顾",
+      "pronunciationId": "w:baby#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏、特定群体新成员",
+      "reason": "专名或特定语境中的用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

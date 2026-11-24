@@ -1,0 +1,217 @@
+{
+  "entryId": "w:disappear",
+  "headword": "disappear",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌdɪsəˈpɪə(r)/",
+    "us": "/ˌdɪsəˈpɪr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:disappear#p-main",
+      "ipa": {
+        "uk": "/ˌdɪsəˈpɪə(r)/",
+        "us": "/ˌdɪsəˈpɪr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "disappeared",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "disappearing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "disappears",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 101
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 101
+  },
+  "senses": [
+    {
+      "senseId": "w:disappear#s1",
+      "pos": "v.",
+      "glossZh": "消失；不见；失踪",
+      "pronunciationId": "w:disappear#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:disappear#e-84dc16d083bf9996",
+          "text": "It crashed through a wooden fence and disappeared.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:disappear#e-d7e03cee06d5a867",
+          "text": "Two basic magic tricks are making objects seem to appear and making objects seem to disappear.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:disappear#e-1207a3ae796b49b2",
+          "text": "What actually happens is that the magician makes the cut or burned object disappear by quickly hiding it while the audience watches something else.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 83
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:disappear#s2",
+      "pos": "v.",
+      "glossZh": "不复存在；消亡",
+      "pronunciationId": "w:disappear#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:disappear#e-756e6db58dc09bef",
+          "text": "Once the drink is gone, the straw will take centuries to disappear.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:disappear#e-1340b59ea1005bff",
+          "text": "Many species could well disappear completely if the present trend continues.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:disappear#e-8a06a36fe5e11f5f",
+          "text": "The doubt about cloud seeding has disappeared.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:31",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 45
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "使某人失踪（及物用法）",
+      "reason": "少见且常出现在特定政治语境"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

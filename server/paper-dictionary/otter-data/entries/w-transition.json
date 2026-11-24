@@ -1,0 +1,216 @@
+{
+  "entryId": "w:transition",
+  "headword": "transition",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/trænˈzɪʃn/",
+    "us": "/trænˈzɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:transition#p-main",
+      "ipa": {
+        "uk": "/trænˈzɪʃn/",
+        "us": "/trænˈzɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "transitions",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "transitioned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "transitioning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 49
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 44
+  },
+  "senses": [
+    {
+      "senseId": "w:transition#s1",
+      "pos": "n.",
+      "glossZh": "转变",
+      "pronunciationId": "w:transition#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:transition#e-fc02bbdf1d0c7cbe",
+          "text": "This energy transition（变革）is global, and the amount of renewable energy the world will need is “a little bit mind-blowing,” says mechanical engineer Keith Wipke at the National Renewable Energy Laboratory.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:transition#e-e9f02e65a508ddbd",
+          "text": "However, I was quite surprised by how easy the transition(转变) was.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:transition#e-ce2b38f6f9054d72",
+          "text": "When the time came for me, armed with the belief that my strong __41__ to reconnect with family and my __42__ decision to return would make the transition（过渡） effortless, I __43__ to come back to my hometown.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2025学年第一学期浙江省七彩阳光新高考研究联盟返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-qicai-alliance-2025-08-senior-three-return-school-exam:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 144,
+            "end": 154
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:transition#s2",
+      "pos": "v.",
+      "glossZh": "过渡",
+      "pronunciationId": "w:transition#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:transition#e-d8c87eab7b4008cf",
+          "text": "He transitioned from a law firm job to full-time motivational speaking, prioritising helping young people.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:transition#e-0954485bb3e61ac0",
+          "text": "“Fairly taxing fossil fuel companies and the extremely rich is an obvious place to start to generate the funds needed to transition to a fairer, greener future,” said Beth John, a climate justice adviser at Oxfam.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 131
+          }
+        },
+        {
+          "exampleId": "w:transition#e-0ca58c20224577a5",
+          "text": "As we move out of the depths of winter, and tip gently into spring, our moods and tastes can transition too; some days we still miss the comfort of winter foods, while, on others, we may feel ready to welcome the lighter, fresher flavors of the new season.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 103
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "碱基替换、攻防转换和飞行程序",
+      "reason": "专业义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

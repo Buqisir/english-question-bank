@@ -1,0 +1,314 @@
+{
+  "entryId": "w:primary",
+  "headword": "primary",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpraɪməri/",
+    "us": "/ˈpraɪmeri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:primary#p-main",
+      "ipa": {
+        "uk": "/ˈpraɪməri/",
+        "us": "/ˈpraɪmeri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more primary",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most primary",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "primaries",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 71
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 67
+  },
+  "senses": [
+    {
+      "senseId": "w:primary#s1",
+      "pos": "adj.",
+      "glossZh": "主要的",
+      "pronunciationId": "w:primary#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:primary#e-a427445f98e82270",
+          "text": "What was the primary focus of the microbiological evaluation?",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-hz-2026-apr-gaosan-quality:29",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:primary#e-343f0b8789d250c1",
+          "text": "In turn, the fungi serve as their primary food source.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:primary#e-ba6e18b229688831",
+          "text": "The primary function of these marks is to ensure the safety of users and property.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:primary#s2",
+      "pos": "adj.",
+      "glossZh": "首级的；与次级相对的",
+      "pronunciationId": "w:primary#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:primary#e-b7cd6e12963529c0",
+          "text": "A carbon footprint is made up of two parts, the primary footprint and the secondary footprint.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:primary#e-b5cdfff27b11bdce",
+          "text": "The primary footprint is a measure of our direct emissions（排放）of carbon dioxide (CO2) from the burning of fuels, including household energy consumption and transportation.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:primary#s3",
+      "pos": "adj.",
+      "glossZh": "直接取得的（资料等）",
+      "pronunciationId": "w:primary#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:primary#e-313c586d3ec582bc",
+          "text": "“These observations now outnumber the primary data that comes from physical specimens(标本), and since we are increasingly using observational data to investigate how species are responding to global change, I wanted to know: Are they usable?”",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:primary#s4",
+      "pos": "adj.",
+      "glossZh": "小学的",
+      "pronunciationId": "w:primary#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:primary#e-e760466079157b37",
+          "text": "Many primary schools support walking school-bus routes（路线）, with days of regular, parent-accompanied walks.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:primary#e-d2d09747b715fab6",
+          "text": "Students from seven different primary schools in and around the small town were warming up and walking the route(路线)through thick evergreen forest.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "writing-continuation-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:primary#e-578837a2e7237868",
+          "text": "When Tina Farr visits the year 2 classroom at her Oxford primary school, she can feel the changed atmosphere since play was put firmly back on the curriculum（课程）.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 64
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:primary#s5",
+      "pos": "n.",
+      "glossZh": "初选",
+      "pronunciationId": "w:primary#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "初级飞羽",
+      "reason": "鸟类学术语"
+    },
+    {
+      "glossZh": "原发病灶",
+      "reason": "医学专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

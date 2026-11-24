@@ -1,0 +1,387 @@
+{
+  "entryId": "w:wind",
+  "headword": "wind",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/wɪnd/",
+    "us": "/wɪnd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:wind#p-main",
+      "ipa": {
+        "uk": "/wɪnd/",
+        "us": "/wɪnd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:wind#p-turn",
+      "ipa": {
+        "uk": "/waɪnd/",
+        "us": "/waɪnd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "winds",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "winded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "winding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "wound",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 149
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 145
+  },
+  "senses": [
+    {
+      "senseId": "w:wind#s1",
+      "pos": "n.",
+      "glossZh": "风；气流",
+      "pronunciationId": "w:wind#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wind#e-4ffff96aaf9684bd",
+          "text": "It swayed violently in a strong wind",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2020-ii:28",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:wind#e-ab9d68bd8e1023fa",
+          "text": "“I was turning the page to get ready for the next page, but the draft wind from the turn caused the spare pages to fall off the stand,” Mr Titterton said, “Luckily I was able to catch them and put them back.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:wind#e-3d26b00adb854ed9",
+          "text": "Beautiful year-round, they invite you to enjoy the smallest detail, from the sound of grasses in the gentle wind to the sculpture of odd-looking seed heads.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 112
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:wind#s2",
+      "pos": "n.",
+      "glossZh": "风能",
+      "pronunciationId": "w:wind#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wind#e-0be653b15542d064",
+          "text": "“By letting water itself play both structural and electrical roles, we’ve opened the door to land-free systems that can supplement other renewable technologies like solar and wind.” Professor Wanlin Guo, a corresponding author of the study said.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 175,
+            "end": 179
+          }
+        },
+        {
+          "exampleId": "w:wind#e-c2064250b008a823",
+          "text": "Energy storage like this is necessary to supplement renewable power sources, such as wind and solar, which cannot provide energy continuously.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:wind#e-31fa93bafaaed41e",
+          "text": "Renewable energy like solar and wind is not always available, requiring batteries for storage.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:wind#s3",
+      "pos": "n.",
+      "glossZh": "肠气",
+      "pronunciationId": "w:wind#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:wind#s4",
+      "pos": "v.",
+      "glossZh": "使喘不过气",
+      "pronunciationId": "w:wind#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:wind#s5",
+      "pos": "v.",
+      "glossZh": "蜿蜒延伸",
+      "pronunciationId": "w:wind#p-turn",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wind#e-14217278b2a3cbaf",
+          "text": "Going to Mount Huangshan reminds me of the popular Beatles’ song “The Long and Winding Road”.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:wind#e-7e6c3a3ece84fec4",
+          "text": "The garden also contains a winding path that guides visitors through the twelve regions of the Silk Road.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:wind#e-d44315a34aad98ed",
+          "text": "The lazy red staircase is the centerpiece of this amazing shop, winding up to the first floor like a flower.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 71
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:wind#s6",
+      "pos": "v.",
+      "glossZh": "缠绕",
+      "pronunciationId": "w:wind#p-turn",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:wind#s7",
+      "pos": "v.",
+      "glossZh": "上发条",
+      "pronunciationId": "w:wind#p-turn",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:wind#s8",
+      "pos": "v.",
+      "glossZh": "卷动以拉起或放下",
+      "pronunciationId": "w:wind#p-turn",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:wind#s9",
+      "pos": "短语",
+      "glossZh": "听说；得知",
+      "pronunciationId": "w:wind#p-main",
+      "note": "get wind of sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "四元素、麻将风牌、羊病、鸟名",
+      "reason": "历史或专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,283 @@
+{
+  "entryId": "w:display",
+  "headword": "display",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈspleɪ/",
+    "us": "/dɪˈspleɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:display#p-main",
+      "ipa": {
+        "uk": "/dɪˈspleɪ/",
+        "us": "/dɪˈspleɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "displays",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "displayed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "displaying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 126
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 123
+  },
+  "senses": [
+    {
+      "senseId": "w:display#s1",
+      "pos": "v.",
+      "glossZh": "展示；陈列；显示",
+      "pronunciationId": "w:display#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:display#e-ac6adcbdf1435c45",
+          "text": "Campers will share their colorful ideas and imagination with each other and work together to visualize,sketch and paint with non-traditional techniques to create the coolest mural which will be displayed in public for all to see.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 194,
+            "end": 203
+          }
+        },
+        {
+          "exampleId": "w:display#e-10aada5a51e17958",
+          "text": "One of the four original copies of the Magna Carta is displayed there.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:display#e-d63ee8f9c3a2be39",
+          "text": "This project will select 10 visual artists and 10 writers to create artwork that will be displayed on temporary signs along the multi-use path.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 98
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:display#s2",
+      "pos": "v.",
+      "glossZh": "表露；表现出",
+      "pronunciationId": "w:display#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:display#e-7dfdd9f6617f63cd",
+          "text": "Most importantly, after participating in School at the Museum, students who had had little prior exposure to museums displayed equal engagement to their classmates who had visited museums with family or friends.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 117,
+            "end": 126
+          }
+        },
+        {
+          "exampleId": "w:display#e-55ae6c87136f16ee",
+          "text": "However, psychological research suggests that the opposite can also be true: individuals with limited ability may display surprisingly high levels of confidence while remaining largely unaware of their limitations.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-04-second",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-2026-04-second:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-2026-04-second:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 114,
+            "end": 121
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:display#s3",
+      "pos": "n.",
+      "glossZh": "展示；陈列品；展演",
+      "pronunciationId": "w:display#p-main",
+      "note": "on display 指「公开展出」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:display#e-8bbc8c3350803fec",
+          "text": "A first-of-its-kind exhibition that focuses on the history of Yellowstone National Park posters will be on display at the University of Wyoming’s Coe Library beginning Tuesday, February 1.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 114
+          }
+        },
+        {
+          "exampleId": "w:display#e-e6cc6c991e9bedf9",
+          "text": "How long will the public art signs be on display?",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2026-zhejiang-jan:22",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:display#e-1e0a0f884d7a0547",
+          "text": "Pella’s Tulip Time Festival is an entire long weekend featuring parades, performances, museum tours, a craft market, concerts, auto and tractor shows, and of course, several large tulip displays with hundreds of thousands of blooms in a whole host of colors.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2025-10-first-baseline-test",
+            "paperTitle": "南宁市2026届高中毕业班第一次摸底测试高三英语试题卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2025-10-first-baseline-test:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2025-10-first-baseline-test:reading-a:10",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 186,
+            "end": 194
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:display#s4",
+      "pos": "n.",
+      "glossZh": "显示屏；显示方式",
+      "pronunciationId": "w:display#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "看见、展队列、用大字排印",
+      "reason": "古义或专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

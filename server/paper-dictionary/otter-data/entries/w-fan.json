@@ -1,0 +1,269 @@
+{
+  "entryId": "w:fan",
+  "headword": "fan",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fæn/",
+    "us": "/fæn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fan#p-main",
+      "ipa": {
+        "uk": "/fæn/",
+        "us": "/fæn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "fans",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "fen",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "FANs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "fanned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "fanning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 77
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 75
+  },
+  "senses": [
+    {
+      "senseId": "w:fan#s1",
+      "pos": "n.",
+      "glossZh": "爱好者",
+      "pronunciationId": "w:fan#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fan#e-ba9337d22dcf57f8",
+          "text": "Even soccer fans tend to have a seat each; gone are the days of thousands standing to watch the match.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:fan#e-9f3110614b620d38",
+          "text": "Even the biggest sausage fan doesn’t want to eat them every day.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:fan#e-7cd2eff1a6316919",
+          "text": "SoFi Stadium is the go-to destination in the heart of Los Angeles for sports fans.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fan#s2",
+      "pos": "n.",
+      "glossZh": "风扇",
+      "pronunciationId": "w:fan#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fan#e-2b5805c7be537fc8",
+          "text": "Or that her dorm room wouldn’t come with a fan.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fan#s3",
+      "pos": "n.",
+      "glossZh": "扇子",
+      "pronunciationId": "w:fan#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fan#e-463125bbb3211f3a",
+          "text": "She made a fan.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:listening.long-form",
+            "locator": {
+              "question": 9,
+              "questionId": "question:listening:9",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fan#s4",
+      "pos": "v.",
+      "glossZh": "扇风",
+      "pronunciationId": "w:fan#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fan#s5",
+      "pos": "v.",
+      "glossZh": "煽动",
+      "pronunciationId": "w:fan#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fan#s6",
+      "pos": "短语",
+      "glossZh": "呈扇形散开",
+      "pronunciationId": "w:fan#p-main",
+      "note": "fan out。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "旧香港长度单位",
+      "reason": "历史专门义"
+    },
+    {
+      "glossZh": "Fan 作中文姓氏",
+      "reason": "同形专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

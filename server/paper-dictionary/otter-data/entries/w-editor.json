@@ -1,0 +1,175 @@
+{
+  "entryId": "w:editor",
+  "headword": "editor",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈedɪtə(r)/",
+    "us": "/ˈedɪtər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:editor#p-main",
+      "ipa": {
+        "uk": "/ˈedɪtə(r)/",
+        "us": "/ˈedɪtər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "editors",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 39
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 37
+  },
+  "senses": [
+    {
+      "senseId": "w:editor#s1",
+      "pos": "n.",
+      "glossZh": "编辑；编者；主编",
+      "pronunciationId": "w:editor#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:editor#e-5c80fea5951872d5",
+          "text": "Their stay in Elkhead is the subject of Nothing Daunted: The Unexpected Education of Two Society Girls in the West by Dorothy Wickenden, who is a magazine editor and Dorothy Woodruff’s granddaughter.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 155,
+            "end": 161
+          }
+        },
+        {
+          "exampleId": "w:editor#e-8e0043ff32504040",
+          "text": "No editor is likely to tolerate a writer who does not take the trouble to spell words correctly.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:editor#e-279da405caaa9bf3",
+          "text": "Besides, as a senior editor, his job is to carefully compare and refine the translations of the Chinese texts, ensuring that they gain the broadest recognition in the English context.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:editor#s2",
+      "pos": "n.",
+      "glossZh": "（电影、广播等的）剪辑人员",
+      "pronunciationId": "w:editor#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:editor#e-8e7d441d4e16b599",
+          "text": "What does a dialogue editor do?",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:editor#s3",
+      "pos": "n.",
+      "glossZh": "编辑器；编辑软件",
+      "pronunciationId": "w:editor#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "电影胶片剪辑机",
+      "reason": "设备专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

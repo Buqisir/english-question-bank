@@ -1,0 +1,250 @@
+{
+  "entryId": "w:gift",
+  "headword": "gift",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɡɪft/",
+    "us": "/ɡɪft/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:gift#p-main",
+      "ipa": {
+        "uk": "/ɡɪft/",
+        "us": "/ɡɪft/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "gifts",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "GIFTs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "gifted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "gifting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 39,
+    "mock": 216
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 214
+  },
+  "senses": [
+    {
+      "senseId": "w:gift#s1",
+      "pos": "n.",
+      "glossZh": "礼物",
+      "pronunciationId": "w:gift#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 38,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gift#e-b0c9b7ec904123fe",
+          "text": "Then one Christmas I received a surprise gift – a large, beautifully made wooden chest.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:10",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:gift#e-4a19301573832720",
+          "text": "Even if there isn’t a registry, a good housewarming gift is something to decorate the new house with, like a piece of art or a plant.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:gift#e-0362648bf00c0b98",
+          "text": "I had my first dictionary as a gift for my 13th birthday.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gift#s2",
+      "pos": "n.",
+      "glossZh": "天赋",
+      "pronunciationId": "w:gift#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gift#e-2ffa13a71a47db38",
+          "text": "Some individuals are born with a gift for public speaking.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:gift#e-96beff8ad98f4b8d",
+          "text": "Michael realizes how dangerous his gift really is.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:seven-choices:2",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gift#s3",
+      "pos": "n.",
+      "glossZh": "捐赠",
+      "pronunciationId": "w:gift#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gift#e-8ab94ad07c1a7b61",
+          "text": "Make a gift today at archaeological.org/ donate to receive your copies!",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a:16",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gift#s4",
+      "pos": "v.",
+      "glossZh": "赠送",
+      "pronunciationId": "w:gift#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "配子输卵管内移植术",
+      "reason": "医学缩写 GIFT"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,233 @@
+{
+  "entryId": "w:community",
+  "headword": "community",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəˈmjuːnəti/",
+    "us": "/kəˈmjuːnəti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:community#p-main",
+      "ipa": {
+        "uk": "/kəˈmjuːnəti/",
+        "us": "/kəˈmjuːnəti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "communities",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 43,
+    "mock": 399
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 397
+  },
+  "senses": [
+    {
+      "senseId": "w:community#s1",
+      "pos": "n.",
+      "glossZh": "社区；当地居民",
+      "pronunciationId": "w:community#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 40,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:community#e-5c4254fc906f74d6",
+          "text": "I needed to do something in my community (社区) in order to complete the community service hours required to graduate from high school.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:community#e-1875366d68c47da6",
+          "text": "The last one standing has just been turned into a “mini community library”: any passer-by can “borrow” a book from its shelves, return it later, or replace it with another title from their own collection.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:community#e-85c502854f618b69",
+          "text": "Jacobs argues that urban communities are best placed to understand how their city functions, because city life is created and sustained through their various interactions.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:community#s2",
+      "pos": "n.",
+      "glossZh": "群体；社群；共同体",
+      "pronunciationId": "w:community#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:community#e-84fa3ce1f2035b16",
+          "text": "We look forward to welcoming you as we showcase the creativity of the Harvard arts community through performances, art exhibitions and art-making activities.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:community#e-40f0e0cbfa76c7c0",
+          "text": "China, on its part, will also embrace（拥抱） the world with greater openness and make new contributions to the international community.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 122,
+            "end": 131
+          }
+        },
+        {
+          "exampleId": "w:community#e-cd3068e30277bd27",
+          "text": "This was exactly the kind of evidence that could support the controversial (争议的) theory of continental drift, which was largely dismissed by the scientific community at the time.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 156,
+            "end": 165
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:community#s3",
+      "pos": "n.",
+      "glossZh": "（生态）群落",
+      "pronunciationId": "w:community#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:community#e-84df1134015acc05",
+          "text": "The reason for this shift, according to Butler, is the rapid decline in bird communities, both in number and variation.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 88
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "威尔士基层行政区",
+      "reason": "地区行政专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

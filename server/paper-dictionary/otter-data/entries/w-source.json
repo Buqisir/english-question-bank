@@ -1,0 +1,244 @@
+{
+  "entryId": "w:source",
+  "headword": "source",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/sɔːs/",
+    "us": "/sɔːrs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:source#p-main",
+      "ipa": {
+        "uk": "/sɔːs/",
+        "us": "/sɔːrs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "sources",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "sourced",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "sourcing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 186
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 183
+  },
+  "senses": [
+    {
+      "senseId": "w:source#s1",
+      "pos": "n.",
+      "glossZh": "来源",
+      "pronunciationId": "w:source#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:source#e-c187fecdf01ddb4a",
+          "text": "I had several children and books were our main source(来源) of entertainment.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:source#e-8b75d65d0e7534c7",
+          "text": "This is a world of diverse sources（来源）of information, from newspapers and books to TV, radio, music and even real people.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:source#e-84343381568da826",
+          "text": "Microplastics have become a common source of pollution across the Earth – they have settled in the deep sea and on the Himalayas, stuck inside volcanic rocks, filled the stomachs of seabirds and even fallen in fresh Antarctic snow.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:source#s2",
+      "pos": "n.",
+      "glossZh": "水源",
+      "pronunciationId": "w:source#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:source#e-744549046ea177a2",
+          "text": "Raindrops are more than a source of fresh water.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:source#s3",
+      "pos": "v.",
+      "glossZh": "从某处获取",
+      "pronunciationId": "w:source#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:source#e-5855837fe38102bb",
+          "text": "Traditionally associated with rivers and lakes in Jiangsu and Zhejiang provinces, hairy crabs are now being sourced from new regions in China.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 115
+          }
+        },
+        {
+          "exampleId": "w:source#e-af6051f7f51a19eb",
+          "text": "“The sustainable sourcing of silicon from old solar panels cuts waste,” said Dong Tiantian, a researcher at QIBEBT.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:source#s4",
+      "pos": "n.",
+      "glossZh": "消息人士",
+      "pronunciationId": "w:source#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "源极、源节点和定义域",
+      "reason": "工程或数学专义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

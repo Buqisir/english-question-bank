@@ -1,0 +1,130 @@
+{
+  "entryId": "w:autumn",
+  "headword": "autumn",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɔːtəm/",
+    "us": "/ˈɔːtəm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:autumn#p-main",
+      "ipa": {
+        "uk": "/ˈɔːtəm/",
+        "us": "/ˈɔːtəm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "autumns",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 25
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:autumn#s1",
+      "pos": "n.",
+      "glossZh": "秋天；秋季",
+      "pronunciationId": "w:autumn#p-main",
+      "note": "美式英语常说 fall。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 25
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:autumn#e-dc0a2f9e91f9fe33",
+          "text": "There was making leaf houses in autumn, ice skating in winter, and so much more.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:autumn#e-838f8e2f2af37740",
+          "text": "As autumn comes, she gets restless--the same old wanderlust returning.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:autumn#e-21effbf0312c5ffd",
+          "text": "The ideal planting time is at the beginning of autumn, before the weather becomes too cold.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 53
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "衰退期、暖色外貌类型、女性名、度过秋季",
+      "reason": "文学比喻、专门义、专名或罕见动词义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,191 @@
+{
+  "entryId": "w:vocabulary",
+  "headword": "vocabulary",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/vəˈkæbjələri/",
+    "us": "/vəˈkæbjəleri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:vocabulary#p-main",
+      "ipa": {
+        "uk": "/vəˈkæbjələri/",
+        "us": "/vəˈkæbjəleri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "vocabularies",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 25
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 22
+  },
+  "senses": [
+    {
+      "senseId": "w:vocabulary#s1",
+      "pos": "n.",
+      "glossZh": "词汇",
+      "pronunciationId": "w:vocabulary#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:vocabulary#e-810facb2a0bab529",
+          "text": "They had a very limited vocabulary.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2025-i:25",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:vocabulary#e-a857221bdae8ae8c",
+          "text": "They observed that the visits created a stronger sense of connection to the museum environment and its resources, enriching students’ cultural knowledge and expanding their vocabulary.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 173,
+            "end": 183
+          }
+        },
+        {
+          "exampleId": "w:vocabulary#e-087c12f99f64496d",
+          "text": "Try simple slime science experiments, learn key vocabulary, and explore science facts.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-a:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:vocabulary#s2",
+      "pos": "n.",
+      "glossZh": "用来表达意思的一套符号",
+      "pronunciationId": "w:vocabulary#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:vocabulary#e-8bc9c799db445945",
+          "text": "They say wild chimps communicate 19 specific messages to one another with a \"vocabulary\" of 66 gestures.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 87
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:vocabulary#s3",
+      "pos": "n.",
+      "glossZh": "词汇表",
+      "pronunciationId": "w:vocabulary#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:vocabulary#e-2e5f6f23466b76a4",
+          "text": "The newsletter might include: discussion questions, tasks around headlines and images, comments to respond to, vocabularies and links to related ESL Brains lesson plans.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 111,
+            "end": 123
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

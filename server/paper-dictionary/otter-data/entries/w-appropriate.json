@@ -1,0 +1,216 @@
+{
+  "entryId": "w:appropriate",
+  "headword": "appropriate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈprəʊpriət/",
+    "us": "/əˈproʊpriət/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:appropriate#p-main",
+      "ipa": {
+        "uk": "/əˈprəʊpriət/",
+        "us": "/əˈproʊpriət/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:appropriate#p-verb",
+      "ipa": {
+        "uk": "/əˈprəʊprieɪt/",
+        "us": "/əˈproʊprieɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "动词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more appropriate",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most appropriate",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "appropriated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "appropriates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "appropriating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "senses": [
+    {
+      "senseId": "w:appropriate#s1",
+      "pos": "adj.",
+      "glossZh": "合适的；恰当的；得体的",
+      "pronunciationId": "w:appropriate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:appropriate#e-a0b10c8f3aaf24da",
+          "text": "Rather, an authoritative parenting style includes some of the following characteristics: children feel warmth and love from their father; responsibility and the reasons behind rules are stressed; children are given an appropriate level of autonomy（自主权）.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 218,
+            "end": 229
+          }
+        },
+        {
+          "exampleId": "w:appropriate#e-0d60ce6b12666f91",
+          "text": "With appropriate initial support, learners can apply the same principles to independent study using digital tools, authentic materials, or language-learning applications.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:appropriate#e-06cdba8b401aa4b6",
+          "text": "One of the most familiar sayings is to aim for “8 glasses a day,” but this may not be appropriate for every person.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-final",
+            "paperTitle": "九五高中协作体2026届高考最后一卷 英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-final:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-final:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 97
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:appropriate#s2",
+      "pos": "v.",
+      "glossZh": "擅自占用；据为己用",
+      "pronunciationId": "w:appropriate#p-verb",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:appropriate#e-8b0d68e9bcc49756",
+          "text": "To appropriate a well-worked saying, a slice of pizza is sometimes worth a thousand words of comfort.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:appropriate#s3",
+      "pos": "v.",
+      "glossZh": "拨出（款项等）；划拨作某种用途",
+      "pronunciationId": "w:appropriate#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "令人愉快的；使相称",
+      "reason": "旧式义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

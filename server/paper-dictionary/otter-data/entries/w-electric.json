@@ -1,0 +1,253 @@
+{
+  "entryId": "w:electric",
+  "headword": "electric",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈlektrɪk/",
+    "us": "/ɪˈlektrɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:electric#p-main",
+      "ipa": {
+        "uk": "/ɪˈlektrɪk/",
+        "us": "/ɪˈlektrɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 12,
+    "mock": 95
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 95
+  },
+  "senses": [
+    {
+      "senseId": "w:electric#s1",
+      "pos": "adj.",
+      "glossZh": "与电有关的",
+      "pronunciationId": "w:electric#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:electric#e-061304e7db35f1eb",
+          "text": "He is building a four-wheeled robot that will run on solar and electric power.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:electric#e-52f92cc5a3055a5a",
+          "text": "“It is curious that no one has put together a history of both the steam and electric revolutions,” writes Maury Klein in his book The Power Makers, Steam, Electricity, and the Men Who Invented Modern America.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:electric#e-0cace9988bc891c5",
+          "text": "Edison perfected an incandescent bulb that brought electric light into the American home.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 59
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:electric#s2",
+      "pos": "adj.",
+      "glossZh": "用电驱动的",
+      "pronunciationId": "w:electric#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:electric#e-645f73a341eb140b",
+          "text": "Little do they know that as they do so, a burst of energy is sent up to street level to help charge an electric car.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 103,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:electric#e-73e4617a2b114961",
+          "text": "They consist of an electric motor which collects energy used in the braking action that would be lost as heat by conventional brakes.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:electric#e-6c5e95959f2ff525",
+          "text": "Alvaro Luna, a professor of electrical engineering, said that the system is innovative in so far as it allows for recycled energy to be redirected to specific local uses – in this case powering electric cars parked nearby.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 194,
+            "end": 202
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:electric#s3",
+      "pos": "adj.",
+      "glossZh": "通电的",
+      "pronunciationId": "w:electric#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:electric#e-c913565b70def0ae",
+          "text": "Putting electric fencing around chicken houses and other farm animal quarters is also highly effective at getting grizzlies away.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:electric#s4",
+      "pos": "adj.",
+      "glossZh": "电声的",
+      "pronunciationId": "w:electric#p-main",
+      "note": "如 electric guitar。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:electric#s5",
+      "pos": "adj.",
+      "glossZh": "令人兴奋的",
+      "pronunciationId": "w:electric#p-main",
+      "note": "如 an electric atmosphere。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "带电绝缘物",
+      "reason": "罕见技术名词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,123 @@
+{
+  "entryId": "w:deer",
+  "headword": "deer",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪə(r)/",
+    "us": "/dɪr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:deer#p-main",
+      "ipa": {
+        "uk": "/dɪə(r)/",
+        "us": "/dɪr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:deer#s1",
+      "pos": "n.",
+      "glossZh": "鹿",
+      "pronunciationId": "w:deer#p-main",
+      "note": "单复数同形。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 13
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:deer#e-b052b6ff12a0c457",
+          "text": "These stones, or “plaquettes”, were discovered in the 1860s in a rock shelter called Montastrue and were carved with images of animals such as horses and deer.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 154,
+            "end": 158
+          }
+        },
+        {
+          "exampleId": "w:deer#e-b8c039661b165d4c",
+          "text": "A decade ago, while managing a private forest, Lybarger wanted to attract more deer and wild turkeys.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:deer#e-1389722be6f854cb",
+          "text": "Wildlife bridges like Ecoduct de Woeste Hoeve let over 5,000 deer cross highways safely, reducing wildlife-vehicle accidents by 80%.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m1",
+            "paperTitle": "温州市普通高中2026届高三第一次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m1:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m1:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 65
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "泛指动物；英美地名",
+      "reason": "旧义或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

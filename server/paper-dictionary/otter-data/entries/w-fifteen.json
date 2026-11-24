@@ -1,0 +1,121 @@
+{
+  "entryId": "w:fifteen",
+  "headword": "fifteen",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌfɪfˈtiːn/",
+    "us": "/ˌfɪfˈtiːn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fifteen#p-main",
+      "ipa": {
+        "uk": "/ˌfɪfˈtiːn/",
+        "us": "/ˌfɪfˈtiːn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:fifteen#s1",
+      "pos": "num.",
+      "glossZh": "十五",
+      "pronunciationId": "w:fifteen#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 17
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fifteen#e-33b18092b49df7f8",
+          "text": "However, within fifteen minutes of __39__, my worries had gone.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:cloze:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:fifteen#e-cf83ca7917fa90e8",
+          "text": "When you are first trying to think of ideas for an essay, put your pen to your paper and write nonstop for ten or fifteen minutes without letting your pen leave the paper.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 121,
+            "end": 128
+          }
+        },
+        {
+          "exampleId": "w:fifteen#e-fc88361976cc7a3f",
+          "text": "He planned routes through the quiet roads near their home: first five kilometers, then ten, then fifteen.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation:8",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 104
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "爱尔兰甜点方糕",
+      "reason": "地域食品名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

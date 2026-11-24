@@ -1,0 +1,123 @@
+{
+  "entryId": "w:clothes",
+  "headword": "clothes",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kləʊðz/",
+    "us": "/kloʊðz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:clothes#p-main",
+      "ipa": {
+        "uk": "/kləʊðz/",
+        "us": "/kloʊðz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 40,
+    "mock": 79
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:clothes#s1",
+      "pos": "n.",
+      "glossZh": "衣服",
+      "pronunciationId": "w:clothes#p-main",
+      "note": "只用复数。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 40,
+        "mock": 79
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:clothes#e-84e226a0cbaaa394",
+          "text": "Unusual fashion shows in New Orleans and Brooklyn have showcased nutria fur made into clothes in different styles.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:clothes#e-2eaafdf1ece912b7",
+          "text": "It’s the best way to get rid of your used clothes, score clothes from your friends, and have a party all at the same time.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:clothes#e-d92a76eb24a649fa",
+          "text": "Most of them wore clothes that were torn and dirty.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 25
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "给……穿衣",
+      "reason": "此处是 clothe 的第三人称单数，应独立查词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

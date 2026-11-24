@@ -1,0 +1,162 @@
+{
+  "entryId": "w:visitor",
+  "headword": "visitor",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈvɪzɪtə(r)/",
+    "us": "/ˈvɪzɪtər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:visitor#p-main",
+      "ipa": {
+        "uk": "/ˈvɪzɪtə(r)/",
+        "us": "/ˈvɪzɪtər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "visitors",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 29,
+    "mock": 166
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 166
+  },
+  "senses": [
+    {
+      "senseId": "w:visitor#s1",
+      "pos": "n.",
+      "glossZh": "来参观的人",
+      "pronunciationId": "w:visitor#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 28,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:visitor#e-afaf6dc496f28302",
+          "text": "Many museums are lively places and they attract a lot of visitors.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:grammar-fill:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:visitor#e-e4a75285b0991361",
+          "text": "The garden also contains a winding path that guides visitors through the twelve regions of the Silk Road.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:grammar-fill:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:visitor#e-5debff308c585cb7",
+          "text": "By joining the Friends, you help to guarantee that the Museum remains a welcoming place of shared enrichment for all visitors to experience, to enjoy, and to love.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 117,
+            "end": 125
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:visitor#s2",
+      "pos": "n.",
+      "glossZh": "来拜访的人",
+      "pronunciationId": "w:visitor#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:visitor#e-73f3dd22cad0b450",
+          "text": "Over the decades, Reisley has opened his doors to visitors.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 58
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "机构巡视主管、访问者模式对象",
+      "reason": "制度或编程专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

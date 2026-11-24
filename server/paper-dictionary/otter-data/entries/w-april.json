@@ -1,0 +1,121 @@
+{
+  "entryId": "w:april",
+  "headword": "April",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈeɪprəl/",
+    "us": "/ˈeɪprəl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:april#p-main",
+      "ipa": {
+        "uk": "/ˈeɪprəl/",
+        "us": "/ˈeɪprəl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 6,
+    "mock": 51
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:april#s1",
+      "pos": "n.",
+      "glossZh": "四月",
+      "pronunciationId": "w:april#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 51
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:april#e-58319ca72cd6ca4b",
+          "text": "First announced in April, 2016, the tax which applies to soft drinks containing more than 5g of sugar per 100ml, was introduced to help reduce childhood obesity（肥胖）.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:april#e-3da36d1bf4a651d9",
+          "text": "Paul Revere was a silversmith（银匠）in Boston who rode a horse at night on April 18,1775 to Lexington to warn people that British soldiers were coming.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:april#e-3f982b2f0e8b4893",
+          "text": "In April last year, I saw a post on the PNP (Pilots N Paws) website from a family in Topeka.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "人名艾普里尔",
+      "reason": "同形专名。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

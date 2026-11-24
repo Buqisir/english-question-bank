@@ -1,0 +1,255 @@
+{
+  "entryId": "w:retire",
+  "headword": "retire",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈtaɪə(r)/",
+    "us": "/rɪˈtaɪər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:retire#p-main",
+      "ipa": {
+        "uk": "/rɪˈtaɪə(r)/",
+        "us": "/rɪˈtaɪər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "retired",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "retires",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "retiring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 48
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 45
+  },
+  "senses": [
+    {
+      "senseId": "w:retire#s1",
+      "pos": "v.",
+      "glossZh": "退休",
+      "pronunciationId": "w:retire#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:retire#e-db894198209e2eed",
+          "text": "When Nicolo retired and went to live in Sicily, he __47__ the paintings with him.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:retire#e-3f560e40feb40c72",
+          "text": "When she retired from dancing and her sons eventually flew the nest, she decided it was time to take the plunge.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:retire#e-a7f3a088b13dad8b",
+          "text": "One doubter about the safety of cloud seeding is Chuck Doswell, a research scientist who just retired from the University of Oklahoma.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 94,
+            "end": 101
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:retire#s2",
+      "pos": "v.",
+      "glossZh": "退役",
+      "pronunciationId": "w:retire#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:retire#s3",
+      "pos": "v.",
+      "glossZh": "使停止使用",
+      "pronunciationId": "w:retire#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:retire#e-c5a27ec869249bc0",
+          "text": "Eventually, the pumper was retired.”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:writing-continuation:5",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:retire#e-e53edb9e0143547d",
+          "text": "Dozens of retired coal-fired power plants could find new life providing backup or emergency power for the electricity grid (电网) — except this time without the need for fossil fuels.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:retire#e-4a1725512647e9d9",
+          "text": "Researchers extract tiny silicon particles（硅颗粒）from retired solar panels to create battery anodes.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 59
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:retire#s4",
+      "pos": "v.",
+      "glossZh": "退到别处",
+      "pronunciationId": "w:retire#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:retire#s5",
+      "pos": "v.",
+      "glossZh": "就寝",
+      "pronunciationId": "w:retire#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "换新胎",
+      "reason": "另用 re-tire"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

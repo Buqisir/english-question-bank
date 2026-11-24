@@ -1,0 +1,277 @@
+{
+  "entryId": "w:appreciate",
+  "headword": "appreciate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈpriːʃieɪt/",
+    "us": "/əˈpriːʃieɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:appreciate#p-main",
+      "ipa": {
+        "uk": "/əˈpriːʃieɪt/",
+        "us": "/əˈpriːʃieɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "appreciated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "appreciates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "appreciating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 110
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 106
+  },
+  "senses": [
+    {
+      "senseId": "w:appreciate#s1",
+      "pos": "v.",
+      "glossZh": "感激；感谢",
+      "pronunciationId": "w:appreciate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:appreciate#e-14a3c51ce0324693",
+          "text": "This is often appreciated since at a housewarming there isn’t a lot of food served.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:appreciate#e-3c4db3a294a5fdcd",
+          "text": "They also preferred not being monitored, suggesting these individuals might appreciate being given space for independence and privacy.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:appreciate#e-fd15162d5d201cdd",
+          "text": "Her working parents appreciated that Harold didn’t mind her watching him work.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:appreciate#s2",
+      "pos": "v.",
+      "glossZh": "欣赏；赏识；珍视",
+      "pronunciationId": "w:appreciate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:appreciate#e-84d638b5264504dd",
+          "text": "How to appreciate art works.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:appreciate#e-3c5324a8867a4830",
+          "text": "This place is good for a candlelit dinner or a work meeting with colleagues who appreciate fine food.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:8",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:appreciate#e-cc6203e6ddca8c1b",
+          "text": "So, the next time you see a rainbow, take a moment to appreciate its beauty and at the same time think about all the different colors that make it up.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 71
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:appreciate#s3",
+      "pos": "v.",
+      "glossZh": "理解；认识到……的重要性",
+      "pronunciationId": "w:appreciate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:appreciate#e-d5c5a036ea1d955c",
+          "text": "But if you have to read a great deal for study, you will appreciate the benefits of being able to read more quickly.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:appreciate#e-8459e617ac9b4146",
+          "text": "This was his chief comfort: that some people, at least, would still appreciate that face value and true worth are not at all the same thing.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-d:7",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 78
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:appreciate#s4",
+      "pos": "v.",
+      "glossZh": "增值；升值",
+      "pronunciationId": "w:appreciate#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

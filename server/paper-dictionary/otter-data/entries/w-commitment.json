@@ -1,0 +1,200 @@
+{
+  "entryId": "w:commitment",
+  "headword": "commitment",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəˈmɪtmənt/",
+    "us": "/kəˈmɪtmənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:commitment#p-main",
+      "ipa": {
+        "uk": "/kəˈmɪtmənt/",
+        "us": "/kəˈmɪtmənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "commitments",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 81
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 76
+  },
+  "senses": [
+    {
+      "senseId": "w:commitment#s1",
+      "pos": "n.",
+      "glossZh": "承诺；承担的义务",
+      "pronunciationId": "w:commitment#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:commitment#e-f967948951c8710b",
+          "text": "Good __55__, like good parenting, is a long-term commitment.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:3",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:commitment#e-b5ebbb9d69e32531",
+          "text": "Our project welcomes participants aged 16 and above, with a minimum commitment of one week and flexible start dates.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:commitment#e-1403195b84aa7d45",
+          "text": "If you make time for consuming and producing the arts the same way you make time for work and exercise and family commitments, I assure you that you'll find your life getting fuller and happier.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 114,
+            "end": 125
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:commitment#s2",
+      "pos": "n.",
+      "glossZh": "投入；奉献；尽心尽力",
+      "pronunciationId": "w:commitment#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:commitment#e-5cba6cde405e144d",
+          "text": "So keeping the enthusiasm up, and demonstrating your own commitment to achieving the shared goal, could be the key to motivating your social loafer.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:commitment#e-46cd43e3719a9c7f",
+          "text": "What underlying reason motivated Tharp’s commitment to science?",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-first:24",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:commitment#e-6c96d19ca3e89e06",
+          "text": "Though the workload sometimes wears her out, her commitment never declines.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 59
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "收押、实施犯罪",
+      "reason": "法律专门义或偏义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

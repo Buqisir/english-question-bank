@@ -1,0 +1,143 @@
+{
+  "entryId": "w:somebody",
+  "headword": "somebody",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsʌmbədi/",
+    "us": "/ˈsʌmbədi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:somebody#p-main",
+      "ipa": {
+        "uk": "/ˈsʌmbədi/",
+        "us": "/ˈsʌmbədi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "somebodies",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "somebodys",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "senses": [
+    {
+      "senseId": "w:somebody#s1",
+      "pos": "pron.",
+      "glossZh": "某个人",
+      "pronunciationId": "w:somebody#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:somebody#e-d5a4afddfe5cbca5",
+          "text": "Nobody is better able to understand the impact of desertification and climate change than somebody who is living with no access to water.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 98
+          }
+        },
+        {
+          "exampleId": "w:somebody#e-c016918279158b6d",
+          "text": "Tearing open the paper, he found a heart-shaped box tied with a pink bow, filled with colorful candies along with a tiny card that read “Somebody misses you.” Realizing it could be a New Year gift, which he had never dreamed of, the lonely man was excited and touched.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 137,
+            "end": 145
+          }
+        },
+        {
+          "exampleId": "w:somebody#e-91ea9a0b22b6d7bb",
+          "text": "Smith said, “I’ve never really thought of my __45__ as an obstacle, I kind of have the __46__ of: If somebody else can do it, you know, why can’t I?”",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-huliqu-2025-nov-m1:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 109
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:somebody#s2",
+      "pos": "n.",
+      "glossZh": "重要人物",
+      "pronunciationId": "w:somebody#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

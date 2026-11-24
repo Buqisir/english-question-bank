@@ -1,0 +1,159 @@
+{
+  "entryId": "w:describe",
+  "headword": "describe",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈskraɪb/",
+    "us": "/dɪˈskraɪb/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:describe#p-main",
+      "ipa": {
+        "uk": "/dɪˈskraɪb/",
+        "us": "/dɪˈskraɪb/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "described",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "describes",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "describing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 21,
+    "mock": 294
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 294
+  },
+  "senses": [
+    {
+      "senseId": "w:describe#s1",
+      "pos": "v.",
+      "glossZh": "描述；形容；把……称作",
+      "pronunciationId": "w:describe#p-main",
+      "note": "describe sb/sth as … 指「把某人或某事描述为……」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 21,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:describe#e-01de0c46d9bfc6f6",
+          "text": "Sometimes, students would ask me to describe all the things I had in it.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:describe#e-4ac59f8b4743d0d0",
+          "text": "We prefer to describe emotional intelligence as a specific set of skills that can be used for either good or bad purposes.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:describe#e-d258b5aeee22b42f",
+          "text": "In 1511, Tan wrote a book, Sayings of a Female Doctor, describing her life as a physician.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-a:figure-d47b575dce95546b:cell-1-1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:describe#s2",
+      "pos": "v.",
+      "glossZh": "画出（形状）；划出（轨迹）",
+      "pronunciationId": "w:describe#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "给物种作正式分类描述",
+      "reason": "生物分类学专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

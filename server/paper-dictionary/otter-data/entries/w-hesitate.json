@@ -1,0 +1,146 @@
+{
+  "entryId": "w:hesitate",
+  "headword": "hesitate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈhezɪteɪt/",
+    "us": "/ˈhezɪteɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:hesitate#p-main",
+      "ipa": {
+        "uk": "/ˈhezɪteɪt/",
+        "us": "/ˈhezɪteɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "hesitated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "hesitates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "hesitating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 72
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:hesitate#s1",
+      "pos": "v.",
+      "glossZh": "犹豫；迟疑",
+      "pronunciationId": "w:hesitate#p-main",
+      "note": "hesitate to do sth 表示「犹豫是否做某事」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 72
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hesitate#e-28b187e8e307b7c9",
+          "text": "He hesitated and then said he had decided not to run.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "writing-continuation-3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:hesitate#e-8f9688c95bebce2a",
+          "text": "Don’t hesitate to seek help if you face problems you don’t know how to handle.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:hesitate#e-1c7349b3d0e57ba6",
+          "text": "She hesitated for a moment, then slowed down and pushed open the door.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 13
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "吞吞吐吐地说",
+      "reason": "由迟疑动作引申，罕见作引语动词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,243 @@
+{
+  "entryId": "w:award",
+  "headword": "award",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈwɔːd/",
+    "us": "/əˈwɔːrd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:award#p-main",
+      "ipa": {
+        "uk": "/əˈwɔːd/",
+        "us": "/əˈwɔːrd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "awards",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "awarded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "awarding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 116
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 113
+  },
+  "senses": [
+    {
+      "senseId": "w:award#s1",
+      "pos": "n.",
+      "glossZh": "奖；奖品；奖项",
+      "pronunciationId": "w:award#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:award#e-3a24259756f5a8a1",
+          "text": "A Take a view, the Landscape (风景) Photographer of the Year Award, was the idea of Charlie Waite, one of today’s most respected landscape photographers.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:award#e-ea8fdd14828d5405",
+          "text": "Paragraph 2: I went to my teacher’s office after the award presentation.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:award#e-378631f9b30a7198",
+          "text": "Opening in the West End in 1986, it won the Tony Award for Best Musical two years later.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:award#s2",
+      "pos": "v.",
+      "glossZh": "授予；颁发；拨给",
+      "pronunciationId": "w:award#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:award#e-4713e71b12c2d108",
+          "text": "The government has awarded $5 million to three different local nonprofit organizations.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:award#e-a414d6c5a0ab61a7",
+          "text": "In 2023, David Ferguson was awarded the Orchard Awards, a recognition to international friends for enhancing cultural exchanges between China and the rest of the world.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:award#e-bb5eee8f1049fd5c",
+          "text": "● The HZ Scholarship Committee will award the scholarship based on previous academic results, and motivation for choosing a program of study and the applicant will be informed of the decision within 6 weeks after the application deadline of May 1.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:reading-a:15",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:award#s3",
+      "pos": "n.",
+      "glossZh": "裁决；裁定的款项",
+      "pronunciationId": "w:award#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:award#s4",
+      "pos": "v.",
+      "glossZh": "判给（赔偿等）",
+      "pronunciationId": "w:award#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "行业劳动裁定",
+      "reason": "特定司法区的劳动关系术语。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

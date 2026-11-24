@@ -1,0 +1,130 @@
+{
+  "entryId": "w:advice",
+  "headword": "advice",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ədˈvaɪs/",
+    "us": "/ədˈvaɪs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:advice#p-main",
+      "ipa": {
+        "uk": "/ədˈvaɪs/",
+        "us": "/ədˈvaɪs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "advices",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 25,
+    "mock": 167
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:advice#s1",
+      "pos": "n.",
+      "glossZh": "建议；忠告",
+      "pronunciationId": "w:advice#p-main",
+      "note": "通常不可数。可用 a piece of advice 表示「一条建议」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 25,
+        "mock": 167
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:advice#e-29d2053e413312dd",
+          "text": "So here is my advice: Lead by action.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:advice#e-3790ecc4f04b2968",
+          "text": "Here is some advice on how to make a trip by rail as pleasant as possible.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:advice#e-ca670ae4ad59f7bf",
+          "text": "We interviewed students and professors to get their advice about online courses.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 58
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "金融、商业中的正式通知",
+      "reason": "专业义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

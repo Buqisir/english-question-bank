@@ -1,0 +1,129 @@
+{
+  "entryId": "w:topic",
+  "headword": "topic",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtɒpɪk/",
+    "us": "/ˈtɑːpɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:topic#p-main",
+      "ipa": {
+        "uk": "/ˈtɒpɪk/",
+        "us": "/ˈtɑːpɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "topics",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 18,
+    "mock": 143
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:topic#s1",
+      "pos": "n.",
+      "glossZh": "话题",
+      "pronunciationId": "w:topic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 143
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:topic#e-4664b38986797fcf",
+          "text": "Which of the following is a frequent topic in small talk?",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:topic#e-7ae3eb508e6269f8",
+          "text": "The differences in conversational styles became evident when participants listened to audio clips in which two people spoke at the same time but were agreeing with each other and stayed on topic, Hilton said.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 189,
+            "end": 194
+          }
+        },
+        {
+          "exampleId": "w:topic#e-974cba2da4c0171a",
+          "text": "As a new unit started, I asked everyone to write a persuasive piece on a health-related topic of their choice.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 93
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "外用疗法和音乐符号",
+      "reason": "专业义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

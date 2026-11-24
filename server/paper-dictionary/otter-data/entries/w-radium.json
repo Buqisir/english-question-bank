@@ -1,0 +1,75 @@
+{
+  "entryId": "w:radium",
+  "headword": "radium",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈreɪdiəm/",
+    "us": "/ˈreɪdiəm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:radium#p-main",
+      "ipa": {
+        "uk": "/ˈreɪdiəm/",
+        "us": "/ˈreɪdiəm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "radiums",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:radium#s1",
+      "pos": "n.",
+      "glossZh": "镭（放射性元素）",
+      "pronunciationId": "w:radium#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "有光泽的丝织物",
+      "reason": "纺织品专门称谓"
+    },
+    {
+      "glossZh": "用镭治疗",
+      "reason": "历史医疗用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

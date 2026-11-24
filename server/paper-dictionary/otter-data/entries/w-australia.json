@@ -1,0 +1,117 @@
+{
+  "entryId": "w:australia",
+  "headword": "Australia",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɒˈstreɪliə/",
+    "us": "/ɔːˈstreɪliə/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:australia#p-main",
+      "ipa": {
+        "uk": "/ɒˈstreɪliə/",
+        "us": "/ɔːˈstreɪliə/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 13,
+    "mock": 33
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:australia#s1",
+      "pos": "专名",
+      "glossZh": "澳大利亚；澳洲",
+      "pronunciationId": "w:australia#p-main",
+      "note": "地理语境中也可指澳大利亚大陆。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 33
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:australia#e-6f1b745b26a0eaf6",
+          "text": "These days you’d be hard pressed to find anyone in Australia over the age of 15 who doesn’t own a mobile phone.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:australia#e-85c4f7ac100870bc",
+          "text": "Sometime in the early 1960s, a significant thing happened in Sydney, Australia.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:australia#e-a5f228d95c10fff8",
+          "text": "In Australia we now have over twenty million cars for just over twenty-six million people, among the highest rates of car ownership in the world.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 12
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

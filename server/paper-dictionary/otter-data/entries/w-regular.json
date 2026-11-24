@@ -1,0 +1,382 @@
+{
+  "entryId": "w:regular",
+  "headword": "regular",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈreɡjələ(r)/",
+    "us": "/ˈreɡjələr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:regular#p-main",
+      "ipa": {
+        "uk": "/ˈreɡjələ(r)/",
+        "us": "/ˈreɡjələr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more regular",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most regular",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "regulars",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 159
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 157
+  },
+  "senses": [
+    {
+      "senseId": "w:regular#s1",
+      "pos": "adj.",
+      "glossZh": "经常的",
+      "pronunciationId": "w:regular#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:regular#e-15d13d4f0aed5caf",
+          "text": "A new exhibition in Halifax uses everyday activities to explain the hidden math principles we all use on a regular basis.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:17",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 114
+          }
+        },
+        {
+          "exampleId": "w:regular#e-863329c54b1733de",
+          "text": "The benefits of regular exercise are well documented but there’s a new bonus to add to the ever-growing list.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:regular#e-44610a922fcc6afe",
+          "text": "Established matrix gardens should not need the life support we give most gardens: fertilizer, dividing, regular watering.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 111
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:regular#s2",
+      "pos": "adj.",
+      "glossZh": "形状规整的",
+      "pronunciationId": "w:regular#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:regular#e-c45e825f51f3dd2e",
+          "text": "the dot patterns were regular in shape",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:33",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:regular#s3",
+      "pos": "adj.",
+      "glossZh": "普通的",
+      "pronunciationId": "w:regular#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:regular#e-82f7bd1d2d6dae8f",
+          "text": "David had a brain disease which prevented him from walking or running like other children, but at school his classmates thought of him as a regular kid.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "writing-continuation-7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 140,
+            "end": 147
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:regular#s4",
+      "pos": "adj.",
+      "glossZh": "惯常的",
+      "pronunciationId": "w:regular#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:regular#e-b9ea3df3c87e97e2",
+          "text": "She generally works with their regular teachers to get lessons and tests being used at their home schools.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:regular#e-6bb59f83e8b21111",
+          "text": "Though wastED received enthusiastic reviews, it was designed from the start as a short-lived experiment; Blue Hill has since returned to its regular menu.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 141,
+            "end": 148
+          }
+        },
+        {
+          "exampleId": "w:regular#e-8e7a6f2f24d14c06",
+          "text": "• Regular price: $219.99",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:regular#s5",
+      "pos": "n.",
+      "glossZh": "常客",
+      "pronunciationId": "w:regular#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:regular#e-20517b7cc4664bdc",
+          "text": "She was __49__ absolutely everything, nothing was right and I was rather __50__ that she became a “regular”.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 99,
+            "end": 106
+          }
+        },
+        {
+          "exampleId": "w:regular#e-270c8c8915384b9d",
+          "text": "As the bookstore’s regular, she instantly __52__ with me and I told her our __53__ search.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:cloze:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:regular#s6",
+      "pos": "n.",
+      "glossZh": "常驻成员",
+      "pronunciationId": "w:regular#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:regular#e-82c3062a709e0e7a",
+          "text": "He was in the cast of “Tom Sawyer” when it was first performed and is a Children’s Theatre regular, with five shows to his credit.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 98
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:regular#s7",
+      "pos": "adj.",
+      "glossZh": "按规则变化的",
+      "pronunciationId": "w:regular#p-main",
+      "note": "如 regular verb，规则动词。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "左脚在前的",
+      "reason": "滑板等运动专门义"
+    },
+    {
+      "glossZh": "复活节满月星期数",
+      "reason": "历法术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

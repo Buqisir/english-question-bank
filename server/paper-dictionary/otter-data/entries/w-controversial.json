@@ -1,0 +1,134 @@
+{
+  "entryId": "w:controversial",
+  "headword": "controversial",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌkɒntrəˈvɜːʃl/",
+    "us": "/ˌkɑːntrəˈvɜːrʃl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:controversial#p-main",
+      "ipa": {
+        "uk": "/ˌkɒntrəˈvɜːʃl/",
+        "us": "/ˌkɑːntrəˈvɜːrʃl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more controversial",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most controversial",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:controversial#s1",
+      "pos": "adj.",
+      "glossZh": "有争议的；引起争论的",
+      "pronunciationId": "w:controversial#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 12
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:controversial#e-4ccf378bea4497d5",
+          "text": "This was exactly the kind of evidence that could support the controversial (争议的) theory of continental drift, which was largely dismissed by the scientific community at the time.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:controversial#e-62111c7f1851d8d9",
+          "text": "The recent explosion of GLP-1 medications like Ozempic, Wegovy, and Mounjaro has made this question even more controversial.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-d:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 110,
+            "end": 123
+          }
+        },
+        {
+          "exampleId": "w:controversial#e-34e4bb041a6bc957",
+          "text": "Some studies suggest this pattern may weaken immune functioning and increase illness vulnerability, even though the direct connection to serious diseases like cancer remains controversial.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam",
+            "paperTitle": "山东省滨州市2025—2026学年度第一学期期末测试 高三英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-01-senior-three-first-semester-final-exam:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 174,
+            "end": 187
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "爱争辩的；有争议的人或事物",
+      "reason": "罕见偏义或名词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

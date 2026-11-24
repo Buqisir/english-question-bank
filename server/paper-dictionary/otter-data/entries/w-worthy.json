@@ -1,0 +1,170 @@
+{
+  "entryId": "w:worthy",
+  "headword": "worthy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈwɜːði/",
+    "us": "/ˈwɜːrði/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:worthy#p-main",
+      "ipa": {
+        "uk": "/ˈwɜːði/",
+        "us": "/ˈwɜːrði/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "worthier",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "worthiest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "worthies",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "senses": [
+    {
+      "senseId": "w:worthy#s1",
+      "pos": "adj.",
+      "glossZh": "值得认真对待的",
+      "pronunciationId": "w:worthy#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:worthy#e-e2270020b6bc56f0",
+          "text": "Becoming a “musician” is thus a worthy goal for older adults.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-03-first",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-03-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-guangdong-guangzhou-2026-03-first:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:worthy#e-da2ddabc8a1cf661",
+          "text": "The spelling of “of” may not be a worthy battle to build a life around, but this memory helped me become aware of the fact that the world is a place that comes with a lot of strange rules that we often fail to question.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "济宁市2025—2026学年度第一学期高三质量检测英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-01-senior-three-first-semester-quality-test:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:worthy#s2",
+      "pos": "adj.",
+      "glossZh": "值得获得……的",
+      "pronunciationId": "w:worthy#p-main",
+      "note": "worthy of sth。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:worthy#e-789bcea9e79782ef",
+          "text": "Integrity is not achieved overnight, but through constant practicing, you can become a person truly worthy of trust and respect.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam",
+            "paperTitle": "浙江省新阵地教育联盟2026届第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-xinzhendi-alliance-2025-10-first-joint-exam:seven-choices:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 106
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:worthy#s3",
+      "pos": "n.",
+      "glossZh": "要人；名流",
+      "pronunciationId": "w:worthy#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏、使受尊重",
+      "reason": "专名或古旧动词用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

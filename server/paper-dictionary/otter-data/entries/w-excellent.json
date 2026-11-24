@@ -1,0 +1,136 @@
+{
+  "entryId": "w:excellent",
+  "headword": "excellent",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈeksələnt/",
+    "us": "/ˈeksələnt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:excellent#p-main",
+      "ipa": {
+        "uk": "/ˈeksələnt/",
+        "us": "/ˈeksələnt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more excellent",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most excellent",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:excellent#s1",
+      "pos": "adj.",
+      "glossZh": "极好的",
+      "pronunciationId": "w:excellent#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 38
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:excellent#e-4d02dc46cf2b6196",
+          "text": "The quality of life in France is equally excellent.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-i:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:excellent#e-3ec173184139f614",
+          "text": "Things like kale ribs, fish collars, rejected sweet potatoes, and cucumber butts were all re-appropriated and, with the help of a number of good chefs, turned into excellent cuisine.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 164,
+            "end": 173
+          }
+        },
+        {
+          "exampleId": "w:excellent#e-cd3e35de1c131f79",
+          "text": "“My therapist was an excellent listener and could tell when I was in a place to hear a suggestion or insight and when I clearly just needed to keep talking through it,” said Jack, a Talkspace tester, who’d recently lost a loved one.",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 30
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "出色地",
+      "reason": "过时副词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

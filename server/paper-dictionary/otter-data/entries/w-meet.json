@@ -1,0 +1,489 @@
+{
+  "entryId": "w:meet",
+  "headword": "meet",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/miːt/",
+    "us": "/miːt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:meet#p-main",
+      "ipa": {
+        "uk": "/miːt/",
+        "us": "/miːt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "meets",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "meeting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "met",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 66,
+    "mock": 350
+  },
+  "unassignedCounts": {
+    "gaokao": 6,
+    "mock": 349
+  },
+  "senses": [
+    {
+      "senseId": "w:meet#s1",
+      "pos": "v.",
+      "glossZh": "遇见；结识",
+      "pronunciationId": "w:meet#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 24,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meet#e-0b974a525660e89c",
+          "text": "Dr. Jubilado first met the Bajau while growing up on Samal Island in the Philippines.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:meet#e-8be9b5704bbd090e",
+          "text": "I post my work on social media and, in turn, have met some of the kindest people.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:meet#e-9358da0d5492ade7",
+          "text": "I met Gunter on a cold, wet and unforgettable evening in September.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meet#s2",
+      "pos": "v.",
+      "glossZh": "会面；集合",
+      "pronunciationId": "w:meet#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 20,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meet#e-35cda5995c239a86",
+          "text": "Where are the speakers going to meet?",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:meet#e-f4a329f14670bde1",
+          "text": "When my teammate and I met to discuss our project, I was uneasy.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:meet#e-359f4dc718866dd6",
+          "text": "Where will the participants meet for the July 10 photography workshop?",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2023-ii:23",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meet#s3",
+      "pos": "v.",
+      "glossZh": "符合；达到",
+      "pronunciationId": "w:meet#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meet#e-3955673b2f277d12",
+          "text": "A total of 40 women met the criteria for a high fitness level, or 120 watts or higher.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:meet#e-d670f4333b75117c",
+          "text": "According to the Solar Energy Industry Association, the number of solar panels installed(安装) has grown rapidly in the past decade, and it has to grow even faster to meet climate goals.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 165,
+            "end": 169
+          }
+        },
+        {
+          "exampleId": "w:meet#e-59115bc15c6c0d96",
+          "text": "Which of the following meets the application requirements?",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2026-zhejiang-jan:23",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meet#s4",
+      "pos": "v.",
+      "glossZh": "应对；迎接",
+      "pronunciationId": "w:meet#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meet#e-8189ff467ac455e3",
+          "text": "People were trying to help each other meet the challenges.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:meet#e-d66974a4a8b0f765",
+          "text": "Meet challenges with courage.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meet#s5",
+      "pos": "短语",
+      "glossZh": "遭遇；得到（某种反应）",
+      "pronunciationId": "w:meet#p-main",
+      "note": "meet with。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meet#e-a9f6114de5509bba",
+          "text": "Most parents will have eagerly asked their child about their day, only to meet with a “good”, quickly followed by \"I’m hungry\".",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 78
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meet#s6",
+      "pos": "短语",
+      "glossZh": "收支相抵",
+      "pronunciationId": "w:meet#p-main",
+      "note": "make ends meet。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meet#e-0e6788b7dd87a49e",
+          "text": "Many of their families were struggling to make ends meet.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meet#s7",
+      "pos": "v.",
+      "glossZh": "相接；交汇",
+      "pronunciationId": "w:meet#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:meet#s8",
+      "pos": "v.",
+      "glossZh": "相结合",
+      "pronunciationId": "w:meet#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meet#e-ad8a96713077516d",
+          "text": "When Historians Meet Artists",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2021-ii:31",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:meet#e-dc29280e873c12e3",
+          "text": "By creating a space where different artistic traditions can meet, it celebrates cultural diversity and encourages exchange across cultures.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 64
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meet#s9",
+      "pos": "n.",
+      "glossZh": "体育比赛",
+      "pronunciationId": "w:meet#p-main",
+      "note": "主要用于美式英语，如 track meet。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "合适的（形容词）；猎狐聚会；格的交运算",
+      "reason": "旧义或专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

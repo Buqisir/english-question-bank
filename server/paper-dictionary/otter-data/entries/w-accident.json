@@ -1,0 +1,165 @@
+{
+  "entryId": "w:accident",
+  "headword": "accident",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈæksɪdənt/",
+    "us": "/ˈæksɪdənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:accident#p-main",
+      "ipa": {
+        "uk": "/ˈæksɪdənt/",
+        "us": "/ˈæksɪdənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "accidents",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 120
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 118
+  },
+  "senses": [
+    {
+      "senseId": "w:accident#s1",
+      "pos": "n.",
+      "glossZh": "意外；事故（尤指引起受伤或损害的事件）",
+      "pronunciationId": "w:accident#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:accident#e-bd5954b0eb69d06f",
+          "text": "Road accidents, which had fallen for years, are now rising sharply.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:accident#e-6e600f06770e5f26",
+          "text": "On the day of the accident, Mrs. Brown was at work and Eric was at home with his father.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-ii:grammar-fill:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:accident#e-9f4c2b7a5c854203",
+          "text": "Its structural faults led to a tragic accident.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:21",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:accident#s2",
+      "pos": "n.",
+      "glossZh": "偶然；巧合",
+      "note": "by accident 表示「偶然地；无意中」。",
+      "pronunciationId": "w:accident#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:accident#e-8c335f5a7720d148",
+          "text": "By accident during cleaning.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:33",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 11
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "地层断裂；纹章中的可移除标记",
+      "reason": "专业用法"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

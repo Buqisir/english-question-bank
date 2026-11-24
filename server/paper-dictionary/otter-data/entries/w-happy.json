@@ -1,0 +1,229 @@
+{
+  "entryId": "w:happy",
+  "headword": "happy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈhæpi/",
+    "us": "/ˈhæpi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:happy#p-main",
+      "ipa": {
+        "uk": "/ˈhæpi/",
+        "us": "/ˈhæpi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "happier",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "happiest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more happy",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most happy",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 34,
+    "mock": 160
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 159
+  },
+  "senses": [
+    {
+      "senseId": "w:happy#s1",
+      "pos": "adj.",
+      "glossZh": "高兴的；快乐的",
+      "pronunciationId": "w:happy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 29,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:happy#e-d33d2485d9bd0e9a",
+          "text": "We finished the job, and I was a very happy man.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:happy#e-cec9a5f472a65332",
+          "text": "I’ve got two children - the younger one, Kynan, was extremely happy about the tigers arriving - but all of us really looked forward to being part of their lives and watching them grow.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:happy#e-baf4e36ed8ec172a",
+          "text": "Thankfulness has a lot of benefits: Research shows it makes us happier, less stressed and even more optimistic.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:happy#s2",
+      "pos": "adj.",
+      "glossZh": "满意的",
+      "pronunciationId": "w:happy#p-main",
+      "note": "be happy with sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:happy#e-4af51bc836613a7d",
+          "text": "I didn’t want Toby to be running around in the house, and my brother wasn’t happy with driving home with a wet dog.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:happy#s3",
+      "pos": "adj.",
+      "glossZh": "愿意的；乐意的",
+      "pronunciationId": "w:happy#p-main",
+      "note": "如 I’d be happy to help。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:happy#s4",
+      "pos": "adj.",
+      "glossZh": "祝……快乐",
+      "pronunciationId": "w:happy#p-main",
+      "note": "用于生日、节日等祝语。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:happy#e-928344f1baaa712c",
+          "text": "After we __45__ them up and pay, I mention to the clerks that it is Andrew’s __46__, and they wish him a happy one.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:cloze:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 110
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "恰好合适的（如 happy coincidence）",
+      "reason": "常见于少量搭配，语料无清晰独立例证"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

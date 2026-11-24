@@ -1,0 +1,206 @@
+{
+  "entryId": "w:monument",
+  "headword": "monument",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmɒnjumənt/",
+    "us": "/ˈmɑːnjumənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:monument#p-main",
+      "ipa": {
+        "uk": "/ˈmɒnjumənt/",
+        "us": "/ˈmɑːnjumənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "monuments",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Monuments",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "senses": [
+    {
+      "senseId": "w:monument#s1",
+      "pos": "n.",
+      "glossZh": "纪念碑；纪念性建筑",
+      "pronunciationId": "w:monument#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:monument#e-f9195bdfd41b0d83",
+          "text": "Read about how these ingenious artists created and moved the huge statues, theories of what may have happened to the island’s ancient inhabitants, and how today’s Rapanui people are embracing these extremely impressive monuments of their past.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 219,
+            "end": 228
+          }
+        },
+        {
+          "exampleId": "w:monument#e-6e2b1c9f56818c4a",
+          "text": "Visit the monument with him.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:monument#e-cf88389c21c909ea",
+          "text": "Pahlavan Mahmud Mausoleum: It is a historic monument, just next to the tower, in memory of a famous poet and folk hero in the 13th century.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 52
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:monument#s2",
+      "pos": "n.",
+      "glossZh": "有历史价值的建筑或遗迹",
+      "pronunciationId": "w:monument#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:monument#e-8ed20b39923d5038",
+          "text": "We will visit some of the best-preserved Roman monuments in the world.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:monument#e-8cb9152a7d93ad8c",
+          "text": "As we travel south from Madrid with Prof. Ronald Messier to historic Toledo, Roman Merida and into Andalucia, we explore historical monuments and architecture.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 132,
+            "end": 141
+          }
+        },
+        {
+          "exampleId": "w:monument#e-271782b41dbda767",
+          "text": "You’ll play a key role in supporting habitat restoration, trail maintenance, and landscape care across three iconic locations: Golden Gate National Recreation Area, Muir Woods National Monument, and Fort Point National Historic Site.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 185,
+            "end": 193
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "测量标志；占地石堆；公路自行车赛事",
+      "reason": "专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

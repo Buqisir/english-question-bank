@@ -1,0 +1,161 @@
+{
+  "entryId": "w:spicy",
+  "headword": "spicy",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈspaɪsi/",
+    "us": "/ˈspaɪsi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:spicy#p-main",
+      "ipa": {
+        "uk": "/ˈspaɪsi/",
+        "us": "/ˈspaɪsi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "spicier",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "spiciest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "senses": [
+    {
+      "senseId": "w:spicy#s1",
+      "pos": "adj.",
+      "glossZh": "辛辣的",
+      "pronunciationId": "w:spicy#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:spicy#e-712df16f6c5fec14",
+          "text": "Tearing up, sweating, nose running and other bodily functions are all signs when you’re eating spicy foods.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:spicy#e-8a5325c378c1c779",
+          "text": "We enjoyed a variety of dishes, piled with fruit, cheese and spicy Thai noodles.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n123:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:spicy#e-aaff0eea7f5b4198",
+          "text": "The enjoyment of spicy food is learned through adaptation of the nervous system.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:spicy#s2",
+      "pos": "adj.",
+      "glossZh": "香料味浓的",
+      "pronunciationId": "w:spicy#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:spicy#s3",
+      "pos": "adj.",
+      "glossZh": "劲爆的",
+      "pronunciationId": "w:spicy#p-main",
+      "note": "可形容八卦或消息。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "带情色意味的",
+      "reason": "较窄的非正式用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

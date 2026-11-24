@@ -1,0 +1,616 @@
+{
+  "entryId": "w:short",
+  "headword": "short",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ʃɔːt/",
+    "us": "/ʃɔːrt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:short#p-main",
+      "ipa": {
+        "uk": "/ʃɔːt/",
+        "us": "/ʃɔːrt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "shorter",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "shortest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "shorts",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 59,
+    "mock": 264
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 259
+  },
+  "senses": [
+    {
+      "senseId": "w:short#s1",
+      "pos": "adj.",
+      "glossZh": "（时间）短的",
+      "pronunciationId": "w:short#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:short#e-9ae84d953e093f89",
+          "text": "Art is long, life is short.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:23",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:short#e-f788f32fc7790414",
+          "text": "Which walk takes the shortest time?",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2024-ii:21",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:short#e-825da8a608e296e1",
+          "text": "A single invasive (侵入的) species may replace native ones and accomplish an ecosystem function in the short term, but a disease would more easily wipe it out in the future.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 105
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:short#s2",
+      "pos": "adj.",
+      "glossZh": "（长度或距离）短的",
+      "pronunciationId": "w:short#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:short#e-b4b4a03f98cc9fa1",
+          "text": "After a short way, the farmer stopped and pointed at a weed which we missed.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:short#e-6ff74d5be31e5869",
+          "text": "When attending an event at SoFi Stadium, you’re just a short walk or ride from several comfortable and classy hotels.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:short#e-3fdd549737d42477",
+          "text": "Red, with the longest wavelength, is on the outside, while violet, with the shortest, is on the inside.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 84
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:short#s3",
+      "pos": "adj.",
+      "glossZh": "（篇幅）短的",
+      "pronunciationId": "w:short#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 24,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:short#e-27aa25a22ea04cef",
+          "text": "This college-level course in creative storytelling functions as an introduction to a variety of storytelling techniques that appear in different forms of creative writing, such as short fiction and playwriting.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 180,
+            "end": 185
+          }
+        },
+        {
+          "exampleId": "w:short#e-25977a6fbc05b82a",
+          "text": "Of course, with its 2,672 pages, it’s not exactly short.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:short#e-90376b12e5ae2039",
+          "text": "Artist Biography: Please provide a short introduction (maximum 50 words) to the artist written in the third person.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:short#s4",
+      "pos": "adj.",
+      "glossZh": "矮的",
+      "pronunciationId": "w:short#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:short#e-bbfec194306da834",
+          "text": "We share only our passion for basketball; he’s a tall, famous icon, while I’m a short boy who can barely dribble(运球) the ball without dropping it.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 85
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:short#s5",
+      "pos": "短语",
+      "glossZh": "缺少……",
+      "pronunciationId": "w:short#p-main",
+      "note": "常见 be short of，也用 be short on。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:short#e-0f08ff5e968c0297",
+          "text": "He is short of money.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:short#e-f36d259671ff7015",
+          "text": "They are short of time.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:short#e-38b0b9ad5a049704",
+          "text": "If you find yourself short on recycled materials, you can also use clean towels and clothes to wrap breakables in.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:seven-choices:14",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:short#s6",
+      "pos": "短语",
+      "glossZh": "未达到……",
+      "pronunciationId": "w:short#p-main",
+      "note": "fall short of。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:short#e-cbe5adf2a6014844",
+          "text": "Today, in Australia, most children on average fall 2,000 steps short of the physical activity they need to avoid being overweight.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:short#e-5ce92c40c1d9b40e",
+          "text": "When he wasn’t doing all that, Jim was running across a checkerboard of green lawns（草坪） to ensure the local postal service did not fall short of its daily promise.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 136,
+            "end": 141
+          }
+        },
+        {
+          "exampleId": "w:short#e-f6bd59622d668bd6",
+          "text": "While it can provide a general idea of a text’s meaning, it often falls short of delivering correct translations for specialized fields like medicine, law, or marketing.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 77
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:short#s7",
+      "pos": "短语",
+      "glossZh": "是……的简称",
+      "pronunciationId": "w:short#p-main",
+      "note": "be short for。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:short#e-7c1a8d0bf7251174",
+          "text": "Apps (short for applications) are becoming increasingly popular nowadays, and for good reason.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:short#s8",
+      "pos": "短语",
+      "glossZh": "简而言之",
+      "pronunciationId": "w:short#p-main",
+      "note": "in short。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:short#e-aec533e47c57a15c",
+          "text": "In short, he loves postcards, and the excitement of getting a hand-written note from someone far away.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:31",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:short#e-a968ec65dc60a114",
+          "text": "In short, AI is redefining the museum in all respects.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-i:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:short#s9",
+      "pos": "短语",
+      "glossZh": "骤然停住",
+      "pronunciationId": "w:short#p-main",
+      "note": "stop short。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:short#e-dd0bee26a11b9314",
+          "text": "actually wanted to drop the class at one point, but stopped short because I didn’t want to give him the satisfaction of my chickening out.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:short#s10",
+      "pos": "adj.",
+      "glossZh": "（答话）简短而生硬的",
+      "pronunciationId": "w:short#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:short#s11",
+      "pos": "n.",
+      "glossZh": "短片",
+      "pronunciationId": "w:short#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "短路；卖空；游击手；短整型；未到洞；酥脆",
+      "reason": "不同专业的术语"
+    },
+    {
+      "glossZh": "纯饮料；汽车；地名和姓氏",
+      "reason": "地区俚语或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

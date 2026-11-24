@@ -1,0 +1,124 @@
+{
+  "entryId": "w:musician",
+  "headword": "musician",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/mjuˈzɪʃn/",
+    "us": "/mjuˈzɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:musician#p-main",
+      "ipa": {
+        "uk": "/mjuˈzɪʃn/",
+        "us": "/mjuˈzɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "musicians",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 37
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:musician#s1",
+      "pos": "n.",
+      "glossZh": "音乐家；音乐人",
+      "pronunciationId": "w:musician#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 37
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:musician#e-77d40c0a1802cbc8",
+          "text": "In his spare time though he goes on stage beside pianist Maria Raspopova – not as a musician but as her page turner.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:musician#e-52d3c57aea2a9064",
+          "text": "The project results from the difficulties many schools have in getting artists of any sort - whether an up-and-coming local musician or a major movie star - into schools to work with and inspire children.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 124,
+            "end": 132
+          }
+        },
+        {
+          "exampleId": "w:musician#e-e1eebdc6b85342af",
+          "text": "Professional musicians constantly switch between musical notes, rhythms, and emotional expressions, requiring frequent cognitive adjustments.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 22
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

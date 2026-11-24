@@ -1,0 +1,131 @@
+{
+  "entryId": "w:whenever",
+  "headword": "whenever",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/wenˈevə(r)/",
+    "us": "/wenˈevər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:whenever#p-main",
+      "ipa": {
+        "uk": "/wenˈevə(r)/",
+        "us": "/wenˈevər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 42
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 42
+  },
+  "senses": [
+    {
+      "senseId": "w:whenever#s1",
+      "pos": "conj.",
+      "glossZh": "无论何时",
+      "pronunciationId": "w:whenever#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:whenever#e-f2cac648cf66d987",
+          "text": "The truth is that we are lucky enough to have clean water whenever we want, but this is not the case for many people around the world.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:whenever#e-07e5a45eae3f9f74",
+          "text": "Whenever I heard of businesses using plastic, I’d send an email.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:grammar-fill:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:whenever#e-8e8f3fa30156b2b4",
+          "text": "Just spend face-to-face time together whenever possible.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:12",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:whenever#s2",
+      "pos": "adv.",
+      "glossZh": "究竟什么时候",
+      "pronunciationId": "w:whenever#p-main",
+      "note": "用于加强疑问语气。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

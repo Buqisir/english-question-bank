@@ -1,0 +1,206 @@
+{
+  "entryId": "w:port",
+  "headword": "port",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pɔːt/",
+    "us": "/pɔːrt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:port#p-main",
+      "ipa": {
+        "uk": "/pɔːt/",
+        "us": "/pɔːrt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "ports",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "ported",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "porting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 5,
+    "mock": 9
+  },
+  "senses": [
+    {
+      "senseId": "w:port#s1",
+      "pos": "n.",
+      "glossZh": "港口",
+      "pronunciationId": "w:port#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:port#e-ce8b8f1563c2f851",
+          "text": "The museum explores the colourful history of the town and port of Goole, with plenty of hands-on exhibits for younger visitors.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:port#e-67515ec1194bd4b5",
+          "text": "Northwest of Alexandria on the Nile Delta, this was a popular trading port before earthquakes weakened the land and dragged it below the salty water.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:port#e-3a64bc21751eb54f",
+          "text": "Steveston Village is an active fishing port where visitors can purchase freshly caught seafood at Fisherman’s Wharf and have it prepared at a local restaurant for a custom meal.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:port#s2",
+      "pos": "n.",
+      "glossZh": "左舷",
+      "pronunciationId": "w:port#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:port#s3",
+      "pos": "n.",
+      "glossZh": "设备接口",
+      "pronunciationId": "w:port#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:port#s4",
+      "pos": "n.",
+      "glossZh": "波特酒",
+      "pronunciationId": "w:port#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:port#s5",
+      "pos": "v.",
+      "glossZh": "移植（软件）",
+      "pronunciationId": "w:port#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Port Lympne",
+      "reason": "专名，相关命中留空"
+    },
+    {
+      "glossZh": "持枪姿势",
+      "reason": "军事专门用法"
+    },
+    {
+      "glossZh": "举止仪态",
+      "reason": "旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

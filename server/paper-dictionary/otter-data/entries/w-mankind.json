@@ -1,0 +1,84 @@
+{
+  "entryId": "w:mankind",
+  "headword": "mankind",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/mænˈkaɪnd/",
+    "us": "/mænˈkaɪnd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:mankind#p-main",
+      "ipa": {
+        "uk": "/mænˈkaɪnd/",
+        "us": "/mænˈkaɪnd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:mankind#s1",
+      "pos": "n.",
+      "glossZh": "人类",
+      "pronunciationId": "w:mankind#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:mankind#e-8cf38c20e2e10e2e",
+          "text": "China Daily, in partnership with relevant organizations, is launching the International Cartoon and Illustration Exhibition 2025 on a Community with a Shared Future for Mankind, hoping to promote the trustworthy use of technology for the benefit of humanity through creative cartoons and illustrations.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 169,
+            "end": 176
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "宗教章节名、男性群体",
+      "reason": "专名或旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

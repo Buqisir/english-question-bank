@@ -1,0 +1,60 @@
+{
+  "entryId": "w:dumpling",
+  "headword": "dumpling",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdʌmplɪŋ/",
+    "us": "/ˈdʌmplɪŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dumpling#p-main",
+      "ipa": {
+        "uk": "/ˈdʌmplɪŋ/",
+        "us": "/ˈdʌmplɪŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:dumpling#s1",
+      "pos": "n.",
+      "glossZh": "饺子；面团团子",
+      "pronunciationId": "w:dumpling#p-main",
+      "note": "也可指包有甜馅或咸馅的面团食品，具体看菜式。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

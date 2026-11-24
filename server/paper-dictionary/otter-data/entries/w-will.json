@@ -1,0 +1,375 @@
+{
+  "entryId": "w:will",
+  "headword": "will",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/wɪl/",
+    "us": "/wɪl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:will#p-main",
+      "ipa": {
+        "uk": "/wɪl/",
+        "us": "/wɪl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "wills",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Wills",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "willing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "would",
+      "tags": [
+        "past"
+      ]
+    },
+    {
+      "form": "willed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 341,
+    "mock": 1848
+  },
+  "unassignedCounts": {
+    "gaokao": 303,
+    "mock": 1847
+  },
+  "senses": [
+    {
+      "senseId": "w:will#s1",
+      "pos": "modal v.",
+      "glossZh": "将要；会",
+      "pronunciationId": "w:will#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 33,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:will#e-abe497bafaadb953",
+          "text": "How will David get to the club?",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:will#e-964f73f7ccb14e7c",
+          "text": "50 Honorable Mentions: Judges will choose up to 50 honorable mention winners, who will each receive a T-shirt in memory of Earhart’s final flight.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:will#e-3d72ca880aa907fe",
+          "text": "A British woman who won a $1 million prize after she was named the World’s Best Teacher will use the cash to bring inspirational figures into UK schools.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 92
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:will#s2",
+      "pos": "modal v.",
+      "glossZh": "愿意；肯",
+      "pronunciationId": "w:will#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:will#e-f9f0d3b3d46e30c0",
+          "text": "If this fellow participant is going to eat more, so will I. Call it the “I’ll have what she’s having” effect.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:will#e-15c3419d5a328e76",
+          "text": "So many of us have the belief that being comfortable is the only state we will tolerate, and when we experience something outside of our comfort zone, we get impatient about the circumstances.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:will#e-d05dc6d0e163b2db",
+          "text": "“We’re not going to go cutting down any big old oaks,” and neither will the department completely stop planting new ones, said Auyeung.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 71
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:will#s3",
+      "pos": "modal v.",
+      "glossZh": "通常会",
+      "pronunciationId": "w:will#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:will#e-5bde3d8412fff615",
+          "text": "Even the most successful public speaker will make mistakes.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:will#e-1f58ed1e05c84db6",
+          "text": "If someone feels as though others in the group are loafing, they will also lower their effort to match.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:seven-choices:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 76
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:will#s4",
+      "pos": "n.",
+      "glossZh": "意志",
+      "pronunciationId": "w:will#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:will#e-3923e48eeccbef72",
+          "text": "Where there’s a will there’s a way.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:23",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:will#s5",
+      "pos": "n.",
+      "glossZh": "意愿",
+      "pronunciationId": "w:will#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:will#s6",
+      "pos": "n.",
+      "glossZh": "遗嘱",
+      "pronunciationId": "w:will#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:will#s7",
+      "pos": "v.",
+      "glossZh": "立遗嘱赠予",
+      "pronunciationId": "w:will#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:will#s8",
+      "pos": "v.",
+      "glossZh": "竭力希望某事发生",
+      "pronunciationId": "w:will#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Will",
+      "reason": "人名，真题 g201"
+    },
+    {
+      "glossZh": "willing",
+      "reason": "独立形容词，在本词条中不绑定"
+    },
+    {
+      "glossZh": "弱侧线卫；古旧的愿望或去向用法",
+      "reason": "专业或古旧"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

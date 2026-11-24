@@ -1,0 +1,121 @@
+{
+  "entryId": "w:london",
+  "headword": "London",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈlʌndən/",
+    "us": "/ˈlʌndən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:london#p-main",
+      "ipa": {
+        "uk": "/ˈlʌndən/",
+        "us": "/ˈlʌndən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 20,
+    "mock": 95
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:london#s1",
+      "pos": "n.",
+      "glossZh": "伦敦（英国首都）",
+      "pronunciationId": "w:london#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 20,
+        "mock": 95
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:london#e-efe914f760f325b4",
+          "text": "When I was 9, we packed up our home in Los Angeles and arrived at Heathrow, London on a gray January morning.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:london#e-b57f5821bb37ce1c",
+          "text": "When I returned to London in 2004, I found myself wandering down to Southbank, spending hours there.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:london#e-7a275a011522fd12",
+          "text": "I was conducting auditions(试演) for my play in my tiny old shared house in London.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 80
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "其他同名城镇、姓氏",
+      "reason": "真题指英国首都"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

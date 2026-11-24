@@ -1,0 +1,219 @@
+{
+  "entryId": "w:communicate",
+  "headword": "communicate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəˈmjuːnɪkeɪt/",
+    "us": "/kəˈmjuːnɪkeɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:communicate#p-main",
+      "ipa": {
+        "uk": "/kəˈmjuːnɪkeɪt/",
+        "us": "/kəˈmjuːnɪkeɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "communicated",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "communicates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "communicating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 25,
+    "mock": 92
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 92
+  },
+  "senses": [
+    {
+      "senseId": "w:communicate#s1",
+      "pos": "v.",
+      "glossZh": "沟通；交流；联系",
+      "pronunciationId": "w:communicate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 19,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:communicate#e-1c74a2c67e03dd44",
+          "text": "They can help you out in just about every area of your life, whether it’s keeping fit, communicating with friends, or even learning a language.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:communicate#e-4cd8452372ffde05",
+          "text": "Make sure you have communicated with your friend about how frequently each of you wants to be contacted and what method works best for you both.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:communicate#e-718313cae36c7bec",
+          "text": "When we communicate, we communicate meaning.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
+              "sentence": 8
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:communicate#s2",
+      "pos": "v.",
+      "glossZh": "传达；传递（消息、想法等）",
+      "pronunciationId": "w:communicate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:communicate#e-58b35fb0e5b12898",
+          "text": "They say wild chimps communicate 19 specific messages to one another with a \"vocabulary\" of 66 gestures.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:communicate#e-177cea014180746c",
+          "text": "When we communicate, we communicate meaning.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
+              "sentence": 8
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:communicate#e-86831ff10267f382",
+          "text": "If the information you’re communicating isn’t urgent, consider sending an email.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 39
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "领圣餐；使参加圣餐",
+      "reason": "宗教专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

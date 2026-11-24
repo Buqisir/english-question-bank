@@ -1,0 +1,201 @@
+{
+  "entryId": "w:bomb",
+  "headword": "bomb",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bɒm/",
+    "us": "/bɑːm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bomb#p-main",
+      "ipa": {
+        "uk": "/bɒm/",
+        "us": "/bɑːm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "bombs",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Bombs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "bombed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "bombing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "senses": [
+    {
+      "senseId": "w:bomb#s1",
+      "pos": "n.",
+      "glossZh": "炸弹；爆炸装置",
+      "pronunciationId": "w:bomb#p-main",
+      "note": "语料也用作比喻，指突然释放出或带来强烈效果的事物。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bomb#e-315a03ebe86f79dc",
+          "text": "Instead, they explode in your mouth like little flavor bombs.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:bomb#e-c837dac938c5035b",
+          "text": "“Losing them would be like setting off a carbon bomb, worsening climate change.”",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n090:reading-d:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 52
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bomb#s2",
+      "pos": "v.",
+      "glossZh": "轰炸",
+      "pronunciationId": "w:bomb#p-main",
+      "note": "bombing 表示「轰炸」。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bomb#e-ae2ed278e53db21e",
+          "text": "His most remarkable and politically charged work was “Guernica”, produced in response to the Spanish Civil War when the town suffered a horrifying bombing.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 147,
+            "end": 154
+          }
+        },
+        {
+          "exampleId": "w:bomb#e-a2853dd6dead10cf",
+          "text": "On May 14th, 1940, a German bombing raid almost destroyed Rotterdam, forcing thousands to flee the burning city.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bomb#s3",
+      "pos": "v.",
+      "glossZh": "惨败；彻底失败",
+      "pronunciationId": "w:bomb#p-main",
+      "note": "口语。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "药物俚语、摔跤动作、破旧汽车及 a bomb「一大笔钱」",
+      "reason": "俗语或专业义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

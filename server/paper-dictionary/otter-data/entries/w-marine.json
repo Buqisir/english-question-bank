@@ -1,0 +1,205 @@
+{
+  "entryId": "w:marine",
+  "headword": "marine",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/məˈriːn/",
+    "us": "/məˈriːn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:marine#p-main",
+      "ipa": {
+        "uk": "/məˈriːn/",
+        "us": "/məˈriːn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more marine",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most marine",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "marines",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Marines",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 59
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 55
+  },
+  "senses": [
+    {
+      "senseId": "w:marine#s1",
+      "pos": "adj.",
+      "glossZh": "海洋的",
+      "pronunciationId": "w:marine#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:marine#e-e26f529232088af7",
+          "text": "This accidental harvest is known as bycatch, and every year it kills millions of marine animals.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 87
+          }
+        },
+        {
+          "exampleId": "w:marine#e-647d308b020c0c34",
+          "text": "“It’s a dance of partnership guided by light,” explains marine biologist Dr. Kenji Nakamura.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:marine#e-a80fc1d792ed8fa5",
+          "text": "Oyster reefs are highly important marine ecosystems that provide living space for hundreds of species, thus driving ecological interactions.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:marine#s2",
+      "pos": "adj.",
+      "glossZh": "海运的",
+      "pronunciationId": "w:marine#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:marine#e-a65d09ba33bce38c",
+          "text": "This flashy postmodern tower dominates the Thames, mixing ocean liner elegance and old storehouse solidity while taking inspiration from local marine history.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 143,
+            "end": 149
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:marine#s3",
+      "pos": "adj.",
+      "glossZh": "海军陆战队的",
+      "pronunciationId": "w:marine#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:marine#s4",
+      "pos": "n.",
+      "glossZh": "海军陆战队员",
+      "pronunciationId": "w:marine#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "海景画、为船配员",
+      "reason": "真题和模拟无证"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

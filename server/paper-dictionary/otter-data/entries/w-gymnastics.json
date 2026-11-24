@@ -1,0 +1,113 @@
+{
+  "entryId": "w:gymnastics",
+  "headword": "gymnastics",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dʒɪmˈnæstɪks/",
+    "us": "/dʒɪmˈnæstɪks/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:gymnastics#p-main",
+      "ipa": {
+        "uk": "/dʒɪmˈnæstɪks/",
+        "us": "/dʒɪmˈnæstɪks/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "senses": [
+    {
+      "senseId": "w:gymnastics#s1",
+      "pos": "n.",
+      "glossZh": "体操",
+      "pronunciationId": "w:gymnastics#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gymnastics#e-fef0e145c8c69eb7",
+          "text": "She wants to try gymnastics.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:gymnastics#e-67e90c25fe9c2210",
+          "text": "As usual, I watched Mum coach her gymnastics class.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gymnastics#s2",
+      "pos": "n.",
+      "glossZh": "复杂的脑力活动",
+      "pronunciationId": "w:gymnastics#p-main",
+      "note": "常见 mental gymnastics。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

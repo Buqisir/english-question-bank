@@ -1,0 +1,265 @@
+{
+  "entryId": "w:remote",
+  "headword": "remote",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈməʊt/",
+    "us": "/rɪˈmoʊt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:remote#p-main",
+      "ipa": {
+        "uk": "/rɪˈməʊt/",
+        "us": "/rɪˈmoʊt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more remote",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most remote",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "remoter",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "remotest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "remotes",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 59
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 56
+  },
+  "senses": [
+    {
+      "senseId": "w:remote#s1",
+      "pos": "adj.",
+      "glossZh": "偏远的",
+      "pronunciationId": "w:remote#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:remote#e-902bdcc42869bde2",
+          "text": "Tour highlights include the Roman city of Dougga, the underground Numidian capital at Bulla Regia, Roman Sbeitla and the remote areas around Tataouine and Matmata, unique for underground cities.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 121,
+            "end": 127
+          }
+        },
+        {
+          "exampleId": "w:remote#e-e33f202d2244fe55",
+          "text": "Drones’ reliable performance in remote areas.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2022-national-b:28",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:remote#e-e5077f8cfab12ba6",
+          "text": "The Saint Lukas is one of five government-sponsored medical trains that travel to remote towns in central and eastern Russia.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:remote#s2",
+      "pos": "adj.",
+      "glossZh": "远程的",
+      "pronunciationId": "w:remote#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:remote#e-bfd4009b680b1585",
+          "text": "Research found that multitasking goes up when meetings are remote or boring.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:remote#e-65fa592723fcb08c",
+          "text": "Doing so might suggest you aren’t open to remote work opportunities.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:remote#e-51ba41efe6945a9a",
+          "text": "Free access to remote learning.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey",
+            "paperTitle": "南京市、盐城市2025-2026学年度第一学期期末调研测试 高三英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-jiangsu-nanjing-yancheng-2026-01-first-semester-final-survey:22",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:remote#s3",
+      "pos": "adj.",
+      "glossZh": "渺茫的",
+      "pronunciationId": "w:remote#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:remote#s4",
+      "pos": "adj.",
+      "glossZh": "冷淡疏离的",
+      "pronunciationId": "w:remote#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:remote#s5",
+      "pos": "n.",
+      "glossZh": "遥控器",
+      "pronunciationId": "w:remote#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "远程仓库",
+      "reason": "计算机术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

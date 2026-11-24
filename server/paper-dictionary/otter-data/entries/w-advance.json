@@ -1,0 +1,337 @@
+{
+  "entryId": "w:advance",
+  "headword": "advance",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ədˈvɑːns/",
+    "us": "/ədˈvæns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:advance#p-main",
+      "ipa": {
+        "uk": "/ədˈvɑːns/",
+        "us": "/ədˈvæns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more advance",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most advance",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "advances",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "advanced",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "advancing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 212
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 212
+  },
+  "senses": [
+    {
+      "senseId": "w:advance#s1",
+      "pos": "v.",
+      "glossZh": "推动；促进；使向前发展",
+      "pronunciationId": "w:advance#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:advance#e-60ac4411e5299b54",
+          "text": "She decided to go back to college to advance her career and to be able to better support her family while doing something she loves: nursing.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:advance#e-93966f7cd6a38a35",
+          "text": "Jane Jacobs spent her working life advancing a distinct vision of the city – in particular focusing on what makes a successful urban community.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:advance#s2",
+      "pos": "n.",
+      "glossZh": "进步；进展",
+      "pronunciationId": "w:advance#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:advance#e-8c1466332aae6774",
+          "text": "It is our hope that in coming decades, advances in science will offer new perspectives (视角) from which to study how people manage their lives.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:advance#e-066599fc30e24f1e",
+          "text": "The most recent advances in solar technology.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:32",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:advance#s3",
+      "pos": "adj. / 短语",
+      "glossZh": "预先的；提前（in advance）",
+      "pronunciationId": "w:advance#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:advance#e-66d9eda3876f2da1",
+          "text": "Advance bookings are required(info@middletonlodge.co.uk)",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:advance#e-3bbdafa6a0033d1f",
+          "text": "Registration must be made at least two weeks in advance.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:advance#s4",
+      "pos": "adj.",
+      "glossZh": "先进的；高级的（advanced）",
+      "pronunciationId": "w:advance#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:advance#e-f62f71f849d15dc4",
+          "text": "Very small drones with advanced sensors and AI and travelling ahead of the train could guide it like a co-pilot.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:advance#e-ccf0d91ae22eaafa",
+          "text": "They help develop advanced skills.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2024-i:30",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:advance#e-61a4c5ee1dabc0d5",
+          "text": "By using machine learning and advanced algorithms (算法), these institutions are creating personalized visitor journeys, protecting delicate collections, and revealing hidden stories.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:advance#s5",
+      "pos": "v.",
+      "glossZh": "前进；向前移动",
+      "pronunciationId": "w:advance#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:advance#s6",
+      "pos": "n.",
+      "glossZh": "预付款；预支款",
+      "pronunciationId": "w:advance#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

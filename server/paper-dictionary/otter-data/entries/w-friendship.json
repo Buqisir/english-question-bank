@@ -1,0 +1,129 @@
+{
+  "entryId": "w:friendship",
+  "headword": "friendship",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfrendʃɪp/",
+    "us": "/ˈfrendʃɪp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:friendship#p-main",
+      "ipa": {
+        "uk": "/ˈfrendʃɪp/",
+        "us": "/ˈfrendʃɪp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "friendships",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 18,
+    "mock": 83
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:friendship#s1",
+      "pos": "n.",
+      "glossZh": "友谊",
+      "pronunciationId": "w:friendship#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 83
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:friendship#e-054aaed4c27873d0",
+          "text": "Friendship needs care and attention to keep it in good health.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:friendship#e-f42becbb2c54b5aa",
+          "text": "Here are five ways to sustain (保持) long-distance friendships.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:friendship#e-674c38f59add6617",
+          "text": "In addition, the way that toddlers demonstrate that they like other children is markedly different from what adults think of as expressions of friendship.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 143,
+            "end": 153
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Friendship 地名",
+      "reason": "专名，语料未见"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

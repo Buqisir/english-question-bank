@@ -1,0 +1,304 @@
+{
+  "entryId": "w:steam",
+  "headword": "steam",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/stiːm/",
+    "us": "/stiːm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:steam#p-main",
+      "ipa": {
+        "uk": "/stiːm/",
+        "us": "/stiːm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "steams",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "steamed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "steaming",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 37
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 31
+  },
+  "senses": [
+    {
+      "senseId": "w:steam#s1",
+      "pos": "n.",
+      "glossZh": "蒸汽",
+      "pronunciationId": "w:steam#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:steam#e-2faf26119cdb92c0",
+          "text": "Then Jeff noticed steam shooting out of the pot and the lid starting to shake.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:steam#e-b791390e98db1fad",
+          "text": "Klein writes, “America did not invent the steam engine, but once they grasped its passwords they put it to more uses than anyone else.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:steam#e-6003f5635f2d9ea2",
+          "text": "Water moves through these man-made cracks for 24-48 hours, gathering heat until temperatures exceed 380°F. As heated water rises through the second well, pressure changes near the surface turn about 20% into steam.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-c:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 208,
+            "end": 213
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:steam#s2",
+      "pos": "v.",
+      "glossZh": "冒蒸汽",
+      "pronunciationId": "w:steam#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:steam#e-51807e735f47447b",
+          "text": "The dumplings arrive steaming and dangerously hot.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-i:grammar-fill:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:steam#e-eac1f6a5567b57b6",
+          "text": "A cup of tea steamed and then cooled beside him, untouched.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test",
+            "paperTitle": "淄博市2025-2026学年度第一学期高三摸底质量检测 英语试卷",
+            "groupId": "group:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:steam#e-be2a739fb35d7176",
+          "text": "Some days, it was chicken soup and tomato soup steaming in big pots.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:steam#s3",
+      "pos": "v.",
+      "glossZh": "用蒸汽烹调",
+      "pronunciationId": "w:steam#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:steam#e-6fcb4d8c060d9e3a",
+          "text": "Cooking methods like steaming and stir-frying are preferred to preserve the natural quality of ingredients.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:grammar-fill:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:steam#e-af2a31db37e208b8",
+          "text": "Steamed fish with vegetables.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:21",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:steam#s4",
+      "pos": "短语",
+      "glossZh": "势头变强",
+      "pronunciationId": "w:steam#p-main",
+      "note": "gain steam。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:steam#e-f784f6aa15f5cd28",
+          "text": "But that is no longer true: as AI promises to transform how we work, and the four-day-workweek movement gains steam, it is time to admit once and for all that working more does not make you more productive.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 110,
+            "end": 115
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "STEAM 教育、显微镜缩写及非电子击剑",
+      "reason": "同形缩写或行业专称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

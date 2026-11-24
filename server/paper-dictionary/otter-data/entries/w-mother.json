@@ -1,0 +1,179 @@
+{
+  "entryId": "w:mother",
+  "headword": "mother",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmʌðə(r)/",
+    "us": "/ˈmʌðər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:mother#p-main",
+      "ipa": {
+        "uk": "/ˈmʌðə(r)/",
+        "us": "/ˈmʌðər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "mothers",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Mothers",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "mothered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "mothering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 52,
+    "mock": 239
+  },
+  "unassignedCounts": {
+    "gaokao": 49,
+    "mock": 239
+  },
+  "senses": [
+    {
+      "senseId": "w:mother#s1",
+      "pos": "n.",
+      "glossZh": "母亲（人或动物）",
+      "pronunciationId": "w:mother#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:mother#e-6378568aa72bf396",
+          "text": "As I grew older and became a mother, the library took on a new place and an added meaning in my life.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:mother#e-e955725d0c594d93",
+          "text": "Her mother, Solio, is a first-time mum and she is doing a fantastic job.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:mother#e-c5987b2429c3f524",
+          "text": "We watched it from a distance, not wanting to disturb it or scare off its mother.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:mother#s2",
+      "pos": "n.",
+      "glossZh": "根源；起因",
+      "pronunciationId": "w:mother#p-main",
+      "note": "如 necessity is the mother of invention。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:mother#s3",
+      "pos": "v.",
+      "glossZh": "像母亲一样照料",
+      "pronunciationId": "w:mother#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "醋母；唱片母盘；机车供电车",
+      "reason": "专业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

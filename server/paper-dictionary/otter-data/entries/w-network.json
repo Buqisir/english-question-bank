@@ -1,0 +1,385 @@
+{
+  "entryId": "w:network",
+  "headword": "network",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈnetwɜːk/",
+    "us": "/ˈnetwɜːrk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:network#p-main",
+      "ipa": {
+        "uk": "/ˈnetwɜːk/",
+        "us": "/ˈnetwɜːrk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "networks",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "networked",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "networking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 93
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 89
+  },
+  "senses": [
+    {
+      "senseId": "w:network#s1",
+      "pos": "n.",
+      "glossZh": "相互联系的人或机构组成的网络",
+      "pronunciationId": "w:network#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:network#e-0b84e0de7fb13b20",
+          "text": "They have complex social networks.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:34",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:network#e-80315f94889299b9",
+          "text": "By creating a network of friends.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:25",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:network#e-bda75f7e3e646c27",
+          "text": "Currently, he’s building a network of volunteers, technicians, and hospital staff.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:network#s2",
+      "pos": "n.",
+      "glossZh": "社交平台",
+      "pronunciationId": "w:network#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:network#e-5f050fd881509843",
+          "text": "Today his hobby has developed into the website postcrossing.com, a social network that has grown to 575,217 registered users in 214 countries and regions since he started it 10 years ago.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:network#e-cb1280001525d833",
+          "text": "Americans are still texting while driving, as well as using social networks and taking photos.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:network#s3",
+      "pos": "n.",
+      "glossZh": "相互连通的系统",
+      "pronunciationId": "w:network#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:network#e-4f891bf09004ce32",
+          "text": "Whole neighbourhoods were destroyed to make way for new road networks and kids had to play elsewhere.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:network#e-25d74f1702eb718f",
+          "text": "Each parking zone consists of multiple lots, designed to efficiently manage traffic across the venue’s network.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 103,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:network#e-6c0b05672c5082e7",
+          "text": "In 2021 the Tiantong satellites formed a network covering the entire Asia-Pacific region.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 48
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:network#s4",
+      "pos": "adj.",
+      "glossZh": "联网的",
+      "pronunciationId": "w:network#p-main",
+      "note": "networked。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:network#e-20e4d4789b919a69",
+          "text": "And in contrast to our increasingly networked lives where the information we consume is monitored and tracked, a printed book still offers the chance of a wholly private, “off-line” activity.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:network#s5",
+      "pos": "v.",
+      "glossZh": "建立人脉",
+      "pronunciationId": "w:network#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:network#e-e270be0f0f350ad0",
+          "text": "The networking is a space where new ideas are shared and exchanged, allowing people to build casual friendships and exchange ideas.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:network#s6",
+      "pos": "n.",
+      "glossZh": "计算机网络",
+      "pronunciationId": "w:network#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:network#e-3535167f26df7a7f",
+          "text": "Computer networks.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:network#s7",
+      "pos": "v.",
+      "glossZh": "使联网",
+      "pronunciationId": "w:network#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "全国联播（作动词）",
+      "reason": "广播专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,103 @@
+{
+  "entryId": "w:respective",
+  "headword": "respective",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈspektɪv/",
+    "us": "/rɪˈspektɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:respective#p-main",
+      "ipa": {
+        "uk": "/rɪˈspektɪv/",
+        "us": "/rɪˈspektɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:respective#s1",
+      "pos": "adj.",
+      "glossZh": "各自的",
+      "pronunciationId": "w:respective#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:respective#e-b7ba5faf4b829ff8",
+          "text": "To explore the origins of social curiosity, Laura Lewis, a psychologist at the University of California, and her colleagues studied how human children between four and six years old from San Francisco’s Bay Area and adult chimpanzees responded to certain videos showing members of their respective species.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 287,
+            "end": 297
+          }
+        },
+        {
+          "exampleId": "w:respective#e-33e3a1aea32459d6",
+          "text": "“With their respective lenses (镜头), photographers documented the landscape of human activities at the southern most tip of the Balkan Peninsula, captured the traditional lifestyles of Egyptians while wandering through the markets and backstreets of Cairo, and turned their cameras to the more reserved daily life and social changes in China,” she says.",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 22
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "恭敬的",
+      "reason": "旧义，现代英语通常用 respectful"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

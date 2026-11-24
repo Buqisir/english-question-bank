@@ -1,0 +1,274 @@
+{
+  "entryId": "w:reality",
+  "headword": "reality",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/riˈæləti/",
+    "us": "/riˈæləti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:reality#p-main",
+      "ipa": {
+        "uk": "/riˈæləti/",
+        "us": "/riˈæləti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "realities",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 156
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 151
+  },
+  "senses": [
+    {
+      "senseId": "w:reality#s1",
+      "pos": "n.",
+      "glossZh": "现实",
+      "pronunciationId": "w:reality#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reality#e-abf0867b9833f218",
+          "text": "My son Bruce had made my Grandma’s Box a reality.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:10",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:reality#e-7704c42365b70081",
+          "text": "Although these campaigns were widespread, the reality is that the majority of the western cities were completely redesigned around the needs of the motor car.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:reality#e-490a729038f3a727",
+          "text": "Seeking a balance between reality and fantasy.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-hz-2026-apr-gaosan-quality:24",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:reality#s2",
+      "pos": "短语",
+      "glossZh": "真人秀",
+      "pronunciationId": "w:reality#p-main",
+      "note": "reality show。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reality#e-c16388bf0916abf8",
+          "text": "What is the man’s attitude toward reality shows?",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:reality#s3",
+      "pos": "短语",
+      "glossZh": "实际上",
+      "pronunciationId": "w:reality#p-main",
+      "note": "in reality。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reality#e-c11a27e8be1f67b5",
+          "text": "In reality, what we call multitasking is often rapid task-switching, which divides attention, reduces focus, and ultimately leads to lower-quality results.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:reality#e-10a2f6c800e4f449",
+          "text": "For Peter Kareiva, the president of the Aquarium of the Pacific, the term biodiversity crisis wrongly overstates the importance of individual species, when in reality, entire ecosystems are more important.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 159,
+            "end": 166
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:reality#s4",
+      "pos": "短语",
+      "glossZh": "虚拟现实",
+      "pronunciationId": "w:reality#p-main",
+      "note": "virtual reality。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reality#e-e72a305dc72e1176",
+          "text": "These models were imported into virtual reality software and placed next to a virtual hearth (壁炉炉床) so that the heat-damaged areas were closest to the flames, simulating (模仿) how the stones might have been arranged in real life.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:reality#e-4545593274033f6f",
+          "text": "This is the promise of virtual reality (VR): a world delivered to us without leaving home.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:seven-choices:1",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 45
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "效忠",
+      "reason": "旧义"
+    },
+    {
+      "glossZh": "不动产",
+      "reason": "通常用近形词 realty"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

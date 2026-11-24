@@ -1,0 +1,340 @@
+{
+  "entryId": "w:secure",
+  "headword": "secure",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/sɪˈkjʊə(r)/",
+    "us": "/sɪˈkjʊr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:secure#p-main",
+      "ipa": {
+        "uk": "/sɪˈkjʊə(r)/",
+        "us": "/sɪˈkjʊr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more secure",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most secure",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "securer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "securest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "secured",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "secures",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "securing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 71
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 63
+  },
+  "senses": [
+    {
+      "senseId": "w:secure#s1",
+      "pos": "v.",
+      "glossZh": "取得",
+      "pronunciationId": "w:secure#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:secure#e-98e12d96d366aa1d",
+          "text": "Register to secure your preferred time for the trial class for your child.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:secure#e-98d1c49a16b5e983",
+          "text": "She secured support to transform the lot.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:26",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:secure#e-166ac5a3293a6c6f",
+          "text": "By the end of that summer, I had secured my private pilot’s license and began taking local flights just for fun.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:secure#s2",
+      "pos": "v.",
+      "glossZh": "使得到保障",
+      "pronunciationId": "w:secure#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:secure#e-7d28f07207c65406",
+          "text": "It secured the gloves’ long-term preservation.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-cq-nankai-2025-12-fourth-quality-test:29",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:secure#s3",
+      "pos": "v.",
+      "glossZh": "妥善固定",
+      "pronunciationId": "w:secure#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:secure#s4",
+      "pos": "adj.",
+      "glossZh": "安全的",
+      "pronunciationId": "w:secure#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:secure#e-c0f143f5d9fecd9f",
+          "text": "This is to ensure data entered is kept in a secure environment.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-cq-nankai-2026-03-sixth-quality-test:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:secure#s5",
+      "pos": "adj.",
+      "glossZh": "有保障的",
+      "pronunciationId": "w:secure#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:secure#e-622b0fa28316f8d8",
+          "text": "“When independent local shops disappear, money flows out of the community instead of staying locally, making jobs less secure.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 119,
+            "end": 125
+          }
+        },
+        {
+          "exampleId": "w:secure#e-2fdd63de545fb711",
+          "text": "However, But her parents, both practicing doctors, urged her hard to go into medicine, arguing it would give her a stable, secure future.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 129
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:secure#s6",
+      "pos": "adj.",
+      "glossZh": "安心的",
+      "pronunciationId": "w:secure#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:secure#e-6cecbd938474132d",
+          "text": "Relaxed and secure.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:24",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 18
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "订立誓约",
+      "reason": "少见旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

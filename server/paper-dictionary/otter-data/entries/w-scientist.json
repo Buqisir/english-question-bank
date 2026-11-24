@@ -1,0 +1,129 @@
+{
+  "entryId": "w:scientist",
+  "headword": "scientist",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsaɪəntɪst/",
+    "us": "/ˈsaɪəntɪst/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:scientist#p-main",
+      "ipa": {
+        "uk": "/ˈsaɪəntɪst/",
+        "us": "/ˈsaɪəntɪst/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "scientists",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 33,
+    "mock": 319
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 319
+  },
+  "senses": [
+    {
+      "senseId": "w:scientist#s1",
+      "pos": "n.",
+      "glossZh": "科学家",
+      "pronunciationId": "w:scientist#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 32,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:scientist#e-39f7f0306014d5e1",
+          "text": "As scientists look deeper into our genes (基因), they are finding examples of human evolution in just the past few thousand years.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:scientist#e-d60e8d333a8ec404",
+          "text": "Building upon past research that found exercise releases biochemicals that improve mental function, scientists at Radboud University and the University of Edinburgh conducted a study to determine when exercise was most beneficial to learning.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:scientist#e-dc62e13fbe972b55",
+          "text": "Now, Pereira has teamed up with plant scientist Professor Wolfgang Busch to apply SLEAP to plants.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 47
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "New Scientist",
+      "reason": "杂志名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

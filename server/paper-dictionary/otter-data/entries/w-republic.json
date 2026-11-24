@@ -1,0 +1,91 @@
+{
+  "entryId": "w:republic",
+  "headword": "republic",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈpʌblɪk/",
+    "us": "/rɪˈpʌblɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:republic#p-main",
+      "ipa": {
+        "uk": "/rɪˈpʌblɪk/",
+        "us": "/rɪˈpʌblɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "republics",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:republic#s1",
+      "pos": "n.",
+      "glossZh": "共和国",
+      "pronunciationId": "w:republic#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:republic#e-9be862450765fa4e",
+          "text": "For instance, the 11th Hour Project’s work in the Democratic Republic of Congo helps protect gorilla habitats while providing alternative livelihoods for local communities by supporting the construction of micro-hydropower (微型水力发电) systems.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock",
+            "paperTitle": "镇江市2025-2026学年上学期高三“零模”英语试卷",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2026-02-senior-three-zero-mock:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 69
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Urban Tech Republic",
+      "reason": "机构专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

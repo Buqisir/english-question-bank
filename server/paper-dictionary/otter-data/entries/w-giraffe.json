@@ -1,0 +1,131 @@
+{
+  "entryId": "w:giraffe",
+  "headword": "giraffe",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dʒəˈrɑːf/",
+    "us": "/dʒəˈræf/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:giraffe#p-main",
+      "ipa": {
+        "uk": "/dʒəˈrɑːf/",
+        "us": "/dʒəˈræf/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "giraffes",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:giraffe#s1",
+      "pos": "n.",
+      "glossZh": "长颈鹿",
+      "pronunciationId": "w:giraffe#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:giraffe#e-1c263178ababc8a8",
+          "text": "A 2023 study in Nature Ecology & Evolution demonstrates that acacia trees (金合欢树) bitten by giraffes produce ethylene (乙烯) gas.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:giraffe#e-56f53fa56631fad7",
+          "text": "After seeing a giraffe at the zoo.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:giraffe#e-4ad47a5fdd5dd083",
+          "text": "Feeding the giraffes.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 20
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "高单轮车",
+      "reason": "低频器材名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,494 @@
+{
+  "entryId": "w:find",
+  "headword": "find",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/faɪnd/",
+    "us": "/faɪnd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:find#p-main",
+      "ipa": {
+        "uk": "/faɪnd/",
+        "us": "/faɪnd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "finds",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "fand",
+      "tags": [
+        "past",
+        "participle",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "finding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "found",
+      "tags": [
+        "past",
+        "participle",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 116,
+    "mock": 710
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 707
+  },
+  "senses": [
+    {
+      "senseId": "w:find#s1",
+      "pos": "v.",
+      "glossZh": "找到",
+      "pronunciationId": "w:find#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 74,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:find#e-36d2e124ce331363",
+          "text": "Where did the fisherman find the bottle?",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:find#e-e0ba5aaef4f338ad",
+          "text": "I got into a panic as I pressed firmly against the table and moved my head around trying to find the right angle, but it was no use.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:5",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:find#e-dc3b184456227b25",
+          "text": "We tried to find an expert to help, but the Inland Fisheries and Wildlife website showed that there were no wildlife experts in our area.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:find#s2",
+      "pos": "v.",
+      "glossZh": "发现（事实）",
+      "pronunciationId": "w:find#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:find#e-c02ce827394ca055",
+          "text": "We’d come down in the morning to find they’d turned the room upside down, and left it looking like a zoo.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:find#e-6220943d4421bfa6",
+          "text": "You’ll soon find that the more patience you practice, the more you start to apply it to other, more annoying situations.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:find#e-e8cbba1602f066b6",
+          "text": "From it, they extract Cashew Nut Shell Liquid (CNSL) and find that it contains special natural substances that can fight bacteria and prevent decay (变质).",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:find#s3",
+      "pos": "v.",
+      "glossZh": "觉得",
+      "pronunciationId": "w:find#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:find#e-bb09ae75bd84c83a",
+          "text": "Generation Xers with young families, like my wife and me, can still find it convenient to have a home phone rather than providing a mobile phone for every family member.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:find#e-9cc11346c4ffc0d6",
+          "text": "Low intensity speakers find it rude to talk at the same time and prefer people speak one after another in conversation.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:find#e-29ef5f5089152403",
+          "text": "What does Christina find surprising?",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:find#s4",
+      "pos": "短语",
+      "glossZh": "发觉自己处于某种状况",
+      "pronunciationId": "w:find#p-main",
+      "note": "find oneself。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:find#e-5c0670f5c9d8f45d",
+          "text": "You may find yourself having to learn something by heart.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-ii:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:find#e-e051945a77aa85aa",
+          "text": "As you make your lifestyle changes, you may find yourself wanting to speak up for yourself if others comment on what you’re doing, which can turn itself into a whole household debate.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:find#e-d626849b19417360",
+          "text": "Many drivers find themselves temporarily blinded while driving directly into the glare of the sun.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:find#s5",
+      "pos": "短语",
+      "glossZh": "查明",
+      "pronunciationId": "w:find#p-main",
+      "note": "find out。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:find#e-7dd786fb0f41f94e",
+          "text": "To find out what she would do in the two tests.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2020-i:34",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:find#e-37653530da20e406",
+          "text": "What can the Textalyzer help a police officer find out?",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2022-ii:29",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:find#e-6551bf57f10d782f",
+          "text": "What does the follow-up test aim to find out about the cockatoos?",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2022-national-a:26",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:find#s6",
+      "pos": "n.",
+      "glossZh": "有价值的发现物",
+      "pronunciationId": "w:find#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:find#e-5f4d1ccf4f2ecf89",
+          "text": "This exciting volume provides an overview of Troy’s history and of the significant finds made by archaeologists who have worked there since it was discovered in 1871.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:find#s7",
+      "pos": "v.",
+      "glossZh": "裁定",
+      "pronunciationId": "w:find#p-main",
+      "note": "find sb guilty 认定某人有罪。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "将球传到预定位置",
+      "reason": "体育专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

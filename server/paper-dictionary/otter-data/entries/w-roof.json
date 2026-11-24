@@ -1,0 +1,178 @@
+{
+  "entryId": "w:roof",
+  "headword": "roof",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ruːf/",
+    "us": "/ruːf/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:roof#p-main",
+      "ipa": {
+        "uk": "/ruːf/",
+        "us": "/ruːf/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "roofs",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "rooves",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "roofed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "roofing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 35
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 34
+  },
+  "senses": [
+    {
+      "senseId": "w:roof#s1",
+      "pos": "n.",
+      "glossZh": "屋顶",
+      "pronunciationId": "w:roof#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:roof#e-8ea5208c18d60891",
+          "text": "Four years ago they all moved into a three-storey Victorian house in Bristol - one of a growing number of multigenerational families in the UK living together under the same roof.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 174,
+            "end": 178
+          }
+        },
+        {
+          "exampleId": "w:roof#e-2097af5fc38abd3e",
+          "text": "It is made with local materials, has a flat roof, wood paneling, concrete floors and custom-made furniture.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:roof#e-c78c9189abf49703",
+          "text": "However, my kitchen received little sunlight, so I carried my small garden up to the roof each morning, sometimes forgetting to bring it back down at night.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 89
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:roof#s2",
+      "pos": "n.",
+      "glossZh": "内腔的顶部",
+      "pronunciationId": "w:roof#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:roof#s3",
+      "pos": "v.",
+      "glossZh": "给……盖屋顶",
+      "pronunciationId": "w:roof#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "上覆岩层",
+      "reason": "采矿专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

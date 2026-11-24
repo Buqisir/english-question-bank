@@ -1,0 +1,162 @@
+{
+  "entryId": "w:evidence",
+  "headword": "evidence",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈevɪdəns/",
+    "us": "/ˈevɪdəns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:evidence#p-main",
+      "ipa": {
+        "uk": "/ˈevɪdəns/",
+        "us": "/ˈevɪdəns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "evidences",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "evidenced",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "evidencing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 153
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 153
+  },
+  "senses": [
+    {
+      "senseId": "w:evidence#s1",
+      "pos": "n.",
+      "glossZh": "证据",
+      "pronunciationId": "w:evidence#p-main",
+      "note": "通常不可数，可说 a piece of evidence。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:evidence#e-672dff5bdbc80ee6",
+          "text": "It was inspiring but the evidence was unreliable.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:28",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:evidence#e-f860dd52be6083fb",
+          "text": "“There is a lot of really interesting evidence which seems to be suggesting that if children are inspired up to the age of seven, then being outdoors will be a habit for life.” His own children have got into the habit of playing outside now: “We just send them out into the garden and tell them not to come back in for a while.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:evidence#e-e9e51fa49253f164",
+          "text": "For a long time, this ineffective hiding method was __44__ as evidence that children are hopelessly “egocentric” (自我中心的) creatures.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-b:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:evidence#s2",
+      "pos": "v.",
+      "glossZh": "显示",
+      "pronunciationId": "w:evidence#p-main",
+      "note": "正式用法，多见 be evidenced by。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "作证者",
+      "reason": "罕见旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

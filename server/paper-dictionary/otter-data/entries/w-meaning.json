@@ -1,0 +1,204 @@
+{
+  "entryId": "w:meaning",
+  "headword": "meaning",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmiːnɪŋ/",
+    "us": "/ˈmiːnɪŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:meaning#p-main",
+      "ipa": {
+        "uk": "/ˈmiːnɪŋ/",
+        "us": "/ˈmiːnɪŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "meanings",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 27,
+    "mock": 119
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 117
+  },
+  "senses": [
+    {
+      "senseId": "w:meaning#s1",
+      "pos": "n.",
+      "glossZh": "含义",
+      "pronunciationId": "w:meaning#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 22,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meaning#e-e1f755f759453982",
+          "text": "Researchers say they have translated the meaning of gestures that wild chimpanzees (黑猩猩) use to communicate.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:meaning#e-791e62b17d525962",
+          "text": "It should give you a precise definition of each word, thus differentiating it from other words whose meanings are similar, but not identical.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 116
+          }
+        },
+        {
+          "exampleId": "w:meaning#e-bcf164fdb4000a82",
+          "text": "Not long ago, my fifth-grade son Kevin asked me about the meaning of a word in a novel.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:meaning#s2",
+      "pos": "n.",
+      "glossZh": "意义；价值",
+      "pronunciationId": "w:meaning#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meaning#e-6c2615c1311238fe",
+          "text": "As I grew older and became a mother, the library took on a new place and an added meaning in my life.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:meaning#e-b0ecb2359a86308b",
+          "text": "I revisited that question of my life meaning.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:meaning#e-5227f958d671c126",
+          "text": "And every time a former student tells me they still keep their magazine, it confirms the true meaning of this project.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 101
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "有某种意图的",
+      "reason": "常作为复合形容词的一部分"
+    },
+    {
+      "glossZh": "动词 mean 的现在分词",
+      "reason": "归入 mean 的动词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

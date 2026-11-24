@@ -1,0 +1,130 @@
+{
+  "entryId": "w:probably",
+  "headword": "probably",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈprɒbəbli/",
+    "us": "/ˈprɑːbəbli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:probably#p-main",
+      "ipa": {
+        "uk": "/ˈprɒbəbli/",
+        "us": "/ˈprɑːbəbli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more probably",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most probably",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 73,
+    "mock": 528
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:probably#s1",
+      "pos": "adv.",
+      "glossZh": "很可能",
+      "pronunciationId": "w:probably#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 73,
+        "mock": 528
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:probably#e-b5d8826952de4820",
+          "text": "The host or hostess of the party will, however, probably give all the guests a tour of their new home.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:probably#e-4c38284c8f457d78",
+          "text": "“We will probably build another school-home with this money,” he said.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:grammar-fill:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:probably#e-739999a0a5d18f6e",
+          "text": "Even if you haven’t been to the small fishing village Mevagissey, you’ve probably seen it in a movie or British TV show.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 81
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

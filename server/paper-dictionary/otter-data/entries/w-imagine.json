@@ -1,0 +1,220 @@
+{
+  "entryId": "w:imagine",
+  "headword": "imagine",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈmædʒɪn/",
+    "us": "/ɪˈmædʒɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:imagine#p-main",
+      "ipa": {
+        "uk": "/ɪˈmædʒɪn/",
+        "us": "/ɪˈmædʒɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "imagined",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "imagines",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "imagining",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 153
+  },
+  "unassignedCounts": {
+    "gaokao": 6,
+    "mock": 150
+  },
+  "senses": [
+    {
+      "senseId": "w:imagine#s1",
+      "pos": "v.",
+      "glossZh": "想象；设想",
+      "pronunciationId": "w:imagine#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:imagine#e-024149fae29609e2",
+          "text": "She has served here for 17 years and can’t imagine working anywhere else.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-i:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:imagine#e-8d9fade859639cb5",
+          "text": "Flowers are everywhere – hanging baskets, window boxes, and planters – just what you imagine in an attractive English market town.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:8",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:imagine#e-eccefb861e2cf38b",
+          "text": "“Standing among the stones, I found myself imagining how they looked thousands of years ago.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 52
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:imagine#s2",
+      "pos": "v.",
+      "glossZh": "猜想；料想",
+      "pronunciationId": "w:imagine#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:imagine#e-374a644cd3dbad3b",
+          "text": "\"I often send postcards to family and friends,\" he says to China Daily, \"but you can imagine that after a while, you never receive as many as you send, and you realize that not everyone is into it __32__” Seeking other like-minded souls, however, Paulo started looking in a somewhat unlikely place: online.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:imagine#e-4a08b4c926ce3e37",
+          "text": "You might imagine it would be hard to see the funny side if you knew you were going to use a wheelchair for the rest of your life, but that is precisely what Jade Reynolds does.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:imagine#e-cf79e8783f1eaf16",
+          "text": "Never in my wildest dreams did I imagine that I would be assigned to write a science-fiction novel one day.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 40
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "读者代入式幻想短文",
+      "reason": "网络低频名词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

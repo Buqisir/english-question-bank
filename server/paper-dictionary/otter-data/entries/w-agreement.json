@@ -1,0 +1,181 @@
+{
+  "entryId": "w:agreement",
+  "headword": "agreement",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈɡriːmənt/",
+    "us": "/əˈɡriːmənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:agreement#p-main",
+      "ipa": {
+        "uk": "/əˈɡriːmənt/",
+        "us": "/əˈɡriːmənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "agreements",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 48
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 45
+  },
+  "senses": [
+    {
+      "senseId": "w:agreement#s1",
+      "pos": "n.",
+      "glossZh": "同意；意见一致",
+      "pronunciationId": "w:agreement#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:agreement#e-30afec3b632409d7",
+          "text": "The high intensity group reported that conversations where people spoke at the same time when expressing agreement were not interruptive but engaged and friendlier than the conversations with moments of silence in between speaking turns.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 114
+          }
+        },
+        {
+          "exampleId": "w:agreement#e-823c1b7c7bf1b2ce",
+          "text": "They express that despite a growing agreement in scientific circles that GMOs run few risks, environmental and consumer groups have successfully launched campaigns against GMOs over the past 30 years.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:agreement#s2",
+      "pos": "n.",
+      "glossZh": "约定；协议",
+      "pronunciationId": "w:agreement#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:agreement#e-565c3e6ed2e0e126",
+          "text": "Bring your completed Volunteer Agreement Form.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:agreement#e-88af35ceb73be415",
+          "text": "● International agreements recognize the global importance of rainforests in combating climate change.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:agreement#e-2d3539d90ae00dea",
+          "text": "What agreement has been reached between the speakers?",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 14
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "语法配合或一致关系",
+      "reason": "语言学专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

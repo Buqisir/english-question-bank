@@ -1,0 +1,143 @@
+{
+  "entryId": "w:kilo",
+  "headword": "kilo",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "kilogram",
+    "kilogramme"
+  ],
+  "ipa": {
+    "uk": "/ˈkiːləʊ/",
+    "us": "/ˈkiːləʊ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:kilo#p-main",
+      "ipa": {
+        "uk": "/ˈkiːləʊ/",
+        "us": "/ˈkiːləʊ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "kilos",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "kilograms",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "senses": [
+    {
+      "senseId": "w:kilo#s1",
+      "pos": "n.",
+      "glossZh": "千克；公斤",
+      "pronunciationId": "w:kilo#p-main",
+      "note": "kilogram 的简写。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:kilo#e-34d0e8cc18828784",
+          "text": "Drinks now contain 45 million fewer kilos of sugar as a result of manufacturers’ efforts to avoid the charge, according to Treasury figures.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:kilo#e-32cfd6d003bbc22e",
+          "text": "Second, conventional lithium batteries, which rely on graphite anodes（石墨负极）, are rapidly hitting their energy limit of 300 watt-hours per kilogram, which falls short of the ever-increasing demands of electric vehicles.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 138,
+            "end": 146
+          }
+        },
+        {
+          "exampleId": "w:kilo#e-ef3a43fe8d0d6f08",
+          "text": "At 16, he weighed over 100 kilograms.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 36
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Kilo Shop",
+      "reason": "店名，m2 留空"
+    },
+    {
+      "glossZh": "字母 K 的无线电拼读词",
+      "reason": "专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

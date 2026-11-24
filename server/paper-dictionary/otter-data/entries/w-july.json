@@ -1,0 +1,122 @@
+{
+  "entryId": "w:july",
+  "headword": "July",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dʒuˈlaɪ/",
+    "us": "/dʒuˈlaɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:july#p-main",
+      "ipa": {
+        "uk": "/dʒuˈlaɪ/",
+        "us": "/dʒuˈlaɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 18,
+    "mock": 29
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:july#s1",
+      "pos": "n.",
+      "glossZh": "七月",
+      "pronunciationId": "w:july#p-main",
+      "note": "月份名写作 July。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 29
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:july#e-71c96ae737491113",
+          "text": "When is the House at Dalemain Mansion & Historic Gardens open on Sundays in July?",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2020-national-ii:21",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 80
+          }
+        },
+        {
+          "exampleId": "w:july#e-35e28b1252e5e91b",
+          "text": "Where will the participants meet for the July 10 photography workshop?",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2023-ii:23",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:july#e-ed1c86f01dc06934",
+          "text": "•Monday – Friday, July 8–26, 9am – 4pm.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 22
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓名",
+      "reason": "专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

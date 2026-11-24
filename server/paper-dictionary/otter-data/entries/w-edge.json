@@ -1,0 +1,314 @@
+{
+  "entryId": "w:edge",
+  "headword": "edge",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/edʒ/",
+    "us": "/edʒ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:edge#p-main",
+      "ipa": {
+        "uk": "/edʒ/",
+        "us": "/edʒ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "edges",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "edged",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "edging",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 69
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 65
+  },
+  "senses": [
+    {
+      "senseId": "w:edge#s1",
+      "pos": "n.",
+      "glossZh": "边缘；边沿",
+      "pronunciationId": "w:edge#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:edge#e-790ce48c8fd9ed64",
+          "text": "When you put them down between bites, always put them down together so they are parallel with the edge of the table in front of you.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:edge#e-85105f2e3eb51558",
+          "text": "While taking a 20-hour train ride along the edge of the Taklimakan Desert in northwestern China, I had the kind of humbling, educational, and above all else, wonderful __41__ with a local that all travelers long for.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:edge#e-49cbab63e3a56ea5",
+          "text": "I left my daughter at the swimming center, circled back and found the cow standing at the grassy edge of a side street, breathing heavily.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 101
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:edge#s2",
+      "pos": "n.",
+      "glossZh": "优势",
+      "pronunciationId": "w:edge#p-main",
+      "note": "have an edge over sb 指「比某人占优势」。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:edge#e-7809e00f7fbe1a1c",
+          "text": "● Have a competitive edge in application for Master’s, Ph.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:edge#e-5b99971b1ada2b2b",
+          "text": "Lefties have an edge in certain top-level sports.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:34",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:edge#s3",
+      "pos": "n.",
+      "glossZh": "刀刃；锋利的一边",
+      "pronunciationId": "w:edge#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:edge#s4",
+      "pos": "v.",
+      "glossZh": "缓慢移动；逐渐超过",
+      "pronunciationId": "w:edge#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:edge#e-0693a0de8f64154a",
+          "text": "However, while some of her classmates edged ahead, others actually fell behind.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:edge#s5",
+      "pos": "短语",
+      "glossZh": "紧张不安",
+      "pronunciationId": "w:edge#p-main",
+      "note": "on edge。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:edge#e-410c7731ce3bd9c7",
+          "text": "Everyone else seemed at ease, while I felt on edge.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n085:writing-continuation:3",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:edge#s6",
+      "pos": "短语",
+      "glossZh": "在……的边缘；濒临",
+      "pronunciationId": "w:edge#p-main",
+      "note": "on the edge of sth。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:edge#e-615c5e4679b22535",
+          "text": "Still, this study provides the know-how to avoid the axolotl’s “last nail in the coffin,” showing that even species on the edge of extinction may have a path to recovery.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 127
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "微软浏览器、移动通信缩写、图论中的边等",
+      "reason": "同形专名或专业术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,182 @@
+{
+  "entryId": "w:politics",
+  "headword": "politics",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpɒlətɪks/",
+    "us": "/ˈpɑːlətɪks/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:politics#p-main",
+      "ipa": {
+        "uk": "/ˈpɒlətɪks/",
+        "us": "/ˈpɑːlətɪks/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:politics#s1",
+      "pos": "n.",
+      "glossZh": "政治活动；政治事务",
+      "pronunciationId": "w:politics#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:politics#e-42e8e26f4610d1d4",
+          "text": "Since context is key to critical thinking, learning to analyze information about current events likely requires knowledge about politics and history, as well as practice at tracing sources.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 136
+          }
+        },
+        {
+          "exampleId": "w:politics#e-6b4c2d8ae9e32714",
+          "text": "Rather than learning general principles about online media, civic online reasoning teaches students specific skills for evaluating information about politics and social issues.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-d:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 149,
+            "end": 157
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:politics#s2",
+      "pos": "n.",
+      "glossZh": "政治学",
+      "pronunciationId": "w:politics#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:politics#e-64ce9a37400640b4",
+          "text": "High levels of knowledge can make people too attached to traditional ways of viewing problems across fields the arts, sciences, and politics.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 132,
+            "end": 140
+          }
+        },
+        {
+          "exampleId": "w:politics#e-8167fda73de9411c",
+          "text": "Hire only Cambridge politics graduates or Harvard MBAs or Stanford software engineers and they will have studied under the same professors and absorbed similar world views regardless of their gender or skin colour.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:politics#e-25b62ae7422aa1c3",
+          "text": "In Britain, men with a master’s in politics make about 10% less in their mid-30s than those who only studied it at college; for history, the drop is about 20%, and for English, nearly 30%.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:politics#s3",
+      "pos": "n.",
+      "glossZh": "政治立场；政治观点",
+      "pronunciationId": "w:politics#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

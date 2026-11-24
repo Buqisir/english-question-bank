@@ -1,0 +1,136 @@
+{
+  "entryId": "w:efficient",
+  "headword": "efficient",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈfɪʃnt/",
+    "us": "/ɪˈfɪʃnt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:efficient#p-main",
+      "ipa": {
+        "uk": "/ɪˈfɪʃnt/",
+        "us": "/ɪˈfɪʃnt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more efficient",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most efficient",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 51
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:efficient#s1",
+      "pos": "adj.",
+      "glossZh": "高效的；效率高的",
+      "pronunciationId": "w:efficient#p-main",
+      "note": "侧重以较少的时间、精力或能源完成任务。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 51
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:efficient#e-5a8f2fc831f7a276",
+          "text": "As we age, even if we’re healthy, the heart just isn’t as efficient in processing oxygen as it used to be.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:efficient#e-2fec314212ec167c",
+          "text": "Costs would be cut and operations would be more efficient（高效）across the board.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:efficient#e-506a9835460260f5",
+          "text": "The new batteries are more eco-friendly, energy efficient and affordable compared to traditional ones.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 57
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "致因；起致因作用的",
+      "reason": "哲学术语或旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

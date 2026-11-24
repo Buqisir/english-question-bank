@@ -1,0 +1,308 @@
+{
+  "entryId": "w:population",
+  "headword": "population",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌpɒpjuˈleɪʃn/",
+    "us": "/ˌpɑːpjuˈleɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:population#p-main",
+      "ipa": {
+        "uk": "/ˌpɒpjuˈleɪʃn/",
+        "us": "/ˌpɑːpjuˈleɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "populations",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 21,
+    "mock": 116
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 112
+  },
+  "senses": [
+    {
+      "senseId": "w:population#s1",
+      "pos": "n.",
+      "glossZh": "人口（某地居民总数）",
+      "pronunciationId": "w:population#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:population#e-44969af3c6e12f75",
+          "text": "In the quiet oil town of Drumright, Oklahoma – where the highway passes by empty shops and the population is just under 3,000 – Sarah Hagan is rewriting the rules of math education.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 105
+          }
+        },
+        {
+          "exampleId": "w:population#e-3e64917771fdbe36",
+          "text": "As the population grows, we need to protect and restore our farmland to ensure healthy food for everyone.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:population#s2",
+      "pos": "n.",
+      "glossZh": "居民（某地或某类地区的人群）",
+      "pronunciationId": "w:population#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:population#e-17091c4c7c96f775",
+          "text": "Something significant is happening to the world population: it is aging.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:population#e-c519fc16e08b1c92",
+          "text": "Then, one after another, Sydney discovered lots of things that were just sort of there – broad parks, superb beaches, and a culturally diverse population.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 143,
+            "end": 153
+          }
+        },
+        {
+          "exampleId": "w:population#e-6854d247d29b8458",
+          "text": "Each stop lasts an average of two days, and during that time the doctors and nurses on board provide rural（乡村）populations with basic medical care, X-ray scans and prescriptions.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 110,
+            "end": 121
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:population#s3",
+      "pos": "n.",
+      "glossZh": "具有共同特征的人群",
+      "pronunciationId": "w:population#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:population#e-4485df19371c719e",
+          "text": "“Research indicates that actions aimed at improving educational success must be carried out regularly and at a pace that allows the acquisition of new attitudes, understandings or behaviours among the target population,” explains Anik.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 208,
+            "end": 218
+          }
+        },
+        {
+          "exampleId": "w:population#e-f2939903d8985309",
+          "text": "Studies indicate that medical terms like “obese” are least favored, while more neutral descriptions such as “in a larger body,” “unhealthy weight,” and “overweight” find greater acceptance among certain populations.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 203,
+            "end": 214
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:population#s4",
+      "pos": "n.",
+      "glossZh": "种群",
+      "pronunciationId": "w:population#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:population#e-8dfd19662f3b2587",
+          "text": "According to the World Wildlife Fund, the global black rhino population has dropped as low as 5500, giving the rhinos a “critically endangered” status.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:population#e-a5d107dd240ef51b",
+          "text": "The route the butterflies travel has been hardly known because the populations are too small to follow.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:population#e-f369ef34a93016c6",
+          "text": "Habitat loss, pesticide use, and climate change have caused dramatic declines in pollinator populations over the past couple of decades, which has damaged the U.S. agricultural economy.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 103
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "统计总体",
+      "reason": "统计学术语"
+    },
+    {
+      "glossZh": "填充集合",
+      "reason": "计算机专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

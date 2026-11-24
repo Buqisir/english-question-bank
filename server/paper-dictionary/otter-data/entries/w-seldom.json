@@ -1,0 +1,149 @@
+{
+  "entryId": "w:seldom",
+  "headword": "seldom",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈseldəm/",
+    "us": "/ˈseldəm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:seldom#p-main",
+      "ipa": {
+        "uk": "/ˈseldəm/",
+        "us": "/ˈseldəm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more seldom",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most seldom",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "seldomer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "seldomest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:seldom#s1",
+      "pos": "adv.",
+      "glossZh": "很少",
+      "pronunciationId": "w:seldom#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 38
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:seldom#e-e621452990228e38",
+          "text": "Then I would try to remember the different possessions I supposedly had taken away – since I seldom actually kept them.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:seldom#e-88509e300afa3eb1",
+          "text": "It’s seldom studied.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:seldom#e-afea76bbd2f0e1dc",
+          "text": "He seldom appears on television.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2022-ii:27",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 9
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "罕见的",
+      "reason": "旧式形容词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

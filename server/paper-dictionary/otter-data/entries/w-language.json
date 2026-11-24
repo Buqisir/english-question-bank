@@ -1,0 +1,295 @@
+{
+  "entryId": "w:language",
+  "headword": "language",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈlæŋɡwɪdʒ/",
+    "us": "/ˈlæŋɡwɪdʒ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:language#p-main",
+      "ipa": {
+        "uk": "/ˈlæŋɡwɪdʒ/",
+        "us": "/ˈlæŋɡwɪdʒ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "languages",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 58,
+    "mock": 426
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 424
+  },
+  "senses": [
+    {
+      "senseId": "w:language#s1",
+      "pos": "n.",
+      "glossZh": "语言",
+      "pronunciationId": "w:language#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 49,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:language#e-d0d48d53f932c948",
+          "text": "Any seasoned language learner will tell you that the beauty of mastering a foreign language is the world which it opens up to you.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 91
+          }
+        },
+        {
+          "exampleId": "w:language#e-092e7c5b4266f145",
+          "text": "For postcrossing to work worldwide, a common communication language is needed so that everyone can understand each other.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:language#e-c4f0692ccafe6034",
+          "text": "It suddenly became very clear to me how lucky I was to be fluent in two languages.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:language#s2",
+      "pos": "n.",
+      "glossZh": "措辞；用语",
+      "pronunciationId": "w:language#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:language#e-1b254b6122e24bc5",
+          "text": "However, because they are usually writing to family and friends, they use informal language most of the time.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 91
+          }
+        },
+        {
+          "exampleId": "w:language#e-b94abc90d9712951",
+          "text": "The very best communicators are those who know how to adjust their language to match their audience.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:seven-choices:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:language#e-e71550c0bedfbedc",
+          "text": "Later, person-first language such as “a person with obesity” emerged, aiming to spotlight the individual rather than a single characteristic.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:language#s3",
+      "pos": "n.",
+      "glossZh": "沟通信号系统",
+      "pronunciationId": "w:language#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:language#e-c74571032644bf8c",
+          "text": "Chimpanzee language: communication gestures translated",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:30",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:language#s4",
+      "pos": "n.",
+      "glossZh": "计算机语言",
+      "pronunciationId": "w:language#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:language#s5",
+      "pos": "短语",
+      "glossZh": "肢体语言",
+      "pronunciationId": "w:language#p-main",
+      "note": "body language。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:language#e-5541cfbcbb8dcd6e",
+          "text": "● Mind Your Words and Body Language",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:language#s6",
+      "pos": "n.",
+      "glossZh": "脏话",
+      "pronunciationId": "w:language#p-main",
+      "note": "常见 bad language。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "管风琴簧舌片",
+      "reason": "专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

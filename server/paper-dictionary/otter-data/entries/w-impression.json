@@ -1,0 +1,247 @@
+{
+  "entryId": "w:impression",
+  "headword": "impression",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪmˈpreʃn/",
+    "us": "/ɪmˈpreʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:impression#p-main",
+      "ipa": {
+        "uk": "/ɪmˈpreʃn/",
+        "us": "/ɪmˈpreʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "impressions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 36
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 33
+  },
+  "senses": [
+    {
+      "senseId": "w:impression#s1",
+      "pos": "n.",
+      "glossZh": "印象",
+      "pronunciationId": "w:impression#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:impression#e-a4a973ac47aad1b5",
+          "text": "Antarctica left an impression on me that no other place has,” Ginni says.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:impression#e-de1bddce3ce4abc1",
+          "text": "What impression did the first painting give the woman?",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:impression#e-d33c96d24f7078b2",
+          "text": "At the end of each tour, many told me their impressions of China had changed.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:grammar-fill:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:impression#s2",
+      "pos": "n.",
+      "glossZh": "感觉；不确定的看法",
+      "pronunciationId": "w:impression#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:impression#e-922d71ac109d5d0a",
+          "text": "If you ever get the impression that your dog can \"tell\" whether you look content or annoyed, you may be onto something.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:impression#e-0f0971f58d3b6382",
+          "text": "He wasn’t mean or abusive; he just gave me the impression he could do whatever project we dreamed up better if he did it alone.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:impression#e-ca1f3c0e9aa2cefe",
+          "text": "“I was coming to Shanghai with the impression that it’s like a city of the future, and so far, I feel like I’m seeing it for real,” said Picazo.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test",
+            "paperTitle": "2025-2026学年第一学期浙东北县域名校发展联盟（ZDB）11月诊断测试 英语",
+            "groupId": "group:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-zhedongbei-county-alliance-2025-11-senior-three-diagnostic-test:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:impression#s3",
+      "pos": "n.",
+      "glossZh": "压出或印出的印痕",
+      "pronunciationId": "w:impression#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:impression#e-73b0220eec107273",
+          "text": "Grab your favorite rubber stamps and press them firmly into the clay to make an impression.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 90
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:impression#s4",
+      "pos": "n.",
+      "glossZh": "模仿表演",
+      "pronunciationId": "w:impression#p-main",
+      "note": "如 do an impression of sb。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "同版印次、广告展示次数、配钥匙压痕",
+      "reason": "行业术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,159 @@
+{
+  "entryId": "w:lunch",
+  "headword": "lunch",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/lʌntʃ/",
+    "us": "/lʌntʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:lunch#p-main",
+      "ipa": {
+        "uk": "/lʌntʃ/",
+        "us": "/lʌntʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "lunches",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "lunched",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "lunching",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 84
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 84
+  },
+  "senses": [
+    {
+      "senseId": "w:lunch#s1",
+      "pos": "n.",
+      "glossZh": "午餐",
+      "pronunciationId": "w:lunch#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lunch#e-0990036b36a9be72",
+          "text": "When I was about to say goodbye, the girl asked if I’d had lunch.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:lunch#e-60e1591ecd6e0c5b",
+          "text": "The young banker who eats lunch at his desk is probably seen as a go-getter, while his colleagues who chat over a relaxed conference-room meal get dirty looks from the corner office.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:lunch#e-27950a4779c64c43",
+          "text": "All campers should bring their own bagged lunch and snacks.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:lunch#s2",
+      "pos": "v.",
+      "glossZh": "吃午餐",
+      "pronunciationId": "w:lunch#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "比赛中场休息",
+      "reason": "特定运动用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

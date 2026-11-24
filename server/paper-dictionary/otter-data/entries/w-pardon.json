@@ -1,0 +1,127 @@
+{
+  "entryId": "w:pardon",
+  "headword": "pardon",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpɑːdn/",
+    "us": "/ˈpɑːrdn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:pardon#p-main",
+      "ipa": {
+        "uk": "/ˈpɑːdn/",
+        "us": "/ˈpɑːrdn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "pardons",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "pardoned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "pardoning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "senses": [
+    {
+      "senseId": "w:pardon#s1",
+      "pos": "int.",
+      "glossZh": "请再说一遍",
+      "pronunciationId": "w:pardon#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:pardon#s2",
+      "pos": "v.",
+      "glossZh": "原谅",
+      "pronunciationId": "w:pardon#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:pardon#s3",
+      "pos": "v.",
+      "glossZh": "赦免",
+      "pronunciationId": "w:pardon#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:pardon#s4",
+      "pos": "n.",
+      "glossZh": "赦免",
+      "pronunciationId": "w:pardon#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "孤立的 pardoning、pardoned",
+      "reason": "仅为模拟卷单词选项，无法区分「原谅」和「赦免」。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

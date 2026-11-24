@@ -1,0 +1,213 @@
+{
+  "entryId": "w:chemistry",
+  "headword": "chemistry",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkemɪstri/",
+    "us": "/ˈkemɪstri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:chemistry#p-main",
+      "ipa": {
+        "uk": "/ˈkemɪstri/",
+        "us": "/ˈkemɪstri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "chemistries",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 21
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 15
+  },
+  "senses": [
+    {
+      "senseId": "w:chemistry#s1",
+      "pos": "n.",
+      "glossZh": "化学；化学学科",
+      "pronunciationId": "w:chemistry#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chemistry#e-132d59914bf56a9c",
+          "text": "I was shocked when he approached me after school one day to tell me that he liked chemistry, but failed to think that he was intelligent enough to attend college.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 91
+          }
+        },
+        {
+          "exampleId": "w:chemistry#e-08a41f76f5b8869f",
+          "text": "“We believe these innovative microscopy techniques will enable the study of hidden processes in physics, chemistry, and biology, revealing for the first time how nature behaves in its fastest and most elusive moments,” Kaminer added.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月31日卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 114
+          }
+        },
+        {
+          "exampleId": "w:chemistry#e-0dc00b29910aa089",
+          "text": "I consider myself most fortunate to be a chemistry teacher, and to have been a part of so many young lives, hopes, and dreams!",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chemistry#s2",
+      "pos": "n.",
+      "glossZh": "化学组成；化学性质或变化",
+      "pronunciationId": "w:chemistry#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chemistry#e-09b51a8d91fb4087",
+          "text": "But what if their weight loss came from grief, stress, depression or a medication that finally brought balance to their body chemistry?",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 134
+          }
+        },
+        {
+          "exampleId": "w:chemistry#e-b6cb4a042877a710",
+          "text": "There is indeed some evidence that heat can affect brain chemistry and connectivity, potentially leading to aggressive behavior, says environmental neuroscientist Kim Meidenbauer.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:chemistry#e-f4bea10ba83d91e8",
+          "text": "Researchers are exploring new battery chemistries to create multiple microscopic pathways for ions, easing congestion.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-d:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chemistry#s3",
+      "pos": "n.",
+      "glossZh": "默契；相互吸引力",
+      "pronunciationId": "w:chemistry#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "血液生化检查",
+      "reason": "医学语境省称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,142 @@
+{
+  "entryId": "w:worker",
+  "headword": "worker",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈwɜːkə(r)/",
+    "us": "/ˈwɜːrkər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:worker#p-main",
+      "ipa": {
+        "uk": "/ˈwɜːkə(r)/",
+        "us": "/ˈwɜːrkər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "workers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 135
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 135
+  },
+  "senses": [
+    {
+      "senseId": "w:worker#s1",
+      "pos": "n.",
+      "glossZh": "劳动者；工作人员",
+      "pronunciationId": "w:worker#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 19,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:worker#e-9b218af591451db9",
+          "text": "English in California, Oleg and Natasha, his hosts in Tashkent, and a string of foreign aid workers.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:worker#e-60a273d8e8911c19",
+          "text": "For Texas cattleman Pete Bonds, it’s increasingly difficult to find workers interested in watching cattle.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:worker#e-635baa4483e43f26",
+          "text": "Catherine Murphy, a cafe worker in a green shirt and black hat, makes sure that each customer gets exactly what they order.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:worker#s2",
+      "pos": "n.",
+      "glossZh": "工蚁或工蜂等不繁殖的成员",
+      "pronunciationId": "w:worker#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "工作线程",
+      "reason": "计算机专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

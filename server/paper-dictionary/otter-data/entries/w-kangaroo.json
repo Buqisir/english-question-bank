@@ -1,0 +1,129 @@
+{
+  "entryId": "w:kangaroo",
+  "headword": "kangaroo",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌkæŋɡəˈruː/",
+    "us": "/ˌkæŋɡəˈruː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:kangaroo#p-main",
+      "ipa": {
+        "uk": "/ˌkæŋɡəˈruː/",
+        "us": "/ˌkæŋɡəˈruː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "kangaroos",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:kangaroo#s1",
+      "pos": "n.",
+      "glossZh": "袋鼠",
+      "pronunciationId": "w:kangaroo#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 20
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:kangaroo#e-8e81887df81bb82d",
+          "text": "In tests, these robots have already exhibited movement patterns similar to leaping kangaroos and rolling seals.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
+            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-05-second-adaptability:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:kangaroo#e-2d053c5f73758cf5",
+          "text": "Annual surveys suggest that there are more than 47 million kangaroos bounding through the wild.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:kangaroo#e-cb7b4374e7131a10",
+          "text": "But a higher kangaroo population simply means that more will die in the next drought, says George Wilson, of the Australian National University.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 21
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "袋鼠式护理",
+      "reason": "医疗专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,85 @@
+{
+  "entryId": "w:strait",
+  "headword": "strait",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/streɪt/",
+    "us": "/streɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:strait#p-main",
+      "ipa": {
+        "uk": "/streɪt/",
+        "us": "/streɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "straits",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:strait#s1",
+      "pos": "n.",
+      "glossZh": "海峡",
+      "pronunciationId": "w:strait#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:strait#s2",
+      "pos": "n.",
+      "glossZh": "困境",
+      "pronunciationId": "w:strait#p-main",
+      "note": "常用复数 straits，如 in dire straits。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "狭窄的、收紧和 straight 旧拼写、姓氏",
+      "reason": "历史用法、拼写异形或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

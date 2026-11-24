@@ -1,0 +1,285 @@
+{
+  "entryId": "w:mention",
+  "headword": "mention",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmenʃn/",
+    "us": "/ˈmenʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:mention#p-main",
+      "ipa": {
+        "uk": "/ˈmenʃn/",
+        "us": "/ˈmenʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "mentions",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "mentioned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "mentioning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 24,
+    "mock": 241
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 239
+  },
+  "senses": [
+    {
+      "senseId": "w:mention#s1",
+      "pos": "v.",
+      "glossZh": "提到；说起",
+      "pronunciationId": "w:mention#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 20,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:mention#e-72732276146db4a7",
+          "text": "Also, if you are allergic (过敏) to any medicines, be sure to mention that to your doctor.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:mention#e-05856cf9a3171fa2",
+          "text": "What does Levine want to explain by mentioning the rubber band?",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2022-ii:32",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:mention#e-e2e220c70ffb205f",
+          "text": "The idea of sea level as a reference point for elevations has by now been around for so long as to go essentially unnoticed – we mention it without even considering what it means.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 129,
+            "end": 136
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:mention#s2",
+      "pos": "n.",
+      "glossZh": "提及",
+      "pronunciationId": "w:mention#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:mention#e-b5953335a450650f",
+          "text": "The mention of “Palantir” serves to show that ____.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-hz-2026-apr-gaosan-quality:32",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:mention#s3",
+      "pos": "短语",
+      "glossZh": "荣誉奖；入围表扬",
+      "pronunciationId": "w:mention#p-main",
+      "note": "honorable mention。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:mention#e-73a7070aa97f1b06",
+          "text": "50 Honorable Mentions: Judges will choose up to 50 honorable mention winners, who will each receive a T-shirt in memory of Earhart’s final flight.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:mention#e-6648e6f8a677ef63",
+          "text": "What will each of the honorable mention winners get?",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2020-i:22",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:mention#e-76655e84d5cd3980",
+          "text": "● Prizes (two age groups: 13-15; 16-19): 1 winner ($250), 1 runner-up ($100), and 3 honorable mentions ($50) per group.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-a",
+            "locator": {
+              "paragraph": 16,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-a:16",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 102
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:mention#s4",
+      "pos": "短语",
+      "glossZh": "更不用说",
+      "pronunciationId": "w:mention#p-main",
+      "note": "not to mention。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:mention#e-7be5ffa35f462f14",
+          "text": "These days, safety regulations – not to mention the modern sports fan’s desire for a good view and a comfortable seat – tend to keep stadium capacities（容量）slightly lower.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 47
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "社交平台上被提及的记录",
+      "reason": "应用界面用法，与普通名词义有重叠"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

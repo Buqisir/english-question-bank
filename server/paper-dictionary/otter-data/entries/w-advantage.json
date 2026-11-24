@@ -1,0 +1,163 @@
+{
+  "entryId": "w:advantage",
+  "headword": "advantage",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ədˈvɑːntɪdʒ/",
+    "us": "/ədˈvæntɪdʒ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:advantage#p-main",
+      "ipa": {
+        "uk": "/ədˈvɑːntɪdʒ/",
+        "us": "/ədˈvæntɪdʒ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "advantages",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 131
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 130
+  },
+  "senses": [
+    {
+      "senseId": "w:advantage#s1",
+      "pos": "n.",
+      "glossZh": "优势；有利条件；好处",
+      "pronunciationId": "w:advantage#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:advantage#e-73ed499601ddcd1a",
+          "text": "My dad has a rule that we have to carry our pumpkins back home, and as the eldest child I have an advantage – I carried an 85-pounder back last year.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:advantage#e-b5ca49e82e6e2253",
+          "text": "The most obvious advantage of online learning is that you can study anywhere and anytime.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:advantage#s2",
+      "pos": "短语",
+      "glossZh": "利用（机会、条件）；占……的便宜",
+      "pronunciationId": "w:advantage#p-main",
+      "note": "take advantage of。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:advantage#e-7337e895b6a6af8f",
+          "text": "I took advantage of my brief __39__ to dash across the lawn（草坪）-- and hit a large maple tree!",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:cloze:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:advantage#e-5f4eba17edb0c543",
+          "text": "By attending the Open House, you can take advantage of the following exclusive offers:",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 51
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "网球占先分；足球有利原则",
+      "reason": "体育术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

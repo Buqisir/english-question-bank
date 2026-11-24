@@ -1,0 +1,247 @@
+{
+  "entryId": "w:setting",
+  "headword": "setting",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsetɪŋ/",
+    "us": "/ˈsetɪŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:setting#p-main",
+      "ipa": {
+        "uk": "/ˈsetɪŋ/",
+        "us": "/ˈsetɪŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "settings",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 16,
+    "mock": 180
+  },
+  "unassignedCounts": {
+    "gaokao": 11,
+    "mock": 177
+  },
+  "senses": [
+    {
+      "senseId": "w:setting#s1",
+      "pos": "n.",
+      "glossZh": "环境",
+      "pronunciationId": "w:setting#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:setting#e-659112b84c1eeb71",
+          "text": "As the summer months roll in, our Georgian country estate makes the perfect setting for an outdoor fitness session.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:setting#e-b0b7aef31ef9f6e1",
+          "text": "Adults are portrayed(描绘) alone in many settings and poses – absorbed in a volume, deep in thought or lost in a moment of leisure.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:setting#e-7da60bc7690050d9",
+          "text": "While many visitors have never been to a farm at all, __52__ a sunflower farm, the unique setting allows them to __53__ the city for a while, breathe in the fresh air, gain a newfound __54__ for agriculture, and maybe even __55__ with their farming roots and what they may have taken for granted for too long.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 97
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:setting#s2",
+      "pos": "n.",
+      "glossZh": "故事背景",
+      "pronunciationId": "w:setting#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:setting#e-0b07b5b412babd89",
+          "text": "The setting of the story.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:setting#e-eebc9f080f3a1235",
+          "text": "“Exploring the streets, landscapes and atmosphere of the setting provides a fascinating insight of the story.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:setting#e-4af0581596b79605",
+          "text": "Walking the streets, seeing the landscapes and feeling the atmosphere of a novel’s setting deepens my understanding of the story.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 90
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:setting#s3",
+      "pos": "n.",
+      "glossZh": "设置项",
+      "pronunciationId": "w:setting#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:setting#e-72eb505e13be46a1",
+          "text": "How To Set Up Privacy Settings",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:setting#s4",
+      "pos": "n.",
+      "glossZh": "宝石镶座",
+      "pronunciationId": "w:setting#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "set 的现在分词",
+      "reason": "动词用法归入 set"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

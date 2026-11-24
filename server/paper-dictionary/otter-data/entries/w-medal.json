@@ -1,0 +1,175 @@
+{
+  "entryId": "w:medal",
+  "headword": "medal",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmedl/",
+    "us": "/ˈmedl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:medal#p-main",
+      "ipa": {
+        "uk": "/ˈmedl/",
+        "us": "/ˈmedl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "medals",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "medaled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "medaling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "medalled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "medalling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 21
+  },
+  "senses": [
+    {
+      "senseId": "w:medal#s1",
+      "pos": "n.",
+      "glossZh": "奖章；奖牌",
+      "pronunciationId": "w:medal#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:medal#e-c5ee5202b11184d8",
+          "text": "He designed a medal.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:medal#e-70b7f0772da94ecc",
+          "text": "Wang’s __55__ won him several honors, including a National May Day Labor Medal and 11 Citations of Merit.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:cloze",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-ii:cloze:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:medal#e-168df4a5aa20a1d1",
+          "text": "His achievements in sports have seen him win multiple gold medals at the Paralympic Games and World Championships.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:medal#s2",
+      "pos": "v.",
+      "glossZh": "获得奖牌",
+      "pronunciationId": "w:medal#p-main",
+      "note": "常见于体育报道。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "护身圆牌；姓氏",
+      "reason": "旧式用法或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

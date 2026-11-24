@@ -1,0 +1,356 @@
+{
+  "entryId": "w:survey",
+  "headword": "survey",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsɜːveɪ/",
+    "us": "/ˈsɜːrveɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:survey#p-main",
+      "ipa": {
+        "uk": "/ˈsɜːveɪ/",
+        "us": "/ˈsɜːrveɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:survey#p-verb",
+      "ipa": {
+        "uk": "/səˈveɪ/",
+        "us": "/sərˈveɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "动词读音"
+    }
+  ],
+  "forms": [
+    {
+      "form": "surveys",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "surveyed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "surveying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 106
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 104
+  },
+  "senses": [
+    {
+      "senseId": "w:survey#s1",
+      "pos": "n.",
+      "glossZh": "调查",
+      "pronunciationId": "w:survey#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:survey#e-b52f36495b145ae8",
+          "text": "Still, 55 percent of Australians have a landline phone at home and only just over a quarter（29%）rely only on their smartphones, according to a survey（调查）.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 143,
+            "end": 149
+          }
+        },
+        {
+          "exampleId": "w:survey#e-6c6e1a083dadce12",
+          "text": "Doing a survey of customers.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2024-ii:26",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:survey#e-dbffa58f2642f598",
+          "text": "A survey found that 29 percent of college students registered for online courses.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:survey#s2",
+      "pos": "n.",
+      "glossZh": "问卷",
+      "pronunciationId": "w:survey#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:survey#e-be3b7cdc0d097dd7",
+          "text": "Participation in a post-visit survey is required.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:survey#e-8d7638c4f3993397",
+          "text": "Respond to a survey.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:33",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:survey#e-15c1c43d06e1a69a",
+          "text": "After the program, each participant must complete a survey to provide feedback on their experience and offer suggestions for improving program in the future.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-a:12",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:survey#s3",
+      "pos": "n.",
+      "glossZh": "概述",
+      "pronunciationId": "w:survey#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:survey#s4",
+      "pos": "n.",
+      "glossZh": "勘测",
+      "pronunciationId": "w:survey#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:survey#s5",
+      "pos": "v.",
+      "glossZh": "调查",
+      "pronunciationId": "w:survey#p-verb",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:survey#e-7ec66d10e4f21ec5",
+          "text": "Using a set of controlled audio clips (录音片段), Hilton surveyed 5,000 American English speakers to better understand what affects people’s perceptions of interruptions.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:survey#e-8e47faf2500334ca",
+          "text": "They surveyed several hundred park-goers, asking them to submit a written summary online of a meaningful interaction they had with nature in the park.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:survey#e-ffd85f948619871f",
+          "text": "Recently, I surveyed 48 classmates about why they visit museums.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:writing-application",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:writing-application:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:survey#s6",
+      "pos": "v.",
+      "glossZh": "审视",
+      "pronunciationId": "w:survey#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:survey#s7",
+      "pos": "v.",
+      "glossZh": "勘测",
+      "pronunciationId": "w:survey#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "租赁拍卖和海关征收区",
+      "reason": "历史或制度专义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

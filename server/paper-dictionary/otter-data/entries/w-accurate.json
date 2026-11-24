@@ -1,0 +1,135 @@
+{
+  "entryId": "w:accurate",
+  "headword": "accurate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈækjərət/",
+    "us": "/ˈækjərət/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:accurate#p-main",
+      "ipa": {
+        "uk": "/ˈækjərət/",
+        "us": "/ˈækjərət/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more accurate",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most accurate",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 45
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:accurate#s1",
+      "pos": "adj.",
+      "glossZh": "准确的；精确的；与事实或标准相符",
+      "pronunciationId": "w:accurate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 45
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:accurate#e-7ca4937b0fcd2ed3",
+          "text": "To speed up the process, please make sure the information you submit through the ILL Request Form is accurate.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 109
+          }
+        },
+        {
+          "exampleId": "w:accurate#e-8a8419210840d3f2",
+          "text": "When enough of these errors are averaged together, they cancel each other out resulting in a more accurate estimate.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 106
+          }
+        },
+        {
+          "exampleId": "w:accurate#e-beda833952a5efca",
+          "text": "Punishing heat waves and extreme weather events like hurricanes and floods are going to become more common as the climate crisis worsens, making it more important than ever before to produce accurate weather forecasts.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 191,
+            "end": 199
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "严谨细致的（直接形容人）",
+      "reason": "较旧用法"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

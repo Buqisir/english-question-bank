@@ -1,0 +1,158 @@
+{
+  "entryId": "w:harmonious",
+  "headword": "harmonious",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/hɑːˈməʊniəs/",
+    "us": "/hɑːrˈmoʊniəs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:harmonious#p-main",
+      "ipa": {
+        "uk": "/hɑːˈməʊniəs/",
+        "us": "/hɑːrˈmoʊniəs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more harmonious",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most harmonious",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "senses": [
+    {
+      "senseId": "w:harmonious#s1",
+      "pos": "adj.",
+      "glossZh": "协调的；相配的",
+      "pronunciationId": "w:harmonious#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:harmonious#e-f436c1dfe70b2298",
+          "text": "For Confucians, the “mean” is not a compromise between two extremes, but a harmonious integration of different elements.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n123:grammar-fill:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 85
+          }
+        },
+        {
+          "exampleId": "w:harmonious#e-354e16a37347a042",
+          "text": "The city of Wuxi, located south of the Yangtze River, represents a harmonious combination of contemporary industry and cultural heritage.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
+            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 77
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:harmonious#s2",
+      "pos": "adj.",
+      "glossZh": "和睦的",
+      "pronunciationId": "w:harmonious#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:harmonious#e-10915872ae9ef58e",
+          "text": "A desire for harmonious communication.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:29",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:harmonious#s3",
+      "pos": "adj.",
+      "glossZh": "和谐悦耳的",
+      "pronunciationId": "w:harmonious#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

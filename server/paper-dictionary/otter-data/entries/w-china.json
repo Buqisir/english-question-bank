@@ -1,0 +1,151 @@
+{
+  "entryId": "w:china",
+  "headword": "China",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "china"
+  ],
+  "ipa": {
+    "uk": "/ˈtʃaɪnə/",
+    "us": "/ˈtʃaɪnə/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:china#p-main",
+      "ipa": {
+        "uk": "/ˈtʃaɪnə/",
+        "us": "/ˈtʃaɪnə/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "Chinas",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "chinas",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 15,
+    "mock": 243
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 243
+  },
+  "senses": [
+    {
+      "senseId": "w:china#s1",
+      "pos": "n.",
+      "glossZh": "中国",
+      "pronunciationId": "w:china#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:china#e-3f3f509fe9a2c093",
+          "text": "Discover the China of “past ages,” its walled cities, temples and mountain scenery with Prof. Robert Thorp.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:china#e-e760ce352d6ab039",
+          "text": "While taking a 20-hour train ride along the edge of the Taklimakan Desert in northwestern China, I had the kind of humbling, educational, and above all else, wonderful __41__ with a local that all travelers long for.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:china#e-40a8ebb75ba10ddc",
+          "text": "China, on its part, will also embrace（拥抱） the world with greater openness and make new contributions to the international community.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:china#s2",
+      "pos": "n.",
+      "glossZh": "瓷器；瓷制餐具",
+      "pronunciationId": "w:china#p-main",
+      "note": "这一义写作小写 china。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "海外同名城镇、中国月季、上釉弹珠等",
+      "reason": "专名、专称或旧用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

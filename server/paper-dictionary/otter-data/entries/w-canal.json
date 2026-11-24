@@ -1,0 +1,142 @@
+{
+  "entryId": "w:canal",
+  "headword": "canal",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəˈnæl/",
+    "us": "/kəˈnæl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:canal#p-main",
+      "ipa": {
+        "uk": "/kəˈnæl/",
+        "us": "/kəˈnæl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "canals",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 24
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 23
+  },
+  "senses": [
+    {
+      "senseId": "w:canal#s1",
+      "pos": "n.",
+      "glossZh": "运河；人工水道",
+      "pronunciationId": "w:canal#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:canal#e-44bf3a003ba34015",
+          "text": "Cycling is the most economical, sustainable and fun way to explore the city, with its beautiful canals, parks, squares and countless lights.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:canal#e-9444a96f99572d2c",
+          "text": "He also designed an eco-machine to clean canal water in Fuzhou, a city in southeast China.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:canal#e-e0b92a815f79343c",
+          "text": "Researchers identified two suitable habitats in southern Mexico City: a restored canal in the axolotl’s native Lake Xochimilco, and a spring-fed pond in an artificial wetland.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 86
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:canal#s2",
+      "pos": "n.",
+      "glossZh": "（身体或植物中的）管；道",
+      "pronunciationId": "w:canal#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "火星运河、姓氏等",
+      "reason": "历史假说术语或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,310 @@
+{
+  "entryId": "w:chart",
+  "headword": "chart",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tʃɑːt/",
+    "us": "/tʃɑːrt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:chart#p-main",
+      "ipa": {
+        "uk": "/tʃɑːt/",
+        "us": "/tʃɑːrt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "charts",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "charted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "charting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 31
+  },
+  "senses": [
+    {
+      "senseId": "w:chart#s1",
+      "pos": "v.",
+      "glossZh": "记录（发展过程）；追踪",
+      "pronunciationId": "w:chart#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chart#e-cc62628aee946feb",
+          "text": "The result was Project Wild Thing, a film which charts the birth of the World Network, a group of organisations with the common goal of getting children out into nature.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:chart#e-28bfbeb2e480e2a3",
+          "text": "In a creative blend of art and science, a new study uses historical poetry to chart the critically endangered animal’s population across the river it calls home.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-03-first:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 83
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chart#s2",
+      "pos": "n.",
+      "glossZh": "图表；统计图",
+      "pronunciationId": "w:chart#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chart#e-996f577c3150af07",
+          "text": "Check this chart to see how the wind alters the temperature your body feels.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-a:15",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:chart#e-4e9f7dee76427a98",
+          "text": "The chart below summarizes food’s share of total emissions and breaks it down by source.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:chart#e-858de60e6dd24fc2",
+          "text": "By drawing a flow chart.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-hunan-changjun-2025-10-monthly-exam-2:30",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chart#s3",
+      "pos": "n.",
+      "glossZh": "（医护人员用的）病历表",
+      "pronunciationId": "w:chart#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chart#e-4975a233ebe01589",
+          "text": "When my daughter asked why I missed her school play again, I showed her the __44__ pile of charts in my trunk.” Dr. Leong said.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:cloze:1",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:chart#e-cb7c2336f6380862",
+          "text": "An instinct sent me to the chart – no address: the family, a mother with her four children aged 4-10, was homeless.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chart#s4",
+      "pos": "n.",
+      "glossZh": "航海图；地图",
+      "pronunciationId": "w:chart#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:chart#s5",
+      "pos": "v.",
+      "glossZh": "绘制地图；标出",
+      "pronunciationId": "w:chart#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chart#e-437a17af5d5b48e4",
+          "text": "In other words, the best way to reduce these future disasters is to draw maps of the underworld, charting every fault and monitoring its behavior.",
+          "source": {
+            "paperId": "paper-mock-henan-four-cities-2026-01",
+            "paperTitle": "河南省洛阳、许昌、平顶山、济源四市2025—2026学年高三年级第二次质量检测英语试题",
+            "groupId": "group:paper-mock-henan-four-cities-2026-01:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-henan-four-cities-2026-01:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 105
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chart#s6",
+      "pos": "n.",
+      "glossZh": "（音乐销量等的）排行榜",
+      "pronunciationId": "w:chart#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "正式文书等",
+      "reason": "领域旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

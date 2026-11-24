@@ -1,0 +1,282 @@
+{
+  "entryId": "w:north",
+  "headword": "north",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/nɔːθ/",
+    "us": "/nɔːrθ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:north#p-main",
+      "ipa": {
+        "uk": "/nɔːθ/",
+        "us": "/nɔːrθ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "norths",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 43
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 39
+  },
+  "senses": [
+    {
+      "senseId": "w:north#s1",
+      "pos": "n.",
+      "glossZh": "北；北方",
+      "pronunciationId": "w:north#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:north#e-7c22a1a9ae9b0576",
+          "text": "Some believe the gardens were located near the city of Hillah, about a two-hour drive south of the capital Baghdad, while others point to Nineveh, hundreds of miles to the north.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 172,
+            "end": 177
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:north#s2",
+      "pos": "adj.",
+      "glossZh": "北部的；北面的",
+      "pronunciationId": "w:north#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:north#e-5852837a36d10cec",
+          "text": "Andria Zafirakou, a north London secondary school teacher, said she wanted to bring about a classroom revolution（变革）.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:north#e-92649fb520988fe9",
+          "text": "He thinks the most difficult stretch physically will be the north coasts of Devon and Cornwall.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-b:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:north#s3",
+      "pos": "adv.",
+      "glossZh": "向北",
+      "pronunciationId": "w:north#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:north#e-d39d8a8bcd71953d",
+          "text": "sister’s bike and rode north to the nicer section of Fresno in search of work.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:north#e-267be677e5c26946",
+          "text": "On the flight north, which was booked by Brown, everything felt unreal – leather seats, fresh fruit, and, after landing, a reception in a splendid hall.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:north#s4",
+      "pos": "adv.",
+      "glossZh": "在……以北",
+      "pronunciationId": "w:north#p-main",
+      "note": "north of。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:north#e-e5c7e9ea47ea2115",
+          "text": "Jim Johnson, a mail carrier, was an institution in the leafy Westmoreland, Westhaven and Westover Hills neighborhoods, just north of downtown Wilmington, where he delivered much more than the mail.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 124,
+            "end": 129
+          }
+        },
+        {
+          "exampleId": "w:north#e-9549f59f9fd66284",
+          "text": "The house where Reisley has lived for 73 years is located in the woods of Westchester County, New York, just 30 miles north of Manhattan.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 118,
+            "end": 123
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:north#s5",
+      "pos": "专名",
+      "glossZh": "北美",
+      "pronunciationId": "w:north#p-main",
+      "note": "North America。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:north#e-1448282060093bd8",
+          "text": "When the explorers first set foot upon the continent of North America, the skies and lands were alive with an astonishing variety of wildlife.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 61
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "其他地名的组成部分",
+      "reason": "固定地名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

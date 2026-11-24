@@ -1,0 +1,97 @@
+{
+  "entryId": "w:socialist",
+  "headword": "socialist",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsəʊʃəlɪst/",
+    "us": "/ˈsəʊʃəlɪst/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:socialist#p-main",
+      "ipa": {
+        "uk": "/ˈsəʊʃəlɪst/",
+        "us": "/ˈsəʊʃəlɪst/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more socialist",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most socialist",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "socialists",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Socialists",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:socialist#s1",
+      "pos": "adj.",
+      "glossZh": "社会主义的",
+      "pronunciationId": "w:socialist#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:socialist#s2",
+      "pos": "n.",
+      "glossZh": "社会主义者",
+      "pronunciationId": "w:socialist#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

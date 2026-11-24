@@ -1,0 +1,168 @@
+{
+  "entryId": "w:miracle",
+  "headword": "miracle",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmɪrəkl/",
+    "us": "/ˈmɪrəkl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:miracle#p-main",
+      "ipa": {
+        "uk": "/ˈmɪrəkl/",
+        "us": "/ˈmɪrəkl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "miracles",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 31
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 27
+  },
+  "senses": [
+    {
+      "senseId": "w:miracle#s1",
+      "pos": "n.",
+      "glossZh": "奇迹；似乎不可思议的好结果",
+      "pronunciationId": "w:miracle#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:miracle#e-2adeacd732aa730e",
+          "text": "When she finally saved enough for the entry fee to a city marathon, it felt like a miracle.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:miracle#e-bb61e3a8a51c8a39",
+          "text": "A long-awaited miracle.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:25",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:miracle#e-f953ab0e5b3d9024",
+          "text": "But it was not a miracle that saved him.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2025-nov-m1",
+            "paperTitle": "金华十校2025年11月高三模拟考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zj-jinhua-2025-nov-m1:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-jinhua-2025-nov-m1:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:miracle#s2",
+      "pos": "短语",
+      "glossZh": "产生极好的效果",
+      "pronunciationId": "w:miracle#p-main",
+      "note": "work miracles。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:miracle#e-de67960e0dbaf1c7",
+          "text": "Their heroism showed teamwork works miracles.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-qingdao-2026-sep-opening:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 44
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "人名或宠物名 Miracle",
+      "reason": "同形专名"
+    },
+    {
+      "glossZh": "施行奇迹（动词）",
+      "reason": "不常用"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

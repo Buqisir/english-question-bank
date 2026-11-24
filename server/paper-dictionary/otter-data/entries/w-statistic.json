@@ -1,0 +1,129 @@
+{
+  "entryId": "w:statistic",
+  "headword": "statistic",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/stəˈtɪstɪk/",
+    "us": "/stəˈtɪstɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:statistic#p-main",
+      "ipa": {
+        "uk": "/stəˈtɪstɪk/",
+        "us": "/stəˈtɪstɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "statistics",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 31
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:statistic#s1",
+      "pos": "n.",
+      "glossZh": "统计数据",
+      "pronunciationId": "w:statistic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 31
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:statistic#e-f7eef7125b2634bd",
+          "text": "In a piece from 2018, Von Wong wanted to illustrate（说明）a specific statistic:",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:statistic#e-5f9f7e3c31f4d143",
+          "text": "These statistics were shocking to me too, but in entirely the opposite way: so few?",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:statistic#e-6d42594bd54b3494",
+          "text": "A statistic – the average life expectancy of a mill worker in 1830 was just 42 – stopped him cold.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-03-first:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 11
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "用统计方法分析的动词义",
+      "reason": "不常见，通常用 analyze 或 compile statistics。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

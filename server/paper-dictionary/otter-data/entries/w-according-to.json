@@ -1,0 +1,151 @@
+{
+  "entryId": "w:according-to",
+  "headword": "according to",
+  "kind": "phrase",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈkɔːdɪŋ tə/",
+    "us": "/əˈkɔːrdɪŋ tə/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:according-to#p-main",
+      "ipa": {
+        "uk": "/əˈkɔːdɪŋ tə/",
+        "us": "/əˈkɔːrdɪŋ tə/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 47,
+    "mock": 346
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 346
+  },
+  "senses": [
+    {
+      "senseId": "w:according-to#s1",
+      "pos": "prep.",
+      "glossZh": "根据；据……所说或所示",
+      "pronunciationId": "w:according-to#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 45,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:according-to#e-945900577c43edeb",
+          "text": "According to the World Wildlife Fund, the global black rhino population has dropped as low as 5500, giving the rhinos a “critically endangered” status.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:according-to#e-d40cc0177b2da6bf",
+          "text": "Dogs may indeed be able to distinguish between happy and angry human faces, according to a new study.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 88
+          }
+        },
+        {
+          "exampleId": "w:according-to#e-8ebb215ca79f0c57",
+          "text": "According to this research, the best time to exercise to improve learning is four hours after studying.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:according-to#s2",
+      "pos": "prep.",
+      "glossZh": "按照（规则或标准）；视……而定",
+      "note": "如 according to size，表示按大小区分。",
+      "pronunciationId": "w:according-to#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:according-to#e-a74c1aa4b4250442",
+          "text": "Led by the concept of “right plant, right place,” they match plants that enjoy the same soil, sun and weather conditions, and arrange them according to their patterns of growth.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 139,
+            "end": 151
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,220 @@
+{
+  "entryId": "w:japanese",
+  "headword": "Japanese",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌdʒæpəˈniːz/",
+    "us": "/ˌdʒæpəˈniːz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:japanese#p-main",
+      "ipa": {
+        "uk": "/ˌdʒæpəˈniːz/",
+        "us": "/ˌdʒæpəˈniːz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more Japanese",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most Japanese",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "Japaneses",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "senses": [
+    {
+      "senseId": "w:japanese#s1",
+      "pos": "adj.",
+      "glossZh": "日本的；日本人的",
+      "pronunciationId": "w:japanese#p-main",
+      "note": "写作 Japanese。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:japanese#e-7c1cab3f656951e0",
+          "text": "Tiny forests were first pioneered as a concept in the 1970s by Dr Miyawaki, a Japanese botanist.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:japanese#e-daf3f717299adccf",
+          "text": "Weekend workshops here explore that balance through activities like yoga, outdoor painting, and discussions of kokoro, the Japanese concept linking heart, mind, and soul.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 131
+          }
+        },
+        {
+          "exampleId": "w:japanese#e-02a881c8f6330ac1",
+          "text": "What are the basic tasks that the Japanese robots can carry out?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:japanese#s2",
+      "pos": "adj.",
+      "glossZh": "日语的",
+      "pronunciationId": "w:japanese#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:japanese#e-b9b3b047ddf85087",
+          "text": "As a result, English speakers are more likely to focus on the person responsible for an accident than Japanese speakers, according to Psychology Today.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 110
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:japanese#s3",
+      "pos": "n.",
+      "glossZh": "日语",
+      "pronunciationId": "w:japanese#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:japanese#e-f00948175b91f4a1",
+          "text": "For example, the English sentence “he fired the gun” is usually phrased as “the gun went off” in Japanese.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 105
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:japanese#s4",
+      "pos": "n.",
+      "glossZh": "日本人",
+      "pronunciationId": "w:japanese#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "日本料理",
+      "reason": "上下文中的省略用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,430 @@
+{
+  "entryId": "w:pot",
+  "headword": "pot",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pɒt/",
+    "us": "/pɑːt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:pot#p-main",
+      "ipa": {
+        "uk": "/pɒt/",
+        "us": "/pɑːt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "pots",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "potted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "potting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 16,
+    "mock": 27
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 18
+  },
+  "senses": [
+    {
+      "senseId": "w:pot#s1",
+      "pos": "n.",
+      "glossZh": "锅",
+      "pronunciationId": "w:pot#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pot#e-1573463264ac2867",
+          "text": "They put some rice into a pot of water and left it to boil while they made the French toast.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:pot#e-ece67aeac8745b05",
+          "text": "Then Jeff noticed steam shooting out of the pot and the lid starting to shake.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:pot#e-b86526beba523867",
+          "text": "Hotpot is meant for families and friends to sit together, dip everything they like this in one pot, and shared friendship and love.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2024-national-a:writing-short-error-correction:8",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 98
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pot#s2",
+      "pos": "n.",
+      "glossZh": "（盛装液体等的）罐",
+      "pronunciationId": "w:pot#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pot#e-04b0a846df5370d5",
+          "text": "The dog smells four pots of urine（尿液）samples, and then correctly picks out the sample belonging to an NHS (National Health Service) patient with bladder（膀胱）cancer.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:pot#e-0f8e96c94c542827",
+          "text": "Throughout the day, I meet people getting rid of unwanted stuff: a couple throwing away woodwork and boxes, a woman dropping off pots of unused paint and another donating bird books.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 129,
+            "end": 133
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pot#s3",
+      "pos": "n.",
+      "glossZh": "花盆",
+      "pronunciationId": "w:pot#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pot#e-ad436b2069114c01",
+          "text": "Changing the pot of your plant from time to time will also help",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-national-b:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:pot#e-c4c53503fb5f660e",
+          "text": "The divergent thinkers typically answer simple questions like “What are the uses for a flower pot?” in many ways.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:pot#e-60172f5c2ac184a7",
+          "text": "Then I looked at Mr. Fletcher’s yard next door – overgrown grass, old flower pots, and a low fence with a loose board.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-third-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第三次适应性检测",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-third-adaptive-test:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pot#s4",
+      "pos": "n.",
+      "glossZh": "壶",
+      "pronunciationId": "w:pot#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pot#e-266282f60cb3d06d",
+          "text": "Soon, he returned with a steaming pot of coffee and a tray of various cups.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pot#s5",
+      "pos": "n.",
+      "glossZh": "集中起来供分享的钱",
+      "pronunciationId": "w:pot#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pot#e-07088238a691b047",
+          "text": "Participants are given money and can choose to contribute to a shared pot, which grows and is later split equally.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pot#s6",
+      "pos": "v.",
+      "glossZh": "把（植物）栽在盆里",
+      "pronunciationId": "w:pot#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pot#e-ceb73a134fc04b59",
+          "text": "Past research has confirmed that indoor nature, including potted plants and natural materials, reduces stress and increases feelings of restoration and belonging.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-04-second",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-04-second:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-04-second:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:pot#e-3fbece4261d893c9",
+          "text": "Living in someone else’s space builds a unique closeness – admiring their bookshelf picks, the way they arrange potted plants, or family photos on the fridge turns virtual strangers into familiar faces.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 112,
+            "end": 118
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pot#s7",
+      "pos": "短语",
+      "glossZh": "多种文化等相互交融的地方",
+      "pronunciationId": "w:pot#p-main",
+      "note": "melting pot。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pot#e-87f7ac1e7c95babf",
+          "text": "People often describe New York as a melting pot of cultures, but it’s __51__ to know that in this busy city, there’s also a place for me and the language I __52__ inside.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 47
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "大麻",
+      "reason": "非本批教学用法"
+    },
+    {
+      "glossZh": "旧容量单位、旧式铁盔",
+      "reason": "历史专门用法"
+    },
+    {
+      "glossZh": "电位器",
+      "reason": "电子术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

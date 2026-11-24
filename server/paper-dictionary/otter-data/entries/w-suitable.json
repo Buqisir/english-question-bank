@@ -1,0 +1,131 @@
+{
+  "entryId": "w:suitable",
+  "headword": "suitable",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsuːtəbl/",
+    "us": "/ˈsuːtəbl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:suitable#p-main",
+      "ipa": {
+        "uk": "/ˈsuːtəbl/",
+        "us": "/ˈsuːtəbl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more suitable",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most suitable",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 21,
+    "mock": 174
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:suitable#s1",
+      "pos": "adj.",
+      "glossZh": "合适的",
+      "pronunciationId": "w:suitable#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 21,
+        "mock": 174
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:suitable#e-31ef6978601cf4fc",
+          "text": "What can be a suitable title for the text?",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2020-ii:35",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:suitable#e-f316d4ff57d5a0da",
+          "text": "High-intensity exercise is more suitable for the young.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2022-ii:34",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:suitable#e-cafdc9f609a73c0f",
+          "text": "A torch（手电筒）along with suitable clothing is essential for walking in the dark.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:14",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 31
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

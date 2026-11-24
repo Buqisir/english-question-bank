@@ -1,0 +1,123 @@
+{
+  "entryId": "w:mostly",
+  "headword": "mostly",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈməʊstli/",
+    "us": "/ˈmoʊstli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:mostly#p-main",
+      "ipa": {
+        "uk": "/ˈməʊstli/",
+        "us": "/ˈmoʊstli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 54
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 53
+  },
+  "senses": [
+    {
+      "senseId": "w:mostly#s1",
+      "pos": "adv.",
+      "glossZh": "主要地；大多",
+      "pronunciationId": "w:mostly#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:mostly#e-d9784d2066570a6a",
+          "text": "They are mostly in electronic form.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2024-i:32",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:mostly#e-0e0ce9eaef031328",
+          "text": "Instead, she recommends applying a well-known concept among nutrition experts called the “Division of Responsibility,” where parents provide a variety of mostly healthy foods to their kids at fixed times, and the kids themselves decide what and how much they want to consume – even if that means occasionally eating more cookies than carrots.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 154,
+            "end": 160
+          }
+        },
+        {
+          "exampleId": "w:mostly#e-7cdce40a90a63ef9",
+          "text": "I didn’t take a single photo that night, wanting to be unbothered, but mostly because I was having too much fun.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-b:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 77
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "最为",
+      "reason": "现代标准英语中应用 most；真题 g0 为改错语境。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

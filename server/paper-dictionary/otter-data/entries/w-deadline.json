@@ -1,0 +1,130 @@
+{
+  "entryId": "w:deadline",
+  "headword": "deadline",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdedlaɪn/",
+    "us": "/ˈdedlaɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:deadline#p-main",
+      "ipa": {
+        "uk": "/ˈdedlaɪn/",
+        "us": "/ˈdedlaɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "deadlines",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 58
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:deadline#s1",
+      "pos": "n.",
+      "glossZh": "最后期限；截止日期",
+      "pronunciationId": "w:deadline#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 58
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:deadline#e-24020f6c3074ac48",
+          "text": "But that doesn’t mean there aren’t deadlines.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:36",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:deadline#e-fef2a1b1d5205627",
+          "text": "● The HZ Scholarship Committee will award the scholarship based on previous academic results, and motivation for choosing a program of study and the applicant will be informed of the decision within 6 weeks after the application deadline of May 1.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:reading-a:15",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 229,
+            "end": 237
+          }
+        },
+        {
+          "exampleId": "w:deadline#e-e92cfb06d0bbcb80",
+          "text": "For instance, if poor time management led to missing a deadline at work, consider strategies to improve this skill.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:seven-choices:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 63
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "印刷界线、监狱警戒线、使停飞",
+      "reason": "行业或历史用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

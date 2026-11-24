@@ -1,0 +1,314 @@
+{
+  "entryId": "w:bridge",
+  "headword": "bridge",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/brɪdʒ/",
+    "us": "/brɪdʒ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bridge#p-main",
+      "ipa": {
+        "uk": "/brɪdʒ/",
+        "us": "/brɪdʒ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "bridges",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "bridged",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "bridging",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 145
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 140
+  },
+  "senses": [
+    {
+      "senseId": "w:bridge#s1",
+      "pos": "n.",
+      "glossZh": "桥；桥梁",
+      "pronunciationId": "w:bridge#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bridge#e-aabcb32a12d8f34c",
+          "text": "The bridge was closed to motor traffic so people could enjoy a walk across it.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:bridge#e-bb61cd24a4816eb1",
+          "text": "By the time 250,000 were on the bridge, engineers noticed something terrible: the roadway was flattening under what turned out to be the heaviest load it had ever been asked to carry.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:bridge#e-3a75ecb8544aa631",
+          "text": "On one hike, I found myself hanging onto a wire on a bridge made of two partly rotten(腐烂的) logs, suspended high above rushing rapids.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 59
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bridge#s2",
+      "pos": "n.",
+      "glossZh": "起连接作用的人或事物；桥梁；纽带",
+      "pronunciationId": "w:bridge#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bridge#e-40ce49a2ad080c26",
+          "text": "I see libraries as a safe haven(避风港) for readers and writers, a bridge that helps put together a reader with a book.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:bridge#e-e93fb00f33e11bcd",
+          "text": "“Poetry, dance, music, and visual art are the original bridges between cultures.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:grammar-fill",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:grammar-fill:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:bridge#e-200a1bec13cec7d5",
+          "text": "Thus, it helps build a strong bridge between home and school.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:seven-choices:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bridge#s3",
+      "pos": "v.",
+      "glossZh": "弥合；跨越；连接",
+      "pronunciationId": "w:bridge#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bridge#e-0e36c1ca097c4230",
+          "text": "Beijing is a city bridging the ancient and the modern.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:bridge#e-86797a1d4d9c603a",
+          "text": "With no formal scientific training, she pioneered a new way of study: integration, aiming to bridge the divide between humans and gorillas (大猩猩).",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:bridge#e-2b67f5107d871814",
+          "text": "Bridging the gap between promise and practice, Jann Spiess, an associate professor at Stanford Graduate School of Business, is exploring how algorithms (算法) can be designed to most effectively support – rather than replace – human decision-makers.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bridge#s4",
+      "pos": "n.",
+      "glossZh": "桥牌",
+      "pronunciationId": "w:bridge#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:bridge#s5",
+      "pos": "n.",
+      "glossZh": "鼻梁",
+      "pronunciationId": "w:bridge#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "专名中的姓氏或镇名、电桥、轮滑阻挡队形、作弊弯牌等",
+      "reason": "专名或专业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

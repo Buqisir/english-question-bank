@@ -1,0 +1,212 @@
+{
+  "entryId": "w:presentation",
+  "headword": "presentation",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌpreznˈteɪʃn/",
+    "us": "/ˌpriːzenˈteɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:presentation#p-main",
+      "ipa": {
+        "uk": "/ˌpreznˈteɪʃn/",
+        "us": "/ˌpriːzenˈteɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "presentations",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 69
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 67
+  },
+  "senses": [
+    {
+      "senseId": "w:presentation#s1",
+      "pos": "n.",
+      "glossZh": "报告；演示",
+      "pronunciationId": "w:presentation#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:presentation#e-60b1371b416bec66",
+          "text": "Always make your presentation just a bit shorter than anticipated.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:presentation#e-e95a205f97af8609",
+          "text": "I held presentations at schools to teach kids about plastic waste.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:grammar-fill:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:presentation#e-35212072d5354f11",
+          "text": "Opportunities will include facilitating teacher training and making presentations at various meetings led by Historic Royal Palaces.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:presentation#s2",
+      "pos": "n.",
+      "glossZh": "颁发",
+      "pronunciationId": "w:presentation#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:presentation#e-3cf25116b1099da7",
+          "text": "Paragraph 2: I went to my teacher’s office after the award presentation.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 71
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:presentation#s3",
+      "pos": "n.",
+      "glossZh": "演示文稿",
+      "pronunciationId": "w:presentation#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:presentation#e-8fa74cf9fe9579e8",
+          "text": "Gamma is great for generating presentations.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:presentation#s4",
+      "pos": "n.",
+      "glossZh": "呈现方式",
+      "pronunciationId": "w:presentation#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "胎位",
+      "reason": "医学专门义"
+    },
+    {
+      "glossZh": "推荐圣职人选",
+      "reason": "教会专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

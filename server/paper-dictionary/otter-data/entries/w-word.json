@@ -1,0 +1,410 @@
+{
+  "entryId": "w:word",
+  "headword": "word",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/wɜːd/",
+    "us": "/wɜːrd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:word#p-main",
+      "ipa": {
+        "uk": "/wɜːd/",
+        "us": "/wɜːrd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "words",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "worded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "wording",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 108,
+    "mock": 849
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 848
+  },
+  "senses": [
+    {
+      "senseId": "w:word#s1",
+      "pos": "n.",
+      "glossZh": "词；单词",
+      "pronunciationId": "w:word#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 89,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:word#e-007b99e64f243396",
+          "text": "You could not take back a book to the library on the same day you’d taken it out; it made no difference to her that you’d read every word in it and needed another to start.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 133,
+            "end": 137
+          }
+        },
+        {
+          "exampleId": "w:word#e-aa2aa102f6b5c26d",
+          "text": "And it came to me then how much easier it would be if we had a range of words that express different __42__ of gratitude (感谢).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:word#e-9e216ee3954bb49f",
+          "text": "It should give you a precise definition of each word, thus differentiating it from other words whose meanings are similar, but not identical.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 59
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:word#s2",
+      "pos": "n.",
+      "glossZh": "说的话",
+      "pronunciationId": "w:word#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:word#e-5904a32e70d7ee4e",
+          "text": "The audience is too busy watching the cloth and listening to the magician’s words to notice that his other hand is hiding the ball.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:word#e-469e7023332d834d",
+          "text": "My dad’s words made me realize that my earnings might not be mine to do with as I wished.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:word#e-fc9a188ee859e9c7",
+          "text": "There were times when I found myself wondering if I should pack it all in, but the boy’s words kept ringing in my ears.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 94
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:word#s3",
+      "pos": "n.",
+      "glossZh": "书面语言",
+      "pronunciationId": "w:word#p-main",
+      "note": "the written word。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:word#e-b0f54df98d7b2a90",
+          "text": "My love of the written word began early as my mother read to me every evening.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:word#e-c7fa85b41acb7b0b",
+          "text": "And are listening to and viewing content as effective as reading the written word when covering the same material?",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:word#s4",
+      "pos": "n.",
+      "glossZh": "消息",
+      "pronunciationId": "w:word#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:word#e-ee4040f525bfd672",
+          "text": "One day I got word that he was admitted to hospital for a serious disease.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:15",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:word#s5",
+      "pos": "n.",
+      "glossZh": "诺言",
+      "pronunciationId": "w:word#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:word#s6",
+      "pos": "n.",
+      "glossZh": "口令",
+      "pronunciationId": "w:word#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:word#s7",
+      "pos": "v.",
+      "glossZh": "措辞",
+      "pronunciationId": "w:word#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:word#s8",
+      "pos": "短语",
+      "glossZh": "口耳相传",
+      "pronunciationId": "w:word#p-main",
+      "note": "word of mouth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:word#e-69735fd18cf91903",
+          "text": "Human beings have always loved reviews: word of mouth has long been regarded as one of the most valuable marketing tools available to a company.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:word#s9",
+      "pos": "短语",
+      "glossZh": "换句话说",
+      "pronunciationId": "w:word#p-main",
+      "note": "in other words。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:word#e-42505acf6ff5ea10",
+          "text": "In other words, a toy’s physical traits (特征) did not dictate how it would be used.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-c:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Word、圣言、俚语中的赞同、靠言语压倒",
+      "reason": "专名、宗教、俚语或古旧用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,391 @@
+{
+  "entryId": "w:blank",
+  "headword": "blank",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/blæŋk/",
+    "us": "/blæŋk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:blank#p-main",
+      "ipa": {
+        "uk": "/blæŋk/",
+        "us": "/blæŋk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "blanker",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "blankest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more blank",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most blank",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "blanks",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "blanked",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "blanking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 25
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 17
+  },
+  "senses": [
+    {
+      "senseId": "w:blank#s1",
+      "pos": "adj.",
+      "glossZh": "空白的；未填写的",
+      "pronunciationId": "w:blank#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blank#e-3c9b4909699f655f",
+          "text": "As a result, these writers never get in the habit of crossing out chunks (大块) of their draft and writing revisions in the blank space.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 129,
+            "end": 134
+          }
+        },
+        {
+          "exampleId": "w:blank#e-9e822c7945011015",
+          "text": "While my deskmate Lily stayed up late making her hand-painted storybook and the boys in the back row argued over their DIY craft models, I just sat quietly in my seat, staring at the blank sign-up sheet.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 183,
+            "end": 188
+          }
+        },
+        {
+          "exampleId": "w:blank#e-265f5f6c80498c20",
+          "text": "Visitors to the fair were also given copies of Don’t Steal This Book, a collection of 10,000 writers including Nobel winner Kazuo Ishiguro and Richard Osman, in which the pages are completely blank.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 192,
+            "end": 197
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blank#s2",
+      "pos": "adj.",
+      "glossZh": "茫然的；没有表情的",
+      "pronunciationId": "w:blank#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blank#e-f2d8c7dabb64ad29",
+          "text": "Students’ blank stares.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-hubei-wuchang-2026-05:25",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:blank#e-7d284bf8e980c6a0",
+          "text": "Most ignored him, with cold blank faces.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blank#s3",
+      "pos": "adj.",
+      "glossZh": "（脑子）一片空白的",
+      "pronunciationId": "w:blank#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blank#e-f052a22e23dde066",
+          "text": "For thirty minutes, my mind went completely blank, unable to __41__ a single word from the paper.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-04-second:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blank#s4",
+      "pos": "adj.",
+      "glossZh": "（弹药）无弹头的",
+      "pronunciationId": "w:blank#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blank#e-ce0baca05a07d6f0",
+          "text": "We yelled at the bear, hit pots hard, and fired blank shotgun shells into the air.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blank#s5",
+      "pos": "n.",
+      "glossZh": "空白处；空缺",
+      "pronunciationId": "w:blank#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blank#e-c6916bc3a3fa7d8d",
+          "text": "To occupy a blank in her personal calendar.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-shandong-jining-2026-03-first:25",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 17
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blank#s6",
+      "pos": "短语",
+      "glossZh": "想不起来；找不到结果",
+      "pronunciationId": "w:blank#p-main",
+      "note": "draw a blank。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blank#e-d2f2ea671d103bb4",
+          "text": "My mind raced back to my first-aid class, but I drew a blank, afraid of getting it wrong.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-04-second-mock",
+            "paperTitle": "济宁市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-04-second-mock:reading-b:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blank#s7",
+      "pos": "v.",
+      "glossZh": "突然忘记",
+      "pronunciationId": "w:blank#p-main",
+      "note": "常用 blank on sth。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blank#e-bb812a67f00357c4",
+          "text": "Halfway through the test, I blanked on a formula, and time was running out.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "古硬币、印刷或电气用坯料、骨牌及使对手不得分",
+      "reason": "历史或专门用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

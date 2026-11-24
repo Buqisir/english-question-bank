@@ -1,0 +1,227 @@
+{
+  "entryId": "w:choose",
+  "headword": "choose",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tʃuːz/",
+    "us": "/tʃuːz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:choose#p-main",
+      "ipa": {
+        "uk": "/tʃuːz/",
+        "us": "/tʃuːz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "chooses",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "choosing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "chose",
+      "tags": [
+        "past",
+        "participle",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "chosen",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 48,
+    "mock": 401
+  },
+  "unassignedCounts": {
+    "gaokao": 5,
+    "mock": 401
+  },
+  "senses": [
+    {
+      "senseId": "w:choose#s1",
+      "pos": "v.",
+      "glossZh": "选择；挑选；选定",
+      "pronunciationId": "w:choose#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 28,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:choose#e-c0f00921482e12aa",
+          "text": "50 Honorable Mentions: Judges will choose up to 50 honorable mention winners, who will each receive a T-shirt in memory of Earhart’s final flight.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:choose#e-aebd40039be4aad0",
+          "text": "The clear front of the box had a “keyhole” in a geometric shape, and the birds were given five differently shaped “keys” to choose from.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 124,
+            "end": 130
+          }
+        },
+        {
+          "exampleId": "w:choose#e-dc119ebcb5519014",
+          "text": "\"You choose which length you want and it gives you a receipt-like short story.\"",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:choose#s2",
+      "pos": "v.",
+      "glossZh": "决定（做或不做某事）",
+      "pronunciationId": "w:choose#p-main",
+      "note": "常用 choose to do。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:choose#e-bf7489ea9500d32d",
+          "text": "With the young unable to afford to leave home and the old at risk of isolation(孤独), more families are choosing to live together.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:choose#e-69b9b3ca6890332f",
+          "text": "Why did Jim choose to work from home?",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:choose#e-1611f2fef9ee1070",
+          "text": "There was just one thing I hadn’t counted on: My brother chose to bring his dog Toby, a 50-pound ball of fire.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 62
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "选择这一动作或资格的名词用法",
+      "reason": "现代英语通常用 choice 表示"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

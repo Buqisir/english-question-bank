@@ -1,0 +1,256 @@
+{
+  "entryId": "w:reinforce",
+  "headword": "reinforce",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌriːɪnˈfɔːs/",
+    "us": "/ˌriːɪnˈfɔːrs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:reinforce#p-main",
+      "ipa": {
+        "uk": "/ˌriːɪnˈfɔːs/",
+        "us": "/ˌriːɪnˈfɔːrs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "reinforced",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "reinforces",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "reinforcing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 25
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 18
+  },
+  "senses": [
+    {
+      "senseId": "w:reinforce#s1",
+      "pos": "v.",
+      "glossZh": "加固",
+      "pronunciationId": "w:reinforce#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reinforce#e-0d23d67093a0cc98",
+          "text": "It’s hard to compare the longevity of Roman concrete to modern concrete, because today, many concrete buildings and structures are reinforced with steel.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 131,
+            "end": 141
+          }
+        },
+        {
+          "exampleId": "w:reinforce#e-b14d1c20c72df97e",
+          "text": "Yet, instead of giving in to despair, she immediately set out to fix the problem by reinforcing the entire structure with durable steel wires.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 95
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:reinforce#s2",
+      "pos": "v.",
+      "glossZh": "强化（行为或习惯）",
+      "pronunciationId": "w:reinforce#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reinforce#e-333a2951e37b8610",
+          "text": "Avoid using this space for distractions to reinforce the habit of concentration.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:seven-choices:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:reinforce#e-201af13711f9543e",
+          "text": "Psychologists have long found that rewarding effort helps form a strong work ethic and reinforces learning.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:reinforce#e-af39316390044df2",
+          "text": "Showing appreciation, even toward a machine, reinforces positive habits of courtesy (礼貌), patience and empathy.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-huliqu-2025-nov-m1:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:reinforce#s3",
+      "pos": "v.",
+      "glossZh": "使（观点等）更有说服力",
+      "pronunciationId": "w:reinforce#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reinforce#e-423738fe28c4d3d5",
+          "text": "Decades of research since then have reinforced the point.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:reinforce#e-cbf350063dcabfbb",
+          "text": "Subtly repeating your main point in different ways reinforces your message and makes it more persuasive.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:seven-choices",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:seven-choices:12",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:reinforce#s4",
+      "pos": "v.",
+      "glossZh": "增援",
+      "pronunciationId": "w:reinforce#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

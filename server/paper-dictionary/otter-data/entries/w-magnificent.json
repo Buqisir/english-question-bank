@@ -1,0 +1,162 @@
+{
+  "entryId": "w:magnificent",
+  "headword": "magnificent",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/mæɡˈnɪfɪsnt/",
+    "us": "/mæɡˈnɪfɪsnt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:magnificent#p-main",
+      "ipa": {
+        "uk": "/mæɡˈnɪfɪsnt/",
+        "us": "/mæɡˈnɪfɪsnt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more magnificent",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most magnificent",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "senses": [
+    {
+      "senseId": "w:magnificent#s1",
+      "pos": "adj.",
+      "glossZh": "壮丽的",
+      "pronunciationId": "w:magnificent#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:magnificent#e-7a4e1e20deed98fe",
+          "text": "They had a magnificent garden – rows of tomatoes, corn, and flowers in every color.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:magnificent#e-620a67a80299070f",
+          "text": "Finally, the day arrived, and there I was, standing in the heart of Beijing, staring up at the most magnificent buildings I had ever seen.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年10月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-10-senior-three-joint-exam:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 111
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:magnificent#s2",
+      "pos": "adj.",
+      "glossZh": "极好的",
+      "pronunciationId": "w:magnificent#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:magnificent#e-5bef6a1b0251146f",
+          "text": "“It’s magnificent!” she cried, giving it a test spin around the kitchen tiles.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:magnificent#e-c14e1f2571c8179f",
+          "text": "Perfect for the young and young-at-heart, OMSI is a magnificent museum that will keep the whole family entertained for days.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 63
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,145 @@
+{
+  "entryId": "w:annoy",
+  "headword": "annoy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈnɔɪ/",
+    "us": "/əˈnɔɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:annoy#p-main",
+      "ipa": {
+        "uk": "/əˈnɔɪ/",
+        "us": "/əˈnɔɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "annoyed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "annoying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "annoys",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 15,
+    "mock": 111
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:annoy#s1",
+      "pos": "v.",
+      "glossZh": "惹恼；使烦恼",
+      "pronunciationId": "w:annoy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 111
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:annoy#e-5d1144957bcf40e2",
+          "text": "Who hasn’t received an email so annoying that it ruined an entire day?",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:annoy#e-ced99fbdbd38a3ca",
+          "text": "Annoyed by the level of distraction(干扰)in his open office, he said, “That’s why I have a membership at the coworking space across the street – so I can focus.” His comment struck me as strange.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:annoy#e-e855572cc3f55eac",
+          "text": "The way you handle chopsticks is important to avoid annoying your companions.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 60
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "反复攻击骚扰（军事）",
+      "reason": "专门的历史义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

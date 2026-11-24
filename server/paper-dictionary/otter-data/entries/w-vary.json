@@ -1,0 +1,159 @@
+{
+  "entryId": "w:vary",
+  "headword": "vary",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈveəri/",
+    "us": "/ˈveri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:vary#p-main",
+      "ipa": {
+        "uk": "/ˈveəri/",
+        "us": "/ˈveri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "varied",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "varies",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "varying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 98
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 97
+  },
+  "senses": [
+    {
+      "senseId": "w:vary#s1",
+      "pos": "v.",
+      "glossZh": "有所不同；变化",
+      "pronunciationId": "w:vary#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:vary#e-3d2757f6a319804a",
+          "text": "Class activities will vary from day to day, but students must be ready to complete short in-class writings or tests drawn directly from assigned readings or notes from the previous class' lecture/discussion, so it is important to take careful notes during class.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "reading-a-9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:vary#e-37fd6c737fd0e8ac",
+          "text": "Why did they vary ever so slightly from one instrument to the next?",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:vary#e-ba0b811712e9e88d",
+          "text": "How dreams are interpreted varies from culture to culture.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:vary#s2",
+      "pos": "v.",
+      "glossZh": "变换（做法等）",
+      "pronunciationId": "w:vary#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "varying hare",
+      "reason": "固定物种名，g1 不表示随意变化的野兔"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

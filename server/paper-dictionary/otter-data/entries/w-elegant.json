@@ -1,0 +1,169 @@
+{
+  "entryId": "w:elegant",
+  "headword": "elegant",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈelɪɡənt/",
+    "us": "/ˈelɪɡənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:elegant#p-main",
+      "ipa": {
+        "uk": "/ˈelɪɡənt/",
+        "us": "/ˈelɪɡənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more elegant",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most elegant",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "senses": [
+    {
+      "senseId": "w:elegant#s1",
+      "pos": "adj.",
+      "glossZh": "优雅的",
+      "pronunciationId": "w:elegant#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:elegant#e-30f10368894d07e6",
+          "text": "Catamarans are faster, but they’re not so elegant, and they’re not fun to pilot.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:elegant#e-53beacb104d54163",
+          "text": "Serving hard-to-find Thai dishes in an elegant atmosphere, the restaurant is true to Thai cuisine’s roots, yet still manages to add a special twist.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:elegant#e-17fe4cd4fbeacb2e",
+          "text": "These elegant birds swim in the clear water, forming a beautiful picture with the snow mountains in the background.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:grammar-fill:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:elegant#s2",
+      "pos": "adj.",
+      "glossZh": "简洁巧妙的",
+      "pronunciationId": "w:elegant#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:elegant#e-e3162b77a0be9da5",
+          "text": "Instead, focus on summarizing the main idea in simple elegant words.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 61
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "一种鹦鹉",
+      "reason": "物种专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

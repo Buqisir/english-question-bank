@@ -1,0 +1,241 @@
+{
+  "entryId": "w:foreign",
+  "headword": "foreign",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfɒrən/",
+    "us": "/ˈfɔːrən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:foreign#p-main",
+      "ipa": {
+        "uk": "/ˈfɒrən/",
+        "us": "/ˈfɔːrən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more foreign",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most foreign",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 65
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 64
+  },
+  "senses": [
+    {
+      "senseId": "w:foreign#s1",
+      "pos": "adj.",
+      "glossZh": "外国的",
+      "pronunciationId": "w:foreign#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:foreign#e-623d06d38e83b85a",
+          "text": "English in California, Oleg and Natasha, his hosts in Tashkent, and a string of foreign aid workers.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 87
+          }
+        },
+        {
+          "exampleId": "w:foreign#e-fb1947893daadba7",
+          "text": "Any seasoned language learner will tell you that the beauty of mastering a foreign language is the world which it opens up to you.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:foreign#e-c307ef1d334cb674",
+          "text": ", the more comfortable you’ll begin to feel with its foreign cultural practices.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2022-national-a:seven-choices:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:foreign#s2",
+      "pos": "adj.",
+      "glossZh": "外来的",
+      "pronunciationId": "w:foreign#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:foreign#e-6c1fb77bf746bb60",
+          "text": "They are foreign species.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jun:26",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:foreign#e-5a03cf4db9dd1255",
+          "text": "To bring in foreign species of plants.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:29",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:foreign#e-11bb7920cf724c4c",
+          "text": "The immune system’s primary role is to distinguish foreign microbes (细菌) from the body’s own cells and then attack them.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:foreign#s3",
+      "pos": "adj.",
+      "glossZh": "陌生的",
+      "pronunciationId": "w:foreign#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:foreign#e-adba89a27f908801",
+          "text": "Here was a cow foreign to my experience.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:8",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 22
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "他行的",
+      "reason": "银行业特定用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

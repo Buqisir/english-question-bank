@@ -1,0 +1,320 @@
+{
+  "entryId": "w:progress",
+  "headword": "progress",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈprəʊɡres/",
+    "us": "/ˈprɑːɡres/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:progress#p-main",
+      "ipa": {
+        "uk": "/ˈprəʊɡres/",
+        "us": "/ˈprɑːɡres/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:progress#p-verb",
+      "ipa": {
+        "uk": "/prəˈɡres/",
+        "us": "/prəˈɡres/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "动词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "progresses",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Progresses",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "progressed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "progressing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 24,
+    "mock": 178
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 176
+  },
+  "senses": [
+    {
+      "senseId": "w:progress#s1",
+      "pos": "n.",
+      "glossZh": "进步",
+      "pronunciationId": "w:progress#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:progress#e-bd552e4edbe6f575",
+          "text": "I owe the speed of progress I made in Italian to the support from Jim, my partner in study time.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:progress#e-28a2e14a9b58cb38",
+          "text": "Celebrate progress and keep refining（改进）toward a happy productive existence.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:progress#e-a00ccdb26d7b191d",
+          "text": "Progress can be slow, and you’ll wonder if it’s all sinking in.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-ii:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:progress#s2",
+      "pos": "n.",
+      "glossZh": "进展；进度",
+      "pronunciationId": "w:progress#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:progress#e-1ea4a31f83abb19b",
+          "text": "No, I don’t mean posting your progress online.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:progress#e-3c666dc8b189bde0",
+          "text": "To keep records of her progress.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:progress#e-09798f4a016919c6",
+          "text": "Keeping track of task progress.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-fujian-putian-2026-03-second-quality-test:35",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:progress#s3",
+      "pos": "短语",
+      "glossZh": "正在进行",
+      "pronunciationId": "w:progress#p-main",
+      "note": "in progress。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:progress#e-b64f2586820d4c2e",
+          "text": "This can be a work in progress rather than a completed piece.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:progress#e-79b2c09b3ca530be",
+          "text": "Road work is in progress.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:progress#s4",
+      "pos": "v.",
+      "glossZh": "继续推进",
+      "pronunciationId": "w:progress#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:progress#s5",
+      "pos": "v.",
+      "glossZh": "进步",
+      "pronunciationId": "w:progress#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "君主巡行",
+      "reason": "历史专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

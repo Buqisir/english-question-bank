@@ -1,0 +1,211 @@
+{
+  "entryId": "w:screen",
+  "headword": "screen",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/skriːn/",
+    "us": "/skriːn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:screen#p-main",
+      "ipa": {
+        "uk": "/skriːn/",
+        "us": "/skriːn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "screens",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "screened",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "screening",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 197
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 197
+  },
+  "senses": [
+    {
+      "senseId": "w:screen#s1",
+      "pos": "n.",
+      "glossZh": "屏幕",
+      "pronunciationId": "w:screen#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:screen#e-6e9d8df080ba2a2f",
+          "text": "American black bears the task of distinguishing between numerically larger and smaller groups of dots（点）on a computer screen.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 118,
+            "end": 124
+          }
+        },
+        {
+          "exampleId": "w:screen#e-728de40c4d7a2013",
+          "text": "Today’s children spend an average of four and a half hours a day looking at screens, split between watching television and using the Internet.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:screen#e-e9ea80e4d14b0d6d",
+          "text": "“We usually think in very concrete terms when doing something on a screen,” said Simone Schnall, senior author of the study.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:screen#s2",
+      "pos": "n.",
+      "glossZh": "屏风",
+      "pronunciationId": "w:screen#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:screen#s3",
+      "pos": "n.",
+      "glossZh": "滤网",
+      "pronunciationId": "w:screen#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:screen#s4",
+      "pos": "v.",
+      "glossZh": "筛查",
+      "pronunciationId": "w:screen#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:screen#s5",
+      "pos": "v.",
+      "glossZh": "遮挡",
+      "pronunciationId": "w:screen#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:screen#s6",
+      "pos": "v.",
+      "glossZh": "放映",
+      "pronunciationId": "w:screen#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "护航小船队",
+      "reason": "海军事务专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

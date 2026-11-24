@@ -1,0 +1,199 @@
+{
+  "entryId": "w:dog",
+  "headword": "dog",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɒɡ/",
+    "us": "/dɔːɡ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dog#p-main",
+      "ipa": {
+        "uk": "/dɒɡ/",
+        "us": "/dɔːɡ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "DOGs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "dogs",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "dogged",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "dogging",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 49,
+    "mock": 380
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 379
+  },
+  "senses": [
+    {
+      "senseId": "w:dog#s1",
+      "pos": "n.",
+      "glossZh": "狗；犬",
+      "pronunciationId": "w:dog#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 49,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dog#e-e0e2b2658849c09b",
+          "text": "The boy’s mother turned to the dog, “Okay, Poppy, time to go back home.”",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:dog#e-17015c87892ba8de",
+          "text": "If you ever get the impression that your dog can \"tell\" whether you look content or annoyed, you may be onto something.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:dog#e-96aca83f070af0d5",
+          "text": "Dogs are known for their impressive fetching habit, but cats take this behavior up a notch.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dog#s2",
+      "pos": "v.",
+      "glossZh": "纠缠；紧跟",
+      "pronunciationId": "w:dog#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dog#e-0ea29c939da3a7fc",
+          "text": "Reporters dog him for interviews, turning his life into a freak(怪胎) show.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:seven-choices:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dog#s3",
+      "pos": "n.",
+      "glossZh": "家伙；人",
+      "pronunciationId": "w:dog#p-main",
+      "note": "如 a lucky dog 指「幸运儿」。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "纽卡斯尔棕色啤酒；天狼星；枪械、机械零件；舱口固定等",
+      "reason": "同形专名、俚语或行业术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

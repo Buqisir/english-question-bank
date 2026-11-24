@@ -1,0 +1,173 @@
+{
+  "entryId": "w:prejudice",
+  "headword": "prejudice",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpredʒudɪs/",
+    "us": "/ˈpredʒudɪs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:prejudice#p-main",
+      "ipa": {
+        "uk": "/ˈpredʒudɪs/",
+        "us": "/ˈpredʒudɪs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "prejudices",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "prejudiced",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "prejudicing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 20
+  },
+  "senses": [
+    {
+      "senseId": "w:prejudice#s1",
+      "pos": "n.",
+      "glossZh": "偏见",
+      "pronunciationId": "w:prejudice#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:prejudice#e-aa8faba188de511d",
+          "text": "Volunteering can be the first step in breaking down prejudice.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-ii:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:prejudice#e-6fdbad27d4978fc4",
+          "text": "He didn't have the courage to ask his mother for money as he knew her prejudice against art.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:prejudice#e-c3f04e461860dfc3",
+          "text": "But changing deeply held beliefs takes generations, as the long struggle against racial prejudice shows.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam",
+            "paperTitle": "2025-2026学年第二学期浙江北斗星盟阶段性考试 高三年级英语学科试题",
+            "groupId": "group:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-beidouxing-alliance-2026-05-second-semester-stage-exam:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 97
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:prejudice#s2",
+      "pos": "v.",
+      "glossZh": "使产生偏见",
+      "pronunciationId": "w:prejudice#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:prejudice#s3",
+      "pos": "v.",
+      "glossZh": "损害（利益、机会）",
+      "pronunciationId": "w:prejudice#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "预知",
+      "reason": "旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

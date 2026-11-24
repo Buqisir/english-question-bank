@@ -1,0 +1,146 @@
+{
+  "entryId": "w:ensure",
+  "headword": "ensure",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪnˈʃʊə(r)/",
+    "us": "/ɪnˈʃʊr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ensure#p-main",
+      "ipa": {
+        "uk": "/ɪnˈʃʊə(r)/",
+        "us": "/ɪnˈʃʊr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "ensured",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "ensures",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "ensuring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 21,
+    "mock": 168
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:ensure#s1",
+      "pos": "v.",
+      "glossZh": "确保",
+      "pronunciationId": "w:ensure#p-main",
+      "note": "可接名词或 that 从句。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 21,
+        "mock": 168
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ensure#e-09a03f5c8cf087a5",
+          "text": "About 98 cents of every duck stamp dollar goes directly into the Migratory Bird Conservation Fund to purchase wetlands and wildlife habitat for inclusion into the National Wildlife Refuge System – a fact that ensures this land will be protected and available for all generations to come.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 209,
+            "end": 216
+          }
+        },
+        {
+          "exampleId": "w:ensure#e-98e4b86c3c7457b7",
+          "text": "Measures must be taken to not only conserve ecosystems, but also sustain livelihoods and ensure food security.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:ensure#e-411e656ca46b2114",
+          "text": "When he wasn’t doing all that, Jim was running across a checkerboard of green lawns（草坪） to ensure the local postal service did not fall short of its daily promise.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 97
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "向某人保证",
+      "reason": "现代通常用 assure"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

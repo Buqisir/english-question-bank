@@ -1,0 +1,253 @@
+{
+  "entryId": "w:extra",
+  "headword": "extra",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈekstrə/",
+    "us": "/ˈekstrə/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:extra#p-main",
+      "ipa": {
+        "uk": "/ˈekstrə/",
+        "us": "/ˈekstrə/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more extra",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most extra",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "extras",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 26,
+    "mock": 130
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 128
+  },
+  "senses": [
+    {
+      "senseId": "w:extra#s1",
+      "pos": "adj.",
+      "glossZh": "额外的",
+      "pronunciationId": "w:extra#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:extra#e-6953ce430e1123dd",
+          "text": "After high school, Jennifer attended a local technical college, working to pay her tuition（学费）, because there was no extra money set aside for a college education.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 117,
+            "end": 122
+          }
+        },
+        {
+          "exampleId": "w:extra#e-49875ea01771fb28",
+          "text": "Failure to provide enough chaperones will result in an extra charge of $50 per absent adult.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:extra#e-2f0078e6520a0c49",
+          "text": "Put off watching your favorite show until the weekend or wait 10 extra minutes before going for that cake.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:extra#s2",
+      "pos": "adv.",
+      "glossZh": "格外",
+      "pronunciationId": "w:extra#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:extra#e-0eb73e79edf91b4c",
+          "text": "That makes it extra hard to learn and practice it",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:31",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:extra#e-cfc6d5608a0c99e9",
+          "text": "Other things include work gloves, a backpack, lunch, plenty of drinking water, rain clothes, and extra warm clothes for bad weather.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-a:12",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 102
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:extra#s3",
+      "pos": "n.",
+      "glossZh": "额外项目",
+      "pronunciationId": "w:extra#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:extra#e-a4d139dfc0394b1b",
+          "text": "Extra: Transfers（转移）to and/or from Ruggedy Range Booking Office where tour starts/ends: NZ $10.00 one-way or NZ $20.00 return per person.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-03-first",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（一）英语试卷",
+            "groupId": "group:paper-mock-guangdong-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-guangdong-2026-03-first:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:extra#s4",
+      "pos": "n.",
+      "glossZh": "群众演员",
+      "pronunciationId": "w:extra#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:extra#s5",
+      "pos": "n.",
+      "glossZh": "号外",
+      "pronunciationId": "w:extra#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "额外惩罚值勤日",
+      "reason": "历史军事专用语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

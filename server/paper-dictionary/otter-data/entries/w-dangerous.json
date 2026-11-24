@@ -1,0 +1,135 @@
+{
+  "entryId": "w:dangerous",
+  "headword": "dangerous",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdeɪndʒərəs/",
+    "us": "/ˈdeɪndʒərəs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dangerous#p-main",
+      "ipa": {
+        "uk": "/ˈdeɪndʒərəs/",
+        "us": "/ˈdeɪndʒərəs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more dangerous",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most dangerous",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 89
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:dangerous#s1",
+      "pos": "adj.",
+      "glossZh": "危险的；可能造成伤害的",
+      "pronunciationId": "w:dangerous#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 89
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dangerous#e-c66d9841312363dc",
+          "text": "Taking pictures of polar bears is amazing but also dangerous.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:dangerous#e-1f1b134b9e1975a3",
+          "text": "That can be dangerous work that could be avoided with drones assisting the crews’ efforts.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:dangerous#e-5a95589015482e13",
+          "text": "For instance, almost all animals have distinct vocals（声音）that they rely on to either ask for help, scare away any dangerous animals or look for shelter.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 123
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "生命垂危的",
+      "reason": "病情可描述为 dangerous，本身不直接形容病人垂危"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

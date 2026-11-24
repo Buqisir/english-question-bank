@@ -1,0 +1,175 @@
+{
+  "entryId": "w:symphony",
+  "headword": "symphony",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsɪmfəni/",
+    "us": "/ˈsɪmfəni/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:symphony#p-main",
+      "ipa": {
+        "uk": "/ˈsɪmfəni/",
+        "us": "/ˈsɪmfəni/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "symphonies",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "senses": [
+    {
+      "senseId": "w:symphony#s1",
+      "pos": "n.",
+      "glossZh": "交响曲",
+      "pronunciationId": "w:symphony#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:symphony#s2",
+      "pos": "n.",
+      "glossZh": "交响乐团",
+      "pronunciationId": "w:symphony#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:symphony#e-c9e96665f66e6c56",
+          "text": "As Bell, the distinguished violinist and the symphony performed, a little boy in the audience seat occasionally accompanied them with his own spontaneous (自发的), sweet sounds.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:symphony#s3",
+      "pos": "n.",
+      "glossZh": "交织的整体",
+      "pronunciationId": "w:symphony#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:symphony#e-1e5c1cc83cd7c042",
+          "text": "The atmosphere was lively, filled with greetings in different languages that blended into a cheerful symphony of cultural diversity.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 109
+          }
+        },
+        {
+          "exampleId": "w:symphony#e-da8deca90a05baac",
+          "text": "To Mrs. Henderson’s ordered mind, their home was a symphony of cheerful chaos: brightly colored plastic toys spreading across the yard, a tricycle lying on its side by the walkway, and the constant energetic screams of children at play.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:symphony#e-f59d90b1d3b6de1b",
+          "text": "The honking(按 喇叭) of horns filled the air, creating a chaotic symphony.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinlishu-2026-dec-m1",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第一次联考",
+            "groupId": "group:paper-mock-zhejiang-jinlishu-2026-dec-m1:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jinlishu-2026-dec-m1:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 70
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "器乐前奏或尾声、Symphony Hall",
+      "reason": "音乐专义或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

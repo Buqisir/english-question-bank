@@ -1,0 +1,124 @@
+{
+  "entryId": "w:photographer",
+  "headword": "photographer",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fəˈtɒɡrəfə(r)/",
+    "us": "/fəˈtɑːɡrəfər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:photographer#p-main",
+      "ipa": {
+        "uk": "/fəˈtɒɡrəfə(r)/",
+        "us": "/fəˈtɑːɡrəfər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "photographers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 34
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:photographer#s1",
+      "pos": "n.",
+      "glossZh": "摄影师；摄影者",
+      "pronunciationId": "w:photographer#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 34
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:photographer#e-4a4158c88bc2d7a5",
+          "text": "Enhance your photography skills-join Yellowstone’s park photographer for a hands-on program to inspire new and creative ways of enjoying the beauty and wonder of Yellowstone.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:photographer#e-89cf21b3bafca0e0",
+          "text": "Living in Iowa and trying to become a photographer specializing in landscape (风景) can be quite a challenge, mainly because the corn state lacks geographical variation.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:photographer#e-97a755e518aa2a3a",
+          "text": "“People started queuing to make an appointment early in the morning,” says Emile Ducke, a German photographer who traveled with the staff of the Saint Lukas for a two-week trip in November through the vast regions（区域）of Krasnoyarsk and Khakassia.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 109
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

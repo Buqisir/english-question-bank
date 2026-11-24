@@ -1,0 +1,137 @@
+{
+  "entryId": "w:perspective",
+  "headword": "perspective",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pəˈspektɪv/",
+    "us": "/pərˈspektɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:perspective#p-main",
+      "ipa": {
+        "uk": "/pəˈspektɪv/",
+        "us": "/pərˈspektɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "perspectives",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 99
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 98
+  },
+  "senses": [
+    {
+      "senseId": "w:perspective#s1",
+      "pos": "n.",
+      "glossZh": "视角；看法",
+      "pronunciationId": "w:perspective#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:perspective#e-8fa92bd764f714e6",
+          "text": "It is our hope that in coming decades, advances in science will offer new perspectives (视角) from which to study how people manage their lives.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:perspective#e-001e217b6c0624f4",
+          "text": "Scientists with new perspectives.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2021-i:35",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:perspective#e-c8a99a9d8dd9287f",
+          "text": "“This is a breakthrough from a scientific perspective, offering a better overall understanding of planetary boundaries,” says Johan Rockström, one of the co-authors of the study.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:perspective#s2",
+      "pos": "n.",
+      "glossZh": "透视法",
+      "pronunciationId": "w:perspective#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

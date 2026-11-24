@@ -1,0 +1,158 @@
+{
+  "entryId": "w:crayon",
+  "headword": "crayon",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkreɪən/",
+    "us": "/ˈkreɪɑːn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:crayon#p-main",
+      "ipa": {
+        "uk": "/ˈkreɪən/",
+        "us": "/ˈkreɪɑːn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "crayons",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "crayoned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "crayoning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "senses": [
+    {
+      "senseId": "w:crayon#s1",
+      "pos": "n.",
+      "glossZh": "蜡笔",
+      "pronunciationId": "w:crayon#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:crayon#e-3685b04907bdf61a",
+          "text": "He brought her small comforts – books, crayons, stuffed animals – and encouraged her to talk about her mother and brother when she was ready.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:crayon#e-c04624e6b35616f7",
+          "text": "Her childhood photos were squeezed into the upper corner, nearly replaced by Tom’s new ones – his chubby face clutching a cake on his first birthday, his tiny figure with a small schoolbag on his first day of kindergarten, and even a recent one where he was proudly holding a crayon drawing.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 276,
+            "end": 282
+          }
+        },
+        {
+          "exampleId": "w:crayon#e-10300db380ac78b2",
+          "text": "One evening, Clara found a new note in pink crayon, “Dear friends, Bunny really wants a toy swing（秋千）.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+            "paperTitle": "宁波市2025学年第一学期高考模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-ningbo-2025-11-first-mock:writing-continuation:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:crayon#s2",
+      "pos": "v.",
+      "glossZh": "用蜡笔画",
+      "pronunciationId": "w:crayon#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "电光用炭笔",
+      "reason": "专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

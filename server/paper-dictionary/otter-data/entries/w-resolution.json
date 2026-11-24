@@ -1,0 +1,266 @@
+{
+  "entryId": "w:resolution",
+  "headword": "resolution",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌrezəˈluːʃn/",
+    "us": "/ˌrezəˈluːʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:resolution#p-main",
+      "ipa": {
+        "uk": "/ˌrezəˈluːʃn/",
+        "us": "/ˌrezəˈluːʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "resolutions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "senses": [
+    {
+      "senseId": "w:resolution#s1",
+      "pos": "n.",
+      "glossZh": "决心（要去做的事）",
+      "pronunciationId": "w:resolution#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:resolution#e-0775f95fa53523cf",
+          "text": "Have you ever made a resolution to “study harder”, only to fall back into old habits within a week?",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:resolution#e-163d60624c88bee1",
+          "text": "What percentage of people keep their New Year’s resolutions after the first month?",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:resolution#e-ce49e4046aa31e87",
+          "text": "Making New Year’s resolutions.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:resolution#s2",
+      "pos": "n.",
+      "glossZh": "解决",
+      "pronunciationId": "w:resolution#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:resolution#e-511800dc99170c6e",
+          "text": "Claim → counterclaim → resolution.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-04-eighth:31",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:resolution#e-0d19f72c8e207271",
+          "text": "It’s a temporary relief without resolution.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-henan-zhengzhou-2026-04-second:30",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:resolution#s3",
+      "pos": "n.",
+      "glossZh": "分辨率",
+      "pronunciationId": "w:resolution#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:resolution#e-084ddd5fc916bb8c",
+          "text": "The works should be submitted in JPG format, with a resolution of 300dpi, file size no less than 2M and not exceeding 10M.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:reading-a:15",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:resolution#e-033767a3d1fbaa56",
+          "text": "High resolution gravity measurements collected by the BAS’s aircraft detected an unusual signal beneath the glacier.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test",
+            "paperTitle": "2026届石家庄市普通高中学校毕业年级教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-03-first-teaching-quality-test:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:resolution#s4",
+      "pos": "n.",
+      "glossZh": "正式决议",
+      "pronunciationId": "w:resolution#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:resolution#s5",
+      "pos": "n.",
+      "glossZh": "故事的结局",
+      "pronunciationId": "w:resolution#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "名称解析",
+      "reason": "计算机术语"
+    },
+    {
+      "glossZh": "和弦解决",
+      "reason": "音乐术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

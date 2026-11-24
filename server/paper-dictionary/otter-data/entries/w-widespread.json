@@ -1,0 +1,130 @@
+{
+  "entryId": "w:widespread",
+  "headword": "widespread",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈwaɪdspred/",
+    "us": "/ˈwaɪdspred/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:widespread#p-main",
+      "ipa": {
+        "uk": "/ˈwaɪdspred/",
+        "us": "/ˈwaɪdspred/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more widespread",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most widespread",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 39
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:widespread#s1",
+      "pos": "adj.",
+      "glossZh": "广泛的；普遍的",
+      "pronunciationId": "w:widespread#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 39
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:widespread#e-40effd2dcd8b9058",
+          "text": "Although these campaigns were widespread, the reality is that the majority of the western cities were completely redesigned around the needs of the motor car.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:widespread#e-07e05e1e8a49e818",
+          "text": "The widespread availability of high-speed internet and the popularity of online travel agencies likely contribute to this trend.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:widespread#e-d3f9b62f19fdbf17",
+          "text": "If the new screens are ever indeed applied to widespread consumer mobile devices, they could change the way users interface with apps and services used on a daily basis.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 56
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,183 @@
+{
+  "entryId": "w:eliminate",
+  "headword": "eliminate",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈlɪmɪneɪt/",
+    "us": "/ɪˈlɪmɪneɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:eliminate#p-main",
+      "ipa": {
+        "uk": "/ɪˈlɪmɪneɪt/",
+        "us": "/ɪˈlɪmɪneɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "eliminated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "eliminates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "eliminating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "senses": [
+    {
+      "senseId": "w:eliminate#s1",
+      "pos": "v.",
+      "glossZh": "消除",
+      "pronunciationId": "w:eliminate#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:eliminate#e-d2c38a1ca173b31b",
+          "text": "This progress eliminates geothermal’s old obstacle of needing volcanic zones.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-c:14",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:eliminate#e-e97d9db30014e1f5",
+          "text": "This eliminates printing expenses while developing valuable computer skills.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:eliminate#e-4b668b290996bf98",
+          "text": "A magnetic coil powers the implant wirelessly, eliminating the need for patients to remove the device for charging.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:eliminate#s2",
+      "pos": "v.",
+      "glossZh": "淘汰（参赛者）",
+      "pronunciationId": "w:eliminate#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:eliminate#s3",
+      "pos": "v.",
+      "glossZh": "排除（可能性）",
+      "pronunciationId": "w:eliminate#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:eliminate#s4",
+      "pos": "v.",
+      "glossZh": "杀死",
+      "pronunciationId": "w:eliminate#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "抵销内部交易",
+      "reason": "会计术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

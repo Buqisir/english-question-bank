@@ -1,0 +1,161 @@
+{
+  "entryId": "w:fantastic",
+  "headword": "fantastic",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fænˈtæstɪk/",
+    "us": "/fænˈtæstɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fantastic#p-main",
+      "ipa": {
+        "uk": "/fænˈtæstɪk/",
+        "us": "/fænˈtæstɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more fantastic",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most fantastic",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 13
+  },
+  "senses": [
+    {
+      "senseId": "w:fantastic#s1",
+      "pos": "adj.",
+      "glossZh": "极好的",
+      "pronunciationId": "w:fantastic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fantastic#e-db84c003148d6813",
+          "text": "There are four fantastic galleries to visit from fine art to interactive fun, so there’s something for everyone!",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:13",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:fantastic#e-618b23d13c886283",
+          "text": "Her mother, Solio, is a first-time mum and she is doing a fantastic job.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:fantastic#e-02ea0fa3de0d4415",
+          "text": "This online concert is absolutely fantastic.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-application",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-application:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fantastic#s2",
+      "pos": "adj.",
+      "glossZh": "奇幻的",
+      "pronunciationId": "w:fantastic#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fantastic#s3",
+      "pos": "adj.",
+      "glossZh": "惊人地大的",
+      "pronunciationId": "w:fantastic#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "异想天开的人",
+      "reason": "罕见名词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

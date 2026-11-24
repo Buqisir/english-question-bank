@@ -1,0 +1,139 @@
+{
+  "entryId": "w:shorts",
+  "headword": "shorts",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ʃɔːts/",
+    "us": "/ʃɔːrts/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:shorts#p-main",
+      "ipa": {
+        "uk": "/ʃɔːts/",
+        "us": "/ʃɔːrts/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:shorts#s1",
+      "pos": "n.",
+      "glossZh": "短裤",
+      "pronunciationId": "w:shorts#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shorts#e-1d1e02789a13c5b3",
+          "text": "Dirty shorts and old shoes gave him the __46__ of a real beggar and his convincing dialect soon won him the __47__ of the beggars.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:shorts#e-657cd378a3384f23",
+          "text": "I chose my outfit very carefully: My best shorts, clean T-shirt and brand-new shoes.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:shorts#e-112fe4609609e545",
+          "text": "A few afternoons later, Mrs. Glover spotted Isaac sitting in front of his house, wearing only shorts and a thin shirt.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 94,
+            "end": 100
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shorts#s2",
+      "pos": "n.",
+      "glossZh": "（男式）短内裤",
+      "pronunciationId": "w:shorts#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "生产边料；制粉筛余；短麻",
+      "reason": "工业专门义"
+    },
+    {
+      "glossZh": "short 的第三人称单数",
+      "reason": "动词屈折误配"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

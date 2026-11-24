@@ -1,0 +1,187 @@
+{
+  "entryId": "w:adapt",
+  "headword": "adapt",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈdæpt/",
+    "us": "/əˈdæpt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:adapt#p-main",
+      "ipa": {
+        "uk": "/əˈdæpt/",
+        "us": "/əˈdæpt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "adapted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "adapting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "adapts",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 118
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 118
+  },
+  "senses": [
+    {
+      "senseId": "w:adapt#s1",
+      "pos": "v.",
+      "glossZh": "适应；调整以适应",
+      "pronunciationId": "w:adapt#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:adapt#e-dde4331530bf23cc",
+          "text": "People in Ethiopian highlands have adapted to living at high altitudes.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:adapt#e-c617b93503c1f67f",
+          "text": "She is confident that small land areas can bring large returns if farmers are able to adapt by planting sustainable crops, using new technologies for water treatment and focusing on natural products and fertilisers (肥料) rather than chemicals.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 91
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:adapt#s2",
+      "pos": "v.",
+      "glossZh": "改造；调整以便用于新用途",
+      "pronunciationId": "w:adapt#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:adapt#e-bcc4ef9beba913e0",
+          "text": "Elizabeth Sims analyzes the final chapters of five great novels to see what key points they include and how you can adapt them for your work.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 116,
+            "end": 121
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:adapt#s3",
+      "pos": "v.",
+      "glossZh": "改编（作品）",
+      "pronunciationId": "w:adapt#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:adapt#e-75900bdf112e0c65",
+          "text": "It is adapted by Joe McDonough, with music by David Kisor.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 13
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

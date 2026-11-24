@@ -1,0 +1,163 @@
+{
+  "entryId": "w:confused",
+  "headword": "confused",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kənˈfjuːzd/",
+    "us": "/kənˈfjuːzd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:confused#p-main",
+      "ipa": {
+        "uk": "/kənˈfjuːzd/",
+        "us": "/kənˈfjuːzd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more confused",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most confused",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 111
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 110
+  },
+  "senses": [
+    {
+      "senseId": "w:confused#s1",
+      "pos": "adj.",
+      "glossZh": "困惑的；糊涂的；不知所措的",
+      "pronunciationId": "w:confused#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:confused#e-cbf911211b43a196",
+          "text": "I was confused: Is there something wrong with this kid?",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:4",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:confused#e-12cf542ce0bdce24",
+          "text": "I thought my pronunciation was the problem, so I explained again more slowly, but he still looked confused.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 106
+          }
+        },
+        {
+          "exampleId": "w:confused#e-0ab4416c2c7fbb98",
+          "text": "Katherine asked, obviously confused.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-continuation:6",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:confused#s2",
+      "pos": "adj.",
+      "glossZh": "混乱的；条理不清的",
+      "pronunciationId": "w:confused#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:confused#e-b686475ca482266f",
+          "text": "When Melody finally rushed in, breathless and upset, her explanation came out as a confused mix of words.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 91
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

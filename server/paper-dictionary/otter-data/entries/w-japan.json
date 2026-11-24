@@ -1,0 +1,130 @@
+{
+  "entryId": "w:japan",
+  "headword": "Japan",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dʒəˈpæn/",
+    "us": "/dʒəˈpæn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:japan#p-main",
+      "ipa": {
+        "uk": "/dʒəˈpæn/",
+        "us": "/dʒəˈpæn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "japans",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 21
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:japan#s1",
+      "pos": "n.",
+      "glossZh": "日本",
+      "pronunciationId": "w:japan#p-main",
+      "note": "国名写作 Japan。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 21
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:japan#e-a131c7d398de871a",
+          "text": "After taking a degree at Chichester University in Related Arts, Ginni began to travel the world, eventually getting work teaching English in Japan and Chile.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 141,
+            "end": 146
+          }
+        },
+        {
+          "exampleId": "w:japan#e-f2cd80917348847c",
+          "text": "During the morning activity session, Emma and I ended up in the same group with students from Brazil, Japan, and France.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 102,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:japan#e-b8a5ae54b2ff4a6f",
+          "text": "This trend started in Japan and quickly spread worldwide.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 27
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "黑色硬漆、涂漆",
+      "reason": "小写形式的工艺术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

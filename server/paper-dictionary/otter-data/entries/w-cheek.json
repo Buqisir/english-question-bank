@@ -1,0 +1,154 @@
+{
+  "entryId": "w:cheek",
+  "headword": "cheek",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tʃiːk/",
+    "us": "/tʃiːk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:cheek#p-main",
+      "ipa": {
+        "uk": "/tʃiːk/",
+        "us": "/tʃiːk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "cheeks",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "senses": [
+    {
+      "senseId": "w:cheek#s1",
+      "pos": "n.",
+      "glossZh": "脸颊；面颊",
+      "pronunciationId": "w:cheek#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cheek#e-7ae4d5c623e87400",
+          "text": "Her little brother Leo, his cheeks still soft with sleep, was hitting his spoon on his bowl like a bell.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:cheek#e-40f4d72bdb1b35c3",
+          "text": "“Now for the finishing touch,” Mareya said, taking out her face-paint kit to paint tiger whiskers（胡须）on her cheeks.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 114
+          }
+        },
+        {
+          "exampleId": "w:cheek#e-3755a2ab47e410a5",
+          "text": "One rainy afternoon, she found him staring at his phone’s black screen, a single tear moving slowly down his wrinkled cheek.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 118,
+            "end": 123
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cheek#s2",
+      "pos": "n.",
+      "glossZh": "厚脸皮；无礼",
+      "pronunciationId": "w:cheek#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:cheek#s3",
+      "pos": "n.",
+      "glossZh": "半边臀部",
+      "pronunciationId": "w:cheek#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "三叶虫头甲侧部、铸模中段、马嚼子分支等",
+      "reason": "技术或器具专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

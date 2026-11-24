@@ -1,0 +1,224 @@
+{
+  "entryId": "w:relieve",
+  "headword": "relieve",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈliːv/",
+    "us": "/rɪˈliːv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:relieve#p-main",
+      "ipa": {
+        "uk": "/rɪˈliːv/",
+        "us": "/rɪˈliːv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "relieved",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "relieves",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "relieving",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 78
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 74
+  },
+  "senses": [
+    {
+      "senseId": "w:relieve#s1",
+      "pos": "adj.",
+      "glossZh": "如释重负的",
+      "pronunciationId": "w:relieve#p-main",
+      "note": "用 relieved。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:relieve#e-54111d3d287f526e",
+          "text": "Grateful and relieved, Emily accepted the offer.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:relieve#e-840dfa419ea7ad0a",
+          "text": "Good, she’s keeping her distance, I thought, relieved.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:writing-continuation:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:relieve#s2",
+      "pos": "v.",
+      "glossZh": "缓解（痛苦或负担）",
+      "pronunciationId": "w:relieve#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:relieve#e-65a0f0ee2c71f759",
+          "text": "These three adaptation methods can already go some way to relieve climate pressures in some countries.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:relieve#e-1eabdeae6d587460",
+          "text": "Among these, novel TRPM8 agonists（激动剂）—acting like precise keys – show great potential in relieving dry-eye discomfort by gently unlocking the cooling receptors on the eye’s surface.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:relieve#e-4b09c88f08b8abad",
+          "text": "It relieves his leg pain.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:relieve#s3",
+      "pos": "v.",
+      "glossZh": "免除（义务等）",
+      "pronunciationId": "w:relieve#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:relieve#s4",
+      "pos": "v.",
+      "glossZh": "接替（值勤者）",
+      "pronunciationId": "w:relieve#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "使图案突出",
+      "reason": "较少见的专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

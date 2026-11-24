@@ -1,0 +1,228 @@
+{
+  "entryId": "w:employ",
+  "headword": "employ",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪmˈplɔɪ/",
+    "us": "/ɪmˈplɔɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:employ#p-main",
+      "ipa": {
+        "uk": "/ɪmˈplɔɪ/",
+        "us": "/ɪmˈplɔɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "employs",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "employed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "employing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 53
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 50
+  },
+  "senses": [
+    {
+      "senseId": "w:employ#s1",
+      "pos": "v.",
+      "glossZh": "雇用",
+      "pronunciationId": "w:employ#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:employ#e-5c5a312aa8e1bb21",
+          "text": "Most magicians employ assistants.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:31",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:employ#e-22daf15dca88a6a2",
+          "text": "My life as a tax-paying employed person began in middle school, when, for three whole days, I worked in a baking factory.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:employ#e-9b362d65d3470cc9",
+          "text": "He is employed by a scientific program.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-henan-zhengzhou-2026-01-first:24",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:employ#s2",
+      "pos": "v.",
+      "glossZh": "使用",
+      "pronunciationId": "w:employ#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:employ#e-527ba5a33008adac",
+          "text": "What actually happens is that the magician, employing quick hand movements or a mechanical device, hides one ball.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:employ#e-183e601f95289660",
+          "text": "They note that adults routinely employ the same approach in various real-life situations.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:employ#e-674033494227a546",
+          "text": "Jordan Heber never imagined she would employ her talents in such a way.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:employ#s3",
+      "pos": "n.",
+      "glossZh": "雇用状态",
+      "pronunciationId": "w:employ#p-main",
+      "note": "in the employ of sb。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

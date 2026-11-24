@@ -1,0 +1,162 @@
+{
+  "entryId": "w:horrible",
+  "headword": "horrible",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈhɒrəbl/",
+    "us": "/ˈhɔːrəbl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:horrible#p-main",
+      "ipa": {
+        "uk": "/ˈhɒrəbl/",
+        "us": "/ˈhɔːrəbl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "horribler",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "horriblest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more horrible",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most horrible",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "senses": [
+    {
+      "senseId": "w:horrible#s1",
+      "pos": "adj.",
+      "glossZh": "可怕的",
+      "pronunciationId": "w:horrible#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:horrible#e-865dff5c0895de89",
+          "text": "Suddenly, a horrible crack（破碎声） disturbed the quiet.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:horrible#s2",
+      "pos": "adj.",
+      "glossZh": "糟糕透顶的",
+      "pronunciationId": "w:horrible#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:horrible#e-28777ce59fb754a6",
+          "text": "The weather is horrible.",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:horrible#e-cab680691b614d94",
+          "text": "My mother was the most horrible cook, unbelievably bad at it.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 31
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "游行中的怪诞装扮者",
+      "reason": "罕见名词用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

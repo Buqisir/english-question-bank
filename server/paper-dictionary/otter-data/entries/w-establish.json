@@ -1,0 +1,434 @@
+{
+  "entryId": "w:establish",
+  "headword": "establish",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈstæblɪʃ/",
+    "us": "/ɪˈstæblɪʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:establish#p-main",
+      "ipa": {
+        "uk": "/ɪˈstæblɪʃ/",
+        "us": "/ɪˈstæblɪʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "established",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "establishes",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "establishing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 105
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 101
+  },
+  "senses": [
+    {
+      "senseId": "w:establish#s1",
+      "pos": "v.",
+      "glossZh": "创立",
+      "pronunciationId": "w:establish#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:establish#e-98bd23ff372c3bec",
+          "text": "InSPIRE is investigating practical approaches to \"low-impact\" solar development, which focuses on establishing and operating solar farms in a way that is kinder to the land.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:establish#e-91fe36a4b0fe2679",
+          "text": "The application of SLEAP to plants has already enabled researchers to establish the most extensive catalog (目录) of plant root phenotypes to date.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:establish#e-5269101c9bb53e0b",
+          "text": "At 24, she established Meet Cute, an entertainment company specializing in short-form audio romantic comedies.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:establish#s2",
+      "pos": "v.",
+      "glossZh": "制定",
+      "pronunciationId": "w:establish#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:establish#e-5e955c836e0e1e85",
+          "text": "When you establish these guidelines, explain the reasons behind them.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:3",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:establish#e-f171fd609540f180",
+          "text": "Loan periods are established by the lending library.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:establish#e-756814d86793d544",
+          "text": "In a study published in Plant Phenomics, Busch and Pereira establish a new procedure for using SLEAP to analyze plant root phenotypes – how deep and wide they grow, how massive their root systems become, and other physical qualities.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:establish#s3",
+      "pos": "v.",
+      "glossZh": "建立（关系）",
+      "pronunciationId": "w:establish#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:establish#e-89c83edcbd135afe",
+          "text": "It’s been 33 years since Jim left the route, but we are still reminded of the deep bond established between community and letter carrier.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:establish#e-1f2c39c28f8d5dcb",
+          "text": "To establish connections with viewers.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-chongqing-nankai-2026-m2:24",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:establish#s4",
+      "pos": "v.",
+      "glossZh": "安置（居所）",
+      "pronunciationId": "w:establish#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:establish#e-d955ac276315ffba",
+          "text": "On their first trip out, they were greeted with such enthusiasm from the 10 families who’d already established homes there that they decided to join.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 99,
+            "end": 110
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:establish#s5",
+      "pos": "v.",
+      "glossZh": "证实",
+      "pronunciationId": "w:establish#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:establish#e-5a1aa1c8d26413f4",
+          "text": "Researchers have established that there are two factors that drive an individual’s motivation: the individual’s expectations about achieving the goal and the perceived value of the goal.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:establish#e-7896f767189948e0",
+          "text": "Researchers behind this study have stressed that further work is needed to establish a definitive causal link between elevated AI use and weakened brains.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 84
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:establish#s6",
+      "pos": "adj.",
+      "glossZh": "公认的",
+      "pronunciationId": "w:establish#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:establish#e-a36e82b3287f03b7",
+          "text": "The Downtown Mesa Festival of the Arts features the work of established and emerging artists, including those who create woodwork, metal crafts, food items, art, photography and gifts.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 71
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:establish#s7",
+      "pos": "adj.",
+      "glossZh": "已形成并稳定的",
+      "pronunciationId": "w:establish#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:establish#e-deccc766f40b4d1d",
+          "text": "These include encountering wildlife, walking along the edge of water, and following an established trail.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 98
+          }
+        },
+        {
+          "exampleId": "w:establish#e-ed1e7b3978870726",
+          "text": "Established matrix gardens should not need the life support we give most gardens: fertilizer, dividing, regular watering.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

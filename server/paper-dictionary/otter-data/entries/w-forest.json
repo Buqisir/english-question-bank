@@ -1,0 +1,213 @@
+{
+  "entryId": "w:forest",
+  "headword": "forest",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfɒrɪst/",
+    "us": "/ˈfɔːrɪst/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:forest#p-main",
+      "ipa": {
+        "uk": "/ˈfɒrɪst/",
+        "us": "/ˈfɔːrɪst/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "forests",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "forested",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "foresting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 30,
+    "mock": 171
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 169
+  },
+  "senses": [
+    {
+      "senseId": "w:forest#s1",
+      "pos": "n.",
+      "glossZh": "森林",
+      "pronunciationId": "w:forest#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 26,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:forest#e-2b147a70bafd5341",
+          "text": "To survive in the forest,animals must climb, jump or fly across the gaps.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:forest#e-9bfe8f06a56fa298",
+          "text": "Walking up a path through the forest towards Shutlingsloe, a local high point, I came across a small clearing and immediately noticed the dead yellow grasses set against the fresh snow.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-a:figure-8f50d0ac5d38cb0b:cell-2-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:forest#e-949fc850c4c0a5ad",
+          "text": "Students from seven different primary schools in and around the small town were warming up and walking the route(路线)through thick evergreen forest.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "writing-continuation-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 140,
+            "end": 146
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:forest#s2",
+      "pos": "n.",
+      "glossZh": "密集的一大片",
+      "pronunciationId": "w:forest#p-main",
+      "note": "常见结构 a forest of sth。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:forest#e-3e48a0984d2fb57c",
+          "text": "Sea otters spend their days looking around for food in kelp (海草) forests.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:forest#s3",
+      "pos": "v.",
+      "glossZh": "给……植树造林",
+      "pronunciationId": "w:forest#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:forest#e-dca9d5602a99d064",
+          "text": "According to tales, Nebuchadnezzar, then King of Babylon, had them built for his queen who longed for the forested mountains of her homeland.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 114
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "无环图集合",
+      "reason": "数学专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

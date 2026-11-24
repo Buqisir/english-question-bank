@@ -1,0 +1,104 @@
+{
+  "entryId": "w:bye",
+  "headword": "bye",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/baɪ/",
+    "us": "/baɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bye#p-main",
+      "ipa": {
+        "uk": "/baɪ/",
+        "us": "/baɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "byes",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:bye#s1",
+      "pos": "感叹词",
+      "glossZh": "再见",
+      "pronunciationId": "w:bye#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bye#e-301cfa6eda6c0788",
+          "text": "“Bye, sailboats,” Mom says.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 4
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bye#s2",
+      "pos": "n.",
+      "glossZh": "（比赛中）轮空",
+      "pronunciationId": "w:bye#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "板球附加得分、男孩和蜜蜂的旧拼法等",
+      "reason": "运动专用术语、方言或旧拼法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

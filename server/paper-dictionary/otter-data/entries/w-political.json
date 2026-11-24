@@ -1,0 +1,131 @@
+{
+  "entryId": "w:political",
+  "headword": "political",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pəˈlɪtɪkl/",
+    "us": "/pəˈlɪtɪkl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:political#p-main",
+      "ipa": {
+        "uk": "/pəˈlɪtɪkl/",
+        "us": "/pəˈlɪtɪkl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more political",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most political",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:political#s1",
+      "pos": "adj.",
+      "glossZh": "政治的；与政治有关的",
+      "pronunciationId": "w:political#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 19
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:political#e-d408a8f5d3713993",
+          "text": "The very first Federal Duck Stamp was designed by J.N. “Ding” Darling, a political cartoonist from Des Moines, Iowa, who at that time was appointed by President Franklin Roosevelt as Director of the Bureau of Biological Survey.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:political#e-2db4da55aac846b6",
+          "text": "Joanna Wright, a senior political science major, loves coffee and goes to the cafe at least six days a week.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:political#e-5f2e6f4ad2e463df",
+          "text": "It directly criticizes unfair political systems.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:22",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 39
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

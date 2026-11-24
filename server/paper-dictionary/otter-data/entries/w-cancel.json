@@ -1,0 +1,208 @@
+{
+  "entryId": "w:cancel",
+  "headword": "cancel",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkænsl/",
+    "us": "/ˈkænsl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:cancel#p-main",
+      "ipa": {
+        "uk": "/ˈkænsl/",
+        "us": "/ˈkænsl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "canceled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "canceling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "cancelled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "cancelling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "cancels",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 16,
+    "mock": 48
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 48
+  },
+  "senses": [
+    {
+      "senseId": "w:cancel#s1",
+      "pos": "v.",
+      "glossZh": "取消；作废",
+      "pronunciationId": "w:cancel#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cancel#e-b6ef0ccad1792543",
+          "text": "Cancel a credit card.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 6,
+              "questionId": "question:listening:6",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:cancel#e-6536420c6d821afc",
+          "text": "By cancelling the rental agreement.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2023-national-a:26",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:cancel#e-8b853dc0eed88983",
+          "text": "•The last day to cancel registration and receive a full refund(退款) is June 15.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cancel#s2",
+      "pos": "短语",
+      "glossZh": "抵消；相互抵消",
+      "pronunciationId": "w:cancel#p-main",
+      "note": "cancel out",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cancel#e-4f732939d03953c5",
+          "text": "When enough of these errors are averaged together, they cancel each other out resulting in a more accurate estimate.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 62
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cancel#s3",
+      "pos": "v.",
+      "glossZh": "约去；划掉",
+      "pronunciationId": "w:cancel#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "印刷替换页、盖销、姓氏等",
+      "reason": "行业专门用法或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

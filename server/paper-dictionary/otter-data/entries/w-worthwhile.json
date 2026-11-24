@@ -1,0 +1,131 @@
+{
+  "entryId": "w:worthwhile",
+  "headword": "worthwhile",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌwɜːθˈwaɪl/",
+    "us": "/ˌwɜːrθˈwaɪl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:worthwhile#p-main",
+      "ipa": {
+        "uk": "/ˌwɜːθˈwaɪl/",
+        "us": "/ˌwɜːrθˈwaɪl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more worthwhile",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most worthwhile",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 30
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:worthwhile#s1",
+      "pos": "adj.",
+      "glossZh": "值得花时间或精力的",
+      "pronunciationId": "w:worthwhile#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 30
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:worthwhile#e-ce558c0d54b15831",
+          "text": "Why does the author find walking with her son worthwhile?",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:26",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:worthwhile#e-d153a24d7442f028",
+          "text": "It is worthwhile to be a perfectionist",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jun:27",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:worthwhile#e-91fac00920d56ecd",
+          "text": "The ideal gym needs equipment and classes that you’ll consistently use to make it a worthwhile investment.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 101
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

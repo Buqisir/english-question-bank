@@ -1,0 +1,243 @@
+{
+  "entryId": "w:king",
+  "headword": "king",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kɪŋ/",
+    "us": "/kɪŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:king#p-main",
+      "ipa": {
+        "uk": "/kɪŋ/",
+        "us": "/kɪŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "kings",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Kings",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 65
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 59
+  },
+  "senses": [
+    {
+      "senseId": "w:king#s1",
+      "pos": "n.",
+      "glossZh": "国王",
+      "pronunciationId": "w:king#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:king#e-0612002d9b5759d9",
+          "text": "Like Troy, the ancient site of Pylos figures in the Trojan War as the home of the famous king Nestor, whose palace was discovered there nearly a century ago.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:king#e-185936c2b570372f",
+          "text": "In 1824, King Liholiho voyaged from the North Pacific to seek an alliance (结盟) with the British Crown, a turning point for his kingdom.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:king#e-4898b3735771f677",
+          "text": "Do you know a teacher who makes history come alive – who can turn dusty dates into living stories, and bring kings, queens and battles vividly to life in the classroom?",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 114
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:king#s2",
+      "pos": "n.",
+      "glossZh": "最杰出的人或事物",
+      "pronunciationId": "w:king#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:king#e-cbcaf55f58675ffa",
+          "text": "This happened over and over, but we soon learned to identify different grasses like cockleburs, lamb's-quarters, foxtails, and the king of weeds, the pretty purple thistle.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 131,
+            "end": 135
+          }
+        },
+        {
+          "exampleId": "w:king#e-9786b2e576eba8c7",
+          "text": "If Kitchener Road must keep its name, I’d prefer to imagine they honor the “King of Calypso,” not the colonial butcher.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 80
+          }
+        },
+        {
+          "exampleId": "w:king#e-cddead2da054b008",
+          "text": "I recalled the excitement I had felt as a postdoc, when __51__ was king for me.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:cloze:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 71
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:king#s3",
+      "pos": "n.",
+      "glossZh": "（国际象棋）王",
+      "pronunciationId": "w:king#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:king#e-30d1b22ef49ee55e",
+          "text": "He taught me about all the pieces and showed me how they moved: the king could move one square in any direction, and the game was won by trapping him; pawns(兵) moved straight forward; knights(马) moved in an L-shape and could leap over other pieces...",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 72
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏、店名、地名",
+      "reason": "专名，g1、m4、m7、m9 留空"
+    },
+    {
+      "glossZh": "雄蜻蜓、通话代号、图论用法",
+      "reason": "专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

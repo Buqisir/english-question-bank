@@ -1,0 +1,216 @@
+{
+  "entryId": "w:transform",
+  "headword": "transform",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/trænsˈfɔːm/",
+    "us": "/trænsˈfɔːrm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:transform#p-main",
+      "ipa": {
+        "uk": "/trænsˈfɔːm/",
+        "us": "/trænsˈfɔːrm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "transformed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "transforming",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "transforms",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 136
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 133
+  },
+  "senses": [
+    {
+      "senseId": "w:transform#s1",
+      "pos": "v.",
+      "glossZh": "彻底改变",
+      "pronunciationId": "w:transform#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:transform#e-5e35deb88a85d35f",
+          "text": "I learned a lot about how to extend the life of objects and transform them into something new and useful.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:transform#e-8993228f5f32b945",
+          "text": "New power machinery and artificial fertilizers(化肥)have now totally transformed a way of life that started in the Stone Age.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:grammar-fill:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:transform#e-2e8e9c2c055ed49d",
+          "text": "AI transforms a standard museum trip into a personalized and interactive adventure.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:transform#s2",
+      "pos": "v.",
+      "glossZh": "发生彻底变化",
+      "pronunciationId": "w:transform#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:transform#e-d5d5effaf5460d4d",
+          "text": "Since ChatGPT’s release three years ago, Artificial Intelligence (AI) has rapidly transformed from an online novelty into essential infrastructure (基础设施).",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:transform#e-2ad535bd2f097fa4",
+          "text": "So why do children transform from fearless learners into strategic avoiders?",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:transform#e-2a88dc2de3e49e9d",
+          "text": "Slowly, my fear transformed into __52__",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:cloze:3",
+              "sentence": 14
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 27
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "数学中的变换结果及专业操作",
+      "reason": "专业义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

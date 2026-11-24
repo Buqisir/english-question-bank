@@ -1,0 +1,292 @@
+{
+  "entryId": "w:used",
+  "headword": "used",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/juːst/",
+    "us": "/juːst/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:used#p-main",
+      "ipa": {
+        "uk": "/juːst/",
+        "us": "/juːst/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:used#p-secondhand",
+      "ipa": {
+        "uk": "/juːzd/",
+        "us": "/juːzd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "二手的"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more used",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most used",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 62,
+    "mock": 512
+  },
+  "unassignedCounts": {
+    "gaokao": 45,
+    "mock": 511
+  },
+  "senses": [
+    {
+      "senseId": "w:used#s1",
+      "pos": "adj.",
+      "glossZh": "二手的",
+      "pronunciationId": "w:used#p-secondhand",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:used#e-9281e8c7527eca52",
+          "text": "But one question has been on my mind a lot lately: is it better to buy new eco-friendly products or used traditionally produced goods?",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:used#e-9fc37bc4f1cb6e81",
+          "text": "Things like dishes, clothes and furniture fall into the “secondary footprint” group, so less is more and we can focus on finding used goods to avoid the added production.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 129,
+            "end": 133
+          }
+        },
+        {
+          "exampleId": "w:used#e-46dc7ea6921495d2",
+          "text": "It’s the best way to get rid of your used clothes, score clothes from your friends, and have a party all at the same time.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:used#s2",
+      "pos": "adj.",
+      "glossZh": "习惯于",
+      "pronunciationId": "w:used#p-main",
+      "note": "be/get used to sth 或 doing sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:used#e-4f17b7abfc1825ea",
+          "text": "While the younger generations prefer to communicate visually, for those used to working with traditional tools like email, it may feel like a learning curve(曲线).",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:used#e-b4e452e3e8d130e6",
+          "text": "Little by little, these different kinds of life got used to one another and formed their own ecosystem.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:used#e-f6cc18e397495740",
+          "text": "As an enthusiastic rock climber, Sam was used to occasional minor injuries.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 41,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:used#s3",
+      "pos": "短语",
+      "glossZh": "过去常常",
+      "pronunciationId": "w:used#p-main",
+      "note": "used to do sth，否定和疑问句中常用 use to。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:used#e-09a88b5eaea721f9",
+          "text": "\"There’s something about me,\" he thought – and it took him a few seconds but he finally remembered what she used to look like.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 112
+          }
+        },
+        {
+          "exampleId": "w:used#e-e73ea6b7c2ec146b",
+          "text": "She said: “I used to keep hens when I was younger and had to prepare their breakfast each morning before I went to school.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "reading-c-3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:used#e-9efa43400bcc8919",
+          "text": "My parents used to live here and my father’s watch was here,” he explained, trying to lift a floorboard.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "use 的过去式或普通过去分词",
+      "reason": "屈折形式归 use"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

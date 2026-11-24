@@ -1,0 +1,164 @@
+{
+  "entryId": "w:fee",
+  "headword": "fee",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fiː/",
+    "us": "/fiː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fee#p-main",
+      "ipa": {
+        "uk": "/fiː/",
+        "us": "/fiː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "fees",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 111
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 111
+  },
+  "senses": [
+    {
+      "senseId": "w:fee#s1",
+      "pos": "n.",
+      "glossZh": "需缴纳的费用",
+      "pronunciationId": "w:fee#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fee#e-67c9ff51f2bcbce7",
+          "text": "Pay a registration fee.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2021-ii:21",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:fee#e-58df5234db07e089",
+          "text": ", return it with your annual membership fee in the attached envelope, and begin enjoying your benefits immediately.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:fee#e-a5ae30587ad6c49c",
+          "text": "Pay an extra fee for delivery.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:22",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fee#s2",
+      "pos": "n.",
+      "glossZh": "专业服务报酬",
+      "pronunciationId": "w:fee#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fee#e-4f4e8e2499d0d1c7",
+          "text": "The artist fee for this project is $400.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 14
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "可继承的土地权益",
+      "reason": "历史法律义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

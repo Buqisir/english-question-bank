@@ -1,0 +1,187 @@
+{
+  "entryId": "w:bath",
+  "headword": "bath",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bɑːθ/",
+    "us": "/bæθ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bath#p-main",
+      "ipa": {
+        "uk": "/bɑːθ/",
+        "us": "/bæθ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "baths",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "bathed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "bathing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 17
+  },
+  "senses": [
+    {
+      "senseId": "w:bath#s1",
+      "pos": "n.",
+      "glossZh": "洗澡；泡澡",
+      "pronunciationId": "w:bath#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bath#e-8eee1db14b9b73ae",
+          "text": "They moved in with a local family, the Harrisons, and, like them, had little privacy, rare baths, and a blanket of snow on their quilt when they woke up in the morning.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:bath#e-c09f0df67fd78da3",
+          "text": "It needs a bath.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:listening.long-form",
+            "locator": {
+              "question": 10,
+              "questionId": "question:listening:10",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:bath#e-a26343e3c0398945",
+          "text": "After a day outdoors, guests can enjoy traditional hot spring baths.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期中质量监测英语试题",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-12-senior-three-first-semester-midterm-quality-monitoring:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 67
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bath#s2",
+      "pos": "n.",
+      "glossZh": "浴缸",
+      "pronunciationId": "w:bath#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:bath#s3",
+      "pos": "n.",
+      "glossZh": "浸泡液；浸浴处理",
+      "pronunciationId": "w:bath#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:bath#s4",
+      "pos": "v.",
+      "glossZh": "给……洗澡",
+      "pronunciationId": "w:bath#p-main",
+      "note": "英式用法。美式通常用 bathe。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "bathe 的屈折形；英国巴斯等地名；古希伯来容量单位",
+      "reason": "另一个词、专名或历史用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

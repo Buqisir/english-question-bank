@@ -1,0 +1,74 @@
+{
+  "entryId": "w:entitle",
+  "headword": "entitle",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪnˈtaɪtl/",
+    "us": "/ɪnˈtaɪtl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:entitle#p-main",
+      "ipa": {
+        "uk": "/ɪnˈtaɪtl/",
+        "us": "/ɪnˈtaɪtl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:entitle#s1",
+      "pos": "v.",
+      "glossZh": "使有权享有",
+      "pronunciationId": "w:entitle#p-main",
+      "note": "entitle sb to sth 或 entitle sb to do sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:entitle#s2",
+      "pos": "v.",
+      "glossZh": "给（作品）取名",
+      "pronunciationId": "w:entitle#p-main",
+      "note": "多用于过去分词 entitled。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

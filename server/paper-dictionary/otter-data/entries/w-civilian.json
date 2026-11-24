@@ -1,0 +1,105 @@
+{
+  "entryId": "w:civilian",
+  "headword": "civilian",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/səˈvɪliən/",
+    "us": "/səˈvɪliən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:civilian#p-main",
+      "ipa": {
+        "uk": "/səˈvɪliən/",
+        "us": "/səˈvɪliən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "civilians",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:civilian#s1",
+      "pos": "n.",
+      "glossZh": "平民；非军人",
+      "pronunciationId": "w:civilian#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:civilian#e-2e6779e3ddc49ce7",
+          "text": "It was addictive for civilians.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:civilian#s2",
+      "pos": "adj.",
+      "glossZh": "平民的；民用的",
+      "pronunciationId": "w:civilian#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "民法学者、民法专业学生等",
+      "reason": "少见专称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

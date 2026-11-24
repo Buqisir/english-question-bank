@@ -1,0 +1,273 @@
+{
+  "entryId": "w:buy",
+  "headword": "buy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/baɪ/",
+    "us": "/baɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:buy#p-main",
+      "ipa": {
+        "uk": "/baɪ/",
+        "us": "/baɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "buys",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "bought",
+      "tags": [
+        "past",
+        "participle",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "buying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 68,
+    "mock": 354
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 352
+  },
+  "senses": [
+    {
+      "senseId": "w:buy#s1",
+      "pos": "v.",
+      "glossZh": "买；购买",
+      "pronunciationId": "w:buy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 67,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:buy#e-5b26a2e384c116fc",
+          "text": "A housewarming party is a special party to be held when someone buys or moves into a new apartment or house.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:buy#e-24976eb6c6963bfe",
+          "text": "You can buy your ticket in a MacBike shop or book online.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-a",
+            "locator": {
+              "paragraph": 22,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:buy#e-d2ed3b97bd8283d3",
+          "text": "When I decided to buy a house in Europe ten years ago, I didn’t think too long.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:buy#s2",
+      "pos": "v.",
+      "glossZh": "替某人付钱买；请客",
+      "pronunciationId": "w:buy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:buy#e-5190c80d70cacfac",
+          "text": "In the cafe, the couple bought Emily a hot chocolate and listened patiently as she explained her desperate situation: she was about a hundred miles from her destination, her car was completely stuck, and her entire holiday plan could be ruined.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:buy#e-450804c4e0c8c0f7",
+          "text": "Buy her a coffee.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 3
+          }
+        },
+        {
+          "exampleId": "w:buy#e-915df75ccdd98710",
+          "text": "Soon enough she is transported to the playground of her youth, offering cheerfully-recalled anecdotes from when she learnt double dutch with friends as her mother could not afford to buy her a Sindy doll.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 183,
+            "end": 186
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:buy#s3",
+      "pos": "n.",
+      "glossZh": "买到的东西；合算的东西",
+      "pronunciationId": "w:buy#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:buy#s4",
+      "pos": "v.",
+      "glossZh": "相信；接受（说法）",
+      "pronunciationId": "w:buy#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:buy#s5",
+      "pos": "v.",
+      "glossZh": "收买；贿赂",
+      "pronunciationId": "w:buy#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:buy#s6",
+      "pos": "v.",
+      "glossZh": "争取；换取（时间等）",
+      "pronunciationId": "w:buy#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "用大幅加注虚张声势",
+      "reason": "扑克专业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

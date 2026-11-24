@@ -1,0 +1,571 @@
+{
+  "entryId": "w:hit",
+  "headword": "hit",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/hɪt/",
+    "us": "/hɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:hit#p-main",
+      "ipa": {
+        "uk": "/hɪt/",
+        "us": "/hɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "hits",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "HITs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "hitting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 17,
+    "mock": 165
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 157
+  },
+  "senses": [
+    {
+      "senseId": "w:hit#s1",
+      "pos": "v.",
+      "glossZh": "撞上；碰到",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-f89a402ef761ba6d",
+          "text": "I took advantage of my brief __39__ to dash across the lawn（草坪）-- and hit a large maple tree!",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:cloze:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:hit#e-ee80d58410ed1232",
+          "text": "When sunlight hits the water droplets in the air, the white light splits into a spectrum of colors that bend at different angles.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:hit#e-df060e2153d4f035",
+          "text": "Their fronts are taller than other cars’ and this is bad news for cyclists and pedestrians if one of these cars hits you.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 112,
+            "end": 116
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hit#s2",
+      "pos": "v.",
+      "glossZh": "击打",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-becfd18b6577c4f0",
+          "text": "We yelled at the bear, hit pots hard, and fired blank shotgun shells into the air.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:hit#e-cf4faa5cad755c17",
+          "text": "Summers in the mid-70s were spent at home shooting baskets, hitting a baseball, or throwing a football, preparing for my future as a quarterback on a football team.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:hit#e-f10aa7db5c9b49b5",
+          "text": "Pairs of opponents hit the ball back and forth until one winner comes out from all who entered.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hit#s3",
+      "pos": "v.",
+      "glossZh": "袭击；使受损",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-79551c4a8e751e5b",
+          "text": "A flood had hit the area earlier that year and the __44__ it caused had driven away a number of birds.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:hit#e-077d2d1e41cdf138",
+          "text": "The downturn hit the real estate（房地产） firm where she had worked for ten years as an office manager.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:hit#e-bc334bf48d84423f",
+          "text": "On September 7, 1991, the costliest hailstorm(雹暴) in Canadian history hit Calgary’s southern suburbs.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hit#s4",
+      "pos": "v.",
+      "glossZh": "遇到（难题）",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-9dee5f47a64424db",
+          "text": "You’ll hit roadblocks, and you’ll feel discouraged at times.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-ii:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hit#s5",
+      "pos": "短语",
+      "glossZh": "使人深切明白（某事）",
+      "pronunciationId": "w:hit#p-main",
+      "note": "hit home。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-a73f2eb43c224050",
+          "text": "This hit home for me as I was sitting with my 2-year-old grandson on a sofa over the Spring Festival holiday.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:hit#e-8caffdb9b4d8952d",
+          "text": "The realization that this is a precious land, to be respected by humans, was one of the biggest things that hit home to Ginni.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 111
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hit#s6",
+      "pos": "v.",
+      "glossZh": "达到（数字或限度）",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-7aae46930d7f098c",
+          "text": "Meanwhile, it’s estimated that literary tourism may hit $3.3bn by 2034.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:hit#e-c5e219d57d92723a",
+          "text": "Second, conventional lithium batteries, which rely on graphite anodes（石墨负极）, are rapidly hitting their energy limit of 300 watt-hours per kilogram, which falls short of the ever-increasing demands of electric vehicles.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 96
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hit#s7",
+      "pos": "v.",
+      "glossZh": "突然强烈地影响",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-d288412c3e7ddab9",
+          "text": "Panic hit me out of nowhere.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:hit#e-14261cd63bf12585",
+          "text": "I didn’t expect her quitting to hit me so hard or so suddenly.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-b:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hit#s8",
+      "pos": "短语",
+      "glossZh": "偶然想到",
+      "pronunciationId": "w:hit#p-main",
+      "note": "hit on an idea。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-430ae6a471121bc0",
+          "text": "It was during one visit that Andrew hit on the perfect idea: The animal shelter had 40 dog kennels that were always full.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hit#s9",
+      "pos": "v.",
+      "glossZh": "按下（按钮）",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hit#e-22232c53fb64d520",
+          "text": "Next time you’re about to hit “share” on a post or accept a “fact” as true, stop for 10 seconds.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hit#s10",
+      "pos": "n.",
+      "glossZh": "大受欢迎的人或事物",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:hit#s11",
+      "pos": "n.",
+      "glossZh": "击中",
+      "pronunciationId": "w:hit#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "一剂毒品、雇凶杀人、棒球安打",
+      "reason": "俚语或体育专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

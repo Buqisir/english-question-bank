@@ -1,0 +1,130 @@
+{
+  "entryId": "w:university",
+  "headword": "university",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌjuːnɪˈvɜːsəti/",
+    "us": "/ˌjuːnɪˈvɜːrsəti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:university#p-main",
+      "ipa": {
+        "uk": "/ˌjuːnɪˈvɜːsəti/",
+        "us": "/ˌjuːnɪˈvɜːrsəti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "universities",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 56,
+    "mock": 397
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 397
+  },
+  "senses": [
+    {
+      "senseId": "w:university#s1",
+      "pos": "n.",
+      "glossZh": "大学",
+      "pronunciationId": "w:university#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 55,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:university#e-8e395c99f2826ae6",
+          "text": "That willpower bore fruit when Jennifer graduated from University of Wisconsin-Eau Claire and became the first in her large family to earn a bachelor's degree.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:university#e-c737297281d1f91b",
+          "text": "They had driven their son several hours out of town to the university where he would soon be living and studying.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:university#e-03c6c87d68f25bef",
+          "text": "He was trained in it at university.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2024-i:25",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 34
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "University Blvd",
+      "reason": "街名的一部分，无法据此判断大学指称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

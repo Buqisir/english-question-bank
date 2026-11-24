@@ -1,0 +1,229 @@
+{
+  "entryId": "w:interaction",
+  "headword": "interaction",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌɪntərˈækʃn/",
+    "us": "/ˌɪntərˈækʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:interaction#p-main",
+      "ipa": {
+        "uk": "/ˌɪntərˈækʃn/",
+        "us": "/ˌɪntərˈækʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "interactions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 22,
+    "mock": 147
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 145
+  },
+  "senses": [
+    {
+      "senseId": "w:interaction#s1",
+      "pos": "n.",
+      "glossZh": "交流；互动",
+      "pronunciationId": "w:interaction#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 19,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:interaction#e-36420ae772febe2e",
+          "text": "Indeed, the researchers found that face-to-face interactions and conversations affect the creative process, and yet a coworking space or a coffee shop provides a certain level of noise while also providing freedom from interruptions.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:interaction#e-3b55e24861fc6e75",
+          "text": "Social interaction has been shown to lift mood(情绪) and get people thinking in new directions and in ways that could help improve any post-lunch effort.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:interaction#e-7a0b10d8f5754c25",
+          "text": "The chief complaint about online courses is that they lack human interaction.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 76
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:interaction#s2",
+      "pos": "n.",
+      "glossZh": "相互作用",
+      "pronunciationId": "w:interaction#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:interaction#e-0ba23c094375b87b",
+          "text": "Physiologically, ticklishness arises from interactions between sensory nerves and the brain.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:interaction#e-961aa5db4fb7a8c6",
+          "text": "Complex collective motions arise just from simple interactions.” Even more surprising, the synchronization adapts.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-d:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 62
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:interaction#s3",
+      "pos": "n.",
+      "glossZh": "与外界的接触",
+      "pronunciationId": "w:interaction#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:interaction#e-8306a0631d090afc",
+          "text": "They surveyed several hundred park-goers, asking them to submit a written summary online of a meaningful interaction they had with nature in the park.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 116
+          }
+        },
+        {
+          "exampleId": "w:interaction#e-153619df68edd57f",
+          "text": "“We’re trying to generate a language that helps bring the human-nature interactions back into our daily lives.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 83
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,243 @@
+{
+  "entryId": "w:charm",
+  "headword": "charm",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tʃɑːm/",
+    "us": "/tʃɑːrm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:charm#p-main",
+      "ipa": {
+        "uk": "/tʃɑːm/",
+        "us": "/tʃɑːrm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "charms",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "charmed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "charming",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 48
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 42
+  },
+  "senses": [
+    {
+      "senseId": "w:charm#s1",
+      "pos": "n.",
+      "glossZh": "魅力；吸引力",
+      "pronunciationId": "w:charm#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:charm#e-d021b7e415bb6e44",
+          "text": "Enter DIY oven-bake clay garden markers – these little lifesavers aren’t just practical; they also add a special charm to your greenery.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 113,
+            "end": 118
+          }
+        },
+        {
+          "exampleId": "w:charm#e-afa698407c15fa7a",
+          "text": "Ted’s charm has won over many in the audience, particularly the older ladies.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:charm#e-f153bbac207b9893",
+          "text": "Martha’s Vineyard, with its rich history, scenic landscapes, and distinct charm, is the perfect destination for a day trip.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:charm#s2",
+      "pos": "v.",
+      "glossZh": "吸引；使着迷",
+      "pronunciationId": "w:charm#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:charm#e-281549aeda6f12e8",
+          "text": "Yet, she was extremely charmed.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:cloze:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:charm#e-1be30cb0048ee3cd",
+          "text": "Viewers were not only charmed by the bond between the woman and her dog but also impressed by her dedication and positive attitude.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:charm#s3",
+      "pos": "n.",
+      "glossZh": "小挂件",
+      "pronunciationId": "w:charm#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:charm#e-f91c9b6726b6267c",
+          "text": "Popular among fashion celebrities, Labubu, a small, bunny-like toy with a doll’s face produced by Pop Mart, has become a street style item as bag charms since 2024.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 146,
+            "end": 152
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:charm#s4",
+      "pos": "n.",
+      "glossZh": "护身符；魔咒",
+      "pronunciationId": "w:charm#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "魅数、期权敏感度、金翅雀群等",
+      "reason": "物理、金融术语或冷僻用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

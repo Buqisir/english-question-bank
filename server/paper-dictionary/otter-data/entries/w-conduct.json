@@ -1,0 +1,280 @@
+{
+  "entryId": "w:conduct",
+  "headword": "conduct",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kənˈdʌkt/",
+    "us": "/kənˈdʌkt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:conduct#p-main",
+      "ipa": {
+        "uk": "/kənˈdʌkt/",
+        "us": "/kənˈdʌkt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "动词"
+    },
+    {
+      "pronunciationId": "w:conduct#p-noun",
+      "ipa": {
+        "uk": "/ˈkɒndʌkt/",
+        "us": "/ˈkɑːndʌkt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "名词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "conducts",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "conducted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "conducting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 127
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 125
+  },
+  "senses": [
+    {
+      "senseId": "w:conduct#s1",
+      "pos": "v.",
+      "glossZh": "进行；实施；主持",
+      "pronunciationId": "w:conduct#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 19,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:conduct#e-63f1c535728d98f1",
+          "text": "To test the effect of social influence on eating habits, the researchers conducted two experiments.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:conduct#e-8559ddc3068bf959",
+          "text": "Conducting an interview.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:conduct#e-3d46027952936ce8",
+          "text": "If we’re covering friction, for example, I bring different tires (轮胎) into my classroom so that my students can conduct lab experiments with them to see how friction works in real-life applications.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 112,
+            "end": 119
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:conduct#s2",
+      "pos": "v.",
+      "glossZh": "传导（电、热等）",
+      "pronunciationId": "w:conduct#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:conduct#e-98cd325415c3f255",
+          "text": "By conducting current in a salt-containing liquid.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-fujian-2026-04-provincial-quality-test-a1:33",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:conduct#e-8564dd2886e56692",
+          "text": "The supercapacitor’s core lies in carbon black’s high ability to conduct electricity.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:conduct#s3",
+      "pos": "v.",
+      "glossZh": "指挥（乐队等）",
+      "pronunciationId": "w:conduct#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:conduct#s4",
+      "pos": "v.",
+      "glossZh": "引导；带领",
+      "pronunciationId": "w:conduct#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:conduct#s5",
+      "pos": "v.",
+      "glossZh": "举止；表现",
+      "pronunciationId": "w:conduct#p-main",
+      "note": "常用 conduct oneself。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:conduct#s6",
+      "pos": "n.",
+      "glossZh": "行为；举止",
+      "pronunciationId": "w:conduct#p-noun",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:conduct#s7",
+      "pos": "n.",
+      "glossZh": "组织；进行；管理",
+      "pronunciationId": "w:conduct#p-noun",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "受聘牧师、情节发展",
+      "reason": "古旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,264 @@
+{
+  "entryId": "w:desert",
+  "headword": "desert",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdezət/",
+    "us": "/ˈdezərt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:desert#p-main",
+      "ipa": {
+        "uk": "/ˈdezət/",
+        "us": "/ˈdezərt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:desert#p-verb",
+      "ipa": {
+        "uk": "/dɪˈzɜːt/",
+        "us": "/dɪˈzɜːrt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "动词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "deserts",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "deserted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "deserting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 45
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 41
+  },
+  "senses": [
+    {
+      "senseId": "w:desert#s1",
+      "pos": "n.",
+      "glossZh": "沙漠；荒漠；缺乏某事物的地方",
+      "pronunciationId": "w:desert#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:desert#e-9825f46500ba448c",
+          "text": "I wanted to stop the Sahara Desert in its tracks.” A decrease in average rainfall and an increase in the severity of droughts (干旱) have led to an estimated 75 per cent of Tunisia’s agricultural lands being threatened by desertification.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:desert#e-c37bf674d540c1cc",
+          "text": "While taking a 20-hour train ride along the edge of the Taklimakan Desert in northwestern China, I had the kind of humbling, educational, and above all else, wonderful __41__ with a local that all travelers long for.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:desert#e-5e256c5255845b67",
+          "text": "Many large museums are unfortunately located in restaurant deserts, where quality food is hard to find.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:desert#s2",
+      "pos": "v.",
+      "glossZh": "抛弃；遗弃；擅离（职守）",
+      "pronunciationId": "w:desert#p-verb",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:desert#e-5c4dd68722b78734",
+          "text": "In the evening, I paced in front of the art building, glancing at the vast and empty sports field deserted by sports fans.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 106
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:desert#s3",
+      "pos": "adj.",
+      "glossZh": "空无一人的；被遗弃的",
+      "pronunciationId": "w:desert#p-verb",
+      "note": "deserted。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:desert#e-ac733f939ee6b3f8",
+          "text": "It was already getting dark and the streets were nearly deserted.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:desert#e-ef4c229450695d91",
+          "text": "No way was I going to stop for a suspicious stranger on a deserted street.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:writing-continuation:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:desert#e-4521a84aa8ac7ff2",
+          "text": "They planned to turn a piece of deserted land into a community farm, but they faced issues like soil toxins and water access.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 40
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "应得的惩罚或报偿；dessert 的旧拼法",
+      "reason": "前者限于 just deserts 等固定形式，后者是旧拼写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

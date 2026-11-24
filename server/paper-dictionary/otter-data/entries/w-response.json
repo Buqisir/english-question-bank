@@ -1,0 +1,272 @@
+{
+  "entryId": "w:response",
+  "headword": "response",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈspɒns/",
+    "us": "/rɪˈspɑːns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:response#p-main",
+      "ipa": {
+        "uk": "/rɪˈspɒns/",
+        "us": "/rɪˈspɑːns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "responses",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 184
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 181
+  },
+  "senses": [
+    {
+      "senseId": "w:response#s1",
+      "pos": "n.",
+      "glossZh": "答复",
+      "pronunciationId": "w:response#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:response#e-294a82d4097c0ade",
+          "text": "A couple of years ago film-maker David Bond realised that his children, then aged five and three, were attached to screens to the point where he was able to say “chocolate” into his three-year-old son’s ear without getting a response.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 225,
+            "end": 233
+          }
+        },
+        {
+          "exampleId": "w:response#e-832c92352dca4365",
+          "text": "You might think about posting what you are looking for on social media, but it probably won’t result in a useful response.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "seven-choices-4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 113,
+            "end": 121
+          }
+        },
+        {
+          "exampleId": "w:response#e-666a615e1d40fee7",
+          "text": "So I turned to Cora, an app that uses A. I. to protect users from messages that don’t genuinely require a response.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 114
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:response#s2",
+      "pos": "n.",
+      "glossZh": "反应",
+      "pronunciationId": "w:response#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:response#e-c4ee0842f27c22c0",
+          "text": "Simple and relatively harmless household objects can draw extreme fear responses from a bird.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 80
+          }
+        },
+        {
+          "exampleId": "w:response#e-20ebdc119450051d",
+          "text": "We are tempted by sugary treats because our ancestors lived in a calorie-poor world, and our brains developed a response mechanism to these treats that reflected their value-a feeling of reward and satisfaction.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 112,
+            "end": 120
+          }
+        },
+        {
+          "exampleId": "w:response#e-387fd61b27979f8f",
+          "text": "A similar process is at work in our response to information.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:response#s3",
+      "pos": "短语",
+      "glossZh": "作为对……的反应",
+      "pronunciationId": "w:response#p-main",
+      "note": "in response to。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:response#e-e025451b144c550d",
+          "text": "Since the effects were small, this may suggest that our creative thinking does not differ that much in response to total silence and 85 decibels of background noise.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 103,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:response#e-6007e76959173ca0",
+          "text": "Humans come up with them in response to a changing world.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:reading-c:1",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:response#e-3e5b602c10a53362",
+          "text": "His most remarkable and politically charged work was “Guernica”, produced in response to the Spanish Civil War when the town suffered a horrifying bombing.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 85
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "礼拜中的应答词句",
+      "reason": "宗教专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

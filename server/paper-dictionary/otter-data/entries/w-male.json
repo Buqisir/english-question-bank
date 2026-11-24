@@ -1,0 +1,328 @@
+{
+  "entryId": "w:male",
+  "headword": "male",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/meɪl/",
+    "us": "/meɪl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:male#p-main",
+      "ipa": {
+        "uk": "/meɪl/",
+        "us": "/meɪl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "maler",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "malest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more male",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most male",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "males",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 32
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 26
+  },
+  "senses": [
+    {
+      "senseId": "w:male#s1",
+      "pos": "adj.",
+      "glossZh": "男性的",
+      "pronunciationId": "w:male#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:male#e-d1bea41a5a970e1b",
+          "text": "With an increasing number of male chefs on TV, it’s no longer “uncool” for boys to like cooking.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:3",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:male#e-5c9e4086d5376cdb",
+          "text": "Participants – 72 healthy male and female adults – were first asked to perform a computer test that challenged their visual and spatial learning.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:male#e-dd008728b8f92b8f",
+          "text": "For example, participants said they would be less likely to buy a genderless voice assistant than versions with male or female voices.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 112,
+            "end": 116
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:male#s2",
+      "pos": "adj.",
+      "glossZh": "雄性的",
+      "pronunciationId": "w:male#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:male#e-8d92bc6fc2a8b8c7",
+          "text": "As Elli and I cooked dinner, a young male polar bear who was playing in a nearby lake sniffed, and smelled our garlic bread.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:male#e-2b8f8442851a9b4d",
+          "text": "Researchers from the University of Buenos Aires have successfully used a robotic tutor to teach the male chingolo, a kind of small bird in South America, a song that was once part of the species’ culture but had been lost for more than half a century.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:male#e-b5f4a7376141a81b",
+          "text": "Scientists also obtained more than 1,700 roars from collars worn by five male lions in the Zimbabwean Bubye Valley Conservancy (BVC).",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey",
+            "paperTitle": "青岛市2026年1月高三年级部分学生调研检测 高三英语 适应性试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-01-senior-three-partial-student-survey:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 77
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:male#s3",
+      "pos": "n.",
+      "glossZh": "雄性动物",
+      "pronunciationId": "w:male#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:male#e-448289513353a74f",
+          "text": "This was particularly important for female otters, since they’re smaller than males and aren’t able to bite down with as much force.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:male#e-aaad0c7a13dfab3b",
+          "text": "We’d just watched a remarkable standoff: lionesses baring teeth and muscle to a dominant male who’d wandered too close.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 89,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:male#e-560bebbc1370b48d",
+          "text": "It wasn’t until late that afternoon that we remembered our two ducks, a male and a female, were still at our poorly-built small farm.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 76
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:male#s4",
+      "pos": "n.",
+      "glossZh": "男性",
+      "pronunciationId": "w:male#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:male#e-6f125d39dcf42098",
+          "text": "Advanced athletes often boast scores above 60, while an average 40-year-old male scores around 40.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 80
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "带 F 因子的、插入式接头",
+      "reason": "专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,298 @@
+{
+  "entryId": "w:application",
+  "headword": "application",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌæplɪˈkeɪʃn/",
+    "us": "/ˌæplɪˈkeɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:application#p-main",
+      "ipa": {
+        "uk": "/ˌæplɪˈkeɪʃn/",
+        "us": "/ˌæplɪˈkeɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "applications",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 15,
+    "mock": 216
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 213
+  },
+  "senses": [
+    {
+      "senseId": "w:application#s1",
+      "pos": "n.",
+      "glossZh": "应用；运用；用途",
+      "pronunciationId": "w:application#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:application#e-24e8a625487aa6f3",
+          "text": "What makes the application of drones to rail lines possible?",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2022-national-b:28",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:application#e-42e3b2c563c2cdf3",
+          "text": "If we’re covering friction, for example, I bring different tires (轮胎) into my classroom so that my students can conduct lab experiments with them to see how friction works in real-life applications.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 185,
+            "end": 197
+          }
+        },
+        {
+          "exampleId": "w:application#e-1fc15afda0bfe9c9",
+          "text": "The application of SLEAP to plants has already enabled researchers to establish the most extensive catalog (目录) of plant root phenotypes to date.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:application#s2",
+      "pos": "n.",
+      "glossZh": "申请；申请材料",
+      "pronunciationId": "w:application#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:application#e-a5e2b8e9b776fe4d",
+          "text": "Which of the following meets the application requirements?",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2026-zhejiang-jan:23",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:application#e-caafde5effb6b28c",
+          "text": "Applying takes time, so don't do it unless you’re seriously considering the school – that time could be better spent on your college applications and internships(实习).",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 133,
+            "end": 145
+          }
+        },
+        {
+          "exampleId": "w:application#e-693345ca72e6638d",
+          "text": "Sending her application form.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:application#s3",
+      "pos": "n.",
+      "glossZh": "应用程序",
+      "pronunciationId": "w:application#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:application#e-09ecd08ce8114e6a",
+          "text": "Apps (short for applications) are becoming increasingly popular nowadays, and for good reason.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:application#e-81fe19687f5ebe84",
+          "text": "“With the rise of technology it is easy for people to make observations of different species with the aid of a mobile application,” said Barnabas Daru, who is lead author of the study and assistant professor of biology in the Stanford School of Humanities and Sciences.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 118,
+            "end": 129
+          }
+        },
+        {
+          "exampleId": "w:application#e-53e0c5fd9fa92a55",
+          "text": "With appropriate initial support, learners can apply the same principles to independent study using digital tools, authentic materials, or language-learning applications.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 164,
+            "end": 176
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:application#s4",
+      "pos": "n.",
+      "glossZh": "涂敷；施用",
+      "pronunciationId": "w:application#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:application#s5",
+      "pos": "n.",
+      "glossZh": "专心；勤奋",
+      "pronunciationId": "w:application#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "贴布绣、参数代入、顺从",
+      "reason": "专门用法或过时义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

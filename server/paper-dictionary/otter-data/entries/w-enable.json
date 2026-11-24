@@ -1,0 +1,168 @@
+{
+  "entryId": "w:enable",
+  "headword": "enable",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈneɪbl/",
+    "us": "/ɪˈneɪbl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:enable#p-main",
+      "ipa": {
+        "uk": "/ɪˈneɪbl/",
+        "us": "/ɪˈneɪbl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "enabled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "enables",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "enabling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 15,
+    "mock": 104
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 104
+  },
+  "senses": [
+    {
+      "senseId": "w:enable#s1",
+      "pos": "v.",
+      "glossZh": "使能够",
+      "pronunciationId": "w:enable#p-main",
+      "note": "enable sb/sth to do sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:enable#e-7f80f97c3c730440",
+          "text": "Giving employees the tools enables them to communicate honestly",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-national-ii:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:enable#e-ac3f0b953bd25e75",
+          "text": "The position enabled us to look over the lake with the sunset in the background.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:enable#e-949dca89aaf8799a",
+          "text": "The application of SLEAP to plants has already enabled researchers to establish the most extensive catalog (目录) of plant root phenotypes to date.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:enable#s2",
+      "pos": "v.",
+      "glossZh": "启用（功能）",
+      "pronunciationId": "w:enable#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:enable#s3",
+      "pos": "v.",
+      "glossZh": "助长（不当行为）",
+      "pronunciationId": "w:enable#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

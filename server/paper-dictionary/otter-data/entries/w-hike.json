@@ -1,0 +1,243 @@
+{
+  "entryId": "w:hike",
+  "headword": "hike",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/haɪk/",
+    "us": "/haɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:hike#p-main",
+      "ipa": {
+        "uk": "/haɪk/",
+        "us": "/haɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "hikes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "hiked",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "hiking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 94
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 92
+  },
+  "senses": [
+    {
+      "senseId": "w:hike#s1",
+      "pos": "v.",
+      "glossZh": "徒步旅行",
+      "pronunciationId": "w:hike#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hike#e-a30a54bc65142374",
+          "text": "Whether you’re hiking a backcountry trail (小径), camping, or just enjoying the park’s amazing wildlife from the road, this quick workshop is for you and your family.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:hike#e-93b50198d8a0c9e4",
+          "text": "A month after visiting the French Riviera and enjoying the sandy beaches of Nice and Menton, I went hiking with friends in the Pala group.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 106
+          }
+        },
+        {
+          "exampleId": "w:hike#e-3a00c8555ee5ec9a",
+          "text": "She was proven __48__ last Saturday when my daughter Stephanie insisted we go hiking.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 84
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hike#s2",
+      "pos": "n.",
+      "glossZh": "远足；徒步旅行",
+      "pronunciationId": "w:hike#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hike#e-69c8699729387f84",
+          "text": "For example, the experience of walking along the edge of water might be satisfying for a young professional on a weekend hike in the park.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 121,
+            "end": 125
+          }
+        },
+        {
+          "exampleId": "w:hike#e-acd7bdfe7a90d302",
+          "text": "The Carlow Autumn Walking Festival is a great opportunity for the beginner, experienced or advanced walker to enjoy the challenges of Carlow’s mountain hikes or the peace of its woodland walks.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 152,
+            "end": 157
+          }
+        },
+        {
+          "exampleId": "w:hike#e-5789e53441c482bd",
+          "text": "On one hike, I found myself hanging onto a wire on a bridge made of two partly rotten(腐烂的) logs, suspended high above rushing rapids.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hike#s3",
+      "pos": "n.",
+      "glossZh": "（价格等）大幅上涨",
+      "pronunciationId": "w:hike#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:hike#s4",
+      "pos": "v.",
+      "glossZh": "大幅提高（价格等）",
+      "pronunciationId": "w:hike#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "美式橄榄球开球",
+      "reason": "体育术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

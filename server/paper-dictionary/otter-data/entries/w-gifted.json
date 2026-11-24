@@ -1,0 +1,169 @@
+{
+  "entryId": "w:gifted",
+  "headword": "gifted",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɡɪftɪd/",
+    "us": "/ˈɡɪftɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:gifted#p-main",
+      "ipa": {
+        "uk": "/ˈɡɪftɪd/",
+        "us": "/ˈɡɪftɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more gifted",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most gifted",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "senses": [
+    {
+      "senseId": "w:gifted#s1",
+      "pos": "adj.",
+      "glossZh": "有天赋的",
+      "pronunciationId": "w:gifted#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gifted#e-6fc0edaf55eae878",
+          "text": "Though a gifted guitarist who picked up songs quickly and loved playing with the band, Ruben hated practicing alone.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:gifted#e-c2ae59c5f8f71bb4",
+          "text": "Believing the students were “gifted”, she pushed them harder – and they all made great progress.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:gifted#e-52bbfaeccdff4323",
+          "text": "While such feedback is positive, it reinforces the students’ mindset that they are either mathematically gifted or not.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
+            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-05-second-adaptability:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 111
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gifted#s2",
+      "pos": "adj.",
+      "glossZh": "面向资优学生的",
+      "pronunciationId": "w:gifted#p-main",
+      "note": "如 gifted program。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gifted#e-ae6b503974de5bbd",
+          "text": "When Caroline finished fifth grade and left Windward, her reading level was better than 95 percent of other students, and she later qualified for her new school’s gifted program.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 163,
+            "end": 169
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "gift 的动词变形",
+      "reason": "m1 是赠予，归 gift"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

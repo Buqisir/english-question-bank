@@ -1,0 +1,102 @@
+{
+  "entryId": "w:liberty",
+  "headword": "liberty",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈlɪbəti/",
+    "us": "/ˈlɪbərti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:liberty#p-main",
+      "ipa": {
+        "uk": "/ˈlɪbəti/",
+        "us": "/ˈlɪbərti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "liberties",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:liberty#s1",
+      "pos": "n.",
+      "glossZh": "人身自由",
+      "pronunciationId": "w:liberty#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:liberty#s2",
+      "pos": "n.",
+      "glossZh": "自由行事的权利",
+      "pronunciationId": "w:liberty#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:liberty#s3",
+      "pos": "短语",
+      "glossZh": "擅自做某事",
+      "pronunciationId": "w:liberty#p-main",
+      "note": "take the liberty of doing sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Newark Liberty International Airport",
+      "reason": "机场专名，m0 留空"
+    },
+    {
+      "glossZh": "水手上岸假、围棋的气",
+      "reason": "专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

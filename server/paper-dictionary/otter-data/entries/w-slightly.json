@@ -1,0 +1,135 @@
+{
+  "entryId": "w:slightly",
+  "headword": "slightly",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈslaɪtli/",
+    "us": "/ˈslaɪtli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:slightly#p-main",
+      "ipa": {
+        "uk": "/ˈslaɪtli/",
+        "us": "/ˈslaɪtli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more slightly",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most slightly",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 55
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:slightly#s1",
+      "pos": "adv.",
+      "glossZh": "略微",
+      "pronunciationId": "w:slightly#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 55
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slightly#e-f86bb225ef85be1a",
+          "text": "These days, safety regulations – not to mention the modern sports fan’s desire for a good view and a comfortable seat – tend to keep stadium capacities（容量）slightly lower.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 155,
+            "end": 163
+          }
+        },
+        {
+          "exampleId": "w:slightly#e-366fe458a5d06139",
+          "text": "Why did they vary ever so slightly from one instrument to the next?",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:slightly#e-b47744ebc500fe0d",
+          "text": "Grandma Chen’s door was slightly open, and I heard faint coughing inside.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-import-20261026-n123:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 32
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "体格纤细",
+      "reason": "罕见方式用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

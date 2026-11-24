@@ -1,0 +1,239 @@
+{
+  "entryId": "w:concentrate",
+  "headword": "concentrate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɒnsntreɪt/",
+    "us": "/ˈkɑːnsntreɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:concentrate#p-main",
+      "ipa": {
+        "uk": "/ˈkɒnsntreɪt/",
+        "us": "/ˈkɑːnsntreɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "concentrates",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "concentrated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "concentrating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 32
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 29
+  },
+  "senses": [
+    {
+      "senseId": "w:concentrate#s1",
+      "pos": "v.",
+      "glossZh": "集中注意力；专注",
+      "pronunciationId": "w:concentrate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:concentrate#e-f2dd97b1b2eaf2d0",
+          "text": "Then she concentrated on jogging to the spot where the track curved(拐弯).",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:7",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:concentrate#e-5b9097b900042ac2",
+          "text": "During most of the class, we follow Angela and concentrate on making tiny, isolated (单独) movements.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:grammar-fill",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:concentrate#e-e85e32c18d96af25",
+          "text": "In today’s world, it can feel difficult to concentrate when your smartphone buzzes (嗡嗡响) every minute or two with reminders about updates, messages and much more.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省县域教研联盟高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-county-teaching-research-alliance-2025-12-senior-three-mock-exam:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:concentrate#s2",
+      "pos": "v.",
+      "glossZh": "集中；聚集于一处",
+      "pronunciationId": "w:concentrate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:concentrate#e-88fac6c786de6319",
+          "text": "Though overtourism is described as a problem affecting the entire world, it’s actually concentrated to a small number of extremely popular spots.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:concentrate#e-cee109b622a2d1c9",
+          "text": "Most attractions are concentrated in the Itchan Kala, a historic walled city rich in the spirit of the Silk Road.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-05-second-adaptability",
+            "paperTitle": "青岛市2026年高三年级第二次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-05-second-adaptability:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:concentrate#s3",
+      "pos": "v.",
+      "glossZh": "浓缩；提高浓度",
+      "pronunciationId": "w:concentrate#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:concentrate#e-8adeb2d9b10c5c2a",
+          "text": "Campen said most of the microplastics that end up in our bodies arrive there via food – meat in particular, as commercial meat production concentrates plastics across the food chain.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 138,
+            "end": 150
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:concentrate#s4",
+      "pos": "n.",
+      "glossZh": "浓缩物；浓缩液",
+      "pronunciationId": "w:concentrate#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

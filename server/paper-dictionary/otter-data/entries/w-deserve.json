@@ -1,0 +1,148 @@
+{
+  "entryId": "w:deserve",
+  "headword": "deserve",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈzɜːv/",
+    "us": "/dɪˈzɜːrv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:deserve#p-main",
+      "ipa": {
+        "uk": "/dɪˈzɜːv/",
+        "us": "/dɪˈzɜːrv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "deserved",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "deserves",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "deserving",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 52
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:deserve#s1",
+      "pos": "v.",
+      "glossZh": "值得；应得；应受",
+      "pronunciationId": "w:deserve#p-main",
+      "note": "既可接正面的 praise，也可接负面的 blame。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 52
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:deserve#e-1f228d0c1c598c04",
+          "text": "It deserves greater attention.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2021-ii:29",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:deserve#e-ddb7d82099b81725",
+          "text": "It’s the seaside birds that deserve at least part of the blame for getting Nick Burchill blacklisted at the Fairmont Empress Hotel in Victoria, Canada.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:deserve#e-c777895e78d23a5a",
+          "text": "It was a failure but the methods deserved praise.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:28",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 41
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "奖给；款待；使受益",
+      "reason": "过时用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

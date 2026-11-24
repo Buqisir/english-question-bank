@@ -1,0 +1,66 @@
+{
+  "entryId": "w:socialism",
+  "headword": "socialism",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsəʊʃəlɪzəm/",
+    "us": "/ˈsəʊʃəlɪzəm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:socialism#p-main",
+      "ipa": {
+        "uk": "/ˈsəʊʃəlɪzəm/",
+        "us": "/ˈsəʊʃəlɪzəm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "socialisms",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:socialism#s1",
+      "pos": "n.",
+      "glossZh": "社会主义",
+      "pronunciationId": "w:socialism#p-main",
+      "note": "主张主要生产资源由社会掌控的思想或制度，各流派的主张有所不同。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,78 @@
+{
+  "entryId": "w:typhoon",
+  "headword": "typhoon",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/taɪˈfuːn/",
+    "us": "/taɪˈfuːn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:typhoon#p-main",
+      "ipa": {
+        "uk": "/taɪˈfuːn/",
+        "us": "/taɪˈfuːn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "typhoons",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Typhoons",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:typhoon#s1",
+      "pos": "n.",
+      "glossZh": "台风",
+      "pronunciationId": "w:typhoon#p-main",
+      "note": "指西北太平洋一带达到一定强度的热带气旋。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "战斗机型号、作旋转动词",
+      "reason": "专名或少见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,333 @@
+{
+  "entryId": "w:project",
+  "headword": "project",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈprɒdʒekt/",
+    "us": "/ˈprɑːdʒekt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:project#p-main",
+      "ipa": {
+        "uk": "/ˈprɒdʒekt/",
+        "us": "/ˈprɑːdʒekt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:project#p-verb",
+      "ipa": {
+        "uk": "/prəˈdʒekt/",
+        "us": "/prəˈdʒekt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "动词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "projects",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "projected",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "projecting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 67,
+    "mock": 524
+  },
+  "unassignedCounts": {
+    "gaokao": 10,
+    "mock": 522
+  },
+  "senses": [
+    {
+      "senseId": "w:project#s1",
+      "pos": "n.",
+      "glossZh": "项目",
+      "pronunciationId": "w:project#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 47,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:project#e-f6bc650971a73f9d",
+          "text": "\"I’ve started a project to promote the teaching of the arts in our schools.\"",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:project#e-669c986f23426888",
+          "text": "The project was dreamed up by a local charity (慈善组织) to reduce loneliness and improve elderly people’s wellbeing.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "reading-c-2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:project#e-f20c25797862a49e",
+          "text": "Sixteen stations of Barcelona’s subway system are part of its new MetroCharge project, whereby the energy from the underground trains’ brakes (刹车) is used to power the trains and the stations themselves, while the remainder is sent snaking through cables (电缆) to the surface to power plug-in stations for privately owned vehicles.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 85
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:project#s2",
+      "pos": "n.",
+      "glossZh": "专门完成的作业或任务",
+      "pronunciationId": "w:project#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:project#e-7a0391fb151f2c08",
+          "text": "The project required each team to develop a hypothesis（假说）, set up an experiment to test the hypothesis, do the statistical analysis and present the findings.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:project#e-685d36cf3c360139",
+          "text": "The average spend per project will be around £ 823.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:project#e-6458a6e43f6e7960",
+          "text": "The music helped 21-year-old Mulder focus on a project for her degree.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:grammar-fill:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:project#s3",
+      "pos": "n.",
+      "glossZh": "低收入公共住宅区",
+      "pronunciationId": "w:project#p-main",
+      "note": "常见于美式英语复数 projects。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:project#e-6442b48cd55eb3a6",
+          "text": "I grew up in the Chelsea Projects, 288 10th Avenue at 26th Street.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:project#s4",
+      "pos": "v.",
+      "glossZh": "伸出；凸出",
+      "pronunciationId": "w:project#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:project#s5",
+      "pos": "v.",
+      "glossZh": "投射（光或影像）",
+      "pronunciationId": "w:project#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:project#s6",
+      "pos": "v.",
+      "glossZh": "预测",
+      "pronunciationId": "w:project#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:project#s7",
+      "pos": "v.",
+      "glossZh": "展现（某种形象）",
+      "pronunciationId": "w:project#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:project#s8",
+      "pos": "v.",
+      "glossZh": "把自己的感受归到别人身上",
+      "pronunciationId": "w:project#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Project Debater、Project Wild Thing",
+      "reason": "产品或作品专名，相关命中留空"
+    },
+    {
+      "glossZh": "神经元投射",
+      "reason": "神经科学专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

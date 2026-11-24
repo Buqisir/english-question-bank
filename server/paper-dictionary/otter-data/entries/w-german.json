@@ -1,0 +1,282 @@
+{
+  "entryId": "w:german",
+  "headword": "German",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdʒɜːmən/",
+    "us": "/ˈdʒɜːrmən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:german#p-main",
+      "ipa": {
+        "uk": "/ˈdʒɜːmən/",
+        "us": "/ˈdʒɜːrmən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "Germanest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more German",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most German",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more german",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most german",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "Germans",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "germans",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 15
+  },
+  "senses": [
+    {
+      "senseId": "w:german#s1",
+      "pos": "adj.",
+      "glossZh": "德国的",
+      "pronunciationId": "w:german#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:german#e-c013cd24aecd569d",
+          "text": "“People started queuing to make an appointment early in the morning,” says Emile Ducke, a German photographer who traveled with the staff of the Saint Lukas for a two-week trip in November through the vast regions（区域）of Krasnoyarsk and Khakassia.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:german#e-c140ef9894530f4c",
+          "text": "The concept was born when German city planners sought to plant large areas of parkland after World War II in a reproducible way that would need minimal maintenance.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:german#e-8c6b3e20a5945a42",
+          "text": "Architecture studio Penda has released visualizations of its “Yin-Yang House” – a home designed for a tiny plot near the German city of Kassel.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 127
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:german#s2",
+      "pos": "n.",
+      "glossZh": "德语",
+      "pronunciationId": "w:german#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:german#e-8cbfd3abbb3e4473",
+          "text": "He learned Spanish and raised five children in a mixed German-Mexican household, but he didn’t teach them German, and the language was lost in one generation.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 112
+          }
+        },
+        {
+          "exampleId": "w:german#e-e6408686446372b9",
+          "text": "He can speak German.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:german#e-2ff0b9fac6f737f0",
+          "text": "Other languages also have similar words: очень in Russian, sehr in German, très in French.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:german#s3",
+      "pos": "n.",
+      "glossZh": "德国人",
+      "pronunciationId": "w:german#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:german#e-c13c647d34da626b",
+          "text": "I made friends through a board-game club – three Danish students, one German, and two Icelandic students.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 76
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:german#s4",
+      "pos": "adj.",
+      "glossZh": "德语的",
+      "pronunciationId": "w:german#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "一种字号",
+      "reason": "印刷专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

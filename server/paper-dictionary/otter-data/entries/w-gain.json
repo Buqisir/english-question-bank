@@ -1,0 +1,369 @@
+{
+  "entryId": "w:gain",
+  "headword": "gain",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɡeɪn/",
+    "us": "/ɡeɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:gain#p-main",
+      "ipa": {
+        "uk": "/ɡeɪn/",
+        "us": "/ɡeɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "gains",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "gained",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "gaining",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 206
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 202
+  },
+  "senses": [
+    {
+      "senseId": "w:gain#s1",
+      "pos": "v.",
+      "glossZh": "获得",
+      "pronunciationId": "w:gain#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gain#e-80cdad32bfae97e5",
+          "text": "Gaining high-tech knowledge.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2020-national-ii:24",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:gain#e-81c726969c6f7810",
+          "text": "Even though he often felt he would be discovered to be a no-talent, he moved forward, gaining a scholarship to the Neighborhood Playhouse and making his first television appearance a few years later in 1948.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:gain#e-5fc6f348e3269938",
+          "text": "If we readjust our view of arguments – from a verbal fight or tennis game to a reasoned exchange through which we all gain respect and understanding from each other -then we change the very nature of what it means to “win” an argument.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 118,
+            "end": 122
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gain#s2",
+      "pos": "v.",
+      "glossZh": "增加",
+      "pronunciationId": "w:gain#p-main",
+      "note": "如 gain weight 体重增加。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gain#e-0d17e1d4351bfba2",
+          "text": "As someone noted in this paper a couple of weeks ago, they eat great food and never gain weight.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gain#s3",
+      "pos": "v.",
+      "glossZh": "重新获得",
+      "pronunciationId": "w:gain#p-main",
+      "note": "gain back。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gain#e-4389ade66e85d6c0",
+          "text": "Always be looking for a new way to gain back an hour here or there.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:seven-choices:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gain#s4",
+      "pos": "v.",
+      "glossZh": "获益",
+      "pronunciationId": "w:gain#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gain#e-ebd7d009093ed428",
+          "text": "In the course of a couple of hours, he __53__ me just how much one can gain from __54__ with an open mind, and a willingness to __55__ with locals from all walks of life.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:gain#e-479ffd265d03d4a6",
+          "text": "According to Wright, what do participants gain from Books in Places?",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-chongqing-kangde-2026-05-may-survey-r3:29",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gain#s5",
+      "pos": "n.",
+      "glossZh": "收益",
+      "pronunciationId": "w:gain#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gain#e-26b0472aa12923e4",
+          "text": "By contrast, the wealthy landowners, large companies and illegal loggers, in their pursuit of financial gain, have done huge damage.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 108
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gain#s6",
+      "pos": "n.",
+      "glossZh": "增长量",
+      "pronunciationId": "w:gain#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gain#e-1371b264e6091a9f",
+          "text": "At the level of the brain, intense learning looks very different than the slow, consistent gains we’re more familiar with.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:gain#e-5829d43eba6d3b8a",
+          "text": "A new study shows choosing exercise you enjoy is vital for lasting benefits like strength gains and stress relief.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 95
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gain#s7",
+      "pos": "短语",
+      "glossZh": "取得进展",
+      "pronunciationId": "w:gain#p-main",
+      "note": "gain ground。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "信号增益",
+      "reason": "电子与通信专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

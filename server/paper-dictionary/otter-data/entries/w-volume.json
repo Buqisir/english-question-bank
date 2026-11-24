@@ -1,0 +1,319 @@
+{
+  "entryId": "w:volume",
+  "headword": "volume",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈvɒljuːm/",
+    "us": "/ˈvɑːljuːm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:volume#p-main",
+      "ipa": {
+        "uk": "/ˈvɒljuːm/",
+        "us": "/ˈvɑːljuːm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "volumes",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "senses": [
+    {
+      "senseId": "w:volume#s1",
+      "pos": "n.",
+      "glossZh": "一册书",
+      "pronunciationId": "w:volume#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:volume#e-0ff85b515ad16f54",
+          "text": "Adults are portrayed(描绘) alone in many settings and poses – absorbed in a volume, deep in thought or lost in a moment of leisure.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 80
+          }
+        },
+        {
+          "exampleId": "w:volume#e-a303c44b0e830bb1",
+          "text": "More recently, as books have become inexpensive or even throwaway, artists have used them as the raw material for artworks – transforming covers, pages or even complete volumes into paintings and sculptures.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 169,
+            "end": 176
+          }
+        },
+        {
+          "exampleId": "w:volume#e-421f2ca4271c648f",
+          "text": "If your child was literate, one of the 20 volumes of the Oxford English Dictionary or an illustrated Collins was the surest way to keep them happily occupied, setting them off on hunts for lost or forgotten words.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:volume#s2",
+      "pos": "n.",
+      "glossZh": "音量",
+      "pronunciationId": "w:volume#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:volume#e-912a8bedb76ee85b",
+          "text": "Cage used coin tosses to choose notes – random in note height, length, and volume.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:volume#e-5348410404864c10",
+          "text": "Controlling his speaking volume.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:volume#s3",
+      "pos": "n.",
+      "glossZh": "体积",
+      "pronunciationId": "w:volume#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:volume#e-351852f012c7e8bd",
+          "text": "As we age, we tend to lose fast-twitch muscle fibers in both size and volume.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:volume#e-cf29b7e5d652f52e",
+          "text": "The first unit, about a liter in volume, holds the polluted water inside it, while the second stores the magnetic oil-based ferrofluid.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-05-second-mock:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:volume#e-79eb25892c33426b",
+          "text": "Through laboratory tests, the researchers found that a single raindrop – measuring roughly 92 microliters in volume – was capable of generating a surprising 60 volts of electricity.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-02-first",
+            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
+            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-02-first:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 115
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:volume#s4",
+      "pos": "n.",
+      "glossZh": "数量",
+      "pronunciationId": "w:volume#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:volume#e-aa68ce8ce39549ce",
+          "text": "I. Attack Volume by Industry (Weekly Average per Organization)",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:volume#e-cec926c4030f555f",
+          "text": "Not only do the super-rich, frequently using private jets and high-emission luxuries, generate a disproportionate volume of emissions directly, but their financial power also fuels the crisis by supporting industries that rely heavily on fossil fuels.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 114,
+            "end": 120
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:volume#s5",
+      "pos": "短语",
+      "glossZh": "充分说明问题",
+      "pronunciationId": "w:volume#p-main",
+      "note": "speak volumes。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "古代卷轴、存储卷、攀岩支点",
+      "reason": "历史或专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

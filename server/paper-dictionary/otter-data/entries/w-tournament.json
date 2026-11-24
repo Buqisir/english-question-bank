@@ -1,0 +1,142 @@
+{
+  "entryId": "w:tournament",
+  "headword": "tournament",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtʊənəmənt/",
+    "us": "/ˈtʊrnəmənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:tournament#p-main",
+      "ipa": {
+        "uk": "/ˈtʊənəmənt/",
+        "us": "/ˈtʊrnəmənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "tournaments",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "senses": [
+    {
+      "senseId": "w:tournament#s1",
+      "pos": "n.",
+      "glossZh": "锦标赛",
+      "pronunciationId": "w:tournament#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tournament#e-e7885edababf422d",
+          "text": "You would be feeling almost as bad if arguments were even just competitions- like, say, tennis tournaments.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 106
+          }
+        },
+        {
+          "exampleId": "w:tournament#e-0977ccc3d21a683d",
+          "text": "The annual tennis tournament, Wimbledon, made the decision this year to replace their line judges.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:tournament#e-0641d570f2bdc09f",
+          "text": "It all began with a “fun” indoor hockey tournament(曲棍球锦标赛) for U11, U12, and U13 kids.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey",
+            "paperTitle": "南京市2026届高三年级学情调研 英语",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2025-09-senior-three-opening-survey:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:tournament#s2",
+      "pos": "n.",
+      "glossZh": "骑士比武",
+      "pronunciationId": "w:tournament#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "有向完全图",
+      "reason": "数学义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

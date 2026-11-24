@@ -1,0 +1,157 @@
+{
+  "entryId": "w:convey",
+  "headword": "convey",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kənˈveɪ/",
+    "us": "/kənˈveɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:convey#p-main",
+      "ipa": {
+        "uk": "/kənˈveɪ/",
+        "us": "/kənˈveɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "conveyed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "conveying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "conveys",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 76
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 75
+  },
+  "senses": [
+    {
+      "senseId": "w:convey#s1",
+      "pos": "v.",
+      "glossZh": "传达；表达",
+      "pronunciationId": "w:convey#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:convey#e-0bc23f2d5123223d",
+          "text": "He conveyed through her that he had a jack but that it was too small for the Jeep, so we would need something to support it.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:convey#e-8bb18114efba68ed",
+          "text": "\"Moreover, the meanings seem to not go beyond what other animals convey with non-verbal communication.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:convey#e-a93be1ae7dfa710e",
+          "text": "You can fill it with laughter, pauses, and tone that a text message can’t convey.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:convey#s2",
+      "pos": "v.",
+      "glossZh": "运送；输送",
+      "pronunciationId": "w:convey#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "转让财产、暗中带走",
+      "reason": "法律专门义或过时用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

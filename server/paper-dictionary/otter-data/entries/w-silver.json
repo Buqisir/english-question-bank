@@ -1,0 +1,410 @@
+{
+  "entryId": "w:silver",
+  "headword": "silver",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsɪlvə(r)/",
+    "us": "/ˈsɪlvər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:silver#p-main",
+      "ipa": {
+        "uk": "/ˈsɪlvə(r)/",
+        "us": "/ˈsɪlvər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more silver",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most silver",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "silvers",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "silvered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "silvering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 40
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 30
+  },
+  "senses": [
+    {
+      "senseId": "w:silver#s1",
+      "pos": "n.",
+      "glossZh": "银",
+      "pronunciationId": "w:silver#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:silver#e-ce5baf157a557e1f",
+          "text": "From vintage toys to gold, jewellery, watches, cameras, old tech, silver and more; broken, tired or tiptop, Vintage Cash Cow sorts it all so you don’t have to.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-a:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:silver#s2",
+      "pos": "adj.",
+      "glossZh": "银制的",
+      "pronunciationId": "w:silver#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:silver#e-16f6fc6b0b815e0e",
+          "text": "Filigree involves using gold or silver threads to create delicate designs, while the inlay work decorates metal pieces with carved patterns and embedded jade or gemstones.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:silver#e-dbd76e51604c7343",
+          "text": "Then the youngest judge, a blind woman with silver earrings, asked, “Can you play it again, but this time answer the flute when it questions you?” Qian lifted the cracked flute and discovered the crack had lowered every note slightly, creating a gentle crying sound.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 44,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:silver#s3",
+      "pos": "adj.",
+      "glossZh": "银白色的",
+      "pronunciationId": "w:silver#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:silver#e-d6c9c14468a5d7e5",
+          "text": "Glancing at the silver light through the curtains, you wonder: Could the full moon be ruining your sleep?",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-import-20261026-n090:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:silver#e-a0c81efdd80505d5",
+          "text": "He scattered seeds from a crumpled paper bag, his silver hair catching the golden light.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:silver#s4",
+      "pos": "n.",
+      "glossZh": "银牌",
+      "pronunciationId": "w:silver#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:silver#e-39589aa04f206728",
+          "text": "The team contest will award up to one gold, two silver, and three bronze medals.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:silver#e-2a856d52d40af227",
+          "text": "He went on to win a silver medal",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-b:15",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:silver#s5",
+      "pos": "短语",
+      "glossZh": "不幸中的一线希望",
+      "pronunciationId": "w:silver#p-main",
+      "note": "silver lining。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:silver#e-fe3ac139b3001628",
+          "text": "Martin sees a silver lining, however: She believes that anthropomorphism（拟人化）“provides an opportunity to change stereotypes.” When women are put into positions of leadership like running companies, it reduces negative stereotypes about women.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:silver#e-a23a123626bbfda6",
+          "text": "Every cloud has a silver lining.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-03-first",
+            "paperTitle": "滨州市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-03-first:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-shandong-binzhou-2026-03-first:27",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:silver#s6",
+      "pos": "短语",
+      "glossZh": "能轻易解决难题的办法",
+      "pronunciationId": "w:silver#p-main",
+      "note": "silver bullet，常用于否定句。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:silver#e-3a8a2de5dbc7b26a",
+          "text": "It's an exciting approach, but she warns that this method is not a silver bullet for all methane emissions.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test",
+            "paperTitle": "南昌市2025年高三年级九月测试英语",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2025-09-senior-three-monthly-test:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:silver#e-ebc4e27347abbfaf",
+          "text": "While there is no silver bullet, practical steps – rooted in policy and personal awareness – can narrow the gap.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:silver#s7",
+      "pos": "adj.",
+      "glossZh": "第二十五周年的",
+      "pronunciationId": "w:silver#p-main",
+      "note": "如 silver wedding「银婚」。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:silver#s8",
+      "pos": "v.",
+      "glossZh": "镀银",
+      "pronunciationId": "w:silver#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Silver Spring、姓氏和名字",
+      "reason": "专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

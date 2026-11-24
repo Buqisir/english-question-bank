@@ -1,0 +1,122 @@
+{
+  "entryId": "w:meanwhile",
+  "headword": "meanwhile",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmiːnwaɪl/",
+    "us": "/ˈmiːnwaɪl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:meanwhile#p-main",
+      "ipa": {
+        "uk": "/ˈmiːnwaɪl/",
+        "us": "/ˈmiːnwaɪl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 79
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:meanwhile#s1",
+      "pos": "adv.",
+      "glossZh": "与此同时",
+      "pronunciationId": "w:meanwhile#p-main",
+      "note": "也可用来转到同时发生的另一件事。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 79
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:meanwhile#e-c50167201dbf3325",
+          "text": "Meanwhile, over the course of the 19th century, electricity went from mere curiosity to a basic necessity.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:meanwhile#e-ef3cc855aa82ff2a",
+          "text": "Meanwhile in the early 2000s, bio-technologists Brunkow and Ramsdell investigated why a specific type of mouse was particularly sensitive to autoimmune diseases.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:meanwhile#e-1bfe42e5a6c6e7de",
+          "text": "Meanwhile, Mia stayed home and grew increasingly dependent on their mother.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "间隔时间（名词）",
+      "reason": "旧式名词用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

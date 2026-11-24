@@ -1,0 +1,135 @@
+{
+  "entryId": "w:expensive",
+  "headword": "expensive",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪkˈspensɪv/",
+    "us": "/ɪkˈspensɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:expensive#p-main",
+      "ipa": {
+        "uk": "/ɪkˈspensɪv/",
+        "us": "/ɪkˈspensɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more expensive",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most expensive",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 15,
+    "mock": 77
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:expensive#s1",
+      "pos": "adj.",
+      "glossZh": "花费高的",
+      "pronunciationId": "w:expensive#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 77
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:expensive#e-2f8f5f0a186c9e90",
+          "text": "Disposing of（处置）the brine can be expensive.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:expensive#e-e209f7f3c23799c2",
+          "text": "So the first thing we did was rent a fantastically expensive sixth-floor apartment the size of a cupboard.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:expensive#e-2fe27db51af6d877",
+          "text": "What’s more, indoor plants are easy to look after and are not very expensive.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 76
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "让对手得分多的",
+      "reason": "体育专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,135 @@
+{
+  "entryId": "w:frightened",
+  "headword": "frightened",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfraɪtnd/",
+    "us": "/ˈfraɪtnd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:frightened#p-main",
+      "ipa": {
+        "uk": "/ˈfraɪtnd/",
+        "us": "/ˈfraɪtnd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more frightened",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most frightened",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 26
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 24
+  },
+  "senses": [
+    {
+      "senseId": "w:frightened#s1",
+      "pos": "adj.",
+      "glossZh": "害怕的",
+      "pronunciationId": "w:frightened#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:frightened#e-2082ae7ee2624295",
+          "text": "As prey animals, parrots are often frightened by exposure to new household items or strangers.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:frightened#e-cae212812cd4bf98",
+          "text": "He said they were loud and he was frightened.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:frightened#e-440bef376827aa79",
+          "text": "He slowly moved closer, but when he reached out his hand, the bird became very frightened and struggled wildly.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 89
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "frighten 的过去式",
+      "reason": "g1 是及物动词，归 frighten"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

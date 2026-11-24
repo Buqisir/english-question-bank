@@ -1,0 +1,100 @@
+{
+  "entryId": "w:pyramid",
+  "headword": "pyramid",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpɪrəmɪd/",
+    "us": "/ˈpɪrəmɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:pyramid#p-main",
+      "ipa": {
+        "uk": "/ˈpɪrəmɪd/",
+        "us": "/ˈpɪrəmɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "pyramids",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:pyramid#s1",
+      "pos": "n.",
+      "glossZh": "金字塔",
+      "pronunciationId": "w:pyramid#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:pyramid#s2",
+      "pos": "n.",
+      "glossZh": "金字塔形体",
+      "pronunciationId": "w:pyramid#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:pyramid#s3",
+      "pos": "n.",
+      "glossZh": "金字塔式层级",
+      "pronunciationId": "w:pyramid#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "延髓锥体",
+      "reason": "解剖学术语"
+    },
+    {
+      "glossZh": "交易中逐步加码",
+      "reason": "金融专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

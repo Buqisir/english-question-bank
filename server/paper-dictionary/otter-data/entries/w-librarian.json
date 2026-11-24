@@ -1,0 +1,124 @@
+{
+  "entryId": "w:librarian",
+  "headword": "librarian",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/laɪˈbreəriən/",
+    "us": "/laɪˈbreriən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:librarian#p-main",
+      "ipa": {
+        "uk": "/laɪˈbreəriən/",
+        "us": "/laɪˈbreriən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "librarians",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 30
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:librarian#s1",
+      "pos": "n.",
+      "glossZh": "图书馆管理员",
+      "pronunciationId": "w:librarian#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 30
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:librarian#e-55343587e70ec7d6",
+          "text": "I never knew anyone who’d grown up in Jackson without being afraid of Mrs. Calloway, our librarian.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 98
+          }
+        },
+        {
+          "exampleId": "w:librarian#e-8421e7c896ce71c9",
+          "text": "These tasks, which were key to my project, confused me: I had no idea how to organize the corner in a neat and orderly way, how to use simple tech tools to record audio, or even how to ask Ms. Henderson, the librarian, for permission.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 208,
+            "end": 217
+          }
+        },
+        {
+          "exampleId": "w:librarian#e-dc5d99f2125dd1fd",
+          "text": "The librarians at Baton Rouge’s public libraries have always taken pride in answering every question, from recipes to football events.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-sanxin-2026-dec-joint-exam",
+            "paperTitle": "2025年「三新」协同教研共同体高三联考",
+            "groupId": "group:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-sanxin-2026-dec-joint-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 14
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

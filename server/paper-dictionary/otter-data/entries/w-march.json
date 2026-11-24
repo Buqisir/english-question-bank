@@ -1,0 +1,132 @@
+{
+  "entryId": "w:march",
+  "headword": "March",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "march"
+  ],
+  "ipa": {
+    "uk": "/mɑːtʃ/",
+    "us": "/mɑːrtʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:march#p-main",
+      "ipa": {
+        "uk": "/mɑːtʃ/",
+        "us": "/mɑːrtʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "marches",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 68
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 68
+  },
+  "senses": [
+    {
+      "senseId": "w:march#s1",
+      "pos": "n.",
+      "glossZh": "三月",
+      "pronunciationId": "w:march#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:march#e-e91fd82313fdad7a",
+          "text": "In 1993 the United Nations decided that March 22nd is the World Day for Water.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jan:31",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:march#e-d8a4f12756097005",
+          "text": "In March 2008, Ginni boarded a ship with 48 passengers she’d never met before, to begin the journey towards Antarctica.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:march#e-af16f3c556067132",
+          "text": "Riders have printed nearly 20,000 short stories and poems since the program was launched last March.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 94,
+            "end": 99
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "行进、游行、进行曲",
+      "reason": "小写 march，模拟同形留空"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

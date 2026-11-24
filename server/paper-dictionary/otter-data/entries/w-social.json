@@ -1,0 +1,537 @@
+{
+  "entryId": "w:social",
+  "headword": "social",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsəʊʃl/",
+    "us": "/ˈsəʊʃl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:social#p-main",
+      "ipa": {
+        "uk": "/ˈsəʊʃl/",
+        "us": "/ˈsəʊʃl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more social",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most social",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "socials",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 51,
+    "mock": 732
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 730
+  },
+  "senses": [
+    {
+      "senseId": "w:social#s1",
+      "pos": "adj.",
+      "glossZh": "社会的",
+      "pronunciationId": "w:social#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:social#e-67b5dd24e2db1343",
+          "text": "To test the effect of social influence on eating habits, the researchers conducted two experiments.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:social#e-4e71385c26d26aac",
+          "text": "And the more we look, the more we will see that social factors(因素)like gender, race, and class do not determine the appearance of genius.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:social#e-dc3a03d5e769d734",
+          "text": "The rules that assign meaning lie not just inside our heads, but also outside, in society, in social memory, social conventions and social relations.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 109,
+            "end": 115
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:social#s2",
+      "pos": "adj.",
+      "glossZh": "社交的",
+      "pronunciationId": "w:social#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 16,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:social#e-efba8b20495af175",
+          "text": "Which hotel best suits people who enjoy an active social life?",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2021-i:22",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:social#e-95e132ba8c6ee74d",
+          "text": "Social interaction has been shown to lift mood(情绪) and get people thinking in new directions and in ways that could help improve any post-lunch effort.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:social#e-d33845790ceb179b",
+          "text": ", and they get invitations to exhibition openings, lectures, travel opportunities, and lively social gatherings.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:seven-choices:8",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 106
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:social#s3",
+      "pos": "adj.",
+      "glossZh": "爱交际的",
+      "pronunciationId": "w:social#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:social#e-378a978728abce49",
+          "text": "Some toddlers are very social, but others are shy.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:social#s4",
+      "pos": "adj.",
+      "glossZh": "群居的",
+      "pronunciationId": "w:social#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:social#e-48f940bad3fd8d50",
+          "text": "They are, however, always alone, and so do not have the complex social systems that contribute to animal smarts.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:social#e-7358eb7221d6c11c",
+          "text": "Over time, these efforts allowed her to be accepted by creatures once feared as violent beasts, revealing them as gentle and social.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 131
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:social#s5",
+      "pos": "短语",
+      "glossZh": "社交媒体",
+      "pronunciationId": "w:social#p-main",
+      "note": "social media。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:social#e-2564a78c991bedb8",
+          "text": "Share library announcements on your social media.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:6",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:social#e-05b3751476bbc602",
+          "text": "You might think about posting what you are looking for on social media, but it probably won’t result in a useful response.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "seven-choices-4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:social#e-397da42f29fb679b",
+          "text": "As an artist who shares her journey on social media, I’m often asked by curious followers how to begin an art journey.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:social#s6",
+      "pos": "短语",
+      "glossZh": "社交网络",
+      "pronunciationId": "w:social#p-main",
+      "note": "social network，语料中指网站或服务。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:social#e-3879f79a324cf249",
+          "text": "Today his hobby has developed into the website postcrossing.com, a social network that has grown to 575,217 registered users in 214 countries and regions since he started it 10 years ago.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:social#e-9e52e7b0d0461e84",
+          "text": "Americans are still texting while driving, as well as using social networks and taking photos.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:social#s7",
+      "pos": "短语",
+      "glossZh": "社会研究课",
+      "pronunciationId": "w:social#p-main",
+      "note": "social studies。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:social#e-cb8ce2ec36f7c76a",
+          "text": "When I was in middle school, my social studies teacher asked me to enter a writing contest.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:social#s8",
+      "pos": "短语",
+      "glossZh": "社会保障",
+      "pronunciationId": "w:social#p-main",
+      "note": "social security。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:social#e-d861ebf9a94057da",
+          "text": "In many communities, that trust is won every day when life-saving medicine, greeting cards, social security checks, college acceptance letters – even the bills – appear in mailboxes in front of the houses.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 98
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:social#s9",
+      "pos": "n.",
+      "glossZh": "社交聚会",
+      "pronunciationId": "w:social#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:social#s10",
+      "pos": "n.",
+      "glossZh": "社交媒体",
+      "pronunciationId": "w:social#p-main",
+      "note": "口语用复数 socials。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:social#e-d860934c13718651",
+          "text": "“If something is trending on socials, we’re able to incorporate it into a story.” Moving quickly and meeting audiences “where they’re at,” Shah says, enables Meet Cute to be “part of the conversation.”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 36
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "盟国的；社会安全号码简称",
+      "reason": "罕见义或特定国家制度的简称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

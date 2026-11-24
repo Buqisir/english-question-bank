@@ -1,0 +1,194 @@
+{
+  "entryId": "w:yours",
+  "headword": "yours",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/jɔːz/",
+    "us": "/jʊrz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:yours#p-main",
+      "ipa": {
+        "uk": "/jɔːz/",
+        "us": "/jʊrz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 12,
+    "mock": 131
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 128
+  },
+  "senses": [
+    {
+      "senseId": "w:yours#s1",
+      "pos": "pron.",
+      "glossZh": "你的东西；你们的东西",
+      "pronunciationId": "w:yours#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:yours#e-23f58379e6bdbf48",
+          "text": "Most trains operate just once a day and some run only three times a week, so missing yours can be a disaster.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:yours#e-b0e9161f4bb6b025",
+          "text": "The other pair is yours to keep.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-a:9",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:yours#e-01ee90331a864431",
+          "text": "Talk to people who have experiences similar to yours.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:seven-choices:10",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 52
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:yours#s2",
+      "pos": "短语",
+      "glossZh": "信末署名前的客套语",
+      "pronunciationId": "w:yours#p-main",
+      "note": "Yours / Yours sincerely / Yours truly。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:yours#e-3e4530b121ab075f",
+          "text": "Yours,",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-application",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-application:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:yours#e-d9b54f9d9190f502",
+          "text": "Yours sincerely,",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-application",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "writing-application-8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:yours#e-bda749aa050b8288",
+          "text": "Yours truly,",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-application",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-application:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "yours learning kung fu",
+      "reason": "真题 g0 通常应写 your learning kung fu 或 you learning kung fu"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

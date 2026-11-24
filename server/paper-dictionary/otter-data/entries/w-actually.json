@@ -1,0 +1,123 @@
+{
+  "entryId": "w:actually",
+  "headword": "actually",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈæktʃuəli/",
+    "us": "/ˈæktʃuəli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:actually#p-main",
+      "ipa": {
+        "uk": "/ˈæktʃuəli/",
+        "us": "/ˈæktʃuəli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 28,
+    "mock": 256
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:actually#s1",
+      "pos": "adv.",
+      "glossZh": "实际上；其实；确实（纠正印象或强调事实）",
+      "note": "可放在句首引出更正，也可放在动词前或句末强调。",
+      "pronunciationId": "w:actually#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 28,
+        "mock": 256
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:actually#e-c723aae6560888a3",
+          "text": "“I could see them actually walking under the sea.”",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:actually#e-8e2bda07b002f442",
+          "text": "But since the results at 70 decibels were significant, the study also suggests that the right level of background noise – not too loud and not total silence – may actually improve one’s creative thinking ability.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 163,
+            "end": 171
+          }
+        },
+        {
+          "exampleId": "w:actually#e-4f7f39e7b9e028a8",
+          "text": "Actually, a true eco-friendly trip must meet the following principles:",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:grammar-fill:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "在当时；积极地或主动地",
+      "reason": "过时或罕见用法"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

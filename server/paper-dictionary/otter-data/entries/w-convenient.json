@@ -1,0 +1,169 @@
+{
+  "entryId": "w:convenient",
+  "headword": "convenient",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kənˈviːniənt/",
+    "us": "/kənˈviːniənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:convenient#p-main",
+      "ipa": {
+        "uk": "/kənˈviːniənt/",
+        "us": "/kənˈviːniənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more convenient",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most convenient",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 35
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 33
+  },
+  "senses": [
+    {
+      "senseId": "w:convenient#s1",
+      "pos": "adj.",
+      "glossZh": "方便的；省事的；（地点）近便的",
+      "pronunciationId": "w:convenient#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:convenient#e-cc9b6ecf87b1741f",
+          "text": "Generation Xers with young families, like my wife and me, can still find it convenient to have a home phone rather than providing a mobile phone for every family member.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:convenient#e-328abdf8525720b5",
+          "text": "Also, there is a convenient app that provides growing data in real time.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:convenient#e-f25a360a3238ce34",
+          "text": "People can pick up a package from a locker at a time that suits them, in a convenient location near their residence or workplace.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 85
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:convenient#s2",
+      "pos": "adj.",
+      "glossZh": "对自己有利的；方便拿来搪塞的",
+      "pronunciationId": "w:convenient#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:convenient#e-cde8b48e2d43c5ce",
+          "text": "A convenient excuse.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-second:32",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 12
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "合适的（无便利含义）",
+      "reason": "古旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

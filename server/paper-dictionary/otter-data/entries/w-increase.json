@@ -1,0 +1,356 @@
+{
+  "entryId": "w:increase",
+  "headword": "increase",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪnˈkriːs/",
+    "us": "/ɪnˈkriːs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:increase#p-main",
+      "ipa": {
+        "uk": "/ɪnˈkriːs/",
+        "us": "/ɪnˈkriːs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:increase#p-noun",
+      "ipa": {
+        "uk": "/ˈɪŋkriːs/",
+        "us": "/ˈɪŋkriːs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "名词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "increases",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "increased",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "increasing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 37,
+    "mock": 343
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 342
+  },
+  "senses": [
+    {
+      "senseId": "w:increase#s1",
+      "pos": "v.",
+      "glossZh": "使增加；提高",
+      "pronunciationId": "w:increase#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 20,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:increase#e-022c88e409388d61",
+          "text": "But in half the cases she wore a specially designed fat suit which increased her weight to 180 pounds.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:increase#e-0d977b8bfcd4f8a8",
+          "text": "Experts suggest increasing your running distance by no more than 10% each week",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-nine-provinces-jan:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:increase#e-56df56631e67bbea",
+          "text": "This optimization (优化) aims to increase the amount of carbon stored and extend the duration of its storage.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:increase#s2",
+      "pos": "v.",
+      "glossZh": "增长；上升",
+      "pronunciationId": "w:increase#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:increase#e-220a525ae56608fa",
+          "text": "Analyses of a language database also confirmed that there was a global change in the sound of world languages after the Neolithic age, with the use of “f” and “v” increasing remarkably during the last few thousand years.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "reading-d-5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 163,
+            "end": 173
+          }
+        },
+        {
+          "exampleId": "w:increase#e-2c8d2fd3b6338b33",
+          "text": "Its ridership will increase.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2024-ii:27",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:increase#e-b0c8895cb845929f",
+          "text": "The number of cars on roads has been increasing rapidly.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:increase#s3",
+      "pos": "n.",
+      "glossZh": "增长；增幅",
+      "pronunciationId": "w:increase#p-noun",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:increase#e-d23e7eac46e2495e",
+          "text": "A decrease in average rainfall and an increase in the severity of droughts (干旱) have led to an estimated 75 per cent of Tunisia’s agricultural lands being threatened by desertification.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:increase#e-21e19cbbc44bc0f6",
+          "text": "What has helped the increase of the grizzly population?",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2023-national-a:33",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:increase#e-e9dcc2078f89a19a",
+          "text": "Pingers are also linked with an increase in bycatch of seals, which seem to associate the sound with a potential meal.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:increase#s4",
+      "pos": "adj.",
+      "glossZh": "增加了的",
+      "pronunciationId": "w:increase#p-main",
+      "note": "屈折形式 increased 用于名词前。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:increase#e-3eab4efa6b06640a",
+          "text": "In the past, there was often an automatic reaction to increased traffic: just widen the roads, says Mark Poch, the Bellevue Transportation Department’s traffic engineering manager.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:increase#e-144e92f039718c2a",
+          "text": "Her success is just one example of increased time at home leading to an explosion in the houseplant industry.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 44
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "加针、月亮渐圆、后代",
+      "reason": "专业或旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,129 @@
+{
+  "entryId": "w:castle",
+  "headword": "castle",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɑːsl/",
+    "us": "/ˈkæsl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:castle#p-main",
+      "ipa": {
+        "uk": "/ˈkɑːsl/",
+        "us": "/ˈkæsl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "castles",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 21
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:castle#s1",
+      "pos": "n.",
+      "glossZh": "城堡；堡垒",
+      "pronunciationId": "w:castle#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 21
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:castle#e-cb9053d2b6516fa7",
+          "text": "Bordering the square, the Ludlow Castle is a “must explore” medieval stronghold.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:castle#e-19213eda70a041ed",
+          "text": "I heard from many people who already made daily visits, or who liked the idea of making daily visits, to places such as: the beach, public library, hiking trails, and even a castle!",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 174,
+            "end": 180
+          }
+        },
+        {
+          "exampleId": "w:castle#e-b7093a67bb30dbf9",
+          "text": "Also called “the castle of the fairy-tale king”, this 19th-century palace is among the most visited castles in Germany and the world.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 23
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "王车易位、将棋防守阵、蒸汽机车型号、姓氏",
+      "reason": "棋类用法、设备名或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

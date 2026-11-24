@@ -1,0 +1,146 @@
+{
+  "entryId": "w:prevent",
+  "headword": "prevent",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/prɪˈvent/",
+    "us": "/prɪˈvent/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:prevent#p-main",
+      "ipa": {
+        "uk": "/prɪˈvent/",
+        "us": "/prɪˈvent/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "prevented",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "preventing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "prevents",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 176
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:prevent#s1",
+      "pos": "v.",
+      "glossZh": "阻止",
+      "pronunciationId": "w:prevent#p-main",
+      "note": "常用 prevent sb/sth from doing sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 176
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:prevent#e-e068b28253c22fdd",
+          "text": "Scientists think this is the plants’ way to prevent the spread of any tree diseases and make life more difficult for leaf-eating insects like caterpillars.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:prevent#e-e466045c463a12ca",
+          "text": "David had a brain disease which prevented him from walking or running like other children, but at school his classmates thought of him as a regular kid.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "writing-continuation-7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:prevent#e-df13c4687089c4d1",
+          "text": "Lead researcher Dr. Helena Horder, of the University of Gothenburg in Sweden, said: “These findings are exciting because it’s possible that improving people’s cardiovascular(心血管的) fitness in middle age could delay or even prevent them from developing dementia.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 222,
+            "end": 229
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "先于；抢先",
+      "reason": "旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

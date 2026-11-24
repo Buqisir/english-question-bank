@@ -1,0 +1,146 @@
+{
+  "entryId": "w:premier",
+  "headword": "premier",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpremiə(r)/",
+    "us": "/prɪˈmɪr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:premier#p-main",
+      "ipa": {
+        "uk": "/ˈpremiə(r)/",
+        "us": "/prɪˈmɪr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "premiers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "senses": [
+    {
+      "senseId": "w:premier#s1",
+      "pos": "adj.",
+      "glossZh": "最杰出的",
+      "pronunciationId": "w:premier#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:premier#e-16ad4b4f5a1c99a2",
+          "text": "Every weekend this is “Wales” premier comedy club where having a great time is the order for both audiences and comedy stars alike.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:premier#e-8dea57430cda897e",
+          "text": "Join us for the Harvard Ceramics Program’s Winter 2025 Show and Sale, a premier event featuring original ceramic art and supporting artists and arts education.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:premier#e-02554f4b861f441d",
+          "text": "Welcome to the Grand Canal Cultural Heritage Digital Museum, a premier institution dedicated to preserving and showcasing the history of China's UNESCO World Heritage site, the Grand Canal.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 70
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:premier#s2",
+      "pos": "n.",
+      "glossZh": "政府首脑",
+      "pronunciationId": "w:premier#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "首演",
+      "reason": "通常用 premiere"
+    },
+    {
+      "glossZh": "船上副指挥官",
+      "reason": "航海旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

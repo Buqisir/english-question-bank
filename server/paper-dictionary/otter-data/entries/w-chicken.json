@@ -1,0 +1,323 @@
+{
+  "entryId": "w:chicken",
+  "headword": "chicken",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtʃɪkɪn/",
+    "us": "/ˈtʃɪkɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:chicken#p-main",
+      "ipa": {
+        "uk": "/ˈtʃɪkɪn/",
+        "us": "/ˈtʃɪkɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more chicken",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most chicken",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "chickens",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "chickened",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "chickening",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 49
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 46
+  },
+  "senses": [
+    {
+      "senseId": "w:chicken#s1",
+      "pos": "n.",
+      "glossZh": "鸡肉",
+      "pronunciationId": "w:chicken#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chicken#e-47fec07d6ebadd9f",
+          "text": "They planned to make French toast and chicken porridge.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:chicken#e-57c7e52e2182c0f3",
+          "text": "The arugula (芝麻菜)was to make a nice green salad, rounding out a roast chicken dinner.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-b-1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:chicken#e-6f60871b32630600",
+          "text": "I stuck the chicken in the freezer.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-b-1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chicken#s2",
+      "pos": "n.",
+      "glossZh": "鸡；家鸡",
+      "pronunciationId": "w:chicken#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chicken#e-ec6a0df46d1bd415",
+          "text": "Putting electric fencing around chicken houses and other farm animal quarters is also highly effective at getting grizzlies away.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:chicken#e-f0a1090a28610c55",
+          "text": "Grandma and Grandpa raised him along with lots of chickens and cattle.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:chicken#e-193929ed3641c243",
+          "text": "I rushed through caring for my chickens and pigeons.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chicken#s3",
+      "pos": "v.",
+      "glossZh": "因害怕而退缩",
+      "pronunciationId": "w:chicken#p-main",
+      "note": "chicken out",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chicken#e-3e30c0807fbc0e15",
+          "text": "actually wanted to drop the class at one point, but stopped short because I didn’t want to give him the satisfaction of my chickening out.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 123,
+            "end": 133
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chicken#s4",
+      "pos": "n.",
+      "glossZh": "胆小鬼",
+      "pronunciationId": "w:chicken#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:chicken#s5",
+      "pos": "adj.",
+      "glossZh": "胆怯的",
+      "pronunciationId": "w:chicken#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:chicken#s6",
+      "pos": "短语",
+      "glossZh": "鸡和蛋的问题（难以判断哪一个是原因）",
+      "pronunciationId": "w:chicken#p-main",
+      "note": "chicken and egg",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chicken#e-6e6016f72fb6290c",
+          "text": "And it’s really crucial to study these issues further so the chicken and egg problem can be solved.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-02-first",
+            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
+            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-02-first:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 68
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "毒品计量俚语、小锡壶等",
+      "reason": "俚语、旧义或同形义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

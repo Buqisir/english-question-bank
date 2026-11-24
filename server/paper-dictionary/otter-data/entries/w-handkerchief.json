@@ -1,0 +1,85 @@
+{
+  "entryId": "w:handkerchief",
+  "headword": "handkerchief",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈhæŋkətʃɪf/",
+    "us": "/ˈhæŋkərtʃɪf/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:handkerchief#p-main",
+      "ipa": {
+        "uk": "/ˈhæŋkətʃɪf/",
+        "us": "/ˈhæŋkərtʃɪf/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "handkerchiefs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "handkerchieves",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:handkerchief#s1",
+      "pos": "n.",
+      "glossZh": "手帕",
+      "pronunciationId": "w:handkerchief#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:handkerchief#s2",
+      "pos": "n.",
+      "glossZh": "颈巾",
+      "pronunciationId": "w:handkerchief#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

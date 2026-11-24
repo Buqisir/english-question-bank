@@ -1,0 +1,103 @@
+{
+  "entryId": "w:chopsticks",
+  "headword": "chopsticks",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtʃɒpstɪks/",
+    "us": "/ˈtʃɑːpstɪks/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:chopsticks#p-main",
+      "ipa": {
+        "uk": "/ˈtʃɒpstɪks/",
+        "us": "/ˈtʃɑːpstɪks/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:chopsticks#s1",
+      "pos": "n.",
+      "glossZh": "筷子",
+      "pronunciationId": "w:chopsticks#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chopsticks#e-cde5ab58f49123b3",
+          "text": "The way you handle chopsticks is important to avoid annoying your companions.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:chopsticks#e-4cc6a80748e5db9b",
+          "text": "The process is like trying to pick up broken tofu with chopsticks – not only is success unlikely, but the situation may even worsen.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 65
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "两指钢琴曲、手指游戏",
+      "reason": "曲目专名或游戏名称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

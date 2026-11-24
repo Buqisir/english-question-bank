@@ -1,0 +1,130 @@
+{
+  "entryId": "w:teenager",
+  "headword": "teenager",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtiːneɪdʒə(r)/",
+    "us": "/ˈtiːneɪdʒər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:teenager#p-main",
+      "ipa": {
+        "uk": "/ˈtiːneɪdʒə(r)/",
+        "us": "/ˈtiːneɪdʒər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "teenagers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 86
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 86
+  },
+  "senses": [
+    {
+      "senseId": "w:teenager#s1",
+      "pos": "n.",
+      "glossZh": "青少年",
+      "pronunciationId": "w:teenager#p-main",
+      "note": "通常指 13 至 19 岁。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:teenager#e-66cf4b076b66c7d4",
+          "text": "“I’m going to miss you so much, Poppy,” said the tall, thin teenager.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 68
+          }
+        },
+        {
+          "exampleId": "w:teenager#e-fc7084c91ce6ea88",
+          "text": "After long discussions we somehow agreed to do a study on the psychological well-being of teenagers.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:teenager#e-c7352dca5aa4d754",
+          "text": "When I was a teenager, a neighborhood friend __41__ a marathon race.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 21
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "用于狗的 teenagers",
+      "reason": "模拟题里的拟人称呼"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

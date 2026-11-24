@@ -1,0 +1,125 @@
+{
+  "entryId": "w:pronunciation",
+  "headword": "pronunciation",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/prəˌnʌnsiˈeɪʃn/",
+    "us": "/prəˌnʌnsiˈeɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:pronunciation#p-main",
+      "ipa": {
+        "uk": "/prəˌnʌnsiˈeɪʃn/",
+        "us": "/prəˌnʌnsiˈeɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "pronunciations",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:pronunciation#s1",
+      "pos": "n.",
+      "glossZh": "发音",
+      "pronunciationId": "w:pronunciation#p-main",
+      "note": "中间是 /nʌn/。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 11
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pronunciation#e-36022b794de3db7f",
+          "text": "I thought my pronunciation was the problem, so I explained again more slowly, but he still looked confused.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:pronunciation#e-af65f49e154e659d",
+          "text": "The pronunciation system of the Chinese language is quite different from that of English.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:pronunciation#e-5379823d6829c1e8",
+          "text": "If the child mispronounces the word, the caregiver will likely emphasize the correct pronunciation.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 98
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

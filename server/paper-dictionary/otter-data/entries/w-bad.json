@@ -1,0 +1,447 @@
+{
+  "entryId": "w:bad",
+  "headword": "bad",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bæd/",
+    "us": "/bæd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bad#p-main",
+      "ipa": {
+        "uk": "/bæd/",
+        "us": "/bæd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "badder",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "baddest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more bad",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most bad",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "worse",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "worst",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 197
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 192
+  },
+  "senses": [
+    {
+      "senseId": "w:bad#s1",
+      "pos": "adj.",
+      "glossZh": "坏的；差劲的；令人不快的",
+      "pronunciationId": "w:bad#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bad#e-195df38402aa2f0c",
+          "text": "How to remove a bad smell.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:bad#e-f3934df404c88027",
+          "text": "Work even in bad weather.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2024-i:23",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:bad#e-1347cac2f48a2e61",
+          "text": "Paragraph 1: I ran back to Gunter and told him the bad news.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bad#s2",
+      "pos": "adj.",
+      "glossZh": "不道德的；不正当的",
+      "pronunciationId": "w:bad#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bad#e-133e53b1c2fa4e60",
+          "text": "We prefer to describe emotional intelligence as a specific set of skills that can be used for either good or bad purposes.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 109,
+            "end": 112
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bad#s3",
+      "pos": "adj.",
+      "glossZh": "变质的；腐坏的",
+      "pronunciationId": "w:bad#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bad#e-a4cc68bcb1735745",
+          "text": "Cheese brine has a downside too: a smell similar to that of bad milk.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:bad#e-34b5dad3a50b176a",
+          "text": "But as days passed, the arugula went bad.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-b-1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bad#s4",
+      "pos": "adj.",
+      "glossZh": "难受的；伤心的；内疚的",
+      "pronunciationId": "w:bad#p-main",
+      "note": "feel bad。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bad#e-082b6a8a589ccee4",
+          "text": "You would be feeling almost as bad if arguments were even just competitions- like, say, tennis tournaments.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:bad#e-f1d68ec413ea52db",
+          "text": "He felt so bad that he walked out of the theater.",
+          "source": {
+            "paperId": "paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test",
+            "paperTitle": "漳州市2026届高中毕业年级第三次教学质量检测 英语试题",
+            "groupId": "group:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-zhangzhou-2026-05-third-teaching-quality-test:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bad#s5",
+      "pos": "adj.",
+      "glossZh": "有害的；对……不利的",
+      "pronunciationId": "w:bad#p-main",
+      "note": "be bad for。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bad#e-9b1870950c384711",
+          "text": "That said, technology isn’t necessarily bad for kids when used properly.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:bad#e-30827b124b274cf8",
+          "text": "Then came the choice: Would they like to watch a video about why eating that candy was bad for their teeth?",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 87,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:bad#e-821e1d169e5ecf9c",
+          "text": "Keep your house warm and your bedroom window closed especially on cold winter nights, as breathing cold air can be bad for your health.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-a:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 115,
+            "end": 118
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bad#s6",
+      "pos": "adj.",
+      "glossZh": "严重的；厉害的",
+      "pronunciationId": "w:bad#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bad#e-41c832bb0c837c70",
+          "text": "Her bad cough.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bad#s7",
+      "pos": "adj.",
+      "glossZh": "不擅长的",
+      "pronunciationId": "w:bad#p-main",
+      "note": "be bad at sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:bad#s8",
+      "pos": "adv.",
+      "glossZh": "很；非常",
+      "pronunciationId": "w:bad#p-main",
+      "note": "口语中可用 badly。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:bad#s9",
+      "pos": "短语",
+      "glossZh": "还不错；相当好",
+      "pronunciationId": "w:bad#p-main",
+      "note": "not bad。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "很酷或性感、虚假支票、剥核桃外皮、古旧 bid 过去式和经济学负价值商品",
+      "reason": "俚语、专业或同形用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

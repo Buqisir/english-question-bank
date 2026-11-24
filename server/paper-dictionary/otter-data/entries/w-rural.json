@@ -1,0 +1,135 @@
+{
+  "entryId": "w:rural",
+  "headword": "rural",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈrʊərəl/",
+    "us": "/ˈrʊrəl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:rural#p-main",
+      "ipa": {
+        "uk": "/ˈrʊərəl/",
+        "us": "/ˈrʊrəl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more rural",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most rural",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 60
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:rural#s1",
+      "pos": "adj.",
+      "glossZh": "乡村的",
+      "pronunciationId": "w:rural#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 60
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rural#e-bc07c5c42d50e402",
+          "text": "More than 25 years ago, Saroo Brierley lived in rural（农村）India.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:rural#e-6d1fc27600e9e7f3",
+          "text": "Each stop lasts an average of two days, and during that time the doctors and nurses on board provide rural（乡村）populations with basic medical care, X-ray scans and prescriptions.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 106
+          }
+        },
+        {
+          "exampleId": "w:rural#e-fc5b4c5864600a7f",
+          "text": "The government has struggled to come up with measures to address the problem, particularly in the poorer, rural areas east of the Volga River, including arranging doctor’s appointments by video chat and expanding financial aid programs to motivate doctors to practice medicine in remote parts of the country like Krasnoyarsk.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 106,
+            "end": 111
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "乡下人",
+      "reason": "过时名词用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

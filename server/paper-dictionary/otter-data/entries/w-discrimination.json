@@ -1,0 +1,139 @@
+{
+  "entryId": "w:discrimination",
+  "headword": "discrimination",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˌskrɪmɪˈneɪʃn/",
+    "us": "/dɪˌskrɪmɪˈneɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:discrimination#p-main",
+      "ipa": {
+        "uk": "/dɪˌskrɪmɪˈneɪʃn/",
+        "us": "/dɪˌskrɪmɪˈneɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "discriminations",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:discrimination#s1",
+      "pos": "n.",
+      "glossZh": "歧视；不公平的区别对待",
+      "pronunciationId": "w:discrimination#p-main",
+      "note": "常见 discrimination against sb。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:discrimination#e-661ccaaa4a320df0",
+          "text": "In this course we will analyze many interesting aspects of the sports industry: sports leagues, ticket pricing, salary negotiations, discrimination, and NCAA policies to name a few.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 133,
+            "end": 147
+          }
+        },
+        {
+          "exampleId": "w:discrimination#e-7b2498aaa38800da",
+          "text": "Less discrimination against women.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2021-national-a:34",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:discrimination#e-5960a24b62197bb2",
+          "text": "They repeatedly encountered discrimination and racial violence, such as fistfights with white players and fans.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:discrimination#s2",
+      "pos": "n.",
+      "glossZh": "辨别；辨别力",
+      "pronunciationId": "w:discrimination#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

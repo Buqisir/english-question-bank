@@ -1,0 +1,349 @@
+{
+  "entryId": "w:chain",
+  "headword": "chain",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tʃeɪn/",
+    "us": "/tʃeɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:chain#p-main",
+      "ipa": {
+        "uk": "/tʃeɪn/",
+        "us": "/tʃeɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "chains",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "chained",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "chaining",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 50
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 41
+  },
+  "senses": [
+    {
+      "senseId": "w:chain#s1",
+      "pos": "短语",
+      "glossZh": "供应链",
+      "pronunciationId": "w:chain#p-main",
+      "note": "supply chain",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chain#e-8a93a75461170a17",
+          "text": "Food waste is a growing concern in the restaurant, supermarket, and supply chain industries.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 80
+          }
+        },
+        {
+          "exampleId": "w:chain#e-f9fb202e4934f9a8",
+          "text": "Still, the young supply chain means manufacturing these batteries is currently about 30 percent more expensive, realistically pushing mass production toward the end of this decade.” We should be looking into lowering the cost while maintaining their strong performance at low temperatures,” says Phate Zhang, an EV news founder.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:chain#e-99698ab492cac582",
+          "text": "Looking ahead, the company will further strengthen its supply chain by expanding sourcing capabilities, improving logistics (物流) efficiency, and investing in production capacity and research and development.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:grammar-fill",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:grammar-fill:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 67
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chain#s2",
+      "pos": "短语",
+      "glossZh": "食物链",
+      "pronunciationId": "w:chain#p-main",
+      "note": "food chain",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chain#e-f62992a8e49deb49",
+          "text": "Experiments show that shading from panels can slow the growth of algae that fish eat and also reduce harmful algae, affecting the food chain.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 135,
+            "end": 140
+          }
+        },
+        {
+          "exampleId": "w:chain#e-35ed087e9234fb6b",
+          "text": "“It’s sad how widely human activities impact the ocean,” Chong says, noting that plastics in the patch not only entangle marine life or block their digestive systems, but also carry harmful substances up the food chain to higher-level organisms, ultimately threatening the balance of entire marine ecosystems.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 213,
+            "end": 218
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chain#s3",
+      "pos": "n.",
+      "glossZh": "链子；链条",
+      "pronunciationId": "w:chain#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:chain#s4",
+      "pos": "n.",
+      "glossZh": "一连串；连续的一系列",
+      "pronunciationId": "w:chain#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chain#e-dac49c77052c9e15",
+          "text": "When Claude itself is asked to reason, printing out its chain of thought to answer maths questions, the microscope suggests that the way the model says it reached a conclusion, and what it actually thought, might not always be the same.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:chain#e-ab334b67f13a3d01",
+          "text": "It is the bird’s way of saying, ‘This is me, and here I am.’” However, urbanization and habitat loss have broken this learning chain, causing local song “dialects” to disappear.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 127,
+            "end": 132
+          }
+        },
+        {
+          "exampleId": "w:chain#e-22893fb9040b9aa2",
+          "text": "When the yeast cell detects these chemical clues, it triggers a chain of internal gene expression, ultimately leading to a visible “output” – for example, the cell giving off a green light under a microscope to signal a “YES” answer, or remaining dull for a “NO”.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chain#s5",
+      "pos": "n.",
+      "glossZh": "连锁店；连锁企业",
+      "pronunciationId": "w:chain#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chain#e-b1eb3710447d4ef6",
+          "text": "When James Shapland spotted a gap in the market for a dog-friendly café that was half-way between a tiny, trendy coffee shop and a large chain, he started one himself, Coffi Lab – coffi is Welsh for coffee and the lab refers to Labradors (a breed of dog).",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 137,
+            "end": 142
+          }
+        },
+        {
+          "exampleId": "w:chain#e-45f07e909af4cf79",
+          "text": "Tall glass buildings, international coffee chains and shopping malls on every corner are replacing the streets that once defined each city’s character.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chain#s6",
+      "pos": "v.",
+      "glossZh": "用链子拴住；束缚",
+      "pronunciationId": "w:chain#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "测量长度单位、全序子集、链复形等",
+      "reason": "测量或数学专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

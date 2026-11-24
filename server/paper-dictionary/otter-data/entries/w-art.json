@@ -1,0 +1,282 @@
+{
+  "entryId": "w:art",
+  "headword": "art",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɑːt/",
+    "us": "/ɑːrt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:art#p-main",
+      "ipa": {
+        "uk": "/ɑːt/",
+        "us": "/ɑːrt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "arts",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "ARTs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 99,
+    "mock": 521
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 521
+  },
+  "senses": [
+    {
+      "senseId": "w:art#s1",
+      "pos": "n.",
+      "glossZh": "艺术；美术；艺术作品",
+      "pronunciationId": "w:art#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 69,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:art#e-12eca800edbbfc87",
+          "text": "The image of the reader appears throughout history, in art made long before books as we now know them came into being.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:art#e-8b3baab0dc93ef6c",
+          "text": "Don’t throw away your beginner art.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-ii:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:art#e-55117c17bc3bf89d",
+          "text": "What does Kevin think of abstract art?",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:art#s2",
+      "pos": "n.",
+      "glossZh": "艺术门类；艺术学科",
+      "pronunciationId": "w:art#p-main",
+      "note": "常用 the arts，可包括文学、音乐、戏剧等。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 25,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:art#e-62c7454b4af86822",
+          "text": "\"I’ve started a project to promote the teaching of the arts in our schools.\"",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:art#e-27f305a172944a45",
+          "text": "In the sciences and arts, those praised as geniuses were most often white men, of European origin.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:art#e-28239b491e59323e",
+          "text": "Turner, a 10th-grader at School for Creative and Performing Arts, is a familiar presence on Cincinnati’s stages.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 64
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:art#s3",
+      "pos": "n.",
+      "glossZh": "技巧；技艺",
+      "pronunciationId": "w:art#p-main",
+      "note": "常用 the art of sth/doing sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:art#e-fc8ef0fe1cb4b106",
+          "text": "To explain the art of magic.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:28",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:art#e-7921a4c1cf3431a5",
+          "text": "An essay on the art of writing.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2023-ii:28",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:art#e-64061066ece69615",
+          "text": "He knew all the kids and their pets by name; he carried in the groceries; he took note of unlocked doors, offered gardening advice and taught more than a few young boys the art of the curveball.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 173,
+            "end": 176
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Arthur 的昵称、ART 技术缩写、古英语形式",
+      "reason": "同形名称、缩写或过时用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

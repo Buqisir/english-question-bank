@@ -1,0 +1,142 @@
+{
+  "entryId": "w:motivate",
+  "headword": "motivate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈməʊtɪveɪt/",
+    "us": "/ˈmoʊtɪveɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:motivate#p-main",
+      "ipa": {
+        "uk": "/ˈməʊtɪveɪt/",
+        "us": "/ˈmoʊtɪveɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "motivated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "motivates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "motivating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 113
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:motivate#s1",
+      "pos": "v.",
+      "glossZh": "激发（某人做某事）的动力",
+      "pronunciationId": "w:motivate#p-main",
+      "note": "motivate sb to do sth。有时用于说明促使某人行动的原因。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 113
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:motivate#e-dd30dd7409c89997",
+          "text": "Motivate the audience to act.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:motivate#e-bbfc1e2b7269ce6f",
+          "text": "The government has struggled to come up with measures to address the problem, particularly in the poorer, rural areas east of the Volga River, including arranging doctor’s appointments by video chat and expanding financial aid programs to motivate doctors to practice medicine in remote parts of the country like Krasnoyarsk.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 239,
+            "end": 247
+          }
+        },
+        {
+          "exampleId": "w:motivate#e-7e3a6e47dfe5d4e6",
+          "text": "Jessica Pink, an undergraduate student, suggests taking online courses with a friend, so you can motivate each other to stay on track.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 105
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

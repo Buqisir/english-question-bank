@@ -1,0 +1,173 @@
+{
+  "entryId": "w:cooperate",
+  "headword": "cooperate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəʊˈɒpəreɪt/",
+    "us": "/koʊˈɑːpəreɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:cooperate#p-main",
+      "ipa": {
+        "uk": "/kəʊˈɒpəreɪt/",
+        "us": "/koʊˈɑːpəreɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "cooperated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "cooperates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "cooperating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 16
+  },
+  "senses": [
+    {
+      "senseId": "w:cooperate#s1",
+      "pos": "v.",
+      "glossZh": "合作；协作",
+      "pronunciationId": "w:cooperate#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cooperate#e-6db21cbc38ddf5f4",
+          "text": "How can animals of different species cooperate in defense?",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-guangdong-shantou-2026-03-first:32",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:cooperate#e-e292170d86cf0ad8",
+          "text": "In a similar time frame, a group of countries – led by China and including Russia, South Africa, Belarus and others – have announced their intention to cooperate on an International Lunar Research Station (ILRS) of their own.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-a:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 152,
+            "end": 161
+          }
+        },
+        {
+          "exampleId": "w:cooperate#e-bfb6698c3769de3e",
+          "text": "He also produced The Nobody and became a writer, cooperating with different artists on various storylines.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cooperate#s2",
+      "pos": "v.",
+      "glossZh": "配合；按要求协助",
+      "pronunciationId": "w:cooperate#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cooperate#e-343dd0a89a9f4935",
+          "text": "The experiment, conducted by neuroscientist Adrian Owen and his colleagues, suggested that the woman understood the instructions and decided to cooperate – despite appearing to be unresponsive.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 144,
+            "end": 153
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

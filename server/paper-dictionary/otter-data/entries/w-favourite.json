@@ -1,0 +1,299 @@
+{
+  "entryId": "w:favourite",
+  "headword": "favourite",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "favorite"
+  ],
+  "ipa": {
+    "uk": "/ˈfeɪvərɪt/",
+    "us": "/ˈfeɪvərɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:favourite#p-main",
+      "ipa": {
+        "uk": "/ˈfeɪvərɪt/",
+        "us": "/ˈfeɪvərɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more favorite",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most favorite",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "favorites",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "favorited",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "favoriting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "favouritemost",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more favourite",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most favourite",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "favourites",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "favourited",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "favouriting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 22,
+    "mock": 165
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 165
+  },
+  "senses": [
+    {
+      "senseId": "w:favourite#s1",
+      "pos": "adj.",
+      "glossZh": "最喜欢的",
+      "pronunciationId": "w:favourite#p-main",
+      "note": "美式拼写 favorite。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:favourite#e-e27cfe6749e6eb21",
+          "text": "All that week, Poppy didn’t seem interested in her dinner, her favorite toy, or even in her daily walk.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:favourite#e-54dde47344073fc6",
+          "text": "Another favourite trick is to cut or burn something, and then make it appear whole again.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:favourite#e-f1046bd7bb0b0d39",
+          "text": "“But that’s why this is one of my favorite books.”",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:2",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:favourite#s2",
+      "pos": "n.",
+      "glossZh": "最喜欢的人或事物",
+      "pronunciationId": "w:favourite#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:favourite#e-b05672a943b666fa",
+          "text": "Of all the stories of my early childhood, the one about a __36__ is my mother’s favorite.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 88
+          }
+        },
+        {
+          "exampleId": "w:favourite#e-ee395250de73bc5d",
+          "text": "And my favorite: Safe.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:favourite#e-da3b758b3d767909",
+          "text": "A 35-minute hand-clapping, foot-stomping musical version of a Mark Twain favorite returns with this Tall Stacks festival.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:favourite#s3",
+      "pos": "n.",
+      "glossZh": "最有希望获胜的人",
+      "pronunciationId": "w:favourite#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:favourite#s4",
+      "pos": "v.",
+      "glossZh": "加入收藏",
+      "pronunciationId": "w:favourite#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "太阳穴旁垂下的卷发",
+      "reason": "历史用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

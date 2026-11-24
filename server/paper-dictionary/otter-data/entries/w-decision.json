@@ -1,0 +1,130 @@
+{
+  "entryId": "w:decision",
+  "headword": "decision",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈsɪʒn/",
+    "us": "/dɪˈsɪʒn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:decision#p-main",
+      "ipa": {
+        "uk": "/dɪˈsɪʒn/",
+        "us": "/dɪˈsɪʒn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "decisions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 16,
+    "mock": 220
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:decision#s1",
+      "pos": "n.",
+      "glossZh": "决定；决策；判定",
+      "pronunciationId": "w:decision#p-main",
+      "note": "make a decision 指「作出决定」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 16,
+        "mock": 220
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:decision#e-e054e2897cebc067",
+          "text": "The tests show that the social environment is extremely influential when we’re making decisions.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:decision#e-4927365f78604f24",
+          "text": "In Wickenden’s book, she expanded on the history of the West and also on feminism, which of course influenced the girls’ decision to go to Elkhead.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 121,
+            "end": 129
+          }
+        },
+        {
+          "exampleId": "w:decision#e-c907b1b568bba0ae",
+          "text": "Allowing kids to eat what they want also exposes them to the natural consequences of their decisions.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 100
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "裁判判胜、投手胜负判定",
+      "reason": "体育专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,265 @@
+{
+  "entryId": "w:automatic",
+  "headword": "automatic",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌɔːtəˈmætɪk/",
+    "us": "/ˌɔːtəˈmætɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:automatic#p-main",
+      "ipa": {
+        "uk": "/ˌɔːtəˈmætɪk/",
+        "us": "/ˌɔːtəˈmætɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "dubious",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more automatic",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most automatic",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "automatics",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "senses": [
+    {
+      "senseId": "w:automatic#s1",
+      "pos": "adj.",
+      "glossZh": "自动的；无需人操控的",
+      "pronunciationId": "w:automatic#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:automatic#e-c0a4fb3392a8fa6e",
+          "text": "Why personally respond to an email when AI can instantly produce automatic replies filled with all the typical greetings and talking-points?",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:automatic#e-90f0e4104014f635",
+          "text": "It can be an automatic drainage system.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-02-first",
+            "paperTitle": "潍坊市2026届高考第一次模拟考试 英语",
+            "groupId": "group:paper-mock-shandong-weifang-2026-02-first:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-shandong-weifang-2026-02-first:34",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:automatic#e-3af0d3795137e793",
+          "text": "Even safety features like automatic lane-keeping are sometimes screen-controlled.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jinlishu-2026-dec-m1",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第一次联考",
+            "groupId": "group:paper-mock-zhejiang-jinlishu-2026-dec-m1:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-jinlishu-2026-dec-m1:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:automatic#s2",
+      "pos": "adj.",
+      "glossZh": "下意识的；不假思索的",
+      "pronunciationId": "w:automatic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:automatic#e-b8f64fff6d79e632",
+          "text": "In the past, there was often an automatic reaction to increased traffic: just widen the roads, says Mark Poch, the Bellevue Transportation Department’s traffic engineering manager.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:automatic#e-f9a77b5049656559",
+          "text": "My automatic “no” to anything that “wasn’t my thing” only kept me trapped in the same daily routine.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:automatic#e-d663046505affbf1",
+          "text": "Consequently, the brain frequently turns to the straightforward, automatic responses offered by System 1, with the more hard-working System 2 often agreeing to its suggestions.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-d:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 74
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:automatic#s3",
+      "pos": "adj.",
+      "glossZh": "自动取得的；必然发生的",
+      "pronunciationId": "w:automatic#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:automatic#e-da8005b7cc12b167",
+          "text": "The UK government, for example, is exploring policies that would give tech companies automatic access to creative works unless creators opt out.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 94
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:automatic#s4",
+      "pos": "n.",
+      "glossZh": "自动挡汽车",
+      "pronunciationId": "w:automatic#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "自动枪械；函数自动管理或状态机",
+      "reason": "武器或编程专门义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

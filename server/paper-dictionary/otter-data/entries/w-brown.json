@@ -1,0 +1,254 @@
+{
+  "entryId": "w:brown",
+  "headword": "brown",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/braʊn/",
+    "us": "/braʊn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:brown#p-main",
+      "ipa": {
+        "uk": "/braʊn/",
+        "us": "/braʊn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "browner",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "brownest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more brown",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most brown",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more Brown",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most Brown",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "browns",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Browns",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "browned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "browning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 40
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 36
+  },
+  "senses": [
+    {
+      "senseId": "w:brown#s1",
+      "pos": "adj.",
+      "glossZh": "棕色的；褐色的",
+      "pronunciationId": "w:brown#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:brown#e-b0f2a403311b03bb",
+          "text": "My classmates ranged from those kids with pale skin and large blue eyes to those with rich brown skin and dark hair.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:brown#e-68e2ff8aaf193179",
+          "text": "The basket in her hands held a dozen brown eggs, each one different in size.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:brown#e-d81f376d1ad34b45",
+          "text": "They picked out a little hamster（仓鼠）with soft brown fur and shiny black eyes.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:brown#s2",
+      "pos": "n.",
+      "glossZh": "棕色；褐色",
+      "pronunciationId": "w:brown#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:brown#e-16a29f53d04376c1",
+          "text": "When I __46__ Vegas, the green turned a dull desert brown.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:brown#s3",
+      "pos": "v.",
+      "glossZh": "变成棕色；把食物煎成棕黄色",
+      "pronunciationId": "w:brown#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:brown#e-5bff6eabbb3e094f",
+          "text": "The limited sale is an early test run for the controversial apple, which has been genetically modified to rid the browning that occurs when an apple is bitten, sliced or left out in the open air.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 129
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏、布朗大学、斯诺克棕球等",
+      "reason": "专名、俚语或领域专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

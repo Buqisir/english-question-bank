@@ -1,0 +1,62 @@
+{
+  "entryId": "w:p.m.",
+  "headword": "p.m.",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "p.m"
+  ],
+  "ipa": {
+    "uk": "/ˌpiː ˈem/",
+    "us": "/ˌpiː ˈem/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:p.m.#p-main",
+      "ipa": {
+        "uk": "/ˌpiː ˈem/",
+        "us": "/ˌpiː ˈem/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 3,
+    "mock": 44
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 44
+  },
+  "senses": [
+    {
+      "senseId": "w:p.m.#s1",
+      "pos": "abbr.",
+      "glossZh": "下午或晚上的（用于时刻之后）",
+      "pronunciationId": "w:p.m.#p-main",
+      "note": "真题原文有 At 2:00 p.m. 等时刻，索引跨度只覆盖 p，例句暂无法绑定。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,142 @@
+{
+  "entryId": "w:valley",
+  "headword": "valley",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈvæli/",
+    "us": "/ˈvæli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:valley#p-main",
+      "ipa": {
+        "uk": "/ˈvæli/",
+        "us": "/ˈvæli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "valleys",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 34
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 33
+  },
+  "senses": [
+    {
+      "senseId": "w:valley#s1",
+      "pos": "n.",
+      "glossZh": "山谷",
+      "pronunciationId": "w:valley#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:valley#e-3080c521a69447dd",
+          "text": "Habitat Restoration Team volunteers play a vital role in restoring sensitive resources and protecting endangered species across the ridges and valleys.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 143,
+            "end": 150
+          }
+        },
+        {
+          "exampleId": "w:valley#e-026fc810603e93cb",
+          "text": "The __50__: The roads there went through large valleys where I’d be riding uphill for miles at a time.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:cloze:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:valley#e-4edc92c576483e03",
+          "text": "As we walked down a muddy valley, a waterfall blocked our way.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:cloze:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:valley#s2",
+      "pos": "n.",
+      "glossZh": "流域",
+      "pronunciationId": "w:valley#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "单独出现的 the Valley",
+      "reason": "无法判断所指地名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

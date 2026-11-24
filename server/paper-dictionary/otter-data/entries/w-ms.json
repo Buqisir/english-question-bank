@@ -1,0 +1,125 @@
+{
+  "entryId": "w:ms",
+  "headword": "Ms",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "Ms."
+  ],
+  "ipa": {
+    "uk": "/mɪz/",
+    "us": "/mɪz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ms#p-main",
+      "ipa": {
+        "uk": "/mɪz/",
+        "us": "/mɪz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 13,
+    "mock": 105
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 105
+  },
+  "senses": [
+    {
+      "senseId": "w:ms#s1",
+      "pos": "缩写",
+      "glossZh": "女士（不表明婚姻状况）",
+      "pronunciationId": "w:ms#p-main",
+      "note": "用于姓氏或姓名之前。美式英语通常写 Ms.。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ms#e-8e91f096c402e59e",
+          "text": "Most page turners are piano students or up-and-coming concert pianists, although Ms Raspopova has once asked her husband to help her out on stage.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:ms#e-2fc48c67bbcecf26",
+          "text": "Why does Ms. McDaniel talk to Frank?",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:ms#e-b94bd7555b538648",
+          "text": "Determined to turn her life around, Ms Donohue began to work out and follow a __45__ lifestyle, before discovering a __46__ for weightlifting.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 38
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "多发性硬化症、理学硕士、手稿等缩写",
+      "reason": "大写同形缩写，模拟 m14 和 m15 属于多发性硬化症"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

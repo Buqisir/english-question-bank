@@ -1,0 +1,251 @@
+{
+  "entryId": "w:nature",
+  "headword": "nature",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈneɪtʃə(r)/",
+    "us": "/ˈneɪtʃər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:nature#p-main",
+      "ipa": {
+        "uk": "/ˈneɪtʃə(r)/",
+        "us": "/ˈneɪtʃər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "natures",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 39,
+    "mock": 391
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 390
+  },
+  "senses": [
+    {
+      "senseId": "w:nature#s1",
+      "pos": "n.",
+      "glossZh": "自然；自然界",
+      "pronunciationId": "w:nature#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 34,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:nature#e-1b231eb1c69b8d4d",
+          "text": "The result was Project Wild Thing, a film which charts the birth of the World Network, a group of organisations with the common goal of getting children out into nature.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 162,
+            "end": 168
+          }
+        },
+        {
+          "exampleId": "w:nature#e-48879a056da34e3c",
+          "text": "Past research has found health and wellness benefits of nature for humans, but a new study shows that wildness in urban areas is extremely important for human well-being.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:nature#e-deb242f6aa270acb",
+          "text": "“Adding more nature to our environment can change our mood and how we think.” Plants can improve our state of mind in a few ways but the biggest is by decreasing our level of cortisol, the stress hormone（激素）in our body.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:nature#s2",
+      "pos": "n.",
+      "glossZh": "本质；性质",
+      "pronunciationId": "w:nature#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:nature#e-b118c09d93b3b5ae",
+          "text": "But we want to go beyond one man and explore the nature of genius itself.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:nature#e-beaa40150bec684d",
+          "text": "If we readjust our view of arguments – from a verbal fight or tennis game to a reasoned exchange through which we all gain respect and understanding from each other -then we change the very nature of what it means to “win” an argument.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 190,
+            "end": 196
+          }
+        },
+        {
+          "exampleId": "w:nature#e-a80f4654b71e3f9c",
+          "text": "Yet integrating play into a formal school setting can be challenging because the nature of play and the nature of school are often in conflict.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-a:14",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 87
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:nature#s3",
+      "pos": "n.",
+      "glossZh": "本性",
+      "pronunciationId": "w:nature#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:nature#e-5a51b073ecc369d6",
+          "text": "These adorable little hunters are just doing something that has been in their nature since the beginning of time.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 84
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:nature#s4",
+      "pos": "n.",
+      "glossZh": "种类；性质相同的一类",
+      "pronunciationId": "w:nature#p-main",
+      "note": "of this nature。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "《自然》及其子刊名称",
+      "reason": "刊物专名，如模拟 m3、m5、m15 和 m19。"
+    },
+    {
+      "glossZh": "身体分泌物；赋予自然性质（动词）",
+      "reason": "罕见旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

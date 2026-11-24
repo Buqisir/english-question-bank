@@ -1,0 +1,143 @@
+{
+  "entryId": "w:ancestor",
+  "headword": "ancestor",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈænsestə(r)/",
+    "us": "/ˈænsestər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ancestor#p-main",
+      "ipa": {
+        "uk": "/ˈænsestə(r)/",
+        "us": "/ˈænsestər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "ancestors",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 23
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 21
+  },
+  "senses": [
+    {
+      "senseId": "w:ancestor#s1",
+      "pos": "n.",
+      "glossZh": "祖先；祖辈",
+      "pronunciationId": "w:ancestor#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ancestor#e-e39b8ed59210b823",
+          "text": "We are tempted by sugary treats because our ancestors lived in a calorie-poor world, and our brains developed a response mechanism to these treats that reflected their value-a feeling of reward and satisfaction.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:ancestor#e-27543134e4423f16",
+          "text": "Now, whenever I enter the ocean, I remember my ancestors for whom the sea was a place of terror rather than freedom.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:ancestor#e-7a2218402337c7f5",
+          "text": "It is a time to pay respects to ancestors through various rituals, including the floating of water lanterns.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:grammar-fill:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ancestor#s2",
+      "pos": "n.",
+      "glossZh": "祖先种；前身",
+      "pronunciationId": "w:ancestor#p-main",
+      "note": "用于生物演化和事物发展。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "祖仙（可穿越多重地点的神）",
+      "reason": "特定信仰与翻译语境"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

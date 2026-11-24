@@ -1,0 +1,230 @@
+{
+  "entryId": "w:helicopter",
+  "headword": "helicopter",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈhelɪkɒptə(r)/",
+    "us": "/ˈhelɪkɑːptər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:helicopter#p-main",
+      "ipa": {
+        "uk": "/ˈhelɪkɒptə(r)/",
+        "us": "/ˈhelɪkɑːptər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "helicopters",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "helicoptered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "helicoptering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "senses": [
+    {
+      "senseId": "w:helicopter#s1",
+      "pos": "n.",
+      "glossZh": "直升机",
+      "pronunciationId": "w:helicopter#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:helicopter#e-16eaec40b8e8b5d3",
+          "text": "He told me a helicopter was on its way, but it would be 30 minutes before it arrived.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:helicopter#e-1b0ad249de942205",
+          "text": "At that very moment, the helicopter arrived.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:helicopter#e-991ee81272f5b2f1",
+          "text": "As I watched him being flown off the mountain by helicopter, relief flooded through me – and then reality hit.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 59
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:helicopter#s2",
+      "pos": "短语",
+      "glossZh": "过度干预子女生活的父母",
+      "pronunciationId": "w:helicopter#p-main",
+      "note": "helicopter parent 或 helicopter mom。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:helicopter#e-8804ebad0a158361",
+          "text": "As a textbook “helicopter mom,” I checked the backyard for hidden dangers before letting him play, carried a fully stocked emergency kit to his T-ball games, and flatly declined all concerts or crowded outings – fearing crushes, fires, or unforeseen disasters.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:helicopter#e-5048bc2ec7716c3b",
+          "text": "I became a helicopter mom, checking the backyard for anything dangerous before letting David out to play – under my strict supervision（监督）.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:helicopter#e-e7406714f529613a",
+          "text": "For as long as I could remember my mom had been a helicopter parent, hovering (盘旋) over me all the time.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-04-second",
+            "paperTitle": "太原市2026年高三年级模拟考试（二）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-04-second:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:helicopter#s3",
+      "pos": "v.",
+      "glossZh": "用直升机运送",
+      "pronunciationId": "w:helicopter#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "混凝土抹平机、带翼果实、旋转舞步",
+      "reason": "专门用法或罕见俗称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

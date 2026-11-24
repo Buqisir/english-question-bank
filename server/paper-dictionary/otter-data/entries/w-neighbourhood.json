@@ -1,0 +1,189 @@
+{
+  "entryId": "w:neighbourhood",
+  "headword": "neighbourhood",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "neighborhood"
+  ],
+  "ipa": {
+    "uk": "/ˈneɪbəhʊd/",
+    "us": "/ˈneɪbərhʊd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:neighbourhood#p-main",
+      "ipa": {
+        "uk": "/ˈneɪbəhʊd/",
+        "us": "/ˈneɪbərhʊd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "neighborhoods",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "neighbourhoods",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 113
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 112
+  },
+  "senses": [
+    {
+      "senseId": "w:neighbourhood#s1",
+      "pos": "n.",
+      "glossZh": "街区；居住区",
+      "pronunciationId": "w:neighbourhood#p-main",
+      "note": "美式拼写 neighborhood。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:neighbourhood#e-9fbf046a984fa50c",
+          "text": "pay for their house, often working hours not of their choosing, living in car-dependent neighborhoods with limited public transport.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:neighbourhood#e-da2f1156ea249b7e",
+          "text": "Jaramillo’s students live in neighborhoods where fresh food and green space are not easy to find and fast food restaurants outnumber grocery stores.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:neighbourhood#e-5a98f13ceba1ac9a",
+          "text": "Whole neighbourhoods were destroyed to make way for new road networks and kids had to play elsewhere.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:neighbourhood#s2",
+      "pos": "n.",
+      "glossZh": "邻近地区的居民",
+      "pronunciationId": "w:neighbourhood#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:neighbourhood#e-5e4230155031e5ca",
+          "text": "To Lila, it looked like a “wound” that the neighborhood had simply learned to ignore.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:neighbourhood#s3",
+      "pos": "短语",
+      "glossZh": "约为；大约值为",
+      "pronunciationId": "w:neighbourhood#p-main",
+      "note": "in the neighbourhood of。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "拓扑邻域；图的邻域",
+      "reason": "数学术语"
+    },
+    {
+      "glossZh": "Neighborhood Playhouse",
+      "reason": "学校名称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

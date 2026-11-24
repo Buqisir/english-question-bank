@@ -1,0 +1,187 @@
+{
+  "entryId": "w:cave",
+  "headword": "cave",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/keɪv/",
+    "us": "/keɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:cave#p-main",
+      "ipa": {
+        "uk": "/keɪv/",
+        "us": "/keɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "caves",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "caved",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "caving",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 45
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 43
+  },
+  "senses": [
+    {
+      "senseId": "w:cave#s1",
+      "pos": "n.",
+      "glossZh": "洞穴；山洞",
+      "pronunciationId": "w:cave#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cave#e-b56bfc55a801c104",
+          "text": "“Tom Sawyer: A River Adventure” has all the good stuff, including the fence painting, the graveyard, the island and the cave.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 120,
+            "end": 124
+          }
+        },
+        {
+          "exampleId": "w:cave#e-aecd47dfb783d209",
+          "text": "Another recent study found that Stone Age humans created “hidden” art in dark caves that could only be lighted and viewed with appropriate lighting.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:cave#e-f42e66c8544f6520",
+          "text": "This area also has beautiful clifftop walks and sea caves that can be explored at low tide (潮汐).",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cave#s2",
+      "pos": "短语",
+      "glossZh": "倒塌；塌陷",
+      "pronunciationId": "w:cave#p-main",
+      "note": "cave in。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:cave#s3",
+      "pos": "v.",
+      "glossZh": "进行洞穴探险",
+      "pronunciationId": "w:cave#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:cave#s4",
+      "pos": "短语",
+      "glossZh": "屈服；让步",
+      "pronunciationId": "w:cave#p-main",
+      "note": "cave in。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "核实验屏蔽室、钻孔堵塞物、旧党派称呼等",
+      "reason": "专业用法或历史称呼"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

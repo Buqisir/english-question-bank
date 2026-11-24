@@ -1,0 +1,181 @@
+{
+  "entryId": "w:discussion",
+  "headword": "discussion",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈskʌʃn/",
+    "us": "/dɪˈskʌʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:discussion#p-main",
+      "ipa": {
+        "uk": "/dɪˈskʌʃn/",
+        "us": "/dɪˈskʌʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "discussions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 82
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 82
+  },
+  "senses": [
+    {
+      "senseId": "w:discussion#s1",
+      "pos": "n.",
+      "glossZh": "讨论；商谈",
+      "pronunciationId": "w:discussion#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 16,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:discussion#e-8f95f3926eb7ab99",
+          "text": "After long discussions we somehow agreed to do a study on the psychological well-being of teenagers.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:writing-continuation:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:discussion#e-6cdfec83a97dde75",
+          "text": "After a heated discussion that lasted for what seemed like a century, Gunter put his phone down and started the car.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:discussion#e-54b319d545cfc189",
+          "text": "Paragraph 1: In a class discussion, I was invited to explain the meaning of my name.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:discussion#s2",
+      "pos": "n.",
+      "glossZh": "论述；讨论部分",
+      "pronunciationId": "w:discussion#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:discussion#e-32b094104ffda023",
+          "text": "Readers will encounter not only stories they have heard before, but some new stories and a moving discussion of the responsibility of the engineer to the public and the ways young engineers can be helped to grasp them.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 108
+          }
+        },
+        {
+          "exampleId": "w:discussion#e-ade5a7cfe5ed866a",
+          "text": "In part one, I describe the philosophical foundations of digital minimalism, starting with an examination of the forces that are making so many people’s digital lives increasingly intolerable, before moving on to a detailed discussion of the digital minimalism philosophy.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 224,
+            "end": 234
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "肿瘤扩散",
+      "reason": "旧式医学用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

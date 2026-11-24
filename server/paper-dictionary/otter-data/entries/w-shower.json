@@ -1,0 +1,437 @@
+{
+  "entryId": "w:shower",
+  "headword": "shower",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈʃaʊə(r)/",
+    "us": "/ˈʃaʊər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:shower#p-main",
+      "ipa": {
+        "uk": "/ˈʃaʊə(r)/",
+        "us": "/ˈʃaʊər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "showers",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "showered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "showering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 35
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 23
+  },
+  "senses": [
+    {
+      "senseId": "w:shower#s1",
+      "pos": "n.",
+      "glossZh": "阵雨",
+      "pronunciationId": "w:shower#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shower#e-8c91e815cc8b4363",
+          "text": "This is real rain-your umbrella may protect you in a shower, but it won’t keep you dry if there is a full rainstorm.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:shower#e-bddefc2b6e9df822",
+          "text": "Wet from another shower and with a torn map, we felt even more __47__.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:cloze:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:shower#e-18f954575fd5bd6a",
+          "text": "April showers bring May flowers.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-05-second-mock",
+            "paperTitle": "菏泽市2026年高三二模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-05-second-mock:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-shandong-heze-2026-05-second-mock:27",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shower#s2",
+      "pos": "n.",
+      "glossZh": "淋浴设备",
+      "pronunciationId": "w:shower#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shower#e-7b8ccd8dd89c99e4",
+          "text": "● Bring your own bed: campgrounds are much less costly than hotels, and many campgrounds come equipped with showers, toilets and laundry.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-05-third-survey-test",
+            "paperTitle": "南通市2026届高三第三次调研测试 英语试题",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-05-third-survey-test:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 108,
+            "end": 115
+          }
+        },
+        {
+          "exampleId": "w:shower#e-aa53586b2029a300",
+          "text": "Its shower wasn’t working.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shower#s3",
+      "pos": "n.",
+      "glossZh": "淋浴",
+      "pronunciationId": "w:shower#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shower#e-35725f4479014a03",
+          "text": "For example, you can try to finish a task within a limited time, volunteer to speak in public, or end your shower with a short burst of cold water.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 113
+          }
+        },
+        {
+          "exampleId": "w:shower#e-40520c76cf627d26",
+          "text": "But it could also be doing something unrelated, like taking a shower or washing the dishes.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 69,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:shower#e-b6cbe36c3d13b4e8",
+          "text": "The trick, she said, was to take a cold shower.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shower#s4",
+      "pos": "n.",
+      "glossZh": "阵落",
+      "pronunciationId": "w:shower#p-main",
+      "note": "如 meteor shower「流星雨」。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shower#e-08494a72c7620055",
+          "text": "The Geminid meteor (流星) shower, an annual highlight for skywatchers, is set to reach its peak intensity in mid-December.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-01-first-semester-quality-assessment",
+            "paperTitle": "山东省泰安市2025-2026学年第一学期普通高中质量检测 高三年级英语试卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shower#s5",
+      "pos": "n.",
+      "glossZh": "送礼聚会",
+      "pronunciationId": "w:shower#p-main",
+      "note": "如 baby shower，亲友给准父母送婴儿用品。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shower#e-33255853246119f4",
+          "text": "When will Lisa go to the baby shower?",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shower#s6",
+      "pos": "v.",
+      "glossZh": "洗淋浴",
+      "pronunciationId": "w:shower#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shower#e-4b140065529985f4",
+          "text": "Mom and Dad had redesigned the kitchen and bathroom to make cooking and showering as easy as possible for me, since the disease had robbed me of my balance.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:shower#e-ce8627cea7b53224",
+          "text": "People often find solutions better after unfocused thinking than intentional effort alone, especially during routine tasks like driving or showering.",
+          "source": {
+            "paperId": "paper-mock-jiaxing-2026-apr-m179",
+            "paperTitle": "嘉兴市2026年高三教学测试",
+            "groupId": "group:paper-mock-jiaxing-2026-apr-m179:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiaxing-2026-apr-m179:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 139,
+            "end": 148
+          }
+        },
+        {
+          "exampleId": "w:shower#e-2f64a950386e2946",
+          "text": "She usually __41__ herself with a few toys when I quickly showered and got ready for the day.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shower#s7",
+      "pos": "v.",
+      "glossZh": "（成阵）洒落",
+      "pronunciationId": "w:shower#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:shower#s8",
+      "pos": "v.",
+      "glossZh": "大量给予",
+      "pronunciationId": "w:shower#p-main",
+      "note": "shower somebody with gifts。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "杂耍动作、比赛展示者、战斗、一群无能的人",
+      "reason": "专门义、过时义或地区俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

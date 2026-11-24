@@ -1,0 +1,403 @@
+{
+  "entryId": "w:question",
+  "headword": "question",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkwestʃən/",
+    "us": "/ˈkwestʃən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:question#p-main",
+      "ipa": {
+        "uk": "/ˈkwestʃən/",
+        "us": "/ˈkwestʃən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "questions",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "questioned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "questioning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 48,
+    "mock": 478
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 476
+  },
+  "senses": [
+    {
+      "senseId": "w:question#s1",
+      "pos": "n.",
+      "glossZh": "提问的问题",
+      "pronunciationId": "w:question#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 34,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:question#e-ed2d9166631aa9b1",
+          "text": "Do not be afraid to ask your doctor any questions you have.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:question#e-bd1c7cd0c3ac6b1c",
+          "text": "If you can start the conversation with a question other than “What do you do for a living?”, you’ll be able to get a lot more interesting conversation out of whomever it is you’re talking to.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:question#e-c8c7bf64e5a55192",
+          "text": "And then, at the end of the lesson, one child asked me a question: “Have you always wanted to be a __46__, Miss?” I explained that when I was his age, I actually wanted to be a writer, but I didn’t think I quite had what it __47__.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:cloze:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:question#s2",
+      "pos": "n.",
+      "glossZh": "有待研究的议题",
+      "pronunciationId": "w:question#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:question#e-0aef7563b53e59c5",
+          "text": "Although the studies led by Navajas have limitations and many questions remain, the potential implications for group discussion and decision-making are enormous.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:question#e-f44ee0e8411286f8",
+          "text": "What Hammond is referring to is the question of meaning, and meaning is central to what distinguishes the least intelligent of humans from the most intelligent of machines.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:question#e-e4cb9bf415cf5b2a",
+          "text": "Another question left unanswered is the level of exercise that might best improve learning.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:question#s3",
+      "pos": "n.",
+      "glossZh": "疑虑",
+      "pronunciationId": "w:question#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:question#e-38718f3786592164",
+          "text": "And there are questions about the films made outside the States, which sometimes are not monitored as closely as productions filmed in the States.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:question#s4",
+      "pos": "v.",
+      "glossZh": "质疑",
+      "pronunciationId": "w:question#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:question#e-de7a2b0733469e54",
+          "text": "If we want to reconstruct what was actually going on that day, the shield must be questioned and interpreted as deeply and strictly as the",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 92
+          }
+        },
+        {
+          "exampleId": "w:question#e-acf99e1502c8bc53",
+          "text": "The recovery process seemed surprisingly __46__, which made him feel defeated and question his future.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:cloze:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:question#e-53d4f49eaf222ff5",
+          "text": "To question the video’s credibility.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-second:24",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:question#s5",
+      "pos": "v.",
+      "glossZh": "询问",
+      "pronunciationId": "w:question#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:question#s6",
+      "pos": "adj.",
+      "glossZh": "带着疑惑的",
+      "pronunciationId": "w:question#p-main",
+      "note": "用 questioning。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:question#e-d2edf1f14a689763",
+          "text": "Whenever I tell people that I teach English at the Berlin Zoo, I almost always get a questioning look.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 96
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:question#s7",
+      "pos": "短语",
+      "glossZh": "所谈到的",
+      "pronunciationId": "w:question#p-main",
+      "note": "in question。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:question#e-9d329eb26f433a22",
+          "text": "It took him a few tries to find the word in question.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 52
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "刑讯",
+      "reason": "历史义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

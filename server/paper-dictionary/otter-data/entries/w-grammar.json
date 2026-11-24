@@ -1,0 +1,143 @@
+{
+  "entryId": "w:grammar",
+  "headword": "grammar",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɡræmə(r)/",
+    "us": "/ˈɡræmər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:grammar#p-main",
+      "ipa": {
+        "uk": "/ˈɡræmə(r)/",
+        "us": "/ˈɡræmər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "grammars",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 14,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 11,
+    "mock": 20
+  },
+  "senses": [
+    {
+      "senseId": "w:grammar#s1",
+      "pos": "n.",
+      "glossZh": "语法",
+      "pronunciationId": "w:grammar#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:grammar#e-ded29fa6f36a95c4",
+          "text": "Don’t worry about grammar or spelling.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:grammar#e-d765b2f7c9bacbe5",
+          "text": "I asked my older sister to correct my grammar.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:5",
+              "sentence": 16
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:grammar#e-c6810ba2e6dedb73",
+          "text": "That means good grammar and no spelling mistakes.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-i:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:grammar#s2",
+      "pos": "n.",
+      "glossZh": "语法书",
+      "pronunciationId": "w:grammar#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "文法学校的简称",
+      "reason": "主要用于 grammar school"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

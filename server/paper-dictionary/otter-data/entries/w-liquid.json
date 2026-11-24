@@ -1,0 +1,226 @@
+{
+  "entryId": "w:liquid",
+  "headword": "liquid",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈlɪkwɪd/",
+    "us": "/ˈlɪkwɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:liquid#p-main",
+      "ipa": {
+        "uk": "/ˈlɪkwɪd/",
+        "us": "/ˈlɪkwɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more liquid",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most liquid",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "liquids",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 53
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 49
+  },
+  "senses": [
+    {
+      "senseId": "w:liquid#s1",
+      "pos": "n.",
+      "glossZh": "液体",
+      "pronunciationId": "w:liquid#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:liquid#e-c0b389f70420b1bc",
+          "text": "Milwaukee, Wisconsin, is road testing a new way to keep winter roads ice-free -by spreading on them cheese brine, the salty liquid used to make soft cheeses, like mozzarella.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 124,
+            "end": 130
+          }
+        },
+        {
+          "exampleId": "w:liquid#e-7e6a76d62f3c55e5",
+          "text": "Pack a bag, cut a cake, guess which juice container holds the most liquid, and much more.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:17",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:liquid#e-0016059e220587cc",
+          "text": "When temperature is raised to 31°C, and pressure is increased to 7.37 MPa, CO₂ enters its supercritical state, where it exhibits properties of both a liquid and a gas.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 150,
+            "end": 156
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:liquid#s2",
+      "pos": "adj.",
+      "glossZh": "液态的",
+      "pronunciationId": "w:liquid#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:liquid#e-cb00e0f315ce8b6c",
+          "text": "Although sodium ions are larger, they form weaker bonds with the liquid electrolyte than lithium does.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:liquid#e-22707a527eaab69f",
+          "text": "Constantinou said resolving the question could help astronomers rule out Venus as a habitable planet now that the dry interior of Venus suggests it never has the oceans of liquid water traditionally thought necessary for life to begin.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 172,
+            "end": 178
+          }
+        },
+        {
+          "exampleId": "w:liquid#e-714d3fbab806bfd0",
+          "text": "This occurs because the surface tension – the invisible, stretchy “skin” of liquid water – is too strong for the small drops to overcome.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 76,
+            "end": 82
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:liquid#s3",
+      "pos": "adj.",
+      "glossZh": "易于变现的",
+      "pronunciationId": "w:liquid#p-main",
+      "note": "金融用法，如 liquid assets。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "液音",
+      "reason": "语言学术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

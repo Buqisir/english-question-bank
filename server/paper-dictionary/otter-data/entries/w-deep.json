@@ -1,0 +1,461 @@
+{
+  "entryId": "w:deep",
+  "headword": "deep",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/diːp/",
+    "us": "/diːp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:deep#p-main",
+      "ipa": {
+        "uk": "/diːp/",
+        "us": "/diːp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "deeper",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "deepest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more deep",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most deep",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 313
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 308
+  },
+  "senses": [
+    {
+      "senseId": "w:deep#s1",
+      "pos": "adj.",
+      "glossZh": "深的；有一定深度的",
+      "pronunciationId": "w:deep#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:deep#e-cd9f499393a4bc55",
+          "text": "I climbed to the top of a small rise and realised that the mist was little more than a few feet deep, and though it was only a short climb, I found myself completely above it and looking at a wonderfully clear view of Skiddaw with the sun setting in the west.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-a:figure-8f50d0ac5d38cb0b:cell-1-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:deep#e-605be67db9910cb1",
+          "text": "People still want to eat fish, so the fishing industry must look at other sources, especially the deep waters of the Atlantic.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:deep#e-1e6df6bfaf27da56",
+          "text": "There, they would walk through deep water, sit down cross-legged underwater and hold their __52__ while they watched all action going on around them.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:cloze:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:deep#s2",
+      "pos": "adj.",
+      "glossZh": "强烈的；深厚的",
+      "pronunciationId": "w:deep#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:deep#e-262d3228deb094df",
+          "text": "He has a deep love for the theater.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jul:21",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:deep#e-d78e73f514e3e968",
+          "text": "It’s been 33 years since Jim left the route, but we are still reminded of the deep bond established between community and letter carrier.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:deep#e-720ae6333f9dd3c5",
+          "text": "Seeing the energy and kindness in the woman’s eyes, a warmth and deep respect welled up inside Emily.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:writing-continuation:11",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:deep#s3",
+      "pos": "adj.",
+      "glossZh": "深刻的；深入的",
+      "pronunciationId": "w:deep#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:deep#e-1f82c855c594ea35",
+          "text": "Adults are portrayed(描绘) alone in many settings and poses – absorbed in a volume, deep in thought or lost in a moment of leisure.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:deep#e-b3074fc224fae6f2",
+          "text": "The Socrates Express is a fun, sharp book that draws readers in with its apparent simplicity and gradually pulls them into deeper thoughts on desire, loneliness, and aging.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-c:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 123,
+            "end": 129
+          }
+        },
+        {
+          "exampleId": "w:deep#e-45028c6eb47e5875",
+          "text": "This suggests that AI might have a deeper understanding of the world than we thought.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:deep#s4",
+      "pos": "adv.",
+      "glossZh": "深入地；在深处",
+      "pronunciationId": "w:deep#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:deep#e-7958e752eadc888e",
+          "text": "As scientists look deeper into our genes (基因), they are finding examples of human evolution in just the past few thousand years.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:deep#e-a4a0b5064153d8db",
+          "text": "In a study published in Plant Phenomics, Busch and Pereira establish a new procedure for using SLEAP to analyze plant root phenotypes – how deep and wide they grow, how massive their root systems become, and other physical qualities.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 140,
+            "end": 144
+          }
+        },
+        {
+          "exampleId": "w:deep#e-8a611a71dca2ea59",
+          "text": "When we burn fossil carbon, really what we’re doing is taking ancient forests that died and became coal over tens of millions of years – at high pressures deep under the Earth’s surface – and we’re putting that up in the atmosphere in just a few decades and expecting a tree to grow and somehow be an offset.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 155,
+            "end": 159
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:deep#s5",
+      "pos": "adj.",
+      "glossZh": "（颜色）浓的；深的",
+      "pronunciationId": "w:deep#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:deep#e-dd2c88139fe8516f",
+          "text": "Occupying a 1920s theatre in the city’s downtown, this bookstore has kept the original furnishings – balconies, painted ceilings, shining carvings, and deep red stage curtains.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 152,
+            "end": 156
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:deep#s6",
+      "pos": "adj.",
+      "glossZh": "（呼吸）深的；（声音）低沉的",
+      "pronunciationId": "w:deep#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:deep#e-b3c5889729a79d74",
+          "text": "Fear threatened to __53__, but Sam took a deep breath and began.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:deep#s7",
+      "pos": "短语",
+      "glossZh": "深度学习",
+      "pronunciationId": "w:deep#p-main",
+      "note": "deep learning。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:deep#e-f9b055519131088c",
+          "text": "SLEAP uses computer vision (the ability for computers to understand images) and deep learning (an AI approach for training a computer to learn and work like the human brain) to help researchers process images much more quickly.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 84
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "后场位置；沉重泥泞的场地；姓氏",
+      "reason": "运动专门用法或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

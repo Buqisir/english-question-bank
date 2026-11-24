@@ -1,0 +1,140 @@
+{
+  "entryId": "w:professor",
+  "headword": "professor",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/prəˈfesə(r)/",
+    "us": "/prəˈfesər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:professor#p-main",
+      "ipa": {
+        "uk": "/prəˈfesə(r)/",
+        "us": "/prəˈfesər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "professors",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Professors",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 29,
+    "mock": 178
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:professor#s1",
+      "pos": "n.",
+      "glossZh": "教授；大学教师",
+      "pronunciationId": "w:professor#p-main",
+      "note": "美国英语可泛指大学教师。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 29,
+        "mock": 178
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:professor#e-fb05bc93312d756a",
+          "text": "Salah Sukkarieh, a professor at the University of Sydney, sees robots as necessary given how cattlemen are aging.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:professor#e-39787d7b3b6e3bff",
+          "text": "“With the rise of technology it is easy for people to make observations of different species with the aid of a mobile application,” said Barnabas Daru, who is lead author of the study and assistant professor of biology in the Stanford School of Humanities and Sciences.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 198,
+            "end": 207
+          }
+        },
+        {
+          "exampleId": "w:professor#e-f4ab60374fdf8232",
+          "text": "Once in a lecture, the professor tried repeating my name after me over and over in front of thirty classmates.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 32
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "宗教教义宣讲者",
+      "reason": "历史用法"
+    },
+    {
+      "glossZh": "酒馆钢琴师",
+      "reason": "旧式俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,129 @@
+{
+  "entryId": "w:panda",
+  "headword": "panda",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpændə/",
+    "us": "/ˈpændə/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:panda#p-main",
+      "ipa": {
+        "uk": "/ˈpændə/",
+        "us": "/ˈpændə/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "pandas",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 6
+  },
+  "senses": [
+    {
+      "senseId": "w:panda#s1",
+      "pos": "n.",
+      "glossZh": "大熊猫",
+      "pronunciationId": "w:panda#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:panda#e-d45e73d3818dd428",
+          "text": "The Chinese government recently finalized a plan to set up a Giant Panda National Park(GPNP).",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "grammar-fill-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:panda#e-fe9786f11f8eecb3",
+          "text": "Now, I’m living out that dream indirectly by helping the panda keepers do their job in English.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-ii:grammar-fill:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:panda#e-1295101c6bd19e0b",
+          "text": "The panda serves as an ideal example.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:grammar-fill",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:grammar-fill:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 9
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Panda Gourmet",
+      "reason": "餐馆名称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

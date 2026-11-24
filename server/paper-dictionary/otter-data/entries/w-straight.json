@@ -1,0 +1,417 @@
+{
+  "entryId": "w:straight",
+  "headword": "straight",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/streɪt/",
+    "us": "/streɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:straight#p-main",
+      "ipa": {
+        "uk": "/streɪt/",
+        "us": "/streɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "straighter",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "straightest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more straight",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most straight",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "straights",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 66
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 60
+  },
+  "senses": [
+    {
+      "senseId": "w:straight#s1",
+      "pos": "adj.",
+      "glossZh": "直的",
+      "pronunciationId": "w:straight#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:straight#e-aeb0936ed2798521",
+          "text": "The journey you’re on won’t follow a straight path.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:straight#e-1cb97ae463b11c86",
+          "text": "You might go for a classic straight marker with a pointed end to stick directly into the soil, or perhaps you’re feeling a bit more adventurous and want to create a round or heart shape with a hole to hang from a metal post.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:straight#e-c7fe1010cf744302",
+          "text": "Imagine wandering through a dark forest for hours, then traveling all the way home – in a straight line.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 98
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:straight#s2",
+      "pos": "adv.",
+      "glossZh": "径直",
+      "pronunciationId": "w:straight#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:straight#e-19fb521e3bbb34d0",
+          "text": "The doorway to peace and quiet, for Nick Bright at least, leads straight to his mother-in-law, she lives on the ground floor, while he lives upstairs with his wife and their two daughters.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:straight#e-2b4d9ff0f2a5f1eb",
+          "text": "If she thought you were dressed improperly, she sent you straight back home to change your clothes.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:straight#e-27bc4f5a99e259eb",
+          "text": "My story would come straight from the horse’s mouth.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:straight#s3",
+      "pos": "adj.",
+      "glossZh": "连续一致的",
+      "pronunciationId": "w:straight#p-main",
+      "note": "straight A’s 指成绩全是 A。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:straight#e-8bc44d55938a246c",
+          "text": "In my ninth-grade writing class last year, I met a cowboy who saved his town, a strict father who demanded his son earn straight A’s, and a modern-day Juliet who died of heartbreak after her parents rejected the love of her young life.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 120,
+            "end": 128
+          }
+        },
+        {
+          "exampleId": "w:straight#e-e64643a4ad251598",
+          "text": "During the 1932-33 season, the Renaissance won 88 straight games, a professional basketball record that remains unbroken.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:straight#e-6dbe80f8ddfe177f",
+          "text": "That difference can be deadly in a city that experienced 40 straight days above 100 degrees last",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:straight#s4",
+      "pos": "adv.",
+      "glossZh": "清楚有条理地",
+      "pronunciationId": "w:straight#p-main",
+      "note": "think straight。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:straight#e-d907b33ce8024b17",
+          "text": "Gillian Mills, a high school teacher with 20 years of classroom experience, explains, “When students feel too stressed to think straight, we often suggest a walk outside.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-08-stage-training",
+            "paperTitle": "2026届广州市高三年级8月阶段训练英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-08-stage-training:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-08-stage-training:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 136
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:straight#s5",
+      "pos": "adj.",
+      "glossZh": "坦率的",
+      "pronunciationId": "w:straight#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:straight#s6",
+      "pos": "adj.",
+      "glossZh": "异性恋的",
+      "pronunciationId": "w:straight#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:straight#s7",
+      "pos": "adj.",
+      "glossZh": "（酒）不掺兑的",
+      "pronunciationId": "w:straight#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:straight#s8",
+      "pos": "n.",
+      "glossZh": "直道",
+      "pronunciationId": "w:straight#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:straight#s9",
+      "pos": "短语",
+      "glossZh": "马上",
+      "pronunciationId": "w:straight#p-main",
+      "note": "straight away。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:straight#e-55b7f53fb551c93a",
+          "text": "I didn’t love everything straight away.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 33
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "牌局顺子、直耳猫和姓氏",
+      "reason": "游戏、动物专门义或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

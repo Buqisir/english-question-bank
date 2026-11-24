@@ -1,0 +1,149 @@
+{
+  "entryId": "w:economic",
+  "headword": "economic",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌiːkəˈnɒmɪk/",
+    "us": "/ˌiːkəˈnɑːmɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:economic#p-main",
+      "ipa": {
+        "uk": "/ˌiːkəˈnɒmɪk/",
+        "us": "/ˌiːkəˈnɑːmɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more economic",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most economic",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 77
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 74
+  },
+  "senses": [
+    {
+      "senseId": "w:economic#s1",
+      "pos": "adj.",
+      "glossZh": "经济的；经济学的",
+      "pronunciationId": "w:economic#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:economic#e-c8506f0df7e20be3",
+          "text": "According to him, China’s remarkable achievements and prosperity（繁荣）over the past decades are also due to its stable social and economic system.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 136
+          }
+        },
+        {
+          "exampleId": "w:economic#e-2fa911f15cfab86e",
+          "text": "The anchoring effect, a common mental tendency rooted in the study of how people make economic choices, refers to how people overly depend on the first piece of information, which is called the “anchor (锚)”, when making later judgments.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 94
+          }
+        },
+        {
+          "exampleId": "w:economic#e-05c6222ec6220ad2",
+          "text": "While they bring jobs, reliability, and economic benefits, their dominance reduces local diversity and character.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 48
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:economic#s2",
+      "pos": "adj.",
+      "glossZh": "合算的；有经济效益的",
+      "pronunciationId": "w:economic#p-main",
+      "note": "表示「节俭、用料省」时更常用 economical。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "家庭管理的",
+      "reason": "词源性旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

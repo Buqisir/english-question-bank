@@ -1,0 +1,683 @@
+{
+  "entryId": "w:by",
+  "headword": "by",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/baɪ/",
+    "us": "/baɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:by#p-main",
+      "ipa": {
+        "uk": "/baɪ/",
+        "us": "/baɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 433,
+    "mock": 3558
+  },
+  "unassignedCounts": {
+    "gaokao": 366,
+    "mock": 3555
+  },
+  "senses": [
+    {
+      "senseId": "w:by#s1",
+      "pos": "prep.",
+      "glossZh": "通过；借助；乘（交通工具）",
+      "pronunciationId": "w:by#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 34,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:by#e-dfcc2f8b4243c38b",
+          "text": "Last year it recovered more than 807,500 pounds of food by taking donations and collecting blemished (有瑕疵的) produce that otherwise would have rotted in fields.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "reading-b-4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:by#e-a621c056d0166b51",
+          "text": "For a physical item, you will be notified by email when it arrives.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:by#e-109651654ab1fa31",
+          "text": "Paragraph 1: Daniel and Rachel suggested that Emily continue her journey by train.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:by#s2",
+      "pos": "prep.",
+      "glossZh": "由；被；出自",
+      "pronunciationId": "w:by#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:by#e-3f1bcbbd130e9e90",
+          "text": "6 First Prizes: The book Sky Pioneer: A Photobiography of Amelia Earhart signed by author Corinne Szabo and pilot Linda Finch.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:by#e-2fbe3f32442a420e",
+          "text": "A book by Corinne Szabo.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2020-i:22",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:by#e-d7b658a429e681e4",
+          "text": "In Ferghana, he attends a mountain funeral（葬礼）followed by a strange drinking party.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:by#s3",
+      "pos": "prep.",
+      "glossZh": "不迟于；到……为止",
+      "pronunciationId": "w:by#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:by#e-9f43f091e9ca5388",
+          "text": "■Mail your entry to us by October 31 this year.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:by#e-2f19ef46f99a5d4b",
+          "text": "By 9:33am, a burst of additional traffic might push it to 145 seconds.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 2
+          }
+        },
+        {
+          "exampleId": "w:by#e-d5730fded11b71a1",
+          "text": "It’s estimated that the global demand for electricity could more than double by 2050.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:by#s4",
+      "pos": "prep.",
+      "glossZh": "在……旁边；靠近",
+      "pronunciationId": "w:by#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:by#e-319ee182f1e74452",
+          "text": "By the window.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 2
+          }
+        },
+        {
+          "exampleId": "w:by#e-379059fbb6afdfee",
+          "text": "Some things were immediately obvious: that the world was more interesting than I had guessed; that not everything I had learned in high school was true; that I would never live in a more beautiful place than the Foothills by the Bay.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 222,
+            "end": 224
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:by#s5",
+      "pos": "prep.",
+      "glossZh": "相差；增加或减少（某数量）",
+      "pronunciationId": "w:by#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:by#e-cefbb2638c05ca0f",
+          "text": "The research, carried out by scientists at the Columbia Climate School and other institutions, found that if the city maintains past species patterns in new plantings, isoprene production in Manhattan in coming decades will go up by about 140%, and resulting summer ozone levels as much as 30%.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 230,
+            "end": 232
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:by#s6",
+      "pos": "prep.",
+      "glossZh": "按；以……为单位",
+      "pronunciationId": "w:by#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:by#e-494f56a98b79dce1",
+          "text": "• Overtime is charged at 1.5x the hourly rate and billed by the hour.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a",
+            "locator": {
+              "paragraph": 24,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 59
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:by#s7",
+      "pos": "prep.",
+      "glossZh": "表示尺寸或乘除关系",
+      "pronunciationId": "w:by#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:by#s8",
+      "pos": "adv.",
+      "glossZh": "经过；过去",
+      "pronunciationId": "w:by#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:by#e-96fa07e4e06bc2c8",
+          "text": "If people remove food and attractants from their yards and campsites, grizzlies will typically pass by without trouble.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 102
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:by#s9",
+      "pos": "短语",
+      "glossZh": "独自；自行",
+      "pronunciationId": "w:by#p-main",
+      "note": "by oneself",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:by#e-9ac28bad9a390d3e",
+          "text": "With no other kids of my age in the neighborhood, I had to spend hours by myself.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:by#e-3ad703756d54da09",
+          "text": "For Jacobs, urban communities are organic beings that should be left to grow and change by themselves and not be subject to the grand plans of so-called experts and officials.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 90
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:by#s10",
+      "pos": "短语",
+      "glossZh": "凭记忆；熟记",
+      "pronunciationId": "w:by#p-main",
+      "note": "by heart",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:by#e-66dd67efc987ef55",
+          "text": "You may find yourself having to learn something by heart.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-ii:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:by#s11",
+      "pos": "短语",
+      "glossZh": "偶然地；碰巧",
+      "pronunciationId": "w:by#p-main",
+      "note": "by chance",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:by#s12",
+      "pos": "短语",
+      "glossZh": "错误地；无意中",
+      "pronunciationId": "w:by#p-main",
+      "note": "by mistake",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:by#e-04427ed6545faa19",
+          "text": "He got on a train by mistake.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:21",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 20
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:by#s13",
+      "pos": "短语",
+      "glossZh": "顺便说一下",
+      "pronunciationId": "w:by#p-main",
+      "note": "by the way",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:by#s14",
+      "pos": "短语",
+      "glossZh": "并排；一起",
+      "pronunciationId": "w:by#p-main",
+      "note": "side by side",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:by#e-816346f358a7d9f2",
+          "text": "The commercial, business, and residential elements of a city should not be separated out but instead be side by side, to allow for greater integration of people.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 109,
+            "end": 111
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:by#s15",
+      "pos": "短语",
+      "glossZh": "到现在；到这时",
+      "pronunciationId": "w:by#p-main",
+      "note": "by now",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:by#e-68f2d9e70efa082e",
+          "text": "The idea of sea level as a reference point for elevations has by now been around for so long as to go essentially unnoticed – we mention it without even considering what it means.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 64
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:by#s16",
+      "pos": "短语",
+      "glossZh": "相比之下",
+      "pronunciationId": "w:by#p-main",
+      "note": "by contrast",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:by#e-c5e43d044af91efb",
+          "text": "By contrast, the wealthy landowners, large companies and illegal loggers, in their pursuit of financial gain, have done huge damage.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 2
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "车站代码、马的父系、迎风航行动作",
+      "reason": "专名缩写或专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

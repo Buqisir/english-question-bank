@@ -1,0 +1,224 @@
+{
+  "entryId": "w:coach",
+  "headword": "coach",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəʊtʃ/",
+    "us": "/koʊtʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:coach#p-main",
+      "ipa": {
+        "uk": "/kəʊtʃ/",
+        "us": "/koʊtʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "coaches",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "coached",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "coaching",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 22,
+    "mock": 85
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 84
+  },
+  "senses": [
+    {
+      "senseId": "w:coach#s1",
+      "pos": "n.",
+      "glossZh": "教练；辅导员；指导者",
+      "pronunciationId": "w:coach#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:coach#e-ca2acd37d9b4bef5",
+          "text": "The Chinese coach __52__ Douglas into one of the best gymnasts in the __53__, helping her skyrocket from an __54__ member of the national team to the top of the sport.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:coach#e-896dc91a6ff9afad",
+          "text": "In her first PE class, Eva was shocked when Coach Pitt announced that everyone had to run one mile around the track outside.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:coach#e-c3bcff08a837477d",
+          "text": "“I’m a coach, an adviser, and a comforter, and that's what it means to be a hospital teacher.”",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:coach#s2",
+      "pos": "v.",
+      "glossZh": "训练；辅导",
+      "pronunciationId": "w:coach#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:coach#e-79cbc6d3de7bb29d",
+          "text": "The three dogs formed a pack that, with coaching, __56__ Flora’s space; Steve and I formed a good team __57__ for Tilly.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:cloze:4",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:coach#e-d25db4966d09e0d1",
+          "text": "Douglas, who had owned and coached the Rens for their entire 25-year run, is today known as the “Father of Black Professional Basketball,” which ensures that although the Rens isn’t a household name, their legacy will never be forgotten.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:coach#s3",
+      "pos": "n.",
+      "glossZh": "长途汽车；（旧时的）马车",
+      "pronunciationId": "w:coach#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:coach#s4",
+      "pos": "n.",
+      "glossZh": "（英语美式）飞机经济舱",
+      "pronunciationId": "w:coach#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "帆船前舱",
+      "reason": "航海术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

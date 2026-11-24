@@ -1,0 +1,229 @@
+{
+  "entryId": "w:column",
+  "headword": "column",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɒləm/",
+    "us": "/ˈkɑːləm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:column#p-main",
+      "ipa": {
+        "uk": "/ˈkɒləm/",
+        "us": "/ˈkɑːləm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "columns",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 30
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 25
+  },
+  "senses": [
+    {
+      "senseId": "w:column#s1",
+      "pos": "n.",
+      "glossZh": "（报刊的）专栏；栏目",
+      "pronunciationId": "w:column#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:column#e-37f9d1393b555978",
+          "text": "I really like the idea of adding a new column to our English newspaper.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-application",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-application:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:column#e-993eca06eb447ee8",
+          "text": "A newspaper’s weekly book review column.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-zhejiang-jiyang-2026-04-joint-exam:23",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:column#s2",
+      "pos": "n.",
+      "glossZh": "（表格的）列；（版面的）栏",
+      "pronunciationId": "w:column#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:column#e-3ce6022e499239ca",
+          "text": "They wrote numbers in columns going up.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-04-second:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:column#e-41aa71a94119df9b",
+          "text": "It divides your paper into a cue column, a notes section, and a summary area.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:column#s3",
+      "pos": "n.",
+      "glossZh": "柱子；柱状物",
+      "pronunciationId": "w:column#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:column#e-bc9c4cfbf24113d8",
+          "text": "Another would be as energy-storing foundations of houses – 30 to 40 cubic meters meets a household’s daily needs, Stefaniuk notes: “Walls, foundations or columns can support structures and store energy.”",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 154,
+            "end": 161
+          }
+        },
+        {
+          "exampleId": "w:column#e-ec21e433fce596a9",
+          "text": "When these droplets enter the tube, their impacts create “plug flow,” in which the water forms mini columns separated by air gaps.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 107
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:column#s4",
+      "pos": "n.",
+      "glossZh": "（人或车辆纵列行进的）队列",
+      "pronunciationId": "w:column#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "广告版面计量单位、化学分离柱、植物合生柱",
+      "reason": "专业术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

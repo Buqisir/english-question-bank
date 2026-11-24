@@ -1,0 +1,173 @@
+{
+  "entryId": "w:kid",
+  "headword": "kid",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kɪd/",
+    "us": "/kɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:kid#p-main",
+      "ipa": {
+        "uk": "/kɪd/",
+        "us": "/kɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "kids",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "kidded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "kidding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 97,
+    "mock": 462
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 462
+  },
+  "senses": [
+    {
+      "senseId": "w:kid#s1",
+      "pos": "n.",
+      "glossZh": "孩子；年纪小的人",
+      "pronunciationId": "w:kid#p-main",
+      "note": "非正式用法。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 96,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:kid#e-008caa996683c96f",
+          "text": "While running every aspect of our own news station, kids and their fellow campers will create and host a broadcast airing each night at dinner for the entire camp.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:kid#e-b2c9fbefd7172065",
+          "text": "David had a brain disease which prevented him from walking or running like other children, but at school his classmates thought of him as a regular kid.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "writing-continuation-7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 148,
+            "end": 151
+          }
+        },
+        {
+          "exampleId": "w:kid#e-da71861b800650f6",
+          "text": "Instead, she recommends applying a well-known concept among nutrition experts called the “Division of Responsibility,” where parents provide a variety of mostly healthy foods to their kids at fixed times, and the kids themselves decide what and how much they want to consume – even if that means occasionally eating more cookies than carrots.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 184,
+            "end": 188
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:kid#s2",
+      "pos": "n.",
+      "glossZh": "小山羊",
+      "pronunciationId": "w:kid#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:kid#s3",
+      "pos": "v.",
+      "glossZh": "开玩笑",
+      "pronunciationId": "w:kid#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "用山羊皮制成的材料、王翼印度防御缩写",
+      "reason": "较少用或专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

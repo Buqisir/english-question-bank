@@ -1,0 +1,254 @@
+{
+  "entryId": "w:nice",
+  "headword": "nice",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/naɪs/",
+    "us": "/naɪs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:nice#p-main",
+      "ipa": {
+        "uk": "/naɪs/",
+        "us": "/naɪs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "nicer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "nicest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 21,
+    "mock": 61
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 60
+  },
+  "senses": [
+    {
+      "senseId": "w:nice#s1",
+      "pos": "adj.",
+      "glossZh": "令人愉快的；宜人的",
+      "pronunciationId": "w:nice#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:nice#e-0b763738d8b4d2c8",
+          "text": "There was a nice kitchen and a comfortable bed.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-i:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:nice#e-54c31bffcb62d7da",
+          "text": "His trust in me is __39__ which is quite a nice feeling, but at the same time gives me a huge sense of __40__.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:cloze:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:nice#e-a1faf3c00248a3ae",
+          "text": "A mile away, the H Hotel Los Angeles, with its stylish design, is ideal for a nice stay between events.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 82
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:nice#s2",
+      "pos": "adj.",
+      "glossZh": "友善的；体贴的",
+      "pronunciationId": "w:nice#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:nice#e-38a895fa468659ab",
+          "text": "It was a very nice __45__ for him to make.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:cloze:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:nice#e-2303bf7fb2b6c3aa",
+          "text": "I’ve known lots of motorcycle enthusiasts and most are nice people.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:nice#e-7277fc0551a4f75c",
+          "text": "So, next time in a child-screaming situation, just be nice to your fellow human.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:nice#s3",
+      "pos": "专名",
+      "glossZh": "尼斯（法国城市）",
+      "pronunciationId": "w:nice#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:nice#e-5cbc1840ddbb72cd",
+          "text": "A month after visiting the French Riviera and enjoying the sandy beaches of Nice and Menton, I went hiking with friends in the Pala group.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:nice#s4",
+      "pos": "adj.",
+      "glossZh": "细微而讲究精确的",
+      "pronunciationId": "w:nice#p-main",
+      "note": "如 a nice distinction。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "计算进程优先级；英国卫生机构缩写",
+      "reason": "术语或同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

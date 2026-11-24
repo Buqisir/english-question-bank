@@ -1,0 +1,127 @@
+{
+  "entryId": "w:maths",
+  "headword": "maths",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "math",
+    "mathematics"
+  ],
+  "ipa": {
+    "uk": "/mæθs/",
+    "us": "/mæθs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:maths#p-main",
+      "ipa": {
+        "uk": "/mæθs/",
+        "us": "/mæθs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 8,
+    "mock": 130
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:maths#s1",
+      "pos": "n.",
+      "glossZh": "数学",
+      "pronunciationId": "w:maths#p-main",
+      "note": "英式 maths，美式通常用 math，正式名称为 mathematics。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 130
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:maths#e-53bf8d290a8a90d9",
+          "text": "Perhaps, then, their maths skill developed because they cannot count on their friends for help.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:maths#e-1b29c9447bbda2ea",
+          "text": "A new exhibition in Halifax uses everyday activities to explain the hidden math principles we all use on a regular basis.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:17",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:maths#e-fc9559cf51dc6a20",
+          "text": "Do mathematics exercises.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2025-eight-provinces-jan:33",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 14
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "宗教修院、割草所得物",
+      "reason": "同形词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

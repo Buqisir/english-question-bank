@@ -1,0 +1,240 @@
+{
+  "entryId": "w:contemporary",
+  "headword": "contemporary",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kənˈtemprəri/",
+    "us": "/kənˈtempəreri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:contemporary#p-main",
+      "ipa": {
+        "uk": "/kənˈtemprəri/",
+        "us": "/kənˈtempəreri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more contemporary",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most contemporary",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "contemporaries",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 28
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 26
+  },
+  "senses": [
+    {
+      "senseId": "w:contemporary#s1",
+      "pos": "adj.",
+      "glossZh": "当代的；现代的",
+      "pronunciationId": "w:contemporary#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:contemporary#e-b0e0a2c06894177c",
+          "text": "Discover, explore and enjoy award-winning Tullie House, where historic collections, contemporary art and family fun are brought together in one impressive museum and art gallery.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:13",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:contemporary#e-b6f47251f4cabb5e",
+          "text": "In around 80 A.D., the Romans built the Colosseum, which remains the world’s best known stadium and continues to inform contemporary design.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 120,
+            "end": 132
+          }
+        },
+        {
+          "exampleId": "w:contemporary#e-e43d1fccb3a56f47",
+          "text": "“The exhibition brings together Go culture, cutting-edge technology and contemporary art,” says Tu.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:grammar-fill:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 84
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:contemporary#s2",
+      "pos": "adj.",
+      "glossZh": "同时代的",
+      "pronunciationId": "w:contemporary#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:contemporary#e-39013c2108861adc",
+          "text": "“Previous studies only compared female bones to contemporary male bones,” the researchers said, “And that’s a problem, because the response of male bones to stress and change is much bigger than that of women.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:contemporary#s3",
+      "pos": "n.",
+      "glossZh": "同时代的人",
+      "pronunciationId": "w:contemporary#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:contemporary#e-0de6727883554330",
+          "text": "Raeburn’s English Contemporaries",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "cell:paper-gaokao-2022-national-b:reading-a:ocr-916a21169272a7ae:1:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:contemporary#e-4ca0c5eb5d7349ee",
+          "text": "Tang and Shakespeare were contemporaries and both died in 1616.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-ii:grammar-fill:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:contemporary#e-dbf343932f7c5e55",
+          "text": "How was Tharp’s work treated by her contemporaries?",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-first:27",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 50
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

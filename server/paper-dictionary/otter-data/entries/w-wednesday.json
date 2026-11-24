@@ -1,0 +1,128 @@
+{
+  "entryId": "w:wednesday",
+  "headword": "Wednesday",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈwenzdeɪ/",
+    "us": "/ˈwenzdeɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:wednesday#p-main",
+      "ipa": {
+        "uk": "/ˈwenzdeɪ/",
+        "us": "/ˈwenzdeɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "Wednesdays",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 31
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:wednesday#s1",
+      "pos": "n.",
+      "glossZh": "星期三",
+      "pronunciationId": "w:wednesday#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 31
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wednesday#e-9fc123ffd3bde0cf",
+          "text": "Challenging work that requires lots of analytical thinking, planning and other managerial skills might help your brain stay sharp as you age, a study published Wednesday in the journal Neurology suggests.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 160,
+            "end": 169
+          }
+        },
+        {
+          "exampleId": "w:wednesday#e-5091e669616461f3",
+          "text": "What time does school finish on Wednesdays?",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:wednesday#e-30442f987223633e",
+          "text": "Entries open on Monday 21 December 2025 at 00:01 and close on Wednesday 25 March 2026 at 23:59.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-a",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-a:14",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 71
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "谢菲尔德星期三队",
+      "reason": "球队专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

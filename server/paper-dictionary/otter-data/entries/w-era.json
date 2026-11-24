@@ -1,0 +1,139 @@
+{
+  "entryId": "w:era",
+  "headword": "era",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɪərə/",
+    "us": "/ˈɪrə/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:era#p-main",
+      "ipa": {
+        "uk": "/ˈɪərə/",
+        "us": "/ˈɪrə/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "eras",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "ERAs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 48
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:era#s1",
+      "pos": "n.",
+      "glossZh": "时代",
+      "pronunciationId": "w:era#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 48
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:era#e-e7524ac3885cad47",
+          "text": "In this “book of books,” artworks are selected and arranged in a way that emphasizes these connections between different eras and cultures.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 121,
+            "end": 125
+          }
+        },
+        {
+          "exampleId": "w:era#e-3aa7513f767aeb99",
+          "text": "However, those in the 1920s romanticized the Victorian era, when families were strong and children respected their elders.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:era#e-fb31f19a9d3db0d6",
+          "text": "“Nearly a century ago, civilizations across different countries evolved in parallel (平行), and people had little knowledge of life beyond their own borders,” Zhao explains, “But now, these old photos enable us to revisit that era and witness the daily lives of people in three distinct countries.”",
+          "source": {
+            "paperId": "paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam",
+            "paperTitle": "2026年大连市高三双基模拟考试 高三年级英语试卷",
+            "groupId": "group:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-liaoning-dalian-2026-01-senior-three-basic-knowledge-and-skills-exam:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 225,
+            "end": 228
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "棒球自责分率",
+      "reason": "大写缩写 ERA"
+    },
+    {
+      "glossZh": "地质年代单位「代」",
+      "reason": "地质学专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

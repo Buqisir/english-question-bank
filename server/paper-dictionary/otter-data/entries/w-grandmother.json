@@ -1,0 +1,163 @@
+{
+  "entryId": "w:grandmother",
+  "headword": "grandmother",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɡrænmʌðə(r)/",
+    "us": "/ˈɡrænmʌðər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:grandmother#p-main",
+      "ipa": {
+        "uk": "/ˈɡrænmʌðə(r)/",
+        "us": "/ˈɡrænmʌðər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "grandmothers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 44
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 43
+  },
+  "senses": [
+    {
+      "senseId": "w:grandmother#s1",
+      "pos": "n.",
+      "glossZh": "祖母或外祖母",
+      "pronunciationId": "w:grandmother#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:grandmother#e-a504d204cd1747c1",
+          "text": "His mother, grandmother and great grandmother were all born at the reserve and still live there.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:grandmother#e-66368d38eabde3cb",
+          "text": "my grandmother would tell me stories about her childhood.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:grandmother#e-7d3779a8c2ee6555",
+          "text": "said Milly, my 91-year-old grandmother, as we snapped a selfie.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:grandmother#s2",
+      "pos": "短语",
+      "glossZh": "曾祖母辈的女性亲属",
+      "pronunciationId": "w:grandmother#p-main",
+      "note": "great-grandmother，原句分写。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:grandmother#e-1eafc7e7064c485f",
+          "text": "His mother, grandmother and great grandmother were all born at the reserve and still live there.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 45
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "死藤水的尊称",
+      "reason": "特定文化用法，语料未见"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

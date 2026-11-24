@@ -1,0 +1,170 @@
+{
+  "entryId": "w:electricity",
+  "headword": "electricity",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˌlekˈtrɪsəti/",
+    "us": "/ɪˌlekˈtrɪsəti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:electricity#p-main",
+      "ipa": {
+        "uk": "/ɪˌlekˈtrɪsəti/",
+        "us": "/ɪˌlekˈtrɪsəti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "electricities",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 123
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 122
+  },
+  "senses": [
+    {
+      "senseId": "w:electricity#s1",
+      "pos": "n.",
+      "glossZh": "电力",
+      "pronunciationId": "w:electricity#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:electricity#e-938c6d8e21afeffb",
+          "text": "Meanwhile, over the course of the 19th century, electricity went from mere curiosity to a basic necessity.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:electricity#e-23a8518da73e6bf9",
+          "text": "It’s estimated that the global demand for electricity could more than double by 2050.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:electricity#e-85f8549c98da8f00",
+          "text": "That energy can be immediately used to accelerate (加速) the vehicle or, in the case of the Barcelona subway system, sent along cables to supply electricity for the station or for electric car chargers.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 143,
+            "end": 154
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:electricity#s2",
+      "pos": "n.",
+      "glossZh": "电现象",
+      "pronunciationId": "w:electricity#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:electricity#e-96f8c6b0cc6cebe1",
+          "text": "When you rub (摩擦) a balloon on your skin, it produces electricity – a familiar example of charge separation (电荷分离), a process in which opposite charges are separated, creating electric potential.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:electricity#s3",
+      "pos": "n.",
+      "glossZh": "兴奋感",
+      "pronunciationId": "w:electricity#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

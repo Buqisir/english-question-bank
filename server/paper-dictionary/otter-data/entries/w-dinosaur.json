@@ -1,0 +1,142 @@
+{
+  "entryId": "w:dinosaur",
+  "headword": "dinosaur",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdaɪnəsɔː(r)/",
+    "us": "/ˈdaɪnəsɔːr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dinosaur#p-main",
+      "ipa": {
+        "uk": "/ˈdaɪnəsɔː(r)/",
+        "us": "/ˈdaɪnəsɔːr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "dinosaurs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 23
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 20
+  },
+  "senses": [
+    {
+      "senseId": "w:dinosaur#s1",
+      "pos": "n.",
+      "glossZh": "恐龙",
+      "pronunciationId": "w:dinosaur#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dinosaur#e-46f19c8633939e73",
+          "text": "Its massive, varied collection features a giant dinosaur skeleton(骨架), plus exhibits on outer space and the human body.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:dinosaur#e-8ee476ae8b62992e",
+          "text": "When most dinosaurs went extinct, our solar system was in a completely different arm!",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:dinosaur#e-66fe1350e8e23581",
+          "text": "Experts have created an app that uses artificial intelligence to identify dinosaurs from the footprints they left behind millions of years ago.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-04-second-round-test",
+            "paperTitle": "2026年山东省泰安市高三二轮4月检测英语试题卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-04-second-round-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-04-second-round-test:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 83
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dinosaur#s2",
+      "pos": "n.",
+      "glossZh": "守旧的人；过时的事物",
+      "pronunciationId": "w:dinosaur#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "泛指史前爬行动物",
+      "reason": "宽泛叫法易和科学分类混淆"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

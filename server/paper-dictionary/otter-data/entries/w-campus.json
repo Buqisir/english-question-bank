@@ -1,0 +1,135 @@
+{
+  "entryId": "w:campus",
+  "headword": "campus",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkæmpəs/",
+    "us": "/ˈkæmpəs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:campus#p-main",
+      "ipa": {
+        "uk": "/ˈkæmpəs/",
+        "us": "/ˈkæmpəs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "campuses",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "campusses",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 146
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:campus#s1",
+      "pos": "n.",
+      "glossZh": "校园；校区",
+      "pronunciationId": "w:campus#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 146
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:campus#e-d880cb4e1b7b8e8c",
+          "text": "My Views on Filming Short Videos on Campus",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-application",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-application:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:campus#e-dcffb0db85b1369a",
+          "text": "One day, I was walking across campus when I spotted one of my students sitting on a bench, her face turned toward the sun, her eyes closed.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:campus#e-aa6c038a34c17d95",
+          "text": "On a typical sunny day at the University of California, Los Angeles (UCLA), small native bushes (灌木) wave where tidy grasslands used to be, bees fly over flowers, and students walk on a campus alive with biodiversity.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 186,
+            "end": 192
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "罚留校、只靠手臂攀爬",
+      "reason": "特定校规或运动用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

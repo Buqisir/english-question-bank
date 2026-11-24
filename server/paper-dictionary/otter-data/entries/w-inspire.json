@@ -1,0 +1,294 @@
+{
+  "entryId": "w:inspire",
+  "headword": "inspire",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪnˈspaɪə(r)/",
+    "us": "/ɪnˈspaɪər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:inspire#p-main",
+      "ipa": {
+        "uk": "/ɪnˈspaɪə(r)/",
+        "us": "/ɪnˈspaɪər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "inspired",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "inspires",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "inspiring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 35,
+    "mock": 276
+  },
+  "unassignedCounts": {
+    "gaokao": 6,
+    "mock": 275
+  },
+  "senses": [
+    {
+      "senseId": "w:inspire#s1",
+      "pos": "v.",
+      "glossZh": "激励；鼓舞",
+      "pronunciationId": "w:inspire#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 23,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:inspire#e-49964b0a907a5467",
+          "text": "The project results from the difficulties many schools have in getting artists of any sort - whether an up-and-coming local musician or a major movie star - into schools to work with and inspire children.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 187,
+            "end": 194
+          }
+        },
+        {
+          "exampleId": "w:inspire#e-4e0b05b5c21e79d2",
+          "text": "The admiration and respect his uncle earned inspired Nielsen to make a career (职业) in acting.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:inspire#e-c4b35cd431444b62",
+          "text": "Volunteering makes you feel capable and inspires you to make the most of each day.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-ii:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 48
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:inspire#s2",
+      "pos": "v.",
+      "glossZh": "启发；给……灵感",
+      "pronunciationId": "w:inspire#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:inspire#e-21a3e20fdc20ab8c",
+          "text": "Inspired by the Belt and Road Forum for International",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:grammar-fill:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:inspire#e-7bc84dfd6d76b994",
+          "text": "Enhance your photography skills-join Yellowstone’s park photographer for a hands-on program to inspire new and creative ways of enjoying the beauty and wonder of Yellowstone.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:inspire#e-5620902e9345c035",
+          "text": "Join Javier Marin from the Harvard Museum of Natural History to learn how insects and other invertebrates dance, inspire fashion and create art, while making your own spineless artists out of craft（手工艺）materials.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 113,
+            "end": 120
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:inspire#s3",
+      "pos": "adj.",
+      "glossZh": "鼓舞人心的",
+      "pronunciationId": "w:inspire#p-main",
+      "note": "使用 inspiring。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:inspire#e-7bd6af5cf3d1a55c",
+          "text": "It was inspiring but the evidence was unreliable.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:28",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:inspire#e-0e52ada729872886",
+          "text": "Leslie Nielsen’s devotion to acting is wonderfully inspiring.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:inspire#e-4117ecaad5d0db2d",
+          "text": "Left in a Reno motel at age nine, Stephen Jon Thompson recounts his journey from foster care to tech success in this inspiring, redemptive (救赎的) memoir.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 117,
+            "end": 126
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "InSPIRE 项目名",
+      "reason": "同形缩写，g19–g22 留空"
+    },
+    {
+      "glossZh": "吸入、散布传闻",
+      "reason": "罕见或旧式用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

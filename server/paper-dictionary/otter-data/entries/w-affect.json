@@ -1,0 +1,171 @@
+{
+  "entryId": "w:affect",
+  "headword": "affect",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈfekt/",
+    "us": "/əˈfekt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:affect#p-main",
+      "ipa": {
+        "uk": "/əˈfekt/",
+        "us": "/əˈfekt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "affected",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "affecting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "affects",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 246
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 246
+  },
+  "senses": [
+    {
+      "senseId": "w:affect#s1",
+      "pos": "v.",
+      "glossZh": "影响；使发生改变",
+      "pronunciationId": "w:affect#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:affect#e-6e0b7bcd344ecaf5",
+          "text": "Indeed, the researchers found that face-to-face interactions and conversations affect the creative process, and yet a coworking space or a coffee shop provides a certain level of noise while also providing freedom from interruptions.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 85
+          }
+        },
+        {
+          "exampleId": "w:affect#e-aabf49559b1b8e33",
+          "text": "AI will affect us all, and if you only read one book on the subject, this is it.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:affect#e-5cf6e9b57dd96474",
+          "text": "These effects aren’t just short-term but have been proved to affect a teen's well-being in the years to come.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 67
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:affect#s2",
+      "pos": "v.",
+      "glossZh": "打动；使感动",
+      "pronunciationId": "w:affect#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:affect#s3",
+      "pos": "v.",
+      "glossZh": "假装；故作某种样子",
+      "pronunciationId": "w:affect#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "情感表现（名词）",
+      "reason": "心理学专业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

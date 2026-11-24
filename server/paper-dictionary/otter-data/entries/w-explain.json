@@ -1,0 +1,216 @@
+{
+  "entryId": "w:explain",
+  "headword": "explain",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪkˈspleɪn/",
+    "us": "/ɪkˈspleɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:explain#p-main",
+      "ipa": {
+        "uk": "/ɪkˈspleɪn/",
+        "us": "/ɪkˈspleɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "explained",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "explaining",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "explains",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 53,
+    "mock": 441
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 441
+  },
+  "senses": [
+    {
+      "senseId": "w:explain#s1",
+      "pos": "v.",
+      "glossZh": "解释清楚",
+      "pronunciationId": "w:explain#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 49,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:explain#e-20038e1140011768",
+          "text": "If you don’t understand the answer to a question, ask the doctor to explain it again until you do understand.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:10",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:explain#e-bcd60be727ba03fc",
+          "text": "A new exhibition in Halifax uses everyday activities to explain the hidden math principles we all use on a regular basis.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:17",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:explain#e-cd1339a3a9d917f3",
+          "text": "Every time I gave a self-introduction, I had to explain how to pronounce my name at least five times, yet they still could not say it the way I did.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:explain#s2",
+      "pos": "v.",
+      "glossZh": "成为……的原因",
+      "pronunciationId": "w:explain#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:explain#e-7419c1fce1f1bf39",
+          "text": "This could be explained by the bears’ distinguishing the different areas of colour rather than truly counting the dots.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:explain#e-83579ca28df1bfda",
+          "text": "What may explain the bears’ high degree of intelligence?",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:34",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:explain#e-be87288ce84a4d3e",
+          "text": "This kind of thinking explains why so many people try to avoid arguments.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-c:2",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 30
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "使变平",
+      "reason": "历史旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

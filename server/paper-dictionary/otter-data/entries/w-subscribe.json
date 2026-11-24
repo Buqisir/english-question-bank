@@ -1,0 +1,175 @@
+{
+  "entryId": "w:subscribe",
+  "headword": "subscribe",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/səbˈskraɪb/",
+    "us": "/səbˈskraɪb/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:subscribe#p-main",
+      "ipa": {
+        "uk": "/səbˈskraɪb/",
+        "us": "/səbˈskraɪb/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "subscribed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "subscribes",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "subscribing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:subscribe#s1",
+      "pos": "v.",
+      "glossZh": "订阅",
+      "pronunciationId": "w:subscribe#p-main",
+      "note": "subscribe to。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:subscribe#e-7255dfd71c3a3595",
+          "text": "Subscribe to the newsletter",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:subscribe#e-b2904a4e0e576c8a",
+          "text": "If you are an Unlimited or a Premium user and you're subscribed to our newsletters, the News for Classroom Use newsletter will drop into your mailbox every Wednesday.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级第一次质量检测 高三英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2025-08-senior-three-first-quality-test:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 63
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:subscribe#s2",
+      "pos": "v.",
+      "glossZh": "赞同",
+      "pronunciationId": "w:subscribe#p-main",
+      "note": "subscribe to。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:subscribe#e-b78f6bddb53ec189",
+          "text": "Subscribed to their views.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2",
+            "paperTitle": "2025年11月绍兴市高考科目诊断性考试 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-zhejiang-shaoxing-2025-11-gaokao-subject-diagnostic-v2:25",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:subscribe#s3",
+      "pos": "v.",
+      "glossZh": "认购股份",
+      "pronunciationId": "w:subscribe#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "在文件末尾签名",
+      "reason": "正式旧用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

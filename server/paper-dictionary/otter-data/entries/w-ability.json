@@ -1,0 +1,130 @@
+{
+  "entryId": "w:ability",
+  "headword": "ability",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈbɪləti/",
+    "us": "/əˈbɪləti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ability#p-main",
+      "ipa": {
+        "uk": "/əˈbɪləti/",
+        "us": "/əˈbɪləti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "abilities",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 36,
+    "mock": 299
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:ability#s1",
+      "pos": "n.",
+      "glossZh": "能力；本领（做某事或擅长某事的能力）",
+      "note": "常用 ability to do sth；to the best of one's ability 指「尽最大努力」。",
+      "pronunciationId": "w:ability#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 36,
+        "mock": 299
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ability#e-0931637eb29fe8cc",
+          "text": "“The children who played with puzzles performed better than those who did not, on tasks that assessed their ability to rotate(旋转)and translate shapes,” Levine said in a statement.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 115
+          }
+        },
+        {
+          "exampleId": "w:ability#e-0ab1a8b92a670a1c",
+          "text": "Goffin’s cockatoos, a kind of small parrot native to Australasia, have been shown to have similar shape-recognition abilities to a human two-year-old.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 116,
+            "end": 125
+          }
+        },
+        {
+          "exampleId": "w:ability#e-7c13321be2a31971",
+          "text": "They make me feel valued and respected, no matter my level of artistic ability.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 78
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "法定行为资格；经济能力作为独立义项",
+      "reason": "前者属法律用语，后者可由一般「能力」理解"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

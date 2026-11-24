@@ -1,0 +1,212 @@
+{
+  "entryId": "w:discount",
+  "headword": "discount",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdɪskaʊnt/",
+    "us": "/ˈdɪskaʊnt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:discount#p-main",
+      "ipa": {
+        "uk": "/ˈdɪskaʊnt/",
+        "us": "/ˈdɪskaʊnt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "discounts",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "discounted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "discounting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 51
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 50
+  },
+  "senses": [
+    {
+      "senseId": "w:discount#s1",
+      "pos": "n. / adj.",
+      "glossZh": "折扣；减价；打折的",
+      "pronunciationId": "w:discount#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:discount#e-588716fbb65515d7",
+          "text": "A discount fare.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2022-national-a:29",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:discount#e-5e10a0a7e1ab431c",
+          "text": "How can full-time students get group discounts?",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2022-national-b:23",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:discount#e-fb7b449c322c71cd",
+          "text": "Buy the Switch 2 alone now and you'll get a 10% discount.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:discount#s2",
+      "pos": "v.",
+      "glossZh": "给……打折；减价",
+      "pronunciationId": "w:discount#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:discount#e-aa1e4e8fe6760cb9",
+          "text": "How can you get a discounted ticket to the ZooLights show?",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2023-four-provinces-feb:21",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:discount#e-a9bbd7d0c0d7b51a",
+          "text": "A good one can sometimes find you discounted tickets.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:discount#s3",
+      "pos": "v.",
+      "glossZh": "不重视；不把……当回事",
+      "pronunciationId": "w:discount#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "贴现、贴现率；把自身感受置于现实之上",
+      "reason": "金融、特定心理学用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

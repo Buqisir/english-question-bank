@@ -1,0 +1,211 @@
+{
+  "entryId": "w:rocket",
+  "headword": "rocket",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈrɒkɪt/",
+    "us": "/ˈrɑːkɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:rocket#p-main",
+      "ipa": {
+        "uk": "/ˈrɒkɪt/",
+        "us": "/ˈrɑːkɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "rockets",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "rocketed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "rocketing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "senses": [
+    {
+      "senseId": "w:rocket#s1",
+      "pos": "n.",
+      "glossZh": "火箭",
+      "pronunciationId": "w:rocket#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rocket#e-f35b6d17a112612a",
+          "text": "He would pull out a book on dinosaurs, reading with intense focus for a few minutes, then move on to another about volcanoes or space rockets.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation:4",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 134,
+            "end": 141
+          }
+        },
+        {
+          "exampleId": "w:rocket#e-451050e08e770b2e",
+          "text": "Orion will be lifted off on NASA’s SLS (Space Launch System) rocket, and is equipped with advanced systems for deep space travel such as life support, navigation, and emergency abort capabilities.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:rocket#e-1e5a01c459022c7e",
+          "text": "Most rockets gained respectable heights, while a few shot wildly.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第一次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-zhejiang-z20-alliance-2025-08-senior-three-first-joint-exam:writing-continuation:12",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rocket#s2",
+      "pos": "v.",
+      "glossZh": "急速上升",
+      "pronunciationId": "w:rocket#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rocket#e-5186b13d4ef7dad9",
+          "text": "In just three seasons it rocketed from the bottom to the top of the league.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:rocket#e-f04ed14cb8d09cc4",
+          "text": "Their caution is justified: last year saw record snack food sales, and billboard advertising – less controlled by rules – has rocketed.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2026-apr-m2",
+            "paperTitle": "湖州、衢州、丽水2026年4月三地市高三教学质量检测",
+            "groupId": "group:paper-mock-zj-huliqu-2026-apr-m2:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zj-huliqu-2026-apr-m2:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 126,
+            "end": 134
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rocket#s3",
+      "pos": "n.",
+      "glossZh": "芝麻菜",
+      "pronunciationId": "w:rocket#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "势大力沉的射门",
+      "reason": "体育口语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

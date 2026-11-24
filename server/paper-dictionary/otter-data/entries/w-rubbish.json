@@ -1,0 +1,219 @@
+{
+  "entryId": "w:rubbish",
+  "headword": "rubbish",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈrʌbɪʃ/",
+    "us": "/ˈrʌbɪʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:rubbish#p-main",
+      "ipa": {
+        "uk": "/ˈrʌbɪʃ/",
+        "us": "/ˈrʌbɪʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "rubbishes",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "rubbished",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "rubbishing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "senses": [
+    {
+      "senseId": "w:rubbish#s1",
+      "pos": "n.",
+      "glossZh": "垃圾",
+      "pronunciationId": "w:rubbish#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rubbish#e-faac44acd27fb934",
+          "text": "Lila realized the project was bigger than just cleaning up rubbish.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:rubbish#e-60f3e88ca3357d05",
+          "text": "Charlton works at the centre’s onsite ReUse shop, and has saved a lot of rubbish from landfill (垃圾填埋场).",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 80
+          }
+        },
+        {
+          "exampleId": "w:rubbish#e-7c3cfd01fe8a60ec",
+          "text": "While rural animals may forage at a variety of places and eat a variety of foods, urban animals may concentrate on garbage bins or rubbish dumps where they know they can find food, but they end up eating a potentially unhealthy diet.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 131,
+            "end": 138
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rubbish#s2",
+      "pos": "n.",
+      "glossZh": "劣质内容",
+      "pronunciationId": "w:rubbish#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rubbish#e-02c53fd60a4d16a3",
+          "text": "But in 2026, no such regulation exists for our polluted media landscape, which means it’s up to us, as individuals, to stop consuming AI rubbish, irritating posts, and misinformation-for-profit.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 137,
+            "end": 144
+          }
+        },
+        {
+          "exampleId": "w:rubbish#e-4d419dab1e94ede3",
+          "text": "Ultimately, given the massive energy consumed by algorithms (算法), it is essential that AI be employed to “do good in terms of fighting the climate crisis – designing the next generation of batteries, tracking deforestation,” as Sasha Luccioni, climate lead at an AI firm, said, rather than “create social-media websites filled with rubbish while data centres are still powered by coal-fired generators.”",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:reading-c:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 332,
+            "end": 339
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rubbish#s3",
+      "pos": "n.",
+      "glossZh": "胡说",
+      "pronunciationId": "w:rubbish#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:rubbish#s4",
+      "pos": "v.",
+      "glossZh": "抨击",
+      "pronunciationId": "w:rubbish#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

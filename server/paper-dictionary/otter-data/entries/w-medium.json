@@ -1,0 +1,400 @@
+{
+  "entryId": "w:medium",
+  "headword": "medium",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "media"
+  ],
+  "ipa": {
+    "uk": "/ˈmiːdiəm/",
+    "us": "/ˈmiːdiəm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:medium#p-main",
+      "ipa": {
+        "uk": "/ˈmiːdiəm/",
+        "us": "/ˈmiːdiəm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "mediae",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "medias",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "mediums",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 24,
+    "mock": 325
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 325
+  },
+  "senses": [
+    {
+      "senseId": "w:medium#s1",
+      "pos": "adj.",
+      "glossZh": "中等的",
+      "pronunciationId": "w:medium#p-main",
+      "note": "也用于衣物中号或牛排五分熟。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:medium#e-f5a98211c943e02b",
+          "text": "A total of 92 women were in the medium fitness category; and 59 women were in the low fitness category, defined as a peak workload of 80 watts or less, or having their exercise tests stopped because of high blood pressure, chest pain or other cardiovascular problems.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:medium#e-4373f9433cae300c",
+          "text": "Five percent of the highly fit women developed dementia, compared to 25 percent of the women with medium fitness and 32 percent of the women with low fitness.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 104
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:medium#s2",
+      "pos": "n.",
+      "glossZh": "新闻媒体",
+      "pronunciationId": "w:medium#p-main",
+      "note": "此义常用 media。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:medium#e-793520fbf14c45fc",
+          "text": "They are covered by the local media.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:medium#e-c58515ef2e74dd75",
+          "text": "He realised that something needed to change, and, being a London media type, appointed himself “marketing director for Nature”.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:medium#e-0f7d14d4f7e7b9d5",
+          "text": "By advertising in London media.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:25",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:medium#s3",
+      "pos": "短语",
+      "glossZh": "社交媒体",
+      "pronunciationId": "w:medium#p-main",
+      "note": "social media。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 15,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:medium#e-9fc9fa8054ea173f",
+          "text": "Share library announcements on your social media.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:6",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:medium#e-c226a0f79fe37a25",
+          "text": "As an artist who shares her journey on social media, I’m often asked by curious followers how to begin an art journey.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:medium#e-d63053e5956a62fa",
+          "text": "Ms Donohue used to be laughed at for being too old to work out, but she has proved the __54__ wrong in the best possible way and has indeed become an __55__ for many social media users.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:cloze",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-ii:cloze:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 173,
+            "end": 178
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:medium#s4",
+      "pos": "n.",
+      "glossZh": "传播媒介",
+      "pronunciationId": "w:medium#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:medium#e-f1591aa1e77ce76c",
+          "text": "Would you limit yourself to one medium in your native language?",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:medium#e-fef5286a1ac7a768",
+          "text": "However, for maximizing learning where mental focus and reflection are called for, educators shouldn’t assume all media are the same, even when they contain identical words.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 114,
+            "end": 119
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:medium#s5",
+      "pos": "n.",
+      "glossZh": "艺术表现媒介",
+      "pronunciationId": "w:medium#p-main",
+      "note": "mixed media 指综合媒材。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:medium#e-fb3a58256e893c56",
+          "text": "Mesa Arts Center is hosting an eight-week youth arts course on Saturdays to teach artistic skills and knowledge through fun and challenging art classes in a wide variety of art materials, including painting, drawing, mixed media and sculpture, ensuring mentally stimulating sessions for all.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 223,
+            "end": 228
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:medium#s6",
+      "pos": "n.",
+      "glossZh": "传播或存留物质、能量的介质",
+      "pronunciationId": "w:medium#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:medium#s7",
+      "pos": "n.",
+      "glossZh": "中号",
+      "pronunciationId": "w:medium#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:medium#s8",
+      "pos": "n.",
+      "glossZh": "通灵者",
+      "pronunciationId": "w:medium#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "血管中层；昆虫翅脉；三段论中项；旧制干量单位",
+      "reason": "领域术语或误配"
+    },
+    {
+      "glossZh": "半品脱黑啤；米底王国",
+      "reason": "地区用法或同形专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

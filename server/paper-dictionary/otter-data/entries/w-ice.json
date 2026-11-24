@@ -1,0 +1,256 @@
+{
+  "entryId": "w:ice",
+  "headword": "ice",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/aɪs/",
+    "us": "/aɪs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ice#p-main",
+      "ipa": {
+        "uk": "/aɪs/",
+        "us": "/aɪs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "ices",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "ICEs",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "iced",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "icing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "ICEd",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "ICEing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 122
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 120
+  },
+  "senses": [
+    {
+      "senseId": "w:ice#s1",
+      "pos": "n.",
+      "glossZh": "冰",
+      "pronunciationId": "w:ice#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ice#e-3f0e200b8a99f1b3",
+          "text": "The salt lowers water’s freezing point, causing ice to melt（融化）.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:ice#e-ec67fb54fe8c29c0",
+          "text": "In spring, the snow was replaced by mud over ice.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 48
+          }
+        },
+        {
+          "exampleId": "w:ice#e-8a040e506934a723",
+          "text": "Airplanes seed threatening storm cells with a chemical to make small ice crystals fall as rain before they can grow into dangerous hailstones.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ice#s2",
+      "pos": "短语",
+      "glossZh": "打破冷场",
+      "pronunciationId": "w:ice#p-main",
+      "note": "break the ice。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ice#e-6adef153d77b41ec",
+          "text": "Yet persistence paid off when the ice was finally broken by Graham, a fellow resident of my little neighborhood.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:ice#e-aab24eb2427c83d3",
+          "text": "Paragraph 1: Amazingly, Rose stepped forward to break the ice.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:writing-continuation:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ice#s3",
+      "pos": "v.",
+      "glossZh": "用冰敷",
+      "pronunciationId": "w:ice#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ice#s4",
+      "pos": "v.",
+      "glossZh": "给蛋糕抹糖霜",
+      "pronunciationId": "w:ice#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "icing（糖霜，名词）",
+      "reason": "属于衍生名词，g2、g3 留空"
+    },
+    {
+      "glossZh": "内燃机、移民与海关执法局等",
+      "reason": "大写 ICE 是同形缩写"
+    },
+    {
+      "glossZh": "冰毒、钻石或杀害",
+      "reason": "俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

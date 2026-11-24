@@ -1,0 +1,195 @@
+{
+  "entryId": "w:exhibition",
+  "headword": "exhibition",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌeksɪˈbɪʃn/",
+    "us": "/ˌeksɪˈbɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:exhibition#p-main",
+      "ipa": {
+        "uk": "/ˌeksɪˈbɪʃn/",
+        "us": "/ˌeksɪˈbɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "exhibitions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 33,
+    "mock": 134
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 133
+  },
+  "senses": [
+    {
+      "senseId": "w:exhibition#s1",
+      "pos": "n.",
+      "glossZh": "展览",
+      "pronunciationId": "w:exhibition#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 32,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:exhibition#e-e90d7476e5f6416a",
+          "text": "A new exhibition in Halifax uses everyday activities to explain the hidden math principles we all use on a regular basis.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:17",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:exhibition#e-9b268b9e2076a77c",
+          "text": "This exhibition of some sixty masterpieces celebrating the life and work of Scotland’s best loved painter, Sir Henry Raeburn, comes to London.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:exhibition#e-3ea6aff0cc10a100",
+          "text": "The temporary exhibition gallery has a wide range of art, craft（工艺） and local history exhibitions which change every month.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 97
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:exhibition#s2",
+      "pos": "n.",
+      "glossZh": "展出",
+      "pronunciationId": "w:exhibition#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:exhibition#e-14f4a6b0059e6e18",
+          "text": "They are used for public exhibition.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2024-i:32",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:exhibition#e-e10b67bbb317614c",
+          "text": "Prizes $10,000, exhibition opportunities at international events",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:exhibition#s3",
+      "pos": "n.",
+      "glossZh": "显露（某种品质）",
+      "pronunciationId": "w:exhibition#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "英国学校的奖学金",
+      "reason": "英国旧式教育用语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

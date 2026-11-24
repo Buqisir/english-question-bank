@@ -1,0 +1,189 @@
+{
+  "entryId": "w:medical",
+  "headword": "medical",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmedɪkl/",
+    "us": "/ˈmedɪkl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:medical#p-main",
+      "ipa": {
+        "uk": "/ˈmedɪkl/",
+        "us": "/ˈmedɪkl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more medical",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most medical",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "medicals",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 30,
+    "mock": 216
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 216
+  },
+  "senses": [
+    {
+      "senseId": "w:medical#s1",
+      "pos": "adj.",
+      "glossZh": "医学的；医疗的",
+      "pronunciationId": "w:medical#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 27,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:medical#e-020624e84dd90ee5",
+          "text": "Your medical history is a list of your illnesses, treatments, what the doctors told you to do, and anything else you think your doctor should know.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-ii:seven-choices:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:medical#e-6816a04ac09039f6",
+          "text": "She moved to Virginia in 1865, where she provided medical care to freed slaves.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-a:figure-d47b575dce95546b:cell-1-2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:medical#e-017c386108be7009",
+          "text": "The hospital school is free of parents, doctors, and medical procedures.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 60
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:medical#s2",
+      "pos": "adj.",
+      "glossZh": "学医的",
+      "pronunciationId": "w:medical#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:medical#e-c4ab1b67e653bf37",
+          "text": "Medical students.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2025-ii:24",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:medical#s3",
+      "pos": "n.",
+      "glossZh": "体检",
+      "pronunciationId": "w:medical#p-main",
+      "note": "主要用于英式英语。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "医生（名词）",
+      "reason": "旧式或地区用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

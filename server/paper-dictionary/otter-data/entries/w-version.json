@@ -1,0 +1,155 @@
+{
+  "entryId": "w:version",
+  "headword": "version",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈvɜːʃn/",
+    "us": "/ˈvɜːrʒn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:version#p-main",
+      "ipa": {
+        "uk": "/ˈvɜːʃn/",
+        "us": "/ˈvɜːrʒn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "versions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 75
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 74
+  },
+  "senses": [
+    {
+      "senseId": "w:version#s1",
+      "pos": "n.",
+      "glossZh": "版本",
+      "pronunciationId": "w:version#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:version#e-b97ffe1c37f11291",
+          "text": "A 35-minute hand-clapping, foot-stomping musical version of a Mark Twain favorite returns with this Tall Stacks festival.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:version#e-8c2392eedfe63a87",
+          "text": "In her study, Martin asked participants to rate their attachment to male, female, and genderless versions of a digital voice assistant and a self-driving car known as “Miuu.” It was found that gender increased users’ feelings of attachment to these devices and their interest in purchasing them.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 105
+          }
+        },
+        {
+          "exampleId": "w:version#e-d5f985d60761ec6c",
+          "text": "I began to form a plan for the Creative Project Day – creating a Story Corner in the library, with picture books and short stories, and even recording audio versions of some stories for kids who struggled to read.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2026-05-may-survey-r3",
+            "paperTitle": "重庆市康德2026年普通高等学校招生全国统一考试5月调研英语试题",
+            "groupId": "group:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2026-05-may-survey-r3:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 157,
+            "end": 165
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:version#s2",
+      "pos": "n.",
+      "glossZh": "对事件的一种说法",
+      "pronunciationId": "w:version#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:version#s3",
+      "pos": "n.",
+      "glossZh": "译本",
+      "pronunciationId": "w:version#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "子宫轴偏转、双眼同向运动",
+      "reason": "医学术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

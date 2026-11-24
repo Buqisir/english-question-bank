@@ -1,0 +1,138 @@
+{
+  "entryId": "w:anxious",
+  "headword": "anxious",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈæŋkʃəs/",
+    "us": "/ˈæŋkʃəs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:anxious#p-main",
+      "ipa": {
+        "uk": "/ˈæŋkʃəs/",
+        "us": "/ˈæŋkʃəs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "anxiouser",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "anxiousest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more anxious",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most anxious",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 66
+  },
+  "unassignedCounts": {
+    "gaokao": 9,
+    "mock": 64
+  },
+  "senses": [
+    {
+      "senseId": "w:anxious#s1",
+      "pos": "adj.",
+      "glossZh": "担心的；焦虑的",
+      "pronunciationId": "w:anxious#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:anxious#e-a997d2dc91756dc6",
+          "text": "Instead of seeking immediate reassurance, individuals can pause to ask: Am I truly being rejected, or am I simply anxious?",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 114,
+            "end": 121
+          }
+        },
+        {
+          "exampleId": "w:anxious#e-e680109a9b074b45",
+          "text": "They are more likely to feel anxious in daily life.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-mock-cq-nankai-2026-04-seventh-quality-test:35",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:anxious#s2",
+      "pos": "adj.",
+      "glossZh": "渴望的；急切的",
+      "pronunciationId": "w:anxious#p-main",
+      "note": "anxious to do sth 或 anxious for sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

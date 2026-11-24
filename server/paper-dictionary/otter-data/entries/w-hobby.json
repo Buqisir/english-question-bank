@@ -1,0 +1,130 @@
+{
+  "entryId": "w:hobby",
+  "headword": "hobby",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈhɒbi/",
+    "us": "/ˈhɑːbi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:hobby#p-main",
+      "ipa": {
+        "uk": "/ˈhɒbi/",
+        "us": "/ˈhɑːbi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "hobbies",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 31,
+    "mock": 162
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:hobby#s1",
+      "pos": "n.",
+      "glossZh": "业余爱好",
+      "pronunciationId": "w:hobby#p-main",
+      "note": "take up a hobby 表示「开始培养一项爱好」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 31,
+        "mock": 162
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hobby#e-b59c924d67dd500b",
+          "text": "Many people have the hobby of collecting things, e.g. stamps, postcards or antiques.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:hobby#e-5fb1478593dfabb6",
+          "text": "Though DIY has traditionally been seen as a male hobby, the research shows it is women now leading the charge.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-b:5",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:hobby#e-64738e994ef4b058",
+          "text": "I’ve discovered that if I show students how what they learn is relevant to my hobbies, they’re much more willing to make connections to their personal interests and develop their own hobbies.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 183,
+            "end": 190
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "小型猎鹰、已灭绝的小马品种",
+      "reason": "同形动物名称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

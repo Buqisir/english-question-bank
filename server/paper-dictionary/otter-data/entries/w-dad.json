@@ -1,0 +1,130 @@
+{
+  "entryId": "w:dad",
+  "headword": "dad",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dæd/",
+    "us": "/dæd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dad#p-main",
+      "ipa": {
+        "uk": "/dæd/",
+        "us": "/dæd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "dads",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 18,
+    "mock": 160
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:dad#s1",
+      "pos": "n.",
+      "glossZh": "爸爸",
+      "pronunciationId": "w:dad#p-main",
+      "note": "口语用法。用作称呼时常大写 Dad。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 160
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dad#e-7259e55c1c2623d3",
+          "text": "Dad opened the box and a sweet little dog appeared.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:13",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 3
+          }
+        },
+        {
+          "exampleId": "w:dad#e-e6197380ff480b42",
+          "text": "My dad, George, only had an eighth grade education.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:dad#e-3da6f8c2b414ec72",
+          "text": "A few days later, I came back with my first jars of zero waste groceries, and my dad commented on how silly it was for me to carry jars everywhere.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 84
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "游戏缩写、肺泡损伤缩写、猛撞",
+      "reason": "同形缩写或罕见旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

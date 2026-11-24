@@ -1,0 +1,168 @@
+{
+  "entryId": "w:altogether",
+  "headword": "altogether",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌɔːltəˈɡeðə(r)/",
+    "us": "/ˌɔːltəˈɡeðər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:altogether#p-main",
+      "ipa": {
+        "uk": "/ˌɔːltəˈɡeðə(r)/",
+        "us": "/ˌɔːltəˈɡeðər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "senses": [
+    {
+      "senseId": "w:altogether#s1",
+      "pos": "adv.",
+      "glossZh": "完全；彻底",
+      "pronunciationId": "w:altogether#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:altogether#e-c4add85f337216ac",
+          "text": "Removing gender from the picture altogether seems like a simple way to fix this.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:altogether#e-a0df41c8db463061",
+          "text": "On the other hand, if users view recommendations as overly complex or irrelevant, they may dismiss them altogether, forgoing any advantages algorithmic recommendations may provide.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 114
+          }
+        },
+        {
+          "exampleId": "w:altogether#e-c382be50c7b44346",
+          "text": "Afterward, she began showing up less frequently and eventually stopped coming altogether.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-school-alliance-2025-12-quality-test",
+            "paperTitle": "2025年秋季学期高三年级12月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eleven-school-alliance-2025-12-quality-test:reading-b:1",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:altogether#s2",
+      "pos": "adv.",
+      "glossZh": "总共；合计",
+      "pronunciationId": "w:altogether#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:altogether#e-f4e01a3cfbb6fe3d",
+          "text": "How many hours of class will you have altogether if you register for a single week?",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:23",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 48
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:altogether#s3",
+      "pos": "adv.",
+      "glossZh": "总体来说；总而言之",
+      "pronunciationId": "w:altogether#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "裸体（in the altogether）",
+      "reason": "旧式俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

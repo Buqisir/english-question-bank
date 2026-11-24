@@ -1,0 +1,87 @@
+{
+  "entryId": "w:empress",
+  "headword": "empress",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈemprəs/",
+    "us": "/ˈemprəs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:empress#p-main",
+      "ipa": {
+        "uk": "/ˈemprəs/",
+        "us": "/ˈemprəs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "empresses",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:empress#s1",
+      "pos": "n.",
+      "glossZh": "女皇",
+      "pronunciationId": "w:empress#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:empress#s2",
+      "pos": "n.",
+      "glossZh": "皇后",
+      "pronunciationId": "w:empress#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "费尔蒙帝后酒店中的专名 Empress",
+      "reason": "酒店名称，语料无独立用例"
+    },
+    {
+      "glossZh": "塔罗牌中的女皇牌",
+      "reason": "专门名称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,234 @@
+{
+  "entryId": "w:wet",
+  "headword": "wet",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/wet/",
+    "us": "/wet/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:wet#p-main",
+      "ipa": {
+        "uk": "/wet/",
+        "us": "/wet/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "wetter",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "wettest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "WETter",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "WETtest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "wets",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "wetted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "wetting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 44
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 42
+  },
+  "senses": [
+    {
+      "senseId": "w:wet#s1",
+      "pos": "adj.",
+      "glossZh": "湿的",
+      "pronunciationId": "w:wet#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wet#e-5968cee7b611661a",
+          "text": "“I know where she got it,” declared Hilda climbing out of the tank with a handful of items still wet from their watery, resting place.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:wet#e-16f0883f977ec156",
+          "text": "I didn’t want Toby to be running around in the house, and my brother wasn’t happy with driving home with a wet dog.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:wet#e-be16aa77ed2b7424",
+          "text": "The child’s face was wet with tears, her cries loud and broken.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:writing-continuation",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:writing-continuation:10",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:wet#s2",
+      "pos": "adj.",
+      "glossZh": "多雨的",
+      "pronunciationId": "w:wet#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wet#e-36b1187c9e0cfe68",
+          "text": "I met Gunter on a cold, wet and unforgettable evening in September.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:wet#e-130a32cf0957bb21",
+          "text": "Wetter winters followed by hot, dry summers lead to earlier crowds of pests.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n123",
+            "paperTitle": "黄冈市2025年秋季高三年级期末考试英语试卷",
+            "groupId": "group:paper-mock-import-20261026-n123:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-import-20261026-n123:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:wet#s3",
+      "pos": "v.",
+      "glossZh": "弄湿",
+      "pronunciationId": "w:wet#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "温和保守派、雨胎、埃塞俄比亚炖菜",
+      "reason": "专门用法或外来同形词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

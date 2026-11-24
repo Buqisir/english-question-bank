@@ -1,0 +1,173 @@
+{
+  "entryId": "w:noble",
+  "headword": "noble",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈnəʊbl/",
+    "us": "/ˈnoʊbl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:noble#p-main",
+      "ipa": {
+        "uk": "/ˈnəʊbl/",
+        "us": "/ˈnoʊbl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more noble",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most noble",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "nobler",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "noblest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "nobles",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "senses": [
+    {
+      "senseId": "w:noble#s1",
+      "pos": "adj.",
+      "glossZh": "高尚的",
+      "pronunciationId": "w:noble#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:noble#e-faabe98d36580540",
+          "text": "Noble as its objective is, Felipe admits that Porsorriso is “struggling to survive” because of the huge cost of providing dental work and the constant fundraising events they have to hold to keep the NGO in normal functioning.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1",
+            "paperTitle": "炎德·英才大联考长郡中学2026届高三月考试卷（一）高三英语试题",
+            "groupId": "group:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-08-yande-yingcai-monthly-exam-1:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:noble#e-4c415191060ffb1b",
+          "text": "They may not drive a stylish car, but who is going to say they are not __55__ to us or even nobler?",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 98
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:noble#s2",
+      "pos": "adj.",
+      "glossZh": "贵族的",
+      "pronunciationId": "w:noble#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:noble#s3",
+      "pos": "adj.",
+      "glossZh": "宏伟庄严的",
+      "pronunciationId": "w:noble#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:noble#s4",
+      "pos": "n.",
+      "glossZh": "贵族",
+      "pronunciationId": "w:noble#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "中世纪英国金币；惰性气体的定语",
+      "reason": "历史或化学专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

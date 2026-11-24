@@ -1,0 +1,239 @@
+{
+  "entryId": "w:contract",
+  "headword": "contract",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɒntrækt/",
+    "us": "/ˈkɑːntrækt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:contract#p-main",
+      "ipa": {
+        "uk": "/ˈkɒntrækt/",
+        "us": "/ˈkɑːntrækt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "名词"
+    },
+    {
+      "pronunciationId": "w:contract#p-verb",
+      "ipa": {
+        "uk": "/kənˈtrækt/",
+        "us": "/kənˈtrækt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "动词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "contracts",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "contracted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "contracting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 26
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 23
+  },
+  "senses": [
+    {
+      "senseId": "w:contract#s1",
+      "pos": "n.",
+      "glossZh": "合同；契约",
+      "pronunciationId": "w:contract#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:contract#e-338e5d0457c8d865",
+          "text": "He signed a contract.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:contract#e-39a0c4b5fc012926",
+          "text": "Successful artists selected; enter into a contract with the City of Burlington",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "cell:paper-gaokao-2026-zhejiang-jan:reading-a:ocr-916a21169272a7ae:2:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:contract#e-fd4bb7c638faeae7",
+          "text": "I felt at home immediately and signed the rental contract on the spot.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:contract#s2",
+      "pos": "v.",
+      "glossZh": "收缩；缩小",
+      "pronunciationId": "w:contract#p-verb",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:contract#e-5a1d68eb6aea97aa",
+          "text": "A laser beam is shone onto the skin of a person’s throat and the reflections are used to measure exactly how much their skin is rising and falling as their main artery(动脉) expands and contracts as blood is forced through it.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 184,
+            "end": 193
+          }
+        },
+        {
+          "exampleId": "w:contract#e-60dfaa40591ae89d",
+          "text": "The electrodes fed into a tiny, fitted backpack that recorded electrical signals from contracting muscles as the birds pecked.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 86,
+            "end": 97
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:contract#s3",
+      "pos": "v.",
+      "glossZh": "订立合同；签约",
+      "pronunciationId": "w:contract#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:contract#s4",
+      "pos": "v.",
+      "glossZh": "感染；患上（疾病）",
+      "pronunciationId": "w:contract#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "订婚、指使杀人的委托",
+      "reason": "旧义或特殊语境"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

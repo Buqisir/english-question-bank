@@ -1,0 +1,271 @@
+{
+  "entryId": "w:current",
+  "headword": "current",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkʌrənt/",
+    "us": "/ˈkɜːrənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:current#p-main",
+      "ipa": {
+        "uk": "/ˈkʌrənt/",
+        "us": "/ˈkɜːrənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "currenter",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "currentest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more current",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most current",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "currents",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 170
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 167
+  },
+  "senses": [
+    {
+      "senseId": "w:current#s1",
+      "pos": "adj.",
+      "glossZh": "当前的；现行的；现在的",
+      "pronunciationId": "w:current#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:current#e-7e377a61ab29d8e5",
+          "text": "Bring your medical history, including a list of your current medicines.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-ii:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:current#e-baffdf3c61529b76",
+          "text": "As we soon come to learn from AI by Design, AI is already super-smart and will become more capable, moving from the current generation of “narrow-AI\" to Artificial General Intelligence.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 116,
+            "end": 123
+          }
+        },
+        {
+          "exampleId": "w:current#e-566750f8d27d71db",
+          "text": "Current students, teachers (including retired) and staff can request items through ILL.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:current#s2",
+      "pos": "n.",
+      "glossZh": "电流",
+      "pronunciationId": "w:current#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:current#e-1eabcff76c69d014",
+          "text": "With help from Tesla, Westinghouse’s firm developed a system using alternating current, which soon became the major form of power delivery.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:current#e-ec85ef7a2eca2b8d",
+          "text": "When a small electric current was applied, the salt ions moved, which changed the melting point of the liquid, causing it to melt.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:current#e-be2f5984714de16b",
+          "text": "As charged droplets exit the tube and fall into the cup, charges build up in the water, creating an electric current.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-d:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 116
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:current#s3",
+      "pos": "n.",
+      "glossZh": "水流；洋流；气流",
+      "pronunciationId": "w:current#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:current#e-3dfde05edfa0fad2",
+          "text": "I felt like the poor old man who had gone eighty-four days without catching a single fish, drifting with the current in the deep waters of the Gulf Stream, dehydrated and desperate.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 116
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:current#s4",
+      "pos": "n.",
+      "glossZh": "潮流；趋势",
+      "pronunciationId": "w:current#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "快速流动的",
+      "reason": "罕见形容词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

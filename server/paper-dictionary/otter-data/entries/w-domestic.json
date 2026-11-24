@@ -1,0 +1,240 @@
+{
+  "entryId": "w:domestic",
+  "headword": "domestic",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dəˈmestɪk/",
+    "us": "/dəˈmestɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:domestic#p-main",
+      "ipa": {
+        "uk": "/dəˈmestɪk/",
+        "us": "/dəˈmestɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more domestic",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most domestic",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "domestics",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "senses": [
+    {
+      "senseId": "w:domestic#s1",
+      "pos": "adj.",
+      "glossZh": "家庭的；家用的",
+      "pronunciationId": "w:domestic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:domestic#e-3d2c9eb641b39e01",
+          "text": "Back downtown during a workday, they can enjoy a more domestic form of this interaction by walking along a fountain on their lunch break.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:domestic#e-47f87d2a058e3b5b",
+          "text": "She was determined to take this domestic responsibility.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:domestic#e-90a994580a7c0c6d",
+          "text": "With advanced AI capabilities, they are increasingly transitioning from industrial applications to domestic environments with human-like appearances and skillful body and hand movements.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 107
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:domestic#s2",
+      "pos": "adj.",
+      "glossZh": "国内的；本国的",
+      "pronunciationId": "w:domestic#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:domestic#e-52b87a1d47c58e63",
+          "text": "With gas prices rising and airport security lines snaking longer than ever, why not book your next domestic vacation on a train?",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 99,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:domestic#e-02a349089c26e142",
+          "text": "Today, it has grown into a popular tourist destination, attracting more than 10 million domestic and international visitors annually.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:grammar-fill:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 96
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:domestic#s3",
+      "pos": "adj.",
+      "glossZh": "家养的",
+      "pronunciationId": "w:domestic#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:domestic#e-17dcec1ee2328ce1",
+          "text": "No domestic pets, captive zoo animals or farm livestock.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:domestic#s4",
+      "pos": "n.",
+      "glossZh": "家政佣工",
+      "pronunciationId": "w:domestic#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "家庭纠纷（名词）",
+      "reason": "英式口语省称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

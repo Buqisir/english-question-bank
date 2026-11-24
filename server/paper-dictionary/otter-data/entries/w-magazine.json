@@ -1,0 +1,156 @@
+{
+  "entryId": "w:magazine",
+  "headword": "magazine",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌmæɡəˈziːn/",
+    "us": "/ˈmæɡəziːn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:magazine#p-main",
+      "ipa": {
+        "uk": "/ˌmæɡəˈziːn/",
+        "us": "/ˈmæɡəziːn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "magazines",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 77
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 77
+  },
+  "senses": [
+    {
+      "senseId": "w:magazine#s1",
+      "pos": "n.",
+      "glossZh": "杂志",
+      "pronunciationId": "w:magazine#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 19,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:magazine#e-06c9ed49127c6580",
+          "text": "I remember her reading a magazine while taking the part of the Wolf in a game of “Little Red Riding Hood” with my brother’s two daughters.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:magazine#e-ec9d68f0ab9da006",
+          "text": "Their stay in Elkhead is the subject of Nothing Daunted: The Unexpected Education of Two Society Girls in the West by Dorothy Wickenden, who is a magazine editor and Dorothy Woodruff’s granddaughter.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 146,
+            "end": 154
+          }
+        },
+        {
+          "exampleId": "w:magazine#e-6306108f16e1a792",
+          "text": "Friends receive a subscription to the Museum’s quarterly magazine",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-eight-provinces-jan:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 57,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:magazine#s2",
+      "pos": "n.",
+      "glossZh": "弹匣",
+      "pronunciationId": "w:magazine#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:magazine#s3",
+      "pos": "n.",
+      "glossZh": "弹药库",
+      "pronunciationId": "w:magazine#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "供料仓、旧指商店",
+      "reason": "专门或旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

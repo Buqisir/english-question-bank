@@ -1,0 +1,135 @@
+{
+  "entryId": "w:tiny",
+  "headword": "tiny",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtaɪni/",
+    "us": "/ˈtaɪni/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:tiny#p-main",
+      "ipa": {
+        "uk": "/ˈtaɪni/",
+        "us": "/ˈtaɪni/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "tinier",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "tiniest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 22,
+    "mock": 142
+  },
+  "unassignedCounts": {
+    "gaokao": 5,
+    "mock": 142
+  },
+  "senses": [
+    {
+      "senseId": "w:tiny#s1",
+      "pos": "adj.",
+      "glossZh": "极小的",
+      "pronunciationId": "w:tiny#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tiny#e-00e0c414039604b9",
+          "text": "Molai grew up in a tiny village in India.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:tiny#e-f5040fb9accf4fb6",
+          "text": "Our building even had a tiny lift with a female voice that said, “Ouverture des portes,” in perfect French.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:tiny#e-5ef65d5220af9e38",
+          "text": "During most of the class, we follow Angela and concentrate on making tiny, isolated (单独) movements.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:grammar-fill",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2026-ii:grammar-fill:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 73
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Tiny Forest",
+      "reason": "专名中的用法留空"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

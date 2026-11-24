@@ -1,0 +1,207 @@
+{
+  "entryId": "w:ticket",
+  "headword": "ticket",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtɪkɪt/",
+    "us": "/ˈtɪkɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ticket#p-main",
+      "ipa": {
+        "uk": "/ˈtɪkɪt/",
+        "us": "/ˈtɪkɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "tickets",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "ticketed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "ticketing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 115
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 114
+  },
+  "senses": [
+    {
+      "senseId": "w:ticket#s1",
+      "pos": "n.",
+      "glossZh": "票",
+      "pronunciationId": "w:ticket#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 19,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ticket#e-26d9676209f8ea0d",
+          "text": "Trip includes round-trip air tickets, hotel stay for two nights, and tours of the National Air and Space Museum and the office of National Geographic World.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:ticket#e-2d6de41027fe2e20",
+          "text": "How can you get a discounted ticket to the ZooLights show?",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2023-four-provinces-feb:21",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:ticket#e-2bb3280fcd9ac444",
+          "text": "Book a ticket online.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2023-four-provinces-feb:21",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ticket#s2",
+      "pos": "n.",
+      "glossZh": "罚单",
+      "pronunciationId": "w:ticket#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ticket#s3",
+      "pos": "v.",
+      "glossZh": "给……开罚单",
+      "pronunciationId": "w:ticket#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ticket#s4",
+      "pos": "adj.",
+      "glossZh": "凭票入场的",
+      "pronunciationId": "w:ticket#p-main",
+      "note": "用形式 ticketed。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ticket#e-1f91993991eeb89d",
+          "text": "You can expect ticketed and timed temporary exhibitions that showcase everything from the treasures of China to the culture of Cuba.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 23
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "便条、名片和搜查令",
+      "reason": "少见或特定领域用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

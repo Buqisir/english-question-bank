@@ -1,0 +1,144 @@
+{
+  "entryId": "w:temperature",
+  "headword": "temperature",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtemprətʃə(r)/",
+    "us": "/ˈtemprətʃər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:temperature#p-main",
+      "ipa": {
+        "uk": "/ˈtemprətʃə(r)/",
+        "us": "/ˈtemprətʃər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "temperatures",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 146
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 146
+  },
+  "senses": [
+    {
+      "senseId": "w:temperature#s1",
+      "pos": "n.",
+      "glossZh": "温度",
+      "pronunciationId": "w:temperature#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:temperature#e-bcb5db9e121a922b",
+          "text": "Radio tags（标签）on the animals will measure temperature changes.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:temperature#e-68ff3ee74b7b3b61",
+          "text": "The temperature on rail cars is often hard to control.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:temperature#e-b388667f9cfc884e",
+          "text": "They provide shade, lower surface temperatures, absorb a surprising amount of airborne carbon, remove tiny pollutants, and provide wildlife habitat along with just plain beauty.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:temperature#s2",
+      "pos": "n.",
+      "glossZh": "发烧",
+      "pronunciationId": "w:temperature#p-main",
+      "note": "常见 have a temperature。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "输出随机性参数、古代医学体质",
+      "reason": "技术或历史用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

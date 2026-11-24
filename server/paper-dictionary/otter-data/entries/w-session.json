@@ -1,0 +1,168 @@
+{
+  "entryId": "w:session",
+  "headword": "session",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈseʃn/",
+    "us": "/ˈseʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:session#p-main",
+      "ipa": {
+        "uk": "/ˈseʃn/",
+        "us": "/ˈseʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "sessions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 108
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 108
+  },
+  "senses": [
+    {
+      "senseId": "w:session#s1",
+      "pos": "n.",
+      "glossZh": "一节活动",
+      "pronunciationId": "w:session#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:session#e-5c5990b0d7e506ce",
+          "text": "We will be holding a free taster session on 23rd May, at 10 am, to demonstrate the variety of effective and active exercises.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:session#e-6dd215b8661c646a",
+          "text": "Her notice included what kind of training she wanted to do, how many days a week and how many hours she wanted to spend on each session, and her age.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "seven-choices-5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 128,
+            "end": 135
+          }
+        },
+        {
+          "exampleId": "w:session#e-457c00cb6322e92b",
+          "text": "The day is divided into two thematic sessions per age group.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:session#s2",
+      "pos": "n.",
+      "glossZh": "正式会议",
+      "pronunciationId": "w:session#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:session#s3",
+      "pos": "n.",
+      "glossZh": "会期",
+      "pronunciationId": "w:session#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:session#s4",
+      "pos": "n.",
+      "glossZh": "会话（与计算机系统交互的一段时间）",
+      "pronunciationId": "w:session#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "板球比赛的规定时段",
+      "reason": "体育专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

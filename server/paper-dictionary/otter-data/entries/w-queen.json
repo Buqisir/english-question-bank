@@ -1,0 +1,231 @@
+{
+  "entryId": "w:queen",
+  "headword": "queen",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kwiːn/",
+    "us": "/kwiːn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:queen#p-main",
+      "ipa": {
+        "uk": "/kwiːn/",
+        "us": "/kwiːn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "queens",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Queens",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "senses": [
+    {
+      "senseId": "w:queen#s1",
+      "pos": "n.",
+      "glossZh": "女王",
+      "pronunciationId": "w:queen#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:queen#e-5b84c2249f596e5f",
+          "text": "I admired how she seemed born to the water, emerging like a queen – proud, radiant, and benevolent.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-11-third-quality-test",
+            "paperTitle": "重庆市高2026届高三第三次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-11-third-quality-test:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-11-third-quality-test:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:queen#e-aa35125fbc05f04f",
+          "text": "Then Ms. Tuttle gave the part of the Snow Queen to Christine Abrams.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:writing-continuation:3",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:queen#s2",
+      "pos": "n.",
+      "glossZh": "王后",
+      "pronunciationId": "w:queen#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:queen#e-0f281c2d0a48e813",
+          "text": "According to tales, Nebuchadnezzar, then King of Babylon, had them built for his queen who longed for the forested mountains of her homeland.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 81,
+            "end": 86
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:queen#s3",
+      "pos": "n.",
+      "glossZh": "某方面出类拔萃的女性",
+      "pronunciationId": "w:queen#p-main",
+      "note": "也可比喻事物中的佼佼者。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:queen#e-3bfb316980af6f1b",
+          "text": "They subsequently authorized BBC to use the image of “Queen of Crime” to teach the mysterious writing style.",
+          "source": {
+            "paperId": "paper-mock-tianyu-2026-m4",
+            "paperTitle": "2025-2026学年第二学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-tianyu-2026-m4:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-tianyu-2026-m4:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 54,
+            "end": 59
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:queen#s4",
+      "pos": "n.",
+      "glossZh": "蜂王",
+      "pronunciationId": "w:queen#p-main",
+      "note": "queen bee。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:queen#s5",
+      "pos": "n.",
+      "glossZh": "国际象棋中的后",
+      "pronunciationId": "w:queen#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:queen#s6",
+      "pos": "n.",
+      "glossZh": "纸牌中的 Q",
+      "pronunciationId": "w:queen#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Queens（纽约皇后区）",
+      "reason": "地名"
+    },
+    {
+      "glossZh": "王柱",
+      "reason": "建筑专门义"
+    },
+    {
+      "glossZh": "可繁殖的成年母猫",
+      "reason": "动物繁殖专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

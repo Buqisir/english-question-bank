@@ -1,0 +1,239 @@
+{
+  "entryId": "w:innocent",
+  "headword": "innocent",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɪnəsnt/",
+    "us": "/ˈɪnəsnt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:innocent#p-main",
+      "ipa": {
+        "uk": "/ˈɪnəsnt/",
+        "us": "/ˈɪnəsnt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more innocent",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most innocent",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "senses": [
+    {
+      "senseId": "w:innocent#s1",
+      "pos": "adj.",
+      "glossZh": "无辜的；无罪的",
+      "pronunciationId": "w:innocent#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:innocent#e-242b61ae840aa940",
+          "text": "She argues against the idea that “the end justifies the means” when it comes to fighting cybercrime, citing a 2024 case where a government accessed a criminal group’s servers to recover stolen data, but in doing so, accidentally obtained the private emails of 10,000 innocent people.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-03-first:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 267,
+            "end": 275
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:innocent#s2",
+      "pos": "adj.",
+      "glossZh": "天真的；单纯的",
+      "pronunciationId": "w:innocent#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:innocent#e-75924aa5101652fd",
+          "text": "The coin immediately transported Gerard back to his innocent and sunny childhood, when he stood right in front of a legendary magician.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:innocent#e-f467921e6c84d2be",
+          "text": "It was one fewer bad memory for them, one fewer blow to their innocent childhood.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:innocent#e-a8572c314f07917d",
+          "text": "Buster would just look at me with his big, innocent eyes, tail thumping against the floor as if to say, “Socks?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam",
+            "paperTitle": "2025学年第一学期浙江省9+1高中联盟高三年级期中考试 英语试题",
+            "groupId": "group:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-nine-plus-one-alliance-2025-11-senior-three-midterm-exam:reading-b:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:innocent#s3",
+      "pos": "adj.",
+      "glossZh": "无害的",
+      "pronunciationId": "w:innocent#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:innocent#e-179afb59de427860",
+          "text": "The change may seem innocent, but it’s also transforming our relationship with the mental effort required to explore uncertainties.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-c:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:innocent#e-a19152360e6f7d6a",
+          "text": "Pieces like Safiya Sinclair’s “Notes on the State of Virginia” fully illustrate how a place that seems innocent or even beautiful to some can be upsetting to others.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 103,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:innocent#e-e5a7b281a3820d19",
+          "text": "This episode was just one innocent __53__ to lessen the divide between ourselves and the many species with whom we co-exist.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:cloze",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-nb-2026-m2:cloze:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 34
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "合法可进口或不应没收的",
+      "reason": "专门法律义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

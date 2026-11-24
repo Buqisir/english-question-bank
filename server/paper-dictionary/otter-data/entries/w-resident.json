@@ -1,0 +1,208 @@
+{
+  "entryId": "w:resident",
+  "headword": "resident",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈrezɪdənt/",
+    "us": "/ˈrezɪdənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:resident#p-main",
+      "ipa": {
+        "uk": "/ˈrezɪdənt/",
+        "us": "/ˈrezɪdənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more resident",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most resident",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "residents",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 72
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 70
+  },
+  "senses": [
+    {
+      "senseId": "w:resident#s1",
+      "pos": "n.",
+      "glossZh": "居民",
+      "pronunciationId": "w:resident#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:resident#e-d5ebc9011d832843",
+          "text": "The elderly residents (居民) in care homes in London are being given hens to look after to stop them feeling lonely.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-c-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:resident#e-193401f5a7181d39",
+          "text": "The best judges of how a city should be – and how it should develop – are the local residents themselves.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:resident#e-b139a7c4b92bceac",
+          "text": "The warmth of its residents.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2026-ii:25",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:resident#s2",
+      "pos": "adj.",
+      "glossZh": "常驻的",
+      "pronunciationId": "w:resident#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:resident#e-e5510b1603a55b8c",
+          "text": "After several visits, Kirsty, the resident café cat, has finally started acknowledging my presence.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:resident#s3",
+      "pos": "n.",
+      "glossZh": "住院医师",
+      "pronunciationId": "w:resident#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:resident#e-73826e8a1683e778",
+          "text": "But as the chief resident at a teaching hospital, he couldn't make his young trainees listen.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 17,
+            "end": 25
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "留鸟",
+      "reason": "鸟类学专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

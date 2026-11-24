@@ -1,0 +1,85 @@
+{
+  "entryId": "w:ping-pong",
+  "headword": "ping-pong",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [
+    "ping pong"
+  ],
+  "ipa": {
+    "uk": "/ˈpɪŋ pɒŋ/",
+    "us": "/ˈpɪŋ pɑːŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ping-pong#p-main",
+      "ipa": {
+        "uk": "/ˈpɪŋ pɒŋ/",
+        "us": "/ˈpɪŋ pɑːŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 2
+  },
+  "senses": [
+    {
+      "senseId": "w:ping-pong#s1",
+      "pos": "n.",
+      "glossZh": "乒乓球（运动）",
+      "pronunciationId": "w:ping-pong#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ping-pong#e-f9e8552340530216",
+          "text": "Gradually, I noticed more __51__: I chose elastic-waist (松紧腰) skirts for comfort, and my sister bought a ping-pong table just as Dad used to have.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 114
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "拟声 ping-pong",
+      "reason": "模仿击球声，非运动名称用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

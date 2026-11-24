@@ -1,0 +1,154 @@
+{
+  "entryId": "w:afford",
+  "headword": "afford",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈfɔːd/",
+    "us": "/əˈfɔːrd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:afford#p-main",
+      "ipa": {
+        "uk": "/əˈfɔːd/",
+        "us": "/əˈfɔːrd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "afforded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "affording",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "affords",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 36
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 36
+  },
+  "senses": [
+    {
+      "senseId": "w:afford#s1",
+      "pos": "v.",
+      "glossZh": "负担得起；有条件做",
+      "pronunciationId": "w:afford#p-main",
+      "note": "通常与 can、could 或 be able to 连用。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:afford#e-9d8d2c26e82aba07",
+          "text": "I encourage readers to go to their local library when they can’t afford to purchase a book.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:afford#e-1594082ac7198cf3",
+          "text": "Can our planet afford to have any great thinkers become discouraged and give up?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:afford#e-debbbf15d0d870e3",
+          "text": "It takes many registers to keep one line moving quickly and some stores can’t afford the space or manpower.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:seven-choices:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 91
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:afford#s2",
+      "pos": "v.",
+      "glossZh": "提供；给予（机会、视野等）",
+      "pronunciationId": "w:afford#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,129 @@
+{
+  "entryId": "w:wheat",
+  "headword": "wheat",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/wiːt/",
+    "us": "/wiːt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:wheat#p-main",
+      "ipa": {
+        "uk": "/wiːt/",
+        "us": "/wiːt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "wheats",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:wheat#s1",
+      "pos": "n.",
+      "glossZh": "小麦",
+      "pronunciationId": "w:wheat#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 15
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:wheat#e-1bc7eecb69b2ca9e",
+          "text": "Machines have largely taken over planting, watering and harvesting crops such as corn and wheat, but the monitoring of cattle has gone through fewer changes.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:wheat#e-0631be4b8b454cbf",
+          "text": "Wheat and rice – which benefit from more CO2 in the atmosphere – could see growing output, while corn and sorghum（高粱） could see a decline with warmer temperatures.",
+          "source": {
+            "paperId": "paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock",
+            "paperTitle": "2026届大湾区普通高中毕业年级联合模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-greater-bay-area-2025-10-graduating-joint-mock:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        },
+        {
+          "exampleId": "w:wheat#e-4d796b548d0327aa",
+          "text": "Averaging 30 to 50 miles a day, Johnson’s __53__ across America took her up and down mountains, past wheat fields and through cities, in rain and blistering heat.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:cloze",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:cloze:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 106
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "麦色、姓氏、地名",
+      "reason": "少见词性或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

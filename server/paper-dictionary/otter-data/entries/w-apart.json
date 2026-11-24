@@ -1,0 +1,317 @@
+{
+  "entryId": "w:apart",
+  "headword": "apart",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈpɑːt/",
+    "us": "/əˈpɑːrt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:apart#p-main",
+      "ipa": {
+        "uk": "/əˈpɑːt/",
+        "us": "/əˈpɑːrt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "farther apart",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "farthest apart",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "further apart",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "furthest apart",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more apart",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most apart",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 61
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 53
+  },
+  "senses": [
+    {
+      "senseId": "w:apart#s1",
+      "pos": "adv.",
+      "glossZh": "分开；相隔；离群",
+      "pronunciationId": "w:apart#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:apart#e-7d95a53b7e6bb200",
+          "text": "It then extends to the community – whether a neighborhood design brings people together or drives them apart.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 103,
+            "end": 108
+          }
+        },
+        {
+          "exampleId": "w:apart#e-21d09e6e03a2c09e",
+          "text": "To keep their spirits up, I played upbeat music, and soon we were pulling and dancing down the flower bed – all except Emma, who still sat apart, arms crossed.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:writing-continuation:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 139,
+            "end": 144
+          }
+        },
+        {
+          "exampleId": "w:apart#e-c05a58ae51a93210",
+          "text": "With a surface hot enough to melt lead in its atmosphere, Venus has been described as “Earth's evil twin” – similar in size, yet worlds apart.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 136,
+            "end": 141
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:apart#s2",
+      "pos": "adv.",
+      "glossZh": "拆开；散开；解体",
+      "pronunciationId": "w:apart#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:apart#e-67b493220dd662a9",
+          "text": "“Breaking apart what an interruption means is essential if we want to understand how humans interact with each other.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:apart#e-c8ee75c09a902bd2",
+          "text": "Without a few rivets, a plane can still fly, but if you take too many out, the plane will fall apart and crash.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:apart#e-29380cacf3a9bf1d",
+          "text": "One afternoon, I entered the lab to find my observation box broken, ants running everywhere, and my precious notebook – the very proof of my “brightness” – was torn apart.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 165,
+            "end": 170
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:apart#s3",
+      "pos": "短语",
+      "glossZh": "使不同于；把……区分开",
+      "pronunciationId": "w:apart#p-main",
+      "note": "set sb/sth apart。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:apart#e-b5772349b213dc51",
+          "text": "The Red Cross was my passion and what I relied on to set me apart from other applicants.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 65
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:apart#s4",
+      "pos": "短语",
+      "glossZh": "除……之外",
+      "pronunciationId": "w:apart#p-main",
+      "note": "apart from，可引出例外，也可补充。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:apart#e-250c4ff9a3d55a21",
+          "text": "Luckily, she was still standing where she had been, Nevertheless, apart from the repeated “My…”, I knew nothing more about her.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:writing-continuation:6",
+              "sentence": 8
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 71
+          }
+        },
+        {
+          "exampleId": "w:apart#e-cdc4a35e405054ae",
+          "text": "Apart from the deliciousness of those snacks, the majority of other UPFs, such as ready-to-eat meals and instant mixes, contain artificial flavors and preservatives.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 5
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "a part",
+      "reason": "分写的另一个词组。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

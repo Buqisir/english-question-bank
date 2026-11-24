@@ -1,0 +1,357 @@
+{
+  "entryId": "w:perfect",
+  "headword": "perfect",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpɜːfɪkt/",
+    "us": "/ˈpɜːrfɪkt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:perfect#p-main",
+      "ipa": {
+        "uk": "/ˈpɜːfɪkt/",
+        "us": "/ˈpɜːrfɪkt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:perfect#p-verb",
+      "ipa": {
+        "uk": "/pəˈfekt/",
+        "us": "/pərˈfekt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more perfect",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most perfect",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "perfecter",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "perfectest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "perfected",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "perfecting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "perfects",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 20,
+    "mock": 213
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 212
+  },
+  "senses": [
+    {
+      "senseId": "w:perfect#s1",
+      "pos": "adj.",
+      "glossZh": "完美的；毫无缺点的",
+      "pronunciationId": "w:perfect#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:perfect#e-45e3d4db4fe2371f",
+          "text": "Your goal is not to be a perfect public speaker.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:perfect#e-acab8944f3b8dd02",
+          "text": "Our building even had a tiny lift with a female voice that said, “Ouverture des portes,” in perfect French.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 99,
+            "end": 106
+          }
+        },
+        {
+          "exampleId": "w:perfect#e-9cca7b168763ba12",
+          "text": "The next technique is to write your draft rapidly without worrying about being perfect.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-ii:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 86
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:perfect#s2",
+      "pos": "adj.",
+      "glossZh": "最合适的；理想的",
+      "pronunciationId": "w:perfect#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:perfect#e-7caf9c05034c2eda",
+          "text": "“it seemed like the perfect chance for natural selection to act on a population,” said Dr. Ilardo.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:perfect#e-2d351bdc796a0b73",
+          "text": "As the summer months roll in, our Georgian country estate makes the perfect setting for an outdoor fitness session.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:perfect#e-80351de6d0b96451",
+          "text": "If you’re willing to drive a little further, the Ritz-Carlton Los Angeles promises luxurious rooms and extensive leisure facilities – perfect for turning a game day into a great weekend escape.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 134,
+            "end": 141
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:perfect#s3",
+      "pos": "adj.",
+      "glossZh": "完全的；十足的",
+      "pronunciationId": "w:perfect#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:perfect#e-879a3c58d4f03823",
+          "text": "I’m unsure now why I thought forcing my head inside the pumpkin would settle the matter, but it seemed to make perfect sense at the time.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 111,
+            "end": 118
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:perfect#s4",
+      "pos": "v.",
+      "glossZh": "使完善；使精通",
+      "pronunciationId": "w:perfect#p-verb",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:perfect#e-7b0f0db759e39c85",
+          "text": "The story begins in the last years of the 18th century in Scotland, where Watt perfected “the machine that changed the world”.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 79,
+            "end": 88
+          }
+        },
+        {
+          "exampleId": "w:perfect#e-46112740a1b0d54b",
+          "text": "Edison perfected an incandescent bulb that brought electric light into the American home.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:perfect#e-42839893bda2b108",
+          "text": "Perfect her photography skills.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "完成时的 perfect",
+      "reason": "语法术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

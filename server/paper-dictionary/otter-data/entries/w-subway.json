@@ -1,0 +1,143 @@
+{
+  "entryId": "w:subway",
+  "headword": "subway",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsʌbweɪ/",
+    "us": "/ˈsʌbweɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:subway#p-main",
+      "ipa": {
+        "uk": "/ˈsʌbweɪ/",
+        "us": "/ˈsʌbweɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "subways",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 40
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 40
+  },
+  "senses": [
+    {
+      "senseId": "w:subway#s1",
+      "pos": "n.",
+      "glossZh": "地铁",
+      "pronunciationId": "w:subway#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:subway#e-02d7f213fdc7ef34",
+          "text": "The Barcelona subway pulls into the station, the doors slide open and passengers pour out to go about their daily business.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:subway#e-5d59163cc268104b",
+          "text": "Sixteen stations of Barcelona’s subway system are part of its new MetroCharge project, whereby the energy from the underground trains’ brakes (刹车) is used to power the trains and the stations themselves, while the remainder is sent snaking through cables (电缆) to the surface to power plug-in stations for privately owned vehicles.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:subway#e-8f34096f6290ca96",
+          "text": "Bernardo Espinoza, an engineer who takes the subway every day, owns an electric car.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:subway#s2",
+      "pos": "n.",
+      "glossZh": "地下人行通道",
+      "pronunciationId": "w:subway#p-main",
+      "note": "英式用法。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "地下管道、动物的地下通道",
+      "reason": "专业或少见义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

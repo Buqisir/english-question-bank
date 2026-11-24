@@ -1,0 +1,218 @@
+{
+  "entryId": "w:sandwich",
+  "headword": "sandwich",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsænwɪtʃ/",
+    "us": "/ˈsænwɪtʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:sandwich#p-main",
+      "ipa": {
+        "uk": "/ˈsænwɪtʃ/",
+        "us": "/ˈsænwɪtʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "sandwiches",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Sandwiches",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "sandwiched",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "sandwiching",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 26
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 22
+  },
+  "senses": [
+    {
+      "senseId": "w:sandwich#s1",
+      "pos": "n.",
+      "glossZh": "三明治",
+      "pronunciationId": "w:sandwich#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sandwich#e-db688eb18bb57f98",
+          "text": "Ham sandwiches.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:sandwich#e-330a6c7fc77cfdc9",
+          "text": "A lunch bag sat on the table, with a sandwich, snacks, a drink, and coffee inside.",
+          "source": {
+            "paperId": "paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan",
+            "paperTitle": "A10联盟2026届高三上学期9月学情诊断高三英语试题",
+            "groupId": "group:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-a10-lianmeng-2025-09-xueqing-zhenduan:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:sandwich#e-7551175992d724bc",
+          "text": "Coffi Lab began doing its own baking in 2023, when Shapland decided that buying in pre-packaged baked goods and sandwiches wouldn’t keep customers coming back.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 112,
+            "end": 122
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sandwich#s2",
+      "pos": "v.",
+      "glossZh": "夹在中间",
+      "pronunciationId": "w:sandwich#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sandwich#e-a80bfc11163582b8",
+          "text": "In an oasis of green space sandwiched among Manhattan skyscrapers, one oddball stood out among the parkgoers Monday morning.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 27,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:sandwich#e-9eb19f18812f643c",
+          "text": "Sandwiched between a pork stall and a tofu shop, my bookstore attracted barely any attention.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sandwich#s3",
+      "pos": "n.",
+      "glossZh": "夹层结构",
+      "pronunciationId": "w:sandwich#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "三明治广告牌人",
+      "reason": "少见旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

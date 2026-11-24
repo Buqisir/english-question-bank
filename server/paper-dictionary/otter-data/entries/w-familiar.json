@@ -1,0 +1,240 @@
+{
+  "entryId": "w:familiar",
+  "headword": "familiar",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fəˈmɪliə(r)/",
+    "us": "/fəˈmɪliər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:familiar#p-main",
+      "ipa": {
+        "uk": "/fəˈmɪliə(r)/",
+        "us": "/fəˈmɪliər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more familiar",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most familiar",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "familiars",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 123
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 121
+  },
+  "senses": [
+    {
+      "senseId": "w:familiar#s1",
+      "pos": "adj.",
+      "glossZh": "为人所熟悉的",
+      "pronunciationId": "w:familiar#p-main",
+      "note": "be familiar to sb。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:familiar#e-25284509f555b223",
+          "text": "In 2011, he came across something familiar.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:familiar#e-a84037d89ccae8e9",
+          "text": "However, another way the cats are able to distinguish between situations is by looking for familiar smells.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:familiar#e-b9936a217ea157c5",
+          "text": "Turner, a 10th-grader at School for Creative and Performing Arts, is a familiar presence on Cincinnati’s stages.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 79
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:familiar#s2",
+      "pos": "adj.",
+      "glossZh": "熟悉……的",
+      "pronunciationId": "w:familiar#p-main",
+      "note": "be familiar with sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:familiar#e-37013a7679c2605f",
+          "text": "As a special education teacher at the school, I was familiar with the challenges David faced and was proud of his strong determination.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "writing-continuation-7",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 60
+          }
+        },
+        {
+          "exampleId": "w:familiar#e-aa13c5d85c84b883",
+          "text": "I joined a speaking club, practiced constantly, and found I spoke best when fully __51__ and familiar with my topic.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:familiar#e-f09eb5852cc0dcd2",
+          "text": "So everyone is familiar with the kitchen, the space and the pantry.”",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-01-first-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第一次质量检测 英语",
+            "groupId": "group:paper-mock-fujian-putian-2026-01-first-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-01-first-quality-test:seven-choices:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:familiar#s3",
+      "pos": "adj.",
+      "glossZh": "过分随便的",
+      "pronunciationId": "w:familiar#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:familiar#s4",
+      "pos": "n.",
+      "glossZh": "（传说中为巫师服务的）侍灵",
+      "pronunciationId": "w:familiar#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "宗教裁判所官员",
+      "reason": "历史专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

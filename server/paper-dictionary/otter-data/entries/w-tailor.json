@@ -1,0 +1,213 @@
+{
+  "entryId": "w:tailor",
+  "headword": "tailor",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈteɪlə(r)/",
+    "us": "/ˈteɪlər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:tailor#p-main",
+      "ipa": {
+        "uk": "/ˈteɪlə(r)/",
+        "us": "/ˈteɪlər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "tailors",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "tailored",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "tailoring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 49
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 48
+  },
+  "senses": [
+    {
+      "senseId": "w:tailor#s1",
+      "pos": "n.",
+      "glossZh": "裁缝",
+      "pronunciationId": "w:tailor#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tailor#e-a3b2a47ab57ddb13",
+          "text": "He’s a tailor.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:listening.short-dialogue",
+            "locator": {
+              "question": 3,
+              "questionId": "question:listening:3",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:tailor#e-5e7974dcfc4662e4",
+          "text": "The next day, she prepared enthusiastically, shopping for fabrics at Petra’s Fabric Place, where everyone knew her as a skilled tailor.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期初监测 英语",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 134
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:tailor#s2",
+      "pos": "v.",
+      "glossZh": "按需要调整",
+      "pronunciationId": "w:tailor#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tailor#e-54c6ebd4bac6275d",
+          "text": "All camp sessions are created with age-appropriate activities that are tailored to the multiple ways that kids learn.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:13",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:tailor#e-bc7f8f61cc460526",
+          "text": "Your audience will naturally be more interested and engaged when you tailor your communications to their interests.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:tailor#e-35c3c0cd06b1c8fa",
+          "text": "It tailors learning experiences to different age groups and learning styles.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-i:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:tailor#s3",
+      "pos": "v.",
+      "glossZh": "裁改衣物",
+      "pronunciationId": "w:tailor#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "澳大利亚的一种海鱼、姓氏",
+      "reason": "地区义或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

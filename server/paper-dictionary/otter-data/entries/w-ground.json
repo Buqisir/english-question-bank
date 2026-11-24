@@ -1,0 +1,550 @@
+{
+  "entryId": "w:ground",
+  "headword": "ground",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɡraʊnd/",
+    "us": "/ɡraʊnd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ground#p-main",
+      "ipa": {
+        "uk": "/ɡraʊnd/",
+        "us": "/ɡraʊnd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "grounds",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "grounded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "grounding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 18,
+    "mock": 172
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 167
+  },
+  "senses": [
+    {
+      "senseId": "w:ground#s1",
+      "pos": "n.",
+      "glossZh": "地面",
+      "pronunciationId": "w:ground#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ground#e-ffd6612d1b9aa7d6",
+          "text": ", Ziyad got close to the hive which was around 20 meters above the ground.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:ground#e-50b81991764999db",
+          "text": "Within seconds, he’d __51__ the trunk and was back on the ground.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:cloze:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:ground#e-fbf246d8391fba54",
+          "text": "But, as she __48__ the bench（长凳） to sit down, her necklace（项链） fell to the ground.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ground#s2",
+      "pos": "n.",
+      "glossZh": "土壤",
+      "pronunciationId": "w:ground#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ground#e-3a1f7e938ec7d1c5",
+          "text": "The chemical washes off roads and goes into the ground.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:ground#e-7d9d4e0a92db584f",
+          "text": "“In fact, we may be helping increase the moisture downwind by creating wetter ground.”",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 84
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ground#s3",
+      "pos": "n.",
+      "glossZh": "场地",
+      "pronunciationId": "w:ground#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ground#e-c30f6767a58e36b4",
+          "text": "Come and work out with our qualified personal trainer, Jodie McGregor, on the grounds of the Middleton Lodge estate.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 85
+          }
+        },
+        {
+          "exampleId": "w:ground#e-b165f9db4c0721bf",
+          "text": "She had already made up her mind to say no. With that decision in mind, she quickened her pace and ran across the sports ground.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 127
+          }
+        },
+        {
+          "exampleId": "w:ground#e-900083caa1dd7939",
+          "text": "The houses were well-kept, with flowers blooming in most yards, but at the corner of her block sat a 1,200-square-foot parking lot – a dumping ground for old tires, broken furniture, and overgrown weeds.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 143,
+            "end": 149
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ground#s4",
+      "pos": "n.",
+      "glossZh": "理由",
+      "pronunciationId": "w:ground#p-main",
+      "note": "常用复数 grounds。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ground#s5",
+      "pos": "短语",
+      "glossZh": "一楼",
+      "pronunciationId": "w:ground#p-main",
+      "note": "ground floor，英式。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ground#e-a572d19252a336bd",
+          "text": "The doorway to peace and quiet, for Nick Bright at least, leads straight to his mother-in-law, she lives on the ground floor, while he lives upstairs with his wife and their two daughters.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 112,
+            "end": 118
+          }
+        },
+        {
+          "exampleId": "w:ground#e-a3359ca1248f9bc9",
+          "text": "They share a front door and a washing machine, but Rita Whitehead has her own kitchen, bathroom, bedroom and living room on the ground floor.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 128,
+            "end": 134
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ground#s6",
+      "pos": "短语",
+      "glossZh": "共同点",
+      "pronunciationId": "w:ground#p-main",
+      "note": "common ground。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ground#e-2cb9f5bda0c7a90b",
+          "text": "In any given office, employees can range from age 22 to 70 and beyond, and finding common ground in communication style can be a challenge.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 96
+          }
+        },
+        {
+          "exampleId": "w:ground#e-ea7eb6a932a567e3",
+          "text": "However, staying calm and self-aware is your greatest tool to find common ground again.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ground#s7",
+      "pos": "短语",
+      "glossZh": "基本规则",
+      "pronunciationId": "w:ground#p-main",
+      "note": "ground rules。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ground#e-0b20fd8d8e6af454",
+          "text": "One of the ground rules of the swap should be that everyone must try on the clothes before they take them – things always look different when you put them on.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:ground#e-186d88aa960d1598",
+          "text": "It’s important to set ground rules from the start, like keeping the car a phone-free zone.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:seven-choices:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ground#s8",
+      "pos": "短语",
+      "glossZh": "取得进展",
+      "pronunciationId": "w:ground#p-main",
+      "note": "gain ground。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ground#e-0231e84c713ddc08",
+          "text": "gain ground",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:cloze",
+            "locator": {
+              "question": 46,
+              "questionId": "question:paper-gaokao-2026-zhejiang-jan:46",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ground#s9",
+      "pos": "v.",
+      "glossZh": "以……为基础",
+      "pronunciationId": "w:ground#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ground#e-ccedb9218b5a8fb9",
+          "text": "These AI tool recommendations come from real, practical use, so you can trust that they’re grounded in what",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 99
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ground#s10",
+      "pos": "v.",
+      "glossZh": "禁飞",
+      "pronunciationId": "w:ground#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ground#s11",
+      "pos": "v.",
+      "glossZh": "使接地",
+      "pronunciationId": "w:ground#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ground#s12",
+      "pos": "adj.",
+      "glossZh": "磨碎的",
+      "pronunciationId": "w:ground#p-main",
+      "note": "grind 的过去分词。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "旧印度土地单位",
+      "reason": "历史计量术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

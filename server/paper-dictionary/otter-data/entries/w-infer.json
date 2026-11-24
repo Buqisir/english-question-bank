@@ -1,0 +1,146 @@
+{
+  "entryId": "w:infer",
+  "headword": "infer",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪnˈfɜː(r)/",
+    "us": "/ɪnˈfɜːr/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:infer#p-main",
+      "ipa": {
+        "uk": "/ɪnˈfɜː(r)/",
+        "us": "/ɪnˈfɜːr/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "inferred",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "inferring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "infers",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 22,
+    "mock": 139
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:infer#s1",
+      "pos": "v.",
+      "glossZh": "推断；推论",
+      "pronunciationId": "w:infer#p-main",
+      "note": "infer sth from sth 指由线索推断。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 22,
+        "mock": 139
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:infer#e-91b131755716ebb2",
+          "text": "What can we infer about wearing fur in New York according to Morgan?",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "question": 31,
+              "questionId": "question:paper-gaokao-2020-national-ii:31",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:infer#e-8dda1fbb4b82e12d",
+          "text": "What can we infer from the author’s trip with friends to Devil’s Lake?",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2023-national-b:26",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:infer#e-7d9478cdd11f7524",
+          "text": "What can be inferred from Pereira’s words?",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2026-zhejiang-jan:35",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 20
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "暗示、施加、引入",
+      "reason": "不作现代常用教学义。「暗示」通常用 imply。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

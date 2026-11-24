@@ -1,0 +1,136 @@
+{
+  "entryId": "w:typical",
+  "headword": "typical",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtɪpɪkl/",
+    "us": "/ˈtɪpɪkl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:typical#p-main",
+      "ipa": {
+        "uk": "/ˈtɪpɪkl/",
+        "us": "/ˈtɪpɪkl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more typical",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most typical",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 53
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:typical#s1",
+      "pos": "adj.",
+      "glossZh": "典型的；具有代表性的",
+      "pronunciationId": "w:typical#p-main",
+      "note": "be typical of 表示「是……的典型表现」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 53
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:typical#e-8eb97b226254e425",
+          "text": "Jenifer Mauer has needed more willpower than the typical college student to pursue her goal of earning a nursing degree.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:typical#e-2867f6d6401a6037",
+          "text": "I quickly graduated from typical children’s books to ones with fewer pictures and longer chapters.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:typical#e-feee32a5ecce1e58",
+          "text": "On a typical sunny day at the University of California, Los Angeles (UCLA), small native bushes (灌木) wave where tidy grasslands used to be, bees fly over flowers, and students walk on a campus alive with biodiversity.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 12
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "模式类群的",
+      "reason": "分类学用语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

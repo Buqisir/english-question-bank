@@ -1,0 +1,141 @@
+{
+  "entryId": "w:obey",
+  "headword": "obey",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈbeɪ/",
+    "us": "/əˈbeɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:obey#p-main",
+      "ipa": {
+        "uk": "/əˈbeɪ/",
+        "us": "/əˈbeɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "obeyed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "obeying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "obeys",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:obey#s1",
+      "pos": "v.",
+      "glossZh": "服从；遵守",
+      "pronunciationId": "w:obey#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:obey#e-1aac139edd205cf7",
+          "text": "To obey the rules of the game.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-mock-2026-01-shandong-jinan-gaosan-first:33",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:obey#e-37cbc6f81d6bc9f1",
+          "text": "By learning to obey, you learn to command.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-mock-hunan-changjun-2025-10-monthly-exam-2:27",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:obey#e-df85effa63f99a03",
+          "text": "The new study shows the voids’ need for speed is a point where the singularities stop acting like particles, since particles obey the cosmic speed limit that voids ignore.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月31日卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 129
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

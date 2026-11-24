@@ -1,0 +1,125 @@
+{
+  "entryId": "w:difficulty",
+  "headword": "difficulty",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdɪfɪkəlti/",
+    "us": "/ˈdɪfɪkəlti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:difficulty#p-main",
+      "ipa": {
+        "uk": "/ˈdɪfɪkəlti/",
+        "us": "/ˈdɪfɪkəlti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "difficulties",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 94
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:difficulty#s1",
+      "pos": "n.",
+      "glossZh": "困难；难题；难度",
+      "pronunciationId": "w:difficulty#p-main",
+      "note": "have difficulty (in) doing sth 表示「做某事有困难」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 94
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:difficulty#e-1a496e2b39ce7a03",
+          "text": "The project results from the difficulties many schools have in getting artists of any sort - whether an up-and-coming local musician or a major movie star - into schools to work with and inspire children.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:difficulty#e-ed9ae2a992e4d8db",
+          "text": "What difficulty did Elena face as an assistant coach?",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:difficulty#e-ee3c1aa664a94e64",
+          "text": "For instance, interactive exhibits powered by AI can adjust their content and difficulty level based on the user’s preferences and responses.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 95
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

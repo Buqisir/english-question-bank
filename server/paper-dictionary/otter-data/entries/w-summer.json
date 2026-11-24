@@ -1,0 +1,159 @@
+{
+  "entryId": "w:summer",
+  "headword": "summer",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsʌmə(r)/",
+    "us": "/ˈsʌmər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:summer#p-main",
+      "ipa": {
+        "uk": "/ˈsʌmə(r)/",
+        "us": "/ˈsʌmər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "summers",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "summered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "summering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 37,
+    "mock": 209
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 209
+  },
+  "senses": [
+    {
+      "senseId": "w:summer#s1",
+      "pos": "n.",
+      "glossZh": "夏天",
+      "pronunciationId": "w:summer#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 37,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:summer#e-f624f5e48ae2f288",
+          "text": "Pali Overnight Adventures offers children and teens exciting experiences this summer.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:summer#e-548bee96b12c1436",
+          "text": "The son of a grocer, he’d spent the summers of his childhood __54__ food in Benardsville, New Jersey.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-i:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:summer#e-ea149f9c4e9601b0",
+          "text": "My wife and I wanted to share our new home with family and friends by hosting a small gathering in the early summer.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 109,
+            "end": 115
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:summer#s2",
+      "pos": "v.",
+      "glossZh": "度过夏天",
+      "pronunciationId": "w:summer#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "人名、承重横梁和求和器",
+      "reason": "专名或罕见专义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

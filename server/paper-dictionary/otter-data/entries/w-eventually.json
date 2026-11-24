@@ -1,0 +1,122 @@
+{
+  "entryId": "w:eventually",
+  "headword": "eventually",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪˈventʃuəli/",
+    "us": "/ɪˈventʃuəli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:eventually#p-main",
+      "ipa": {
+        "uk": "/ɪˈventʃuəli/",
+        "us": "/ɪˈventʃuəli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 10,
+    "mock": 83
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:eventually#s1",
+      "pos": "adv.",
+      "glossZh": "最终",
+      "pronunciationId": "w:eventually#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 83
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:eventually#e-d284488f560c9c63",
+          "text": "After taking a degree at Chichester University in Related Arts, Ginni began to travel the world, eventually getting work teaching English in Japan and Chile.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:eventually#e-0c3b803a35419c46",
+          "text": "As he went on to share his concept with others, the idea soon took off in India and other countries before eventually reaching Europe, where it became popular in places like France, Belgium and the Netherlands.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 107,
+            "end": 117
+          }
+        },
+        {
+          "exampleId": "w:eventually#e-e074c6dba075a116",
+          "text": "Eventually, she fell asleep.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
+              "sentence": 10
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "可能",
+      "reason": "非规范用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

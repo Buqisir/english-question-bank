@@ -1,0 +1,345 @@
+{
+  "entryId": "w:qualify",
+  "headword": "qualify",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkwɒlɪfaɪ/",
+    "us": "/ˈkwɑːlɪfaɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:qualify#p-main",
+      "ipa": {
+        "uk": "/ˈkwɒlɪfaɪ/",
+        "us": "/ˈkwɑːlɪfaɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "qualified",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "qualifies",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "qualifying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 42
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 36
+  },
+  "senses": [
+    {
+      "senseId": "w:qualify#s1",
+      "pos": "v.",
+      "glossZh": "取得资格",
+      "pronunciationId": "w:qualify#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:qualify#e-25689b3bb7b4a9f5",
+          "text": "She qualified as a surgeon in 1813, then joined the British Army, serving overseas.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-a:figure-ed26865ff4e2681b:cell-1-2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:qualify#e-62523fc9fe24cda5",
+          "text": "To qualify as a professional climber.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-mock-import-20261026-n090:26",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:qualify#s2",
+      "pos": "adj.",
+      "glossZh": "具备资格的",
+      "pronunciationId": "w:qualify#p-main",
+      "note": "用 qualified。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:qualify#e-961dd7c446fb4c2c",
+          "text": "Come and work out with our qualified personal trainer, Jodie McGregor, on the grounds of the Middleton Lodge estate.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:qualify#e-a27dce80b66156e4",
+          "text": "Hire qualified workers.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2023-four-provinces-feb:28",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:qualify#e-7853effae8a0f987",
+          "text": "They were homeschooled by qualified educators.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-mock-hubei-mingxiao-2025-09:24",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 35
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:qualify#s3",
+      "pos": "v.",
+      "glossZh": "符合条件",
+      "pronunciationId": "w:qualify#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:qualify#e-0648ad60dde57a73",
+          "text": "Mark the jobs you think you might qualify for.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:qualify#e-628c98a80194ea0e",
+          "text": "When Caroline finished fifth grade and left Windward, her reading level was better than 95 percent of other students, and she later qualified for her new school’s gifted program.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 132,
+            "end": 141
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:qualify#s4",
+      "pos": "v.",
+      "glossZh": "算作",
+      "pronunciationId": "w:qualify#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:qualify#e-611990f80c0b3147",
+          "text": "Not every outdoor or nature-based activity qualifies as ecotourism.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a2",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A2 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a2:reading.a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a2:question-source-1:item-58",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 52
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:qualify#s5",
+      "pos": "v.",
+      "glossZh": "使有资格",
+      "pronunciationId": "w:qualify#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:qualify#e-abf893ce299db613",
+          "text": "SIMPLY ANSWER THE QUESTION CORRECTLY TO MAKE YOU QUALIFIED TO WIN.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:qualify#s6",
+      "pos": "v.",
+      "glossZh": "晋级",
+      "pronunciationId": "w:qualify#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:qualify#s7",
+      "pos": "v.",
+      "glossZh": "为陈述加上限制条件",
+      "pronunciationId": "w:qualify#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "完成规定的杂耍动作",
+      "reason": "杂耍专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

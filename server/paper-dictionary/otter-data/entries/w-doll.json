@@ -1,0 +1,148 @@
+{
+  "entryId": "w:doll",
+  "headword": "doll",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɒl/",
+    "us": "/dɑːl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:doll#p-main",
+      "ipa": {
+        "uk": "/dɒl/",
+        "us": "/dɑːl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "dolls",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "dollz",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 37
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 34
+  },
+  "senses": [
+    {
+      "senseId": "w:doll#s1",
+      "pos": "n.",
+      "glossZh": "玩偶；洋娃娃",
+      "pronunciationId": "w:doll#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:doll#e-5c9f18c0297a2d64",
+          "text": "Soon enough she is transported to the playground of her youth, offering cheerfully-recalled anecdotes from when she learnt double dutch with friends as her mother could not afford to buy her a Sindy doll.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 199,
+            "end": 203
+          }
+        },
+        {
+          "exampleId": "w:doll#e-71a85cd5ca7450ba",
+          "text": "Clara picked up a box of old dolls（玩偶）—their plastic arms broken, button eyes missing, dresses worn out, asking me to throw them out.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:writing-continuation:5",
+              "sentence": 9
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:doll#e-f46a660fba027510",
+          "text": "The doll, Chelsea, is Barbie’s sister, and she, too, wore a back brace for scoliosis.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:doll#s2",
+      "pos": "短语",
+      "glossZh": "把某人打扮得漂漂亮亮",
+      "pronunciationId": "w:doll#p-main",
+      "note": "doll sb up，常用 be/get dolled up。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏；Dorothy 的昵称；猪崽、药片和铁路信号支杆",
+      "reason": "同形专名、俚语或行业用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

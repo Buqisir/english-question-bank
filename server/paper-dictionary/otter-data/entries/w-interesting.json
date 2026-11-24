@@ -1,0 +1,135 @@
+{
+  "entryId": "w:interesting",
+  "headword": "interesting",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɪntrəstɪŋ/",
+    "us": "/ˈɪntrəstɪŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:interesting#p-main",
+      "ipa": {
+        "uk": "/ˈɪntrəstɪŋ/",
+        "us": "/ˈɪntrəstɪŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more interesting",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most interesting",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 68
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:interesting#s1",
+      "pos": "adj.",
+      "glossZh": "有趣的；引人关注的",
+      "pronunciationId": "w:interesting#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 19,
+        "mock": 68
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:interesting#e-37bb7c00fc83e749",
+          "text": "In this course we will analyze many interesting aspects of the sports industry: sports leagues, ticket pricing, salary negotiations, discrimination, and NCAA policies to name a few.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 19,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:interesting#e-7143630ab3b1ff3f",
+          "text": "We all know that unpleasant feeling when we’re talking about something interesting and halfway through our sentence we’re interrupted.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:interesting#e-6806747fc3c77ca8",
+          "text": "But a new study led by Joaquin Navajas offered an interesting twist（转折）on this classic phenomenon.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 61
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "怀孕的",
+      "reason": "旧式委婉用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

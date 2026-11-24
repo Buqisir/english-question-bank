@@ -1,0 +1,143 @@
+{
+  "entryId": "w:assumption",
+  "headword": "assumption",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈsʌmpʃn/",
+    "us": "/əˈsʌmpʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:assumption#p-main",
+      "ipa": {
+        "uk": "/əˈsʌmpʃn/",
+        "us": "/əˈsʌmpʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "assumptions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 54
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 53
+  },
+  "senses": [
+    {
+      "senseId": "w:assumption#s1",
+      "pos": "n.",
+      "glossZh": "假定；假设；未经证实的看法",
+      "pronunciationId": "w:assumption#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:assumption#e-7fbe91f4db0a8869",
+          "text": "We tend to forget that sea level is a product of technically and culturally determined assumptions.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 98
+          }
+        },
+        {
+          "exampleId": "w:assumption#e-bd7af5620aba8962",
+          "text": "Students’ false assumptions about learning.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2026-zhejiang-jan:24",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:assumption#e-5b2895159e6ff27c",
+          "text": "Instead, it is a world view, a way of approaching problems with the underlying assumption that things don’t have to be the way they are.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 79,
+            "end": 89
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:assumption#s2",
+      "pos": "n.",
+      "glossZh": "承担；接任",
+      "pronunciationId": "w:assumption#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "圣母升天节、三段论小前提",
+      "reason": "宗教专名或逻辑专门义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

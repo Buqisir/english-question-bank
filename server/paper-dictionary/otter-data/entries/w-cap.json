@@ -1,0 +1,357 @@
+{
+  "entryId": "w:cap",
+  "headword": "cap",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kæp/",
+    "us": "/kæp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:cap#p-main",
+      "ipa": {
+        "uk": "/kæp/",
+        "us": "/kæp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "caps",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "CAPs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Caps",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "capped",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "capping",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "senses": [
+    {
+      "senseId": "w:cap#s1",
+      "pos": "n.",
+      "glossZh": "（有帽舌的）帽子；某种专用帽",
+      "pronunciationId": "w:cap#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cap#e-349759638403437f",
+          "text": "Waterproof caps.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:cap#e-ef7835badfa744ab",
+          "text": "The thought of the mall __45__ me, but I jump like a kid if my brother calls with the __46__ of baseball caps on sale.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:cloze:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 109
+          }
+        },
+        {
+          "exampleId": "w:cap#e-81be2a6d283cd1b0",
+          "text": "It was a small graduation party with only Ed, Max, Raúl and me – no caps, gowns, music, or diplomas.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-import-20261026-n093:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 72
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cap#s2",
+      "pos": "n.",
+      "glossZh": "盖；盖子",
+      "pronunciationId": "w:cap#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cap#e-f8dc170f9ba89fe2",
+          "text": "I painted the railings（围栏）blue, hung a wind chime（铃）I made from bottle caps, and placed a small wooden box inside where I kept my treasures: a fossil I had found, a letter from my best friend, and a photo of our dog Max, who had passed away the year before.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test",
+            "paperTitle": "江苏省南通、泰州、扬州、徐州、淮安、连云港、宿迁、盐城八市2026届高三5月份调研测试 英语",
+            "groupId": "group:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-eight-city-2026-05-senior-three-may-survey-test:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:cap#e-4ea5147134098de9",
+          "text": "I picked up the pen and glanced at it: its body had faded, most of the paint on the cap had peeled off, and the nib（笔尖）was slightly bent.",
+          "source": {
+            "paperId": "paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test",
+            "paperTitle": "2026年3月襄阳市高三年级统一调研测试英语试题卷",
+            "groupId": "group:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-xiangyang-2026-03-senior-three-unified-survey-test:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 87
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cap#s3",
+      "pos": "n.",
+      "glossZh": "（覆盖顶部的）顶层或盖层",
+      "pronunciationId": "w:cap#p-main",
+      "note": "ice cap 意为冰盖。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cap#e-068b19f23c318a09",
+          "text": "If people just understood the climate crisis – the graphs, melting ice caps and emissions charts, they’d change.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 71,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cap#s4",
+      "pos": "n.",
+      "glossZh": "上限；限额",
+      "pronunciationId": "w:cap#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:cap#s5",
+      "pos": "v.",
+      "glossZh": "盖住；覆盖",
+      "pronunciationId": "w:cap#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:cap#s6",
+      "pos": "v.",
+      "glossZh": "设定上限；限制在（某数目）",
+      "pronunciationId": "w:cap#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cap#e-f2c3affa93c6330b",
+          "text": "We recommend starting with two sessions a week and capping at three; otherwise, you may overdo it and wear your body out.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:seven-choices:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:cap#e-a9e35d0d6522f4c8",
+          "text": "To keep the frenzy alive, brands are now adopting “micro-seasons”: four limited drops a year, each capped at 30,000 sets, with visible production codes sewn inside every skirt.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 105
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cap#s7",
+      "pos": "短语",
+      "glossZh": "为……画上句号",
+      "pronunciationId": "w:cap#p-main",
+      "note": "cap off",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cap#e-63ec653a34d3a954",
+          "text": "Huge bonfires are held all around and they’re capped off with vibrant firework displays.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-a:10",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 52
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "火帽、国家队出场、各领域同形缩写等",
+      "reason": "专业、体育用法或同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

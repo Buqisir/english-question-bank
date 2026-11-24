@@ -1,0 +1,130 @@
+{
+  "entryId": "w:fortunately",
+  "headword": "fortunately",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfɔːtʃənətli/",
+    "us": "/ˈfɔːrtʃənətli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fortunately#p-main",
+      "ipa": {
+        "uk": "/ˈfɔːtʃənətli/",
+        "us": "/ˈfɔːrtʃənətli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more fortunately",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most fortunately",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 40
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:fortunately#s1",
+      "pos": "adv.",
+      "glossZh": "幸运的是",
+      "pronunciationId": "w:fortunately#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 40
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fortunately#e-7a25183fee4321bd",
+          "text": "Fortunately, nowadays it is much easier to make eco-friendly lifestyle choices than, let’s say, 20 years ago.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:fortunately#e-31efdb1eeb5b0ebc",
+          "text": "Fortunately for those in midlife, Levine is finding that even if you haven’t been an enthusiastic exerciser, getting in shape now may help improve your aging heart.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:fortunately#e-4e2cc0b6c1ac6be0",
+          "text": "Fortunately, analyses suggest that renewables are up to the task.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

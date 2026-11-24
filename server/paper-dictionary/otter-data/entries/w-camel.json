@@ -1,0 +1,110 @@
+{
+  "entryId": "w:camel",
+  "headword": "camel",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkæml/",
+    "us": "/ˈkæml/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:camel#p-main",
+      "ipa": {
+        "uk": "/ˈkæml/",
+        "us": "/ˈkæml/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "camels",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Camels",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:camel#s1",
+      "pos": "n.",
+      "glossZh": "骆驼",
+      "pronunciationId": "w:camel#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:camel#e-eea3a7ffbd53bd13",
+          "text": "Beijing-based British artist Colin Chinnery has spent years collecting and preserving sounds including pigeon whistles (哨声), jingling camel bells, and the cries of street sellers in Beijing hutong.",
+          "source": {
+            "paperId": "paper-mock-shanxi-taiyuan-2026-03-first",
+            "paperTitle": "太原市2026年高三年级模拟考试（一）",
+            "groupId": "group:paper-mock-shanxi-taiyuan-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shanxi-taiyuan-2026-03-first:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 134,
+            "end": 139
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:camel#s2",
+      "pos": "n.",
+      "glossZh": "驼色",
+      "pronunciationId": "w:camel#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "浮托装置、仙棋棋子、香烟品牌、冒犯性称呼",
+      "reason": "行业义、专名或冒犯义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

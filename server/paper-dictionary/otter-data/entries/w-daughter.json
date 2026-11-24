@@ -1,0 +1,129 @@
+{
+  "entryId": "w:daughter",
+  "headword": "daughter",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdɔːtə(r)/",
+    "us": "/ˈdɔːtər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:daughter#p-main",
+      "ipa": {
+        "uk": "/ˈdɔːtə(r)/",
+        "us": "/ˈdɔːtər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "daughters",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 22,
+    "mock": 122
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:daughter#s1",
+      "pos": "n.",
+      "glossZh": "女儿",
+      "pronunciationId": "w:daughter#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 22,
+        "mock": 122
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:daughter#e-22cefcdb80b3d010",
+          "text": "The doorway to peace and quiet, for Nick Bright at least, leads straight to his mother-in-law, she lives on the ground floor, while he lives upstairs with his wife and their two daughters.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 178,
+            "end": 187
+          }
+        },
+        {
+          "exampleId": "w:daughter#e-66bd881b26ec5e13",
+          "text": "I remember her reading a magazine while taking the part of the Wolf in a game of “Little Red Riding Hood” with my brother’s two daughters.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 128,
+            "end": 137
+          }
+        },
+        {
+          "exampleId": "w:daughter#e-a6a36c1ccaff5da3",
+          "text": "I encourage my daughter to make healthy snack choices and often dissuade（劝阻）her from a second dessert.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 23
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "子语言；子核素；子项",
+      "reason": "学科专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

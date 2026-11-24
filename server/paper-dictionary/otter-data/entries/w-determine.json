@@ -1,0 +1,302 @@
+{
+  "entryId": "w:determine",
+  "headword": "determine",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈtɜːmɪn/",
+    "us": "/dɪˈtɜːrmɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:determine#p-main",
+      "ipa": {
+        "uk": "/dɪˈtɜːmɪn/",
+        "us": "/dɪˈtɜːrmɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "determined",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "determines",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "determining",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 17,
+    "mock": 177
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 177
+  },
+  "senses": [
+    {
+      "senseId": "w:determine#s1",
+      "pos": "v.",
+      "glossZh": "查明；确定（事实）",
+      "pronunciationId": "w:determine#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:determine#e-d46c0393f1085da5",
+          "text": "A computer system will analyze the video to determine whether a cow is sick.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:determine#e-5948a2a8785574a6",
+          "text": "But the study was small and needs to be repeated with far larger groups of people to determine exactly which aspects of an exercise routine make the biggest difference.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-d:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 85,
+            "end": 94
+          }
+        },
+        {
+          "exampleId": "w:determine#e-b431cef5c64a1529",
+          "text": "A study by the Food Waste Alliance determined that the average restaurant generates 33 pounds of food waste for every $ 1,000 in revenue（收入）, and of that waste only 15.7% is donated or recycled.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:determine#s2",
+      "pos": "v.",
+      "glossZh": "决定；制约；影响",
+      "pronunciationId": "w:determine#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:determine#e-363f309babbe6823",
+          "text": "And the more we look, the more we will see that social factors(因素)like gender, race, and class do not determine the appearance of genius.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 102,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:determine#e-8a6087ec8e801884",
+          "text": "There should also be a diversity of old and new buildings, and people’s interactions should determine how buildings get used and reused.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:determine#e-41a76d697b66d60d",
+          "text": "What’s more, tracking these physical root system characteristics helps scientists find genes (基因) associated with those characteristics, as well as whether multiple root characteristics are determined by the same genes or independently.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 190,
+            "end": 200
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:determine#s3",
+      "pos": "adj.",
+      "glossZh": "坚决的；下定决心的",
+      "pronunciationId": "w:determine#p-main",
+      "note": "determined；be determined to do sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:determine#e-5a0d6ca6e57e50e6",
+          "text": "Unfortunately we forgot to weigh them before taking out their insides, but I was determined to prove my point.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 91
+          }
+        },
+        {
+          "exampleId": "w:determine#e-6df94ae09fc0c7d3",
+          "text": "She is a determined person.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2023-zhejiang-jan:26",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:determine#e-263e3c0f195976cf",
+          "text": "Determined to turn her life around, Ms Donohue began to work out and follow a __45__ lifestyle, before discovering a __46__ for weightlifting.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-ii:cloze:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:determine#s4",
+      "pos": "v.",
+      "glossZh": "作出决定；裁定",
+      "pronunciationId": "w:determine#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "（协议）到期终止",
+      "reason": "正式法律专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

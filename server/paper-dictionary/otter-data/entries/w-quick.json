@@ -1,0 +1,288 @@
+{
+  "entryId": "w:quick",
+  "headword": "quick",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kwɪk/",
+    "us": "/kwɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:quick#p-main",
+      "ipa": {
+        "uk": "/kwɪk/",
+        "us": "/kwɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more quick",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most quick",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "quicker",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "quickest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "quicks",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 129
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 127
+  },
+  "senses": [
+    {
+      "senseId": "w:quick#s1",
+      "pos": "adj.",
+      "glossZh": "速度快的",
+      "pronunciationId": "w:quick#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:quick#e-e9a5932c31262c29",
+          "text": "What actually happens is that the magician, employing quick hand movements or a mechanical device, hides one ball.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:quick#e-7dc09c4295a2b452",
+          "text": "Because their biggest enemy is the hawk, parrots are especially reactive to quick movements from above and behind.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:quick#e-e7179c70e85d235e",
+          "text": "He believes their brains are especially good at processing visual, spatial and timing information and generating quick responses, which is crucial for those rapid-action sports such as foil and épée fencing.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 113,
+            "end": 118
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:quick#s2",
+      "pos": "adj.",
+      "glossZh": "很快完成的",
+      "pronunciationId": "w:quick#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:quick#e-6abec4fd7e5004fc",
+          "text": "This is a quick look at life in Uzbekistan, made of friendliness and warmth, but also its darker side of society.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:quick#e-e5e1da81c4f49f83",
+          "text": "After some quick research, we concluded that the best way to give the squirrel a fighting chance was to care for him ourselves.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:quick#e-a70360e6314e45c2",
+          "text": "Whether you’re hiking a backcountry trail (小径), camping, or just enjoying the park’s amazing wildlife from the road, this quick workshop is for you and your family.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 122,
+            "end": 127
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:quick#s3",
+      "pos": "adj.",
+      "glossZh": "反应敏捷的",
+      "pronunciationId": "w:quick#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:quick#s4",
+      "pos": "adv.",
+      "glossZh": "迅速地",
+      "pronunciationId": "w:quick#p-main",
+      "note": "口语用法，正式表达常用 quickly。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:quick#e-b53f4dd037eca727",
+          "text": "We may guess the way there will go by quicker than it does, leading to a “violation of expectation.” By the return trip, as we’ve gotten to know the route, it feels less challenging.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 38,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:quick#s5",
+      "pos": "n.",
+      "glossZh": "指甲下的嫩肉",
+      "pronunciationId": "w:quick#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "活着的",
+      "reason": "古旧义"
+    },
+    {
+      "glossZh": "用汞溶液处理",
+      "reason": "历史技术用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

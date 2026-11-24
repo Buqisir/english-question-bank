@@ -1,0 +1,205 @@
+{
+  "entryId": "w:relay",
+  "headword": "relay",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈriːleɪ/",
+    "us": "/ˈriːleɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:relay#p-main",
+      "ipa": {
+        "uk": "/ˈriːleɪ/",
+        "us": "/ˈriːleɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:relay#p-verb",
+      "ipa": {
+        "uk": "/rɪˈleɪ/",
+        "us": "/ˈriːleɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "动词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "relays",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "relayed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "relaying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 4
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:relay#s1",
+      "pos": "n.",
+      "glossZh": "接力赛",
+      "pronunciationId": "w:relay#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:relay#e-158f731b598463d3",
+          "text": "He shouted numbers over the engine’s noise, threw her water bottles like in a relay, and stuck paper flags on mailboxes: I am strong.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation:8",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 78,
+            "end": 83
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:relay#s2",
+      "pos": "v.",
+      "glossZh": "传递（消息或信号）",
+      "pronunciationId": "w:relay#p-verb",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:relay#e-3fb3a87c8a27e6c3",
+          "text": "These signals are relayed to the somatosensory cortex (体感皮层) for touch processing and the anterior cingulate cortex, which regulates emotion and laughter – producing a blend of pleasure and unease.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:relay#e-e33346e65feaf037",
+          "text": "Their primary goal is to pick up immediate threats – chainsaws, logging trucks, and gunshots – and relay real-time alerts to local authorities and communities, enabling swift action to protect the land.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-binzhou-2026-05-second-mock:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 99,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:relay#e-3eabfae004617edc",
+          "text": "Typically, there would be sensors and IoT (Internet of Things) devices placed across the field to collect environmental and crop health factors which would be relayed to the data cloud via a gateway.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2026年5月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2026-may-gaokao-subject-adaptability-exam-v2:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 159,
+            "end": 166
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:relay#s3",
+      "pos": "n.",
+      "glossZh": "继电器",
+      "pronunciationId": "w:relay#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "沿途换马队伍",
+      "reason": "历史用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

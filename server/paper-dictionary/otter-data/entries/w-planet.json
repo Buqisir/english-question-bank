@@ -1,0 +1,130 @@
+{
+  "entryId": "w:planet",
+  "headword": "planet",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈplænɪt/",
+    "us": "/ˈplænɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:planet#p-main",
+      "ipa": {
+        "uk": "/ˈplænɪt/",
+        "us": "/ˈplænɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "planets",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 54
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:planet#s1",
+      "pos": "n.",
+      "glossZh": "行星",
+      "pronunciationId": "w:planet#p-main",
+      "note": "the planet 常指地球。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 54
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:planet#e-f58ec337fc63574c",
+          "text": "Can our planet afford to have any great thinkers become discouraged and give up?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:planet#e-d3588cb4242694f3",
+          "text": "Dong Mei’s laughter bubbled over as she described talking dinosaurs on a far-away planet.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 82,
+            "end": 88
+          }
+        },
+        {
+          "exampleId": "w:planet#e-37da502fbe8253ed",
+          "text": "Space exploration Scientists use pi to map the surface area of planets, keep the wheels of rovers (探测器) on Mars turning, and measure craters on moons.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 70
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "影视片名及刊名",
+      "reason": "固定专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

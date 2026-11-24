@@ -1,0 +1,141 @@
+{
+  "entryId": "w:app",
+  "headword": "app",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/æp/",
+    "us": "/æp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:app#p-main",
+      "ipa": {
+        "uk": "/æp/",
+        "us": "/æp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "Apps",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "apps",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "APPs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 29,
+    "mock": 221
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:app#s1",
+      "pos": "n.",
+      "glossZh": "应用程序",
+      "pronunciationId": "w:app#p-main",
+      "note": "application 的常用缩写。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 29,
+        "mock": 221
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:app#e-29cfa5f49fd7b29c",
+          "text": "Apps (short for applications) are becoming increasingly popular nowadays, and for good reason.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 4
+          }
+        },
+        {
+          "exampleId": "w:app#e-3900f8097a6586f0",
+          "text": "Here’s what you should think about before downloading an app for language learning.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:app#e-1a869dd327ba2113",
+          "text": "“Biodiversity apps can use our study results to inform users of oversampled areas and lead them to places – and even species – that are not well-sampled.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 18
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "上诉、急性期蛋白等缩写；开胃菜和出场次数的简写；姓氏",
+      "reason": "技术、法律等领域的同形简写或专名。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

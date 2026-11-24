@@ -1,0 +1,201 @@
+{
+  "entryId": "w:unique",
+  "headword": "unique",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/juˈniːk/",
+    "us": "/juˈniːk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:unique#p-main",
+      "ipa": {
+        "uk": "/juˈniːk/",
+        "us": "/juˈniːk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more unique",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most unique",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "uniquer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "uniquest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 15,
+    "mock": 233
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 232
+  },
+  "senses": [
+    {
+      "senseId": "w:unique#s1",
+      "pos": "adj.",
+      "glossZh": "独特的",
+      "pronunciationId": "w:unique#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:unique#e-052f83fe64ac7800",
+          "text": "The whole experience is unique.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:unique#e-adb60513794982bf",
+          "text": "This is a unique piece, as posters such as this one were printed on soft paper and very few have survived.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:unique#e-54590509044efa71",
+          "text": "Everyone brings something unique to the table and can connect with each other in a new way.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2025-ii:seven-choices:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:unique#s2",
+      "pos": "adj.",
+      "glossZh": "为……所特有的",
+      "pronunciationId": "w:unique#p-main",
+      "note": "unique to sb/sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:unique#e-422f7e3abb687582",
+          "text": "\"The big message from this study is that there is another species (物种) out there that is meaningful in its communication, so that’s not unique to humans,\" said Dr Hobaiter.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 136,
+            "end": 142
+          }
+        },
+        {
+          "exampleId": "w:unique#e-f90b6dc57e83ea0a",
+          "text": "These limited-edition publications bring you the newest research and excavation (发掘) updates unique to each of these iconic archaeological sites.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 93,
+            "end": 99
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "作名词指独一无二的事物",
+      "reason": "少见词性"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

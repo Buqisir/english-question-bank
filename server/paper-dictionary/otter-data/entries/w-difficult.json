@@ -1,0 +1,188 @@
+{
+  "entryId": "w:difficult",
+  "headword": "difficult",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdɪfɪkəlt/",
+    "us": "/ˈdɪfɪkəlt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:difficult#p-main",
+      "ipa": {
+        "uk": "/ˈdɪfɪkəlt/",
+        "us": "/ˈdɪfɪkəlt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more difficult",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most difficult",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 35,
+    "mock": 166
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 166
+  },
+  "senses": [
+    {
+      "senseId": "w:difficult#s1",
+      "pos": "adj.",
+      "glossZh": "困难的；不容易的；艰难的",
+      "pronunciationId": "w:difficult#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 29,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:difficult#e-a9d4f0037ea89374",
+          "text": "For Texas cattleman Pete Bonds, it’s increasingly difficult to find workers interested in watching cattle.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:difficult#e-ab8110f26663d4eb",
+          "text": "Leslie Nielsen’s childhood was a difficult one, but he had one particular shining star in his life – his uncle, who was a well-known actor.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:difficult#e-04d720379a46826b",
+          "text": "Still, the findings show a potential path forward for reducing microplastic exposure – a task that’s becoming increasingly difficult.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 123,
+            "end": 132
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:difficult#s2",
+      "pos": "adj.",
+      "glossZh": "（人）难相处的；难应付的",
+      "pronunciationId": "w:difficult#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:difficult#e-c759bc63b42514d7",
+          "text": "If a customer is rude or difficult, just think “Maybe she’s had a row with her husband.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:cloze:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:difficult#e-57826745777cb7fe",
+          "text": "He’s difficult to get along with.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:listening.short-dialogue",
+            "locator": {
+              "question": 4,
+              "questionId": "question:listening:4",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 14
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "使困难（动词）",
+      "reason": "罕见旧词性"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

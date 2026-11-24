@@ -1,0 +1,231 @@
+{
+  "entryId": "w:sad",
+  "headword": "sad",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/sæd/",
+    "us": "/sæd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:sad#p-main",
+      "ipa": {
+        "uk": "/sæd/",
+        "us": "/sæd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more sad",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most sad",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "sadder",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "saddest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 39
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 37
+  },
+  "senses": [
+    {
+      "senseId": "w:sad#s1",
+      "pos": "adj.",
+      "glossZh": "难过的",
+      "pronunciationId": "w:sad#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sad#e-6d366c259e7d8c35",
+          "text": "Her owners were sad too, but they knew their son would be back to visit.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:sad#e-b733f59874cbbed4",
+          "text": "I’m not sad about it.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:sad#e-0030715b43082cea",
+          "text": "What’s making him so sad?”), then suggest how he could resolve the problem (“Maybe he would feel better if you let him play with the ball.”).",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sad#s2",
+      "pos": "adj.",
+      "glossZh": "令人难过的",
+      "pronunciationId": "w:sad#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sad#e-0a99783979a4278b",
+          "text": "“That’s so sad,” he said, “but you still know all those words, even without the book.” I realized that this was true.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:sad#e-5de954ba4d4cebac",
+          "text": "That’s very sad, isn’t it?”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-third",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（三）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-third:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-third:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:sad#e-eb0bb28a350384a2",
+          "text": "“It’s sad how widely human activities impact the ocean,” Chong says, noting that plastics in the patch not only entangle marine life or block their digestive systems, but also carry harmful substances up the food chain to higher-level organisms, ultimately threatening the balance of entire marine ecosystems.",
+          "source": {
+            "paperId": "paper-mock-liaoning-2025-09-senior-three-joint-exam",
+            "paperTitle": "辽宁省名校联盟2025年高三9月份联合考试英语试题",
+            "groupId": "group:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-liaoning-2025-09-senior-three-joint-exam:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 6,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sad#s3",
+      "pos": "adj.",
+      "glossZh": "可悲的",
+      "pronunciationId": "w:sad#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "季节性情绪失调",
+      "reason": "大写 SAD 缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

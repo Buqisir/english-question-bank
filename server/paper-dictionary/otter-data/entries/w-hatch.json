@@ -1,0 +1,203 @@
+{
+  "entryId": "w:hatch",
+  "headword": "hatch",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/hætʃ/",
+    "us": "/hætʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:hatch#p-main",
+      "ipa": {
+        "uk": "/hætʃ/",
+        "us": "/hætʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "hatches",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "hatched",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "hatching",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 10
+  },
+  "senses": [
+    {
+      "senseId": "w:hatch#s1",
+      "pos": "v.",
+      "glossZh": "孵出；破壳",
+      "pronunciationId": "w:hatch#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hatch#e-e3585569d69ad7c6",
+          "text": "• Daily Turtle Care: Feeding, health monitoring, and releasing hatched baby turtles into the sea.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-03-first",
+            "paperTitle": "2026年汕头市普通高考第一次模拟考试英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-03-first:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 63,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:hatch#e-51c9d36b8c6b27ef",
+          "text": "The idea first entered science through the brilliance of Konrad Lorenz, who famously persuaded newly hatched goslings to follow him as if he were their mother.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 108
+          }
+        },
+        {
+          "exampleId": "w:hatch#e-a5d2e63d88cc51c8",
+          "text": "In 1997, not a single red-crowned crane bird hatched.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-10-second",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第二次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-10-second:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 52
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hatch#s2",
+      "pos": "v.",
+      "glossZh": "使孵化",
+      "pronunciationId": "w:hatch#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:hatch#s3",
+      "pos": "n.",
+      "glossZh": "舱口（带盖的开口）",
+      "pronunciationId": "w:hatch#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:hatch#s4",
+      "pos": "n.",
+      "glossZh": "传递窗",
+      "pronunciationId": "w:hatch#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:hatch#s5",
+      "pos": "v.",
+      "glossZh": "密谋；策划",
+      "pronunciationId": "w:hatch#p-main",
+      "note": "如 hatch a plot。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Hatch 姓氏",
+      "reason": "同形专名"
+    },
+    {
+      "glossZh": "排线绘阴影、水闸、捕鱼栅",
+      "reason": "专门或罕见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

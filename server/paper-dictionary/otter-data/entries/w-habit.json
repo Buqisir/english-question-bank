@@ -1,0 +1,155 @@
+{
+  "entryId": "w:habit",
+  "headword": "habit",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈhæbɪt/",
+    "us": "/ˈhæbɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:habit#p-main",
+      "ipa": {
+        "uk": "/ˈhæbɪt/",
+        "us": "/ˈhæbɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "habits",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 36,
+    "mock": 303
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 303
+  },
+  "senses": [
+    {
+      "senseId": "w:habit#s1",
+      "pos": "n.",
+      "glossZh": "习惯",
+      "pronunciationId": "w:habit#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 35,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:habit#e-e8f49769e827e9e4",
+          "text": "According to a recent study in the Journal of Consumer Research, both the size and consumption habits of our eating companions can influence our food intake.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 101
+          }
+        },
+        {
+          "exampleId": "w:habit#e-10471392263f44e0",
+          "text": "His own children have got into the habit of playing outside now: “We just send them out into the garden and tell them not to come back in for a while.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:habit#e-0706e591eb19419c",
+          "text": "Those habits you’re building now are setting your child up for a lifetime of resilience (韧性) and satisfaction.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:11",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 12
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:habit#s2",
+      "pos": "n.",
+      "glossZh": "修会会服",
+      "pronunciationId": "w:habit#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:habit#s3",
+      "pos": "n.",
+      "glossZh": "成瘾性习惯",
+      "pronunciationId": "w:habit#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "晶体外形",
+      "reason": "矿物学专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

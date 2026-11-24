@@ -1,0 +1,301 @@
+{
+  "entryId": "w:drag",
+  "headword": "drag",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dræɡ/",
+    "us": "/dræɡ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:drag#p-main",
+      "ipa": {
+        "uk": "/dræɡ/",
+        "us": "/dræɡ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "drags",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "dragged",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "dragging",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "drug",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 31
+  },
+  "senses": [
+    {
+      "senseId": "w:drag#s1",
+      "pos": "v.",
+      "glossZh": "拖；拽；费力移动",
+      "pronunciationId": "w:drag#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drag#e-9c76e0b619f19b8b",
+          "text": "The next morning, I dragged myself into the kitchen.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:drag#e-78909b6f8bf1fca5",
+          "text": "Northwest of Alexandria on the Nile Delta, this was a popular trading port before earthquakes weakened the land and dragged it below the salty water.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:reading-a:10",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 116,
+            "end": 123
+          }
+        },
+        {
+          "exampleId": "w:drag#e-3edee802cd11fad5",
+          "text": "Paragraph 1: Early the next morning, I dragged the cardboard down to the corner.",
+          "source": {
+            "paperId": "paper-mock-shandong-jiuwu-2026-oct-quality",
+            "paperTitle": "九五高中协作体2026届高三年级10月质量检测（九五联考）英语",
+            "groupId": "group:paper-mock-shandong-jiuwu-2026-oct-quality:writing-continuation",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-shandong-jiuwu-2026-oct-quality:writing-continuation:13",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:drag#s2",
+      "pos": "短语",
+      "glossZh": "拖延；拖得太久",
+      "pronunciationId": "w:drag#p-main",
+      "note": "drag on。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drag#e-9ca1243059548878",
+          "text": "The same three-hour journey seems to drag on between layovers (中途停留), traffic and rest-stop food.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-c:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:drag#s3",
+      "pos": "短语",
+      "glossZh": "使沮丧；拖累",
+      "pronunciationId": "w:drag#p-main",
+      "note": "drag sb down。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drag#e-fed73fe3c2826d7d",
+          "text": "If something is annoying you in your day-to-day life, you had better address these things and keep them from dragging you down further.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 116,
+            "end": 124
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:drag#s4",
+      "pos": "n.",
+      "glossZh": "吸一口烟",
+      "pronunciationId": "w:drag#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drag#e-0a619c783b4cb635",
+          "text": "I mentioned being a writer, and he paused, taking a long drag on his cigarette, and said, “Words are to the mind what exercise is to the body.” That profound insight immediately opened a channel between us.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:drag#s5",
+      "pos": "n.",
+      "glossZh": "阻力",
+      "pronunciationId": "w:drag#p-main",
+      "note": "如水阻力或空气阻力。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drag#e-58fb83a89595da97",
+          "text": "By lifting the hull out of the water, the boat reduces drag by as much as 80 percent, saving a huge amount of energy.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 55,
+            "end": 59
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:drag#s6",
+      "pos": "n.",
+      "glossZh": "乏味或烦人的人或事",
+      "pronunciationId": "w:drag#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "砂型下箱、台球跟进击球、猎犬追踪气味等",
+      "reason": "行业和运动专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

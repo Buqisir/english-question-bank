@@ -1,0 +1,218 @@
+{
+  "entryId": "w:choke",
+  "headword": "choke",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tʃəʊk/",
+    "us": "/tʃəʊk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:choke#p-main",
+      "ipa": {
+        "uk": "/tʃəʊk/",
+        "us": "/tʃəʊk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "choked",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "chokes",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "choking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "senses": [
+    {
+      "senseId": "w:choke#s1",
+      "pos": "v.",
+      "glossZh": "窒息；噎住；使窒息",
+      "pronunciationId": "w:choke#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:choke#e-35d9fa7ba3110315",
+          "text": "The CPSC ensures that children’s clothing doesn’t go against flammability (可燃性) standards, toys don’t present choking danger, and furniture isn’t in danger of falling over.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 110,
+            "end": 117
+          }
+        },
+        {
+          "exampleId": "w:choke#e-84f10f937aae4928",
+          "text": "My first reaction was to take it away from him so he wouldn't accidentally choke – until he spoke.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 75,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:choke#s2",
+      "pos": "v.",
+      "glossZh": "堵塞；挤满；阻碍",
+      "pronunciationId": "w:choke#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:choke#e-3069365b342daee4",
+          "text": "A few months ago, Chris Junior Anaekwe found the gutters in the local market choked with plastic bags, soda bottles and food containers.",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-mingxiao-2025-09:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:choke#e-b0d487bb60602293",
+          "text": "Over the centuries, human development and fire control allowed foreign trees to choke out the once-diverse grasslands, killing native species.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级四月检测 英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-04-senior-three-monthly-test:reading-b:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 85
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:choke#s3",
+      "pos": "v.",
+      "glossZh": "（因情绪激动）哽咽",
+      "pronunciationId": "w:choke#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:choke#s4",
+      "pos": "短语",
+      "glossZh": "强忍住（眼泪等）",
+      "pronunciationId": "w:choke#p-main",
+      "note": "choke back",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:choke#s5",
+      "pos": "v.",
+      "glossZh": "关键时刻因紧张而失常",
+      "pronunciationId": "w:choke#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "阻风门、扼流圈、流体临界状态等",
+      "reason": "机械、电子或工程专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

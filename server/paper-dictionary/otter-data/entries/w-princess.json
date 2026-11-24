@@ -1,0 +1,113 @@
+{
+  "entryId": "w:princess",
+  "headword": "princess",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌprɪnˈses/",
+    "us": "/ˈprɪnses/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:princess#p-main",
+      "ipa": {
+        "uk": "/ˌprɪnˈses/",
+        "us": "/ˈprɪnses/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "princesses",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Princesses",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "senses": [
+    {
+      "senseId": "w:princess#s1",
+      "pos": "n.",
+      "glossZh": "公主",
+      "pronunciationId": "w:princess#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:princess#e-00ca900f92aa6085",
+          "text": "Sadly, no photography or filming is allowed inside, but at least you can capture its Disney princess castle vibes from the outside.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 92,
+            "end": 100
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:princess#s2",
+      "pos": "n.",
+      "glossZh": "王妃",
+      "pronunciationId": "w:princess#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Princess（狗名）",
+      "reason": "宠物专名"
+    },
+    {
+      "glossZh": "彩色玻璃弹珠",
+      "reason": "罕见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

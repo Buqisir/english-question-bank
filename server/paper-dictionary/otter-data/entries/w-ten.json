@@ -1,0 +1,163 @@
+{
+  "entryId": "w:ten",
+  "headword": "ten",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ten/",
+    "us": "/ten/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ten#p-main",
+      "ipa": {
+        "uk": "/ten/",
+        "us": "/ten/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 24,
+    "mock": 90
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 90
+  },
+  "senses": [
+    {
+      "senseId": "w:ten#s1",
+      "pos": "num.",
+      "glossZh": "十",
+      "pronunciationId": "w:ten#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 21,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ten#e-2bd48632cc5f4522",
+          "text": "In just two hours, streams can rise ten to twenty feet.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-d:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:ten#e-d4b2361e7c82c5d5",
+          "text": "This happened when I was ten.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:ten#e-c780d90b623b6c2d",
+          "text": "We require one chaperone (监护人) per ten children.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ten#s2",
+      "pos": "短语",
+      "glossZh": "数以十计的",
+      "pronunciationId": "w:ten#p-main",
+      "note": "tens of。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ten#s3",
+      "pos": "短语",
+      "glossZh": "数以万计",
+      "pronunciationId": "w:ten#p-main",
+      "note": "tens of thousands。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ten#s4",
+      "pos": "短语",
+      "glossZh": "数以千万计",
+      "pronunciationId": "w:ten#p-main",
+      "note": "tens of millions。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "田纳西州缩写、毒性表皮坏死松解症缩写",
+      "reason": "同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

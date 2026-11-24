@@ -1,0 +1,322 @@
+{
+  "entryId": "w:salt",
+  "headword": "salt",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/sɔːlt/",
+    "us": "/sɔːlt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:salt#p-main",
+      "ipa": {
+        "uk": "/sɔːlt/",
+        "us": "/sɔːlt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more salt",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most salt",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "salts",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "SALTs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "salted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "salting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 40
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 36
+  },
+  "senses": [
+    {
+      "senseId": "w:salt#s1",
+      "pos": "n.",
+      "glossZh": "盐（氯化钠）",
+      "pronunciationId": "w:salt#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 19,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:salt#e-8cb7929ff7b03719",
+          "text": "The salt lowers water’s freezing point, causing ice to melt（融化）.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:salt#e-66962a4baa9e1826",
+          "text": "Rock salt is made of sodium chloride, the same compound（化合物）in ordinary table salt.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:salt#e-d0fd0300fe322d36",
+          "text": "It may seem like a simple request to ask for salt and pepper at a meal",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2022-national-a:36",
+              "option": "G",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:salt#s2",
+      "pos": "n.",
+      "glossZh": "盐类（化合物）",
+      "pronunciationId": "w:salt#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:salt#e-41705583fda76e32",
+          "text": "They used a common, non-toxic salt whose dissolution (溶解) in water absorbs large amounts of heat.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2026-04-second",
+            "paperTitle": "2026年广州市普通高中毕业班综合测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2026-04-second:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2026-04-second:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 34
+          }
+        },
+        {
+          "exampleId": "w:salt#e-54d37f4683d3bdb5",
+          "text": "In their study, they observed ammonium thiocyanate, a widely-used industrial salt, absorbs massive amounts of heat when it dissolves（溶解）in water.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-03-first:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 77,
+            "end": 81
+          }
+        },
+        {
+          "exampleId": "w:salt#e-d11f16f9d4759d21",
+          "text": "As the name implies, sodium-ion batteries replace lithium with sodium, an element found widely in salts.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 98,
+            "end": 103
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:salt#s3",
+      "pos": "adj.",
+      "glossZh": "含盐的",
+      "pronunciationId": "w:salt#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:salt#e-dafb1755067401d8",
+          "text": "We’d been training together since freshman year at Seaside High, pushing each other through early morning sessions along the coastal roads, where the salt spray mixed with our sweat.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 150,
+            "end": 154
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:salt#s4",
+      "pos": "adj.",
+      "glossZh": "盐腌的",
+      "pronunciationId": "w:salt#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:salt#s5",
+      "pos": "v.",
+      "glossZh": "加盐",
+      "pronunciationId": "w:salt#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:salt#s6",
+      "pos": "v.",
+      "glossZh": "用盐腌制",
+      "pronunciationId": "w:salt#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:salt#s7",
+      "pos": "短语",
+      "glossZh": "对……持保留态度",
+      "pronunciationId": "w:salt#p-main",
+      "note": "take sth with a pinch of salt。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "加密随机数据",
+      "reason": "计算机专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

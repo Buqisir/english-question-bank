@@ -1,0 +1,296 @@
+{
+  "entryId": "w:broadcast",
+  "headword": "broadcast",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈbrɔːdkɑːst/",
+    "us": "/ˈbrɔːdkæst/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:broadcast#p-main",
+      "ipa": {
+        "uk": "/ˈbrɔːdkɑːst/",
+        "us": "/ˈbrɔːdkæst/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more broadcast",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most broadcast",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "broadcasts",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "broadcasted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "broadcasting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "senses": [
+    {
+      "senseId": "w:broadcast#s1",
+      "pos": "v.",
+      "glossZh": "广播；播送；播出",
+      "pronunciationId": "w:broadcast#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:broadcast#e-318d5d45f8827a00",
+          "text": "Cookery shows and documentaries about food are broadcast more often than before.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:broadcast#e-e925e97ede20db03",
+          "text": "Fourth graders broadcast from an office in the Lower School for Spark, Middle Schoolers write for the online The Torch, and Upper Schoolers contribute to The Campus Lantern, both in print and online.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-03-seventh",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（七）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-03-seventh:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-03-seventh:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:broadcast#e-59a462655e14a443",
+          "text": "The event, held near Washington, D. C. and broadcast live on TV, was especially meaningful as it marked a century of the competition.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 52
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:broadcast#s2",
+      "pos": "n.",
+      "glossZh": "广播节目；播出",
+      "pronunciationId": "w:broadcast#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:broadcast#e-55e1ae5fc5e9c864",
+          "text": "While running every aspect of our own news station, kids and their fellow campers will create and host a broadcast airing each night at dinner for the entire camp.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 114
+          }
+        },
+        {
+          "exampleId": "w:broadcast#e-1dab1a84af6795b1",
+          "text": "He watched a live broadcast.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:broadcast#e-d0163bb02b03eb01",
+          "text": "No one would have known that the confident live-streamer had been frozen by nerves during her first broadcast.",
+          "source": {
+            "paperId": "paper-mock-shandong-taian-2026-01-first-semester-quality-assessment",
+            "paperTitle": "山东省泰安市2025-2026学年第一学期普通高中质量检测 高三年级英语试卷",
+            "groupId": "group:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-taian-2026-01-first-semester-quality-assessment:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 100,
+            "end": 109
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:broadcast#s3",
+      "pos": "adj.",
+      "glossZh": "广播的",
+      "pronunciationId": "w:broadcast#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:broadcast#e-1a1f2ab92348e8de",
+          "text": "Ten years later, I walked into a radio station, hoping to become a broadcast journalist.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 67,
+            "end": 76
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:broadcast#s4",
+      "pos": "v.",
+      "glossZh": "广泛传播；散发",
+      "pronunciationId": "w:broadcast#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:broadcast#e-a25ac10a5074c178",
+          "text": "Then one of six odors – chosen at random from caramel（焦糖）, cherry, coffee, lemon, and peppermint, plus odorless water as a control – was broadcast into the room with an ultrasonic diffuser for five minutes.",
+          "source": {
+            "paperId": "paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment",
+            "paperTitle": "2026年1月随州市普通高中高三年级质量检测 英语试卷",
+            "groupId": "group:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-suizhou-2026-01-senior-three-quality-assessment:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 137,
+            "end": 146
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "撒播播种",
+      "reason": "农业专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

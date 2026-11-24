@@ -1,0 +1,143 @@
+{
+  "entryId": "w:useful",
+  "headword": "useful",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈjuːsfl/",
+    "us": "/ˈjuːsfl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:useful#p-main",
+      "ipa": {
+        "uk": "/ˈjuːsfl/",
+        "us": "/ˈjuːsfl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more useful",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most useful",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "usefuller",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "usefullest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 86
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:useful#s1",
+      "pos": "adj.",
+      "glossZh": "有用的",
+      "pronunciationId": "w:useful#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 86
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:useful#e-91d5c6e68f2f1858",
+          "text": "Michael Kelsey, vice president of the Oklahoma Cattlemen’s Association, said a robot could be extremely useful given rising concerns about cattle theft.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 104,
+            "end": 110
+          }
+        },
+        {
+          "exampleId": "w:useful#e-f606785e5d50d5f4",
+          "text": "Though they are useful for detecting shifts in the number and variety of species in an area, a new Stanford study has found that this type of record is not perfect.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:useful#e-f4045a75baeefcdc",
+          "text": "Dictionaries are still a useful tool.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2026-i:27",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 31
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,129 @@
+{
+  "entryId": "w:discovery",
+  "headword": "discovery",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɪˈskʌvəri/",
+    "us": "/dɪˈskʌvəri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:discovery#p-main",
+      "ipa": {
+        "uk": "/dɪˈskʌvəri/",
+        "us": "/dɪˈskʌvəri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "discoveries",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 96
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:discovery#s1",
+      "pos": "n.",
+      "glossZh": "发现；发现的事物或成果",
+      "pronunciationId": "w:discovery#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 96
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:discovery#e-b60debe8d4a1dd82",
+          "text": "Until I made a discovery.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:discovery#e-b364f13014c5cc6e",
+          "text": "Why was Tharp's discovery of the central valley significant?",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-10-first:25",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 16,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:discovery#e-f0a6051d20a64e74",
+          "text": "A recent study published in Nature highlights a promising discovery: specific bacteria that can dramatically reduce agricultural emissions of nitrous oxide (N₂O), a powerful greenhouse gas.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 58,
+            "end": 67
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "诉前证据开示；闪击攻击",
+      "reason": "法律或棋类义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

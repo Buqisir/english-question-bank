@@ -1,0 +1,175 @@
+{
+  "entryId": "w:sport",
+  "headword": "sport",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/spɔːt/",
+    "us": "/spɔːrt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:sport#p-main",
+      "ipa": {
+        "uk": "/spɔːt/",
+        "us": "/spɔːrt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "sports",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "sported",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "sporting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 35,
+    "mock": 243
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 243
+  },
+  "senses": [
+    {
+      "senseId": "w:sport#s1",
+      "pos": "n.",
+      "glossZh": "体育运动",
+      "pronunciationId": "w:sport#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 35,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:sport#e-6bac20f410e3a314",
+          "text": "All these stadiums are still functional, still open and still hosting the biggest events in world sport.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 103
+          }
+        },
+        {
+          "exampleId": "w:sport#e-ebd7cc06979d9435",
+          "text": "Do you want to be a better athlete in your favorite sport?",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2022-i:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:sport#e-32dacde4f3db33f7",
+          "text": "The Chinese coach __52__ Douglas into one of the best gymnasts in the __53__, helping her skyrocket from an __54__ member of the national team to the top of the sport.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 161,
+            "end": 166
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:sport#s2",
+      "pos": "v.",
+      "glossZh": "穿戴并展示",
+      "pronunciationId": "w:sport#p-main",
+      "note": "如 sport a new hat。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:sport#s3",
+      "pos": "短语",
+      "glossZh": "输得起的人",
+      "pronunciationId": "w:sport#p-main",
+      "note": "a good sport，泛指能接受失败或玩笑的人。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "异常变种、博彩、私情、关门",
+      "reason": "生物专义、历史义或地区义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

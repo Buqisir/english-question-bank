@@ -1,0 +1,180 @@
+{
+  "entryId": "w:snack",
+  "headword": "snack",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/snæk/",
+    "us": "/snæk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:snack#p-main",
+      "ipa": {
+        "uk": "/snæk/",
+        "us": "/snæk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "snacks",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "snacked",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "snacking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 46
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 45
+  },
+  "senses": [
+    {
+      "senseId": "w:snack#s1",
+      "pos": "n.",
+      "glossZh": "零食",
+      "pronunciationId": "w:snack#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:snack#e-bba3022b39cb5a0e",
+          "text": "Before the film began, each woman was asked to help herself to a snack.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:snack#e-d55f46fc1a74c829",
+          "text": "All campers should bring their own bagged lunch and snacks.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:11",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 52,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:snack#e-7a89504fe99fc6e7",
+          "text": "I encourage my daughter to make healthy snack choices and often dissuade（劝阻）her from a second dessert.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:snack#s2",
+      "pos": "v.",
+      "glossZh": "吃零食",
+      "pronunciationId": "w:snack#p-main",
+      "note": "常用 snack on something。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:snack#e-d116dc093cedd7c3",
+          "text": "My suspicion is that the alarm, which cannot be neutralized, was designed to stop my late-night search in the fridge – my wife has long warned me that midnight snacking is bad for my waistline.",
+          "source": {
+            "paperId": "paper-mock-nb-2026-m2",
+            "paperTitle": "宁波市2025学年第二学期高考模拟考试",
+            "groupId": "group:paper-mock-nb-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-nb-2026-m2:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 160,
+            "end": 168
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "有魅力的人；抢夺；分享",
+      "reason": "俚语或罕见旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

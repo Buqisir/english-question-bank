@@ -1,0 +1,188 @@
+{
+  "entryId": "w:absolutely",
+  "headword": "absolutely",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌæbsəˈluːtli/",
+    "us": "/ˌæbsəˈluːtli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:absolutely#p-main",
+      "ipa": {
+        "uk": "/ˌæbsəˈluːtli/",
+        "us": "/ˌæbsəˈluːtli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 9,
+    "mock": 19
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 19
+  },
+  "senses": [
+    {
+      "senseId": "w:absolutely#s1",
+      "pos": "adv.",
+      "glossZh": "完全地；一点也不（加强陈述或否定）",
+      "pronunciationId": "w:absolutely#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:absolutely#e-356a11c4b4b8758d",
+          "text": "She ran Jackson’s Carnegie Library absolutely by herself.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:absolutely#e-bb15906d71a4cb96",
+          "text": "They weighed about 2.5 kg and were so small that there was absolutely no risk.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:absolutely#e-678c8222ec84c7c1",
+          "text": "It doesn’t take a genius to know the answer: absolutely not.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:absolutely#s2",
+      "pos": "adv.",
+      "glossZh": "非常；极其（加强语气）",
+      "pronunciationId": "w:absolutely#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:absolutely#e-b32386b6db589816",
+          "text": "Paul Beer, head of rhino section at Port Lympne, said: “Obviously we’re all absolutely delighted to welcome another calf to our black rhino family.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:absolutely#e-cff0f73409bed3bc",
+          "text": "This online concert is absolutely fantastic.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-application",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-application:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:absolutely#s3",
+      "pos": "interj.",
+      "glossZh": "当然；一点没错",
+      "note": "用作独立答语，表示强烈同意。",
+      "pronunciationId": "w:absolutely#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "脱离条件而独立地",
+      "reason": "多见于专门论述"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

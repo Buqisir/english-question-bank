@@ -1,0 +1,408 @@
+{
+  "entryId": "w:special",
+  "headword": "special",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈspeʃl/",
+    "us": "/ˈspeʃl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:special#p-main",
+      "ipa": {
+        "uk": "/ˈspeʃl/",
+        "us": "/ˈspeʃl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more special",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most special",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "specialer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "specialest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "specials",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 39,
+    "mock": 275
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 275
+  },
+  "senses": [
+    {
+      "senseId": "w:special#s1",
+      "pos": "adj.",
+      "glossZh": "与众不同的",
+      "pronunciationId": "w:special#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 16,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:special#e-8d0a934a096d168a",
+          "text": "What is special about the BYU professors’ study?",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jan:27",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:special#e-d077c265ecf9efc7",
+          "text": "That way, you could exchange thoughts on what makes each of you special and the aspects of your personality that shine through.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-i:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:special#e-1a728d6e997a3db6",
+          "text": "Do your part to preserve what makes a destination special in the first place.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:special#s2",
+      "pos": "adj.",
+      "glossZh": "有特殊意义的",
+      "pronunciationId": "w:special#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:special#e-2fcb61d2df770672",
+          "text": "I have a special place in my heart for libraries.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:special#e-ec8cf67a963bd438",
+          "text": "It was a special time to bond with my children and it filled them with the wonderment of books.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:special#e-425d593789f5116c",
+          "text": "Although technology might make day-to-day communication possible, extra effort goes a long way on special days.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:10",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 105
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:special#s3",
+      "pos": "adj.",
+      "glossZh": "专为某目的安排的",
+      "pronunciationId": "w:special#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:special#e-72697b9646f6134c",
+          "text": "A special path should be built for grizzlies.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2023-national-a:35",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 9
+          }
+        },
+        {
+          "exampleId": "w:special#e-459053694f467425",
+          "text": "Groups of five or more require special arrangements and must be confirmed in advance.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:special#e-13f6a3e3e82e604e",
+          "text": "“We’re thrilled to be working with Yellowstone collectors Jack and Susan Davis, and Larry and Thea Lancaster to bring this exhibition to the University of Wyoming as part of year-long celebrations recognizing Yellowstone’s 150th anniversary,” says Tamsen Hert, head of UW Libraries' Emmett D. Chisum Special Collections.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 300,
+            "end": 307
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:special#s4",
+      "pos": "短语",
+      "glossZh": "特殊教育",
+      "pronunciationId": "w:special#p-main",
+      "note": "special education。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:special#e-0df3cde4b636a403",
+          "text": "As a special education teacher at the school, I was familiar with the challenges David faced and was proud of his strong determination.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "writing-continuation-7",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:special#e-5128024d49c158fb",
+          "text": "Besides, working in the garden seems to have a calming effect on Jaramillo’s special education students, many of whom have emotional control issues.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 84
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:special#s5",
+      "pos": "n.",
+      "glossZh": "特色菜",
+      "pronunciationId": "w:special#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:special#e-ab5b5d1dba43e1c3",
+          "text": "It also serves a variety of chef’s specials, beef with rice cakes, and more.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 43
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:special#s6",
+      "pos": "n.",
+      "glossZh": "特价商品",
+      "pronunciationId": "w:special#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:special#s7",
+      "pos": "n.",
+      "glossZh": "特别节目",
+      "pronunciationId": "w:special#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "弹珠台奖励、看好的赛马及一对一看护",
+      "reason": "游戏或行业特称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

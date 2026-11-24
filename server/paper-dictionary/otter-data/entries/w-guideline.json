@@ -1,0 +1,129 @@
+{
+  "entryId": "w:guideline",
+  "headword": "guideline",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɡaɪdlaɪn/",
+    "us": "/ˈɡaɪdlaɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:guideline#p-main",
+      "ipa": {
+        "uk": "/ˈɡaɪdlaɪn/",
+        "us": "/ˈɡaɪdlaɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "guidelines",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:guideline#s1",
+      "pos": "n.",
+      "glossZh": "指导原则",
+      "pronunciationId": "w:guideline#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 38
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:guideline#e-2bfa8d35f11d11fb",
+          "text": "Conservation organizations put out pollinator-friendliness guidelines for home gardens, businesses, schools, cities——and now there are guidelines for solar farms.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:guideline#e-e02a79837549f073",
+          "text": "When you establish these guidelines, explain the reasons behind them.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:3",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:guideline#e-151b4d45838d939e",
+          "text": "Adults should be getting at least 150 minutes of moderate-intensity (中等强度) exercise every week, according to the Physical Activity Guidelines published recently.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（二）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-05-senior-three-teaching-survey-2:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 131,
+            "end": 141
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "排字辅助线",
+      "reason": "排版专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

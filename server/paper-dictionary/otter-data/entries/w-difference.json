@@ -1,0 +1,227 @@
+{
+  "entryId": "w:difference",
+  "headword": "difference",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdɪfrəns/",
+    "us": "/ˈdɪfrəns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:difference#p-main",
+      "ipa": {
+        "uk": "/ˈdɪfrəns/",
+        "us": "/ˈdɪfrəns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "differences",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 26,
+    "mock": 202
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 202
+  },
+  "senses": [
+    {
+      "senseId": "w:difference#s1",
+      "pos": "n.",
+      "glossZh": "差异；区别",
+      "pronunciationId": "w:difference#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:difference#e-c3ae43b026cd76d0",
+          "text": "Puzzle play was found to be a significant predictor of cognition(认知) after controlling for differences in parents’ income, education and the amount of parent talk, Levine said.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:difference#e-3a9fc087a20cc30a",
+          "text": "This was a significant difference between calls and gestures, Dr Hobaiter said.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:difference#e-59732d8bc64b98e7",
+          "text": "He suggested I think about the difference between endings that I wanted for the characters and endings that were right for the characters, endings that satisfied the story even if they didn’t have a traditionally positive outcome.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:difference#s2",
+      "pos": "n. / 短语",
+      "glossZh": "影响；作用；有所改变",
+      "pronunciationId": "w:difference#p-main",
+      "note": "make a difference 指「起作用；产生影响」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:difference#e-821b18e711099c1f",
+          "text": "You could not take back a book to the library on the same day you’d taken it out; it made no difference to her that you’d read every word in it and needed another to start.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-a:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 103
+          }
+        },
+        {
+          "exampleId": "w:difference#e-1014ad3a44e3a5a1",
+          "text": "But does one plastic straw or cup really make a difference?",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:difference#e-93b97a3620ab3383",
+          "text": "“Just five more minutes outdoors can make a difference,” David Bond says.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:difference#s3",
+      "pos": "n.",
+      "glossZh": "（意见上的）分歧",
+      "pronunciationId": "w:difference#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:difference#s4",
+      "pos": "n.",
+      "glossZh": "差值；差额",
+      "pronunciationId": "w:difference#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "种差；异或运算；纹章标记",
+      "reason": "逻辑、数学或纹章专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

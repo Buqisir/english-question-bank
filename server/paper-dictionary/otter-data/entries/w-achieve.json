@@ -1,0 +1,146 @@
+{
+  "entryId": "w:achieve",
+  "headword": "achieve",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈtʃiːv/",
+    "us": "/əˈtʃiːv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:achieve#p-main",
+      "ipa": {
+        "uk": "/əˈtʃiːv/",
+        "us": "/əˈtʃiːv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "achieved",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "achieves",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "achieving",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 198
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:achieve#s1",
+      "pos": "v.",
+      "glossZh": "实现；完成；取得（目标、成果或水平）",
+      "pronunciationId": "w:achieve#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 198
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:achieve#e-a56939a6bd9e5572",
+          "text": "Jennifer sacrificed（牺牲）to achieve her goal, giving up many nights with her kids and missing important events to study.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:achieve#e-a8a31f84a84145dc",
+          "text": "Chimpanzee behaviour study achieved a breakthrough",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jan:30",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:achieve#e-09ea7e21a658ba49",
+          "text": "The innovative design requires little effort to achieve a reliable weekly supply of fresh greens.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 55
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "结束；结局为",
+      "reason": "旧义"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

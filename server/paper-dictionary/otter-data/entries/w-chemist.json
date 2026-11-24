@@ -1,0 +1,144 @@
+{
+  "entryId": "w:chemist",
+  "headword": "chemist",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkemɪst/",
+    "us": "/ˈkemɪst/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:chemist#p-main",
+      "ipa": {
+        "uk": "/ˈkemɪst/",
+        "us": "/ˈkemɪst/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "chemists",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 5
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "senses": [
+    {
+      "senseId": "w:chemist#s1",
+      "pos": "n.",
+      "glossZh": "化学家",
+      "pronunciationId": "w:chemist#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chemist#e-412c30d4f293e518",
+          "text": "His vision was rooted in the groundbreaking work of his father, a renowned 19th-century chemist, who had predicted that by the year 2000, all food would be artificial.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:chemist#e-4cfb5a9219b16efe",
+          "text": "The famous chemist August Kekulé reportedly discovered the ring structure of benzene (苯) after visualizing a snake biting its own tail during this half-awake state.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chemist#s2",
+      "pos": "n.",
+      "glossZh": "（英式）药剂师；药店",
+      "pronunciationId": "w:chemist#p-main",
+      "note": "chemist’s 也可指药店。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chemist#e-243c1e6af7083c46",
+          "text": "For example, one famous firm of chemists has shops in many parts of London, and in these you may buy not only medicines but toilet items.",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-qilu-2026-second-joint-exam:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 47
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "炼金术士",
+      "reason": "历史旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

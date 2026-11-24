@@ -1,0 +1,207 @@
+{
+  "entryId": "w:international",
+  "headword": "international",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌɪntəˈnæʃnəl/",
+    "us": "/ˌɪntərˈnæʃnəl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:international#p-main",
+      "ipa": {
+        "uk": "/ˌɪntəˈnæʃnəl/",
+        "us": "/ˌɪntərˈnæʃnəl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more international",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most international",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 116
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 115
+  },
+  "senses": [
+    {
+      "senseId": "w:international#s1",
+      "pos": "adj.",
+      "glossZh": "国际的；跨国的",
+      "pronunciationId": "w:international#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:international#e-22dc9c6cac4d8945",
+          "text": "His face is almost the international symbol for genius.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:international#e-f4af59d1864cc010",
+          "text": "China, on its part, will also embrace（拥抱） the world with greater openness and make new contributions to the international community.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:grammar-fill:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 108,
+            "end": 121
+          }
+        },
+        {
+          "exampleId": "w:international#e-8923f799c2569609",
+          "text": "Although she’d had childhood __41__ of exploring the world and studied international business with a desire to pursue a __42__ in Toronto, finding a job proved more __43__ than she’d expected.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 71,
+            "end": 84
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:international#s2",
+      "pos": "adj.",
+      "glossZh": "来自国外的",
+      "pronunciationId": "w:international#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:international#e-3432e68f06de7fb1",
+          "text": "International tourists.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:international#e-aebf6024a0337ca5",
+          "text": "But for me, it was the first challenge I encountered as an international student in Ireland.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:international#e-b967bc4b6490d8f7",
+          "text": "She double-majored in Maths and Physics, completed over 20 advanced courses, and served as president of student organisations to help international students.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 134,
+            "end": 147
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "国家队队员、国际比赛",
+      "reason": "体育名词用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

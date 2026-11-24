@@ -1,0 +1,90 @@
+{
+  "entryId": "w:greedy",
+  "headword": "greedy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɡriːdi/",
+    "us": "/ˈɡriːdi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:greedy#p-main",
+      "ipa": {
+        "uk": "/ˈɡriːdi/",
+        "us": "/ˈɡriːdi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "greedier",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "greediest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:greedy#s1",
+      "pos": "adj.",
+      "glossZh": "贪婪的",
+      "pronunciationId": "w:greedy#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:greedy#s2",
+      "pos": "adj.",
+      "glossZh": "贪吃的",
+      "pronunciationId": "w:greedy#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "每步取局部最优的",
+      "reason": "算法专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,125 @@
+{
+  "entryId": "w:café",
+  "headword": "café",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkæfeɪ/",
+    "us": "/kæˈfeɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:café#p-main",
+      "ipa": {
+        "uk": "/ˈkæfeɪ/",
+        "us": "/kæˈfeɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "cafés",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 65
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:café#s1",
+      "pos": "n.",
+      "glossZh": "咖啡馆；小餐馆",
+      "pronunciationId": "w:café#p-main",
+      "note": "也写作 cafe。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 65
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:café#e-11ae73e1c86d27bb",
+          "text": "Visit the shop and relax in the café.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "paragraph": 18,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:18",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 32,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:café#e-e2a3e3257fea136e",
+          "text": "We have an award-winning garden, a military museum, a children’s play area, and a café & gift shop.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:17",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 82,
+            "end": 86
+          }
+        },
+        {
+          "exampleId": "w:café#e-2f8174d713cd8171",
+          "text": "He transformed his family’s old, empty house into a modern café, a place where city visitors could enjoy coffee while viewing the terraced fields.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 63
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

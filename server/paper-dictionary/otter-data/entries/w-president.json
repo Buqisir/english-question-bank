@@ -1,0 +1,233 @@
+{
+  "entryId": "w:president",
+  "headword": "president",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈprezɪdənt/",
+    "us": "/ˈprezɪdənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:president#p-main",
+      "ipa": {
+        "uk": "/ˈprezɪdənt/",
+        "us": "/ˈprezɪdənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "presidents",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Presidents",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "senses": [
+    {
+      "senseId": "w:president#s1",
+      "pos": "n.",
+      "glossZh": "总统",
+      "pronunciationId": "w:president#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:president#e-fbae425c10cf1984",
+          "text": "The very first Federal Duck Stamp was designed by J.N. “Ding” Darling, a political cartoonist from Des Moines, Iowa, who at that time was appointed by President Franklin Roosevelt as Director of the Bureau of Biological Survey.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 151,
+            "end": 160
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:president#s2",
+      "pos": "n.",
+      "glossZh": "（组织的）会长；主席",
+      "pronunciationId": "w:president#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:president#e-8819bddc3e41ccc3",
+          "text": "Michael Kelsey, vice president of the Oklahoma Cattlemen’s Association, said a robot could be extremely useful given rising concerns about cattle theft.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:president#e-bf7d1826339b8aea",
+          "text": "I'm Li Hua, president of the Student Union of our school.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:writing-application",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:writing-application:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:president#e-37663ff88647b30f",
+          "text": "Surprisingly, when she introduced her work to Thomas Bach, president of the International Olympic Committee, he immediately brought up “yin and yang”, making her realize it is a universal language of balance.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:president#s3",
+      "pos": "n.",
+      "glossZh": "（公司的）总裁",
+      "pronunciationId": "w:president#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:president#e-79a3dbe16d7254df",
+          "text": "It came as a shock when the new president of the company where I had worked for 29 years called me to his office one Tuesday morning along with the human resources director (HRD).",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-03-first",
+            "paperTitle": "济宁市2026年高考第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-jining-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-03-first:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:president#e-5370a3dd615024b0",
+          "text": "“We would love to do more,” says Matt Pestronk, the president of a development company, “but unfortunately, almost all capital seeks a return.",
+          "source": {
+            "paperId": "paper-mock-zj-wenzhou-2026-m2",
+            "paperTitle": "温州市普通高中2026届高三第二次适应性考试",
+            "groupId": "group:paper-mock-zj-wenzhou-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-wenzhou-2026-m2:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 61
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:president#s4",
+      "pos": "n.",
+      "glossZh": "（大学等机构的）校长",
+      "pronunciationId": "w:president#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "主持（动词）",
+      "reason": "旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

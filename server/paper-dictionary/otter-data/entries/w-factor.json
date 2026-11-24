@@ -1,0 +1,186 @@
+{
+  "entryId": "w:factor",
+  "headword": "factor",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfæktə(r)/",
+    "us": "/ˈfæktər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:factor#p-main",
+      "ipa": {
+        "uk": "/ˈfæktə(r)/",
+        "us": "/ˈfæktər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "factors",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "factored",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "factoring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 130
+  },
+  "unassignedCounts": {
+    "gaokao": 6,
+    "mock": 130
+  },
+  "senses": [
+    {
+      "senseId": "w:factor#s1",
+      "pos": "n.",
+      "glossZh": "因素",
+      "pronunciationId": "w:factor#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:factor#e-e1d2dee03e48a927",
+          "text": "And the more we look, the more we will see that social factors(因素)like gender, race, and class do not determine the appearance of genius.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:factor#e-88be4234daad5a4a",
+          "text": "The answers to both questions are often “no.” The reasons relate to a variety of factors, including reduced concentration, an entertainment mindset (心态) and a tendency to multitask while consuming digital content.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 81,
+            "end": 88
+          }
+        },
+        {
+          "exampleId": "w:factor#e-9316f03911ed7c1b",
+          "text": "Harmless by itself, isoprene interacts rapidly with polluting nitrogen oxides released by vehicles, buildings and industry to form ground-level ozone（臭氧）—a major factor in many breathing problems.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 162,
+            "end": 168
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:factor#s2",
+      "pos": "n.",
+      "glossZh": "因数",
+      "pronunciationId": "w:factor#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:factor#s3",
+      "pos": "v.",
+      "glossZh": "因式分解",
+      "pronunciationId": "w:factor#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:factor#s4",
+      "pos": "短语",
+      "glossZh": "把……考虑在内",
+      "pronunciationId": "w:factor#p-main",
+      "note": "factor sth in。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "应收账款融资机构",
+      "reason": "金融专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

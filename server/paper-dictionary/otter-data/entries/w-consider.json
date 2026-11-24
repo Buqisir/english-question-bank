@@ -1,0 +1,224 @@
+{
+  "entryId": "w:consider",
+  "headword": "consider",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kənˈsɪdə(r)/",
+    "us": "/kənˈsɪdər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:consider#p-main",
+      "ipa": {
+        "uk": "/kənˈsɪdə(r)/",
+        "us": "/kənˈsɪdər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "considered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "considering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "considers",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 33,
+    "mock": 246
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 246
+  },
+  "senses": [
+    {
+      "senseId": "w:consider#s1",
+      "pos": "v.",
+      "glossZh": "考虑；仔细想；把……考虑在内",
+      "pronunciationId": "w:consider#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 21,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:consider#e-91138930776b1a49",
+          "text": "Now he hopes that other cities will consider making their streets run smarter instead of just making them bigger.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:consider#e-e8dee93be2dc2e08",
+          "text": "Before choosing to study online, consider whether you’re a self-motivated learner and if the material seems interesting enough to keep you going.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:consider#e-01252899fcf13218",
+          "text": "The idea of sea level as a reference point for elevations has by now been around for so long as to go essentially unnoticed – we mention it without even considering what it means.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 153,
+            "end": 164
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:consider#s2",
+      "pos": "v.",
+      "glossZh": "认为；把……看作",
+      "pronunciationId": "w:consider#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:consider#e-10623159e83d3f2b",
+          "text": "In India and the Middle East, it’s considered very rude to eat with your left hand.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-a:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:consider#e-bc7decaf91dac938",
+          "text": "High intensity speakers are generally uncomfortable with moments of silence in conversation and consider talking at the same time a sign of engagement.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-d:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 96,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:consider#e-663c1e1ae570ad11",
+          "text": "“Hold on: Consider failure as a __50__ to success and never give up.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-ii:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:consider#s3",
+      "pos": "v.",
+      "glossZh": "仔细端详；思量",
+      "pronunciationId": "w:consider#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

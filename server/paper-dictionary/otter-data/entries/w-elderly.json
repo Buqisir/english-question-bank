@@ -1,0 +1,208 @@
+{
+  "entryId": "w:elderly",
+  "headword": "elderly",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈeldəli/",
+    "us": "/ˈeldərli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:elderly#p-main",
+      "ipa": {
+        "uk": "/ˈeldəli/",
+        "us": "/ˈeldərli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more elderly",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most elderly",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 94
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 91
+  },
+  "senses": [
+    {
+      "senseId": "w:elderly#s1",
+      "pos": "adj.",
+      "glossZh": "上了年纪的",
+      "pronunciationId": "w:elderly#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:elderly#e-1f1ade2e3a0592df",
+          "text": "Some people live with their elderly parents; many more adult children are returning to the family home, if they ever left.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:elderly#e-5a640036de0eefef",
+          "text": "The elderly residents (居民) in care homes in London are being given hens to look after to stop them feeling lonely.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "reading-c-1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:elderly#e-4d5bb9f6ee6e806c",
+          "text": "There, I would always see the same elderly lady __41__ the pigeons（鸽子）.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:elderly#s2",
+      "pos": "adj.",
+      "glossZh": "老年人群体",
+      "pronunciationId": "w:elderly#p-main",
+      "note": "the elderly。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:elderly#e-c583ef8ba3ad42a2",
+          "text": "Looking on fondly is Jill Fraser, 68, the founder of Kissing it Better (KiB), a charity working to reduce isolation in the elderly through intergenerational friendships.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 130
+          }
+        },
+        {
+          "exampleId": "w:elderly#e-3cc7dc35089c796b",
+          "text": "Its effects are limited among the elderly.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-guangdong-foshan-2026-01-first:34",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:elderly#e-ae1f6d1f2657b8c3",
+          "text": "We tend to assign to the elderly the vague (模糊的) and often fading quality of wisdom, thus suggesting that their own creative and intellectual (智力的) growth has come to an end, and that their only role left is to give advice to others.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "形容物品老旧",
+      "reason": "少见拟人用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

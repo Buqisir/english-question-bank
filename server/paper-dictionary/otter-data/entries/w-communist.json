@@ -1,0 +1,102 @@
+{
+  "entryId": "w:communist",
+  "headword": "communist",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɒmjənɪst/",
+    "us": "/ˈkɑːmjənɪst/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:communist#p-main",
+      "ipa": {
+        "uk": "/ˈkɒmjənɪst/",
+        "us": "/ˈkɑːmjənɪst/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more communist",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most communist",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "communists",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Communists",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:communist#s1",
+      "pos": "n.",
+      "glossZh": "共产主义者；共产党党员",
+      "pronunciationId": "w:communist#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:communist#s2",
+      "pos": "adj.",
+      "glossZh": "共产主义的；共产党的",
+      "pronunciationId": "w:communist#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "共产主义国家居民、激进分子",
+      "reason": "词义范围不同，不宜混用"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

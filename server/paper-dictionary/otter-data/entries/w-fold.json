@@ -1,0 +1,266 @@
+{
+  "entryId": "w:fold",
+  "headword": "fold",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fəʊld/",
+    "us": "/foʊld/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fold#p-main",
+      "ipa": {
+        "uk": "/fəʊld/",
+        "us": "/foʊld/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "folds",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "folded",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    },
+    {
+      "form": "folding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 17
+  },
+  "senses": [
+    {
+      "senseId": "w:fold#s1",
+      "pos": "v.",
+      "glossZh": "折叠",
+      "pronunciationId": "w:fold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fold#e-f58fc7396d65b041",
+          "text": "It was a place where some unused items were stored – some old chairs, folding tables, all piled up gathering dust under a large tree.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:writing-continuation:5",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:fold#e-09b2593acb1482d8",
+          "text": "I folded brochures, stuck on labels and stamps, and mailed them after praying outside the post office.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:writing-continuation:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:fold#e-3df8e1abf8688407",
+          "text": "I quickly folded the test paper, hiding its shameful mark, and stuffed it deep into the dark corner of my desk drawer.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 16
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fold#s2",
+      "pos": "n.",
+      "glossZh": "折痕",
+      "pronunciationId": "w:fold#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fold#e-647791255e95019d",
+          "text": "This transformation mirrors her revolutionary approach to education – one that relies not only on textbooks but also on student-crafted learning journals filled with origami folds(折纸), hand-drawn diagrams, and lessons printed on rainbow-colored paper.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2025-09-first-quality-check",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2025-09-first-quality-check:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 174,
+            "end": 179
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fold#s3",
+      "pos": "v.",
+      "glossZh": "交叠",
+      "pronunciationId": "w:fold#p-main",
+      "note": "fold one's arms 抱臂。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fold#s4",
+      "pos": "v.",
+      "glossZh": "停业",
+      "pronunciationId": "w:fold#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fold#s5",
+      "pos": "n.",
+      "glossZh": "羊圈",
+      "pronunciationId": "w:fold#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fold#s6",
+      "pos": "n.",
+      "glossZh": "所属群体",
+      "pronunciationId": "w:fold#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:fold#s7",
+      "pos": "后缀",
+      "glossZh": "……倍",
+      "pronunciationId": "w:fold#p-main",
+      "note": "-fold。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fold#e-b694830c4ed95b4b",
+          "text": "Programmed to activate automatically whenever enough water is ready to be collected, the setup boasts 45-fold higher energy efficiency than heat-based alternatives, operates independent of sunlight and enables repeated daily cycles for greater water output.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-d:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 109
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "递归汇总函数",
+      "reason": "编程术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

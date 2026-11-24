@@ -1,0 +1,195 @@
+{
+  "entryId": "w:advocate",
+  "headword": "advocate",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈædvəkeɪt/",
+    "us": "/ˈædvəkeɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:advocate#p-main",
+      "ipa": {
+        "uk": "/ˈædvəkeɪt/",
+        "us": "/ˈædvəkeɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:advocate#p-noun",
+      "ipa": {
+        "uk": "/ˈædvəkət/",
+        "us": "/ˈædvəkət/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "名词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "advocates",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "advocated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "advocating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 54
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 54
+  },
+  "senses": [
+    {
+      "senseId": "w:advocate#s1",
+      "pos": "v.",
+      "glossZh": "提倡；主张；公开支持",
+      "pronunciationId": "w:advocate#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:advocate#e-209d8093242cd7c1",
+          "text": "What does the text seem to advocate?",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jun:30",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:advocate#e-c455415d6c0bedf7",
+          "text": "To advocate animal protection.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2024-i:27",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:advocate#e-e798ec824d96ee66",
+          "text": "They advocated building new parks.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2025-i:30",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:advocate#s2",
+      "pos": "n.",
+      "glossZh": "倡导者；支持者",
+      "pronunciationId": "w:advocate#p-noun",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:advocate#e-2015cf8bfc9a39d7",
+          "text": "The local farmers’ advocates.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2023-national-a:34",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 28
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "特定司法体系中出庭的律师",
+      "reason": "法律专业义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

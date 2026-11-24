@@ -1,0 +1,330 @@
+{
+  "entryId": "w:witness",
+  "headword": "witness",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈwɪtnəs/",
+    "us": "/ˈwɪtnəs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:witness#p-main",
+      "ipa": {
+        "uk": "/ˈwɪtnəs/",
+        "us": "/ˈwɪtnəs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "witnesses",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Witnesses",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "witnessed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "witnessing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 90
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 87
+  },
+  "senses": [
+    {
+      "senseId": "w:witness#s1",
+      "pos": "v.",
+      "glossZh": "亲眼看到",
+      "pronunciationId": "w:witness#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:witness#e-b867cd86f56380bb",
+          "text": "However, her children have learned an important lesson witnessing their mother earn her degree.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:witness#e-d5f78f8c838fc52b",
+          "text": "“From seeing the wildlife to witnessing sunrises, the whole experience was amazing.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:witness#e-f2fcc7aa23a0a852",
+          "text": "Toumi witnessed first-hand the destructive effect of desertification.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:witness#s2",
+      "pos": "v.",
+      "glossZh": "经历某事",
+      "pronunciationId": "w:witness#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:witness#e-b8d56e41782eb149",
+          "text": "However, the 21st century has witnessed a sharp decline in third places.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:witness#e-07b8866d62ab47c4",
+          "text": "William Shakespeare may have written that “all the world’s a stage”, but sadly theaters witness a decline in school visits due to budget pressures.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级五月质量检测英语试题",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-05-senior-three-quality-test:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 95
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:witness#s3",
+      "pos": "v.",
+      "glossZh": "见证签署",
+      "pronunciationId": "w:witness#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:witness#s4",
+      "pos": "n.",
+      "glossZh": "目击者",
+      "pronunciationId": "w:witness#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:witness#e-ff0b4a0772b19296",
+          "text": "To frame his story, Klein creates the character of Ned, a fictional witness to the progress brought about by",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:witness#e-a997e3016bb8c342",
+          "text": "“As if life / were a progressive and cunning crime / with no witness to the tiny hidden transgressions（越界）.” He advises the reader to become alert.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:witness#s5",
+      "pos": "n.",
+      "glossZh": "出庭作证的人",
+      "pronunciationId": "w:witness#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:witness#s6",
+      "pos": "n.",
+      "glossZh": "签署或仪式的见证人",
+      "pronunciationId": "w:witness#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:witness#s7",
+      "pos": "短语",
+      "glossZh": "证明；印证",
+      "pronunciationId": "w:witness#p-main",
+      "note": "bear witness to sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:witness#e-955c129a6eb536b7",
+          "text": "It bore witness to her efforts.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2026-i:26",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 15
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "耶和华见证人、宗教传讲",
+      "reason": "专名或宗教用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

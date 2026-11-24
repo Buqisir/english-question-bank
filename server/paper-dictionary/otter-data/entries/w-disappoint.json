@@ -1,0 +1,193 @@
+{
+  "entryId": "w:disappoint",
+  "headword": "disappoint",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌdɪsəˈpɔɪnt/",
+    "us": "/ˌdɪsəˈpɔɪnt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:disappoint#p-main",
+      "ipa": {
+        "uk": "/ˌdɪsəˈpɔɪnt/",
+        "us": "/ˌdɪsəˈpɔɪnt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "disappointed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "disappointing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "disappoints",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 18
+  },
+  "senses": [
+    {
+      "senseId": "w:disappoint#s1",
+      "pos": "v.",
+      "glossZh": "使失望；使落空",
+      "pronunciationId": "w:disappoint#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:disappoint#e-17484acfb139dbe4",
+          "text": "Besides, people tend to overestimate the negative consequences of saying “no” to invitations, thinking it will upset, anger and disappoint inviters.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙南名校联盟十月联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-zhenan-alliance-2025-10-joint-exam:reading-c:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 138
+          }
+        },
+        {
+          "exampleId": "w:disappoint#e-e9cbde000c3700ee",
+          "text": "It disappoints theatergoers.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-chongqing-bashu-2026-11-fourth:28",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:disappoint#s2",
+      "pos": "adj.",
+      "glossZh": "令人失望的",
+      "pronunciationId": "w:disappoint#p-main",
+      "note": "disappointing。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:disappoint#e-273c855a1ce6523a",
+          "text": "But, she added, the results were \"a little disappointing\".",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:disappoint#e-2e6ef060b5a8d33e",
+          "text": "But such nostalgic trips can be disappointing.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:disappoint#e-d497a2e7bfd79c75",
+          "text": "The ideal response to a disappointing grade is not to complain that your diligence wasn’t rewarded.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 24,
+            "end": 37
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

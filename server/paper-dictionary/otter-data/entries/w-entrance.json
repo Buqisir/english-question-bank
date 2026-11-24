@@ -1,0 +1,278 @@
+{
+  "entryId": "w:entrance",
+  "headword": "entrance",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈentrəns/",
+    "us": "/ˈentrəns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:entrance#p-main",
+      "ipa": {
+        "uk": "/ˈentrəns/",
+        "us": "/ˈentrəns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:entrance#p-verb",
+      "ipa": {
+        "uk": "/ɪnˈtrɑːns/",
+        "us": "/ɪnˈtræns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "动词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "entrances",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "entranced",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "entrancing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 40
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 37
+  },
+  "senses": [
+    {
+      "senseId": "w:entrance#s1",
+      "pos": "n.",
+      "glossZh": "入口",
+      "pronunciationId": "w:entrance#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:entrance#e-9c6c050371b38194",
+          "text": "Rome’s Colosseum was 157 feet tall and had 80 entrances, seating 50,000 people.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:entrance#e-5a35efb7f900764b",
+          "text": "When he stood in front of the house where he grew up as a child, he saw a lady standing in the entrance.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 103
+          }
+        },
+        {
+          "exampleId": "w:entrance#e-5417f403b08613f8",
+          "text": "There, at the entrance, was a cash machine.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 22
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:entrance#s2",
+      "pos": "n.",
+      "glossZh": "进入",
+      "pronunciationId": "w:entrance#p-main",
+      "note": "entrance charge 指入场费。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:entrance#e-d74918d4dc753484",
+          "text": "A special low entrance charge of £2 per person is available to all in full-time education, up to and including those at first degree level, in organised groups with teachers.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-a:14",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:entrance#e-0487017e072b0005",
+          "text": "Despite my __48__ entrance, the class went smoothly.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-import-20261026-n093:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:entrance#s3",
+      "pos": "n.",
+      "glossZh": "入学",
+      "pronunciationId": "w:entrance#p-main",
+      "note": "常见 entrance exam。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:entrance#e-4d6cbb21b221e8fe",
+          "text": "Jiang Zhaopeng, an 18-year-old medical student at Shandong City Service Technician College in Yantai, faced a life-or-death test on his way to the spring college entrance exam.",
+          "source": {
+            "paperId": "paper-mock-henan-four-cities-2026-01",
+            "paperTitle": "河南省洛阳、许昌、平顶山、济源四市2025—2026学年高三年级第二次质量检测英语试题",
+            "groupId": "group:paper-mock-henan-four-cities-2026-01:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-henan-four-cities-2026-01:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 162,
+            "end": 170
+          }
+        },
+        {
+          "exampleId": "w:entrance#e-c977295c962e6481",
+          "text": "One evening at dinner, her father said firmly, “It’s time you start preparing for the medical school entrance exams.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 109
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:entrance#s4",
+      "pos": "v.",
+      "glossZh": "使着迷",
+      "pronunciationId": "w:entrance#p-verb",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "船首入水角",
+      "reason": "造船术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

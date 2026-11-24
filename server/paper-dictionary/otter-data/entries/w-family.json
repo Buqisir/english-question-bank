@@ -1,0 +1,350 @@
+{
+  "entryId": "w:family",
+  "headword": "family",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfæməli/",
+    "us": "/ˈfæməli/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:family#p-main",
+      "ipa": {
+        "uk": "/ˈfæməli/",
+        "us": "/ˈfæməli/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "families",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 139,
+    "mock": 684
+  },
+  "unassignedCounts": {
+    "gaokao": 5,
+    "mock": 684
+  },
+  "senses": [
+    {
+      "senseId": "w:family#s1",
+      "pos": "n.",
+      "glossZh": "家庭",
+      "pronunciationId": "w:family#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 97,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:family#e-a27cd046cf07c70d",
+          "text": "Mauer, of Edgar, Wisconsin, grew up on a farm in a family of 10 children.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:family#e-df2d79c12c756f83",
+          "text": "Four years ago they all moved into a three-storey Victorian house in Bristol - one of a growing number of multigenerational families in the UK living together under the same roof.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 124,
+            "end": 132
+          }
+        },
+        {
+          "exampleId": "w:family#e-9329d47ca2e1e4f6",
+          "text": "She grew up in a low-income family.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2023-ii:24",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:family#s2",
+      "pos": "n.",
+      "glossZh": "家人",
+      "pronunciationId": "w:family#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 26,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:family#e-959e37cf125b6585",
+          "text": "Campers learn technical skills of roasting, frying and cutting, as well as some recipes that they can take home and share with their families.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 133,
+            "end": 141
+          }
+        },
+        {
+          "exampleId": "w:family#e-e6ae445593c0ac5b",
+          "text": "Knowing some tips will help ensure that you have an enjoyable meal with friends or family – no matter where you are in the world.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:family#e-71af77efc5456699",
+          "text": "“I __47__ the plan to my family, and asked if they could rent me a small 10 acres (英亩).",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 31
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:family#s3",
+      "pos": "adj.",
+      "glossZh": "适合全家的",
+      "pronunciationId": "w:family#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:family#e-3d143fe330a5a0a5",
+          "text": "Discover, explore and enjoy award-winning Tullie House, where historic collections, contemporary art and family fun are brought together in one impressive museum and art gallery.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-a:13",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 105,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:family#e-7625ca92eb8aae47",
+          "text": "Sherman Cymru is excited to present a packed programme of the very best theatre, dance, family shows and music from Wales and the rest of the world.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:11",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 94
+          }
+        },
+        {
+          "exampleId": "w:family#e-58261edfb56cb3c5",
+          "text": "That’s the local stage writing team that creates many of the Children’s Theatre of Cincinnati’s original musicals, along with the holiday family musicals at Ensemble Theatre.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 138,
+            "end": 144
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:family#s4",
+      "pos": "n.",
+      "glossZh": "关系紧密的群体",
+      "pronunciationId": "w:family#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:family#e-f3b4760942ecc1fe",
+          "text": "Paul Beer, head of rhino section at Port Lympne, said: “Obviously we’re all absolutely delighted to welcome another calf to our black rhino family.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 140,
+            "end": 146
+          }
+        },
+        {
+          "exampleId": "w:family#e-1e685c62b1e52a93",
+          "text": "At every stop, Jim accepted the parting good wishes of families that had become his own.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 63
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:family#s5",
+      "pos": "n.",
+      "glossZh": "同一类事物",
+      "pronunciationId": "w:family#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:family#s6",
+      "pos": "n.",
+      "glossZh": "（生物分类）科",
+      "pronunciationId": "w:family#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "集合族",
+      "reason": "数学术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

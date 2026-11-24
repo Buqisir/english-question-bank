@@ -1,0 +1,129 @@
+{
+  "entryId": "w:hometown",
+  "headword": "hometown",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈhəʊmtaʊn/",
+    "us": "/ˈhoʊmtaʊn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:hometown#p-main",
+      "ipa": {
+        "uk": "/ˈhəʊmtaʊn/",
+        "us": "/ˈhoʊmtaʊn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "hometowns",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 37
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:hometown#s1",
+      "pos": "n.",
+      "glossZh": "家乡",
+      "pronunciationId": "w:hometown#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 37
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hometown#e-44986f6163cb6b90",
+          "text": "I’m glad to know that you’ve come China to learn kung fu in a school in my hometown.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:writing-short-error-correction:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:hometown#e-f519bfda875cae52",
+          "text": "He spent years searching for his hometown in the program’s satellite pictures.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:hometown#e-da1bf4d2768d6094",
+          "text": "As I move through my college years, I __53__ the visits to my little hometown.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 77
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "偏袒本地人的",
+      "reason": "罕见引申用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

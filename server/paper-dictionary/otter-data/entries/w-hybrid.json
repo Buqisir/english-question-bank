@@ -1,0 +1,323 @@
+{
+  "entryId": "w:hybrid",
+  "headword": "hybrid",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈhaɪbrɪd/",
+    "us": "/ˈhaɪbrɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:hybrid#p-main",
+      "ipa": {
+        "uk": "/ˈhaɪbrɪd/",
+        "us": "/ˈhaɪbrɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more hybrid",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most hybrid",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "hybrids",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "senses": [
+    {
+      "senseId": "w:hybrid#s1",
+      "pos": "adj.",
+      "glossZh": "混合的",
+      "pronunciationId": "w:hybrid#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hybrid#e-d9489d80d10dc4a9",
+          "text": "Users have the option to save the workbook online, print it, or adopt a hybrid(混合的) approach that integrates both methods.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2",
+            "paperTitle": "2025-2026学年德州市“优高联盟”高三上学期期中诊断性测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-a:14",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 78
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hybrid#s2",
+      "pos": "adj.",
+      "glossZh": "杂交的",
+      "pronunciationId": "w:hybrid#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hybrid#e-f526b54750574089",
+          "text": "Born in Cengong county in Southwest China’s Guizhou province, Yang started to learn hybrid rice production techniques in 1998, when the manager of the county’s seed company came to his town to develop the industry.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:hybrid#e-dd13e2ad672899b0",
+          "text": "After more than two years of research, he finally developed hybrid rice varieties adapted to local conditions.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hybrid#s3",
+      "pos": "adj.",
+      "glossZh": "混合动力的",
+      "pronunciationId": "w:hybrid#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hybrid#e-e79679828d8100e1",
+          "text": "If you’re concerned about the cost of gas and the environmental impact of gas-powered cars, and don’t want to worry about the charging challenges associated with the pure electric vehicle (EV), it’s time to take a closer look at a hybrid (混合的) electric vehicle (HEV).",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 231,
+            "end": 237
+          }
+        },
+        {
+          "exampleId": "w:hybrid#e-5af86907d6ed9b0d",
+          "text": "What does the ICE in a series hybrid car directly work on?",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-guangdong-2025-12-second-joint-survey:22",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hybrid#s4",
+      "pos": "n.",
+      "glossZh": "杂交后代",
+      "pronunciationId": "w:hybrid#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hybrid#e-9272916e988c9cd3",
+          "text": "“I opened a Pandora’s box and released a Frankenstein’s monster,” he reflected, underscoring the unforeseen consequences of creating a popular hybrid.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+            "paperTitle": "2026年浙江省六校联盟高三5月联考英语试题卷",
+            "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 143,
+            "end": 149
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hybrid#s5",
+      "pos": "n.",
+      "glossZh": "混合动力汽车",
+      "pronunciationId": "w:hybrid#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hybrid#e-3a81e08b7b8e2207",
+          "text": "There are two main types of HEV: parallel (并联式) hybrid and series hybrid.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 54
+          }
+        },
+        {
+          "exampleId": "w:hybrid#e-6cb7bffd2c28f147",
+          "text": "The parallel hybrid (PHEV) aims to keep the core designs of the conventional gas-powered vehicles while lowering the operation costs and improving environmental performance.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:hybrid#e-f9ea50d8ce9a8043",
+          "text": "In the case of series hybrid (SHEV), the vehicle runs only on electricity, which is from the battery.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:hybrid#s6",
+      "pos": "n.",
+      "glossZh": "混合体",
+      "pronunciationId": "w:hybrid#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "二维三维结合的",
+      "reason": "动画制作中的特定技术用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,161 @@
+{
+  "entryId": "w:shave",
+  "headword": "shave",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ʃeɪv/",
+    "us": "/ʃeɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:shave#p-main",
+      "ipa": {
+        "uk": "/ʃeɪv/",
+        "us": "/ʃeɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "shaves",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "shaved",
+      "tags": [
+        "past",
+        "participle"
+      ]
+    },
+    {
+      "form": "shaven",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "shaving",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:shave#s1",
+      "pos": "v.",
+      "glossZh": "刮胡子",
+      "pronunciationId": "w:shave#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:shave#s2",
+      "pos": "v.",
+      "glossZh": "剃掉毛发",
+      "pronunciationId": "w:shave#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:shave#s3",
+      "pos": "v.",
+      "glossZh": "削去薄薄一层",
+      "pronunciationId": "w:shave#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:shave#s4",
+      "pos": "v.",
+      "glossZh": "略微减少",
+      "pronunciationId": "w:shave#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:shave#s5",
+      "pos": "n.",
+      "glossZh": "刮胡子",
+      "pronunciationId": "w:shave#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:shave#s6",
+      "pos": "短语",
+      "glossZh": "侥幸脱险",
+      "pronunciationId": "w:shave#p-main",
+      "note": "a close shave。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "票据折价买入",
+      "reason": "金融专业旧义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

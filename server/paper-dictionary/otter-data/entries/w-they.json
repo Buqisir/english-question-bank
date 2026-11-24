@@ -1,0 +1,229 @@
+{
+  "entryId": "w:they",
+  "headword": "they",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ðeɪ/",
+    "us": "/ðeɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:they#p-main",
+      "ipa": {
+        "uk": "/ðeɪ/",
+        "us": "/ðeɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 632,
+    "mock": 3846
+  },
+  "unassignedCounts": {
+    "gaokao": 626,
+    "mock": 3844
+  },
+  "senses": [
+    {
+      "senseId": "w:they#s1",
+      "pos": "pron.",
+      "glossZh": "他们",
+      "pronunciationId": "w:they#p-main",
+      "note": "也指她们或它们。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:they#e-8e7dea84412d3ed2",
+          "text": "The participants followed suit, taking more food than they normally would have.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 54,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:they#e-9d332be7ac02dafc",
+          "text": "“I’ve seen those magic moments when children are talking to someone they are inspired by - their eyes are shining and their faces light up,” she said.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:they#e-e91fa986e4d190ad",
+          "text": "We all know that indigenous tribes (部落) in rainforests support relatively few people, but they manage rainforests sustainably.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 90,
+            "end": 94
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:they#s2",
+      "pos": "pron.",
+      "glossZh": "某人",
+      "pronunciationId": "w:they#p-main",
+      "note": "指性别不明或无需说明的单数人。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:they#e-515adb8a1ed65976",
+          "text": "It is one of the most __51__ incidents in my life, which taught me to __52__ the profession and works of a person, no matter how __53__ they are.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:cloze",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:cloze:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 136,
+            "end": 140
+          }
+        },
+        {
+          "exampleId": "w:they#e-bcd1f416b94ecfbb",
+          "text": "My mother was so __51__ by her gesture that she decided to go back to the store and give the cashier（收银员）a five-dollar bill to keep on hand __52__ the same happened to someone else if they didn’t have enough __53__ for all of their groceries.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 184,
+            "end": 188
+          }
+        },
+        {
+          "exampleId": "w:they#e-f403d837f3b5beaa",
+          "text": "One thing Murphy may not know is that her smile is contagious（有感染力）and can be the difference in a student having a much better day than they were having before seeing her.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 136,
+            "end": 140
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:they#s3",
+      "pos": "pron.",
+      "glossZh": "人们",
+      "pronunciationId": "w:they#p-main",
+      "note": "用于泛指未点明的人。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:they#e-f21d4a7bf7cdca0f",
+          "text": "The weekly roster (花名册) in IronBark DogPark features 63 dogs, including working dogs, older dogs, and what they call “playful teenagers”.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 107,
+            "end": 111
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "作所有格的“他们的”",
+      "reason": "非标准用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

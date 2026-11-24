@@ -1,0 +1,240 @@
+{
+  "entryId": "w:arrest",
+  "headword": "arrest",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈrest/",
+    "us": "/əˈrest/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:arrest#p-main",
+      "ipa": {
+        "uk": "/əˈrest/",
+        "us": "/əˈrest/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "arrests",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "arrested",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "arresting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "senses": [
+    {
+      "senseId": "w:arrest#s1",
+      "pos": "v.",
+      "glossZh": "逮捕；拘捕",
+      "pronunciationId": "w:arrest#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:arrest#e-02b506d975b042d2",
+          "text": "They pursued and arrested the man.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:arrest#e-8ab9ab2448b97195",
+          "text": "Their training covered a wide range of critical skills, including tracking missing persons, searching buildings and safely arresting suspects.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 123,
+            "end": 132
+          }
+        },
+        {
+          "exampleId": "w:arrest#e-edfaadf9b2d832a5",
+          "text": "In August 1944, after two years in hiding in Amsterdam, 15-year-old Anne Frank and her family, along with four other Jews, were arrested.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam",
+            "paperTitle": "2026届浙江省A9协作体暑假返校联考 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-a9-alliance-2025-08-senior-three-return-school-exam:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 128,
+            "end": 136
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:arrest#s2",
+      "pos": "n.",
+      "glossZh": "逮捕；拘捕",
+      "pronunciationId": "w:arrest#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:arrest#e-994dfbe5875e70d5",
+          "text": "It leads to the immediate arrest of the wrongdoer.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2026-03-senior-three-second-mock",
+            "paperTitle": "黄冈市2026年3月高三年级模拟考试英语试题",
+            "groupId": "group:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-hubei-huanggang-2026-03-senior-three-second-mock:22",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:arrest#s3",
+      "pos": "v.",
+      "glossZh": "阻止；遏制",
+      "pronunciationId": "w:arrest#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:arrest#e-9f71a1bba955dcac",
+          "text": "One method the team suggests to arrest such decline is to have AI itself encourage further questioning in users, with developers adjusting responses to encourage reflection, asking questions like “how confident are you in this answer?”, or otherwise promoting further interaction through measures like confidence scores.",
+          "source": {
+            "paperId": "paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2",
+            "paperTitle": "南平市2026届高三年级第二次适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-nanping-2026-05-second-adaptability-exam-v2:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:arrest#s4",
+      "pos": "v.",
+      "glossZh": "吸引（注意力）",
+      "pronunciationId": "w:arrest#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:arrest#s5",
+      "pos": "n.",
+      "glossZh": "停止；骤停",
+      "pronunciationId": "w:arrest#p-main",
+      "note": "如 cardiac arrest「心脏骤停」。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "制动装置、止动器、马后腿皮肤病",
+      "reason": "技术或兽医义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

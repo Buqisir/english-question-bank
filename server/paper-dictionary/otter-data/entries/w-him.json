@@ -1,0 +1,206 @@
+{
+  "entryId": "w:him",
+  "headword": "him",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/hɪm/",
+    "us": "/hɪm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:him#p-main",
+      "ipa": {
+        "uk": "/hɪm/",
+        "us": "/hɪm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:him#p-weak",
+      "ipa": {
+        "uk": "/ɪm/",
+        "us": "/ɪm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "弱读"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 130,
+    "mock": 814
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 814
+  },
+  "senses": [
+    {
+      "senseId": "w:him#s1",
+      "pos": "pron.",
+      "glossZh": "他（宾格）",
+      "pronunciationId": "w:him#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 120,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:him#e-3abfc1203a0edf38",
+          "text": "“I wish you could see him,” she said to her own children, John, Harry, and Clara.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:him#e-11da3d4e9486bca9",
+          "text": "He seemed not to notice the man next to him.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-c:4",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:him#e-d69a233ef23435b2",
+          "text": "I told him where I was going, but he said he hadn’t heard of the bus station.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 10
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:him#s2",
+      "pos": "pron.",
+      "glossZh": "它（指雄性动物，宾格）",
+      "pronunciationId": "w:him#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:him#e-943bd672b398744f",
+          "text": "So I approached our uninvited guest slowly and, through the fence, sprayed him in the face.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:9",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:him#e-a9d8046323f8f644",
+          "text": "After some quick research, we concluded that the best way to give the squirrel a fighting chance was to care for him ourselves.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 113,
+            "end": 116
+          }
+        },
+        {
+          "exampleId": "w:him#e-b283d2bf454e6efb",
+          "text": "After Charlie had a heart attack, Tindale says, she was prepared to put him to sleep, but Farber’s treatments eased her dog’s suffering so much that she was able to keep him alive for an additional five months.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 75
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "男性（名词）、敬称缩写",
+      "reason": "罕见词性或大写缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

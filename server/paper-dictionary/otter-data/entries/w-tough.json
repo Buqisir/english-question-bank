@@ -1,0 +1,228 @@
+{
+  "entryId": "w:tough",
+  "headword": "tough",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tʌf/",
+    "us": "/tʌf/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:tough#p-main",
+      "ipa": {
+        "uk": "/tʌf/",
+        "us": "/tʌf/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "tougher",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "toughest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 11,
+    "mock": 120
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 118
+  },
+  "senses": [
+    {
+      "senseId": "w:tough#s1",
+      "pos": "adj.",
+      "glossZh": "困难的",
+      "pronunciationId": "w:tough#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tough#e-b68726af64f0c124",
+          "text": "He is facing a tough choice.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:tough#e-0643fec98a24979c",
+          "text": "It can be tough to begin and takes a little planning – running shoes by the front door, lunches made the night before, umbrellas on rainy days and hats on hot ones – but it’s certainly worth trying.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-b:7",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:tough#e-9d2cc31dc6cd85a3",
+          "text": "Turning soil, pulling weeds, and harvesting cabbage sound like tough work for middle and high school kids.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:tough#s2",
+      "pos": "adj.",
+      "glossZh": "坚韧的",
+      "pronunciationId": "w:tough#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tough#e-e8a991c159253c96",
+          "text": "Facing intense competition for foods, sea otters (海獭) survive with the help of tools – like rocks and even glass bottles – that let them break open tougher prey(猎物) that they wouldn't otherwise be able to eat.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 148,
+            "end": 155
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:tough#s3",
+      "pos": "adj.",
+      "glossZh": "嚼不动的",
+      "pronunciationId": "w:tough#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tough#e-0d87396bc94ee2d2",
+          "text": "“Tough as old leather,” the locals liked to say, shaking their heads.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 1,
+            "end": 6
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:tough#s4",
+      "pos": "adj.",
+      "glossZh": "坚强的",
+      "pronunciationId": "w:tough#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:tough#s5",
+      "pos": "adj.",
+      "glossZh": "严厉的",
+      "pronunciationId": "w:tough#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "恶霸、撑过去的动词义",
+      "reason": "少见或非正式"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

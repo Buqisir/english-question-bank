@@ -1,0 +1,146 @@
+{
+  "entryId": "w:multiple",
+  "headword": "multiple",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmʌltɪpl/",
+    "us": "/ˈmʌltɪpl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:multiple#p-main",
+      "ipa": {
+        "uk": "/ˈmʌltɪpl/",
+        "us": "/ˈmʌltɪpl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "multiples",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 91
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 91
+  },
+  "senses": [
+    {
+      "senseId": "w:multiple#s1",
+      "pos": "adj.",
+      "glossZh": "多个的；多次的",
+      "pronunciationId": "w:multiple#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:multiple#e-ec0b406307867aeb",
+          "text": "Register online or fill out a Group Play Registration Form with multiple date and start time options.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 16,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:16",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:multiple#e-61b929064f795e84",
+          "text": "All camp sessions are created with age-appropriate activities that are tailored to the multiple ways that kids learn.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-a:13",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:multiple#e-07fbf1d7452b2ca0",
+          "text": "To design these climate-saving plants, the scientists are using a research tool called SLEAP – AI software that tracks multiple features of root growth.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 119,
+            "end": 127
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:multiple#s2",
+      "pos": "n.",
+      "glossZh": "倍数",
+      "pronunciationId": "w:multiple#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "多发性硬化症（固定病名）",
+      "reason": "模拟 m18、m19 是专有病名中的一部分"
+    },
+    {
+      "glossZh": "估值倍数；单耳多耳洞；连锁店",
+      "reason": "专门或少见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

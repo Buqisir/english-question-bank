@@ -1,0 +1,184 @@
+{
+  "entryId": "w:civilisation",
+  "headword": "civilisation",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "civilization"
+  ],
+  "ipa": {
+    "uk": "/ˌsɪvəlaɪˈzeɪʃn/",
+    "us": "/ˌsɪvələˈzeɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:civilisation#p-main",
+      "ipa": {
+        "uk": "/ˌsɪvəlaɪˈzeɪʃn/",
+        "us": "/ˌsɪvələˈzeɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "civilisations",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "civilizations",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 28
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 24
+  },
+  "senses": [
+    {
+      "senseId": "w:civilisation#s1",
+      "pos": "n.",
+      "glossZh": "文明；文明社会",
+      "pronunciationId": "w:civilisation#p-main",
+      "note": "美式拼作 civilization。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:civilisation#e-974b09a6fee939c6",
+          "text": "These cultural achievements offer a window into a fascinating civilization.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:grammar-fill:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 62,
+            "end": 74
+          }
+        },
+        {
+          "exampleId": "w:civilisation#e-253f9fd11b18bec3",
+          "text": "Civilizations rise and fall, but some endure.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:civilisation#e-6b7cbd7bb8108852",
+          "text": "China is one of the world’s oldest continuous civilizations.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:grammar-fill",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:grammar-fill:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 59
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:civilisation#s2",
+      "pos": "n.",
+      "glossZh": "文明世界；有现代社会设施的地方",
+      "pronunciationId": "w:civilisation#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:civilisation#e-13afdc763e051c2e",
+          "text": "Their only option for reaching “civilization” is seven hours on a snowmobile.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-xinzhendi-2",
+            "paperTitle": "浙江省新阵地教育联盟2026届第二次联考",
+            "groupId": "group:paper-mock-zj-2026-xinzhendi-2:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-2026-xinzhendi-2:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:civilisation#s3",
+      "pos": "n.",
+      "glossZh": "文明化；教化过程",
+      "pronunciationId": "w:civilisation#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "将刑事程序转为民事程序",
+      "reason": "法律专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,210 @@
+{
+  "entryId": "w:competition",
+  "headword": "competition",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌkɒmpəˈtɪʃn/",
+    "us": "/ˌkɑːmpəˈtɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:competition#p-main",
+      "ipa": {
+        "uk": "/ˌkɒmpəˈtɪʃn/",
+        "us": "/ˌkɑːmpəˈtɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "competitions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 20,
+    "mock": 158
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 158
+  },
+  "senses": [
+    {
+      "senseId": "w:competition#s1",
+      "pos": "n.",
+      "glossZh": "竞赛；比赛",
+      "pronunciationId": "w:competition#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:competition#e-c7cc84fac50f8dcb",
+          "text": "Take a view is a desirable annual competition for",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-a:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:competition#e-8bf9776438042f24",
+          "text": "She __56__ the competition from beginning to end.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:cloze:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:competition#e-ed5e0a94b78050f7",
+          "text": "Welcome to Join the English Writing Competition",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-application",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-application:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:competition#s2",
+      "pos": "n.",
+      "glossZh": "竞争；角逐",
+      "pronunciationId": "w:competition#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:competition#e-7b00494b862ff2d4",
+          "text": "One reason was: “You’ll actually show up if you know someone is waiting for you at the gym,” while another read: “__36__” With a workout partner, you will increase your training effort as there is a subtle (微妙) competition.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "seven-choices-1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 211,
+            "end": 222
+          }
+        },
+        {
+          "exampleId": "w:competition#e-edad4fc8365af91d",
+          "text": "It faced tough competition.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2025-ii:28",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:competition#e-6b68fbed135db1a0",
+          "text": "Competition among gyms is heating up.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 11
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:competition#s3",
+      "pos": "n.",
+      "glossZh": "竞争对手（总称）",
+      "pronunciationId": "w:competition#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

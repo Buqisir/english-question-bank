@@ -1,0 +1,133 @@
+{
+  "entryId": "w:hill",
+  "headword": "hill",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/hɪl/",
+    "us": "/hɪl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:hill#p-main",
+      "ipa": {
+        "uk": "/hɪl/",
+        "us": "/hɪl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "hills",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 43
+  },
+  "unassignedCounts": {
+    "gaokao": 8,
+    "mock": 42
+  },
+  "senses": [
+    {
+      "senseId": "w:hill#s1",
+      "pos": "n.",
+      "glossZh": "小山；丘陵",
+      "pronunciationId": "w:hill#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:hill#e-d2e44cee20163fc8",
+          "text": "Highlights(精彩之处)include China’s most sacred peaks at Mount Tai and Hangzhou’s rolling hills, waterways and peaceful temples.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 91
+          }
+        },
+        {
+          "exampleId": "w:hill#e-0870002e208c12fb",
+          "text": "Although landscapes in the Midwest tend to be quite similar, either farm fields or highways, sometimes I find distinctive character in the hills or lakes.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 139,
+            "end": 144
+          }
+        },
+        {
+          "exampleId": "w:hill#e-825c7569636c2d55",
+          "text": "Last month, Tim convinced me to join him in climbing a small hill.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+            "paperTitle": "广东省2026届普通高中毕业班第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-2025-12-second-joint-survey:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 61,
+            "end": 65
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "Hill（姓氏或地名的一部分）",
+      "reason": "同形专名"
+    },
+    {
+      "glossZh": "棒球投手土墩、给植物培土",
+      "reason": "专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,233 @@
+{
+  "entryId": "w:comfortable",
+  "headword": "comfortable",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkʌmftəbl/",
+    "us": "/ˈkʌmftəbl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:comfortable#p-main",
+      "ipa": {
+        "uk": "/ˈkʌmftəbl/",
+        "us": "/ˈkʌmftəbl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "comfortabler",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "comfortablest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more comfortable",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most comfortable",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 20,
+    "mock": 63
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 63
+  },
+  "senses": [
+    {
+      "senseId": "w:comfortable#s1",
+      "pos": "adj.",
+      "glossZh": "舒适的；使人舒服的",
+      "pronunciationId": "w:comfortable#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:comfortable#e-175a730515e0af5e",
+          "text": "There was a nice kitchen and a comfortable bed.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-i:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:comfortable#e-cfeac5f0dfb999ae",
+          "text": "These days, safety regulations – not to mention the modern sports fan’s desire for a good view and a comfortable seat – tend to keep stadium capacities（容量）slightly lower.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 101,
+            "end": 112
+          }
+        },
+        {
+          "exampleId": "w:comfortable#e-cb701cc957268cec",
+          "text": "When attending an event at SoFi Stadium, you’re just a short walk or ride from several comfortable and classy hotels.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-a:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 98
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:comfortable#s2",
+      "pos": "adj.",
+      "glossZh": "自在的；放松的；觉得可以接受的",
+      "pronunciationId": "w:comfortable#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:comfortable#e-fcb3362ef90b483c",
+          "text": "People want to listen to someone who is interesting, relaxed and comfortable.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:comfortable#e-5c56f7cfbaed62dd",
+          "text": ", the more comfortable you’ll begin to feel with its foreign cultural practices.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2022-national-a:seven-choices:9",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:comfortable#e-439f43a4b55517b1",
+          "text": "Share your work if you feel comfortable doing so.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-ii:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:comfortable#s3",
+      "pos": "adj.",
+      "glossZh": "宽裕的；轻松取得的（如领先优势）",
+      "pronunciationId": "w:comfortable#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "厚被、强健勇猛",
+      "reason": "罕见名词或古旧形容词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

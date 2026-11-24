@@ -1,0 +1,142 @@
+{
+  "entryId": "w:location",
+  "headword": "location",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ləʊˈkeɪʃn/",
+    "us": "/loʊˈkeɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:location#p-main",
+      "ipa": {
+        "uk": "/ləʊˈkeɪʃn/",
+        "us": "/loʊˈkeɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "locations",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 140
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 140
+  },
+  "senses": [
+    {
+      "senseId": "w:location#s1",
+      "pos": "n.",
+      "glossZh": "位置；地点",
+      "pronunciationId": "w:location#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:location#e-b489cd5a322fe18c",
+          "text": "The hostels in Rome offer a bed in a dorm room for around $25 a night, and for that, you’ll often get to stay in a central location（位置）with security and comfort.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-a:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 123,
+            "end": 131
+          }
+        },
+        {
+          "exampleId": "w:location#e-8b64768b8c632f26",
+          "text": "With over 2,500 bikes stored in our five rental shops at strategic locations, we make sure there is always a bike available for you.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 76
+          }
+        },
+        {
+          "exampleId": "w:location#e-f011f6219f0b6d2c",
+          "text": "But elevation is necessarily relative: only the choice of a reference point allows us to express numerically the height of an object or a location.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 138,
+            "end": 146
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:location#s2",
+      "pos": "n.",
+      "glossZh": "定位；发现某物的位置",
+      "pronunciationId": "w:location#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "南非历史居住区、租用合同",
+      "reason": "历史或专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

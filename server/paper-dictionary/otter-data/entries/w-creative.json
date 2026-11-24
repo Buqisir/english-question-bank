@@ -1,0 +1,154 @@
+{
+  "entryId": "w:creative",
+  "headword": "creative",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kriˈeɪtɪv/",
+    "us": "/kriˈeɪtɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:creative#p-main",
+      "ipa": {
+        "uk": "/kriˈeɪtɪv/",
+        "us": "/kriˈeɪtɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more creative",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most creative",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "creatives",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 37,
+    "mock": 235
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 235
+  },
+  "senses": [
+    {
+      "senseId": "w:creative#s1",
+      "pos": "adj.",
+      "glossZh": "有创造力的；有创意的；创作的",
+      "pronunciationId": "w:creative#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 37,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:creative#e-c65b9593da91d3f0",
+          "text": "When my mother saw my creations, she told me how creative my designs were.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 49,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:creative#e-7fdeef157e2306f4",
+          "text": "This college-level course in creative storytelling functions as an introduction to a variety of storytelling techniques that appear in different forms of creative writing, such as short fiction and playwriting.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 154,
+            "end": 162
+          }
+        },
+        {
+          "exampleId": "w:creative#e-b0705eabc2e68256",
+          "text": "Enhance your photography skills-join Yellowstone’s park photographer for a hands-on program to inspire new and creative ways of enjoying the beauty and wonder of Yellowstone.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-a:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 111,
+            "end": 119
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:creative#s2",
+      "pos": "n.",
+      "glossZh": "创意人员",
+      "pronunciationId": "w:creative#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "广告活动中的具体素材；掩饰事实",
+      "reason": "行业简称或特定搭配的引申"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

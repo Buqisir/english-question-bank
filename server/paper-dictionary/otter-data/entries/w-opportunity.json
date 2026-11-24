@@ -1,0 +1,124 @@
+{
+  "entryId": "w:opportunity",
+  "headword": "opportunity",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌɒpəˈtjuːnəti/",
+    "us": "/ˌɑːpərˈtuːnəti/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:opportunity#p-main",
+      "ipa": {
+        "uk": "/ˌɒpəˈtjuːnəti/",
+        "us": "/ˌɑːpərˈtuːnəti/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "opportunities",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 25,
+    "mock": 270
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:opportunity#s1",
+      "pos": "n.",
+      "glossZh": "机会",
+      "pronunciationId": "w:opportunity#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 25,
+        "mock": 270
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:opportunity#e-dac1088872734a3d",
+          "text": "This special building is a place in which theatre is made and where children, artists, writers and anyone else have the opportunity（机会）to do creative things.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 120,
+            "end": 131
+          }
+        },
+        {
+          "exampleId": "w:opportunity#e-109cbddaae03a074",
+          "text": "However, I soon found that by doing so, I might be losing something more important: the opportunity to share a small part of my cultural identity.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 99
+          }
+        },
+        {
+          "exampleId": "w:opportunity#e-d0bb3b8016442695",
+          "text": "● Treat mistakes as opportunities.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 33
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

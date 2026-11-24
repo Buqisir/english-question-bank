@@ -1,0 +1,232 @@
+{
+  "entryId": "w:vivid",
+  "headword": "vivid",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈvɪvɪd/",
+    "us": "/ˈvɪvɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:vivid#p-main",
+      "ipa": {
+        "uk": "/ˈvɪvɪd/",
+        "us": "/ˈvɪvɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more vivid",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most vivid",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "vivider",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "vividest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 29
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 24
+  },
+  "senses": [
+    {
+      "senseId": "w:vivid#s1",
+      "pos": "adj.",
+      "glossZh": "生动的",
+      "pronunciationId": "w:vivid#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:vivid#e-943076c9552c25cb",
+          "text": "Whatever it is, the result is a fine and vivid description of the purest of Central Asian traditions.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-c:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:vivid#e-2b71bcafd8c22684",
+          "text": "Published in 2024, it has quickly become one of the most acclaimed historical fictions of recent years, praised for its determined honesty and vivid storytelling.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 143,
+            "end": 148
+          }
+        },
+        {
+          "exampleId": "w:vivid#e-30cf182a2b2726bc",
+          "text": "I, __41__ to the tradition of sharing a detailed account, would __42__ a vivid description of my school life.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-05",
+            "paperTitle": "武汉市武昌区2026届高三年级5月质量检测英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-05:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-05:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 78
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:vivid#s2",
+      "pos": "adj.",
+      "glossZh": "记忆中鲜明的",
+      "pronunciationId": "w:vivid#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:vivid#e-f635011bf29c1764",
+          "text": "Andrea explained that her youngest daughter had just turned eight and that moment brought back vivid memories of the stranger who had given her hope.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-b:6",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 100
+          }
+        },
+        {
+          "exampleId": "w:vivid#e-4228b8109ca2e270",
+          "text": "The memory was still vivid – the hushed audience, and my trembling legs as I stood up again.",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jining-2026-05-third-mock:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:vivid#s3",
+      "pos": "adj.",
+      "glossZh": "颜色鲜艳的",
+      "pronunciationId": "w:vivid#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:vivid#e-e0c48f7f1b7a1fe7",
+          "text": "Leaves will soon make their gradual change to vivid colors of yellow, orange and red as we head through the fall months, but when you can usually expect peak color to arrive depends on where you live.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring",
+            "paperTitle": "山东省潍坊市2025-2026学年高三上学期期中阶段性诊断监测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-11-senior-three-midterm-diagnostic-monitoring:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 51
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "记号笔",
+      "reason": "商标引申的地域用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

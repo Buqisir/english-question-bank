@@ -1,0 +1,175 @@
+{
+  "entryId": "w:atlantic",
+  "headword": "Atlantic",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ətˈlæntɪk/",
+    "us": "/ətˈlæntɪk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:atlantic#p-main",
+      "ipa": {
+        "uk": "/ətˈlæntɪk/",
+        "us": "/ətˈlæntɪk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 2,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "senses": [
+    {
+      "senseId": "w:atlantic#s1",
+      "pos": "专名",
+      "glossZh": "大西洋",
+      "pronunciationId": "w:atlantic#p-main",
+      "note": "the Atlantic 或 the Atlantic Ocean。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:atlantic#e-2713cf1f4d480038",
+          "text": "People still want to eat fish, so the fishing industry must look at other sources, especially the deep waters of the Atlantic.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 117,
+            "end": 125
+          }
+        },
+        {
+          "exampleId": "w:atlantic#e-846c9e629fc8389f",
+          "text": "She partnered with oceanographer Bruce Heezen, who collected sonar(声呐) data from ships that crossed the Atlantic Ocean.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-first",
+            "paperTitle": "重庆市巴蜀中学高2026届第一次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-first:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 104,
+            "end": 112
+          }
+        },
+        {
+          "exampleId": "w:atlantic#e-ffe16df9c64fb94d",
+          "text": "15, after 119 days, Johnson arrived at the Atlantic Ocean.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:cloze",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:cloze:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 43,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:atlantic#s2",
+      "pos": "adj.",
+      "glossZh": "大西洋的；大西洋沿岸的",
+      "pronunciationId": "w:atlantic#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:atlantic#e-fbcaa56a15c12996",
+          "text": "Bear belonged to a breed (品种) that had long been used by Atlantic fishermen to help with their work, and it had a keen instinct for water rescue.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam",
+            "paperTitle": "2025-2026学年第一学期浙江省名校协作体试题 高三英语试题",
+            "groupId": "group:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-school-consortium-2025-09-senior-three-joint-exam:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 65
+          }
+        },
+        {
+          "exampleId": "w:atlantic#e-7005f0706b5439c7",
+          "text": "The researchers studied 10 years of weather radar data from 16 sites and found that birds flying over the Atlantic Coast and the Gulf of Mexico gather more closely and move for a shorter time than those flying over land.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment",
+            "paperTitle": "台州市2026届高三第一次教学质量评估试题 英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-taizhou-2025-11-first-teaching-quality-assessment:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 106,
+            "end": 114
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "亚特兰蒂斯的、大西洋语族、全新世大西洋期、机车型号和同形地名",
+      "reason": "专名或专门义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

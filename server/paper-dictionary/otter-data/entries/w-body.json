@@ -1,0 +1,250 @@
+{
+  "entryId": "w:body",
+  "headword": "body",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈbɒdi/",
+    "us": "/ˈbɑːdi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:body#p-main",
+      "ipa": {
+        "uk": "/ˈbɒdi/",
+        "us": "/ˈbɑːdi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "bodies",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 18,
+    "mock": 336
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 334
+  },
+  "senses": [
+    {
+      "senseId": "w:body#s1",
+      "pos": "n.",
+      "glossZh": "身体；躯体",
+      "pronunciationId": "w:body#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:body#e-177d4ecdf47edc2f",
+          "text": "The human body is 60% water and we need to drink lots of water to be healthy.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 10,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:body#e-553a342fb492134d",
+          "text": "After making sure that David could run if he wanted, I turned to find him coming towards me, his small body rocking from side to side as he swung his feet forward.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "writing-continuation-6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 103,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:body#e-87e6e2f319649c98",
+          "text": "Running is a high-impact activity which can be really hard on your body.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:seven-choices:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 71
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:body#s2",
+      "pos": "n.",
+      "glossZh": "尸体；遗体",
+      "pronunciationId": "w:body#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:body#e-671bcc0b735029de",
+          "text": "When the final bird died, his body was immediately sent to a special room in the zoo.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-d",
+            "locator": {
+              "paragraph": 16,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-d:16",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 34
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:body#s3",
+      "pos": "n.",
+      "glossZh": "主体；主要部分",
+      "pronunciationId": "w:body#p-main",
+      "note": "如 the body of a letter。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:body#s4",
+      "pos": "n.",
+      "glossZh": "团体；机构",
+      "pronunciationId": "w:body#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:body#s5",
+      "pos": "n.",
+      "glossZh": "一大片；相连的一片",
+      "pronunciationId": "w:body#p-main",
+      "note": "如 a body of water。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:body#s6",
+      "pos": "n.",
+      "glossZh": "物体；天体",
+      "pronunciationId": "w:body#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:body#s7",
+      "pos": "短语",
+      "glossZh": "肢体语言",
+      "pronunciationId": "w:body#p-main",
+      "note": "body language。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:body#e-f5f9541d06b9a291",
+          "text": "● Mind Your Words and Body Language",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:seven-choices:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 26
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "活字字身、杀死或彻底打败、姓氏",
+      "reason": "技术或俚语用法及专名。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

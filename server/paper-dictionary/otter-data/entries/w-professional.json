@@ -1,0 +1,405 @@
+{
+  "entryId": "w:professional",
+  "headword": "professional",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/prəˈfeʃənl/",
+    "us": "/prəˈfeʃənl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:professional#p-main",
+      "ipa": {
+        "uk": "/prəˈfeʃənl/",
+        "us": "/prəˈfeʃənl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more professional",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most professional",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "professionals",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 267
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 263
+  },
+  "senses": [
+    {
+      "senseId": "w:professional#s1",
+      "pos": "adj.",
+      "glossZh": "以某活动为职业的",
+      "pronunciationId": "w:professional#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:professional#e-ec5b6b310986eb5b",
+          "text": "He is a professional stage actor.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jul:21",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:professional#e-1348ade0211806a0",
+          "text": "Throughout her career（职业）as a professional dancer, she toured in the UK, but always longed to explore further.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:professional#e-59282200e210ad34",
+          "text": "“This platform is not only __55__ for professional cooks, but also for those willing to discover new experiences.”",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:cloze:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:professional#s2",
+      "pos": "adj.",
+      "glossZh": "职业上的",
+      "pronunciationId": "w:professional#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:professional#e-4b049901f24c9dde",
+          "text": "Professional background.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2022-ii:33",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:professional#e-83a7e00ec0ce2171",
+          "text": "In the wrong hands, such a book could prove as complicated to process as the computer code (代码) that powers AI but, thankfully, Campbell has more than two decades’ professional experience translating the heady into the understandable.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 164,
+            "end": 176
+          }
+        },
+        {
+          "exampleId": "w:professional#e-6d7d7ce530f6d62e",
+          "text": "Gen Z is changing the rules of work, and the results are redefining what professional success looks like in 2025.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 85
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:professional#s3",
+      "pos": "adj.",
+      "glossZh": "出自专业人员的",
+      "pronunciationId": "w:professional#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:professional#e-017dddfddacc0efd",
+          "text": "The value of professional opinions.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2025-ii:30",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:professional#e-7f0172b9e6866ded",
+          "text": "Dogs receive professional attention, while those special participants also benefit from making friends, getting away from computer screens, and exploring new careers like human handlers and so on.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:professional#s4",
+      "pos": "adj.",
+      "glossZh": "符合专业水准的",
+      "pronunciationId": "w:professional#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:professional#e-a4bbf84231b7c5d1",
+          "text": "images that look consistent and professional.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-second",
+            "paperTitle": "重庆市巴蜀中学校高2026届第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-second:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-second:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 32,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:professional#s5",
+      "pos": "adj.",
+      "glossZh": "培养职业技能的",
+      "pronunciationId": "w:professional#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:professional#e-3b28090fad4f1988",
+          "text": "Over several hours, he would tell me about how he had __45__ a two-year professional school to quickly find a job __46__ highways in order to help support his family.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:cloze:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 84
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:professional#s6",
+      "pos": "n.",
+      "glossZh": "专业人士",
+      "pronunciationId": "w:professional#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:professional#e-3691c01217768ec3",
+          "text": "For example, the experience of walking along the edge of water might be satisfying for a young professional on a weekend hike in the park.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 95,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:professional#e-ad19f7116235f46c",
+          "text": "It is intended for AI professionals.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2024-ii:33",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:professional#e-44462a3966c68b28",
+          "text": "The issue has sparked a growing movement among authors and creative professionals worldwide.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 81
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "妓女",
+      "reason": "过时的委婉称呼"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

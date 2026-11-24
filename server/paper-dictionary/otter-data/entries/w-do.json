@@ -1,0 +1,846 @@
+{
+  "entryId": "w:do",
+  "headword": "do",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/duː/",
+    "us": "/duː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:do#p-main",
+      "ipa": {
+        "uk": "/duː/",
+        "us": "/duː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    },
+    {
+      "pronunciationId": "w:do#p-weak",
+      "ipa": {
+        "uk": "/də/",
+        "us": "/də/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "助动词弱读"
+    }
+  ],
+  "forms": [
+    {
+      "form": "do's",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "doos",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "dos",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "DOs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "did",
+      "tags": [
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "does",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "doing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "done",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1260,
+    "mock": 6564
+  },
+  "unassignedCounts": {
+    "gaokao": 1177,
+    "mock": 6560
+  },
+  "senses": [
+    {
+      "senseId": "w:do#s1",
+      "pos": "aux.",
+      "glossZh": "（构成疑问或否定）",
+      "pronunciationId": "w:do#p-weak",
+      "note": "在助动词位置常用弱读。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 26,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:do#e-a525483c421fbe18",
+          "text": "How does the woman probably feel?",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:listening.short-dialogue",
+            "locator": {
+              "question": 5,
+              "questionId": "question:listening:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:do#e-4817631a974fbedd",
+          "text": "Or perhaps a design works so well it is adopted elsewhere again and again, with seemingly harmless improvements, until,suddenly, it does not work at all anymore.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 132,
+            "end": 136
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:do#s2",
+      "pos": "aux. / v.",
+      "glossZh": "代替前面提到的动作；也如此",
+      "pronunciationId": "w:do#p-main",
+      "note": "常见 so do I、do so。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:do#e-0dfc95b2431e1b5c",
+          "text": "“So do I,” said Harry.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 6
+          }
+        },
+        {
+          "exampleId": "w:do#e-9f9f6e9594fba6a9",
+          "text": "Probably not, so why do so in your new language?",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-eight-provinces-jan:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:do#e-1eff4b851f82cbbd",
+          "text": "In doing so, I’ll draw on an experiment I ran in 2018 in which over 1,600 people agreed to perform a digital declutter.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-i:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:do#s3",
+      "pos": "v.",
+      "glossZh": "做；从事；完成",
+      "pronunciationId": "w:do#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 22,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:do#e-306f4f4fe20f06d9",
+          "text": "She decided to go back to college to advance her career and to be able to better support her family while doing something she loves: nursing.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 106,
+            "end": 111
+          }
+        },
+        {
+          "exampleId": "w:do#e-167b4396d28fbe3f",
+          "text": "They are tired of doing their homework.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2021-zhejiang-jun:24",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:do#e-9272a1cba2996565",
+          "text": "Help their parents do the dishes.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:26",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:do#s4",
+      "pos": "v.",
+      "glossZh": "从事某职业；以……为生",
+      "pronunciationId": "w:do#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:do#e-009f08ec05ad26d9",
+          "text": "If you can start the conversation with a question other than “What do you do for a living?”, you’ll be able to get a lot more interesting conversation out of whomever it is you’re talking to.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 76
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:do#s5",
+      "pos": "v.",
+      "glossZh": "够用；合适；可以",
+      "pronunciationId": "w:do#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:do#e-8ee31948abb9d4a0",
+          "text": "● Don’t use ten words when one will do.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:do#s6",
+      "pos": "v.",
+      "glossZh": "进展；表现",
+      "pronunciationId": "w:do#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:do#e-d33dd2c0aa7a1055",
+          "text": "As the researchers report in Animal Behavior, the bears did best with patterns where the coloured dots did not move and where more of them also took up a larger coloured area.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:do#e-d597b33919a5f1b2",
+          "text": "He isn’t doing well because he doesn’t try.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:cloze:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:do#s7",
+      "pos": "v.",
+      "glossZh": "造成（损害等）",
+      "pronunciationId": "w:do#p-main",
+      "note": "do damage。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:do#e-b54f2f087992fa05",
+          "text": "By contrast, the wealthy landowners, large companies and illegal loggers, in their pursuit of financial gain, have done huge damage.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 115,
+            "end": 119
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:do#s8",
+      "pos": "短语",
+      "glossZh": "处理；利用",
+      "pronunciationId": "w:do#p-main",
+      "note": "do with sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:do#e-831f9955d3c98510",
+          "text": "So what should cheese makers do with the waste?",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:do#e-c94e7068e81c0044",
+          "text": "What does the woman suggest the man do with his big table?",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:do#s9",
+      "pos": "短语",
+      "glossZh": "没有……也行；将就",
+      "pronunciationId": "w:do#p-main",
+      "note": "do without sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:do#e-bf6e5c933df79e78",
+          "text": "The only __40__ to pay for the groceries was to take off the __41__ she could do without: a bottle of rubbing alcohol （医用酒精）and a bar of soap.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 78,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:do#s10",
+      "pos": "短语",
+      "glossZh": "尽力",
+      "pronunciationId": "w:do#p-main",
+      "note": "do one's best。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:do#e-9ab94c42958fd1bf",
+          "text": "We did our best for him but he started to get depressed and fed up with life.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:do#s11",
+      "pos": "短语",
+      "glossZh": "废除；去掉",
+      "pronunciationId": "w:do#p-main",
+      "note": "do away with sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:do#s12",
+      "pos": "v.",
+      "glossZh": "游览；走遍",
+      "pronunciationId": "w:do#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:do#s13",
+      "pos": "n.",
+      "glossZh": "聚会；社交活动",
+      "pronunciationId": "w:do#p-main",
+      "note": "非正式用法。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:do#s14",
+      "pos": "n.",
+      "glossZh": "唱名 do",
+      "pronunciationId": "w:do#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:do#s15",
+      "pos": "aux.",
+      "glossZh": "强调确实做了某事",
+      "pronunciationId": "w:do#p-main",
+      "note": "通常重读。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:do#e-8e146f35092fcb19",
+          "text": "I do know how upset the shop staff can get, but I try to persuade them to keep __47__.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:cloze:1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 4
+          }
+        },
+        {
+          "exampleId": "w:do#e-c2b728a10cde5245",
+          "text": "This indicates that Goffin’s cockatoos do indeed possess an allocentric frame of reference when moving objects in space, similar to two-year-old babies.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:do#e-b388c7386577a6d9",
+          "text": "Anna Giannotti, 63, an art psychotherapist who is paid for a few hours a week by KiB, says, “Sometimes the elderly are hesitant to get involved, but often when they do get involved, they just become their complete selves.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 165,
+            "end": 167
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:do#s16",
+      "pos": "aux.",
+      "glossZh": "用于否定词提前的倒装",
+      "pronunciationId": "w:do#p-weak",
+      "note": "little do they know。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:do#e-3f5f97d3dbff427a",
+          "text": "Little do they know that as they do so, a burst of energy is sent up to street level to help charge an electric car.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 7,
+            "end": 9
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:do#s17",
+      "pos": "短语",
+      "glossZh": "与……有关",
+      "pronunciationId": "w:do#p-main",
+      "note": "(have) to do with sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:do#e-f652adc2194c383f",
+          "text": "Age isn’t the only factor; I’d say it’s also to do with the makeup of your household.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:do#s18",
+      "pos": "v.",
+      "glossZh": "帮（某人）一个忙",
+      "pronunciationId": "w:do#p-main",
+      "note": "do sb a favour。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:do#e-5aebbcb3426d1e2d",
+          "text": "I hope we can stop the decline and do the birds and ourselves a big favor,” said Butler.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:reading-d:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:do#s19",
+      "pos": "v.",
+      "glossZh": "烹调（食物）",
+      "pronunciationId": "w:do#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:do#s20",
+      "pos": "v.",
+      "glossZh": "提供（商品或服务）",
+      "pronunciationId": "w:do#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "直接宾语、溶解氧、骨科医学博士等；诈骗、毒品、性行为等",
+      "reason": "专门缩写或低频俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

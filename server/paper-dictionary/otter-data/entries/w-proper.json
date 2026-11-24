@@ -1,0 +1,202 @@
+{
+  "entryId": "w:proper",
+  "headword": "proper",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈprɒpə(r)/",
+    "us": "/ˈprɑːpər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:proper#p-main",
+      "ipa": {
+        "uk": "/ˈprɒpə(r)/",
+        "us": "/ˈprɑːpər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more proper",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most proper",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 69
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 65
+  },
+  "senses": [
+    {
+      "senseId": "w:proper#s1",
+      "pos": "adj.",
+      "glossZh": "合适的",
+      "pronunciationId": "w:proper#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:proper#e-cc05bb911e6fecea",
+          "text": "Wear proper clothes.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2024-ii:22",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 11
+          }
+        },
+        {
+          "exampleId": "w:proper#e-115c5e1f3bb0a726",
+          "text": "Moments later, the old woman slid a basket onto the ground – inside were proper gloves and a trowel（小铲子）with soil.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-05-adaptability-exam",
+            "paperTitle": "莆田市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-putian-2026-05-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 14,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-05-adaptability-exam:writing-continuation:14",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 73,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:proper#e-057ceeb0acacd8e8",
+          "text": "These tools help integrate AI into daily learning while encouraging proper use.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey",
+            "paperTitle": "无锡市2025-2026学年第一学期高三期末质量调研 英语",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2026-01-senior-three-first-semester-final-quality-survey:reading-a:11",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 74
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:proper#s2",
+      "pos": "adj.",
+      "glossZh": "像样的",
+      "pronunciationId": "w:proper#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:proper#e-8b5be5e98d964ed6",
+          "text": "Additionally, you should plan a relaxing break at the museum cafe and book a nearby restaurant for a proper meal once your tour is finished.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test",
+            "paperTitle": "扬州市2025-2026学年度第一学期高三摸底质量检测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-yangzhou-2026-01-senior-three-first-semester-quality-test:seven-choices:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:proper#e-ebe93422a505e762",
+          "text": "This weekend, in fact, we’re playing our first proper match against another team.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 53
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:proper#s3",
+      "pos": "adj.",
+      "glossZh": "严格意义上的",
+      "pronunciationId": "w:proper#p-main",
+      "note": "后置用法，如 the city proper。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "礼仪专属部分",
+      "reason": "宗教专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

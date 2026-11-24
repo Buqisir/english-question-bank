@@ -1,0 +1,123 @@
+{
+  "entryId": "w:housework",
+  "headword": "housework",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈhaʊswɜːk/",
+    "us": "/ˈhaʊswɜːrk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:housework#p-main",
+      "ipa": {
+        "uk": "/ˈhaʊswɜːk/",
+        "us": "/ˈhaʊswɜːrk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 10,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:housework#s1",
+      "pos": "n.",
+      "glossZh": "家务劳动",
+      "pronunciationId": "w:housework#p-main",
+      "note": "不可数名词。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 15
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:housework#e-d0c3f393080fd9b8",
+          "text": "I love doing housework.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2021-national-b:writing-short-error-correction:9",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 13,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:housework#e-70f41746578bc003",
+          "text": "Ever watched your child try to get out of doing housework by making excuses?",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 48,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:housework#e-8dd6392d1cff55b8",
+          "text": "When the tasks become as routine as brushing teeth, kids internalise that helping with housework is simply part of life.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 94,
+            "end": 103
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "课后作业",
+      "reason": "现代普通英语用 homework"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

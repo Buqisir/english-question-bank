@@ -1,0 +1,147 @@
+{
+  "entryId": "w:northern",
+  "headword": "northern",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈnɔːðən/",
+    "us": "/ˈnɔːrðərn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:northern#p-main",
+      "ipa": {
+        "uk": "/ˈnɔːðən/",
+        "us": "/ˈnɔːrðərn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more northern",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most northern",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more Northern",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most Northern",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 18
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 17
+  },
+  "senses": [
+    {
+      "senseId": "w:northern#s1",
+      "pos": "adj.",
+      "glossZh": "北方的；北部的",
+      "pronunciationId": "w:northern#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:northern#e-aee32c2be27038af",
+          "text": "Cattle-raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:northern#e-59029fd4a4b574c9",
+          "text": "By the early 1970s, after centuries of cruel and continuous hunting by settlers, 600 to 800 grizzlies remained on a mere 2 percent of their former range in the Northern Rockies.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 160,
+            "end": 168
+          }
+        },
+        {
+          "exampleId": "w:northern#e-a3d736e6a928fdfb",
+          "text": "Forty years ago, Yin Yuzhen arrived at her new home in a vast desert in northern China.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 72,
+            "end": 80
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "铁路公司名称",
+      "reason": "固定专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

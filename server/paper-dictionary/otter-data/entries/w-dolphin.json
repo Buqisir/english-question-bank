@@ -1,0 +1,135 @@
+{
+  "entryId": "w:dolphin",
+  "headword": "dolphin",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdɒlfɪn/",
+    "us": "/ˈdɑːlfɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dolphin#p-main",
+      "ipa": {
+        "uk": "/ˈdɒlfɪn/",
+        "us": "/ˈdɑːlfɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "dolphins",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Dolphins",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 48
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:dolphin#s1",
+      "pos": "n.",
+      "glossZh": "海豚",
+      "pronunciationId": "w:dolphin#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 48
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dolphin#e-290a03f185498837",
+          "text": "Last summer, Hilda worked as a volunteer with dolphin trainers at a sea life park.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:dolphin#e-a61675fc28312316",
+          "text": "However, one day after cleaning, one of the dolphins, Maya, presented Hilda with a candy wrapper from the tank.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:dolphin#e-2b6768c78f819691",
+          "text": "During the tank sweeps, Maya had been swimming playfully, but now the dolphin stopped suddenly and swam to the back part of the tank where the filter（过滤）box was located.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 77
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "鲯鳅、系泊防护结构、法国王太子、球队队员",
+      "reason": "物种或行业专名、历史头衔或同形称谓"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

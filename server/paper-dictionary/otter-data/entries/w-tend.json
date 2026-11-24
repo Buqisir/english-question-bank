@@ -1,0 +1,180 @@
+{
+  "entryId": "w:tend",
+  "headword": "tend",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tend/",
+    "us": "/tend/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:tend#p-main",
+      "ipa": {
+        "uk": "/tend/",
+        "us": "/tend/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "tended",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "tending",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "tends",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 26,
+    "mock": 204
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 204
+  },
+  "senses": [
+    {
+      "senseId": "w:tend#s1",
+      "pos": "v.",
+      "glossZh": "往往会",
+      "pronunciationId": "w:tend#p-main",
+      "note": "常用 tend to do。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 24,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tend#e-5eb8bb315a9ffd81",
+          "text": "Higher-income parents tended to have children play with puzzles more frequently, and both boys and girls who played with puzzles had better spatial skills.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 22,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:tend#e-5845b2f6cdb5a0e7",
+          "text": "This is of particular concern, as large fish tend to produce more offspring than small ones.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 45,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:tend#e-856074043c236a78",
+          "text": "I tend to travel with a few of my friends to state parks or to the countryside to go on adventures and take photos along the way.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 6
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:tend#s2",
+      "pos": "v.",
+      "glossZh": "照料",
+      "pronunciationId": "w:tend#p-main",
+      "note": "可用 tend to something。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tend#e-d6020113abd39231",
+          "text": "Tending to plants is an exercise in patience and learning.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 7
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "点燃、调整锚泊船",
+      "reason": "罕用或专业义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

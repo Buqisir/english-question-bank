@@ -1,0 +1,143 @@
+{
+  "entryId": "w:soldier",
+  "headword": "soldier",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsəʊldʒə(r)/",
+    "us": "/ˈsəʊldʒər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:soldier#p-main",
+      "ipa": {
+        "uk": "/ˈsəʊldʒə(r)/",
+        "us": "/ˈsəʊldʒər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "soldiers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 10
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "senses": [
+    {
+      "senseId": "w:soldier#s1",
+      "pos": "n.",
+      "glossZh": "士兵",
+      "pronunciationId": "w:soldier#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:soldier#e-15cf55a7a6e59008",
+          "text": "Paul Revere was a silversmith（银匠）in Boston who rode a horse at night on April 18,1775 to Lexington to warn people that British soldiers were coming.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-i:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 127,
+            "end": 135
+          }
+        },
+        {
+          "exampleId": "w:soldier#e-be7f31b9b4c70514",
+          "text": "We had an elderly gentleman, John, who had been a soldier.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n090:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:soldier#e-50b6c9389168483c",
+          "text": "“I need to handle this myself,” he said firmly, “that’s what an old soldier does.” With that, he grabbed his walking stick and headed towards the park before I could react.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n090",
+            "paperTitle": "德州市2026年高考诊断性测试英语试题",
+            "groupId": "group:paper-mock-import-20261026-n090:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-import-20261026-n090:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:soldier#s2",
+      "pos": "短语",
+      "glossZh": "硬撑着继续做",
+      "pronunciationId": "w:soldier#p-main",
+      "note": "soldier on。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "地名、杜父鱼、白蚁兵蚁、象棋卒子、竖砌砖、蘸蛋吐司",
+      "reason": "专名、专物名称或行业词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

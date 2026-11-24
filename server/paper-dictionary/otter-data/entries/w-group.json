@@ -1,0 +1,265 @@
+{
+  "entryId": "w:group",
+  "headword": "group",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɡruːp/",
+    "us": "/ɡruːp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:group#p-main",
+      "ipa": {
+        "uk": "/ɡruːp/",
+        "us": "/ɡruːp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "groups",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "grouped",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "grouping",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 110,
+    "mock": 542
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 542
+  },
+  "senses": [
+    {
+      "senseId": "w:group#s1",
+      "pos": "n.",
+      "glossZh": "群组",
+      "pronunciationId": "w:group#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 105,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:group#e-84f4b71e7aebea4d",
+          "text": "They were randomly divided into four groups and exposed to various noise levels in the background, from total silence to 50 decibels(分贝), 70 decibels, and 85 decibels.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:group#e-f2e40451ad5e9c89",
+          "text": "The differences between most of the groups were statistically insignificant; however, the participants in the 70 decibels group – those exposed to a level of noise similar to background chatter in a coffee shop – significantly outperformed the other groups.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 122,
+            "end": 127
+          }
+        },
+        {
+          "exampleId": "w:group#e-5af4d3d4263ec865",
+          "text": "As Ginni Bazlinton reached Antarctica, she found herself greeted by a group of little Gentoo penguins（企鹅）longing to say hello.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 75
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:group#s2",
+      "pos": "v.",
+      "glossZh": "分组",
+      "pronunciationId": "w:group#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:group#e-0c0f266262e67585",
+          "text": "Grouping toys of different shapes.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-b",
+            "locator": {
+              "question": 25,
+              "questionId": "question:paper-gaokao-2022-national-a:25",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:group#e-f00408f1a998f313",
+          "text": "In a matrix garden, plants with similar cultural needs are grouped so that they will grow together above and below ground, forming a cooperative ecosystem that conserves water and discourages weeds.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 59,
+            "end": 66
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:group#s3",
+      "pos": "n.",
+      "glossZh": "企业集团",
+      "pronunciationId": "w:group#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:group#s4",
+      "pos": "n.",
+      "glossZh": "山群",
+      "pronunciationId": "w:group#p-main",
+      "note": "语料指帕拉山群。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:group#e-0b68cef06e5ae587",
+          "text": "Chimborazo, 6,263 m; Mont Blanc, 4,806m; Pradidali hut, at the foot of the Pala group in the Dolomites, 2,278 m.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 85
+          }
+        },
+        {
+          "exampleId": "w:group#e-d84d79011b2a740e",
+          "text": "A month after visiting the French Riviera and enjoying the sandy beaches of Nice and Menton, I went hiking with friends in the Pala group.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 132,
+            "end": 137
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "群论中的群",
+      "reason": "数学专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

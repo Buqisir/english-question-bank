@@ -1,0 +1,143 @@
+{
+  "entryId": "w:online",
+  "headword": "online",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌɒnˈlaɪn/",
+    "us": "/ˌɑːnˈlaɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:online#p-main",
+      "ipa": {
+        "uk": "/ˌɒnˈlaɪn/",
+        "us": "/ˌɑːnˈlaɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more online",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most online",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 75,
+    "mock": 463
+  },
+  "unassignedCounts": {
+    "gaokao": 72,
+    "mock": 463
+  },
+  "senses": [
+    {
+      "senseId": "w:online#s1",
+      "pos": "adj. / adv.",
+      "glossZh": "在线的；在网上",
+      "pronunciationId": "w:online#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:online#e-53456fa91d7ad9ca",
+          "text": "All the assignments will be submitted by the assigned date through Blackboard, our online learning and course management system.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "reading-a-7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:online#e-bb05be5b4a80d92e",
+          "text": "How much did Americans spend shopping online last year?",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:online#e-fa02321469af3b64",
+          "text": "I took a picture of the vase and posted it online, for $10.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 49
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:online#s2",
+      "pos": "adj.",
+      "glossZh": "联网的；处于联机状态的",
+      "pronunciationId": "w:online#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

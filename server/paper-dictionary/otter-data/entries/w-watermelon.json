@@ -1,0 +1,92 @@
+{
+  "entryId": "w:watermelon",
+  "headword": "watermelon",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈwɔːtəmelən/",
+    "us": "/ˈwɔːtərmelən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:watermelon#p-main",
+      "ipa": {
+        "uk": "/ˈwɔːtəmelən/",
+        "us": "/ˈwɔːtərmelən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "watermelons",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:watermelon#s1",
+      "pos": "n.",
+      "glossZh": "西瓜",
+      "pronunciationId": "w:watermelon#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:watermelon#e-00cf33b2b5def301",
+          "text": "Potatoes and watermelons.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-sep-opening",
+            "paperTitle": "青岛市2026届高三上学期开学考试英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-sep-opening:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 24
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "环保社会主义者、表面按期的项目",
+      "reason": "俚语或管理行话"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

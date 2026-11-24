@@ -1,0 +1,129 @@
+{
+  "entryId": "w:microscope",
+  "headword": "microscope",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmaɪkrəskəʊp/",
+    "us": "/ˈmaɪkrəskoʊp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:microscope#p-main",
+      "ipa": {
+        "uk": "/ˈmaɪkrəskəʊp/",
+        "us": "/ˈmaɪkrəskoʊp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "microscopes",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 13
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:microscope#s1",
+      "pos": "n.",
+      "glossZh": "显微镜",
+      "pronunciationId": "w:microscope#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 13
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:microscope#e-fb6439c98505a4da",
+          "text": "To determine the type and severity of a cancer, scientists usually analyze thin slices of a tumor(肿瘤) under a microscope.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 110,
+            "end": 120
+          }
+        },
+        {
+          "exampleId": "w:microscope#e-b7d775aa01b94845",
+          "text": "Using angle lights and pocket microscopes, students examined manuscripts on the table, amazed at iridescent（泛着虹彩的）inks of the pages.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:microscope#e-5572d9500af8488e",
+          "text": "Reaching for the school’s antique microscope, she accidentally knocked it from the table.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 44
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "用显微镜检查（动词）",
+      "reason": "专门且罕用"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

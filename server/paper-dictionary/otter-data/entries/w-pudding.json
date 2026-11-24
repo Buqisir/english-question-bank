@@ -1,0 +1,89 @@
+{
+  "entryId": "w:pudding",
+  "headword": "pudding",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈpʊdɪŋ/",
+    "us": "/ˈpʊdɪŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:pudding#p-main",
+      "ipa": {
+        "uk": "/ˈpʊdɪŋ/",
+        "us": "/ˈpʊdɪŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "puddings",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:pudding#s1",
+      "pos": "n.",
+      "glossZh": "布丁",
+      "pronunciationId": "w:pudding#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:pudding#s2",
+      "pos": "n.",
+      "glossZh": "甜点",
+      "pronunciationId": "w:pudding#p-main",
+      "note": "英式英语可泛指餐后甜点。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "胖子",
+      "reason": "过时的冒犯性称呼"
+    },
+    {
+      "glossZh": "内脏",
+      "reason": "历史用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

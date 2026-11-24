@@ -1,0 +1,328 @@
+{
+  "entryId": "w:approach",
+  "headword": "approach",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈprəʊtʃ/",
+    "us": "/əˈproʊtʃ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:approach#p-main",
+      "ipa": {
+        "uk": "/əˈprəʊtʃ/",
+        "us": "/əˈproʊtʃ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "approaches",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "approached",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "approaching",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 30,
+    "mock": 395
+  },
+  "unassignedCounts": {
+    "gaokao": 5,
+    "mock": 394
+  },
+  "senses": [
+    {
+      "senseId": "w:approach#s1",
+      "pos": "n.",
+      "glossZh": "方法；方式；思路",
+      "pronunciationId": "w:approach#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:approach#e-5ff5735c4d28d017",
+          "text": "In Bellevue, the switch to adaptive signals has been a lesson in the value of welcoming new approaches.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 92,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:approach#e-2d6cbd7a7dd526ce",
+          "text": "InSPIRE is investigating practical approaches to \"low-impact\" solar development, which focuses on establishing and operating solar farms in a way that is kinder to the land.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:approach#e-bad479a958cd91c7",
+          "text": "A novel design approach to gardening has been gaining in popularity worldwide.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 15,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:approach#s2",
+      "pos": "v.",
+      "glossZh": "接近；靠近；临近",
+      "pronunciationId": "w:approach#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:approach#e-f1410bed1055d860",
+          "text": "So I approached our uninvited guest slowly and, through the fence, sprayed him in the face.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:9",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:approach#e-650c2d62edd258bd",
+          "text": "Although she had heard warnings about an approaching snowstorm, she didn’t give it much thought.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 52
+          }
+        },
+        {
+          "exampleId": "w:approach#e-6a8f23e21c1ebece",
+          "text": "As we came to a heavily traveled street, we saw an unusual procession approaching: a bony, wild-eyed cow followed by many cars, and boys on bicycles and on foot.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 81
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:approach#s3",
+      "pos": "v.",
+      "glossZh": "着手处理；对待",
+      "pronunciationId": "w:approach#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:approach#e-8087844b07575ca6",
+          "text": "According to this theory, people approach digital texts with a mindset suited to social media, which are often not so serious, and devote less mental effort than when they are reading print.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 41
+          }
+        },
+        {
+          "exampleId": "w:approach#e-a4143bacca2bf31f",
+          "text": "After more than three decades, Jim approached his final days on the job much like any other.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:approach#s4",
+      "pos": "v.",
+      "glossZh": "接洽；找某人谈",
+      "pronunciationId": "w:approach#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:approach#e-dc69da964b8e2fa1",
+          "text": "I was shocked when he approached me after school one day to tell me that he liked chemistry, but failed to think that he was intelligent enough to attend college.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 32
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:approach#s5",
+      "pos": "n.",
+      "glossZh": "接近；临近",
+      "pronunciationId": "w:approach#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:approach#s6",
+      "pos": "n.",
+      "glossZh": "通道；通往某处的路径",
+      "pronunciationId": "w:approach#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "飞机进场航道、保龄球助跑区、高尔夫切击",
+      "reason": "专业用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

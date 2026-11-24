@@ -1,0 +1,122 @@
+{
+  "entryId": "w:uk",
+  "headword": "UK",
+  "kind": "word",
+  "lists": [
+    "3000"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌjuː ˈkeɪ/",
+    "us": "/ˌjuː ˈkeɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:uk#p-main",
+      "ipa": {
+        "uk": "/ˌjuː ˈkeɪ/",
+        "us": "/ˌjuː ˈkeɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 14,
+    "mock": 78
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:uk#s1",
+      "pos": "缩写",
+      "glossZh": "英国",
+      "pronunciationId": "w:uk#p-main",
+      "note": "the United Kingdom 的缩写。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 78
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:uk#e-1b6a3af70d486df0",
+          "text": "Four years ago they all moved into a three-storey Victorian house in Bristol - one of a growing number of multigenerational families in the UK living together under the same roof.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 140,
+            "end": 142
+          }
+        },
+        {
+          "exampleId": "w:uk#e-fbf622283cda139f",
+          "text": "photographers from all corners of the UK and beyond.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:uk#e-7cd72661393c3802",
+          "text": "Restaurants like Silo in the UK have experimented with zero-waste systems, but wastED took the concept to its logical conclusion.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 31
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "肯塔基大学、北阿坎德邦",
+      "reason": "同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

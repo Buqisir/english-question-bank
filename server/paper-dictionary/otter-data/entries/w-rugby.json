@@ -1,0 +1,140 @@
+{
+  "entryId": "w:rugby",
+  "headword": "rugby",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈrʌɡbi/",
+    "us": "/ˈrʌɡbi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:rugby#p-main",
+      "ipa": {
+        "uk": "/ˈrʌɡbi/",
+        "us": "/ˈrʌɡbi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "rugbies",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "rugbys",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:rugby#s1",
+      "pos": "n.",
+      "glossZh": "橄榄球运动",
+      "pronunciationId": "w:rugby#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rugby#e-8d3e4e6224f02170",
+          "text": "Where did Emma work for a rugby team?",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 31
+          }
+        },
+        {
+          "exampleId": "w:rugby#e-d13d19db63e0121f",
+          "text": "Combining elements of rugby and dodgeball, it’s called “Muggle Quidditch” since non-magical folks play it without magic.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:reading-a:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 27
+          }
+        },
+        {
+          "exampleId": "w:rugby#e-6333896aa4052ae4",
+          "text": "Pass a rugby ball to other folks.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-mock-zj-taizhou-2026-m2:21",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 12
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "英国小镇 Rugby",
+      "reason": "地名"
+    },
+    {
+      "glossZh": "胶水",
+      "reason": "地区性商品名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,356 @@
+{
+  "entryId": "w:fat",
+  "headword": "fat",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/fæt/",
+    "us": "/fæt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:fat#p-main",
+      "ipa": {
+        "uk": "/fæt/",
+        "us": "/fæt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "fatter",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "fattest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "fats",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "FATs",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 63
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 55
+  },
+  "senses": [
+    {
+      "senseId": "w:fat#s1",
+      "pos": "adj.",
+      "glossZh": "胖的",
+      "pronunciationId": "w:fat#p-main",
+      "note": "形容他人体型时可能冒犯。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fat#e-80e3f6a7ae56241c",
+          "text": "Both the fat and thin versions of the actor took a large amount of food.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:fat#e-ba0c93d73c7c7766",
+          "text": "“You don’t want to get fat” was on constant repeat throughout my childhood.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 26
+          }
+        },
+        {
+          "exampleId": "w:fat#e-de4ce7622eded583",
+          "text": "But one day when I heard her saying “I think I’m too fat,” my heart sank.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-b:1",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 53,
+            "end": 56
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fat#s2",
+      "pos": "adj.",
+      "glossZh": "粗大的",
+      "pronunciationId": "w:fat#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fat#e-054dde7ea34029f6",
+          "text": "Fat clumps（簇）of white, like a million cotton balls, landed on our car and stuck there.",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 0,
+            "end": 3
+          }
+        },
+        {
+          "exampleId": "w:fat#e-d28533e91bb397ba",
+          "text": "The clear sky __42__ darkened, and fat raindrops soon turned into a downpour that flooded the streets.",
+          "source": {
+            "paperId": "paper-mock-shandong-qilu-2026-second-joint-exam",
+            "paperTitle": "齐鲁名校大联考2026届山东省高三第二次学业水平联合检测 英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-qilu-2026-second-joint-exam:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-qilu-2026-second-joint-exam:cloze:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fat#s3",
+      "pos": "n.",
+      "glossZh": "体内脂肪",
+      "pronunciationId": "w:fat#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fat#e-778d5a73ef7c7baa",
+          "text": "When it comes to body fat, we aren’t short of unkind words for it.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-fifth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（五）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-fifth:seven-choices:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:fat#e-e7fa3dd0d17ff0e8",
+          "text": "● Cardiovascular: Boost cardiovascular health and longevity, burn calories effectively for fat loss, and support key heart-health markers.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 94
+          }
+        },
+        {
+          "exampleId": "w:fat#e-542bf2c55bb13879",
+          "text": "Recent studies show that nearly 30% of people classified as overweight by BMI actually have healthy body fat percentages and normal metabolic profiles.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability",
+            "paperTitle": "杭州第二中学2025年10月高三年级适应性检测英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:reading-d:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 105,
+            "end": 108
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fat#s4",
+      "pos": "n.",
+      "glossZh": "食物中的脂肪",
+      "pronunciationId": "w:fat#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:fat#e-298af47d2fdeafdb",
+          "text": "A balanced diet, such as lean meat or protein, fruits and vegetables, whole grains, and staying away from sodas, candy, simple carbohydrates, and saturated fats prevent the “freshman 15” and boost well-being.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 156,
+            "end": 160
+          }
+        },
+        {
+          "exampleId": "w:fat#e-e7bc90b0a892ca87",
+          "text": "Dairy products like milk or yogurt are far better solutions – the fat and protein in them combine with the capsaicin and carry it away.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 66,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:fat#e-3d5b80ccf7b986f9",
+          "text": "Overflowing with sugar, salt and fat, the colorfully packaged candies, cookies and chips, despite being calorie-loaded and nutritionally bad for us, are deliciously addictive.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 36
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:fat#s5",
+      "pos": "adj.",
+      "glossZh": "丰厚的",
+      "pronunciationId": "w:fat#p-main",
+      "note": "如 a fat profit。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "文件分配表",
+      "reason": "大写缩写 FAT，计算机术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

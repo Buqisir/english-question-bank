@@ -1,0 +1,142 @@
+{
+  "entryId": "w:rely",
+  "headword": "rely",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈlaɪ/",
+    "us": "/rɪˈlaɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:rely#p-main",
+      "ipa": {
+        "uk": "/rɪˈlaɪ/",
+        "us": "/rɪˈlaɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "relied",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "relies",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "relying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 17,
+    "mock": 152
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:rely#s1",
+      "pos": "v.",
+      "glossZh": "依赖",
+      "pronunciationId": "w:rely#p-main",
+      "note": "常用 rely on 或 upon。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 152
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rely#e-ef18e339f284061f",
+          "text": "An Australian professor is developing a robot to monitor the health of grazing cattle, a development that could bring big changes to a profession that’s relied largely on a low-tech approach for decades but is facing a labor shortage.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 153,
+            "end": 159
+          }
+        },
+        {
+          "exampleId": "w:rely#e-df9e8d09589edd32",
+          "text": "Billions of people rely on fish for protein.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-four-provinces-feb:36",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:rely#e-db63045510f8a7b9",
+          "text": "Crucially, this process relies on the water containing enough calcium carbonate（碳酸钙）to trap the plastics.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 30
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

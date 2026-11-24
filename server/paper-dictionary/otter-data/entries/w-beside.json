@@ -1,0 +1,150 @@
+{
+  "entryId": "w:beside",
+  "headword": "beside",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bɪˈsaɪd/",
+    "us": "/bɪˈsaɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:beside#p-main",
+      "ipa": {
+        "uk": "/bɪˈsaɪd/",
+        "us": "/bɪˈsaɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 5,
+    "mock": 67
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 66
+  },
+  "senses": [
+    {
+      "senseId": "w:beside#s1",
+      "pos": "prep.",
+      "glossZh": "在……旁边；在……身边",
+      "pronunciationId": "w:beside#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:beside#e-149ad39fc6262aea",
+          "text": "My dog Don always sits beside me in the passenger seat.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:beside#e-3cf7c076e53860e0",
+          "text": "His job is to sit beside the pianist and turn the pages of the score so the musician doesn’t have to break the flow of sound by doing it themselves.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:beside#e-85ea3c041537ed34",
+          "text": "Paragraph 1: Suddenly, I saw a staff member roll out a temporary ramp beside the steps.",
+          "source": {
+            "paperId": "paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test",
+            "paperTitle": "2025年10月「江南十校」新高三第一次综合素质检测英语学科试题卷",
+            "groupId": "group:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangnan-shixiao-2025-10-first-comprehensive-quality-test:writing-continuation:9",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 76
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:beside#s2",
+      "pos": "短语",
+      "glossZh": "离题；无关紧要",
+      "pronunciationId": "w:beside#p-main",
+      "note": "beside the point。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:beside#s3",
+      "pos": "短语",
+      "glossZh": "情绪失控；极为激动",
+      "pronunciationId": "w:beside#p-main",
+      "note": "beside oneself with anger/joy 等。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "另加；除……之外",
+      "reason": "这一用法已少见，现代通常说 besides。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

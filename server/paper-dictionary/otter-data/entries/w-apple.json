@@ -1,0 +1,174 @@
+{
+  "entryId": "w:apple",
+  "headword": "apple",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈæpl/",
+    "us": "/ˈæpl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:apple#p-main",
+      "ipa": {
+        "uk": "/ˈæpl/",
+        "us": "/ˈæpl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "apples",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Apples",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 59
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 57
+  },
+  "senses": [
+    {
+      "senseId": "w:apple#s1",
+      "pos": "n.",
+      "glossZh": "苹果",
+      "pronunciationId": "w:apple#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:apple#e-9105fbcae461129b",
+          "text": "For example, every morning, my dad has to have the bowl of egg soup while I had to eat an apple.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:writing-short-error-correction:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:apple#e-7c45fe1f929fab4a",
+          "text": "An apple pie.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 8
+          }
+        },
+        {
+          "exampleId": "w:apple#e-d783db27de8f5c37",
+          "text": "A far healthier way to get flavanols is from foods like apples, nuts, strawberries, or green tea.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 56,
+            "end": 62
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:apple#s2",
+      "pos": "短语",
+      "glossZh": "喉结",
+      "pronunciationId": "w:apple#p-main",
+      "note": "Adam’s apple。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:apple#e-7db2cb5856aee540",
+          "text": "The father nodded, his Adam’s apple rolling slightly but his eyes never left the hopping swallow.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam",
+            "paperTitle": "绍兴市柯桥区2026年1月浙江省高考科目考试 高三英语 适应性试题",
+            "groupId": "group:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-shaoxing-keqiao-2025-12-senior-three-adaptability-exam:writing-continuation:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 30,
+            "end": 35
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "纽约别称、姓氏和苹果公司",
+      "reason": "专名，纽约别称为 the Big Apple。"
+    },
+    {
+      "glossZh": "助攻等俚语及使成苹果形",
+      "reason": "低频或专门用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

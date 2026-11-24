@@ -1,0 +1,219 @@
+{
+  "entryId": "w:aim",
+  "headword": "aim",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/eɪm/",
+    "us": "/eɪm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:aim#p-main",
+      "ipa": {
+        "uk": "/eɪm/",
+        "us": "/eɪm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "aims",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "AIMs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "aimed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "aiming",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 25,
+    "mock": 121
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 121
+  },
+  "senses": [
+    {
+      "senseId": "w:aim#s1",
+      "pos": "n.",
+      "glossZh": "目标；目的",
+      "pronunciationId": "w:aim#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:aim#e-8a99c355989e21da",
+          "text": "Our aim was to see if we could live, in some way, like real Parisians.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2021-i:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:aim#e-f5980d4a1968b69e",
+          "text": "What is the aim of the Habitat Restoration Team?",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-a",
+            "locator": {
+              "question": 21,
+              "questionId": "question:paper-gaokao-2024-i:21",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:aim#s2",
+      "pos": "v.",
+      "glossZh": "旨在；力求；把……作为目标",
+      "pronunciationId": "w:aim#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:aim#e-6671f33e3684eff2",
+          "text": "It aims to control the number of the animals.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2021-national-a:27",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:aim#e-c1714efa6554a75c",
+          "text": "The program aims to help students develop science skills, environmental awareness, and healthy lifestyles.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:aim#e-48d2fc32f53d5b9d",
+          "text": "Referred to as matrix planting, this approach aims for nature to do a lot more of the heavy lifting in the garden, and even some of the designing.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 46,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:aim#s3",
+      "pos": "v.",
+      "glossZh": "瞄准；把……对准",
+      "pronunciationId": "w:aim#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "航空任务、公司和通信服务缩写",
+      "reason": "同形专名缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

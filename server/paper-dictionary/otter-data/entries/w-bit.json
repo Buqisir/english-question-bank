@@ -1,0 +1,244 @@
+{
+  "entryId": "w:bit",
+  "headword": "bit",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bɪt/",
+    "us": "/bɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bit#p-main",
+      "ipa": {
+        "uk": "/bɪt/",
+        "us": "/bɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "bits",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 19,
+    "mock": 100
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 99
+  },
+  "senses": [
+    {
+      "senseId": "w:bit#s1",
+      "pos": "n.",
+      "glossZh": "小块；小片；一小部分",
+      "pronunciationId": "w:bit#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bit#e-538bdff48e665229",
+          "text": "I tried making toy cars with cardboard boxes and constructing buildings from leftover cardboard and bits of wood my father gave me.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 100,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:bit#e-3a342a034e313a9d",
+          "text": "I also offered to cook every so often, so I portioned out a bit of the cupboard for my own zero waste groceries.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 60,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:bit#e-9f138287858d1f46",
+          "text": "In a world that is flooded with broken bits of information, mental exhaustion is common.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-05-ninth-quality-test",
+            "paperTitle": "重庆市高2026届高三年级第九次质量检测 英语学科试题卷",
+            "groupId": "group:paper-mock-cq-nankai-2026-05-ninth-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-05-ninth-quality-test:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bit#s2",
+      "pos": "短语",
+      "glossZh": "一点；一些；稍微",
+      "pronunciationId": "w:bit#p-main",
+      "note": "a bit、a bit of sth。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bit#e-3bc0263ef5f476bb",
+          "text": "Always make your presentation just a bit shorter than anticipated.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:6",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:bit#e-152724bff0e10707",
+          "text": "For the first few days, Kynan was always a bit disappointed that the cubs weren’t there.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 43,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:bit#e-4a902dd2643c9817",
+          "text": "The trick is to let them struggle a bit – resist the urge to help fix things the moment they experience a setback.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2026-ii:seven-choices:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 36,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bit#s3",
+      "pos": "n.",
+      "glossZh": "比特；二进制位",
+      "pronunciationId": "w:bit#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:bit#s4",
+      "pos": "n.",
+      "glossZh": "钻头；螺丝刀头",
+      "pronunciationId": "w:bit#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:bit#s5",
+      "pos": "n.",
+      "glossZh": "马嚼子",
+      "pronunciationId": "w:bit#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "bit 是 bite 的过去式时",
+      "reason": "归 bite，语料中的咬与咬住不归入本词。"
+    },
+    {
+      "glossZh": "旧硬币、服刑期、枪等",
+      "reason": "历史、俚语或罕见用法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

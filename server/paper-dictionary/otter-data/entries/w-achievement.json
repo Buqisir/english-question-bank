@@ -1,0 +1,183 @@
+{
+  "entryId": "w:achievement",
+  "headword": "achievement",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈtʃiːvmənt/",
+    "us": "/əˈtʃiːvmənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:achievement#p-main",
+      "ipa": {
+        "uk": "/əˈtʃiːvmənt/",
+        "us": "/əˈtʃiːvmənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "achievements",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 108
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 108
+  },
+  "senses": [
+    {
+      "senseId": "w:achievement#s1",
+      "pos": "n.",
+      "glossZh": "成就；成绩；成功做成的事",
+      "pronunciationId": "w:achievement#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:achievement#e-afe1b3281c8643d3",
+          "text": "She has gained a sense of achievement.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2022-i:29",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:achievement#e-cae4f9a4e4d1d902",
+          "text": "Writing is one of humanity’s later achievements, and until fairly recently even many literate (有文字的) societies recorded their concerns not only in writing but in things.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 47
+          }
+        },
+        {
+          "exampleId": "w:achievement#e-c0815575b8377a4e",
+          "text": "I’ve been motivated - and demotivated - by other folks' achievements all my life.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 56,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:achievement#s2",
+      "pos": "n.",
+      "glossZh": "学业成绩；达到的水平",
+      "pronunciationId": "w:achievement#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:achievement#e-bb841f9d43dee40c",
+          "text": "And over time, the persistence gained through fathers led to higher achievement in school.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 68,
+            "end": 79
+          }
+        },
+        {
+          "exampleId": "w:achievement#e-ab259e4a3442da25",
+          "text": "It aimed to improve kids’ achievement in school.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 27,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jan:27",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 26,
+            "end": 37
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "整套纹章；动词的瞬时完成类",
+      "reason": "专业用法"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

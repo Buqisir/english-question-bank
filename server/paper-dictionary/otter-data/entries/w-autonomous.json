@@ -1,0 +1,188 @@
+{
+  "entryId": "w:autonomous",
+  "headword": "autonomous",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɔːˈtɒnəməs/",
+    "us": "/ɔːˈtɑːnəməs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:autonomous#p-main",
+      "ipa": {
+        "uk": "/ɔːˈtɒnəməs/",
+        "us": "/ɔːˈtɑːnəməs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more autonomous",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most autonomous",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 22
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 17
+  },
+  "senses": [
+    {
+      "senseId": "w:autonomous#s1",
+      "pos": "adj.",
+      "glossZh": "自主的；能独立运作的",
+      "pronunciationId": "w:autonomous#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:autonomous#e-1031d2021b887fd3",
+          "text": "The same physics that makes them move could hold the key to the next generation of autonomous robots.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fj-2026-m1-v2:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 83,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:autonomous#e-f507927f85807335",
+          "text": "In modern society, AI is increasingly being fixed in real-world systems such as autonomous vehicles, drones and industrial equipment.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 80,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:autonomous#e-54e4c5071eb07f18",
+          "text": "Designed for 24/7 autonomous operation, a Galbot robot can restock items efficiently.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zj-jinliqu-2026-mar-m2:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 18,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:autonomous#s2",
+      "pos": "adj.",
+      "glossZh": "自治的",
+      "pronunciationId": "w:autonomous#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:autonomous#e-a5b9e29853fa7e83",
+          "text": "Under the baking sun, Xu Xiaolong and his colleagues walked through wild grass in the Gobi Desert, scanning the rocky foothills of Helan Mountain in Yinchuan, Northwest China’s Ningxia Hui autonomous region, in search of ancient carvings.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey",
+            "paperTitle": "无锡市2025-2026学年秋学期高三期中教学质量调研测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-wuxi-2025-11-senior-three-autumn-midterm-teaching-quality-survey:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 189,
+            "end": 199
+          }
+        },
+        {
+          "exampleId": "w:autonomous#e-1d4aba7eff03cc0f",
+          "text": "As loyal protectors of the plateau’s wildlife, they had long heard of TARWPA (Tibet Autonomous Region Wildlife Protection Association), but they never thought they would contact it one day.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
+            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-05-second-adaptability:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 84,
+            "end": 94
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "无主语式的",
+      "reason": "语法专门义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

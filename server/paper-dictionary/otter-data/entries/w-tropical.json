@@ -1,0 +1,134 @@
+{
+  "entryId": "w:tropical",
+  "headword": "tropical",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈtrɒpɪkl/",
+    "us": "/ˈtrɑːpɪkl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:tropical#p-main",
+      "ipa": {
+        "uk": "/ˈtrɒpɪkl/",
+        "us": "/ˈtrɑːpɪkl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more tropical",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most tropical",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 36
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:tropical#s1",
+      "pos": "adj.",
+      "glossZh": "热带的",
+      "pronunciationId": "w:tropical#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 36
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tropical#e-d2c65289f9b33839",
+          "text": "Their deforestation and burning of tropical rainforests are already having severe effects on global climate, biodiversity, human health, and local and regional socioeconomics.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-a:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:tropical#e-1b6be9216a6db482",
+          "text": "The idea of baking on white-sand beaches, and strolling amongst palm trees swaying in a warm breeze is the typical image of a perfect, tropical island getaway for many people.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:reading-a:17",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 135,
+            "end": 143
+          }
+        },
+        {
+          "exampleId": "w:tropical#e-844796277fdd3cbe",
+          "text": "Scientists from the University of Leeds launched the largest and longest experiment ever designed to examine how nutrients shape forest regrowth in tropical areas cleared for agriculture.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 148,
+            "end": 156
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "比喻的、热带几何的",
+      "reason": "古旧或数学专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

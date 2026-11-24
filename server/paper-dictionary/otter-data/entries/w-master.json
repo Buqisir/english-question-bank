@@ -1,0 +1,328 @@
+{
+  "entryId": "w:master",
+  "headword": "master",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmɑːstə(r)/",
+    "us": "/ˈmæstər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:master#p-main",
+      "ipa": {
+        "uk": "/ˈmɑːstə(r)/",
+        "us": "/ˈmæstər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "masters",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Masters",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "mastered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "mastering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 4,
+    "mock": 84
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 80
+  },
+  "senses": [
+    {
+      "senseId": "w:master#s1",
+      "pos": "v.",
+      "glossZh": "熟练掌握",
+      "pronunciationId": "w:master#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:master#e-8ffbb5784ad4e43a",
+          "text": "Here are some principles you must master.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 40
+          }
+        },
+        {
+          "exampleId": "w:master#e-d5e20ab95f7b79e0",
+          "text": "Any seasoned language learner will tell you that the beauty of mastering a foreign language is the world which it opens up to you.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:master#e-2abcc99f6cd8b1c5",
+          "text": "That is the only French phrase I mastered, and it’s a shame I don’t have much use for it.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:master#s2",
+      "pos": "n.",
+      "glossZh": "大师",
+      "pronunciationId": "w:master#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:master#e-96e8db4612ebc906",
+          "text": "Wang , who is often in __53__ situations , is also a judo（柔道）master .",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-ii:cloze:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:master#e-1b15f3b6dca137d3",
+          "text": "Last June, the country’s tourism agency hosted a master class, offering winners chosen from a social media challenge a free trip to Finland to learn from local masters.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 160,
+            "end": 167
+          }
+        },
+        {
+          "exampleId": "w:master#e-79f0860b55a85781",
+          "text": "This craft relies on four signature tools: sharp knives for paper-thin slicing, copper pots for controlled heating, mineral-rich local water, and secret methods passed from master to apprentice.",
+          "source": {
+            "paperId": "paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam",
+            "paperTitle": "2025年湖北云学部分重点高中联盟高三年级10月联考 英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-yunxue-2025-10-senior-three-joint-exam:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 173,
+            "end": 179
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:master#s3",
+      "pos": "n.",
+      "glossZh": "硕士",
+      "pronunciationId": "w:master#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:master#e-0a7636ff22ea5f89",
+          "text": "● Tuition: 2,100 RMB (≈304 USD) per month (undergraduate student or master student).",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 74
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:master#s4",
+      "pos": "n.",
+      "glossZh": "主人",
+      "pronunciationId": "w:master#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:master#s5",
+      "pos": "n.",
+      "glossZh": "母版",
+      "pronunciationId": "w:master#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:master#s6",
+      "pos": "adj.",
+      "glossZh": "技艺高超的",
+      "pronunciationId": "w:master#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:master#e-7b760cb02924ce2e",
+          "text": "One of my most defining moments was meeting a master woodworker, whose philosophy __52__ with me: every project, no matter how small, was a(n) __53__ to leave a bit of your soul behind.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:cloze:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 46,
+            "end": 52
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:master#s7",
+      "pos": "adj.",
+      "glossZh": "主要的；主控的",
+      "pronunciationId": "w:master#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "法庭辅助官员、船名构词、宗教称号",
+      "reason": "专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

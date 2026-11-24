@@ -1,0 +1,203 @@
+{
+  "entryId": "w:brave",
+  "headword": "brave",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/breɪv/",
+    "us": "/breɪv/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:brave#p-main",
+      "ipa": {
+        "uk": "/breɪv/",
+        "us": "/breɪv/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "braver",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "bravest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more brave",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most brave",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "braved",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "braves",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "braving",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 62
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 60
+  },
+  "senses": [
+    {
+      "senseId": "w:brave#s1",
+      "pos": "adj.",
+      "glossZh": "勇敢的；敢于冒险的",
+      "pronunciationId": "w:brave#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:brave#e-7242c4b10d0c0681",
+          "text": "He’s brave.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "question": 24,
+              "questionId": "question:paper-gaokao-2024-i:24",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 10
+          }
+        },
+        {
+          "exampleId": "w:brave#e-a841978decceaa15",
+          "text": "These women were not just caregivers; they were resilient, brave, and essential.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:brave#e-68db284048199b9d",
+          "text": "In such moments, the bravest choice isn’t waiting passively for the light to turn green, but gathering the courage to restart.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 28
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:brave#s2",
+      "pos": "v.",
+      "glossZh": "勇敢面对；冒着",
+      "pronunciationId": "w:brave#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:brave#e-cb31938d244c5504",
+          "text": "So, I decided to brave it.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 22
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "华美的、战士、装饰",
+      "reason": "旧义或历史专指"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,187 @@
+{
+  "entryId": "w:modern",
+  "headword": "modern",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmɒdn/",
+    "us": "/ˈmɑːdərn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:modern#p-main",
+      "ipa": {
+        "uk": "/ˈmɒdn/",
+        "us": "/ˈmɑːdərn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "moderner",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "modernest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more modern",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most modern",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "moderns",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 16,
+    "mock": 253
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 253
+  },
+  "senses": [
+    {
+      "senseId": "w:modern#s1",
+      "pos": "adj.",
+      "glossZh": "现代的；当代的",
+      "pronunciationId": "w:modern#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 14,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:modern#e-998e2b297371e42e",
+          "text": "So to try to change a distinctly modern behavior, lawmakers and public health experts are reaching back to an old approach: They want to treat distracted driving like drunk driving.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 39
+          }
+        },
+        {
+          "exampleId": "w:modern#e-d5f70a17a5605fcc",
+          "text": "By providing long-distance communication and energy, electricity created the modern world.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 83
+          }
+        },
+        {
+          "exampleId": "w:modern#e-13c4cf2c8a1a6e22",
+          "text": "The menu in this beautiful colonial house includes traditional Thai cuisine combined with modern cooking methods.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-a:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 90,
+            "end": 96
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:modern#s2",
+      "pos": "n.",
+      "glossZh": "现代事物；现代的一面",
+      "pronunciationId": "w:modern#p-main",
+      "note": "the modern。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:modern#e-53cbd1f61997d3e6",
+          "text": "Beijing is a city bridging the ancient and the modern.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 53
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "现代人（可数名词）",
+      "reason": "少见用法，本批无例证"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

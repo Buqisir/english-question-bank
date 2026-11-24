@@ -1,0 +1,241 @@
+{
+  "entryId": "w:photo",
+  "headword": "photo",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "photograph"
+  ],
+  "ipa": {
+    "uk": "/ˈfəʊtəʊ/",
+    "us": "/ˈfoʊtoʊ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:photo#p-main",
+      "ipa": {
+        "uk": "/ˈfəʊtəʊ/",
+        "us": "/ˈfoʊtoʊ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "photos",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "photoed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "photoing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "photographs",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "photographed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "photographing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 23,
+    "mock": 274
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 274
+  },
+  "senses": [
+    {
+      "senseId": "w:photo#s1",
+      "pos": "n.",
+      "glossZh": "照片",
+      "pronunciationId": "w:photo#p-main",
+      "note": "photograph 的常见简写。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:photo#e-6913629c0ee4f4cd",
+          "text": "A photo of Amelia Earhart.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-gaokao-2020-i:22",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 2,
+            "end": 7
+          }
+        },
+        {
+          "exampleId": "w:photo#e-3b7dd1d0a6022e08",
+          "text": "A family photo.",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 9,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:photo#e-f67c163867ee8caa",
+          "text": "Still, looking back on the photos, they are some of my best shots though they could have been so much better if I had been prepared and managed my time wisely.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:5",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 27,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:photo#s2",
+      "pos": "v.",
+      "glossZh": "给……拍照",
+      "pronunciationId": "w:photo#p-main",
+      "note": "这些真题使用全形 photograph。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:photo#e-9f0811f755c9ff4f",
+          "text": "One fall, my wife Elli and I had a single goal: to photograph polar bears.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 51,
+            "end": 61
+          }
+        },
+        {
+          "exampleId": "w:photo#e-9293aa2a37c23f77",
+          "text": "Polar bears-like all wild animals-should be photographed from a safe distance.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:photo#e-51f06d116e1f20e1",
+          "text": "After we found a crazy-looking road that hung over a bunch of rocks, we decided to photograph the scene at sunset.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 93
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

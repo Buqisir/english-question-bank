@@ -1,0 +1,220 @@
+{
+  "entryId": "w:bus",
+  "headword": "bus",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bʌs/",
+    "us": "/bʌs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bus#p-main",
+      "ipa": {
+        "uk": "/bʌs/",
+        "us": "/bʌs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "buses",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "busses",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "bused",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "busing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "buss",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "bussed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "bussing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 26,
+    "mock": 136
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 135
+  },
+  "senses": [
+    {
+      "senseId": "w:bus#s1",
+      "pos": "n.",
+      "glossZh": "公共汽车；巴士",
+      "pronunciationId": "w:bus#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 26,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bus#e-ae360156c51f542c",
+          "text": "it can bring in \"I have this old, broken-down vehicle\" or \"I rode the bus with these crazy people who were laughing at silly jokes in the back.\" It just opens up conversation.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 77,
+            "end": 80
+          }
+        },
+        {
+          "exampleId": "w:bus#e-a2f9743ff6c7e916",
+          "text": "I had planned to fly to Vienna and take a bus to Prague for a conference.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:bus#e-9b880f8b3a0db9ba",
+          "text": "Thankfully, there was a long queue（队列）still waiting to board the bus.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:bus#s2",
+      "pos": "v.",
+      "glossZh": "用公交车或校车运送",
+      "pronunciationId": "w:bus#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:bus#s3",
+      "pos": "v.",
+      "glossZh": "（在餐厅）清理餐桌",
+      "pronunciationId": "w:bus#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bus#e-13ff5bc659e2e38e",
+          "text": "James worked odd jobs, like busing tables and bartending, but his inability to read held him back.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 34
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "计算机总线、导弹分导部件等",
+      "reason": "行业专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,159 @@
+{
+  "entryId": "w:enterprise",
+  "headword": "enterprise",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈentəpraɪz/",
+    "us": "/ˈentərpraɪz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:enterprise#p-main",
+      "ipa": {
+        "uk": "/ˈentəpraɪz/",
+        "us": "/ˈentərpraɪz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "enterprises",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 8
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "senses": [
+    {
+      "senseId": "w:enterprise#s1",
+      "pos": "n.",
+      "glossZh": "企业",
+      "pronunciationId": "w:enterprise#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:enterprise#e-ce3592c37e7dcebd",
+          "text": "Some participants even stay on to work at Mcvilly’s enterprise.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 52,
+            "end": 62
+          }
+        },
+        {
+          "exampleId": "w:enterprise#e-d26d968758bbcb56",
+          "text": "During his years of reporting, one of his most memorable experiences is one in Nantong, where he encountered self-made business people in the textile（纺织）industry who built international enterprises out of nothing.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 186,
+            "end": 197
+          }
+        },
+        {
+          "exampleId": "w:enterprise#e-07e3649bdb059ae3",
+          "text": "BP, an energy enterprise, expects renewables to account for half of the growth in global energy supply over the next 20 years.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 24
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:enterprise#s2",
+      "pos": "n.",
+      "glossZh": "艰巨的事业",
+      "pronunciationId": "w:enterprise#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:enterprise#s3",
+      "pos": "n.",
+      "glossZh": "进取心",
+      "pronunciationId": "w:enterprise#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "《星际迷航》的进取号",
+      "reason": "虚构飞船专名"
+    },
+    {
+      "glossZh": "enterprising",
+      "reason": "独立派生形容词，索引同形命中留空"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

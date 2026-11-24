@@ -1,0 +1,204 @@
+{
+  "entryId": "w:road",
+  "headword": "road",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rəʊd/",
+    "us": "/roʊd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:road#p-main",
+      "ipa": {
+        "uk": "/rəʊd/",
+        "us": "/roʊd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "roads",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 57,
+    "mock": 231
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 230
+  },
+  "senses": [
+    {
+      "senseId": "w:road#s1",
+      "pos": "n.",
+      "glossZh": "道路",
+      "pronunciationId": "w:road#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 53,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:road#e-5ee3a755a0780909",
+          "text": "In the past, there was often an automatic reaction to increased traffic: just widen the roads, says Mark Poch, the Bellevue Transportation Department’s traffic engineering manager.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:road#e-95bdd5020fb345f1",
+          "text": "One day, while driving near her home, she saw a dog wandering on the road, clearly lost.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 69,
+            "end": 73
+          }
+        },
+        {
+          "exampleId": "w:road#e-ff3dee88ca2d33b2",
+          "text": "While Emily was driving on a narrow stretch of road, her car slid into a ditch（沟）.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:3",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 51
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:road#s2",
+      "pos": "短语",
+      "glossZh": "今后",
+      "pronunciationId": "w:road#p-main",
+      "note": "down the road。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:road#e-a1f27bae1a2856ed",
+          "text": "Volunteers will wash, cut, and freeze or dry them for use in meals down the road.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "reading-b-4",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:road#s3",
+      "pos": "n.",
+      "glossZh": "实现目标的途径",
+      "pronunciationId": "w:road#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:road#e-c3d9326cbddeb083",
+          "text": "The road back was long, but the rewards of never giving up were sweet.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:cloze:4",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 4,
+            "end": 8
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "road testing",
+      "reason": "属复合词 road-test。"
+    },
+    {
+      "glossZh": "road block",
+      "reason": "属复合词 roadblock。"
+    },
+    {
+      "glossZh": "近岸锚泊水域",
+      "reason": "航海专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

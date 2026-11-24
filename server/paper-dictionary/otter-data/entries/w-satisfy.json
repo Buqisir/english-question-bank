@@ -1,0 +1,369 @@
+{
+  "entryId": "w:satisfy",
+  "headword": "satisfy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsætɪsfaɪ/",
+    "us": "/ˈsætɪsfaɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:satisfy#p-main",
+      "ipa": {
+        "uk": "/ˈsætɪsfaɪ/",
+        "us": "/ˈsætɪsfaɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "satisfied",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "satisfies",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "satisfying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 16,
+    "mock": 96
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 92
+  },
+  "senses": [
+    {
+      "senseId": "w:satisfy#s1",
+      "pos": "v.",
+      "glossZh": "满足（需求或欲望）",
+      "pronunciationId": "w:satisfy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 9,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:satisfy#e-eb054f16a64e952a",
+          "text": "Merebeth’s pet delivery service also satisfies her wanderlust.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 37,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:satisfy#e-3b9ecb487774ac93",
+          "text": "We don’t always eat just to satisfy hunger.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2024-national-a:36",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 28,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:satisfy#e-03095bc68bcc437d",
+          "text": "These digital assistants engage visitors in dynamic conversations and offer context-sensitive insights that deepen understanding and satisfy curiosity.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 140,
+            "end": 147
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:satisfy#s2",
+      "pos": "v.",
+      "glossZh": "符合（条件或要求）",
+      "pronunciationId": "w:satisfy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:satisfy#e-3e159f8bba9d63cd",
+          "text": "He suggested I think about the difference between endings that I wanted for the characters and endings that were right for the characters, endings that satisfied the story even if they didn’t have a traditionally positive outcome.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 152,
+            "end": 161
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:satisfy#s3",
+      "pos": "v.",
+      "glossZh": "使满意",
+      "pronunciationId": "w:satisfy#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:satisfy#e-fac3feb7a5ee9e41",
+          "text": "While a casual approach – “I don’t know much about art, but I know what I like” – might satisfy some, truly appreciating a painting requires a determination to go deeper.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 88,
+            "end": 95
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:satisfy#s4",
+      "pos": "adj.",
+      "glossZh": "令人满意的",
+      "pronunciationId": "w:satisfy#p-main",
+      "note": "用 satisfying。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:satisfy#e-fa18679cab559c22",
+          "text": "Naming each nature experience creates a usable language, which helps people recognize and take part in the activities that are most satisfying and meaningful to them.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 132,
+            "end": 142
+          }
+        },
+        {
+          "exampleId": "w:satisfy#e-b5317240160038aa",
+          "text": "For example, the experience of walking along the edge of water might be satisfying for a young professional on a weekend hike in the park.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:satisfy#e-e705e515ac10924e",
+          "text": "After a satisfying career as communications director for a non-profit international charity, I wanted my retirement to reflect my values and my dreams.",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:satisfy#s5",
+      "pos": "adj.",
+      "glossZh": "感到满足的",
+      "pronunciationId": "w:satisfy#p-main",
+      "note": "用 satisfied。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:satisfy#e-d437b1eae85ac63c",
+          "text": "You should feel satisfied at the end of a meal, but not too full.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:seven-choices:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 16,
+            "end": 25
+          }
+        },
+        {
+          "exampleId": "w:satisfy#e-bc34ea13202af30b",
+          "text": "Then when the other person chooses, everyone is satisfied.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-ninth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（九）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-ninth:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 48,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:satisfy#e-844604a92f7955d1",
+          "text": "She printed it out, feeling satisfied with this neat yet shallow, fancy article.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 37
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:satisfy#s6",
+      "pos": "v.",
+      "glossZh": "消除（疑虑）",
+      "pronunciationId": "w:satisfy#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "偿付",
+      "reason": "金融与法律专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,254 @@
+{
+  "entryId": "w:acquire",
+  "headword": "acquire",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈkwaɪə(r)/",
+    "us": "/əˈkwaɪər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:acquire#p-main",
+      "ipa": {
+        "uk": "/əˈkwaɪə(r)/",
+        "us": "/əˈkwaɪər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "acquired",
+      "tags": [
+        "participle",
+        "past",
+        "singular",
+        "third-person",
+        "plural"
+      ]
+    },
+    {
+      "form": "acquires",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "acquiring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 33
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 26
+  },
+  "senses": [
+    {
+      "senseId": "w:acquire#s1",
+      "pos": "v.",
+      "glossZh": "获得；取得；收购",
+      "pronunciationId": "w:acquire#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:acquire#e-95f81f2b8b0e1c83",
+          "text": "Earlier this year, the company was acquired by Fox Entertainment, where Shah now serves as senior vice president of strategy and operations.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-10-sixth",
+            "paperTitle": "重庆市巴蜀中学校高2026届第六次质量检测",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-10-sixth:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-10-sixth:reading-b:17",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 35,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:acquire#e-232a98e7425fe490",
+          "text": "Now, it is shown in its entirety for the very first time since it was acquired by the museum back in 1948.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-03-first-diagnostic-test",
+            "paperTitle": "烟台市2026年高考第一次诊断性测试英语试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-03-first-diagnostic-test:reading-a:13",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 70,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:acquire#e-e007d6f50a14c8dc",
+          "text": "A settler, Nintendo, acquired the Odyssey’s distribution rights for Japan in 1975, and then blew Magnavox out of the water in the following decade by creating an original Nintendo Entertainment System.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-d:5",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 21,
+            "end": 29
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:acquire#s2",
+      "pos": "v.",
+      "glossZh": "习得（技能、知识）；养成（习惯）",
+      "pronunciationId": "w:acquire#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:acquire#e-8f2b1ab267e2e920",
+          "text": "Nowadays I’ve acquired the habit of multiple book reading.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-hunan-yali-2026-first:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:acquire#e-de3f6b87f6856eb2",
+          "text": "★ Gender-based motivation differences: Girls tend to read more for relaxation and escape, while boys focus more on learning new things and acquiring knowledge.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2026-05-third-mock-exam",
+            "paperTitle": "潍坊市2026届高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-weifang-2026-05-third-mock-exam:reading-a:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 139,
+            "end": 148
+          }
+        },
+        {
+          "exampleId": "w:acquire#e-71f57b8717c2fb84",
+          "text": "It’s the knowledge and skills you acquire.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-t8-2025-12-senior-three-joint-assessment:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 34,
+            "end": 41
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:acquire#s3",
+      "pos": "v.",
+      "glossZh": "患上；后天形成（伤病等）",
+      "pronunciationId": "w:acquire#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:acquire#e-11fe538650c28165",
+          "text": "For Amber, who has an acquired brain injury limiting her mobility, working with dogs is rewarding.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 30
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "锁定目标；采集数字信号",
+      "reason": "军事或技术用法"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

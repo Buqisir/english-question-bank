@@ -1,0 +1,130 @@
+{
+  "entryId": "w:afternoon",
+  "headword": "afternoon",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌɑːftəˈnuːn/",
+    "us": "/ˌæftərˈnuːn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:afternoon#p-main",
+      "ipa": {
+        "uk": "/ˌɑːftəˈnuːn/",
+        "us": "/ˌæftərˈnuːn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "afternoons",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 22,
+    "mock": 173
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:afternoon#s1",
+      "pos": "n.",
+      "glossZh": "下午（中午到傍晚）",
+      "pronunciationId": "w:afternoon#p-main",
+      "note": "Good afternoon. 是下午见面时的问候语。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 22,
+        "mock": 173
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:afternoon#e-023a750940be8696",
+          "text": "All non-credit courses meet from 9:00 a.m. — 11:30 a.m. daily and may have additional requirements in the afternoons or evenings.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 106,
+            "end": 116
+          }
+        },
+        {
+          "exampleId": "w:afternoon#e-cae483dd18ae5203",
+          "text": "Organ music is played on Thursday afternoons.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-a:17",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 44
+          }
+        },
+        {
+          "exampleId": "w:afternoon#e-b0cef6a8dcdba5a7",
+          "text": "One August afternoon, I sat in my kitchen staring at a glass vase that hadn’t seen daylight since my wedding.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-i:cloze:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 20
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "晚年（比喻用法）",
+      "reason": "较少见的文学用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

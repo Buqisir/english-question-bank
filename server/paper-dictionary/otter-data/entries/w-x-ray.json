@@ -1,0 +1,269 @@
+{
+  "entryId": "w:x-ray",
+  "headword": "X-ray",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈeks reɪ/",
+    "us": "/ˈeks reɪ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:x-ray#p-main",
+      "ipa": {
+        "uk": "/ˈeks reɪ/",
+        "us": "/ˈeks reɪ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "X-rays",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "x-rays",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "X-rayed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "X-raying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "x-rayed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "x-raying",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 11
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "senses": [
+    {
+      "senseId": "w:x-ray#s1",
+      "pos": "n.",
+      "glossZh": "X 射线",
+      "pronunciationId": "w:x-ray#p-main",
+      "note": "也可用在另一名词之前。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:x-ray#e-feb8ca1147a8a723",
+          "text": "Next, she used x-ray fluorescence technology to search for signs of chromium (Cr) or titanium (Ti), commonly used in 18th- and 19th-century tanning techniques.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        },
+        {
+          "exampleId": "w:x-ray#e-da0c449186316dcf",
+          "text": "Key missions include the Hongmeng Program, Kuafu-2, an exoplanet（外行星）survey satellite, and an upgraded X-ray space observatory.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:grammar-fill:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 103,
+            "end": 108
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:x-ray#s2",
+      "pos": "n.",
+      "glossZh": "X 光照片",
+      "pronunciationId": "w:x-ray#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:x-ray#e-9c76fb08ef51cc2d",
+          "text": "In the blink of an eye, artificial intelligence (AI) has rapidly entered every walk of life, from self-driving taxis to software that reads X-rays, to virtual assistants that can schedule meetings and draft e-mails.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test",
+            "paperTitle": "南昌市2026届高三年级三月测试英语试题",
+            "groupId": "group:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangxi-nanchang-2026-03-senior-three-monthly-test:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 140,
+            "end": 146
+          }
+        },
+        {
+          "exampleId": "w:x-ray#e-fa4307cd9e4fd8b9",
+          "text": "A new artificial intelligence system developed by researchers at the University of Surrey can forecast what a patient’s knee X-ray might look like in one year’s time.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 125,
+            "end": 130
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:x-ray#s3",
+      "pos": "n.",
+      "glossZh": "X 光检查",
+      "pronunciationId": "w:x-ray#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:x-ray#e-1404667794b3825f",
+          "text": "Each stop lasts an average of two days, and during that time the doctors and nurses on board provide rural（乡村）populations with basic medical care, X-ray scans and prescriptions.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 147,
+            "end": 152
+          }
+        },
+        {
+          "exampleId": "w:x-ray#e-820d128f634b5a7c",
+          "text": "A chest X-ray.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test",
+            "paperTitle": "淄博市2025-2026学年度第一学期高三摸底质量检测 英语试卷",
+            "groupId": "group:paper-mock-shandong-zibo-2026-01-senior-three-first-semester-baseline-quality-test:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 8,
+            "end": 13
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:x-ray#s4",
+      "pos": "v.",
+      "glossZh": "给……拍 X 光片",
+      "pronunciationId": "w:x-ray#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "隔着棋子控制、X 光机",
+      "reason": "专门或不宜独立收录"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

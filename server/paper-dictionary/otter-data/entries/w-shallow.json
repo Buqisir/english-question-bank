@@ -1,0 +1,322 @@
+{
+  "entryId": "w:shallow",
+  "headword": "shallow",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈʃæləʊ/",
+    "us": "/ˈʃæloʊ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:shallow#p-main",
+      "ipa": {
+        "uk": "/ˈʃæləʊ/",
+        "us": "/ˈʃæloʊ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more shallow",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most shallow",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "shallower",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "shallowest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "shallows",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "shallowed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "shallowing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 29
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 21
+  },
+  "senses": [
+    {
+      "senseId": "w:shallow#s1",
+      "pos": "adj.",
+      "glossZh": "浅的",
+      "pronunciationId": "w:shallow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shallow#e-d266a066e84de5d2",
+          "text": "In the shallow pool.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:listening.long-form",
+            "locator": {
+              "question": 11,
+              "questionId": "question:listening:11",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:shallow#e-df1f61e6efcbb5d2",
+          "text": "In the dry, shallow soil, the seeds didn’t take.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:reading-b:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 19
+          }
+        },
+        {
+          "exampleId": "w:shallow#e-c36aee040f7fd388",
+          "text": "In the Caspian Sea, sturgeon typically reside in shallower waters during the summer and fall and lay eggs in the rivers that flow into the sea.",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-08",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026年度上学期八月联考高三英语试题",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-08:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-08:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shallow#s2",
+      "pos": "adj.",
+      "glossZh": "肤浅的",
+      "pronunciationId": "w:shallow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shallow#e-89c23645f60d91c8",
+          "text": "However, there is a common misunderstanding that mobile photography, compared to film photography, reduces creation to a shallow form of photographic note-taking rather than true art.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 121,
+            "end": 128
+          }
+        },
+        {
+          "exampleId": "w:shallow#e-0cc125229e9801f4",
+          "text": "She printed it out, feeling satisfied with this neat yet shallow, fancy article.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:shallow#e-fa3f5029536cca7b",
+          "text": "Because AI users were usually satisfied with their answer after only one question or prompt (提示), accepting the answer without further checking or confirmation, they can be said to have engaged in what Robin Welsch, an Aalto University computer scientist, calls “cognitive (认知) offloading” – exploring the question with reduced reflection, and approaching it in a more “shallow” way.",
+          "source": {
+            "paperId": "paper-mock-hunan-changsha-2026-01-senior-three-mock-exam",
+            "paperTitle": "长沙市2026年高三年级模拟考试 英语",
+            "groupId": "group:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-changsha-2026-01-senior-three-mock-exam:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 370,
+            "end": 377
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shallow#s3",
+      "pos": "adj.",
+      "glossZh": "浅促的（呼吸）",
+      "pronunciationId": "w:shallow#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shallow#e-a8554d5346cba21e",
+          "text": "When we bend forward, our chest becomes less open, which limits oxygen intake and often leads to shallow breathing.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-04-second-teaching-quality-test",
+            "paperTitle": "2026年合肥市高三第二次教学质量检测英语试卷",
+            "groupId": "group:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-04-second-teaching-quality-test:seven-choices:2",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 97,
+            "end": 104
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shallow#s4",
+      "pos": "n.",
+      "glossZh": "浅水区",
+      "pronunciationId": "w:shallow#p-main",
+      "note": "常用复数 shallows。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:shallow#e-b44b3405712ef6b2",
+          "text": "Its big draw is diverse options – Bloody Bay Wall, a massive wall dropping from 10-20 feet deep, is top for serious divers, with unique wildlife in upper walls and shallows.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test",
+            "paperTitle": "山东名校考试联盟2025年10月高三年级阶段性检测 英语学科",
+            "groupId": "group:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-exam-alliance-2025-10-senior-three-stage-test:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 164,
+            "end": 172
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:shallow#s5",
+      "pos": "v.",
+      "glossZh": "变浅",
+      "pronunciationId": "w:shallow#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "shallowing hypothesis",
+      "reason": "专指浅层加工假说，例中使用衍生形式。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

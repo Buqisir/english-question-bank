@@ -1,0 +1,129 @@
+{
+  "entryId": "w:conversation",
+  "headword": "conversation",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌkɒnvəˈseɪʃn/",
+    "us": "/ˌkɑːnvərˈseɪʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:conversation#p-main",
+      "ipa": {
+        "uk": "/ˌkɒnvəˈseɪʃn/",
+        "us": "/ˌkɑːnvərˈseɪʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "conversations",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 46,
+    "mock": 381
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:conversation#s1",
+      "pos": "n.",
+      "glossZh": "交谈；谈话；对话（也用于比喻）",
+      "pronunciationId": "w:conversation#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 46,
+        "mock": 381
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:conversation#e-397e52dc9c572e8a",
+          "text": "If you can start the conversation with a question other than “What do you do for a living?”, you’ll be able to get a lot more interesting conversation out of whomever it is you’re talking to.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:conversation#e-103d202c7ea47a46",
+          "text": "I watched with great sympathy as elderly Italians tried to hold a conversation in Italian with people who did not speak the language.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:2",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:conversation#e-fb8d55b7425bc880",
+          "text": "If we are to find the other half of that conversation, we have to read not just the texts, but the objects.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 53
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "击剑刀锋交锋、生活方式、性行为",
+      "reason": "术语或古旧用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

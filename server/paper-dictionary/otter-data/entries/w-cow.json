@@ -1,0 +1,264 @@
+{
+  "entryId": "w:cow",
+  "headword": "cow",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kaʊ/",
+    "us": "/kaʊ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:cow#p-main",
+      "ipa": {
+        "uk": "/kaʊ/",
+        "us": "/kaʊ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "cattle",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "cows",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "kine",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "COWs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "CoWs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "cowed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "cowing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 12
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 10
+  },
+  "senses": [
+    {
+      "senseId": "w:cow#s1",
+      "pos": "n.",
+      "glossZh": "母牛；奶牛；泛指牛",
+      "pronunciationId": "w:cow#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cow#e-7fd950abd6925e30",
+          "text": "A computer system will analyze the video to determine whether a cow is sick.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-d:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 64,
+            "end": 67
+          }
+        },
+        {
+          "exampleId": "w:cow#e-caf335509cb9cb2c",
+          "text": "Having milked cows as a boy and worked with beef cattle, I knew – so I thought – all about cows.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:cow#e-8f0e01c02aa51dcf",
+          "text": "I left my daughter at the swimming center, circled back and found the cow standing at the grassy edge of a side street, breathing heavily.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cow#s2",
+      "pos": "n.",
+      "glossZh": "（象、鲸等大型动物的）雌性",
+      "pronunciationId": "w:cow#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:cow#s3",
+      "pos": "v.",
+      "glossZh": "吓住；使畏缩",
+      "pronunciationId": "w:cow#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:cow#s4",
+      "pos": "短语",
+      "glossZh": "摇钱树；稳定的赚钱来源",
+      "pronunciationId": "w:cow#p-main",
+      "note": "cash cow。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cow#e-5625b9e10e461fb9",
+          "text": "“They don’t want to lose their cash cow, so they’re willing to put millions into fighting government restrictions on UPFs as well as funding nutritionists to voice evidence of their harmlessness,” Popkin said.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-import-20261026-n093:reading-c:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 39
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cow#s5",
+      "pos": "短语",
+      "glossZh": "不容质疑的事物",
+      "pronunciationId": "w:cow#p-main",
+      "note": "sacred cow。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cow#e-024084a845f8ae2b",
+          "text": "In many cities, preserving every old structure, no matter its function or relevance, has become something of a sacred cow, admired by all but discussed by few.",
+          "source": {
+            "paperId": "paper-mock-fujian-prestigious-schools-2026-02-entrance-exam",
+            "paperTitle": "福建名校联盟全国优质校2026届高三二月大联考英语试题",
+            "groupId": "group:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-fujian-prestigious-schools-2026-02-entrance-exam:reading-c:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 118,
+            "end": 121
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "止动楔、西点军校学员、写时复制",
+      "reason": "专门义或同形缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

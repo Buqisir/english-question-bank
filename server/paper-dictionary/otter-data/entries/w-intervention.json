@@ -1,0 +1,201 @@
+{
+  "entryId": "w:intervention",
+  "headword": "intervention",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌɪntəˈvenʃn/",
+    "us": "/ˌɪntərˈvenʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:intervention#p-main",
+      "ipa": {
+        "uk": "/ˌɪntəˈvenʃn/",
+        "us": "/ˌɪntərˈvenʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "interventions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 71
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 65
+  },
+  "senses": [
+    {
+      "senseId": "w:intervention#s1",
+      "pos": "n.",
+      "glossZh": "介入；干预",
+      "pronunciationId": "w:intervention#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:intervention#e-8048ed6d61cc019a",
+          "text": "The process went naturally without any human intervention.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-10-monthly-exam-2",
+            "paperTitle": "长郡中学2026届高三月考试卷（二）英语学科试题卷",
+            "groupId": "group:paper-mock-hunan-changjun-2025-10-monthly-exam-2:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-hunan-changjun-2025-10-monthly-exam-2:29",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 45,
+            "end": 57
+          }
+        },
+        {
+          "exampleId": "w:intervention#e-aa46c85cab76f2c8",
+          "text": "Their findings showed that bystanders intervened in 91% of cases, and in direct contradiction to the original theory, the presence of more bystanders actually increased the likelihood of intervention, with multiple people often stepping in together.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 187,
+            "end": 199
+          }
+        },
+        {
+          "exampleId": "w:intervention#e-a3cf333ed290637d",
+          "text": "Oxfam is now calling for urgent political intervention, appealing to governments for increased taxes on what it terms “climate-polluting extreme wealth”.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 54
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:intervention#s2",
+      "pos": "n.",
+      "glossZh": "干预措施",
+      "pronunciationId": "w:intervention#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:intervention#e-d686f63272341db6",
+          "text": "Knowing that better sleep is possible, and understanding the basis, could point the way to interventions to improve sleep, enabling more people to live longer, healthier lives.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:intervention#e-106ad375e1d409ad",
+          "text": "This is small, but the effects of most educational interventions are small.",
+          "source": {
+            "paperId": "paper-mock-guangdong-guangzhou-2025-12-survey",
+            "paperTitle": "2026届广州市高三年级调研测试英语",
+            "groupId": "group:paper-mock-guangdong-guangzhou-2025-12-survey:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-guangdong-guangzhou-2025-12-survey:reading-c:2",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:intervention#e-cd8a210c489971f7",
+          "text": "While new, highly-effective weight-loss drugs have hit the market, their price label and numerous side effects mean other weight-loss interventions are still needed.",
+          "source": {
+            "paperId": "paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training",
+            "paperTitle": "圆创联盟 湖北省部分中学2026届高三11月阶段训练 英语",
+            "groupId": "group:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-yuanchuang-alliance-2025-11-senior-three-stage-training:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 134,
+            "end": 147
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "作为第三方参与诉讼",
+      "reason": "法律专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,170 @@
+{
+  "entryId": "w:ham",
+  "headword": "ham",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/hæm/",
+    "us": "/hæm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ham#p-main",
+      "ipa": {
+        "uk": "/hæm/",
+        "us": "/hæm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "hams",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "hammed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "hamming",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:ham#s1",
+      "pos": "n.",
+      "glossZh": "火腿",
+      "pronunciationId": "w:ham#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ham#e-fc42b049535f5a46",
+          "text": "Ham sandwiches.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 7,
+              "questionId": "question:listening:7",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 3
+          }
+        },
+        {
+          "exampleId": "w:ham#e-1446fae646f59ddd",
+          "text": "These were carefully prepared baskets with all necessities for a traditional holiday meal: golden stuffing mix, green beans, sweet potatoes, jellied cranberry sauce, flour, butter, onions, and dessert items, and even turkeys and hams.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-2026-03-m171:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 229,
+            "end": 233
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:ham#s2",
+      "pos": "n.",
+      "glossZh": "表演过火的人",
+      "pronunciationId": "w:ham#p-main",
+      "note": "非正式。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ham#s3",
+      "pos": "n.",
+      "glossZh": "业余无线电爱好者",
+      "pronunciationId": "w:ham#p-main",
+      "note": "也用 radio ham。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:ham#s4",
+      "pos": "v.",
+      "glossZh": "表演过火",
+      "pronunciationId": "w:ham#p-main",
+      "note": "常用 ham it up。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "非垃圾邮件",
+      "reason": "反垃圾邮件技术用语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

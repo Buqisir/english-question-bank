@@ -1,0 +1,228 @@
+{
+  "entryId": "w:gym",
+  "headword": "gym",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "gymnasium"
+  ],
+  "ipa": {
+    "uk": "/dʒɪm/",
+    "us": "/dʒɪm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:gym#p-main",
+      "ipa": {
+        "uk": "/dʒɪm/",
+        "us": "/dʒɪm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "gyms",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "gymnasia",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "gymnasiums",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 92
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 90
+  },
+  "senses": [
+    {
+      "senseId": "w:gym#s1",
+      "pos": "n.",
+      "glossZh": "健身房",
+      "pronunciationId": "w:gym#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gym#e-1a2bc1be97c3a59f",
+          "text": "Why does the woman refuse to go to the gym?",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:gym#e-cf223e7a56350e21",
+          "text": "One reason was: “You’ll actually show up if you know someone is waiting for you at the gym,” while another read: “__36__” With a workout partner, you will increase your training effort as there is a subtle (微妙) competition.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "seven-choices-1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 90
+          }
+        },
+        {
+          "exampleId": "w:gym#e-d947fad1482c68f4",
+          "text": "If you plan on working out in a gym, that person must belong to the same gym.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "seven-choices-4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gym#s2",
+      "pos": "n.",
+      "glossZh": "体育馆",
+      "pronunciationId": "w:gym#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:gym#e-40d1673e7cf4078c",
+          "text": "Somewhere in the building, there was also a library, a cafeteria, and a gym.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 72,
+            "end": 75
+          }
+        },
+        {
+          "exampleId": "w:gym#e-c343a3d87e1bdc5f",
+          "text": "Their coach, Brendan King, who never __41__ them on weekends, urged them back to the gym.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 85,
+            "end": 88
+          }
+        },
+        {
+          "exampleId": "w:gym#e-bfed71e065c18253",
+          "text": "echoing throughout the gym.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:cloze:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 23,
+            "end": 26
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:gym#s3",
+      "pos": "n.",
+      "glossZh": "体育课",
+      "pronunciationId": "w:gym#p-main",
+      "note": "美式。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "欧洲的升学中学",
+      "reason": "对 Gymnasium 的少见简称"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

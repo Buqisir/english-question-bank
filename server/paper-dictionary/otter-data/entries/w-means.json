@@ -1,0 +1,189 @@
+{
+  "entryId": "w:means",
+  "headword": "means",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/miːnz/",
+    "us": "/miːnz/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:means#p-main",
+      "ipa": {
+        "uk": "/miːnz/",
+        "us": "/miːnz/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 37,
+    "mock": 217
+  },
+  "unassignedCounts": {
+    "gaokao": 35,
+    "mock": 215
+  },
+  "senses": [
+    {
+      "senseId": "w:means#s1",
+      "pos": "n.",
+      "glossZh": "手段；方法",
+      "pronunciationId": "w:means#p-main",
+      "note": "作单数或复数时词形相同。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:means#e-5e0124aedf5725b2",
+          "text": "I walked into class believing that writing is important as a means of communication.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:means#e-6298aabf109abca8",
+          "text": "“What suburbia cries for are the means for people to gather easily, inexpensively, regularly, and pleasurably – a ‘place on the corner.’”",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 38
+          }
+        },
+        {
+          "exampleId": "w:means#e-e99423d53106564d",
+          "text": "While many science phenomena may be abstract, global, or layered, causing students to feel conflicted, expansive framing provides a means of cutting through those layers and gives students a deeper understanding of science, allowing more tangible connections with how science is applied.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 132,
+            "end": 137
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:means#s2",
+      "pos": "n.",
+      "glossZh": "经济能力；财力",
+      "pronunciationId": "w:means#p-main",
+      "note": "within one's means 指「在自己负担得起的范围内」。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:means#s3",
+      "pos": "短语",
+      "glossZh": "绝不；一点也不",
+      "pronunciationId": "w:means#p-main",
+      "note": "by no means。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:means#e-ecdf91197e1f7d39",
+          "text": "Plastic straws are by no means the biggest source（来源）of plastic pollution, but they’ve recently come under fire because most people don’t need them to drink with and, because of their small size and weight, they cannot be recycled.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-b",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国乙卷）",
+            "groupId": "group:paper-gaokao-2021-national-b:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-b:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 30
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:means#s4",
+      "pos": "短语",
+      "glossZh": "当然；务必",
+      "pronunciationId": "w:means#p-main",
+      "note": "by all means。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "动词 mean 的第三人称单数",
+      "reason": "同形屈折形式，归入 mean 的动词义"
+    },
+    {
+      "glossZh": "姓氏；美国肯塔基州地名",
+      "reason": "同形专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

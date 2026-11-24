@@ -1,0 +1,160 @@
+{
+  "entryId": "w:rare",
+  "headword": "rare",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/reə(r)/",
+    "us": "/rer/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:rare#p-main",
+      "ipa": {
+        "uk": "/reə(r)/",
+        "us": "/rer/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "rarer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "rarest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more rare",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most rare",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 12,
+    "mock": 133
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 133
+  },
+  "senses": [
+    {
+      "senseId": "w:rare#s1",
+      "pos": "adj.",
+      "glossZh": "罕见的",
+      "pronunciationId": "w:rare#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 12,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rare#e-f36c7abd04134c8e",
+          "text": "It’s rare to hear someone say, “I wish that speaker had spoken longer.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:rare#e-aa84adf54a22b242",
+          "text": "Port Lympne Reserve, which runs a breeding (繁育) programme, has welcomed the arrival of a rare black rhino calf (犀牛幼崽).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 93
+          }
+        },
+        {
+          "exampleId": "w:rare#e-db41819bd59f38f3",
+          "text": "However, obtaining items that are rare, recently published or in high demand may take longer.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 34,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rare#s2",
+      "pos": "adj.",
+      "glossZh": "煎得很生的（肉）",
+      "pronunciationId": "w:rare#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "稀薄的",
+      "reason": "旧式用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

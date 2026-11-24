@@ -1,0 +1,136 @@
+{
+  "entryId": "w:handsome",
+  "headword": "handsome",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈhænsəm/",
+    "us": "/ˈhænsəm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:handsome#p-main",
+      "ipa": {
+        "uk": "/ˈhænsəm/",
+        "us": "/ˈhænsəm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "handsomer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "handsomest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more handsome",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most handsome",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:handsome#s1",
+      "pos": "adj.",
+      "glossZh": "英俊的",
+      "pronunciationId": "w:handsome#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:handsome#e-8b4ee7e6befa08cf",
+          "text": "Paragraph 1: Being clever, good-natured and very handsome, he became my best friend soon.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation:11",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 49,
+            "end": 57
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:handsome#s2",
+      "pos": "adj.",
+      "glossZh": "可观的（数额）",
+      "pronunciationId": "w:handsome#p-main",
+      "note": "如 a handsome profit。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:handsome#s3",
+      "pos": "adj.",
+      "glossZh": "美观的（物品或建筑）",
+      "pronunciationId": "w:handsome#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "使变漂亮；手法灵巧的",
+      "reason": "罕见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

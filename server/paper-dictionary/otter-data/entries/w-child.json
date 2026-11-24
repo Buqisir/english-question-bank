@@ -1,0 +1,262 @@
+{
+  "entryId": "w:child",
+  "headword": "child",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "children"
+  ],
+  "ipa": {
+    "uk": "/tʃaɪld/",
+    "us": "/tʃaɪld/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:child#p-main",
+      "ipa": {
+        "uk": "/tʃaɪld/",
+        "us": "/tʃaɪld/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 199,
+    "mock": 653
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 651
+  },
+  "senses": [
+    {
+      "senseId": "w:child#s1",
+      "pos": "n.",
+      "glossZh": "儿童；小孩",
+      "pronunciationId": "w:child#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 135,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:child#e-0ddff4eaca79ebf3",
+          "text": "I was always an enthusiastic reader sometimes reading up to three books a day as a child.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 83,
+            "end": 88
+          }
+        },
+        {
+          "exampleId": "w:child#e-ba00742d59b3c308",
+          "text": "At one school in the UK, children between the ages of 10 and 15 walk 6km with six litres of water.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 33
+          }
+        },
+        {
+          "exampleId": "w:child#e-f59b942bf94a5fd9",
+          "text": "Children under 12 years accompanied by an adult are admitted free.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-a:12",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:child#s2",
+      "pos": "n.",
+      "glossZh": "子女；孩子（从父母这一关系而言）",
+      "pronunciationId": "w:child#p-main",
+      "note": "复数 children。成年子女也可用。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 62,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:child#e-675d30e97270d794",
+          "text": "Jennifer now is married and has three children of her own.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:child#e-e642992a8ee9f55a",
+          "text": "Now, I see my children taking their children to the library and I love that the excitement of going to the library lives on from generation to generation.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:child#e-58029c0bf8b60629",
+          "text": "Some people live with their elderly parents; many more adult children are returning to the family home, if they ever left.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 69
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:child#s3",
+      "pos": "短语",
+      "glossZh": "内在小孩（仍保有童年感受的那部分自我）",
+      "pronunciationId": "w:child#p-main",
+      "note": "inner child",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:child#e-ff3365d37f59a057",
+          "text": "“Everyone has a child inside,” says Cai Gao, the celebrated 79-year-old picture book artist who has spent decades nurturing her inner child and her work.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-05-tenth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（十）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-05-tenth:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-05-tenth:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 134,
+            "end": 139
+          }
+        },
+        {
+          "exampleId": "w:child#e-fa8a5a2b9e940afd",
+          "text": "They bring joy to the inner child within me,” the lady in her 20s told Xinhua.",
+          "source": {
+            "paperId": "paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam",
+            "paperTitle": "重庆市九龙坡区2026届高三第一学期期中考试 英语学科 试题卷",
+            "groupId": "group:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-jiulongpo-2025-11-senior-three-first-semester-midterm-exam:grammar-fill:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 33
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:child#s4",
+      "pos": "n.",
+      "glossZh": "（某时代、环境等的）产物",
+      "pronunciationId": "w:child#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "雷诺曼牌、子节点、古旧的生育动词等",
+      "reason": "占卜、计算机术语或旧用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

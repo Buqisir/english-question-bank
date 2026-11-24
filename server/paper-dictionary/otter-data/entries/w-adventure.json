@@ -1,0 +1,129 @@
+{
+  "entryId": "w:adventure",
+  "headword": "adventure",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ədˈventʃə(r)/",
+    "us": "/ədˈventʃər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:adventure#p-main",
+      "ipa": {
+        "uk": "/ədˈventʃə(r)/",
+        "us": "/ədˈventʃər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "adventures",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 118
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:adventure#s1",
+      "pos": "n.",
+      "glossZh": "冒险；奇遇；新奇而刺激的经历",
+      "pronunciationId": "w:adventure#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 118
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:adventure#e-b7c66c1637818bae",
+          "text": "Stories were like air to me and while other kids played ball or went to parties, I lived out adventures through the books I checked out from the library.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 93,
+            "end": 103
+          }
+        },
+        {
+          "exampleId": "w:adventure#e-4f67055ce01ac7c3",
+          "text": "I tend to travel with a few of my friends to state parks or to the countryside to go on adventures and take photos along the way.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 88,
+            "end": 98
+          }
+        },
+        {
+          "exampleId": "w:adventure#e-ce07b1398bd7f3d4",
+          "text": "AI transforms a standard museum trip into a personalized and interactive adventure.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 73,
+            "end": 82
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "投机生意；冒险游戏分类",
+      "reason": "商业或游戏专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

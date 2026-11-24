@@ -1,0 +1,150 @@
+{
+  "entryId": "w:able",
+  "headword": "able",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈeɪbl/",
+    "us": "/ˈeɪbl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:able#p-main",
+      "ipa": {
+        "uk": "/ˈeɪbl/",
+        "us": "/ˈeɪbl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "abler",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "ablest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 43,
+    "mock": 146
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 146
+  },
+  "senses": [
+    {
+      "senseId": "w:able#s1",
+      "pos": "adj.",
+      "glossZh": "能够；有条件做到",
+      "note": "常用 be able to do sth，形容成功完成某事时也可译为「设法做到了」。",
+      "pronunciationId": "w:able#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 42,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:able#e-608c01cd84a8b146",
+          "text": "She decided to go back to college to advance her career and to be able to better support her family while doing something she loves: nursing.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 66,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:able#e-a472845c8eb6fc27",
+          "text": "A good thinker is able to inspire other people.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-gaokao-2022-zhejiang-jun:29",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 18,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:able#e-c5303cded7158812",
+          "text": "Nobody is better able to understand the impact of desertification and climate change than somebody who is living with no access to water.”",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 21
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:able#s2",
+      "pos": "adj.",
+      "glossZh": "能干的；有才干的",
+      "pronunciationId": "w:able#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "航海通信代码；使做好准备",
+      "reason": "专业或旧义"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

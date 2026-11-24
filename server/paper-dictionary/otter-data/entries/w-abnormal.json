@@ -1,0 +1,137 @@
+{
+  "entryId": "w:abnormal",
+  "headword": "abnormal",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/æbˈnɔːməl/",
+    "us": "/æbˈnɔːrməl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:abnormal#p-main",
+      "ipa": {
+        "uk": "/æbˈnɔːməl/",
+        "us": "/æbˈnɔːrməl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more abnormal",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most abnormal",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 7
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:abnormal#s1",
+      "pos": "adj.",
+      "glossZh": "异常的；不正常的；偏离通常状态的",
+      "pronunciationId": "w:abnormal#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 7
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:abnormal#e-4c0806bdb2277730",
+          "text": "Monitoring a person’s heartbeat from a distance holds significant value, as it can detect irregularities like abnormal heart rates, providing crucial warnings of potential heart issues.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-first",
+            "paperTitle": "雅礼中学2026届高三月考试卷（一）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-first:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-first:reading-d:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 110,
+            "end": 118
+          }
+        },
+        {
+          "exampleId": "w:abnormal#e-c429c576e698c436",
+          "text": "Anxiety always causes abnormal breathing.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:30",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 22,
+            "end": 30
+          }
+        },
+        {
+          "exampleId": "w:abnormal#e-5512ede10e3f8c17",
+          "text": "Their sleep patterns become abnormal.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第二次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 28,
+            "end": 36
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "指异常的人或事物",
+      "reason": "名词用法罕见"
+    }
+  ],
+  "version": 2,
+  "updatedAt": "2026-11-24"
+}

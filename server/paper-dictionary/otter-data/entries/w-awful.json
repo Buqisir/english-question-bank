@@ -1,0 +1,208 @@
+{
+  "entryId": "w:awful",
+  "headword": "awful",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɔːfl/",
+    "us": "/ˈɔːfl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:awful#p-main",
+      "ipa": {
+        "uk": "/ˈɔːfl/",
+        "us": "/ˈɔːfl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "awfuller",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "awfullest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more awful",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most awful",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 5,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 12
+  },
+  "senses": [
+    {
+      "senseId": "w:awful#s1",
+      "pos": "adj.",
+      "glossZh": "糟糕的；令人不快的；可怕的",
+      "pronunciationId": "w:awful#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:awful#e-5f7c5636f77670b1",
+          "text": "Fearing that I would pick out something awful, I desperately tried to ask the boy ahead of me for a recommendation.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+              "sentence": 7
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 45
+          }
+        },
+        {
+          "exampleId": "w:awful#e-3af7337141436619",
+          "text": "“They come to us thinking vegetables are awful, dirt is awful, insects are awful.” Though some are initially scared of the insects and turned off by the dirt, most are eager to try something new.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 41,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:awful#e-318d91326d21ab19",
+          "text": "As for him, he was horrified – but whether at the awful possibility that nobody would toss bricks for him or at my rudeness, I shall never know.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam",
+            "paperTitle": "武汉市武昌区2026届高三年级元月调研考试 英语试题",
+            "groupId": "group:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b",
+            "locator": {
+              "paragraph": 17,
+              "paragraphId": "block:paper-mock-hubei-wuchang-2026-01-senior-three-january-survey-exam:reading-b:17",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 55
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:awful#s2",
+      "pos": "adj.",
+      "glossZh": "（身体或心情）很不舒服的",
+      "pronunciationId": "w:awful#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:awful#e-87e9acea009e598d",
+          "text": "Alex felt awful but also angry.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:writing-continuation:4",
+              "sentence": 7
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:awful#s3",
+      "pos": "adj.",
+      "glossZh": "极大的；极其严重的",
+      "pronunciationId": "w:awful#p-main",
+      "note": "如 an awful lot。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:awful#s4",
+      "pos": "adv.",
+      "glossZh": "非常；极其",
+      "pronunciationId": "w:awful#p-main",
+      "note": "非正式用法，尤见于美式英语。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "令人敬畏的；充满敬畏的；特定政治标签",
+      "reason": "旧义或专门称法。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

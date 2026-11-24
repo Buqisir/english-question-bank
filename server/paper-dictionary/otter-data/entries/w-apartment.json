@@ -1,0 +1,130 @@
+{
+  "entryId": "w:apartment",
+  "headword": "apartment",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈpɑːtmənt/",
+    "us": "/əˈpɑːrtmənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:apartment#p-main",
+      "ipa": {
+        "uk": "/əˈpɑːtmənt/",
+        "us": "/əˈpɑːrtmənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "apartments",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 60
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:apartment#s1",
+      "pos": "n.",
+      "glossZh": "公寓；一套住房",
+      "pronunciationId": "w:apartment#p-main",
+      "note": "英式英语也常用 flat。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 60
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:apartment#e-e7db9dc861305eee",
+          "text": "A housewarming party is a special party to be held when someone buys or moves into a new apartment or house.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 98
+          }
+        },
+        {
+          "exampleId": "w:apartment#e-54ed96d3863cdc0d",
+          "text": "So the first thing we did was rent a fantastically expensive sixth-floor apartment the size of a cupboard.",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 80,
+            "end": 89
+          }
+        },
+        {
+          "exampleId": "w:apartment#e-b0e33b3ab7b5a005",
+          "text": "I sit in my apartment today, loving each of the __53__ that share our small space.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:cloze",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2025-i:cloze:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 21
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "宫殿中专用的房间；分隔区域",
+      "reason": "前者为旧式用法，后者通常用 compartment。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

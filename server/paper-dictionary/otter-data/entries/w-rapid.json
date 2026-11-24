@@ -1,0 +1,187 @@
+{
+  "entryId": "w:rapid",
+  "headword": "rapid",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈræpɪd/",
+    "us": "/ˈræpɪd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:rapid#p-main",
+      "ipa": {
+        "uk": "/ˈræpɪd/",
+        "us": "/ˈræpɪd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more rapid",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most rapid",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "rapider",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "rapidest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "rapids",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 73
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 71
+  },
+  "senses": [
+    {
+      "senseId": "w:rapid#s1",
+      "pos": "adj.",
+      "glossZh": "迅速的",
+      "pronunciationId": "w:rapid#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rapid#e-fdde0d80554ad69c",
+          "text": "Travel promotes understanding, expands our minds, makes us better people, and boosts local economies and communities, but the rapid growth of travel has led to overtourism in certain regions and destinations.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 126,
+            "end": 131
+          }
+        },
+        {
+          "exampleId": "w:rapid#e-f491363a6b0ad7bd",
+          "text": "Looking ahead, the rapid advancement of AI promises both exciting possibilities and ethical (伦理的) challenges.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 24
+          }
+        },
+        {
+          "exampleId": "w:rapid#e-c452c90eefce312c",
+          "text": "In reality, what we call multitasking is often rapid task-switching, which divides attention, reduces focus, and ultimately leads to lower-quality results.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 47,
+            "end": 52
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:rapid#s2",
+      "pos": "n.",
+      "glossZh": "急流",
+      "pronunciationId": "w:rapid#p-main",
+      "note": "通常用复数 rapids。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:rapid#e-4870d4bb9a27bd5d",
+          "text": "On one hike, I found myself hanging onto a wire on a bridge made of two partly rotten(腐烂的) logs, suspended high above rushing rapids.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 126,
+            "end": 132
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "快棋",
+      "reason": "国际象棋专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

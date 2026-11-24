@@ -1,0 +1,315 @@
+{
+  "entryId": "w:dedicate",
+  "headword": "dedicate",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdedɪkeɪt/",
+    "us": "/ˈdedɪkeɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:dedicate#p-main",
+      "ipa": {
+        "uk": "/ˈdedɪkeɪt/",
+        "us": "/ˈdedɪkeɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more dedicate",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most dedicate",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "dedicated",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "dedicates",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "dedicating",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 36
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 27
+  },
+  "senses": [
+    {
+      "senseId": "w:dedicate#s1",
+      "pos": "v.",
+      "glossZh": "奉献；投入（时间、精力等）",
+      "pronunciationId": "w:dedicate#p-main",
+      "note": "dedicate sth to sth，to 后接名词或动名词。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dedicate#e-eb86e2a1a77932a2",
+          "text": "Learning about his struggle, Riseup, a local nonprofit organization dedicated to helping people rebuild their lives after illness, began checking in on him regularly.",
+          "source": {
+            "paperId": "paper-mock-2026-01-shandong-jinan-gaosan-first",
+            "paperTitle": "济南市2026届高三第一次模拟考试",
+            "groupId": "group:paper-mock-2026-01-shandong-jinan-gaosan-first:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-2026-01-shandong-jinan-gaosan-first:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 77
+          }
+        },
+        {
+          "exampleId": "w:dedicate#e-04f0d2dd7725320d",
+          "text": "To break the four-minute mile barrier, Bannister, while undertaking full-time medical studies, dedicated 45 minutes each day __50__ to training.",
+          "source": {
+            "paperId": "paper-mock-hunan-changjun-2025-11-monthly-exam-3",
+            "paperTitle": "长郡中学2026届高三月考试卷（三）英语",
+            "groupId": "group:paper-mock-hunan-changjun-2025-11-monthly-exam-3:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-changjun-2025-11-monthly-exam-3:cloze:2",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 95,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:dedicate#e-9ae1eaa500d17a3a",
+          "text": "The summer camp shifts away from conventional teaching and dedicates more than 75% of its agenda to hands-on activities, applied projects, and industrial or societal problem-solving.",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test",
+            "paperTitle": "山东省德州市2025-2026学年第一学期高三年级期末调研测试英语",
+            "groupId": "group:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-dezhou-2026-01-senior-three-first-semester-final-survey-test:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 59,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dedicate#s2",
+      "pos": "v.",
+      "glossZh": "把（作品）题献给某人",
+      "pronunciationId": "w:dedicate#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:dedicate#s3",
+      "pos": "adj.",
+      "glossZh": "尽心尽力的；专注的",
+      "pronunciationId": "w:dedicate#p-main",
+      "note": "dedicated。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dedicate#e-e224b650131c5c2b",
+          "text": "For Dr. Leong, it’s finally possible to be both a dedicated physician and a present __55__.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 59
+          }
+        },
+        {
+          "exampleId": "w:dedicate#e-3cff4a10dd18c40d",
+          "text": "We are looking for dedicated volunteers for our annual Coastal Cleanup Day, scheduled for Saturday, September 19, 2026.",
+          "source": {
+            "paperId": "paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam",
+            "paperTitle": "2026届新高考教学教研联盟高三第二次联考 英语试卷",
+            "groupId": "group:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-new-gaokao-teaching-research-alliance-2026-04-second-joint-exam:reading-a:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:dedicate#e-aed292c7a4efd196",
+          "text": "As a dedicated farmer, Saroni is not just tending to his crops and livestock but also to the future of our planet.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 5,
+            "end": 14
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:dedicate#s4",
+      "pos": "adj.",
+      "glossZh": "专用的；专门用于某事的",
+      "pronunciationId": "w:dedicate#p-main",
+      "note": "dedicated。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:dedicate#e-8abd84da80b1931a",
+          "text": "Choose a dedicated location for focus",
+          "source": {
+            "paperId": "paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey",
+            "paperTitle": "南宁市2026年4月高中毕业班教学质量调研英语试卷",
+            "groupId": "group:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-guangxi-nanning-2026-04-senior-three-teaching-quality-survey:36",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 9,
+            "end": 18
+          }
+        },
+        {
+          "exampleId": "w:dedicate#e-fdc5d0a2687dae53",
+          "text": "However, some countries have introduced policy supports, such as tax reductions, purchase subsidies(补贴), and dedicated traffic lanes for EVs, helping to boost adoption rates.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 109,
+            "end": 118
+          }
+        },
+        {
+          "exampleId": "w:dedicate#e-a6f31ab7c10f4294",
+          "text": "A dedicated AI Studio has been added.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-2026-03-senior-three-march-survey",
+            "paperTitle": "江苏省部分学校 2025-2026 学年高三年级 3 月调研考试",
+            "groupId": "group:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-2026-03-senior-three-march-survey:reading-a:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 2,
+            "end": 11
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "奉献者（名词）；奉献以供宗教使用",
+      "reason": "罕见词性或专门仪式用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

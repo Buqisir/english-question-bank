@@ -1,0 +1,204 @@
+{
+  "entryId": "w:contrary",
+  "headword": "contrary",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɒntrəri/",
+    "us": "/ˈkɑːntreri/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:contrary#p-main",
+      "ipa": {
+        "uk": "/ˈkɒntrəri/",
+        "us": "/ˈkɑːntreri/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more contrary",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most contrary",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "contraries",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "senses": [
+    {
+      "senseId": "w:contrary#s1",
+      "pos": "adj.",
+      "glossZh": "相反的；与……相悖的",
+      "pronunciationId": "w:contrary#p-main",
+      "note": "常用 contrary to。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:contrary#e-fd6c135e25955902",
+          "text": "And contrary to existing research that says you should avoid eating with heavier people who order large portions（份）, it's the beanpoles with big appetites you really need to avoid.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 4,
+            "end": 12
+          }
+        },
+        {
+          "exampleId": "w:contrary#e-d1bc244d0780a442",
+          "text": "The findings, however, tell a more complex story, contrary to popular belief.",
+          "source": {
+            "paperId": "paper-mock-shandong-dongying-2026-04-adaptability",
+            "paperTitle": "东营市2026年高三年级4月份适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-dongying-2026-04-adaptability:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-dongying-2026-04-adaptability:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 50,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:contrary#s2",
+      "pos": "短语",
+      "glossZh": "恰恰相反",
+      "pronunciationId": "w:contrary#p-main",
+      "note": "on the contrary。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:contrary#e-60162b5a9056121c",
+          "text": "On the contrary, they are running toward true living.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 15
+          }
+        },
+        {
+          "exampleId": "w:contrary#e-b1457cafca527284",
+          "text": "On the contrary, a fixed mindset sees these as inborn qualities that are fixed at birth and unchangeable.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-05-second-adaptability",
+            "paperTitle": "烟台市2026年高考第二次适应性测试英语试题",
+            "groupId": "group:paper-mock-shandong-yantai-2026-05-second-adaptability:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-05-second-adaptability:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 7,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:contrary#s3",
+      "pos": "n.",
+      "glossZh": "相反的事物或情况",
+      "pronunciationId": "w:contrary#p-main",
+      "note": "to the contrary 指「表明相反情况的」。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:contrary#s4",
+      "pos": "adj.",
+      "glossZh": "爱唱反调的；执拗的",
+      "pronunciationId": "w:contrary#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "作弊骰子、阻挠",
+      "reason": "罕见或古旧用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

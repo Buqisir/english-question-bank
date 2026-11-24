@@ -1,0 +1,103 @@
+{
+  "entryId": "w:africa",
+  "headword": "Africa",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈæfrɪkə/",
+    "us": "/ˈæfrɪkə/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:africa#p-main",
+      "ipa": {
+        "uk": "/ˈæfrɪkə/",
+        "us": "/ˈæfrɪkə/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 25
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:africa#s1",
+      "pos": "专名",
+      "glossZh": "非洲",
+      "pronunciationId": "w:africa#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 25
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:africa#e-495cd10d2a480c71",
+          "text": "Cattle-raising people in East Africa and northern Europe have gained a mutation (突变) that helps them digest milk as adults.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:africa#e-0b35759add38da98",
+          "text": "Maybe that feeling comes from growing up in South Africa, where the phrase “there are children starving in Africa” was more of an uncomfortable reminder of fact than a prayer at dinner time.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 50,
+            "end": 56
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "古罗马的阿非利加行省；姓氏",
+      "reason": "历史专名或姓氏"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

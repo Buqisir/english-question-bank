@@ -1,0 +1,84 @@
+{
+  "entryId": "w:saucer",
+  "headword": "saucer",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsɔːsə(r)/",
+    "us": "/ˈsɔːsər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:saucer#p-main",
+      "ipa": {
+        "uk": "/ˈsɔːsə(r)/",
+        "us": "/ˈsɔːsər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "saucers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:saucer#s1",
+      "pos": "n.",
+      "glossZh": "茶托",
+      "pronunciationId": "w:saucer#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:saucer#s2",
+      "pos": "n.",
+      "glossZh": "碟状物",
+      "pronunciationId": "w:saucer#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "打捞沉船的浅沉箱",
+      "reason": "工程专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,158 @@
+{
+  "entryId": "w:virtue",
+  "headword": "virtue",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈvɜːtʃuː/",
+    "us": "/ˈvɜːrtʃuː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:virtue#p-main",
+      "ipa": {
+        "uk": "/ˈvɜːtʃuː/",
+        "us": "/ˈvɜːrtʃuː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "virtues",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 12
+  },
+  "senses": [
+    {
+      "senseId": "w:virtue#s1",
+      "pos": "n.",
+      "glossZh": "美德",
+      "pronunciationId": "w:virtue#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:virtue#e-a33cb71aa34380c2",
+          "text": "Standing your ground is a virtue.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-hz-2026-apr-gaosan-quality:26",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 26,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:virtue#e-881db6c60206eedf",
+          "text": "And yet philosophers and poets alike sell patience as a “virtue”, implying that having it is always a good thing.",
+          "source": {
+            "paperId": "paper-mock-t8-2025-12-senior-three-joint-assessment",
+            "paperTitle": "2026届T8高三部分重点中学12月联合测评 高三年级英语试题卷",
+            "groupId": "group:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-t8-2025-12-senior-three-joint-assessment:reading-d:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 57,
+            "end": 63
+          }
+        },
+        {
+          "exampleId": "w:virtue#e-94e5b512875628b1",
+          "text": "He believed that regular acts of goodness, like giving charity and expressing gratitude, make us happier in the long run by turning virtue into a habit.",
+          "source": {
+            "paperId": "paper-mock-zj-huliqu-2025-nov-m1",
+            "paperTitle": "湖州、丽水、衢州三地市2025年11月高三教学质量检测（一模）英语试题卷",
+            "groupId": "group:paper-mock-zj-huliqu-2025-nov-m1:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-huliqu-2025-nov-m1:reading-d:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 132,
+            "end": 138
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:virtue#s2",
+      "pos": "n.",
+      "glossZh": "优点",
+      "pronunciationId": "w:virtue#p-main",
+      "note": "指事物有益的特性。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:virtue#s3",
+      "pos": "短语",
+      "glossZh": "凭借",
+      "pronunciationId": "w:virtue#p-main",
+      "note": "by virtue of sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "天使等级、超自然力量",
+      "reason": "宗教或历史义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

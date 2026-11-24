@@ -1,0 +1,175 @@
+{
+  "entryId": "w:easy",
+  "headword": "easy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈiːzi/",
+    "us": "/ˈiːzi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:easy#p-main",
+      "ipa": {
+        "uk": "/ˈiːzi/",
+        "us": "/ˈiːzi/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "easier",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "easiest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more easy",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most easy",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 55,
+    "mock": 393
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 393
+  },
+  "senses": [
+    {
+      "senseId": "w:easy#s1",
+      "pos": "adj.",
+      "glossZh": "容易的；不费力的",
+      "pronunciationId": "w:easy#p-main",
+      "note": "easier said than done 指「说来容易做来难」。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 52,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:easy#e-da36883f4b40b3a4",
+          "text": "He says it’s not easy to convince people that nutria fur is green, but he has no doubt about it.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:reading-c:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 21
+          }
+        },
+        {
+          "exampleId": "w:easy#e-40bb43865e4d6be6",
+          "text": "But sometimes, that is easier said than done.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 23,
+            "end": 29
+          }
+        },
+        {
+          "exampleId": "w:easy#e-4156c97db33009a9",
+          "text": "Jaramillo’s students live in neighborhoods where fresh food and green space are not easy to find and fast food restaurants outnumber grocery stores.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 84,
+            "end": 88
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:easy#s2",
+      "pos": "adj.",
+      "glossZh": "舒适的；安逸的；随和的",
+      "pronunciationId": "w:easy#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:easy#s3",
+      "pos": "短语",
+      "glossZh": "放松；别紧张；别太劳累",
+      "pronunciationId": "w:easy#p-main",
+      "note": "take it easy。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "姓氏；字母 E 的无线电报码词",
+      "reason": "同形专名或专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

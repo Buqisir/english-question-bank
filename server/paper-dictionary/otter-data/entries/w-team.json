@@ -1,0 +1,156 @@
+{
+  "entryId": "w:team",
+  "headword": "team",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tiːm/",
+    "us": "/tiːm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:team#p-main",
+      "ipa": {
+        "uk": "/tiːm/",
+        "us": "/tiːm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "teams",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 46,
+    "mock": 526
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 526
+  },
+  "senses": [
+    {
+      "senseId": "w:team#s1",
+      "pos": "n.",
+      "glossZh": "团队",
+      "pronunciationId": "w:team#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 43,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:team#e-52264a89dc6fcdbc",
+          "text": "On Thursday in an article published in Cell, a team of researchers reported a new kind of adaptation - not to air or to food, but to the ocean.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 51
+          }
+        },
+        {
+          "exampleId": "w:team#e-c040b99895db03e1",
+          "text": "Summers in the mid-70s were spent at home shooting baskets, hitting a baseball, or throwing a football, preparing for my future as a quarterback on a football team.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:writing-continuation:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 159,
+            "end": 163
+          }
+        },
+        {
+          "exampleId": "w:team#e-394d7f0ed36395d1",
+          "text": "The three dogs formed a pack that, with coaching, __56__ Flora’s space; Steve and I formed a good team __57__ for Tilly.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-a:cloze:4",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 98,
+            "end": 102
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:team#s2",
+      "pos": "短语",
+      "glossZh": "合作",
+      "pronunciationId": "w:team#p-main",
+      "note": "team up。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:team#s3",
+      "pos": "n.",
+      "glossZh": "一队拉车的牲畜",
+      "pronunciationId": "w:team#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "泰恩河支流、庄园司法权",
+      "reason": "专名或历史义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

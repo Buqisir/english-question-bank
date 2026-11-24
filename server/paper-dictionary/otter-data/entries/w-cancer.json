@@ -1,0 +1,148 @@
+{
+  "entryId": "w:cancer",
+  "headword": "cancer",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkænsə(r)/",
+    "us": "/ˈkænsər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:cancer#p-main",
+      "ipa": {
+        "uk": "/ˈkænsə(r)/",
+        "us": "/ˈkænsər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "cancers",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Cancers",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 130
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 127
+  },
+  "senses": [
+    {
+      "senseId": "w:cancer#s1",
+      "pos": "n.",
+      "glossZh": "癌；癌症",
+      "pronunciationId": "w:cancer#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cancer#e-466ffb044a296a93",
+          "text": "To determine the type and severity of a cancer, scientists usually analyze thin slices of a tumor(肿瘤) under a microscope.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 46
+          }
+        },
+        {
+          "exampleId": "w:cancer#e-bf12401a4cf8fc74",
+          "text": "“The community in Crich have been, and continue to be, an amazing support to my family, following my cancer diagnosis（诊断）,” he says.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 101,
+            "end": 107
+          }
+        },
+        {
+          "exampleId": "w:cancer#e-6e73b5a5ba75a93c",
+          "text": "The dog smells four pots of urine（尿液）samples, and then correctly picks out the sample belonging to an NHS (National Health Service) patient with bladder（膀胱）cancer.",
+          "source": {
+            "paperId": "paper-mock-fujian-putian-2026-03-second-quality-test",
+            "paperTitle": "莆田市2026届高中毕业班第二次质量调研测试试卷 英语试题卷",
+            "groupId": "group:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-putian-2026-03-second-quality-test:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 156,
+            "end": 162
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cancer#s2",
+      "pos": "n.",
+      "glossZh": "蔓延的祸害",
+      "pronunciationId": "w:cancer#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "巨蟹座、巨蟹座的人",
+      "reason": "大写 Cancer 的专名用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

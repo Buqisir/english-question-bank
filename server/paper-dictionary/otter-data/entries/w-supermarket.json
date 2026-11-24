@@ -1,0 +1,124 @@
+{
+  "entryId": "w:supermarket",
+  "headword": "supermarket",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈsuːpəmɑːkɪt/",
+    "us": "/ˈsuːpərmɑːrkɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:supermarket#p-main",
+      "ipa": {
+        "uk": "/ˈsuːpəmɑːkɪt/",
+        "us": "/ˈsuːpərmɑːrkɪt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "supermarkets",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 10,
+    "mock": 29
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:supermarket#s1",
+      "pos": "n.",
+      "glossZh": "超市",
+      "pronunciationId": "w:supermarket#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 29
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:supermarket#e-45a2f3c140baee13",
+          "text": "But when we looked at the tomatoes, we were __46__ because they were so misshapen: not at all like the nice, round, __47__ things you get in a supermarket.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-a:cloze:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 143,
+            "end": 154
+          }
+        },
+        {
+          "exampleId": "w:supermarket#e-3f6d41134c6a694d",
+          "text": "You can buy plants from supermarkets, garden centres or online.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 24,
+            "end": 36
+          }
+        },
+        {
+          "exampleId": "w:supermarket#e-daf2e3ac951b7d9b",
+          "text": "If your supermarket sells loose produce, then buying smaller quantities is easier.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:grammar-fill",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:grammar-fill:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 8,
+            "end": 19
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

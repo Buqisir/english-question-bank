@@ -1,0 +1,147 @@
+{
+  "entryId": "w:grateful",
+  "headword": "grateful",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɡreɪtfl/",
+    "us": "/ˈɡreɪtfl/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:grateful#p-main",
+      "ipa": {
+        "uk": "/ˈɡreɪtfl/",
+        "us": "/ˈɡreɪtfl/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "gratefuller",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "gratefullest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more grateful",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most grateful",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 51
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:grateful#s1",
+      "pos": "adj.",
+      "glossZh": "感激的",
+      "pronunciationId": "w:grateful#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 51
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:grateful#e-5f167675f54009a2",
+          "text": "I was grateful that my family was there to help.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 6,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:grateful#e-a0e8be557801c450",
+          "text": "I am grateful for the __54__ that I had growing up and know that wherever my next adventure takes me, I can __55__ my small town roots to lead me in the right direction.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:cloze:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 13
+          }
+        },
+        {
+          "exampleId": "w:grateful#e-17a77e6e1ff12e70",
+          "text": "Grateful and relieved, Emily accepted the offer.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-i:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 0,
+            "end": 8
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "令人愉快的",
+      "reason": "旧义，语料无此义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

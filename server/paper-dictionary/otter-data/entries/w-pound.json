@@ -1,0 +1,346 @@
+{
+  "entryId": "w:pound",
+  "headword": "pound",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/paʊnd/",
+    "us": "/paʊnd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:pound#p-main",
+      "ipa": {
+        "uk": "/paʊnd/",
+        "us": "/paʊnd/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "pounds",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "pounded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "pounding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 13,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 36
+  },
+  "senses": [
+    {
+      "senseId": "w:pound#s1",
+      "pos": "n.",
+      "glossZh": "磅（重量单位）",
+      "pronunciationId": "w:pound#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pound#e-ded9c3b948d5eb3f",
+          "text": "In her natural state, the actor weighed 105 pounds.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 44,
+            "end": 50
+          }
+        },
+        {
+          "exampleId": "w:pound#e-f88e9496d0547e3f",
+          "text": "The state produced 2.8 billion pounds of cheese last year!",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-b:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:pound#e-2c1c7f993ee4fe91",
+          "text": "A study by the Food Waste Alliance determined that the average restaurant generates 33 pounds of food waste for every $ 1,000 in revenue（收入）, and of that waste only 15.7% is donated or recycled.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 93
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pound#s2",
+      "pos": "n.",
+      "glossZh": "英镑",
+      "pronunciationId": "w:pound#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pound#e-b319ed1bf389ff0c",
+          "text": "Today’s figures, according to one government official, show the positive influence the sugar tax is having by raising millions of pounds for sports facilities (设施) and healthier eating in schools.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 130,
+            "end": 136
+          }
+        },
+        {
+          "exampleId": "w:pound#e-e91c4047630d6199",
+          "text": "The friend and the dog agreed, so the Instagrammer posed with the dog in front of a bright blue door and then handed over five pounds as a thank you.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:seven-choices:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 127,
+            "end": 133
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pound#s3",
+      "pos": "v.",
+      "glossZh": "（心脏）剧烈跳动",
+      "pronunciationId": "w:pound#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pound#e-b543bfc15be411f2",
+          "text": "Soon Eva began to breathe hard, with her heart pounding and legs shaking.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:pound#e-c045f2f6ad6d3c5e",
+          "text": "Warning bells began to sound in my head, and my heart was pounding.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:pound#e-3bf8dd1bde04cf0f",
+          "text": "Judy pressed her handwritten speech to her chest, felt her heart pounding heavily, and whispered: “Stay calm.”",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pound#s4",
+      "pos": "v.",
+      "glossZh": "（头部）阵阵钝痛",
+      "pronunciationId": "w:pound#p-main",
+      "note": "pounding headache 指阵阵作痛的头痛。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pound#e-fc8e62f68220b808",
+          "text": "Bent over my laptop while sitting on the bed in the corner of my room, I suddenly felt a pounding headache, and had to lie down.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 89,
+            "end": 97
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:pound#s5",
+      "pos": "v.",
+      "glossZh": "反复猛击",
+      "pronunciationId": "w:pound#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:pound#s6",
+      "pos": "v.",
+      "glossZh": "捣碎",
+      "pronunciationId": "w:pound#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:pound#s7",
+      "pos": "n.",
+      "glossZh": "流浪动物收容所",
+      "pronunciationId": "w:pound#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "船闸之间的水道段",
+      "reason": "航运术语"
+    },
+    {
+      "glossZh": "磅力",
+      "reason": "工程计量用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

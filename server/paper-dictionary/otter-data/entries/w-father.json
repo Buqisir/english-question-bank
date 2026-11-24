@@ -1,0 +1,193 @@
+{
+  "entryId": "w:father",
+  "headword": "father",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈfɑːðə(r)/",
+    "us": "/ˈfɑːðər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:father#p-main",
+      "ipa": {
+        "uk": "/ˈfɑːðə(r)/",
+        "us": "/ˈfɑːðər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "fathers",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "Fathers",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "fathered",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "fathering",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 41,
+    "mock": 194
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 194
+  },
+  "senses": [
+    {
+      "senseId": "w:father#s1",
+      "pos": "n.",
+      "glossZh": "父亲",
+      "pronunciationId": "w:father#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 41,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:father#e-a439f64408e072b1",
+          "text": "“That’s the garden in our picture,” Nicolo’s son told his father.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 64
+          }
+        },
+        {
+          "exampleId": "w:father#e-8874be460815ae1d",
+          "text": "I tried making toy cars with cardboard boxes and constructing buildings from leftover cardboard and bits of wood my father gave me.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 116,
+            "end": 122
+          }
+        },
+        {
+          "exampleId": "w:father#e-4a9c4af7738e5d3b",
+          "text": "In my ninth-grade writing class last year, I met a cowboy who saved his town, a strict father who demanded his son earn straight A’s, and a modern-day Juliet who died of heartbreak after her parents rejected the love of her young life.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-b:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 87,
+            "end": 93
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:father#s2",
+      "pos": "n.",
+      "glossZh": "创始人",
+      "pronunciationId": "w:father#p-main",
+      "note": "the father of sth。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:father#s3",
+      "pos": "n.",
+      "glossZh": "神父",
+      "pronunciationId": "w:father#p-main",
+      "note": "称谓通常大写 Father。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:father#s4",
+      "pos": "v.",
+      "glossZh": "成为……的生父",
+      "pronunciationId": "w:father#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "文件的上一代版本",
+      "reason": "旧式技术义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

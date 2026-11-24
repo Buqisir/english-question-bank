@@ -1,0 +1,123 @@
+{
+  "entryId": "w:ago",
+  "headword": "ago",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈɡəʊ/",
+    "us": "/əˈɡəʊ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ago#p-main",
+      "ipa": {
+        "uk": "/əˈɡəʊ/",
+        "us": "/əˈɡəʊ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 34,
+    "mock": 207
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:ago#s1",
+      "pos": "adv.",
+      "glossZh": "以前；……前",
+      "pronunciationId": "w:ago#p-main",
+      "note": "通常接在时间长度之后。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 34,
+        "mock": 207
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ago#e-6c7e8e8aa7299332",
+          "text": "Four years ago they all moved into a three-storey Victorian house in Bristol - one of a growing number of multigenerational families in the UK living together under the same roof.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 11,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:ago#e-abe7ef099e796e2a",
+          "text": "More than 25 years ago, Saroo Brierley lived in rural（农村）India.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-a:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 19,
+            "end": 22
+          }
+        },
+        {
+          "exampleId": "w:ago#e-cb4eb82eb63e9246",
+          "text": "Life on city streets started to change decades ago.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 50
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "总检察长办公室",
+      "reason": "大写缩写，与时间副词不同"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

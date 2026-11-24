@@ -1,0 +1,313 @@
+{
+  "entryId": "w:exposure",
+  "headword": "exposure",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ɪkˈspəʊʒə(r)/",
+    "us": "/ɪkˈspoʊʒər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:exposure#p-main",
+      "ipa": {
+        "uk": "/ɪkˈspəʊʒə(r)/",
+        "us": "/ɪkˈspoʊʒər/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "exposures",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 88
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 83
+  },
+  "senses": [
+    {
+      "senseId": "w:exposure#s1",
+      "pos": "n.",
+      "glossZh": "接触",
+      "pronunciationId": "w:exposure#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:exposure#e-3e63ae6c350fe42d",
+          "text": "\"To us, the most likely explanation appears to be that the basis lies in their living with humans, which gives them a lot of exposure to human facial expressions,\" and this exposure has provided them with many chances to learn to distinguish between them, Muller said.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:6",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 125,
+            "end": 133
+          }
+        },
+        {
+          "exampleId": "w:exposure#e-b258b0653146b1fa",
+          "text": "\"Many people in China have limited exposure to English.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 35,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:exposure#e-f09979e567eed4a1",
+          "text": "Variety in diet and toys, travel, and exposure to new people and places all help to make your bird more flexible and adaptable to change.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:exposure#s2",
+      "pos": "n.",
+      "glossZh": "暴露于有害因素",
+      "pronunciationId": "w:exposure#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:exposure#e-bb02d6ebeb889563",
+          "text": "Still, the findings show a potential path forward for reducing microplastic exposure – a task that’s becoming increasingly difficult.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 76,
+            "end": 84
+          }
+        },
+        {
+          "exampleId": "w:exposure#e-9147a0f79a1cc745",
+          "text": "According to a study published recently in Health and Place, increased UV exposure appears to make people significantly less likely to die of cardiovascular (心血管) disease as well as cancer.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 74,
+            "end": 82
+          }
+        },
+        {
+          "exampleId": "w:exposure#e-146ad35c6e563204",
+          "text": "To reduce exposure to harmful substances, producers must look beyond greenwashing and advocate for systemic change – whether through stricter guidelines or the reintroduction of traditional, non-toxic alternatives.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor",
+            "paperTitle": "2025~2026学年第一学期镇江市高三期初监测 英语",
+            "groupId": "group:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-zhenjiang-2025-09-senior-three-opening-monitor:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 10,
+            "end": 18
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:exposure#s3",
+      "pos": "n.",
+      "glossZh": "揭露",
+      "pronunciationId": "w:exposure#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:exposure#s4",
+      "pos": "n.",
+      "glossZh": "公开报道所带来的关注",
+      "pronunciationId": "w:exposure#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:exposure#s5",
+      "pos": "n.",
+      "glossZh": "曝光",
+      "pronunciationId": "w:exposure#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:exposure#e-9ed20433c411948d",
+          "text": "Photography educator David Yorke explains: “With a film camera, you must think through everything before taking the picture – composition, exposure, timing.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-01-first-quality-test",
+            "paperTitle": "福建省厦门市、龙岩市、三明市、南平市、宁德市、福州市部分学校2026届高中毕业班第一次质量检测英语",
+            "groupId": "group:paper-mock-fujian-2026-01-first-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-fujian-2026-01-first-quality-test:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 139,
+            "end": 147
+          }
+        },
+        {
+          "exampleId": "w:exposure#e-a3adb037de6fb02a",
+          "text": "By adjusting light exposure time.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-mock-hunan-zhuzhou-2026-01-first:28",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 19,
+            "end": 27
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:exposure#s6",
+      "pos": "n.",
+      "glossZh": "一次曝光",
+      "pronunciationId": "w:exposure#p-main",
+      "note": "也用于计算胶卷可拍张数。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:exposure#e-4db7450ab8b33ad3",
+          "text": "With just 36 exposures per roll, each photo required __50__, a slowing down to see the world around me.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring",
+            "paperTitle": "南通市2026届高三学业质量监测英语试卷",
+            "groupId": "group:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-jiangsu-nantong-2026-01-senior-three-academic-quality-monitoring:cloze:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 22
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "财务风险敞口",
+      "reason": "金融术语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

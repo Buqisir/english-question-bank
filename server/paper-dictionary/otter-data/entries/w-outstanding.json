@@ -1,0 +1,145 @@
+{
+  "entryId": "w:outstanding",
+  "headword": "outstanding",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/aʊtˈstændɪŋ/",
+    "us": "/aʊtˈstændɪŋ/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:outstanding#p-main",
+      "ipa": {
+        "uk": "/aʊtˈstændɪŋ/",
+        "us": "/aʊtˈstændɪŋ/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more outstanding",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most outstanding",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 17
+  },
+  "senses": [
+    {
+      "senseId": "w:outstanding#s1",
+      "pos": "adj.",
+      "glossZh": "杰出的；出色的",
+      "pronunciationId": "w:outstanding#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:outstanding#e-fe286fadef7abc02",
+          "text": "The sound quality is outstanding.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 21,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:outstanding#e-6d1597e37e621581",
+          "text": "To honor an outstanding AI expert.",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "question": 35,
+              "questionId": "question:paper-gaokao-2024-ii:35",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 12,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:outstanding#e-45e03564baecda23",
+          "text": "The D. C. area is home to many outstanding Chinese restaurants, but diners willing to travel outside the city limits will also be rewarded.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 31,
+            "end": 42
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:outstanding#s2",
+      "pos": "adj.",
+      "glossZh": "尚未处理或付清的",
+      "pronunciationId": "w:outstanding#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

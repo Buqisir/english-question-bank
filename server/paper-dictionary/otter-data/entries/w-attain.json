@@ -1,0 +1,148 @@
+{
+  "entryId": "w:attain",
+  "headword": "attain",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈteɪn/",
+    "us": "/əˈteɪn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:attain#p-main",
+      "ipa": {
+        "uk": "/əˈteɪn/",
+        "us": "/əˈteɪn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "attained",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "attaining",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "attains",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:attain#s1",
+      "pos": "v.",
+      "glossZh": "达到（目标、水平等）；获得",
+      "pronunciationId": "w:attain#p-main",
+      "note": "较正式。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 14
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:attain#e-1c753b953715a07f",
+          "text": "And remember, attaining better self-control is not an all-or-nothing pursuit.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam",
+            "paperTitle": "2026届武汉市高三四月调研考试 英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-04-senior-three-april-survey-exam:seven-choices:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 14,
+            "end": 23
+          }
+        },
+        {
+          "exampleId": "w:attain#e-40958b5518d82cc1",
+          "text": "If so, we are more likely to attain the outcome we all desire.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-import-20261026-n093:36",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 29,
+            "end": 35
+          }
+        },
+        {
+          "exampleId": "w:attain#e-e75c0de5781500f3",
+          "text": "One of the most common reasons behind our failure to attain goals is lack of time.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江省七校2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-mock-zhejiang-seven-school-alliance-2025-12-senior-three-joint-exam:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 53,
+            "end": 59
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "理解；追上某人",
+      "reason": "陈旧或罕见义。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

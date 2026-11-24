@@ -1,0 +1,209 @@
+{
+  "entryId": "w:reduce",
+  "headword": "reduce",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈdjuːs/",
+    "us": "/rɪˈduːs/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:reduce#p-main",
+      "ipa": {
+        "uk": "/rɪˈdjuːs/",
+        "us": "/rɪˈduːs/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "reduced",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "reduces",
+      "tags": [
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "reducing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 34,
+    "mock": 452
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 451
+  },
+  "senses": [
+    {
+      "senseId": "w:reduce#s1",
+      "pos": "v.",
+      "glossZh": "减少",
+      "pronunciationId": "w:reduce#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 34,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reduce#e-7561547568e671b8",
+          "text": "“Everyone can play a part in reducing waste, whether by not purchasing more food than necessary in your weekly shopping or by asking restaurants to not include the side dish you won’t eat,” Curtin says.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "reading-b-5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 29,
+            "end": 37
+          }
+        },
+        {
+          "exampleId": "w:reduce#e-9277a89db74686ad",
+          "text": "It’s also thought that these places could help reduce the risk of flooding, remove carbon from the atmosphere and fight climate change, as well as improving the mental health of those living locally.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 53
+          }
+        },
+        {
+          "exampleId": "w:reduce#e-492ca4e46858f09e",
+          "text": "Now, new research suggests that a simple, cheap measure may significantly reduce the level of microplastics in water from your tap（水龙头）: boiling and filtering（过滤）it.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 74,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:reduce#s2",
+      "pos": "v.",
+      "glossZh": "使沦为",
+      "pronunciationId": "w:reduce#p-main",
+      "note": "常用 reduce sth to sth。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:reduce#e-27bb76ebd1af7d51",
+          "text": "Since viewing films has gradually been reduced to streaming services, especially since the pandemic, this has increased the accessibility of film but we are stripped of a social experience to watch a movie – one that attending The Barker reminded me of.",
+          "source": {
+            "paperId": "paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test",
+            "paperTitle": "安徽六校教育研究会2026届高三年级入学素质测试英语试题",
+            "groupId": "group:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-anhui-six-schools-2026-september-senior-grade-entry-quality-test:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 39,
+            "end": 46
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:reduce#s3",
+      "pos": "v.",
+      "glossZh": "收浓（液体）",
+      "pronunciationId": "w:reduce#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:reduce#s4",
+      "pos": "v.",
+      "glossZh": "化简（表达式）",
+      "pronunciationId": "w:reduce#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "使脱位骨头复位",
+      "reason": "医学术语"
+    },
+    {
+      "glossZh": "弱读",
+      "reason": "语音学专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

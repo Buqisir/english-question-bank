@@ -1,0 +1,270 @@
+{
+  "entryId": "w:performance",
+  "headword": "performance",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pəˈfɔːməns/",
+    "us": "/pərˈfɔːrməns/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:performance#p-main",
+      "ipa": {
+        "uk": "/pəˈfɔːməns/",
+        "us": "/pərˈfɔːrməns/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "performances",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 25,
+    "mock": 250
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 249
+  },
+  "senses": [
+    {
+      "senseId": "w:performance#s1",
+      "pos": "n.",
+      "glossZh": "表演；演出",
+      "pronunciationId": "w:performance#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:performance#e-d17ce88edcb1540c",
+          "text": "The creative team behind “Apes” used motion-capture (动作捕捉) technology to create digitalized animals, spending tens of millions of dollars on technology that records an actor’s performance and later processes it with computer graphics to create a final image (图像).",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 176,
+            "end": 187
+          }
+        },
+        {
+          "exampleId": "w:performance#e-053ee9b986066ca7",
+          "text": "“I’m not a trained musician, but I’ve learnt to read music so I can help Maria in her performance.”",
+          "source": {
+            "paperId": "paper-gaokao-2021-i",
+            "paperTitle": "2021年普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2021-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-i:reading-b:1",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 97
+          }
+        },
+        {
+          "exampleId": "w:performance#e-2fbe8d07cd0aa8fc",
+          "text": "While eating and enjoying street performances, they chat with each other and share stories of their daily lives.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2026-i:grammar-fill:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 33,
+            "end": 45
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:performance#s2",
+      "pos": "n.",
+      "glossZh": "表现；成绩",
+      "pronunciationId": "w:performance#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 11,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:performance#e-2f7e5eb6c5eaf872",
+          "text": "Family Relationship Influences School Performance",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2020-zhejiang-jan:30",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 38,
+            "end": 49
+          }
+        },
+        {
+          "exampleId": "w:performance#e-f6d55f1d454bead0",
+          "text": "High conscientiousness is related to lower job performance, especially in simple jobs where it doesn’t pay to be a perfectionist.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 58
+          }
+        },
+        {
+          "exampleId": "w:performance#e-e71b2a2089b9e4e2",
+          "text": "Evaluate your performance and, if needed, redefine your role.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2023-ii:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 14,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:performance#s3",
+      "pos": "n.",
+      "glossZh": "性能；运行表现",
+      "pronunciationId": "w:performance#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:performance#e-e4dc16effda3c2b7",
+          "text": "The more regularly they can be inspected, the more railway safety, reliability and on-time performance will be improved.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 91,
+            "end": 102
+          }
+        },
+        {
+          "exampleId": "w:performance#e-c2f1a3c37f40dbfd",
+          "text": "Drones’ reliable performance in remote areas.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "question": 28,
+              "questionId": "question:paper-gaokao-2022-national-b:28",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 17,
+            "end": 28
+          }
+        },
+        {
+          "exampleId": "w:performance#e-4b0997e4a4dcc79b",
+          "text": "Its reliable performance underwater.",
+          "source": {
+            "paperId": "paper-mock-fj-2026-m1-v2",
+            "paperTitle": "全国名校联盟2026届高三联合开学摸底考试",
+            "groupId": "group:paper-mock-fj-2026-m1-v2:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-mock-fj-2026-m1-v2:34",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 13,
+            "end": 24
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

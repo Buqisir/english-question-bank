@@ -1,0 +1,136 @@
+{
+  "entryId": "w:different",
+  "headword": "different",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈdɪfrənt/",
+    "us": "/ˈdɪfrənt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:different#p-main",
+      "ipa": {
+        "uk": "/ˈdɪfrənt/",
+        "us": "/ˈdɪfrənt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "more different",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most different",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 89,
+    "mock": 669
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:different#s1",
+      "pos": "adj.",
+      "glossZh": "不同的；有差别的；各种各样的",
+      "pronunciationId": "w:different#p-main",
+      "note": "different from 最通用，英式英语也用 different to，美式英语也用 different than。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 89,
+        "mock": 669
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:different#e-d9cd9aeec1dd544d",
+          "text": "His friends teased him about babysitting his sister and his interests were far different from mine.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:seven-choices:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 86,
+            "end": 95
+          }
+        },
+        {
+          "exampleId": "w:different#e-10d86b7803b0b9c2",
+          "text": "●Put different types of clothing on different surfaces in the room.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2021-national-a:seven-choices:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 5,
+            "end": 14
+          }
+        },
+        {
+          "exampleId": "w:different#e-352d69be959f42e1",
+          "text": "The pronunciation system of the Chinese language is quite different from that of English.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2025-ii:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 58,
+            "end": 67
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "以不同方式（副词）；数学专门用法",
+      "reason": "通常用 differently 作副词"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

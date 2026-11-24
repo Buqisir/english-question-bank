@@ -1,0 +1,129 @@
+{
+  "entryId": "w:comprehension",
+  "headword": "comprehension",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌkɒmprɪˈhenʃn/",
+    "us": "/ˌkɑːmprɪˈhenʃn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:comprehension#p-main",
+      "ipa": {
+        "uk": "/ˌkɒmprɪˈhenʃn/",
+        "us": "/ˌkɑːmprɪˈhenʃn/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "comprehensions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 15
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:comprehension#s1",
+      "pos": "n.",
+      "glossZh": "理解；理解力（尤指阅读或听力理解）",
+      "pronunciationId": "w:comprehension#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 15
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:comprehension#e-fc2d1b0ad857d6a3",
+          "text": "Is comprehension the same whether a person reads a text onscreen or on paper?",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 3,
+            "end": 16
+          }
+        },
+        {
+          "exampleId": "w:comprehension#e-3aab873a2d5a0127",
+          "text": "Good readers who monitor their own comprehension use it in the reading process.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 55
+          }
+        },
+        {
+          "exampleId": "w:comprehension#e-851ea3b3cd845828",
+          "text": "When researchers tested people’s comprehension of whistled Turkish,",
+          "source": {
+            "paperId": "paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2",
+            "paperTitle": "湖北省「腾·云」联盟2025-2026学年度上学期10月联考高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-d",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-hubei-tengyun-2025-10-senior-three-joint-exam-v2:reading-d:12",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 46
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "集合生成式、英国国教会接纳异议者",
+      "reason": "数学或宗教历史义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

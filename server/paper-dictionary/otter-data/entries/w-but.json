@@ -1,0 +1,338 @@
+{
+  "entryId": "w:but",
+  "headword": "but",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bət/",
+    "us": "/bət/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:but#p-main",
+      "ipa": {
+        "uk": "/bət/",
+        "us": "/bət/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "弱读"
+    },
+    {
+      "pronunciationId": "w:but#p-strong",
+      "ipa": {
+        "uk": "/bʌt/",
+        "us": "/bʌt/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）",
+      "label": "重读"
+    }
+  ],
+  "forms": [
+    {
+      "form": "buts",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 384,
+    "mock": 3529
+  },
+  "unassignedCounts": {
+    "gaokao": 347,
+    "mock": 3529
+  },
+  "senses": [
+    {
+      "senseId": "w:but#s1",
+      "pos": "conj.",
+      "glossZh": "但是；可是；然而",
+      "pronunciationId": "w:but#p-strong",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 19,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:but#e-452930c18b76c57b",
+          "text": "The results were similar to the first test: the participants followed suit but took significantly more candy when the thin actor took 30 pieces.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 75,
+            "end": 78
+          }
+        },
+        {
+          "exampleId": "w:but#e-af0428f0262864ad",
+          "text": "He wants very much to earn some money, but I don't see what he can do.”",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-i:writing-continuation:material-4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 39,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:but#e-98ba94aa3ac0f8dc",
+          "text": "He’s one of a small but growing number of American veterinarians（兽医） now practicing “holistic” medicine-combining traditional Western treatments with acupuncture, chiropractic（按摩疗法） and herbal medicine.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 20,
+            "end": 23
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:but#s2",
+      "pos": "conj.",
+      "glossZh": "不但……而且……",
+      "pronunciationId": "w:but#p-strong",
+      "note": "not only … but (also) …",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 16,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:but#e-22748044b065e468",
+          "text": "I loved talking about the imaginary box, not only with my students but also with my own children.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-b",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2020-ii:reading-b:10",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 67,
+            "end": 70
+          }
+        },
+        {
+          "exampleId": "w:but#e-3c0d8a1333073266",
+          "text": "Measures must be taken to not only conserve ecosystems, but also sustain livelihoods and ensure food security.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:seven-choices",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:seven-choices:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 63,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:but#e-450a5eedd32f63b8",
+          "text": "Museums are not only places to store artworks, but also spaces for learning.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2026-i:36",
+              "option": "E",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 47,
+            "end": 50
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:but#s3",
+      "pos": "prep.",
+      "glossZh": "除了；除……以外",
+      "pronunciationId": "w:but#p-strong",
+      "note": "no choice but to do 表示只好做某事。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:but#e-43e1045a8adda75d",
+          "text": "Unable to keep my eyes open, I decided I had no choice but to finish my homework the next morning.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 55,
+            "end": 58
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:but#s4",
+      "pos": "短语",
+      "glossZh": "一点也不；根本不",
+      "pronunciationId": "w:but#p-strong",
+      "note": "anything but",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:but#e-8c6b48c92dade2e0",
+          "text": "I’ve run enough marathons to prove the fact that my brain is anything but sharp during or after a tough workout.",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:reading-d:5",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 70,
+            "end": 73
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:but#s5",
+      "pos": "adv.",
+      "glossZh": "仅仅；只",
+      "pronunciationId": "w:but#p-strong",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:but#s6",
+      "pos": "短语",
+      "glossZh": "几乎；差一点就",
+      "pronunciationId": "w:but#p-strong",
+      "note": "all but",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:but#s7",
+      "pos": "短语",
+      "glossZh": "要不是；如果没有",
+      "pronunciationId": "w:but#p-strong",
+      "note": "but for",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:but#s8",
+      "pos": "n.",
+      "glossZh": "异议；反对理由",
+      "pronunciationId": "w:but#p-strong",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "外室、界限、钝端、姓氏",
+      "reason": "冷僻同形义或专名"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,430 @@
+{
+  "entryId": "w:slip",
+  "headword": "slip",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/slɪp/",
+    "us": "/slɪp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:slip#p-main",
+      "ipa": {
+        "uk": "/slɪp/",
+        "us": "/slɪp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "slips",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "slipped",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "slipping",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 9,
+    "mock": 85
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 76
+  },
+  "senses": [
+    {
+      "senseId": "w:slip#s1",
+      "pos": "n.",
+      "glossZh": "小失误",
+      "pronunciationId": "w:slip#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slip#e-e3828e0ce67f3cd5",
+          "text": "You don’t need to apologize for a minor slip.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2020-i:36",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 40,
+            "end": 44
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:slip#s2",
+      "pos": "v.",
+      "glossZh": "滑倒",
+      "pronunciationId": "w:slip#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slip#e-343eaf58a550b47e",
+          "text": "Halfway up a difficult route, he slipped and badly broke his __42__.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:cloze:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 33,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:slip#s3",
+      "pos": "v.",
+      "glossZh": "滑脱",
+      "pronunciationId": "w:slip#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slip#e-6197eb126050d77c",
+          "text": "You open your Playbill and a little piece of paper slips out, alerting you that a member of the cast is out and someone unexpected will be performing.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-11-fourth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（四）英语",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-11-fourth:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-11-fourth:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 51,
+            "end": 56
+          }
+        },
+        {
+          "exampleId": "w:slip#e-110d32c716437ee3",
+          "text": "I jumped back in surprise, and the book slipped from my hands.",
+          "source": {
+            "paperId": "paper-mock-guangdong-2026-04-second",
+            "paperTitle": "2026年普通高等学校招生全国统一考试模拟测试（二）英语试题",
+            "groupId": "group:paper-mock-guangdong-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-guangdong-2026-04-second:writing-continuation:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 40,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:slip#s4",
+      "pos": "v.",
+      "glossZh": "悄悄移动",
+      "pronunciationId": "w:slip#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slip#e-d3ee6f213945e825",
+          "text": "Here is a picture of Dorothy Woodruff, on her horse, looking down from a hill top: “When the sun slipped behind the mountains, it shed a rosy glow all around them.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-b",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-b:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 97,
+            "end": 104
+          }
+        },
+        {
+          "exampleId": "w:slip#e-8a67a3425342f3b6",
+          "text": "The moment the door clicked shut, I slipped into the kitchen.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 36,
+            "end": 43
+          }
+        },
+        {
+          "exampleId": "w:slip#e-560f9d228f6e8bab",
+          "text": "After the kids went to bed, he slipped out and wheeled a bike to the empty market parking lot to practise.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+            "paperTitle": "2026年深圳市高三年级第二次调研考试英语试题",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-04-second:writing-continuation:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 31,
+            "end": 38
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:slip#s5",
+      "pos": "v.",
+      "glossZh": "悄悄递送",
+      "pronunciationId": "w:slip#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slip#e-4b50c54be0960996",
+          "text": "For years, she’d run the corner grocery with a sharp eye and an even sharper tongue, blaming teens for pocketing candies and once running after a dog down Main Street with a broom, though rumors（传闻）said she’d slipped the dog a meatball later.",
+          "source": {
+            "paperId": "paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam",
+            "paperTitle": "天一大联考·皖豫名校联盟2025-2026学年高三10月联考英语学科试题卷",
+            "groupId": "group:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-anhui-henan-tianyi-prestigious-school-alliance-2025-10-senior-three-joint-exam:writing-continuation:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 209,
+            "end": 216
+          }
+        },
+        {
+          "exampleId": "w:slip#e-937080cd611fb389",
+          "text": "After retirement, she chose to work as a doorkeeper, __50__ slipping encouraging notes into struggling students’ bags.",
+          "source": {
+            "paperId": "paper-mock-henan-four-cities-2026-01",
+            "paperTitle": "河南省洛阳、许昌、平顶山、济源四市2025—2026学年高三年级第二次质量检测英语试题",
+            "groupId": "group:paper-mock-henan-four-cities-2026-01:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-henan-four-cities-2026-01:cloze:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 60,
+            "end": 68
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:slip#s6",
+      "pos": "短语",
+      "glossZh": "未被察觉",
+      "pronunciationId": "w:slip#p-main",
+      "note": "slip by somebody。",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slip#e-6a836c816082bf63",
+          "text": "Simply keeping a diary that keeps track of friends’ birthdays and other important dates will make sure nothing slips by you.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 10,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:10",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 111,
+            "end": 116
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:slip#s7",
+      "pos": "短语",
+      "glossZh": "逐渐消逝",
+      "pronunciationId": "w:slip#p-main",
+      "note": "slip away。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:slip#e-32700d15280780cc",
+          "text": "As she grew older, she stopped running, and those shared moments slipped away.",
+          "source": {
+            "paperId": "paper-mock-fujian-mingxiao-2025-11-midterm",
+            "paperTitle": "全国名校联盟2026届高三上学期期中考试英语试题",
+            "groupId": "group:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-mingxiao-2025-11-midterm:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 65,
+            "end": 72
+          }
+        },
+        {
+          "exampleId": "w:slip#e-ff69ab951d8a279b",
+          "text": "Giving them my lunch meant I would have to wait again – maybe another line, maybe my break slipping away faster.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 91,
+            "end": 99
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:slip#s8",
+      "pos": "n.",
+      "glossZh": "纸条",
+      "pronunciationId": "w:slip#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:slip#s9",
+      "pos": "n.",
+      "glossZh": "衬裙",
+      "pronunciationId": "w:slip#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "螺旋桨滑差、电机转差、陶瓷泥浆、板球位置及鳎鱼",
+      "reason": "专业或地区用语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

@@ -1,0 +1,128 @@
+{
+  "entryId": "w:madam",
+  "headword": "madam",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmædəm/",
+    "us": "/ˈmædəm/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:madam#p-main",
+      "ipa": {
+        "uk": "/ˈmædəm/",
+        "us": "/ˈmædəm/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "madams",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "mesdames",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Madams",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Mesdames",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:madam#s1",
+      "pos": "n.",
+      "glossZh": "女士（礼貌称呼）",
+      "pronunciationId": "w:madam#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:madam#e-1868fc639ac2c542",
+          "text": "Dear Sir or Madam,",
+          "source": {
+            "paperId": "paper-mock-chongqing-2026-01-first-joint-diagnostic-test",
+            "paperTitle": "2026年重庆高三第一次联合诊断检测英语",
+            "groupId": "group:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-application",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-chongqing-2026-01-first-joint-diagnostic-test:writing-application:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 12,
+            "end": 17
+          }
+        },
+        {
+          "exampleId": "w:madam#e-8c2869bf6be64ba7",
+          "text": "“I’m so sorry, Madam,” she whispered, managing a weak smile, “I’m just trying to get her to sleep.” That was when my anger disappeared.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:writing-continuation:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 15,
+            "end": 20
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "傲慢的女孩、妓院经营者",
+      "reason": "少见或非本批语境"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

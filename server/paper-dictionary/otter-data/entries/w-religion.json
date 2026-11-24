@@ -1,0 +1,103 @@
+{
+  "entryId": "w:religion",
+  "headword": "religion",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/rɪˈlɪdʒən/",
+    "us": "/rɪˈlɪdʒən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:religion#p-main",
+      "ipa": {
+        "uk": "/rɪˈlɪdʒən/",
+        "us": "/rɪˈlɪdʒən/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "religions",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:religion#s1",
+      "pos": "n.",
+      "glossZh": "宗教信仰",
+      "pronunciationId": "w:religion#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:religion#e-5e1a506f3515649b",
+          "text": "You made this difficult decision without ever questioning the race, religion, or nationality.",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 68,
+            "end": 76
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:religion#s2",
+      "pos": "n.",
+      "glossZh": "一种宗教",
+      "pronunciationId": "w:religion#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "使接受宗教灌输",
+      "reason": "历史动词义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

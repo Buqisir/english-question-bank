@@ -1,0 +1,226 @@
+{
+  "entryId": "w:chalk",
+  "headword": "chalk",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tʃɔːk/",
+    "us": "/tʃɔːk/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:chalk#p-main",
+      "ipa": {
+        "uk": "/tʃɔːk/",
+        "us": "/tʃɔːk/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "chalks",
+      "tags": [
+        "plural",
+        "present",
+        "singular",
+        "third-person"
+      ]
+    },
+    {
+      "form": "chalked",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "chalking",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 6
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 2
+  },
+  "senses": [
+    {
+      "senseId": "w:chalk#s1",
+      "pos": "n.",
+      "glossZh": "粉笔",
+      "pronunciationId": "w:chalk#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chalk#e-726b5686cee9f5fe",
+          "text": "Draw a large circle on the ground in chalk and label it with the first few numbers of pi: 3, 1, and 4.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-03-senior-three-mock-test",
+            "paperTitle": "厦门市2026届高中毕业班模拟测试",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-xiamen-2026-03-senior-three-mock-test:reading-a:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 37,
+            "end": 42
+          }
+        },
+        {
+          "exampleId": "w:chalk#e-3a2f9178abdd20ec",
+          "text": "Instead of __50__ this was a nationally standardized test and that there couldn’t be any __51__, Mr. Dalton did the most powerful thing I’ve ever seen a teacher do: he held out the chalk to me with an encouraging smile.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:cloze:6",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 181,
+            "end": 186
+          }
+        },
+        {
+          "exampleId": "w:chalk#e-6d53ced18d9f96c8",
+          "text": "I was hesitant for a moment, then went to the board and demonstrated my proof, using the whole board and three different colors of chalk.",
+          "source": {
+            "paperId": "paper-mock-guangdong-six-school-alliance-2025-08-first",
+            "paperTitle": "广东省“六校联盟”2026届高三年级第一次联考英语",
+            "groupId": "group:paper-mock-guangdong-six-school-alliance-2025-08-first:cloze",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-guangdong-six-school-alliance-2025-08-first:cloze:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 131,
+            "end": 136
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chalk#s2",
+      "pos": "n.",
+      "glossZh": "白垩；白垩质粉末",
+      "pronunciationId": "w:chalk#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chalk#e-009fae24a0b5196b",
+          "text": "Then bacteria(细菌) present in the trees and surrounding soil transform it further into calcium carbonate(碳酸钙), a primary component of limestone and chalk.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 147,
+            "end": 152
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:chalk#s3",
+      "pos": "v.",
+      "glossZh": "用粉笔写或画",
+      "pronunciationId": "w:chalk#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:chalk#s4",
+      "pos": "短语",
+      "glossZh": "把……归因于",
+      "pronunciationId": "w:chalk#p-main",
+      "note": "chalk something up to something",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:chalk#e-c3eb1abc940db4af",
+          "text": "Older and wiser now, Burchill chalked up the incident to youthful indiscretion (莽撞).",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:cloze",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-national-a:cloze:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 30,
+            "end": 37
+          }
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "空降兵小队、夺冠热门、Chalk Creek 中的专名等",
+      "reason": "军事、博弈或专名用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

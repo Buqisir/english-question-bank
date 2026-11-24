@@ -1,0 +1,181 @@
+{
+  "entryId": "w:cheap",
+  "headword": "cheap",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tʃiːp/",
+    "us": "/tʃiːp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:cheap#p-main",
+      "ipa": {
+        "uk": "/tʃiːp/",
+        "us": "/tʃiːp/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "cheaper",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "cheapest",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 6,
+    "mock": 73
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 72
+  },
+  "senses": [
+    {
+      "senseId": "w:cheap#s1",
+      "pos": "adj.",
+      "glossZh": "便宜的；低价的；成本低的",
+      "pronunciationId": "w:cheap#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cheap#e-d75281d04fa90bc8",
+          "text": "And it was in Chile she discovered she could get last-minute cheap deals on ships going to Antarctica from the islands off Tierra del Fuego, the southernmost tip of the South American mainland.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-c:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 61,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:cheap#e-315de36cc9f500a5",
+          "text": "Younger plants are often cheaper than fully grown ones, and you get to care for them as they mature – which is part of the joy of owning plants.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-b:seven-choices:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 25,
+            "end": 32
+          }
+        },
+        {
+          "exampleId": "w:cheap#e-fbe6bfe745d8defa",
+          "text": "Now, new research suggests that a simple, cheap measure may significantly reduce the level of microplastics in water from your tap（水龙头）: boiling and filtering（过滤）it.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 42,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cheap#s2",
+      "pos": "adj.",
+      "glossZh": "廉价粗劣的；低劣的",
+      "pronunciationId": "w:cheap#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:cheap#e-734a4b9176c88bf5",
+          "text": "This subtle linguistic anchor is not just cheap self-help phrases.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 42,
+            "end": 47
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:cheap#s3",
+      "pos": "adj.",
+      "glossZh": "不厚道的；卑劣的",
+      "pronunciationId": "w:cheap#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "市场、交易、议价等名词和动词用法",
+      "reason": "历史义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

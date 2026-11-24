@@ -1,0 +1,253 @@
+{
+  "entryId": "w:blue",
+  "headword": "blue",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/bluː/",
+    "us": "/bluː/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:blue#p-main",
+      "ipa": {
+        "uk": "/bluː/",
+        "us": "/bluː/"
+      },
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "ipaSource": "编辑校订（《牛津高阶》记音）"
+    }
+  ],
+  "forms": [
+    {
+      "form": "bluer",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "bluest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "more blue",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most blue",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "blues",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "Blues",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 7,
+    "mock": 98
+  },
+  "unassignedCounts": {
+    "gaokao": 5,
+    "mock": 95
+  },
+  "senses": [
+    {
+      "senseId": "w:blue#s1",
+      "pos": "adj. / n.",
+      "glossZh": "蓝色的；蓝色",
+      "pronunciationId": "w:blue#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blue#e-18c07b93a4b5e564",
+          "text": "He passed milky white waterfalls and mountains in many shades of blue.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:grammar-fill:2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 65,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:blue#e-3eb447b785133faa",
+          "text": "My classmates ranged from those kids with pale skin and large blue eyes to those with rich brown skin and dark hair.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-a:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao",
+          "target": {
+            "start": 62,
+            "end": 66
+          }
+        },
+        {
+          "exampleId": "w:blue#e-c9f4e521aad33c87",
+          "text": "Her simple blue dress looked old but was neatly ironed.",
+          "source": {
+            "paperId": "paper-mock-chongqing-kangde-2025-11-senior-three-survey-test",
+            "paperTitle": "2026年普通高等学校招生全国统一考试11月调研测试卷 英语试题卷",
+            "groupId": "group:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-kangde-2025-11-senior-three-survey-test:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 11,
+            "end": 15
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blue#s2",
+      "pos": "adj.",
+      "glossZh": "忧郁的；沮丧的",
+      "pronunciationId": "w:blue#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:blue#s3",
+      "pos": "n.",
+      "glossZh": "忧郁；沮丧",
+      "pronunciationId": "w:blue#p-main",
+      "note": "常用复数 the blues。",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:blue#e-82be42736ad41557",
+          "text": "Another explanation is the oncoming weight of the post-vacation blues.",
+          "source": {
+            "paperId": "paper-mock-chongqing-nankai-2026-m2",
+            "paperTitle": "重庆市高2026届高三第二次质量检测",
+            "groupId": "group:paper-mock-chongqing-nankai-2026-m2:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-chongqing-nankai-2026-m2:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 64,
+            "end": 69
+          }
+        },
+        {
+          "exampleId": "w:blue#e-444f118932ddd76c",
+          "text": "For decades “Monday blues” has been a term for the collective groan (叹息) that greets the start of each workweek.",
+          "source": {
+            "paperId": "paper-mock-guangdong-foshan-2026-01-first",
+            "paperTitle": "2025~2026学年佛山市普通高中教学质量检测（一）英语试题",
+            "groupId": "group:paper-mock-guangdong-foshan-2026-01-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-foshan-2026-01-first:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock",
+          "target": {
+            "start": 20,
+            "end": 25
+          }
+        }
+      ]
+    },
+    {
+      "senseId": "w:blue#s4",
+      "pos": "n.",
+      "glossZh": "布鲁斯音乐；蓝调",
+      "pronunciationId": "w:blue#p-main",
+      "note": "the blues。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:blue#s5",
+      "pos": "短语",
+      "glossZh": "突然；出乎意料",
+      "pronunciationId": "w:blue#p-main",
+      "note": "out of the blue。",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "以蓝色为标志的政党、地名、人名及餐馆名等",
+      "reason": "政治语境、技术分类或专名。"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}
