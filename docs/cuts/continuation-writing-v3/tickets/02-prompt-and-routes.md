@@ -68,7 +68,10 @@ refused, no doctrine is sent). Also pass: `verify-application-model-answer-promp
 `verify-companion-analysis-export`, `verify-i5-writing-ai-import`.
 `verify-analyzed-package-producer-kit` stops at the missing `magick` binary
 here, as on the pre-change commit.
-CI: full `verify-ci.mjs` run pending; recorded in the follow-up commit.
+CI: full `verify-ci.mjs` in this container: 37 scripts failed, the same 37
+that failed after ticket 01 (`551ca62b4`); none new, none fixed. They need the
+ImageMagick 7 `magick` binary, a service on `127.0.0.1:8787`, or the deploy and
+OCR fixtures that depend on them; GitHub CI has to confirm them.
 Notes:
 - Spec D4 says the projection "requires V3" for new papers; D7 says V2 stays
   valid in projection. `nck1AnalysisProjection.mjs` keeps accepting V2 so
