@@ -115,3 +115,57 @@ happened to draw V2 as A.
 recorded. The advanced essay was judged worth its extra words on all five
 papers where that question was answered (2024-i and 2025-i left blank). The
 direct-speech question was not answered.
+
+# Round 3 (2026-11-24)
+
+Round 2 tied 2 to 2 with no reasons recorded. Round 3 adds two prompt rules
+the Owner approved and blind-tests them on four papers not used before.
+
+## What changed
+
+- Principle 4 limits new characters: only people the source already has; the
+  people the source or starters imply may appear unnamed as background, never
+  driving the turn. New objects only if they belong in the scene and do work.
+  Evidence in `../new-characters-objects-research.md`.
+- The reading section asks exactly three questions, each with one job: where
+  the source stops, what the character wants and is like, how the source is
+  written (and so how the continuation should be written).
+- `check.mjs` requires exactly 3 reading questions and warns on capitalised
+  words the source never uses. Days, months, holidays, languages, family forms
+  of address, plurals or possessives of known names and parts of known names
+  are skipped. The round 2 "Emma" is still flagged.
+
+## Papers
+
+Blind: paper-2026-i, paper-zj-2025-jan, paper-2020-i, paper-mock-gd-2026-m1.
+Rule check only (V3, not voted): paper-zj-2024-jan and paper-2025-ii, the two
+papers whose round 2 essays brought in a helping new student and a named Emma.
+paper-zj-2026-jan stays held out.
+
+## Checks run
+
+- `check.mjs` on 6 V3 and 4 V2 outputs: no failures. One warning: V2 on
+  mock-gd puts 20% of words in direct speech against 7% in the source (under
+  the warning line after the rematch below; the 225 run had 31%).
+- Every V2 `continuationAnalysis` passes
+  `validateNarrativeContinuationAnalysis`.
+- All 6 V3 outputs ask the three fixed questions. Neither rule-check paper
+  brings in a plot-driving or named new person: zj-2024-jan ends with Eva
+  learning the building herself; 2025-ii has one unnamed classmate reacting.
+- V2 was generated at target 225. mock-gd came out 213 against the V3 186
+  and was regenerated at 200, giving 195.
+
+| paper | source quoted | V2 new words | V3 standard new words | V3 advanced new words |
+|---|---|---|---|---|
+| paper-2026-i | 0% | 213 | 205 | 272 |
+| paper-zj-2025-jan | 11% | 202 | 208 | 278 |
+| paper-2020-i | 36% | 195 | 201 | 276 |
+| paper-mock-gd-2026-m1 | 7% | 195 | 186 | 276 |
+
+## Known weakness, not changed in this round
+
+paper-2020-i's source carries 36% of its words in direct speech, yet the V3
+third reading answer calls it a few short quoted lines and both V3 essays
+quote 2–3%. The principle 3 wording leads with "mostly reported speech" and
+the model applied that default. To fix after the vote by making the third
+question decide the amount from the source first.
