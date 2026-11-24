@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import path from 'node:path'
 // Usage: node prep.mjs <out-dir>. Writes <paper>/v2-prompt.txt, v3-prompt.txt and assets.json.
+// CW_V2_TARGET=<n> overrides wordCountTarget in the V2 prompt only, to match lengths.
 const root = path.resolve(import.meta.dirname, '../../../..')
 const out = process.argv[2]
 const { buildNarrativeContinuationStagedAnalysisContract } = await import(path.join(root, 'server/paper-import-ai/analyzeNarrativeContinuation.mjs'))
@@ -18,10 +19,12 @@ for (const [id, base] of Object.entries(papers)) {
   const asset = JSON.parse(readFileSync(path.join(dir, 'latest/paper-asset.json'), 'utf8'))
   const t = Object.values(asset.content.writingTasks).find((x) => x.taskType === 'continuation')
   const input = { writingTaskId: t.writingTaskId || '', groupId: t.groupId || '', taskType: 'continuation', instruction: t.instruction, materialText: t.materialText, paragraphStarters: [...t.continuationStarters], wordCountTarget: Number(t.wordCountTarget || 150) }
+  const v2Input = process.env.CW_V2_TARGET ? { ...input, wordCountTarget: Number(process.env.CW_V2_TARGET) } : input
   const task = ['Complete continuation Writing Task:', '', 'Structured input:', JSON.stringify(input, null, 2)].join('\n')
   mkdirSync(path.join(out, id), { recursive: true })
   writeFileSync(path.join(out, id, 'v3-prompt.txt'), `${v3}\n\n${task}\n`)
-  writeFileSync(path.join(out, id, 'v2-prompt.txt'), `${v2}\n\n${task}\n`)
+  const v2Task = ['Complete continuation Writing Task:', '', 'Structured input:', JSON.stringify(v2Input, null, 2)].join('\n')
+  writeFileSync(path.join(out, id, 'v2-prompt.txt'), `${v2}\n\n${v2Task}\n`)
   index[id] = dir
 }
 writeFileSync(path.join(out, 'assets.json'), JSON.stringify(index, null, 2))
