@@ -450,6 +450,7 @@ verifiers test historical libraries and do not require a live Orb controller.
 | `verify-i5-writing-ai-import.mjs` | I5 应用文写作 + 读后续写 AI 导题接入：splitter / package / publish path contracts | yes |
 | `verify-application-model-answer-prompt.mjs` | 应用文参考范文生产护栏：运行时精确加载正式 V3 Prompt、附加完整重建题面、保留但不再使用 V2，并钉住交际对象推演与最小充分关系动作 | yes |
 | `verify-continuation-analysis-v1.mjs` | 记叙型读后续写 V2 生产合同及 V1 读取兼容：四区 schema / tracked Prompt / provider seam 同形；段序、段二反约束证据、全局约束 ID、原文摘录、条件情绪与开放路线边界受检；退役字段不得回流 | yes |
+| `verify-application-analysis-v4.mjs` | 应用文 V4 合同和校验器：五套试写结果全过；D3 每条规则各有一个失败样例并报出字段和规则；schema 不允许 V4 和旧审题卡并存、V4 必须带 modelAnswer 且等于标准版；分阶段投影、回填候选和落盘保留 applicationAnalysis，V2 审题卡路径不变 | yes |
 | `verify-teaching-analysis-style.mjs` | 配套解析讲解力护栏：六类正式 Prompt 运行时只加载一次共享讲解规范，题型专项动作存在，固定 25 题 benchmark 数量正确且全部指向已跟踪原题和解析 | yes |
 | `verify-i6-writing-render.mjs` | I6 写作卷面版面还原：从 content.blocks 派生写作页模型（题面外壳归属 / 续写开头句折叠进答题框 / 应用文空框 / 不串味） | yes |
 | `verify-i7-application-given.mjs` | I7 应用文给定上下格式解析：末尾纯英文 + 正向信号守卫切给定骨架（信件/标题/无给定/负向守卫/称呼型），情境剔除、夹注不误判 | yes |
