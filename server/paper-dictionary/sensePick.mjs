@@ -80,7 +80,7 @@ export function createSensePickAdapter({
     if (!apiKey) {
       throw senseError('SENSE_UNAVAILABLE', 'Sense pick is not configured', { status: 503 })
     }
-    const { surface, candidates } = input
+    const { surface, candidates, otterOccurrence } = input
     if (!surface || !Array.isArray(candidates) || candidates.length === 0) {
       throw senseError('SENSE_REQUEST_INVALID', 'surface and candidates are required', { status: 400 })
     }
@@ -90,11 +90,13 @@ export function createSensePickAdapter({
       : timeout
     const body = {
       model,
-      messages: [{ role: 'user', content: surface }],
+      messages: [{ role: 'user', content: otterOccurrence?.sentence ?? surface }],
       translation_options: {
         source_lang: 'English',
         target_lang: 'Chinese',
-        domains: buildSenseDomains({ candidates }),
+        domains: otterOccurrence
+          ? `Choose the meaning of "${surface}" at UTF-16 offsets [${otterOccurrence.start}, ${otterOccurrence.end}) in the English input (zero-based). Output exactly one senseId from these candidates, or NONE if uncertain. Candidates: ${JSON.stringify(candidates)}`
+          : buildSenseDomains({ candidates }),
       },
       temperature: 0,
       max_tokens: SENSE_PICK_MAX_OUTPUT_TOKENS,
@@ -162,6 +164,16 @@ export function createSensePickAdapter({
     }
     if (!observedUsage) {
       throw senseError('SENSE_USAGE_MISSING', 'Sense pick usage was missing', { status: 502 })
+    }
+    if (otterOccurrence) {
+      const senseId = content.trim()
+      const complete = !finishReason || finishReason === 'stop'
+      const picked = complete && candidates.filter(item => item.senseId === senseId).length === 1
+      return {
+        ...(picked ? { kind: 'otter-sense', senseId } : { kind: 'none' }),
+        usage: observedUsage,
+        model: payload.model || model,
+      }
     }
     const copied = matchCopiedGloss(content, candidates)
     // 清单太长时回复会被截断，但第一条义项往往已经完整。圈中词用这条，不再报截断。

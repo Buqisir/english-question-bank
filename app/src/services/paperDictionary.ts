@@ -108,6 +108,7 @@ export type OtterSense = {
 
 export type OtterEntry = {
   entryId: string
+  version: number
   headword: string
   lists: string[]
   variants: string[]
@@ -149,6 +150,7 @@ export type PaperDictionarySenseResponse = {
   status: 'ok' | 'none'
   match: PaperDictionarySenseMatch | null
   phrase: { text: string; gloss: string } | null
+  otterSenseId?: string | null
 }
 
 export async function requestPaperDictionaryLookup(

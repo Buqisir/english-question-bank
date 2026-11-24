@@ -9,6 +9,7 @@ import {
   fetchPaperDictionaryStatus,
   requestPaperDictionaryLookup,
   requestPaperDictionarySense,
+  type OtterEntry,
   type PaperDictionaryResponse,
   type PaperDictionaryStatus,
 } from '../../../services/paperDictionary.ts'
@@ -40,6 +41,8 @@ import './selectionOverlay.css'
 import './sentence-analysis/sentenceAnalysis.css'
 
 const sentenceAnalysisProvider = createSentenceAnalysisProvider(SENTENCE_ANALYSIS_MODE)
+
+type SelectionSenseState = DictionarySenseState | { status: 'otter'; senseId: string }
 
 let translationStatusCache: PaperTranslationStatus | 'unavailable' | null = null
 let translationStatusInflight: Promise<PaperTranslationStatus | 'unavailable'> | null = null
@@ -162,7 +165,7 @@ export function usePaperSelectionTranslation({
   const [lookupError, setLookupError] = useState('')
   const [fullEntryOpen, setFullEntryOpen] = useState(false)
   const [restoreQuickFocus, setRestoreQuickFocus] = useState(false)
-  const [sense, setSense] = useState<DictionarySenseState>({ status: 'loading' })
+  const [sense, setSense] = useState<SelectionSenseState>({ status: 'loading' })
   const [playErrorId, setPlayErrorId] = useState('')
   const { state: copyState, copied, error: copyError, copy, reset: resetCopy } = useClipboardCopy()
   const [analysisState, setAnalysisState] = useState<SentenceAnalysisCardStatus>('loading')
@@ -432,7 +435,7 @@ export function usePaperSelectionTranslation({
     }
   }, [dictionaryStatus?.dictionaryVersion])
 
-  const runSense = useCallback(async (current: Snapshot) => {
+  const runSense = useCallback(async (current: Snapshot, entry?: OtterEntry | null) => {
     if (!dictionaryStatus?.sensePick?.enabled) {
       setSense({ status: 'unavailable', message: '本文义暂不可用' })
       return
@@ -450,9 +453,10 @@ export function usePaperSelectionTranslation({
       paperId: current.paperId,
       sourceRevision: current.sourceRevision,
       segment,
+      otter: entry ? [entry.entryId, entry.version] : undefined,
     })
-    const cached = pageCacheRef.current.get<DictionarySenseState>(cacheKey)
-    if (cached?.status === 'ok' || cached?.status === 'unavailable') {
+    const cached = pageCacheRef.current.get<SelectionSenseState>(cacheKey)
+    if (cached?.status === 'ok' || cached?.status === 'unavailable' || cached?.status === 'otter') {
       if (!isCurrent()) return
       setSense(cached)
       return
@@ -468,6 +472,15 @@ export function usePaperSelectionTranslation({
       if (response.selectedText !== segment.selectedText || response.sourceRevision !== current.sourceRevision) {
         throw new Error('试卷来源已更新，请重新选择')
       }
+      if (entry) {
+        const picked = entry.senses.find(item => item.senseId === response.otterSenseId)
+        if (response.status === 'ok' && picked) {
+          const next = { status: 'otter', senseId: picked.senseId } as const
+          pageCacheRef.current.set(cacheKey, next)
+          setSense(next)
+        }
+        return
+      }
       let next: DictionarySenseState
       if (response.status === 'ok' && response.phrase) {
         next = { status: 'ok', text: `${response.phrase.text}：${response.phrase.gloss}`, matchKey: null }
@@ -480,7 +493,7 @@ export function usePaperSelectionTranslation({
       pageCacheRef.current.set(cacheKey, next)
       setSense(next)
     } catch (error) {
-      if (!isCurrent()) return
+      if (!isCurrent() || entry) return
       const code = (error as { code?: string }).code
       const message = teacherFacingError(error)
       if (!message) return
@@ -494,13 +507,13 @@ export function usePaperSelectionTranslation({
     }
   }, [dictionaryStatus])
 
-  const scheduleSense = useCallback((current: Snapshot) => {
+  const scheduleSense = useCallback((current: Snapshot, entry?: OtterEntry | null) => {
     clearSenseTimer()
     if (!dictionaryStatus?.sensePick?.enabled) return
     senseTimerRef.current = window.setTimeout(() => {
       senseTimerRef.current = null
       if (generationRef.current !== current.generation) return
-      void runSense(current)
+      void runSense(current, entry)
     }, SENSE_DEBOUNCE_MS)
   }, [clearSenseTimer, dictionaryStatus, runSense])
 
@@ -640,7 +653,7 @@ export function usePaperSelectionTranslation({
   }, [clearSenseTimer, close, consumption, dictionaryStatus, hostRef, paperId, phase, runLookup, source, status, resetCopy])
 
   const shownSense = useMemo<DictionarySenseState>(() => {
-    if (dictionaryStatus === undefined) return { status: 'loading' }
+    if (dictionaryStatus === undefined || sense.status === 'otter') return { status: 'loading' }
     if (!dictionaryStatus?.sensePick?.enabled) return { status: 'unavailable', message: '本文义暂不可用' }
     return sense
   }, [dictionaryStatus, sense])
@@ -659,9 +672,9 @@ export function usePaperSelectionTranslation({
   }, [dictionaryStatus, status])
 
   useEffect(() => {
-    if (phase !== 'dictionary' || !snapshot || !dictionaryResult || dictionaryResult.otter
+    if (phase !== 'dictionary' || !snapshot || !dictionaryResult || dictionaryResult.otterSenseId
       || dictionaryResult.status === 'not-found') return undefined
-    scheduleSense(snapshot)
+    scheduleSense(snapshot, dictionaryResult.otter)
     return () => clearSenseTimer()
   }, [clearSenseTimer, dictionaryResult, phase, scheduleSense, snapshot])
 
@@ -868,7 +881,7 @@ export function usePaperSelectionTranslation({
   }, [consumption, hostRef, source])
 
   const otter = dictionaryResult?.otter
-  const otterSenseId = dictionaryResult?.otterSenseId
+  const otterSenseId = dictionaryResult?.otterSenseId ?? (sense.status === 'otter' ? sense.senseId : null)
   const surface = snapshot?.segments[0]?.selectedText ?? ''
   const fallback = !otter && dictionaryResult?.entries.length ? dictionaryResult : null
   const openFullEntry = () => {

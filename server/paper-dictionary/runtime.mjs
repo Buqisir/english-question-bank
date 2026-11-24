@@ -35,7 +35,7 @@ import { createTranslationScheduler } from '../paper-translation/scheduler.mjs'
 import { createSingleFlight } from '../paper-translation/singleFlight.mjs'
 import { createUsageLedger, unavailableLedger } from '../paper-translation/usageLedger.mjs'
 import { lookupSurface, openPaperDictionary } from './store.mjs'
-import { openOtterDictionary } from './otter.mjs'
+import { openOtterDictionary, readOtterOccurrence } from './otter.mjs'
 import { enrichWithGaokao, sharedGaokaoVocabulary } from './gaokao.mjs'
 import { buildSenseCandidates, createSensePickAdapter } from './sensePick.mjs'
 
@@ -397,8 +397,29 @@ export function createPaperDictionaryRuntime({
       ...record,
     })
     const entry = otter?.find(word.surface)
-    const otterSenseId = entry && otter.match(entry, body.paperId, slice.stream, word)
-    if (otterSenseId) return respond({ status: 'none', match: null, phrase: null, otterSenseId })
+    if (entry) {
+      const noMatch = { status: 'none', match: null, phrase: null, otterSenseId: null }
+      const otterSenseId = otter.match(entry, body.paperId, slice.stream, word)
+      if (otterSenseId) return respond({ ...noMatch, status: 'ok', otterSenseId })
+      const occurrence = readOtterOccurrence(slice.stream, word)
+      if (!occurrence || occurrence.sentence.length > SENSE_PICK_MAX_OCCURRENCE_UTF16 || !entry.senses.length) {
+        return respond(noMatch)
+      }
+      const { sentence, start, end } = occurrence
+      const candidates = entry.senses.map(({ senseId, pos, glossZh }) => ({ senseId, pos, glossZh }))
+      const cacheKey = createHash('sha256').update(JSON.stringify([
+        SENSE_PICK_PROMPT_VERSION, senseModel, entry.entryId, entry.version,
+        body.paperId, source.sourceRevision, segment.streamId, segment.start, segment.end, sentence,
+      ])).digest('hex')
+      try {
+        const record = await pickContextSense({
+          surface: word.surface, candidates, otterOccurrence: { sentence, start, end },
+        }, cacheKey, signal)
+        return respond(record)
+      } catch {
+        return respond(noMatch)
+      }
+    }
     const lexical = lexicalEntry(word.surface)
     const candidates = buildSenseCandidates(lexical.entries)
     if (lexical.status === 'not-found' || candidates.length === 0) {
@@ -421,8 +442,13 @@ export function createPaperDictionaryRuntime({
       word.surface,
       occurrence,
     ].join('\n')).digest('hex')
+    const record = await pickContextSense({ surface: word.surface, headwords, occurrence, candidates }, cacheKey, signal)
+    return respond(record)
+  }
+
+  async function pickContextSense(input, cacheKey, signal) {
     const cached = getSenseCache()?.get(cacheKey)
-    if (cached) return respond(cached)
+    if (cached) return cached
 
     const ledger = getSenseLedger()
     if (!ledger.available || translationConfig.monthlyBudgetCny == null) {
@@ -434,7 +460,7 @@ export function createPaperDictionaryRuntime({
       throw serviceError('SENSE_BUDGET_EXHAUSTED', '本月本文义额度已用完', 429)
     }
 
-    const record = await senseFlight.subscribe(cacheKey, async ({
+    return senseFlight.subscribe(cacheKey, async ({
       signal: flightSignal,
       markDispatched,
       hasSubscribers,
@@ -463,15 +489,17 @@ export function createPaperDictionaryRuntime({
           ledger.markDispatched(receipt.receiptId)
           markDispatched()
           dispatched = true
-          const reply = await senseAdapter.pickSense({
-            surface: word.surface,
-            headwords,
-            occurrence,
-            candidates,
-          }, flightSignal)
+          const reply = await senseAdapter.pickSense(input, flightSignal)
           ledger.settle(receipt.receiptId, reply.usage)
           settled = true
-          const picked = senseRecordFromReply(reply)
+          const picked = input.otterOccurrence
+            ? {
+              status: reply.kind === 'otter-sense' ? 'ok' : 'none',
+              match: null,
+              phrase: null,
+              otterSenseId: reply.kind === 'otter-sense' ? reply.senseId : null,
+            }
+            : senseRecordFromReply(reply)
           try {
             getSenseCache()?.set(cacheKey, picked)
           } catch {
@@ -489,7 +517,6 @@ export function createPaperDictionaryRuntime({
         throw error
       }
     }, signal)
-    return respond(record)
   }
 
   return {

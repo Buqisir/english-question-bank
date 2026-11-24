@@ -4,8 +4,19 @@ import { splitSentences } from '../../shared/paper-selection/segmentation.mjs'
 
 const normalize = (text) => text.normalize('NFC').trim()
 const cleanExample = (text) => text.trim().replace(/^(?:[■□●○•▪▫‣◦]\s*)+/, '')
-const normalizeSentence = (text) => cleanExample(normalize(text)).replace(/\s+/g, ' ').replace(/ +([.,!?])/g, '$1')
 const occurrenceKey = (...parts) => JSON.stringify(parts)
+
+export function readOtterOccurrence(stream, word) {
+  const leaf = stream.leaves.find(item => item.start <= word.start && item.end >= word.end)
+  if (!leaf) return null
+  const sentences = splitSentences(stream.text.slice(leaf.start, leaf.end))
+  const index = sentences.findIndex(item => item.start <= word.start - leaf.start && item.end >= word.end - leaf.start)
+  if (index < 0) return null
+  const sentence = sentences[index]
+  const start = word.start - leaf.start - sentence.start
+  const end = word.end - leaf.start - sentence.start
+  return { leaf, sentence: sentence.text, sentenceNumber: index + 1, start, end }
+}
 
 const MONTHS = { jan: 1, feb: 2, jun: 6, jul: 7 }
 const ROUNDS = { first: '一', second: '二', third: '三' }
@@ -123,23 +134,15 @@ export function openOtterDictionary(rootDir) {
       return headwords.get(key) ?? aliases.get(key.toLowerCase()) ?? null
     },
     match(entry, paperId, stream, word) {
-      const leaf = stream.leaves.find(item => item.start <= word.start && item.end >= word.end)
-      if (!leaf) return null
-      const text = stream.text.slice(leaf.start, leaf.end)
-      const sentences = splitSentences(text)
-      const index = sentences.findIndex(item => item.start <= word.start - leaf.start && item.end >= word.end - leaf.start)
-      if (index < 0) return null
-      const sentence = sentences[index]
-      const start = [...text.slice(sentence.start, word.start - leaf.start).trimStart()].length
+      const occurrence = readOtterOccurrence(stream, word)
+      if (!occurrence) return null
+      const { leaf, sentence, sentenceNumber } = occurrence
+      const start = [...sentence.slice(0, occurrence.start).trimStart()].length
       const end = start + [...word.surface].length
       const locator = leaf.kind === 'option' ? leaf.id.replace(/:([^:]+)$/, '#option=$1') : leaf.id
-      const key = occurrenceKey(paperId, stream.groupId, locator, index + 1, start, end, word.surface, entry.entryId)
+      const key = occurrenceKey(paperId, stream.groupId, locator, sentenceNumber, start, end, word.surface, entry.entryId)
       const senseId = occurrences.get(key)
-      if (entry.senses.some(sense => sense.senseId === senseId)) return senseId
-      const sentenceText = normalizeSentence(sentence.text)
-      const matches = entry.senses.filter(sense => sense.examples.some(example =>
-        normalizeSentence(example.text) === sentenceText))
-      return matches.length === 1 ? matches[0].senseId : null
+      return entry.senses.some(sense => sense.senseId === senseId) ? senseId : null
     },
   }
 }

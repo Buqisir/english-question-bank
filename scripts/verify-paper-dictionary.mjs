@@ -916,7 +916,8 @@ async function verifyBrowser() {
               dictionaryVersion: 'fixture', selectedText: body.segments[0].selectedText,
               status: 'found', truncated: false,
               attribution: 'Open Dictionary / Wiktionary 衍生数据，含模型生成释义',
-              entries: [{
+              otter: payload.otter,
+              entries: payload.otter ? [] : [{
                 entryId: 'adopt', headword: payload.headword, posGroups: [{
                   posGroupIndex: 1, pos: 'verb', posLabel: 'v.', etymologyId: 'et1',
                   morphologyLabels: payload.labels, matchedForm: body.segments[0].selectedText,
@@ -938,6 +939,7 @@ async function verifyBrowser() {
               schemaVersion: 'paper-dictionary-sense-response-v1', requestId: 's', sourceRevision: body.sourceRevision,
               selectedText: body.segments[0].selectedText, status: payload.status || 'ok',
               match: payload.match || null, phrase: payload.phrase || null,
+              otterSenseId: payload.otterSenseId,
             }), { status: 200, headers: { 'content-type': 'application/json' } }))
           }})
         })
@@ -1073,6 +1075,20 @@ async function verifyBrowser() {
     await page.locator('.paper-selection-lookup').click()
     await page.waitForSelector('.paper-dictionary-card')
     check('the keyboard card reuses the prefetched lookup', await page.evaluate((n) => window.__dictCalls.dictionary.length === n + 1, before))
+    await page.evaluate((n) => window.__dictCalls.dictionary[n].complete({ otter: {
+      entryId: 'w:policy', version: 1, headword: 'policy', lists: [], variants: [], forms: [], pronunciations: [],
+      senses: [
+        { senseId: 'w:policy#s1', pos: 'n.', glossZh: '保单' },
+        { senseId: 'w:policy#s2', pos: 'n.', glossZh: '政策' },
+      ],
+    } }), before)
+    const otterGloss = page.locator('.paper-dictionary-card .otter-gloss')
+    await otterGloss.waitFor()
+    check('an Otter card opens without a context label before the answer', !(await otterGloss.innerText()).includes('本文'))
+    await page.waitForFunction(() => window.__dictCalls.sense.length === 2)
+    await page.evaluate(() => window.__dictCalls.sense[1].complete({ otterSenseId: 'w:policy#s2' }))
+    await otterGloss.getByText('本文', { exact: true }).waitFor()
+    check('the Otter context label marks the selected sense', (await otterGloss.innerText()).includes('政策'))
 
     await page.goto(`http://127.0.0.1:${port}/dict?translation=off`)
     await page.waitForSelector('#passage')
