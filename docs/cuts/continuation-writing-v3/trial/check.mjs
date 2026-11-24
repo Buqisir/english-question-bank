@@ -79,12 +79,20 @@ function measureEssay(label, essay, range, failures, warnings) {
   // Principle 4: no named new characters. Capitalised words mid-sentence that
   // the source and starters never use; days and months are not names.
   const known = new Set(words([material, ...starters].join(' ')).map((w) => w.toLowerCase()))
-  const calendar = /^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|January|February|March|April|May|June|July|August|September|October|November|December|English|Chinese)$/
+  // Days, months, holidays, languages and family forms of address are not new
+  // people. A plural or possessive of a known name ("the Merediths") and part
+  // of a known name ("Qiu" in "Qiuyu") are not new either.
+  const calendar = /^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|January|February|March|April|May|June|July|August|September|October|November|December|Christmas|Eve|Day|Year|English|Chinese|Mom|Mum|Dad|Mother|Father|Grandma|Grandpa|Granny|Uncle|Aunt|Sir|Madam)$/
+  const isKnown = (w) => {
+    const l = w.toLowerCase()
+    const stem = l.replace(/(?:'s|’s|s)$/, '')
+    return known.has(l) || known.has(stem) || [...known].some((k) => k.length > l.length && k.startsWith(l) && l.length >= 3)
+  }
   const names = new Set()
   for (const m of essay.matchAll(/(?<![.!?"“]\s)(?<!^)\b([A-Z][a-z]+)\b(?!\s*\d)/gm)) {
     const before = essay.slice(0, m.index).trimEnd()
     if (!before || /[.!?:"“”]$/.test(before)) continue
-    if (!known.has(m[1].toLowerCase()) && !calendar.test(m[1])) names.add(m[1])
+    if (!isKnown(m[1]) && !calendar.test(m[1])) names.add(m[1])
   }
   if (names.size) warnings.push(`${label}: possible new named character: ${[...names].join(', ')}`)
   const share = quoteShare(essay)
