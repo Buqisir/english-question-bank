@@ -1,6 +1,8 @@
-import { readFileSync, readdirSync } from 'node:fs'
+import { closeSync, openSync, readFileSync, readdirSync, readSync } from 'node:fs'
 import path from 'node:path'
+import { StringDecoder } from 'node:string_decoder'
 import { splitSentences } from '../../shared/paper-selection/segmentation.mjs'
+import { createBoundedLru } from '../paper-translation/boundedLru.mjs'
 
 const normalize = (text) => text.normalize('NFC').trim()
 const cleanExample = (text) => text.trim().replace(/^(?:[■□●○•▪▫‣◦]\s*)+/, '')
@@ -103,35 +105,68 @@ function readOptional(read, fallback) {
   }
 }
 
+function* readOccurrenceRows(file) {
+  const fd = readOptional(() => openSync(file, 'r'), null)
+  if (fd === null) return
+  try {
+    const buffer = Buffer.alloc(128 * 1024)
+    const decoder = new StringDecoder('utf8')
+    let remainder = ''
+    let bytesRead
+    while ((bytesRead = readSync(fd, buffer)) > 0) {
+      const lines = (remainder + decoder.write(buffer.subarray(0, bytesRead))).split('\n')
+      remainder = lines.pop()
+      for (const line of lines) {
+        if (line.trim()) yield JSON.parse(line)
+      }
+    }
+    const last = remainder + decoder.end()
+    if (last.trim()) yield JSON.parse(last)
+  } finally {
+    closeSync(fd)
+  }
+}
+
 export function openOtterDictionary(rootDir) {
   // Keep the bundled dictionary in the release, whose top-level data directory is shared.
   const dir = path.join(rootDir, 'server', 'paper-dictionary', 'otter-data')
   const entriesDir = path.join(dir, 'entries')
-  const entries = readOptional(() => readdirSync(entriesDir), [])
-    .filter(name => name.endsWith('.json')).sort()
-    .map(name => prepareEntry(JSON.parse(readFileSync(path.join(entriesDir, name), 'utf8'))))
-  const headwords = new Map(entries.map(entry => [normalize(entry.headword), entry]))
+  const files = new Map()
+  const headwords = new Map()
   const aliases = new Map()
-  for (const entry of entries) {
-    for (const form of [entry.headword, ...entry.variants, ...entry.forms.map(item => item.form)]) {
+  const entries = createBoundedLru({ maxEntries: 300 })
+  const readEntry = name => JSON.parse(readFileSync(path.join(entriesDir, name), 'utf8'))
+  const names = readOptional(() => readdirSync(entriesDir), []).filter(name => name.endsWith('.json')).sort()
+  for (const name of names) {
+    const { entryId, headword, variants, forms } = readEntry(name)
+    files.set(entryId, name)
+    headwords.set(normalize(headword), entryId)
+    for (const form of [headword, ...variants, ...forms.map(item => item.form)]) {
       const key = normalize(form).toLowerCase()
-      aliases.set(key, !aliases.has(key) || aliases.get(key) === entry ? entry : null)
+      aliases.set(key, !aliases.has(key) || aliases.get(key) === entryId ? entryId : null)
     }
   }
   const occurrences = new Map()
-  const mapFile = path.join(dir, 'occurrence-senses.ndjson')
-  const rows = readOptional(() => readFileSync(mapFile, 'utf8'), '').trim()
-  for (const line of rows ? rows.split('\n') : []) {
-    const row = JSON.parse(line)
-    const key = occurrenceKey(row.paperId, row.groupId, row.paragraphId ?? row.questionId,
-      row.sentence, row.start, row.end, row.surface, row.entryId)
-    occurrences.set(key, row.senseId)
+  const senseIds = new Map()
+  for (const row of readOccurrenceRows(path.join(dir, 'occurrence-senses.ndjson'))) {
+    const locator = occurrenceKey(row.paperId, row.groupId, row.paragraphId ?? row.questionId)
+    let positions = occurrences.get(locator)
+    if (!positions) occurrences.set(locator, positions = new Map())
+    const key = occurrenceKey(row.sentence, row.start, row.end, row.surface, row.entryId)
+    if (!senseIds.has(row.senseId)) senseIds.set(row.senseId, row.senseId)
+    positions.set(key, senseIds.get(row.senseId))
   }
   return {
-    available: entries.length > 0,
+    available: files.size > 0,
     find(surface) {
       const key = normalize(surface)
-      return headwords.get(key) ?? aliases.get(key.toLowerCase()) ?? null
+      const entryId = headwords.get(key) ?? aliases.get(key.toLowerCase())
+      if (!entryId) return null
+      const cached = entries.get(entryId)
+      if (cached) return cached
+      const entry = prepareEntry(readEntry(files.get(entryId)))
+      entries.set(entryId, entry)
+      return entry
     },
     match(entry, paperId, stream, word) {
       const occurrence = readOtterOccurrence(stream, word)
@@ -142,8 +177,8 @@ export function openOtterDictionary(rootDir) {
       let locator = leaf.id
       if (leaf.kind === 'option') locator = leaf.id.replace(/:([^:]+)$/, '#option=$1')
       if (leaf.kind === 'option-bank') locator = `option-bank:${leaf.id}`
-      const key = occurrenceKey(paperId, stream.groupId, locator, sentenceNumber, start, end, word.surface, entry.entryId)
-      const senseId = occurrences.get(key)
+      const positions = occurrences.get(occurrenceKey(paperId, stream.groupId, locator))
+      const senseId = positions?.get(occurrenceKey(sentenceNumber, start, end, word.surface, entry.entryId))
       return entry.senses.some(sense => sense.senseId === senseId) ? senseId : null
     },
   }
