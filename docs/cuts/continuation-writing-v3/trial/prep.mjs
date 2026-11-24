@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import path from 'node:path'
 // Usage: node prep.mjs <out-dir>. Writes <paper>/v2-prompt.txt, v3-prompt.txt and assets.json.
-// CW_V2_TARGET=<n> overrides wordCountTarget in the V2 prompt only, to match lengths.
+// CW_PAPERS=<id,...> limits the papers; CW_V2_TARGET=<n> overrides wordCountTarget in the V2 prompt only, to match lengths.
 const root = path.resolve(import.meta.dirname, '../../../..')
 const out = process.argv[2]
 const { buildNarrativeContinuationStagedAnalysisContract } = await import(path.join(root, 'server/paper-import-ai/analyzeNarrativeContinuation.mjs'))
@@ -12,6 +12,14 @@ const papers = {
   'paper-2022-i': 'test-fixtures/retired-paper-assets', 'paper-2023-i': 'test-fixtures/retired-paper-assets',
   'paper-zj-2024-jan': 'test-fixtures/retired-paper-assets', 'paper-mock-sz-2026-m1': 'app/public/paper-assets',
   'paper-2024-i': 'test-fixtures/retired-paper-assets', 'paper-2025-i': 'test-fixtures/retired-paper-assets', 'paper-2025-ii': 'test-fixtures/retired-paper-assets',
+  // Round 3 blind papers, not seen by the Owner in earlier rounds.
+  'paper-2020-i': 'test-fixtures/retired-paper-assets', 'paper-2026-i': 'test-fixtures/retired-paper-assets',
+  'paper-zj-2025-jan': 'test-fixtures/retired-paper-assets', 'paper-mock-gd-2026-m1': 'app/public/paper-assets',
+}
+// CW_PAPERS=a,b limits the run to those papers.
+if (process.env.CW_PAPERS) {
+  const keep = new Set(process.env.CW_PAPERS.split(','))
+  for (const id of Object.keys(papers)) if (!keep.has(id)) delete papers[id]
 }
 const index = {}
 for (const [id, base] of Object.entries(papers)) {

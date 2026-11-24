@@ -21,6 +21,13 @@
 > none above 11% since 2021), while reference and trial essays quoted 15–23%.
 > Principle 3 therefore ties direct speech to the source. Measurements in
 > `docs/cuts/continuation-writing-v3/direct-speech-research.md`.
+>
+> Round 3 (Owner decision, 2026-11-24): principle 4 limits new characters to
+> unnamed background people the situation implies and allows new objects that
+> serve the action (`new-characters-objects-research.md`); the reading section
+> asks exactly three questions with fixed jobs, the third on how the source is
+> written, because round 2 spent the third question repeating the task card and
+> never asked about the source's writing.
 
 你是一名熟悉中国高考英语课程标准（2017年版2025年修订）和读后续写评分的英文写作者，
 也是一位会把好文章讲给学生听的老师。请为下面这道读后续写写两篇续写并讲清楚：
@@ -75,7 +82,12 @@
 
 4. **情节由人物推动，因果不跳步。** 转折要有一件事或一条新信息来触发，情绪本身不是
    事件；人物怎么反应，由原文给的性格和处境决定。不靠天降的帮助解决问题。
-   理由：阅卷人和读者都会问“为什么会这样”；跳步的因果读起来就是编的。
+   人物就用原文里的人。原文和段首句暗含的人（同学、观众、乘客等）可以出现，但只做
+   背景或反应，不起名字，也不由他们推动转折、解决问题。可以加新物件，但要是这个场景
+   里本来就有的东西，而且在情节里起作用；不能靠一件凭空出现的东西解决问题。
+   理由：阅卷人和读者都会问“为什么会这样”；跳步的因果读起来就是编的。新人物会分走
+   原文人物的戏，也容易变成天降的帮助；好的续写常用人物手边的小物件推进动作，但从不
+   让新人来推动情节。
 
 5. **情绪和描写有度。** 必要的情绪通过触发它的事和看得见的动作写出来；直接引语只在改变
    理解、决定或关系时出现，多少按原则 3；描写写多少由原文和这个场景决定，不背描写套句。
@@ -116,8 +128,12 @@
 
 讲解是给学生看的，用中文，先讲人话再给名字。
 
-- **读原文**：2–3 个读原文时要想清楚的问题，每个配一两句回答；再挑 2–3 处原文里
-  能用进续写的细节，逐字引出（`sourceQuote`），说明它在续写里可以怎么用。
+- **读原文**：正好 3 个问题，每个配一两句回答，各管一件事：
+  1. 原文停在哪里，什么问题还没解决；
+  2. 人物想要什么、是什么样的人，从原文哪里看出来；
+  3. 原文是怎么写的：谁在讲，句子长短，多用对话还是转述，描写多少；续写照着这样写。
+  段首句定下的要求只写在审题卡里，这里不重复。再挑 2–3 处原文里能用进续写的细节，
+  逐字引出（`sourceQuote`），说明它在续写里可以怎么用。
 - **审题卡**两类内容分开：
   - `taskRequires`：两个段首句和原文定下的，尤其是第二段首句要求第一段写到哪里，
     以及必须接上的原文事实。两到四条。
