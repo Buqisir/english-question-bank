@@ -20,6 +20,10 @@ import { validateWritingAnalysisCandidate } from '../writing-analysis/writingAna
 import { validateApplicationAnalysisV4, validateApplicationModelAnswer } from '../paper-import-ai/applicationWritingWorkflow.mjs'
 import { isApplicationReviewCardV2 } from '../../shared/writing/applicationReviewCard.mjs'
 import { applicationAnalysisV4ShapeProblems } from '../../shared/writing/applicationAnalysisV4.mjs'
+import {
+  CONTINUATION_ANALYSIS_V3,
+  continuationAnalysisV3ShapeProblems,
+} from '../../shared/writing/continuationAnalysisV3.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import {
   LEGACY_NCK1_ANALYSIS_PROFILE,
@@ -258,8 +262,16 @@ export function projectNck1StagedWritingAnalysis(raw) {
     if (!raw.continuationAnalysis || typeof raw.continuationAnalysis !== 'object') {
       fail('New-paper continuation analysis must use continuationAnalysis')
     }
-    if (raw.continuationAnalysis.schemaVersion !== 'continuation-analysis-v2') {
-      fail('New-paper continuation analysis must use continuation-analysis-v2')
+    // Ticket 02 of docs/cuts/continuation-writing-v3 makes V3 the only version
+    // accepted here; until the prompt moves, V2 stays accepted.
+    if (raw.continuationAnalysis.schemaVersion === CONTINUATION_ANALYSIS_V3) {
+      const problems = continuationAnalysisV3ShapeProblems(raw.continuationAnalysis)
+      if (problems.length > 0) fail(`New-paper continuation analysis V3 is malformed: ${problems.join('; ')}`)
+      if (raw.modelAnswer !== raw.continuationAnalysis.standard.essay) {
+        fail('New-paper continuation analysis V3 modelAnswer must equal the standard essay')
+      }
+    } else if (raw.continuationAnalysis.schemaVersion !== 'continuation-analysis-v2') {
+      fail('New-paper continuation analysis must use continuation-analysis-v2 or continuation-analysis-v3')
     }
     if (raw.continuationDesign !== undefined || raw.highlightExpressions !== undefined) {
       fail('New-paper continuation analysis must not mix historical fields')

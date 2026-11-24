@@ -1,0 +1,150 @@
+{
+  "source": "direct-speech fix check 2026-11-24, fix-check/paper-2026-i/v3-out.json; task from test-fixtures/retired-paper-assets/paper-2026-i",
+  "writingTask": {
+    "taskType": "continuation",
+    "instruction": "Emily Sanders, a 25-year-old from Detroit, Michigan, set out on December 23rd with high hopes of reaching Toronto to meet her boyfriend for Christmas. Although she had heard warnings about an approaching snowstorm, she didn’t give it much thought. She assumed that much like in Michigan, police would simply detour (使绕道) traffic around any closed sections of the highway. But that didn’t happen. As the snow came down more and more heavily, Emily was directed off the highway. She drove on for a while and found herself on an unfamiliar road toward a Canadian town.\nThe blinding whiteout made driving nearly impossible. At one point, Emily’s car got stuck. After a struggle, she managed to free the vehicle and continued inching along the snow-covered road. As night fell, panic set in. While Emily was driving on a narrow stretch of road, her car slid into a ditch (沟) . She tried to call for help but found no signal on her phone. Seeing no hope of immediate rescue, Emily decided to spend the night in her car. She wrapped herself in a blanket, waiting for morning. To stay warm, she ran her engine for a few minutes every now and then. Eventually, she fell asleep.\nEmily awoke to a gentle knock on her car window. Standing outside were Daniel and his wife Rachel, who noticed the stranded (被困的) vehicle on their way home and stopped to see if they could help. When Emily rolled down the window, Rachel asked if she was okay and told her it was not safe to stay overnight in the car. With genuine warmth in her voice, Rachel said they could take Emily to a nearby cafe they knew. Grateful and relieved, Emily accepted the offer.\nIn the cafe, the couple bought Emily a hot chocolate and listened patiently as she explained her desperate situation: she was about a hundred miles from her destination, her car was completely stuck, and her entire holiday plan could be ruined.",
+    "materialText": "Emily Sanders, a 25-year-old from Detroit, Michigan, set out on December 23rd with high hopes of reaching Toronto to meet her boyfriend for Christmas. Although she had heard warnings about an approaching snowstorm, she didn’t give it much thought. She assumed that much like in Michigan, police would simply detour (使绕道) traffic around any closed sections of the highway. But that didn’t happen. As the snow came down more and more heavily, Emily was directed off the highway. She drove on for a while and found herself on an unfamiliar road toward a Canadian town.\n\nThe blinding whiteout made driving nearly impossible. At one point, Emily’s car got stuck. After a struggle, she managed to free the vehicle and continued inching along the snow-covered road. As night fell, panic set in. While Emily was driving on a narrow stretch of road, her car slid into a ditch (沟) . She tried to call for help but found no signal on her phone. Seeing no hope of immediate rescue, Emily decided to spend the night in her car. She wrapped herself in a blanket, waiting for morning. To stay warm, she ran her engine for a few minutes every now and then. Eventually, she fell asleep.\n\nEmily awoke to a gentle knock on her car window. Standing outside were Daniel and his wife Rachel, who noticed the stranded (被困的) vehicle on their way home and stopped to see if they could help. When Emily rolled down the window, Rachel asked if she was okay and told her it was not safe to stay overnight in the car. With genuine warmth in her voice, Rachel said they could take Emily to a nearby cafe they knew. Grateful and relieved, Emily accepted the offer.\n\nIn the cafe, the couple bought Emily a hot chocolate and listened patiently as she explained her desperate situation: she was about a hundred miles from her destination, her car was completely stuck, and her entire holiday plan could be ruined.",
+    "continuationStarters": [
+      "Daniel and Rachel suggested that Emily continue her journey by train.",
+      "Three days later, Emily returned to get her car."
+    ],
+    "wordCountTarget": 150
+  },
+  "output": {
+    "taskType": "continuation",
+    "blocked": null,
+    "reading": {
+      "questions": [
+        {
+          "question": "原文停在哪里？什么问题还没解决？",
+          "answer": "停在咖啡馆里：Emily 刚把处境讲完——离多伦多还有约一百英里，车卡在沟里动不了，圣诞计划可能泡汤。两个问题都没解决：她人怎么到多伦多，车怎么办。"
+        },
+        {
+          "question": "人物想要什么、是什么样的人？从原文哪里看出来？",
+          "answer": "Emily 一心想赶到多伦多和男友过圣诞，有点冒失（听到暴风雪警告也没当回事），但遇事不放弃（车陷住后自己挣扎着弄出来）。Daniel 和 Rachel 路过时主动停车查看、把她带去咖啡馆、请她喝热巧克力、耐心听她讲，是热心又实在的本地人。"
+        },
+        {
+          "question": "原文是怎么写的？续写要照着怎样写？",
+          "answer": "第三人称、过去时，叙述平实，句子中等长短。原文一处引号都没有，人物的话全是转述（Rachel asked if she was okay and told her...）。描写很少，只有 blinding whiteout 这类一笔带过。所以续写以转述为主，只在情感转折处放一两句短的直接引语，描写点到即止。"
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "her car was completely stuck",
+          "use": "第一段要回答这个问题：车不能丢下不管，由 Daniel 答应等雪停后把车拖出来，这才让“坐火车走”说得通，也为第二段“回来取车”埋下理由。"
+        },
+        {
+          "sourceQuote": "the couple bought Emily a hot chocolate",
+          "use": "结尾可以回到同一家咖啡馆，这回由 Emily 请客买热巧克力，用同一件小东西表示关系从“被帮助”变成“回报”。"
+        },
+        {
+          "sourceQuote": "to meet her boyfriend for Christmas",
+          "use": "第二段可以让 Emily 带回在多伦多和男友一起做的饼干，说明她确实赶上了圣诞，不必再另写一段团聚场面。"
+        }
+      ]
+    },
+    "taskCard": {
+      "taskRequires": [
+        "第一段从夫妇建议坐火车写起，必须解决“车怎么办”这个顾虑，并让 Emily 接受建议、动身去多伦多。",
+        "第二段首句说她三天后回来取车，所以第一段结束时车必须还留在当地，不能让她开车走，也不能写到取车。",
+        "车卡在沟里，需要有人在她离开期间把它弄出来或看管好，这件事要由原文里的人物完成。",
+        "人物关系和时间不变：她 12 月 23 日出发，在车里过了一夜，第一段发生在 24 日（平安夜）早上。"
+      ],
+      "thisEssayChooses": "本文选择让 Daniel 用自己的卡车在雪停后把车拖出来停在家里，Rachel 用手机查到中午的火车；临别时 Daniel 把电话号码写在咖啡馆餐巾上，这张餐巾到结尾再出现。第二段让夫妇到车站接她，车已经弄好，她带来和男友一起烤的饼干，并回请热巧克力。这些都可以换：比如由夫妇联系拖车公司、把车停在咖啡馆门口、她带的是别的礼物，只要车的问题由原文人物解决、结尾落在具体的动作上即可。"
+    },
+    "standard": {
+      "essay": "Daniel and Rachel suggested that Emily continue her journey by train. Emily hesitated. Her car was still in the ditch, and she could not just leave it there. Daniel told her not to worry. He had a truck, and once the storm passed, he would pull the car out and keep it at their house. Meanwhile, Rachel checked the train times on her phone. A train to Toronto left at noon. \"You don't even know me,\" Emily said, her eyes filling with tears. Rachel smiled and told her that nobody should spend Christmas alone in a ditch. Before Emily got on the train, Daniel wrote their phone number on a cafe napkin and pressed it into her hand.\n\nThree days later, Emily returned to get her car. This time the sun was shining, and the roads were clear. Daniel and Rachel met her at the station and drove her to their house. There was her car in the driveway, free of snow. Daniel had pulled it out the day after Christmas and even checked the engine. Emily handed Rachel a box of cookies she had baked with her boyfriend in Toronto. Then she insisted on taking the couple back to the same cafe. This time, the hot chocolate was on her. Afterwards, she drove home slowly, the napkin tucked safely in her wallet.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "解决“车怎么办”的顾虑，让 Emily 接受坐火车的建议并动身，同时把车留在当地，为第二段取车做好准备。",
+          "items": [
+            {
+              "quote": "Emily hesitated. Her car was still in the ditch, and she could not just leave it there.",
+              "explain": "段首句只说夫妇提了建议，没说她答应。先写她犹豫、说出犹豫的原因，正好接上原文的 her car was completely stuck，下一句的帮助才有触发点，因果不跳步。"
+            },
+            {
+              "quote": "He had a truck, and once the storm passed, he would pull the car out and keep it at their house.",
+              "explain": "用转述写 Daniel 的话，和原文的写法一致。卡车是乡下人家本来就有的东西，“等雪停再拖”也合常理，没有凭空冒出救星；“放在我们家”直接引出第二段的取车。"
+            },
+            {
+              "quote": "\"You don't even know me,\" Emily said, her eyes filling with tears.",
+              "explain": "全文唯一一句直接引语，放在她被陌生人的好意打动的转折处。用一个看得见的动作（眼里含泪）代替“她非常感动”这样的标签。"
+            },
+            {
+              "quote": "Daniel wrote their phone number on a cafe napkin and pressed it into her hand.",
+              "explain": "用咖啡馆里随手可得的餐巾留下联系方式，既交代了三天后她怎么找到他们，又给结尾留下一个能回收的小物件。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "交代车已经弄好，让 Emily 用具体的行动回报夫妇，并以一个动作收尾。",
+          "items": [
+            {
+              "quote": "This time the sun was shining, and the roads were clear.",
+              "explain": "一句天气就和原文的暴风雪形成对照，说明三天里情况已经变了，不用多写描写。"
+            },
+            {
+              "quote": "Emily handed Rachel a box of cookies she had baked with her boyfriend in Toronto.",
+              "explain": "不另写团聚场面，用一盒饼干一笔带过：她赶上了圣诞，也见到了男友，原文开头的目标就这样落了地。"
+            },
+            {
+              "quote": "This time, the hot chocolate was on her.",
+              "explain": "回到原文那杯热巧克力，这回由她请客。be on sb. 是“由某人请客”的常用说法，一句话写出关系的变化，比写一句“善良会传递”更具体。"
+            },
+            {
+              "quote": "the napkin tucked safely in her wallet",
+              "explain": "结尾落在第一段那张餐巾上：她把这份联系好好收起来，意思到了，却没有说教。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "pull the car out (of the ditch)",
+          "function": "把陷进沟里的车拖出来，正好对应原文 slid into a ditch，是解决本题“车怎么办”最直接的动词短语。"
+        },
+        {
+          "expression": "press something into someone's hand",
+          "function": "把东西塞到对方手里，写出临别时郑重又亲切的动作，用来交代留联系方式。"
+        },
+        {
+          "expression": "the hot chocolate was on her",
+          "function": "“这次由她请客”，回扣原文夫妇请的那杯热巧克力，用来写回报。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段直接写 Emily 坐上火车、到了多伦多和男友团聚，却不提车。",
+          "why": "车卡在沟里是原文明确留下的问题，不交代车怎么办，第二段“回来取车”就没有着落；把篇幅花在团聚场面上，也偏离了两个段首句限定的方向。"
+        },
+        {
+          "pitfall": "安排一个新人物来解决问题，比如热心的拖车司机、警察或咖啡馆老板，并给他起名字。",
+          "why": "原文的帮助者是 Daniel 和 Rachel，新人物会抢走他们的戏，读起来像天降救兵。车的事应由这对夫妇用手边的东西解决。"
+        },
+        {
+          "pitfall": "通篇大段对话，或者结尾写 \"Kindness makes the world a better place\" 之类的感想。",
+          "why": "原文没有一处直接引语，满篇引号和原文不是同一种写法；放在任何故事后面都成立的道理只占词数，阅卷时常被扣分。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Daniel and Rachel suggested that Emily continue her journey by train. Emily glanced out at the swirling snow. Her car was still sitting in the ditch, and she couldn't simply abandon it in a strange country. Daniel seemed to read her mind. He had a pickup truck and a tow rope, he said, and as soon as the storm blew over, he would haul her car out and keep it in their driveway. Meanwhile, Rachel was already scrolling through the train schedule on her phone. A train left for Toronto at noon. Emily stared at them over her mug. \"Why would you do all this for a stranger?\" she asked. Rachel just shrugged and said that nobody should spend Christmas Eve stuck in a ditch. At the little station, Daniel scribbled their phone number on a cafe napkin and pressed it into her hand. Emily waved from the window until they were two dark shapes in the snow.\n\nThree days later, Emily returned to get her car. The storm had long since passed, and the highway was clear and dry under a pale winter sun. Daniel and Rachel were waiting on the platform, waving as if she were an old friend. When they pulled into their driveway, there sat her car without a speck of snow on it. Daniel had towed it out the day after Christmas and even topped up the oil. Emily handed Rachel a tin of cookies she had baked with her boyfriend in Toronto. Then she insisted on taking them back to the same cafe. When the waitress came over, Emily spoke up before Daniel could reach for his wallet. \"Three hot chocolates, please. This time they're on me.\" Before she set off for Detroit, she tucked the napkin safely into her wallet.",
+      "beyondStandard": [
+        {
+          "quote": "Daniel seemed to read her mind. He had a pickup truck and a tow rope, he said, and as soon as the storm blew over, he would haul her car out",
+          "explain": "标准版用“她犹豫”直接说出顾虑；这里让她望向窗外的雪，由 Daniel 看出她的心事，顾虑不用说出口。pickup truck、tow rope、blow over、haul out 都是这个场景里更具体、更地道的说法，插入的 he said 也让转述更像口语。"
+        },
+        {
+          "quote": "Rachel just shrugged and said that nobody should spend Christmas Eve stuck in a ditch.",
+          "explain": "一个 shrug 就写出 Rachel 觉得这是理所当然的小事，比 smiled 更有性格；Christmas Eve 也比 Christmas 更准，故事这天正是 12 月 24 日。"
+        },
+        {
+          "quote": "When the waitress came over, Emily spoke up before Daniel could reach for his wallet.",
+          "explain": "标准版只交代“由她请客”；这里写出抢在 Daniel 掏钱包之前开口的瞬间，把回请变成一个看得见的场面，后面那句 This time they're on me 也更像真人会说的话。服务员只是背景，没有名字，也不推动情节。"
+        }
+      ]
+    }
+  }
+}

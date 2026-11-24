@@ -6,6 +6,10 @@ import {
   readPromptFile,
   readTeachingAnalysisPrompt,
 } from './analyzerProviderShell.mjs'
+import {
+  CONTINUATION_ANALYSIS_V3,
+  checkContinuationAnalysisV3,
+} from '../../shared/writing/continuationAnalysisV3.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -177,8 +181,46 @@ function validateConstraintInvariants(analysis) {
   }
 }
 
+/**
+ * V3 check (docs/cuts/continuation-writing-v3/spec.md D3). Accepts either the
+ * stored object or the model's raw output (with `taskType` and `blocked`), and
+ * returns the writing entry to persist. Throws on any D3 failure.
+ */
+export function validateContinuationAnalysisV3({ analysis, writingTask }) {
+  assertNarrativeContinuationInput({ writingTask })
+  if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) {
+    throw new Error('continuation analysis V3 is not an object')
+  }
+  let stored = analysis
+  if ('blocked' in analysis || 'taskType' in analysis) {
+    if (analysis.blocked != null) throw new Error(`continuation analysis V3 is blocked: ${analysis.blocked}`)
+    if (analysis.taskType !== 'continuation') throw new Error('continuation analysis V3 taskType must be continuation')
+    const { taskType: _taskType, blocked: _blocked, ...rest } = analysis
+    stored = { schemaVersion: CONTINUATION_ANALYSIS_V3, ...rest }
+  }
+  const { problems, warnings, wordCounts, directSpeech } = checkContinuationAnalysisV3(stored, {
+    material: writingTask.materialText,
+    starters: writingTask.continuationStarters,
+    wordCountTarget: Number(writingTask.wordCountTarget || 150),
+  })
+  if (problems.length > 0) {
+    throw new Error(`continuation analysis V3 failed: ${problems.join('; ')}`)
+  }
+  return {
+    writing: { taskType: 'continuation', modelAnswer: stored.standard.essay, continuationAnalysis: stored },
+    warnings,
+    wordCounts,
+    directSpeech,
+  }
+}
+
 export function validateNarrativeContinuationAnalysis(analysis, { writingTask }) {
   assertNarrativeContinuationInput({ writingTask })
+
+  if (analysis?.schemaVersion === CONTINUATION_ANALYSIS_V3) {
+    validateContinuationAnalysisV3({ analysis, writingTask })
+    return analysis
+  }
 
   if (analysis?.status === 'unsupported') {
     const observedMode = optionalString(analysis.observedMode) || 'unknown'

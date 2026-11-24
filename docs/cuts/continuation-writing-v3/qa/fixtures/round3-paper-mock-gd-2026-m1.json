@@ -1,0 +1,150 @@
+{
+  "source": "blind round 3 2026-11-24, round3/paper-mock-gd-2026-m1/v3-out.json; task from app/public/paper-assets/paper-mock-gd-2026-m1",
+  "writingTask": {
+    "taskType": "continuation",
+    "instruction": "Every day after school, Lucas and Noah pressed their noses against Mr. Henderson’s shop window. They stared at the red bicycle that stood proudly in the center of the display. For months, they had saved every spare coin, yet the price still seemed far beyond their reach.\nWhen the first snow of winter covered their town, the brothers saw an opportunity. They grabbed their shovels (铲子) , determined to turn the snowfall into savings through hard work.\nThey started in their own neighborhood. But many residents had already cleared their walkways, and those who hadn’t only offered a few coins for short paths. After several tiring hours, they had earned just seven dollars—far less than they hoped.\nRefusing to give up, they headed to Maple Street, where the houses were bigger and the driveways deeper in snow. Noah knocked on the door of a beautiful Victorian house. Mrs. Williams answered, looking like she was in a hurry When Noah asked if she needed her driveway shoveled, she agreed at once. She took a twenty-dollar bill from her purse and placed it into Noah’s hand.\n“I have to rush out,” she said with an encouraging smile. “I’ll leave it in your capable hands.”\nThe boys stared at the bill, amazed. Twenty dollars—more than they had made the entire day! Laughing in disbelief, they set to work with fresh energy. The initial excitement carried them through the first hour of work. But as the afternoon darkened and the temperature dropped, the work became harder. Their hands grew numb (麻木) , their muscles, ached, and the long driveway seemed endless.\nHalfway through, Lucas threw down his shovel in frustration (沮丧) . “Let’s just go. She’ll never know we didn’t finish.”",
+    "materialText": "Every day after school, Lucas and Noah pressed their noses against Mr. Henderson’s shop window. They stared at the red bicycle that stood proudly in the center of the display. For months, they had saved every spare coin, yet the price still seemed far beyond their reach.\n\nWhen the first snow of winter covered their town, the brothers saw an opportunity. They grabbed their shovels (铲子) , determined to turn the snowfall into savings through hard work.\n\nThey started in their own neighborhood. But many residents had already cleared their walkways, and those who hadn’t only offered a few coins for short paths. After several tiring hours, they had earned just seven dollars—far less than they hoped.\n\nRefusing to give up, they headed to Maple Street, where the houses were bigger and the driveways deeper in snow. Noah knocked on the door of a beautiful Victorian house. Mrs. Williams answered, looking like she was in a hurry When Noah asked if she needed her driveway shoveled, she agreed at once. She took a twenty-dollar bill from her purse and placed it into Noah’s hand.\n\n“I have to rush out,” she said with an encouraging smile. “I’ll leave it in your capable hands.”\n\nThe boys stared at the bill, amazed. Twenty dollars—more than they had made the entire day! Laughing in disbelief, they set to work with fresh energy. The initial excitement carried them through the first hour of work. But as the afternoon darkened and the temperature dropped, the work became harder. Their hands grew numb (麻木) , their muscles, ached, and the long driveway seemed endless.\n\nHalfway through, Lucas threw down his shovel in frustration (沮丧) . “Let’s just go. She’ll never know we didn’t finish.”",
+    "continuationStarters": [
+      "Noah’s aching hands seemed to agree with his brother’s words.",
+      "As they cleared the final shovel of snow, Mrs. Williams’ car returned."
+    ],
+    "wordCountTarget": 150
+  },
+  "output": {
+    "taskType": "continuation",
+    "blocked": null,
+    "reading": {
+      "questions": [
+        {
+          "question": "原文停在哪里，什么问题还没解决？",
+          "answer": "停在车道才铲了一半、天又冷又黑，Lucas 扔下铲子说“走吧，她不会知道的”。没解决的问题是：钱已经提前拿到手，兄弟俩要不要把活干完。"
+        },
+        {
+          "question": "人物想要什么、是什么样的人，从哪里看出来？",
+          "answer": "兄弟俩想攒钱买橱窗里的红自行车，从“saved every spare coin”和“Refusing to give up”看出他们肯吃苦；Lucas 先泄气（threw down his shovel），Noah 是敲门、接钱的那一个，更可能想到对 Mrs. Williams 的责任。Mrs. Williams 先付钱、说“capable hands”，说明她信任孩子。"
+        },
+        {
+          "question": "原文是怎么写的？续写照着怎么写？",
+          "answer": "第三人称过去时叙述，句子短而清楚，以叙述为主，只在关键处有两三句短的直接引语，描写只点到冷、累、天黑。续写也以叙述和转述为主，只在 Noah 做决定时留一两句短的直接引语。"
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "placed it into Noah’s hand",
+          "use": "钱在 Noah 手里、在他兜里，正好让他摸到这张钞票时想起“钱已经收了”，用一个物件触发转折，而不是凭空的“良心发现”。"
+        },
+        {
+          "sourceQuote": "I’ll leave it in your capable hands",
+          "use": "这句信任可以变成 Noah 劝弟弟的理由，也可以在结尾由 Mrs. Williams 回来时得到回应：她没有看错人。"
+        },
+        {
+          "sourceQuote": "the red bicycle",
+          "use": "开头的目标物，结尾让兄弟俩回到 Mr. Henderson 的橱窗前，把挣到的钱和自行车放在一起，首尾呼应，又不让自行车一下子到手。"
+        }
+      ]
+    },
+    "taskCard": {
+      "taskRequires": [
+        "第一段从 Noah 也想放弃写起（他的手很痛，也认同 Lucas），然后必须写出他们为什么、怎样决定留下来继续铲。",
+        "第二段首句说他们铲完最后一锹雪时车回来了，所以第一段结束时车道还没铲完，但兄弟俩已经回到工作中；不能在第一段写完工或写 Mrs. Williams 回来。",
+        "必须接上原文事实：钱已经提前付了，Mrs. Williams 出门了不在场，天黑、很冷、手已经麻了。",
+        "第二段要写 Mrs. Williams 回来后看到结果的反应，并收住“要不要守信”这个问题。"
+      ],
+      "thisEssayChooses": "本文让 Noah 在兜里摸到那张二十元钞票作为转折，用一两句短的直接引语说出“钱已经收了”；兄弟俩用“分小段铲、铲完一段歇一下”的办法坚持下来。第二段选择让 Noah 主动承认差点放弃，Mrs. Williams 不计较，并请他们这个冬天下雪都来铲雪；结尾回到自行车橱窗。可以换的：转折也可以是 Lucas 自己想起她的笑容，或看到别人家的车道；结尾她可以多给小费或只说一句谢谢；也可以不承认差点放弃。但不要让她直接买自行车送他们。"
+    },
+    "standard": {
+      "essay": "Noah’s aching hands seemed to agree with his brother’s words. He looked at the deep snow still waiting ahead. Going home sounded wonderful. But when he pushed his frozen fingers into his pocket, they touched the twenty-dollar bill. Mrs. Williams had paid them before they had done anything. “She trusted us,” Noah said quietly. “If we leave now, we’re taking money we didn’t earn.” Lucas kicked at the snow and said nothing. Then he picked up his shovel again. The boys cleared one small section at a time, resting for a minute after each one, and slowly the dark ground appeared beneath the snow.\n\nAs they cleared the final shovel of snow, Mrs. Williams’ car returned. Her headlights moved across the clean driveway, and she stepped out in surprise. Noah admitted that they had almost given up halfway. Mrs. Williams only smiled and said that finishing was what mattered. Then she asked if they would come back every time it snowed this winter. The brothers looked at each other and nodded quickly. On the way home, they stopped in front of Mr. Henderson’s window. Lucas took out the twenty-dollar bill and held it up beside the red bicycle, as if measuring how far they still had to go.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "先承认 Noah 也想走，再用一个具体的东西让他改变主意，最后写清他们怎样重新干起来，让车道还差一点没铲完，正好接第二段。",
+          "items": [
+            {
+              "quote": "Going home sounded wonderful.",
+              "explain": "段首句说他的手也同意弟弟，这里先顺着写他真的想回家，转折才可信。人物不是一上来就“高尚”，而是先动摇再决定。"
+            },
+            {
+              "quote": "when he pushed his frozen fingers into his pocket, they touched the twenty-dollar bill",
+              "explain": "转折由一个动作和原文里已有的物件触发：手冻了往兜里塞，碰到了那张钱。比“他突然想到我们不能这样做”更有因果，学生下次可以找原文里的物件来推动转折。"
+            },
+            {
+              "quote": "“If we leave now, we’re taking money we didn’t earn.”",
+              "explain": "全段只用这一处短的直接引语，因为它改变了兄弟俩的决定；它直接回答了 Lucas 的“她不会知道”，说清问题不在于她知不知道，而在于钱已经拿了。"
+            },
+            {
+              "quote": "The boys cleared one small section at a time, resting for a minute after each one",
+              "explain": "坚持下去要有办法，而不是只写“他们咬牙坚持”。分小段、歇一下，这个办法符合两个累坏了的孩子，也让第一段停在“还没铲完”。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "Mrs. Williams 回来看到结果，Noah 说出实情，她的回应收住“守信”的问题；结尾回到自行车，落在一个动作上。",
+          "items": [
+            {
+              "quote": "Her headlights moved across the clean driveway",
+              "explain": "天已经黑了，车灯照在铲干净的车道上，用一个画面让她和读者同时看到成果，不用写“她非常满意”。"
+            },
+            {
+              "quote": "Noah admitted that they had almost given up halfway.",
+              "explain": "用转述写对话，和原文写法一致；主动承认差点放弃，和第一段的诚实是同一件事，人物前后一致。"
+            },
+            {
+              "quote": "she asked if they would come back every time it snowed this winter",
+              "explain": "她的回报是一个以后还能挣钱的机会，而不是直接送自行车，既回应了她的信任，又不靠天降的帮助解决买车问题。"
+            },
+            {
+              "quote": "held it up beside the red bicycle, as if measuring how far they still had to go",
+              "explain": "结尾回到开头的橱窗，用一个动作说明钱还不够、但他们会继续挣，意思点到为止，不贴一句“诚实最重要”的口号。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "money we didn’t earn",
+          "function": "把“守信”说成孩子能说出口的大白话：钱是拿了，可不是挣来的。直接回答 Lucas 的“她不会知道”。"
+        },
+        {
+          "expression": "one small section at a time",
+          "function": "写人物在累的时候怎样继续干活，用具体做法代替“坚持就是胜利”式的空话。"
+        },
+        {
+          "expression": "the dark ground appeared beneath the snow",
+          "function": "用看得见的变化写出进度，同时只说“出现”，不说“铲完”，把完工留给第二段首句。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段写 Noah 立刻严厉批评弟弟、发表一大段关于诚信的演讲。",
+          "why": "段首句明明说 Noah 的手也同意弟弟，他自己也动摇了；一上来讲大道理既不符合处境，也不像孩子说的话，还会挤掉写他们怎么继续干的篇幅。"
+        },
+        {
+          "pitfall": "第一段就写他们铲完了，甚至写 Mrs. Williams 回来了。",
+          "why": "第二段首句是“铲完最后一锹时车回来了”，第一段提前写掉就和段首句冲突，衔接断掉。"
+        },
+        {
+          "pitfall": "结尾让 Mrs. Williams 被感动，当场买下那辆红自行车送给他们，或加一句“From then on, they understood honesty is the best policy.”",
+          "why": "前者是天降的帮助，把兄弟俩自己挣钱的努力变得没意义；后者是放在任何故事后都成立的口号，只占词数，不推进任何事。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Noah’s aching hands seemed to agree with his brother’s words. He stared at the white stretch still ahead, and walking away seemed easy. Then he shoved his fists into his coat pocket to warm them, and his fingers brushed against something stiff: the folded twenty-dollar bill. Mrs. Williams hadn’t asked them to work first and get paid later. She had handed them the money and driven off, trusting two boys she had never met. “She already paid us, Lucas,” Noah said. “For all of it.” Lucas scowled, but he didn’t argue. At last he pulled his shovel out of the snow and knocked the ice off its blade. They split the rest of the driveway into short strips and blew on their fingers between them. The only sounds were the scrape of metal on concrete and their own heavy breathing, while the bare ground crept toward the street.\n\nAs they cleared the final shovel of snow, Mrs. Williams’ car returned. Its headlights swept across the driveway, bare and neat down to the curb. She climbed out and looked from the clean concrete to the two boys leaning on their shovels, red-cheeked and shivering. Noah blurted out that they had nearly quit halfway, and Lucas, staring at his boots, admitted it had been his idea. Mrs. Williams laughed softly. Nearly quitting didn’t count, she told them; plenty of grown-ups would have gone home and kept the money. Then she asked whether they would like to do her driveway every time it snowed this winter. The brothers nodded so hard their hats slipped. On the way home, they stopped outside Mr. Henderson’s window. Lucas pulled out the twenty-dollar bill, smoothed it flat, and held it up beside the red bicycle, as if measuring how far they still had to go.",
+      "beyondStandard": [
+        {
+          "quote": "his fingers brushed against something stiff: the folded twenty-dollar bill",
+          "explain": "标准版是 touched the bill；这里用 brushed against something stiff，先写手指的感觉再揭出是什么，读者和 Noah 同时“发现”这张钱，转折更有画面感，搭配也更地道。"
+        },
+        {
+          "quote": "“She already paid us, Lucas,” Noah said. “For all of it.”",
+          "explain": "比标准版更短、更像孩子之间真会说的话：不讲道理，只说事实，后半句 For all of it 单独成句，正好顶回 Lucas 的“她不会知道我们没干完”。"
+        },
+        {
+          "quote": "Lucas, staring at his boots, admitted it had been his idea",
+          "explain": "标准版只让 Noah 承认；这里让提议放弃的 Lucas 自己认下来，并用 staring at his boots 写出他的难为情，人物有了各自的反应，又不加新情节。"
+        }
+      ]
+    }
+  }
+}

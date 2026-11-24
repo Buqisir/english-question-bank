@@ -142,7 +142,7 @@ function assertOfficialAnswerLocators(content, byId) {
   }
 }
 
-function assertNoRetiredAnalysisFields(analysisKey, value) {
+export function assertNoRetiredAnalysisFields(analysisKey, value) {
   const rootKeys = ({
     'reading-a': ['schemaVersion', 'paperId', 'sourceAssetVersion', 'targetGroups', 'meta', 'groups', 'questions'],
     'reading-b': ['schemaVersion', 'paperId', 'sourceAssetVersion', 'targetGroups', 'meta', 'groups', 'questions'],
