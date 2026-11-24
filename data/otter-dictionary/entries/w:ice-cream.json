@@ -1,0 +1,104 @@
+{
+  "entryId": "w:ice-cream",
+  "headword": "ice cream",
+  "kind": "phrase",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˌaɪs ˈkriːm/",
+    "us": "/ˈaɪs kriːm/"
+  },
+  "audio": {
+    "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-2401-ice-cream.mp3",
+    "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-2401-ice-cream.mp3"
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:ice-cream#p-main",
+      "ipa": {
+        "uk": "/ˌaɪs ˈkriːm/",
+        "us": "/ˈaɪs kriːm/"
+      },
+      "ipaSource": "频序词表",
+      "audio": {
+        "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-2401-ice-cream.mp3",
+        "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-2401-ice-cream.mp3"
+      }
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 0,
+    "mock": 17
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:ice-cream#s1",
+      "pos": "n.",
+      "glossZh": "冰淇淋，也可指一份冰淇淋",
+      "pronunciationId": "w:ice-cream#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 17
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:ice-cream#e-e440af5416fba0b6",
+          "text": "Maybe it was the peanut butter ice cream I’d had the night before.",
+          "source": {
+            "paperId": "paper-mock-chongqing-bashu-2026-04-eighth",
+            "paperTitle": "巴蜀中学2026届高考适应性月考卷（八）",
+            "groupId": "group:paper-mock-chongqing-bashu-2026-04-eighth:cloze",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-chongqing-bashu-2026-04-eighth:cloze:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:ice-cream#e-08c4ace8faf2086f",
+          "text": "Her pale eyes stared at two kids laughing and sharing an ice cream.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+            "paperTitle": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation:6",
+              "sentence": 5
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:ice-cream#e-0e09bb9576d84b3d",
+          "text": "Mason absently moved his spoon in circles, watching his orange ice cream melt in the bottom of his bowl.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam",
+            "paperTitle": "2025-2026学年第一学期天域全国名校协作体联考",
+            "groupId": "group:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-zhejiang-tianyu-2025-first-semester-joint-exam:writing-continuation:6",
+              "sentence": 4
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

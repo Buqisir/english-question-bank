@@ -1,0 +1,326 @@
+{
+  "entryId": "w:address",
+  "headword": "address",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/əˈdres/",
+    "us": "/ˈædres/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:address#p-noun",
+      "ipa": {
+        "uk": "/əˈdres/",
+        "us": "/ˈædres/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "label": "名词",
+      "needsCheck": [
+        "us"
+      ]
+    },
+    {
+      "pronunciationId": "w:address#p-verb",
+      "ipa": {
+        "uk": "/əˈdres/",
+        "us": "/əˈdres/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "label": "动词"
+    }
+  ],
+  "forms": [
+    {
+      "form": "addressed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "addresses",
+      "tags": [
+        "plural",
+        "present",
+        "third-person"
+      ]
+    },
+    {
+      "form": "addressing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 8,
+    "mock": 157
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 11
+  },
+  "senses": [
+    {
+      "senseId": "w:address#s2",
+      "pos": "v.",
+      "glossZh": "着手处理问题，或专门谈到某个议题",
+      "pronunciationId": "w:address#p-verb",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 94
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:address#e-d09951e899daef91",
+          "text": "This absorbing new book by Catriona Campbell is a practical roadmap addressing the challenges posed by the forthcoming AI revolution (变革).",
+          "source": {
+            "paperId": "paper-gaokao-2024-ii",
+            "paperTitle": "2024年普通高等学校招生全国统一考试英语（新课标II卷）",
+            "groupId": "group:paper-gaokao-2024-ii:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-ii:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:address#e-6c6c7675449818de",
+          "text": "“Adaptive signals can make sure that the traffic demand that is there is being addressed,” says Alex Stevanovic, a researcher at Florida Atlantic University.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:address#e-cfcfdcbdac952256",
+          "text": "Nevertheless, it serves as a reminder that there are many ways to address problems of sustainability, and that you can make an amazing meal out of almost anything.",
+          "source": {
+            "paperId": "paper-gaokao-2025-ii",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2025-ii:reading-d",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2025-ii:reading-d:7",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:address#s1",
+      "pos": "n.",
+      "glossZh": "地址，也可指电子邮箱地址",
+      "pronunciationId": "w:address#p-noun",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 46
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:address#e-2175c000a3876147",
+          "text": "■On the same sheet of paper, write or type your name, address, telephone number, and birth date.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-a",
+            "locator": {
+              "paragraph": 11,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-a:11",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:address#e-6e6e3bf7b3070145",
+          "text": "The tags included email addresses, and soon after the first butterflies took off, James started receiving messages from people who had spotted them.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-four-provinces-feb:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:address#e-ed4ca03d1f60fe4c",
+          "text": "Had the address changed?",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock"
+        }
+      ],
+      "note": "美式名词也可读 /əˈdres/。"
+    },
+    {
+      "senseId": "w:address#s3",
+      "pos": "v.",
+      "glossZh": "向某人或一群人讲话",
+      "pronunciationId": "w:address#p-verb",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:address#e-785883c4b789f571",
+          "text": "Norman Stienwand, who farms in that area, has been addressing public meetings on this issue for years.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:address#e-f687ba32912a58d3",
+          "text": "Mr. Thompson snapped, his tone softening as he addressed Lily.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:writing-continuation:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:address#e-d0b6ddf13ee9efdc",
+          "text": "The more language that is addressed to children, the bigger their vocabulary will be.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first",
+            "paperTitle": "2025～2026学年度苏锡常镇四市高三教学情况调研（一）英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-wuxi-changzhou-zhenjiang-2026-03-first:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:address#s4",
+      "pos": "v.",
+      "glossZh": "在信件或包裹上写明收件人或地址",
+      "pronunciationId": "w:address#p-verb",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:address#e-8821eb3b5f003117",
+          "text": "It was addressed to me from my dad.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-zaozhuang-2026-05-third-mock:writing-continuation:3",
+              "sentence": 6
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:address#e-94bcb204ea10529a",
+          "text": "But the elephant was addressed correctly, and the shipping charges had been paid in full.",
+          "source": {
+            "paperId": "paper-mock-hunan-zhuzhou-2026-01-first",
+            "paperTitle": "株洲市2026届高三年级教学质量统一检测",
+            "groupId": "group:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hunan-zhuzhou-2026-01-first:writing-continuation:2",
+              "sentence": 8
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:address#s5",
+      "pos": "n.",
+      "glossZh": "正式讲话；演说",
+      "pronunciationId": "w:address#p-noun",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "旧式求爱；高尔夫击球准备姿势",
+      "reason": "古旧或运动专门用语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

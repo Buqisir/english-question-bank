@@ -35,6 +35,7 @@ import { createTranslationScheduler } from '../paper-translation/scheduler.mjs'
 import { createSingleFlight } from '../paper-translation/singleFlight.mjs'
 import { createUsageLedger, unavailableLedger } from '../paper-translation/usageLedger.mjs'
 import { lookupSurface, openPaperDictionary } from './store.mjs'
+import { openOtterDictionary } from './otter.mjs'
 import { enrichWithGaokao, sharedGaokaoVocabulary } from './gaokao.mjs'
 import { buildSenseCandidates, createSensePickAdapter } from './sensePick.mjs'
 
@@ -80,6 +81,7 @@ export function createPaperDictionaryRuntime({
     return vocabulary
   }
   const filePath = dictionaryPathFrom(rootDir, env)
+  const otter = enabled ? openOtterDictionary(rootDir) : null
   const publicOrigin = env.QUESTION_BANK_PUBLIC_ORIGIN || ''
   let opened = null
 
@@ -169,7 +171,7 @@ export function createPaperDictionaryRuntime({
     return {
       schemaVersion: DICTIONARY_STATUS_SCHEMA,
       enabled,
-      available: Boolean(current.available),
+      available: Boolean(current.available || otter?.available),
       dictionaryVersion: current.meta?.dictionary_version || null,
       reason: enabled ? current.reason : 'disabled',
       sensePick: {
@@ -280,7 +282,7 @@ export function createPaperDictionaryRuntime({
   function resolveWordSelection({ body, context, userId, schemaVersion }) {
     requireAuth(context)
     const current = dictionary()
-    if (!enabled || !current.available) {
+    if (!enabled || (!current.available && !otter?.available)) {
       throw serviceError('DICTIONARY_UNAVAILABLE', '词典暂不可用', 503)
     }
     if (!body || body.schemaVersion !== schemaVersion) {
@@ -327,21 +329,33 @@ export function createPaperDictionaryRuntime({
   }
 
   function lookup({ body, context, requestId = randomUUID(), userId }) {
-    const { source, word } = resolveWordSelection({
+    const { source, slice, word } = resolveWordSelection({
       body, context, userId, schemaVersion: DICTIONARY_REQUEST_SCHEMA,
     })
-    const lexical = lexicalEntry(word.surface)
+    const entry = otter?.find(word.surface) ?? null
+    const lexical = dictionary().available || !entry
+      ? lexicalEntry(word.surface)
+      : { dictionaryVersion: DICTIONARY_SCHEMA, status: 'found', entries: [], attribution: '' }
     return fitPayload({
       schemaVersion: DICTIONARY_RESPONSE_SCHEMA,
       requestId,
       sourceRevision: source.sourceRevision,
       dictionaryVersion: lexical.dictionaryVersion,
       selectedText: word.surface,
-      status: lexical.status,
+      status: entry ? 'found' : lexical.status,
       entries: lexical.entries,
       truncated: false,
       attribution: lexical.attribution,
+      otter: entry,
+      otterSenseId: entry ? otter.match(entry, body.paperId, slice.stream, word) : null,
     })
+  }
+
+  function entry({ surface, context, userId }) {
+    requireAuth(context)
+    if (!enabled) throw serviceError('DICTIONARY_UNAVAILABLE', '词典暂不可用', 503)
+    admit(userId)
+    return surface && surface.length <= MAX_WORD_UTF16 ? otter.find(surface) : null
   }
 
   function senseRecordFromReply(reply) {
@@ -375,8 +389,6 @@ export function createPaperDictionaryRuntime({
     const { source, segment, slice, word } = resolveWordSelection({
       body, context, userId, schemaVersion: SENSE_PICK_REQUEST_SCHEMA,
     })
-    const lexical = lexicalEntry(word.surface)
-    const candidates = buildSenseCandidates(lexical.entries)
     const respond = (record) => ({
       schemaVersion: SENSE_PICK_RESPONSE_SCHEMA,
       requestId,
@@ -384,6 +396,11 @@ export function createPaperDictionaryRuntime({
       selectedText: word.surface,
       ...record,
     })
+    const entry = otter?.find(word.surface)
+    const otterSenseId = entry && otter.match(entry, body.paperId, slice.stream, word)
+    if (otterSenseId) return respond({ status: 'none', match: null, phrase: null, otterSenseId })
+    const lexical = lexicalEntry(word.surface)
+    const candidates = buildSenseCandidates(lexical.entries)
     if (lexical.status === 'not-found' || candidates.length === 0) {
       return respond({ status: 'none', match: null, phrase: null })
     }
@@ -479,6 +496,7 @@ export function createPaperDictionaryRuntime({
     config: { filePath, enabled, publicOrigin },
     status,
     lookup,
+    entry,
     sense,
     close() {
       opened?.db?.close()

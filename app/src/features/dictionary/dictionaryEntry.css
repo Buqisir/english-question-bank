@@ -1,0 +1,68 @@
+.otter-page {
+  max-width: 720px;
+  margin: var(--eqb-space-5) auto;
+  padding: 0 var(--eqb-space-4);
+}
+
+.otter-entry {
+  --otter-serif: 'EQB Termes', 'EQB Source Han Serif', serif;
+  display: grid;
+  gap: var(--eqb-space-2);
+  color: var(--eqb-color-text);
+  font-size: var(--eqb-font-size-sm);
+}
+
+/* 覆盖浮层默认 flex，词头、读音和操作行按词条网格排列。 */
+.paper-selection-card.otter-entry { display: grid; }
+
+.otter-entry :is(h1, h2, h3, p, ol) { margin: 0; }
+.otter-entry-heading :is(h1, h2) {
+  font: 600 var(--eqb-font-size-xl)/1.15 var(--otter-serif);
+  overflow-wrap: anywhere;
+}
+.otter-entry-heading :focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+.otter-entry-heading,
+.otter-pronunciations,
+.otter-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--eqb-space-2);
+}
+
+.otter-close,
+.otter-actions .eqb-button[aria-haspopup] { margin-inline-start: auto; }
+.otter-entry .paper-dictionary-notebook { margin: 0; padding: 0; }
+.otter-pronunciations,
+.otter-count,
+.otter-source { color: var(--eqb-color-text-muted); font-size: var(--eqb-font-size-xs); }
+.otter-pronunciations [lang="en-fonipa"],
+.otter-gloss i,
+.otter-example p[lang="en"] { font-family: var(--otter-serif); }
+.otter-entry--full > .eqb-button { justify-self: start; }
+
+.otter-senses {
+  border-top: 1px solid var(--eqb-color-border-subtle);
+  padding-block-start: var(--eqb-space-3);
+  margin-block-start: var(--eqb-space-2);
+}
+
+.otter-senses h3 { font-size: var(--eqb-font-size-sm); font-weight: 600; }
+.otter-senses ol { padding-inline-start: var(--eqb-space-5); }
+.otter-senses li { padding-block-start: var(--eqb-space-3); }
+.otter-senses li::marker { color: var(--eqb-color-text-muted); }
+.otter-gloss .eqb-chip { vertical-align: middle; }
+.otter-example { margin-block-start: var(--eqb-space-2); }
+.otter-example p[lang="en"] { font-size: var(--eqb-font-size-md); line-height: 1.55; }
+
+/* 出处链接允许换行，覆盖 Button 的单行标签。 */
+.otter-source .eqb-button-label { white-space: normal; text-align: start; }
+
+/* 发音键依照既有 Button 触屏尺寸，给外扩的点击区留出空地。 */
+@media (pointer: coarse) {
+  .otter-pronunciations { padding-block: var(--eqb-space-2); gap: var(--eqb-space-3); }
+}

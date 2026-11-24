@@ -1,0 +1,126 @@
+{
+  "entryId": "w:percent",
+  "headword": "percent",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "per cent"
+  ],
+  "ipa": {
+    "uk": "/pəˈsɛnt/",
+    "us": "/pərˈsɛnt/"
+  },
+  "audio": {
+    "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-0625-percent.mp3",
+    "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-0625-percent.mp3"
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:percent#p-main",
+      "ipa": {
+        "uk": "/pəˈsɛnt/",
+        "us": "/pərˈsɛnt/"
+      },
+      "ipaSource": "频序词表",
+      "audio": {
+        "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-0625-percent.mp3",
+        "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-0625-percent.mp3"
+      }
+    }
+  ],
+  "forms": [
+    {
+      "form": "per cent",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "percents",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 31,
+    "mock": 92
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:percent#s1",
+      "pos": "数词构式",
+      "glossZh": "百分之……，跟在数字后面",
+      "pronunciationId": "w:percent#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 31,
+        "mock": 92
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:percent#e-34949287231d9f2b",
+          "text": "Be demanding on yourself and expect 100 percent attention to the task.",
+          "source": {
+            "paperId": "paper-gaokao-2026-zhejiang-jan",
+            "paperTitle": "2026年1月普通高等学校招生全国统一考试英语试卷",
+            "groupId": "group:paper-gaokao-2026-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2026-zhejiang-jan:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:percent#e-59295367a7352ff9",
+          "text": "In fact,most people only absorb about 20 percent of a speaker’s message.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2020-i:seven-choices:4",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:percent#e-ec04c96f2a5b96db",
+          "text": "It’s been reported that 76 percent of employees in some western countries are using emojis at work.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2020-national-ii:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-ii:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao"
+        }
+      ],
+      "note": "英式还常写作 per cent。计数覆盖拼写词形。"
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "定息证券义",
+      "reason": "金融专用"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

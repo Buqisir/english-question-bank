@@ -395,6 +395,7 @@ export type PaperBrowsePageProps = {
   renderEmbeddedToolbar?: (lectureToggle?: ReactNode) => ReactNode
   onEmbeddedScreenReady?: (ready: boolean) => void
   focusGroupId?: string | null
+  focusParagraphId?: string | null
   /** flow-panel 刀 3: 入口带态——预选的题（asset 加载完成后走
    * selectLectureQuestion 同款路径），groupId 缺省时用来推导所属题组。 */
   questionId?: string | null
@@ -885,6 +886,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     renderEmbeddedToolbar,
     onEmbeddedScreenReady,
     focusGroupId,
+    focusParagraphId,
     questionId,
     lecture,
     similar,
@@ -1007,6 +1009,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     consumption: canonicalConsumption,
     hostRef: scrollerRef,
   })
+  const dictionaryOpen = Boolean(paperSelection.dictionaryPanel)
   // CR D-MF1：活跃沉降巡检的退场把手——scrollToAnchor 重入时先退旧循环
   // 再起新的（桌面端连点 rail 项不触发 wheel/touch/keydown，若无此把手
   // 两个循环并存互抢滚动打 ping-pong）。
@@ -1083,7 +1086,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   // CR should-fix（同 my-space 先例）：讲评栏开着时文档级 Esc 关闭并还焦
   // 到把手，补齐窄屏抽屉的模态语义。
   useEffect(() => {
-    if (!lectureOpen) return
+    if (!lectureOpen || dictionaryOpen) return
     function onKeyDown(event: KeyboardEvent): void {
       if (event.key !== 'Escape') return
       setLectureOpen(false)
@@ -1093,7 +1096,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     return (): void => {
       document.removeEventListener('keydown', onKeyDown)
     }
-  }, [lectureOpen])
+  }, [lectureOpen, dictionaryOpen])
 
   // 刀 3: 讲评开合 / 点题选择 → URL replaceState 同步（不产生历史条目——
   // App.tsx 的 pushState 只发生在 openPaperBrowse 本身，页内互动一律
@@ -1754,10 +1757,14 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       `[data-paper-browse-anchor="${cssAttr(targetGroupId)}"]`,
     )
     if (!target) return
+    const paragraph = focusParagraphId && target.querySelector<HTMLElement>(
+      `[data-paper-paragraph-id="${cssAttr(focusParagraphId)}"],[data-canonical-block-id="${cssAttr(focusParagraphId)}"]`,
+    )
     focusAppliedRef.current = true
     suppressScrollspyClear()
-    target.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'auto' })
-  }, [focusGroupId, questionId, loading, asset])
+    const destination = paragraph || target
+    destination.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'auto' })
+  }, [focusGroupId, focusParagraphId, questionId, loading, asset])
 
   // 刀 3: 入口带态的 questionId 预选——asset 加载完成后走
   // selectLectureQuestion 同款路径（镜像点题联动）。仅在讲评态下预选（挑题
@@ -2613,6 +2620,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   }
 
   function toggleLecturePanel(): void {
+    if (dictionaryOpen) {
+      paperSelection.closeDictionaryPanel()
+      setLectureOpen(true)
+      return
+    }
     setLectureOpen((open) => !open)
   }
 
@@ -4459,7 +4471,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       {analysisFontError && !lectureOpen && <Notice kind="error" className="paper-browse-export-error">{analysisFontError}</Notice>}
       <div
         className={`paper-browse-shell${
-          lectureOpen ? ' paper-browse-shell--lecture-open' : ''
+          lectureOpen || paperSelection.dictionaryPanel ? ' paper-browse-shell--lecture-open' : ''
         }`}
         ref={shellRef}
         role={embeddedReview ? 'region' : 'main'}
@@ -4537,11 +4549,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               </div>
             )}
         </div>
-        {lectureOpen && (
+        {paperSelection.dictionaryPanel ?? (lectureOpen && (
           <aside className="paper-browse-lecture-panel" aria-label="讲评" ref={rightPanelRef}>
             {renderLecturePanel()}
           </aside>
-        )}
+        ))}
         {/*
           刀 2 修复轮 ③: 阅读跨栏证据动线 —— import-only 复用解析页 harness
           同款 `PaperIntelligenceEvidenceLine`（geometry 只 import 不改）。
@@ -4554,7 +4566,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           一一对应。抽屉态（<1200px）几何意义不大——讲评栏离开文档流叠在
           卷面上，见 paperBrowsePage.css 里同断点的 display:none 收紧。
         */}
-        {lectureOpen
+        {lectureOpen && !paperSelection.dictionaryPanel
           && panelGroupModel?.kind === 'reading'
           && readingEvidenceAnchorReadyId === readingEvidenceLineContext.evidenceId
           && (
@@ -4578,7 +4590,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         更高，讲评态下常驻可点）和文档级 Esc（见上方 effect）兜底，两条
         路径都不受蒙层影响。
       */}
-      {lectureOpen && <div className="paper-browse-lecture-backdrop" aria-hidden="true" />}
+      {lectureOpen && !paperSelection.dictionaryPanel && <div className="paper-browse-lecture-backdrop" aria-hidden="true" />}
       {/* 草稿丸用共用 Button（小号 28，墨字）；浮件的样子在 App.css .eqb-button.basket-chip。
           读屏名以看得见的字开头（Owner 2026-11-14 第 3 条），冒号后补上点了会怎样。 */}
       {!reviewRevision && (

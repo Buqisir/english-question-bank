@@ -1,0 +1,282 @@
+{
+  "entryId": "w:theatre",
+  "headword": "theatre",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "theater"
+  ],
+  "ipa": {
+    "uk": "/ˈθɪətə/",
+    "us": "/ˈθiːətər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:theatre#p-main",
+      "ipa": {
+        "uk": "/ˈθɪətə/",
+        "us": "/ˈθiːətər/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "label": "英式 theatre，美式 theater",
+      "needsCheck": [
+        "uk",
+        "us"
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "form": "theaters",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "theatres",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 36,
+    "mock": 113
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:theatre#s1",
+      "pos": "n.",
+      "glossZh": "供人看戏、音乐剧等演出的剧院",
+      "pronunciationId": "w:theatre#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 34,
+        "mock": 102
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:theatre#e-8740ba9df57c070d",
+          "text": "The New Theatre has been the home of quality drama, musicals, dance and children’s shows for more than 100 years.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:reading-a",
+            "locator": {
+              "paragraph": 15,
+              "paragraphId": "block:paper-gaokao-2022-national-a:reading-a:15",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:theatre#e-357a6f4686c69983",
+          "text": "Was I at the right theater?",
+          "source": {
+            "paperId": "paper-gaokao-2025-eight-provinces-jan",
+            "paperTitle": "2025年高考综合改革适应性演练英语",
+            "groupId": "group:paper-gaokao-2025-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-eight-provinces-jan:writing-continuation:5",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:theatre#e-803149b994eaf968",
+          "text": "What does Children’s Theatre provide for teachers?",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-gaokao-2024-zhejiang-jan:23",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:theatre#s2",
+      "pos": "n.",
+      "glossZh": "戏剧或舞台表演这种艺术",
+      "pronunciationId": "w:theatre#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:theatre#e-1a916a7ca4c7c5d2",
+          "text": "This summer he attended Kentucky’s Governor’s School for the Arts in Musical Theatre.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:6",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:theatre#e-179eb8cc8d32e1d1",
+          "text": "How often does the man go to the school theater club?",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:listening.long-form",
+            "locator": {
+              "question": 8,
+              "questionId": "question:listening:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:theatre#e-ce21d16d530c1ef3",
+          "text": "What does Jenny value most about performing in a theater play?",
+          "source": {
+            "paperId": "paper-mock-shandong-jining-2026-05-third-mock",
+            "paperTitle": "济宁市2026年高考第三次模拟考试英语学科试题卷",
+            "groupId": "group:paper-mock-shandong-jining-2026-05-third-mock:listening.long-form",
+            "locator": {
+              "question": 20,
+              "questionId": "question:listening:20",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:theatre#s6",
+      "pos": "n.",
+      "glossZh": "表演般热闹、有戏剧效果的场面",
+      "pronunciationId": "w:theatre#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:theatre#s3",
+      "pos": "n.",
+      "glossZh": "电影院（美式多见 movie theater）",
+      "pronunciationId": "w:theatre#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 9
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:theatre#e-8bee31c859eef677",
+          "text": "And it’s shaping up to be the next cultural phenomenon, with moviegoers heading to the theaters in big groups while dressed up in purple.",
+          "source": {
+            "paperId": "paper-mock-shandong-2026-04-core-literacy-assessment",
+            "paperTitle": "山东省2026年4月高三核心素养评估英语试题",
+            "groupId": "group:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-2026-04-core-literacy-assessment:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:theatre#e-06fe1923386ef89d",
+          "text": "The most recent additions to the station include: a permanent rail history exhibit, a planetarium where you can explore space and stars, a science centre for kids, and a movie theatre.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a:9",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:theatre#e-5177477a9ec2f2f8",
+          "text": "The museum is home to five halls packed with more than 200 interactive natural-science and technology exhibits and labs, a motion simulator, the state’s most technologically advanced four-story-screen movie theatre, and special seasonal exhibits.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring",
+            "paperTitle": "泉州市2026届高中毕业班质量监测（二）英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-01-second-quality-monitoring:reading-a:7",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:theatre#s4",
+      "pos": "n.",
+      "glossZh": "医院的手术室（英式）",
+      "pronunciationId": "w:theatre#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:theatre#s5",
+      "pos": "n.",
+      "glossZh": "战事展开的地区",
+      "pronunciationId": "w:theatre#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

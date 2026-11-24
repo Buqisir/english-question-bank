@@ -1,0 +1,73 @@
+{
+  "entryId": "w:mutton",
+  "headword": "mutton",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmʌtən/",
+    "us": "/ˈmʌtən/"
+  },
+  "audio": {
+    "uk": null,
+    "us": "/dictionary-audio/wikimedia-v1/047e991dba1f3087.mp3"
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:mutton#p-main",
+      "ipa": {
+        "uk": "/ˈmʌtən/",
+        "us": "/ˈmʌtən/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": "/dictionary-audio/wikimedia-v1/047e991dba1f3087.mp3"
+      },
+      "needsCheck": [
+        "uk"
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "form": "muttons",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:mutton#s1",
+      "pos": "n.",
+      "glossZh": "羊肉，通常指成年绵羊的肉",
+      "pronunciationId": "w:mutton#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "排版单位；表示耳聋的旧义",
+      "reason": "专业和古旧用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

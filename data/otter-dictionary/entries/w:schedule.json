@@ -1,0 +1,300 @@
+{
+  "entryId": "w:schedule",
+  "headword": "schedule",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈʃedjuːl/",
+    "us": "/ˈskedʒuːl/"
+  },
+  "audio": {
+    "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-0763-schedule.mp3",
+    "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-0763-schedule.mp3"
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:schedule#p-main",
+      "ipa": {
+        "uk": "/ˈʃedjuːl/",
+        "us": "/ˈskedʒuːl/"
+      },
+      "ipaSource": "频序词表",
+      "audio": {
+        "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-0763-schedule.mp3",
+        "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-0763-schedule.mp3"
+      }
+    }
+  ],
+  "forms": [
+    {
+      "form": "Schedules",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "scheduled",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "schedules",
+      "tags": [
+        "plural",
+        "present",
+        "third-person"
+      ]
+    },
+    {
+      "form": "scheduling",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 17,
+    "mock": 217
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 15
+  },
+  "senses": [
+    {
+      "senseId": "w:schedule#s1",
+      "pos": "n.",
+      "glossZh": "时间表；对活动时间的安排",
+      "pronunciationId": "w:schedule#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 151
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:schedule#e-f19b9a1e7868eb22",
+          "text": "With busy schedules, squeezing in phone calls can be a challenge.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:schedule#e-ded636f0e77950d6",
+          "text": "Note: The times listed on the schedules are departure times, not arrival times.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:seven-choices:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:schedule#e-010990d6b2d9f853",
+          "text": "The tip that comes up most often is simple: build online courses into your weekly schedule, just like what you would do with in person courses.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:schedule#s2",
+      "pos": "v.",
+      "glossZh": "为某事排定时间；按计划将要做某事",
+      "pronunciationId": "w:schedule#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 7,
+        "mock": 43
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:schedule#e-46f76b6af3a4a549",
+          "text": "Group Play may be scheduled during any day or time the Museum is open.",
+          "source": {
+            "paperId": "paper-gaokao-2022-ii",
+            "paperTitle": "2022年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）英语",
+            "groupId": "group:paper-gaokao-2022-ii:reading-a",
+            "locator": {
+              "paragraph": 13,
+              "paragraphId": "block:paper-gaokao-2022-ii:reading-a:13",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:schedule#e-2887e425db43272c",
+          "text": "Kids are easy to get angry when they’re sleepy or hungry, so schedule playtime when they’re refreshed.",
+          "source": {
+            "paperId": "paper-gaokao-2024-nine-provinces-jan",
+            "paperTitle": "2024年1月九省联考英语",
+            "groupId": "group:paper-gaokao-2024-nine-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-nine-provinces-jan:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:schedule#e-3fed4b5f06a966f4",
+          "text": "Be sure to schedule set times to watch your lectures, read materials and contribute to online discussion boards.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:seven-choices:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:schedule#s3",
+      "pos": "n.",
+      "glossZh": "时间安排这件事（scheduling）",
+      "pronunciationId": "w:schedule#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:schedule#e-0deeacb8de2f3709",
+          "text": "The UK’s obsession (痴迷) with food is reflected through television scheduling.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:schedule#e-a5290f52858a64e8",
+          "text": "One common obstacle is managing scheduling conflicts.",
+          "source": {
+            "paperId": "paper-mock-fujian-fuzhou-2026-03-quality-test",
+            "paperTitle": "2025-2026学年福州市高三年级三月质量检测英语试题卷",
+            "groupId": "group:paper-mock-fujian-fuzhou-2026-03-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-fuzhou-2026-03-quality-test:seven-choices:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:schedule#s4",
+      "pos": "n.",
+      "glossZh": "进度；规定的完成时间（on/ahead of schedule）",
+      "pronunciationId": "w:schedule#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:schedule#e-f2035eecfb947dac",
+          "text": "The country has met its 2030 goals for forest growth and solar and wind power capacity years ahead of schedule.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:reading-b:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:schedule#e-220f6ab2e0f695ba",
+          "text": "The Artemis moon base will be built ahead of schedule.",
+          "source": {
+            "paperId": "paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2",
+            "paperTitle": "华中师范大学第一附属中学2026届高三年级五月适应性检测 高三英语试题",
+            "groupId": "group:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:reading-a",
+            "locator": {
+              "question": 23,
+              "questionId": "question:paper-mock-hubei-huazhong-normal-university-first-affiliated-high-school-2026-05-adaptability-test-v2:23",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:schedule#s5",
+      "pos": "n.",
+      "glossZh": "正式文件的附表",
+      "pronunciationId": "w:schedule#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "管制药物类别；依法强制入院",
+      "reason": "医药法规专门用语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

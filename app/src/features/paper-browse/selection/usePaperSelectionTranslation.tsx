@@ -19,6 +19,9 @@ import {
   type PaperTranslationStatus,
 } from '../../../services/paperTranslation.ts'
 import { DictionaryCard, dictionaryCopyText, type DictionarySenseState } from './DictionaryCard'
+import { DictionaryEntry } from '../../dictionary/DictionaryEntry'
+import { Button } from '../../../shared-ui/Button'
+import { Menu } from '../../../shared-ui/Menu'
 import { useClipboardCopy } from '../../../hooks/useClipboardCopy'
 import { stopDictionaryAudio } from './dictionaryAudio'
 import { createPageTranslationCache } from './pageCache'
@@ -156,6 +159,8 @@ export function usePaperSelectionTranslation({
   const [dictionaryResult, setDictionaryResult] = useState<PaperDictionaryResponse | null>(null)
   const [lookupState, setLookupState] = useState<'loading' | 'ready'>('loading')
   const [lookupError, setLookupError] = useState('')
+  const [fullEntryOpen, setFullEntryOpen] = useState(false)
+  const [restoreQuickFocus, setRestoreQuickFocus] = useState(false)
   const [sense, setSense] = useState<DictionarySenseState>({ status: 'loading' })
   const [playErrorId, setPlayErrorId] = useState('')
   const { state: copyState, copied, error: copyError, copy, reset: resetCopy } = useClipboardCopy()
@@ -237,6 +242,8 @@ export function usePaperSelectionTranslation({
     setErrorMessage('')
     setLiveMessage('')
     setDictionaryResult(null)
+    setFullEntryOpen(false)
+    setRestoreQuickFocus(false)
     setLookupError('')
     setPlayErrorId('')
     setAnalysisResult(null)
@@ -649,10 +656,11 @@ export function usePaperSelectionTranslation({
   }, [dictionaryStatus, status])
 
   useEffect(() => {
-    if (phase !== 'dictionary' || !snapshot || snapshot.action !== 'dictionary') return undefined
+    if (phase !== 'dictionary' || !snapshot || !dictionaryResult || dictionaryResult.otter
+      || dictionaryResult.status === 'not-found') return undefined
     scheduleSense(snapshot)
     return () => clearSenseTimer()
-  }, [clearSenseTimer, phase, scheduleSense, snapshot])
+  }, [clearSenseTimer, dictionaryResult, phase, scheduleSense, snapshot])
 
   useEffect(() => {
     function onSelectionChange() {
@@ -683,9 +691,26 @@ export function usePaperSelectionTranslation({
     const onMove = (event: PointerEvent) => gate.pointerMove(event)
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
+        if (document.querySelector('[role="menu"].otter-menu')) return
+        if (fullEntryOpen) {
+          event.stopPropagation()
+          setFullEntryOpen(false)
+          setRestoreQuickFocus(true)
+          return
+        }
         if (phaseRef.current === 'sentence-analysis' && analysisEscapeRef.current?.()) {
           event.preventDefault()
           event.stopPropagation()
+          return
+        }
+        const current = snapshotRef.current
+        if (phaseRef.current === 'dictionary' && current) {
+          event.stopPropagation()
+          const lookup = { ...current, action: 'lookup' as const, input: 'keyboard' as const }
+          snapshotRef.current = lookup
+          setSnapshot(lookup)
+          setPhase('lookup')
+          stopDictionaryAudio()
           return
         }
         dismissSelection()
@@ -713,11 +738,11 @@ export function usePaperSelectionTranslation({
       window.removeEventListener('pointercancel', finishSelecting, true)
       window.removeEventListener('keydown', onKey, true)
     }
-  }, [dismissSelection, gate, hostRef, paperId, source?.sourceRevision, updateFromSelection])
+  }, [dismissSelection, fullEntryOpen, gate, hostRef, paperId, source?.sourceRevision, updateFromSelection])
 
   useEffect(() => {
     const host = hostRef.current
-    if (!host || phase === 'idle') return undefined
+    if (!host || phase === 'idle' || fullEntryOpen) return undefined
     const anchorRange = () => (phase === 'sentence-analysis' && analysisRange) || snapshot?.range || null
     const onScroll = () => {
       const range = anchorRange()
@@ -740,7 +765,7 @@ export function usePaperSelectionTranslation({
     }
     const onPointerDown = (event: PointerEvent) => {
       const overlay = document.querySelector('.paper-selection-overlay')
-      if (overlay && event.target instanceof Node && overlay.contains(event.target)) return
+      if (event.target instanceof Element && (overlay?.contains(event.target) || event.target.closest('.otter-menu'))) return
       dismissSelection()
     }
     window.addEventListener('scroll', onScroll, true)
@@ -751,7 +776,7 @@ export function usePaperSelectionTranslation({
       window.removeEventListener('resize', onResize)
       window.removeEventListener('pointerdown', onPointerDown, true)
     }
-  }, [analysisRange, dismissSelection, hostRef, phase, snapshot])
+  }, [analysisRange, dismissSelection, fullEntryOpen, hostRef, phase, snapshot])
 
   const openLookup = useCallback(() => {
     const current = snapshotRef.current
@@ -839,7 +864,32 @@ export function usePaperSelectionTranslation({
     })
   }, [consumption, hostRef, source])
 
-  const overlay = snapshot && phase !== 'idle' && (
+  const otter = dictionaryResult?.otter
+  const otterSenseId = dictionaryResult?.otterSenseId
+  const openFullEntry = () => {
+    if (!otter || !snapshot) return
+    if (window.matchMedia('(width > 980px)').matches) {
+      setRestoreQuickFocus(false)
+      setFullEntryOpen(true)
+      return
+    }
+    const sourceUrl = new URL(window.location.href)
+    const segment = snapshot.segments[0]
+    const stream = source?.streams.find(item => item.streamId === segment?.streamId)
+    const leaf = stream?.leaves.find(item => item.start <= segment.start && item.end >= segment.end)
+    if (stream?.groupId) sourceUrl.searchParams.set('focusGroupId', stream.groupId)
+    if (leaf?.kind === 'paragraph') sourceUrl.searchParams.set('focusParagraphId', leaf.id)
+    window.history.replaceState(window.history.state, '', sourceUrl)
+    sourceUrl.searchParams.set('view', 'word')
+    sourceUrl.searchParams.set('w', otter.headword)
+    if (otterSenseId) sourceUrl.searchParams.set('wordSense', otterSenseId)
+    window.history.pushState({ otterFromSelection: true }, '', sourceUrl)
+    window.dispatchEvent(new PopStateEvent('popstate'))
+  }
+  const notebook = snapshot?.segments.length === 1 ? (
+    <NotebookAddButton paperId={snapshot.paperId} sourceRevision={snapshot.sourceRevision} segment={snapshot.segments[0]} />
+  ) : null
+  const overlay = !fullEntryOpen && snapshot && phase !== 'idle' && (
     phase === 'dictionary' || phase === 'lookup' || phase === 'sentence-analysis' || status?.enabled
     || (phase === 'toolbar' && snapshot.analysisEligible)
   )
@@ -885,12 +935,26 @@ export function usePaperSelectionTranslation({
         onPointerInsideChange={(inside) => {
           pointerInsideRef.current = inside
         }}
-        dictionary={phase === 'dictionary' ? (
+        dictionary={phase === 'dictionary' ? otter ? (
+          <DictionaryEntry density="quick" entry={otter} senseId={otterSenseId} onClose={dismissSelection} actions={<>
+            <Button size="sm" tone="primary" autoFocus={restoreQuickFocus || snapshot.input === 'keyboard'} onClick={openFullEntry}>完整词条</Button>
+            {notebook}
+            <Menu label="更多查词操作" className="otter-menu" triggerSize="sm" items={[
+              ...(SENTENCE_ANALYSIS_ENABLED && snapshot.analysisEligible
+                ? [{ key: 'analyze', label: '分析所在句', onSelect: openSentenceAnalysis, restoreFocus: false }] : []),
+              { key: 'copy', label: copied ? '已复制词条' : '复制词条', disabled: copyState === 'pending', onSelect: () => {
+                const match = otter.senses.find(item => item.senseId === otterSenseId)
+                void copy([otter.headword, match && `本文义 ${match.pos} ${match.glossZh}`].filter(Boolean).join('\n'))
+              } },
+            ]} />
+          </>} />
+        ) : (
           <DictionaryCard
             surface={snapshot.segments[0]?.selectedText || ''}
             lookup={lookupState}
             result={dictionaryResult}
             lookupError={lookupError}
+            onRetryLookup={() => { void runLookup(snapshot) }}
             playErrorId={playErrorId}
             sense={shownSense}
             onRetrySense={() => {
@@ -906,13 +970,7 @@ export function usePaperSelectionTranslation({
             }}
             onClose={dismissSelection}
             onAnalyzeSentence={SENTENCE_ANALYSIS_ENABLED && snapshot.analysisEligible ? openSentenceAnalysis : undefined}
-            notebook={snapshot.segments.length === 1 ? (
-              <NotebookAddButton
-                paperId={snapshot.paperId}
-                sourceRevision={snapshot.sourceRevision}
-                segment={snapshot.segments[0]}
-              />
-            ) : null}
+            notebook={notebook}
           />
         ) : null}
       />,
@@ -922,6 +980,15 @@ export function usePaperSelectionTranslation({
 
   return {
     overlay,
+    dictionaryPanel: fullEntryOpen && otter ? (
+      <aside className="paper-browse-lecture-panel otter-panel" aria-label="完整词条">
+        <DictionaryEntry density="full" entry={otter} senseId={otterSenseId} onClose={() => {
+          setRestoreQuickFocus(true)
+          setFullEntryOpen(false)
+        }} />
+      </aside>
+    ) : null,
+    closeDictionaryPanel: () => dismissSelection(),
     lectureFocusGate: gate,
     lastInputSource,
     enabled: Boolean(status && status.enabled),

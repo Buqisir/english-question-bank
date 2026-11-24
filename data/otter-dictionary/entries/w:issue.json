@@ -1,0 +1,270 @@
+{
+  "entryId": "w:issue",
+  "headword": "issue",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɪʃuː/",
+    "us": "/ˈɪʃuː/"
+  },
+  "audio": {
+    "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-1132-issue.mp3",
+    "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-1132-issue.mp3"
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:issue#p-main",
+      "ipa": {
+        "uk": "/ˈɪʃuː/",
+        "us": "/ˈɪʃuː/"
+      },
+      "ipaSource": "频序词表",
+      "audio": {
+        "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-1132-issue.mp3",
+        "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-1132-issue.mp3"
+      }
+    }
+  ],
+  "forms": [
+    {
+      "form": "Issues",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "issued",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "issues",
+      "tags": [
+        "plural",
+        "present",
+        "third-person"
+      ]
+    },
+    {
+      "form": "issuing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 23,
+    "mock": 274
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:issue#s1",
+      "pos": "n.",
+      "glossZh": "需要讨论或解决的问题",
+      "pronunciationId": "w:issue#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 234
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:issue#e-956595aba1bdc5f6",
+          "text": "The Parks Department is not oblivious to the issue.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2026-i:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:issue#e-a2b12fa7eb971bd8",
+          "text": "How does the author present the issue in the first paragraph?",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2025-i:32",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:issue#e-8bf7ab692534cea3",
+          "text": "Eventually, my brother decided to leave rather than force the issue.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:issue#s2",
+      "pos": "n.",
+      "glossZh": "报刊或杂志的一期",
+      "pronunciationId": "w:issue#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 28
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:issue#e-16f29b88886dd31d",
+          "text": "That’s why this issue (期) of Writer’s Digest aims to help you figure out how to write the best ending for whatever kind of writing you’re doing.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:issue#e-e5ecae22f8a4433f",
+          "text": "This issue won’t tell you what your ending should be – that’s up to you and the story you’re telling – but it might provide what you need to get there.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-d:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:issue#e-2e86c0c80998b1bb",
+          "text": "Tell us your story and we might publish it in a future issue of our magazine or on RD.com.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2026年5月高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2026-05-senior-three-joint-exam:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:issue#s3",
+      "pos": "v.",
+      "glossZh": "正式发布、发给或退还",
+      "pronunciationId": "w:issue#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 11
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:issue#e-53dfcab2694d405f",
+          "text": "A four-year tea promotion – Tea Road Cooperative Plan – was also issued in accordance with the initiative.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:grammar-fill",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2022-national-b:grammar-fill:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:issue#e-7e1cae70fb7d57df",
+          "text": "Why is the ban issued?",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:issue#e-aade93cece6b991f",
+          "text": "If rescheduling is not possible, we will issue a full refund.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-a",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-a:7",
+              "sentence": 4
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:issue#s4",
+      "pos": "v.",
+      "glossZh": "从某处流出或传出",
+      "pronunciationId": "w:issue#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "子嗣；证券的特定发行量",
+      "reason": "法律和金融专门用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

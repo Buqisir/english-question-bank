@@ -1,0 +1,172 @@
+{
+  "entryId": "w:calligraphy",
+  "headword": "calligraphy",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/kəˈlɪɡrəfi/",
+    "us": "/kəˈlɪɡrəfi/"
+  },
+  "audio": {
+    "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-2798-calligraphy.mp3",
+    "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-2798-calligraphy.mp3"
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:calligraphy#p-main",
+      "ipa": {
+        "uk": "/kəˈlɪɡrəfi/",
+        "us": "/kəˈlɪɡrəfi/"
+      },
+      "ipaSource": "频序词表",
+      "audio": {
+        "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-2798-calligraphy.mp3",
+        "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-2798-calligraphy.mp3"
+      }
+    }
+  ],
+  "forms": [
+    {
+      "form": "calligraphies",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 14
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:calligraphy#s1",
+      "pos": "n.",
+      "glossZh": "书法；讲究结字和笔法的书写艺术",
+      "pronunciationId": "w:calligraphy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 9
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:calligraphy#e-2c6428edf2fb81bd",
+          "text": "It is this pursuit of spiritual expression that lifts calligraphy to a high art form.",
+          "source": {
+            "paperId": "paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam",
+            "paperTitle": "2026年湖北省新八校协作体高三4月联考 高三英语试题卷",
+            "groupId": "group:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-new-eight-school-2026-04-senior-three-joint-exam:grammar-fill:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:calligraphy#e-68209d6f4b4660e1",
+          "text": "I’m writing on behalf of the Students’ Union to invite you to our student calligraphy exhibition.",
+          "source": {
+            "paperId": "paper-mock-anhui-hefei-2026-02-first",
+            "paperTitle": "2026年合肥市高三第一次教学质量检测英语",
+            "groupId": "group:paper-mock-anhui-hefei-2026-02-first:writing-application",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-anhui-hefei-2026-02-first:writing-application:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:calligraphy#e-8c3c584de8347aee",
+          "text": "Walrond herself has tried many new activities: swimming, calligraphy, surfing, night photography, and so on.",
+          "source": {
+            "paperId": "paper-mock-jiangxi-ganzhou-2026-03-baseline-exam",
+            "paperTitle": "赣州市2026年高三年级摸底考试英语试题",
+            "groupId": "group:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangxi-ganzhou-2026-03-baseline-exam:seven-choices:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ],
+      "note": "本批真题中的唯一命中是听力选项，下面的完整例句来自模拟卷。"
+    },
+    {
+      "senseId": "w:calligraphy#s2",
+      "pos": "n.",
+      "glossZh": "书法作品；某人的书法风格",
+      "pronunciationId": "w:calligraphy#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:calligraphy#e-9a4c8643c8ce9a98",
+          "text": "As the New Year approaches, I’d like to give you a piece of Chinese calligraphy as a gift.",
+          "source": {
+            "paperId": "paper-mock-guangdong-huizhou-2026-01-second-survey",
+            "paperTitle": "惠州市2026届高三第二次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-huizhou-2026-01-second-survey:writing-application",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-guangdong-huizhou-2026-01-second-survey:writing-application:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:calligraphy#e-4c68c4f3797a00f4",
+          "text": "Nonetheless, Su Shi’s calligraphy reflected his open nature and desire for self-expression.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability",
+            "paperTitle": "杭州第二中学2025年10月高三年级适应性检测英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:grammar-fill:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:calligraphy#e-b86da9fdd465e21b",
+          "text": "Prior to his adulthood, he had studied the calligraphy of Wang Xizhi and later on in life, he turned to the works of Yan Zhenqing.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability",
+            "paperTitle": "杭州第二中学2025年10月高三年级适应性检测英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-no2-2025-10-adaptability:grammar-fill:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

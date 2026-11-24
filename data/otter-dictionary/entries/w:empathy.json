@@ -1,0 +1,117 @@
+{
+  "entryId": "w:empathy",
+  "headword": "empathy",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɛmpəθi/",
+    "us": "/ˈɛmpəθi/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:empathy#p-main",
+      "ipa": {
+        "uk": "/ˈɛmpəθi/",
+        "us": "/ˈɛmpəθi/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      }
+    }
+  ],
+  "forms": [
+    {
+      "form": "empathies",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 2,
+    "mock": 72
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:empathy#s1",
+      "pos": "n.",
+      "glossZh": "设身处地理解别人的感受",
+      "pronunciationId": "w:empathy#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 72
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:empathy#e-dfa669e7d065c103",
+          "text": "The project’s real lesson was that empathy isn’t just feeling but the courageous act of voluntarily giving up your own control, even for a moment, to understand another’s misery.",
+          "source": {
+            "paperId": "paper-mock-shandong-heze-2026-03-first",
+            "paperTitle": "菏泽市2026年高三一模考试英语试题",
+            "groupId": "group:paper-mock-shandong-heze-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-heze-2026-03-first:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:empathy#e-c3fbd1fe56e95ddb",
+          "text": "Empathy is a unique human skill beyond AI’s reach.",
+          "source": {
+            "paperId": "paper-mock-zj-2026-03-m171",
+            "paperTitle": "2025-2026学年第二学期浙江省名校协作体高三英语试题卷",
+            "groupId": "group:paper-mock-zj-2026-03-m171:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-mock-zj-2026-03-m171:32",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:empathy#e-f5d74f8cc47a9790",
+          "text": "A core skill is empathy.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao",
+            "paperTitle": "2025-2026学年第二学期浙南名校、七彩阳光、精诚联盟、金兰教育高三返校联考英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:seven-choices",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-zhejiang-2026-02-gaosan-fanxiao-liankao:seven-choices:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "读心能力；毒品别称",
+      "reason": "极少见或俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

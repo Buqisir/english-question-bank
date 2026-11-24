@@ -1,0 +1,279 @@
+{
+  "entryId": "w:object",
+  "headword": "object",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈɒbdʒɪkt/",
+    "us": "/ˈɑːbdʒɪkt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:object#p-noun",
+      "ipa": {
+        "uk": "/ˈɒbdʒɪkt/",
+        "us": "/ˈɑːbdʒɪkt/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "label": "名词"
+    },
+    {
+      "pronunciationId": "w:object#p-verb",
+      "ipa": {
+        "uk": "/əbˈdʒekt/",
+        "us": "/əbˈdʒekt/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "label": "动词",
+      "needsCheck": [
+        "uk",
+        "us"
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "form": "objected",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "objecting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "objects",
+      "tags": [
+        "plural",
+        "present",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 28,
+    "mock": 120
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "senses": [
+    {
+      "senseId": "w:object#s1",
+      "pos": "n.",
+      "glossZh": "可以看到或触碰的东西；物体",
+      "pronunciationId": "w:object#p-noun",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 28,
+        "mock": 109
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:object#e-d165d1a48d7271f1",
+          "text": "Many cats will find random objects outside and bring them to their owners.",
+          "source": {
+            "paperId": "paper-gaokao-2024-national-a",
+            "paperTitle": "2024 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2024-national-a:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2024-national-a:reading-b:3",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:object#e-6325c4ebfaae47f0",
+          "text": "Yet as Martin has found in her work, gender is one of the fundamental ways people form connections with objects, particularly those designed with human characteristics.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2025-zhejiang-jan:reading-d:1",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:object#e-50be9050f0986570",
+          "text": "Why is it difficult to create genderless objects?",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:34",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:object#s2",
+      "pos": "v.",
+      "glossZh": "反对；提出异议（常用 object to）",
+      "pronunciationId": "w:object#p-verb",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:object#e-22a7d806e297ee0e",
+          "text": "As inventor William Petty observed, “When a new invention is first put forward, in the beginning every man objects...not one of a hundred (inventor) outlives this torture.”",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:object#e-5dc6265523e05da7",
+          "text": "Many critics objected to the use of GenAI on environmental grounds – the technology uses vast amounts of energy and water, creates e-waste and drives demand for rare-earth metals, the mining of which causes habitat degradation.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis",
+            "paperTitle": "烟台市2025-2026学年度第一学期期中学业水平诊断 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-yantai-2025-11-senior-three-midterm-academic-proficiency-diagnosis:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:object#e-7ee2696bee534d68",
+          "text": "She objects to moving their bed.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment",
+            "paperTitle": "25年12月苏州南京两地市九校高三年级一轮复习学情联合调研英语试题",
+            "groupId": "group:paper-mock-jiangsu-suzhou-nanjing-nine-schools-2025-12-senior-three-first-round-review-joint-assessment:listening.short-dialogue",
+            "locator": {
+              "question": 1,
+              "questionId": "question:listening:1",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:object#s6",
+      "pos": "n.",
+      "glossZh": "实际例子；用实例说明的教训（object lesson）",
+      "pronunciationId": "w:object#p-noun",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:object#e-07c8095c543ac2db",
+          "text": "When we reduce someone’s body to a before-and-after story, we dehumanize them into an object lesson.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-03-sixth-quality-test",
+            "paperTitle": "重庆市高2026届高三第六次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-03-sixth-quality-test:reading-d:5",
+              "sentence": 6
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:object#s3",
+      "pos": "n.",
+      "glossZh": "目标；要达到的目的",
+      "pronunciationId": "w:object#p-noun",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:object#s4",
+      "pos": "n.",
+      "glossZh": "动作、感情或注意力所指向的对象",
+      "pronunciationId": "w:object#p-noun",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:object#s5",
+      "pos": "n.",
+      "glossZh": "语法中的宾语",
+      "pronunciationId": "w:object#p-noun",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "范畴论中的对象；对抗的古旧动词义",
+      "reason": "专业和古旧用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

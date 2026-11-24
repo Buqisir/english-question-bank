@@ -1,0 +1,89 @@
+{
+  "entryId": "w:pagoda",
+  "headword": "pagoda",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/pəˈɡəʊdə/",
+    "us": "/pəˈɡoʊdə/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:pagoda#p-main",
+      "ipa": {
+        "uk": "/pəˈɡəʊdə/",
+        "us": "/pəˈɡoʊdə/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "needsCheck": [
+        "uk"
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "form": "pagodas",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:pagoda#s1",
+      "pos": "n.",
+      "glossZh": "宝塔；有多层塔檐的塔形建筑",
+      "pronunciationId": "w:pagoda#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:pagoda#e-6a7f4774379588bd",
+          "text": "These ginkgos, each more than 600 years old, guard an ancient pagoda with timeless grace.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:grammar-fill:1",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "旧金币；宝塔袖",
+      "reason": "历史货币和服装专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

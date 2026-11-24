@@ -1,0 +1,443 @@
+{
+  "entryId": "w:colour",
+  "headword": "colour",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "color"
+  ],
+  "ipa": {
+    "uk": "/ˈkʌlə/",
+    "us": "/ˈkʌlər/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:colour#p-main",
+      "ipa": {
+        "uk": "/ˈkʌlə/",
+        "us": "/ˈkʌlər/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "label": "英式 colour，美式 color",
+      "needsCheck": [
+        "us"
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "form": "colored",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "coloring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "colors",
+      "tags": [
+        "plural",
+        "present",
+        "third-person"
+      ]
+    },
+    {
+      "form": "coloured",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "colouring",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "colours",
+      "tags": [
+        "plural",
+        "present",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 28,
+    "mock": 228
+  },
+  "unassignedCounts": {
+    "gaokao": 2,
+    "mock": 2
+  },
+  "senses": [
+    {
+      "senseId": "w:colour#s1",
+      "pos": "n.",
+      "glossZh": "颜色；色彩",
+      "pronunciationId": "w:colour#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 13,
+        "mock": 213
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:colour#e-4d349b28dd9d0d81",
+          "text": "Mom was sure same color would look great on her.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-b:writing-short-error-correction:8",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:colour#e-7c19f7b369d3bcfb",
+          "text": "What color was used for the background in the second painting?",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:listening.long-form",
+            "locator": {
+              "question": 16,
+              "questionId": "question:listening:16",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:colour#e-b7e27a6784879982",
+          "text": "The ball then seems to jump from one cup to another or to change colour.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:colour#s2",
+      "pos": "adj.",
+      "glossZh": "带颜色的；有色的（coloured/colored）",
+      "pronunciationId": "w:colour#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 8,
+        "mock": 7
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:colour#e-1b2f7f87431d7495",
+          "text": "While doing this he talks to the audience and waves a brightly coloured cloth with one hand.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-c:3",
+              "sentence": 6
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:colour#e-f3d6184b09f7257b",
+          "text": "Paulo Magalhaes, a 34-year-old Portuguese computer engineer, loves to open his mailbox and find a brightly colored picture of Rome’s Colosseum.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:colour#e-607a9fe95afcc8b9",
+          "text": "He seemed to be counting mobile dots even when the scientists tried to mislead him by moving the total coloured area of the dots at the same time.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:colour#s5",
+      "pos": "n.",
+      "glossZh": "用来染色的颜料或染料",
+      "pronunciationId": "w:colour#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:colour#e-6669da23ee34597e",
+          "text": "At least one thing proved truth: the color wouldn’t wash out.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-b:writing-short-error-correction:8",
+              "sentence": 8
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:colour#e-8b035cd4155e7705",
+          "text": "She put the new color on her hair or sat still for 30 minutes, just as the directions saying.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-b:writing-short-error-correction:8",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:colour#e-7dd212cdca429b50",
+          "text": "The color she choose came in a box which had a picture of a woman that hair color looked just perfect.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-b:writing-short-error-correction:8",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:colour#s3",
+      "pos": "v.",
+      "glossZh": "给某物上色；染色",
+      "pronunciationId": "w:colour#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:colour#e-fcb78c158c2dbdc5",
+          "text": "Last Friday my mom decided to color his hair.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:writing-short-error-correction",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-gaokao-2023-national-b:writing-short-error-correction:8",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:colour#e-040546fa87007125",
+          "text": "These images were so impressive that he began coloring them using paints from his family’s dyehouse.",
+          "source": {
+            "paperId": "paper-mock-zj-hangzhou2-2026-mar",
+            "paperTitle": "杭州二中高三年级2026年3月月考",
+            "groupId": "group:paper-mock-zj-hangzhou2-2026-mar:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-hangzhou2-2026-mar:grammar-fill:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:colour#e-a61c2ed107c5975a",
+          "text": "She’s colored her hair.",
+          "source": {
+            "paperId": "paper-mock-shandong-binzhou-2026-05-second-mock",
+            "paperTitle": "滨州市2026年高考第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-binzhou-2026-05-second-mock:listening.long-form",
+            "locator": {
+              "question": 14,
+              "questionId": "question:listening:14",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:colour#s4",
+      "pos": "n.",
+      "glossZh": "肤色",
+      "pronunciationId": "w:colour#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:colour#e-2910a4a9eeeaeff7",
+          "text": "When contributions were made by geniuses outside the club – women, or people of a different color or belief – they were unacknowledged and rejected by others.",
+          "source": {
+            "paperId": "paper-gaokao-2021-national-a",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（全国甲卷）",
+            "groupId": "group:paper-gaokao-2021-national-a:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-national-a:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:colour#e-324d00e503b91ef8",
+          "text": "It was not until 2016 that she reinterpreted pink as the natural color of Asian skin, a color of life itself and began to embrace it.",
+          "source": {
+            "paperId": "paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock",
+            "paperTitle": "湖南省2026届高三九校联盟第二次联考&怀化第一次高考模拟考英语试题",
+            "groupId": "group:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hunan-huaihua-2026-03-nine-school-alliance-second-joint-exam-first-gaokao-mock:reading-b:4",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:colour#e-4a9337b6f477e77c",
+          "text": "Hire only Cambridge politics graduates or Harvard MBAs or Stanford software engineers and they will have studied under the same professors and absorbed similar world views regardless of their gender or skin colour.",
+          "source": {
+            "paperId": "paper-mock-hunan-yali-2026-second",
+            "paperTitle": "雅礼中学2026届高三月考试卷（二）英语",
+            "groupId": "group:paper-mock-hunan-yali-2026-second:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hunan-yali-2026-second:reading-d:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:colour#s6",
+      "pos": "v.",
+      "glossZh": "让观点、记忆等带上某种倾向",
+      "pronunciationId": "w:colour#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:colour#e-1bb65ca111b8bdf4",
+          "text": "Another reason is that historical nostalgia is often coloured by personal nostalgia.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:colour#e-1313ef1ca50f0223",
+          "text": "It is colored by historical context.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-01-fifth-quality-test",
+            "paperTitle": "重庆市高2026届高三第五次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-01-fifth-quality-test:reading-c",
+            "locator": {
+              "question": 29,
+              "questionId": "question:paper-mock-cq-nankai-2026-01-fifth-quality-test:29",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "夸克色荷；期权指标",
+      "reason": "物理和金融专门用语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

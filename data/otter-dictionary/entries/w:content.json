@@ -1,0 +1,380 @@
+{
+  "entryId": "w:content",
+  "headword": "content",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈkɒntent/",
+    "us": "/ˈkɑːntent/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:content#p-noun",
+      "ipa": {
+        "uk": "/ˈkɒntent/",
+        "us": "/ˈkɑːntent/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "label": "名词"
+    },
+    {
+      "pronunciationId": "w:content#p-predicative",
+      "ipa": {
+        "uk": "/kənˈtent/",
+        "us": "/kənˈtent/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "label": "形容词、动词",
+      "needsCheck": [
+        "us"
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "form": "contented",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "contenter",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "contentest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "contenting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "contents",
+      "tags": [
+        "plural",
+        "present",
+        "third-person"
+      ]
+    },
+    {
+      "form": "more content",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most content",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 15,
+    "mock": 152
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 9
+  },
+  "senses": [
+    {
+      "senseId": "w:content#s1",
+      "pos": "n.",
+      "glossZh": "文章、课程、媒体等传达的内容",
+      "pronunciationId": "w:content#p-noun",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 10,
+        "mock": 128
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:content#e-20627270bf59b0cf",
+          "text": "What do we know about the content of The Idler?",
+          "source": {
+            "paperId": "paper-gaokao-2023-i",
+            "paperTitle": "2023年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2023-i:listening.long-form",
+            "locator": {
+              "question": 19,
+              "questionId": "question:listening:19",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:content#e-bf8f03c4f572298e",
+          "text": "And are listening to and viewing content as effective as reading the written word when covering the same material?",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2024-i:reading-c:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:content#e-7c2c96bcfe81db73",
+          "text": "Meaning emerges through a process of social interaction, not of computation, interaction that shapes the content of the symbols in our heads.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:content#s2",
+      "pos": "adj.",
+      "glossZh": "满足的；对现状满意的",
+      "pronunciationId": "w:content#p-predicative",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 7
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:content#e-08e7a5373d303523",
+          "text": "Did Nielsen then feel content in his career?",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-a",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-a:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:content#e-28d9aba016e6d285",
+          "text": "If you ever get the impression that your dog can \"tell\" whether you look content or annoyed, you may be onto something.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:content#e-c68d7d4df48fdab2",
+          "text": "Contented solitude (独处) facilitates connection and vice versa.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:seven-choices:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:content#s3",
+      "pos": "n.",
+      "glossZh": "某种成分的含量",
+      "pronunciationId": "w:content#p-noun",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:content#e-c5a811033bc9b3ba",
+          "text": "Since April drinks companies have been forced to pay between 18p and 24p for every litre of sugary drink they produce or import, depending on the sugar content.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-d:5",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:content#e-afea26c797a6ec9b",
+          "text": "They reduced their products’ sugar content.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2022-national-b:33",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:content#e-772f5b599febf950",
+          "text": "Climate change and rising carbon dioxide levels also play a role in lowering nutrient content.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-01-first",
+            "paperTitle": "郑州市2026年高中毕业年级第一次质量预测高三英语适应性试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-01-first:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-01-first:reading-c:4",
+              "sentence": 4
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:content#s4",
+      "pos": "n.",
+      "glossZh": "目录（table of contents）",
+      "pronunciationId": "w:content#p-noun",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:content#e-602ebb1682c00967",
+          "text": "Look at the table of contents, the preface, the chapter heading, etc.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:content#s6",
+      "pos": "v.",
+      "glossZh": "让自己满足于现有条件（content oneself with）",
+      "pronunciationId": "w:content#p-predicative",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:content#e-e6ce85c36a63ee9a",
+          "text": "After college, I contented myself with staying with them at home.",
+          "source": {
+            "paperId": "paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring",
+            "paperTitle": "湖北省十堰、荆门、恩施、咸宁、黄石五地市州2026届高三第一次质量监测 英语试题",
+            "groupId": "group:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-five-cities-2025-09-senior-three-first-quality-monitoring:writing-continuation:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:content#s5",
+      "pos": "n.",
+      "glossZh": "里面装着的物品或组成成分（常用复数）",
+      "pronunciationId": "w:content#p-noun",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:content#e-fe9ba1e93b2ae631",
+          "text": "Education about gum’s contents and the environmental consequences those ingredients have will reduce consumption and encourage better disposal habits.",
+          "source": {
+            "paperId": "paper-mock-zhuji-2026-05-gaosan-adaptability-exam",
+            "paperTitle": "诸暨市2026年5月高三适应性考试试题（英语）",
+            "groupId": "group:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhuji-2026-05-gaosan-adaptability-exam:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "议会赞成票；多项式系数最大公因数",
+      "reason": "议会和高等数学专用"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

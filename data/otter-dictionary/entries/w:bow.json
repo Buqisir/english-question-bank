@@ -1,0 +1,302 @@
+{
+  "entryId": "w:bow",
+  "headword": "bow",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/baʊ/",
+    "us": "/baʊ/"
+  },
+  "audio": {
+    "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-2938-bow.mp3",
+    "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-2938-bow.mp3"
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bow#p-bend",
+      "ipa": {
+        "uk": "/baʊ/",
+        "us": "/baʊ/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-2938-bow.mp3",
+        "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-2938-bow.mp3"
+      },
+      "label": "鞠躬、船头等"
+    },
+    {
+      "pronunciationId": "w:bow#p-arch",
+      "ipa": {
+        "uk": "/bəʊ/",
+        "us": "/boʊ/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": "/dictionary-audio/wikimedia-v1/7ebf73db6fc048ed.mp3",
+        "us": null
+      },
+      "label": "弓、蝴蝶结等"
+    }
+  ],
+  "forms": [
+    {
+      "form": "BOWs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "BoWs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "bowed",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "bowing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "bows",
+      "tags": [
+        "plural",
+        "present",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 16
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:bow#s1",
+      "pos": "v.",
+      "glossZh": "弯身行礼；低头",
+      "pronunciationId": "w:bow#p-bend",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bow#e-7555e6ed6e29a4db",
+          "text": "With sparkling eyes, she bowed politely.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-09-first-quality-test",
+            "paperTitle": "重庆市高2026届高三第一次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2025-09-first-quality-test:cloze",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-09-first-quality-test:cloze:8",
+              "sentence": 4
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:bow#s3",
+      "pos": "n.",
+      "glossZh": "弓；用来拉奏弦乐器的弓子",
+      "pronunciationId": "w:bow#p-arch",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bow#e-6c48a202800caaf3",
+          "text": "Once, she helped me adjust my bow hold after a rehearsal (排练) and gave me an encouraging smile.",
+          "source": {
+            "paperId": "paper-mock-fujian-2026-04-provincial-quality-test-a1",
+            "paperTitle": "福建省2026届高中毕业班适应性考试英语（A1 组合版）",
+            "groupId": "group:paper-mock-fujian-2026-04-provincial-quality-test-a1:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-fujian-2026-04-provincial-quality-test-a1:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:bow#s4",
+      "pos": "n.",
+      "glossZh": "蝴蝶结",
+      "pronunciationId": "w:bow#p-arch",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bow#e-c476dab40d21c5b3",
+          "text": "Tearing open the paper, he found a heart-shaped box tied with a pink bow, filled with colorful candies along with a tiny card that read “Somebody misses you.”",
+          "source": {
+            "paperId": "paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test",
+            "paperTitle": "江苏省徐州、淮安、宿迁、连云港四地市2026届高三年级第一次调研测试英语试卷",
+            "groupId": "group:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-xuzhou-huaian-suqian-lianyungang-2026-01-senior-three-first-survey-test:writing-continuation:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:bow#e-9624431abf8f32fa",
+          "text": "On this Tuesday, a young girl with a bow (蝴蝶结) in her hair hovered nearby, watching attentively.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiyang-2026-04-joint-exam",
+            "paperTitle": "2026年4月稽阳联谊学校高三联考英语试卷",
+            "groupId": "group:paper-mock-zhejiang-jiyang-2026-04-joint-exam:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jiyang-2026-04-joint-exam:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:bow#s5",
+      "pos": "n.",
+      "glossZh": "船头",
+      "pronunciationId": "w:bow#p-bend",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bow#e-cd1b3d2653fe363f",
+          "text": "I was in the bow, paddling hard, focused on speed.",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:bow#e-c9ac21b5529923d8",
+          "text": "We ran to the bow of the boat to see what would happen.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2",
+            "paperTitle": "2025年12月嵊州市高(选)考科目适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-shengzhou-2025-12-gaokao-subject-adaptability-exam-v2:writing-continuation:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:bow#s6",
+      "pos": "n.",
+      "glossZh": "另一项本领（another string to one’s bow）",
+      "pronunciationId": "w:bow#p-arch",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bow#e-febaa7d06d3db51a",
+          "text": "Su Shi was a poet, politician and educator, but he had many other strings to his bow.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey",
+            "paperTitle": "苏州市2026届高三年级期初阳光调研试卷 英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:grammar-fill",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2025-09-senior-three-opening-survey:grammar-fill:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ],
+      "note": "多指一个人在主要本领之外还会做别的事。"
+    },
+    {
+      "senseId": "w:bow#s2",
+      "pos": "n.",
+      "glossZh": "鞠躬（take a bow）",
+      "pronunciationId": "w:bow#p-bend",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:bow#s7",
+      "pos": "v.",
+      "glossZh": "在重力、压力等作用下弯曲",
+      "pronunciationId": "w:bow#p-bend",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "航海测高仪；眼镜腿旧义",
+      "reason": "专业和少见用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

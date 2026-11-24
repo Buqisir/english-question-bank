@@ -1,0 +1,120 @@
+{
+  "entryId": "w:tofu",
+  "headword": "tofu",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [
+    "bean curd"
+  ],
+  "ipa": {
+    "uk": "/ˈtəʊfuː/",
+    "us": "/ˈtoʊfu/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:tofu#p-main",
+      "ipa": {
+        "uk": "/ˈtəʊfuː/",
+        "us": "/ˈtoʊfu/"
+      },
+      "ipaSource": "离线词典",
+      "audio": {
+        "uk": null,
+        "us": null
+      }
+    }
+  ],
+  "forms": [
+    {
+      "form": "tofus",
+      "tags": [
+        "plural"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 1,
+    "mock": 3
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:tofu#s1",
+      "pos": "n.",
+      "glossZh": "豆腐",
+      "pronunciationId": "w:tofu#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tofu#e-77c645c92abb8cf6",
+          "text": "Dandan noodles and mapo tofu are sure bets.",
+          "source": {
+            "paperId": "paper-gaokao-2026-ii",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国II卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-ii:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2026-ii:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:tofu#e-ed9ca92668176c9a",
+          "text": "Sandwiched between a pork stall and a tofu shop, my bookstore attracted barely any attention.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:reading-b:1",
+              "sentence": 4
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:tofu#e-d16a939bcbdbe1da",
+          "text": "The tofu vendor’s daughter, who had watched silently for weeks on end, finally stepped forward to borrow a comic.",
+          "source": {
+            "paperId": "paper-mock-zj-taizhou-2026-m2",
+            "paperTitle": "台州市2026届高三第二次教学质量评估试题",
+            "groupId": "group:paper-mock-zj-taizhou-2026-m2:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-taizhou-2026-m2:reading-b:3",
+              "sentence": 4
+            }
+          },
+          "tier": "mock"
+        }
+      ],
+      "note": "亦可称 bean curd。"
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "字体缺字时出现的方框；营销漏斗顶部缩写",
+      "reason": "排版行话和营销缩写"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

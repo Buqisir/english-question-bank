@@ -79,6 +79,18 @@ export function createPaperDictionaryRoutes() {
       const runtime = context.paperDictionary
       sendPrivateJson(response, 200, runtime.status())
     }),
+    defineRoute('GET', /^\/api\/paper-dictionary\/entry$/, ({ response, url, context }) => {
+      try {
+        const entry = context.paperDictionary.entry({
+          surface: url.searchParams.get('w'),
+          context,
+          userId: context.resolveDataUserId(context),
+        })
+        sendPrivateJson(response, entry ? 200 : 404, entry ?? { error: '该词暂未加入' })
+      } catch (error) {
+        sendPrivateJson(response, error.status || 500, { error: userMessage(error.code) })
+      }
+    }),
     defineRoute('POST', /^\/api\/paper-dictionary\/lookup$/, async ({ request, response, context }) => {
       const runtime = context.paperDictionary
       const requestId = randomUUID()

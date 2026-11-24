@@ -32,6 +32,8 @@ import { VocabularyPracticePage } from './features/vocabulary-practice/Vocabular
 import { VocabularyDictationWorkbench } from './features/vocabulary-dictation-workbench/VocabularyDictationWorkbench'
 import { VocabularyNotebookPage } from './features/vocabulary-notebook/VocabularyNotebookPage.tsx'
 import { AppTopbar, type AppTopbarNav } from './components/AppTopbar'
+import { DictionaryEntry } from './features/dictionary/DictionaryEntry'
+import { Surface } from './shared-ui/Surface'
 import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest, deleteDraftPaperItem, fetchCurrentDraftPaper } from './services/draftPapers'
 import { Button } from './shared-ui/Button.tsx'
 import { Dialog } from './shared-ui/Dialog.tsx'
@@ -57,6 +59,9 @@ function parseAppRoute(search = typeof window === 'undefined' ? '' : window.loca
     paperId: params.get('paperId'),
     draftPaperId: params.get('draftPaperId'),
     focusGroupId: params.get('focusGroupId'),
+    focusParagraphId: params.get('focusParagraphId'),
+    word: params.get('w'),
+    wordSense: params.get('wordSense'),
     questionId: params.get('questionId'),
     reviewRevision: params.get('reviewRevision'),
     lecture: params.get('lecture') === '1',
@@ -462,7 +467,7 @@ function App() {
     similar?: boolean
   }) => {
     navigate('paper-browse', {
-      paperId, focusGroupId: focusGroupId || null, questionId: options?.questionId || null,
+      paperId, focusGroupId: focusGroupId || null, focusParagraphId: null, questionId: options?.questionId || null,
       reviewRevision: null, groupId: null, lecture: options?.lecture ? '1' : null,
       similar: options?.lecture && options.similar ? '1' : null,
     })
@@ -494,7 +499,7 @@ function App() {
   )
 
   const paperBrowseOnBackToWorkbench = useCallback(() => {
-    navigate(null, { paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: null, similar: null }, { replace: true })
+    navigate(null, { paperId: null, focusGroupId: null, focusParagraphId: null, questionId: null, reviewRevision: null, lecture: null, similar: null, w: null, wordSense: null }, { replace: true })
   }, [navigate])
 
   const enterBrowse = useCallback(() => navigate('browse'), [navigate])
@@ -656,6 +661,22 @@ function App() {
     )
   }
 
+  if (route.view === 'word' && route.word) {
+    const source = appRouteUrl('paper-browse', { w: null, wordSense: null })
+    return (
+      <div className="app-shell">
+        <AppTopbar {...shellNav} variant="sub" pageTitle="獭獭词典" onBack={paperBrowseOnBackToWorkbench} />
+        <main className="otter-page">
+          <Surface variant="board" padding="md">
+            <DictionaryEntry key={route.word} density="full" word={route.word}
+              senseId={route.paperId ? route.wordSense : undefined}
+              returnHref={route.paperId ? `${source.pathname}${source.search}` : undefined} />
+          </Surface>
+        </main>
+      </div>
+    )
+  }
+
   if (route.view === 'paper-browse' && route.paperId) {
     return (
       <DraftAddContext.Provider value={draftAddActions}>
@@ -663,6 +684,7 @@ function App() {
         paperId={route.paperId}
         reviewRevision={route.reviewRevision}
         focusGroupId={route.focusGroupId}
+        focusParagraphId={route.focusParagraphId}
         questionId={route.questionId}
         lecture={route.lecture}
         similar={route.similar}

@@ -1,0 +1,467 @@
+{
+  "entryId": "w:bear",
+  "headword": "bear",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/beə(r)/",
+    "us": "/ber/"
+  },
+  "audio": {
+    "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-0388-bear.mp3",
+    "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-0388-bear.mp3"
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:bear#p-main",
+      "ipa": {
+        "uk": "/beə(r)/",
+        "us": "/ber/"
+      },
+      "ipaSource": "频序词表",
+      "audio": {
+        "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-0388-bear.mp3",
+        "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-0388-bear.mp3"
+      }
+    }
+  ],
+  "forms": [
+    {
+      "form": "beared",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "bearing",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "bears",
+      "tags": [
+        "plural",
+        "present",
+        "third-person"
+      ]
+    },
+    {
+      "form": "bore",
+      "tags": [
+        "participle",
+        "past",
+        "plural",
+        "third-person"
+      ]
+    },
+    {
+      "form": "born",
+      "tags": [
+        "participle",
+        "past",
+        "past participle"
+      ]
+    },
+    {
+      "form": "borne",
+      "tags": [
+        "participle",
+        "past",
+        "past participle"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 40,
+    "mock": 85
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 6
+  },
+  "senses": [
+    {
+      "senseId": "w:bear#s1",
+      "pos": "n.",
+      "glossZh": "熊；也可指玩具熊或熊形物品",
+      "pronunciationId": "w:bear#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 37,
+        "mock": 39
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bear#e-2e956af11a79aacc",
+          "text": "Taking pictures of polar bears is amazing but also dangerous.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:bear#e-3cbfcd207b366520",
+          "text": "The hungry bear followed his nose to our camp, which was surrounded by a high wire fence.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jul",
+            "paperTitle": "2020 年 7 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jul:writing-continuation",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jul:writing-continuation:6",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:bear#e-af5916c9737b745e",
+          "text": "The average bear, it seems, is getting ever smarter.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-d:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:bear#s4",
+      "pos": "v.",
+      "glossZh": "结出果实；取得成果（bear fruit）",
+      "pronunciationId": "w:bear#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bear#e-dfa8f2a5e4ab55c2",
+          "text": "That willpower bore fruit when Jennifer graduated from University of Wisconsin-Eau Claire and became the first in her large family to earn a bachelor's degree.",
+          "source": {
+            "paperId": "paper-gaokao-2020-i",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2020-i:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2020-i:reading-b:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:bear#e-620981f6e1965efe",
+          "text": "They bear a lot of fruit soon.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:listening.long-form",
+            "locator": {
+              "question": 15,
+              "questionId": "question:listening:15",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:bear#e-ce0afe1bfc9cca30",
+          "text": "A microconnection may bear lasting fruit.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:bear#s5",
+      "pos": "v.",
+      "glossZh": "表明；给某事作证（bear witness to）",
+      "pronunciationId": "w:bear#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 0
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bear#e-25bc237b75cbc76a",
+          "text": "It bore witness to her efforts.",
+          "source": {
+            "paperId": "paper-gaokao-2026-i",
+            "paperTitle": "2026年普通高等学校招生全国统一考试（全国I卷）英语学科试题卷",
+            "groupId": "group:paper-gaokao-2026-i:reading-b",
+            "locator": {
+              "question": 26,
+              "questionId": "question:paper-gaokao-2026-i:26",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:bear#s2",
+      "pos": "v.",
+      "glossZh": "承受痛苦或压力；承担责任及后果",
+      "pronunciationId": "w:bear#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 21
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bear#e-634474b7c94ec4cf",
+          "text": "The other writers at the workshops she attended criticized her work with a tone she couldn’t bear.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:bear#e-1d20270383e94d65",
+          "text": "Needing a practice spot for his team, Douglas sought casino（赌场）owner William Roach’s permission to use the dance floor before late-night dancing, offering to cover team costs and bear all financial risk.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:bear#e-0f6c5c363f36edb5",
+          "text": "Did you fear it was too much to bear?",
+          "source": {
+            "paperId": "paper-mock-zj-qiangji-2026-mar",
+            "paperTitle": "浙江强基联盟2026年3月高三联考",
+            "groupId": "group:paper-mock-zj-qiangji-2026-mar:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zj-qiangji-2026-mar:reading-b:5",
+              "sentence": 4
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:bear#s3",
+      "pos": "v.",
+      "glossZh": "带有标记、特征等；载着某物",
+      "pronunciationId": "w:bear#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 14
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bear#e-1fd8251bf4c7bf5e",
+          "text": "Just behind the lamp post was an old sign, made of thick iron, bearing the name.",
+          "source": {
+            "paperId": "paper-hz-2026-apr-gaosan-quality",
+            "paperTitle": "2025学年第二学期杭州市高三年级教学质量检测",
+            "groupId": "group:paper-hz-2026-apr-gaosan-quality:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-hz-2026-apr-gaosan-quality:seven-choices:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:bear#e-5571d889aa2fb312",
+          "text": "He matured into a confident, tough young man, bearing the small scars of a normal childhood.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:bear#e-6ca977c0a20ccc48",
+          "text": "As his longtime friend John Etchemendy noted, “Hundreds of projects bear his mark, yet rarely his name.”",
+          "source": {
+            "paperId": "paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2",
+            "paperTitle": "2025-2026学年德州市“优高联盟”高三上学期期中诊断性测试 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-dezhou-yougao-alliance-2025-11-senior-three-midterm-diagnostic-test-v2:reading-b:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:bear#s6",
+      "pos": "v.",
+      "glossZh": "托住；承受重量",
+      "pronunciationId": "w:bear#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bear#e-581ecafb55c276e8",
+          "text": "The wings must be small enough to reduce drag and strong enough to bear the boat’s weight.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:bear#s7",
+      "pos": "v.",
+      "glossZh": "记住；把某事考虑进去（bear in mind）",
+      "pronunciationId": "w:bear#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bear#e-467f2af075fbcba3",
+          "text": "Despite these considerations, it’s worth bearing in mind the courses of action we mentally rehearse （彩排）.",
+          "source": {
+            "paperId": "paper-mock-shandong-weifang-2025-09-senior-three-opening-survey",
+            "paperTitle": "2025年9月潍坊市高三上学期开学调研监测考试 英语试题",
+            "groupId": "group:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-weifang-2025-09-senior-three-opening-survey:reading-c:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:bear#s9",
+      "pos": "v.",
+      "glossZh": "朝某人或某处逼近；猛烈来袭（bear down）",
+      "pronunciationId": "w:bear#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:bear#e-3e3112f2ec609878",
+          "text": "Days earlier, as the worst winter storm in decades bore down, Yvonne had repeatedly warned Joey not to leave his group home.",
+          "source": {
+            "paperId": "paper-mock-zj-jinliqu-2026-mar-m2",
+            "paperTitle": "金丽衢十二校2025-2026学年高三第二次联考",
+            "groupId": "group:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zj-jinliqu-2026-mar-m2:writing-continuation:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:bear#s8",
+      "pos": "v.",
+      "glossZh": "出生；生育（过去分词常用 born 或 borne）",
+      "pronunciationId": "w:bear#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": [],
+      "note": "born 用于 be born，borne 用于其他被动或完成用法。"
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "雷诺曼牌名；美国州警察俚称",
+      "reason": "牌戏和地区俚语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

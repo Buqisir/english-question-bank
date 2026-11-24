@@ -1,0 +1,177 @@
+{
+  "entryId": "w:drone",
+  "headword": "drone",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/dɹəʊn/",
+    "us": "/dɹoʊn/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:drone#p-main",
+      "ipa": {
+        "uk": "/dɹəʊn/",
+        "us": "/dɹoʊn/"
+      },
+      "ipaSource": "离线词典",
+      "audio": {
+        "uk": null,
+        "us": null
+      }
+    }
+  ],
+  "forms": [
+    {
+      "form": "Drones",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "droned",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "drones",
+      "tags": [
+        "plural",
+        "present",
+        "third-person"
+      ]
+    },
+    {
+      "form": "droning",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 18,
+    "mock": 20
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 0
+  },
+  "senses": [
+    {
+      "senseId": "w:drone#s1",
+      "pos": "n.",
+      "glossZh": "无人机",
+      "pronunciationId": "w:drone#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 18,
+        "mock": 20
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:drone#e-e220be64b35f2140",
+          "text": "Drones are already being used to examine high-tension electrical lines.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:drone#e-9204e3e257b3550b",
+          "text": "Very small drones with advanced sensors and AI and travelling ahead of the train could guide it like a co-pilot.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:4",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:drone#e-351884e7842fc026",
+          "text": "Can a small group of drones（无人机）guarantee the safety and reliability of railways and, at the same time, help railway operators save billions of euros each year?",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-b",
+            "paperTitle": "2022 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2022-national-b:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2022-national-b:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:drone#s2",
+      "pos": "n.",
+      "glossZh": "雄蜂",
+      "pronunciationId": "w:drone#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:drone#s3",
+      "pos": "n.",
+      "glossZh": "持续的低沉嗡嗡声",
+      "pronunciationId": "w:drone#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:drone#s4",
+      "pos": "v.",
+      "glossZh": "持续发出低沉的嗡嗡声，或单调地说个不停",
+      "pronunciationId": "w:drone#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "风笛持续音管；地区面包车旧称",
+      "reason": "乐器专门义和地区用语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

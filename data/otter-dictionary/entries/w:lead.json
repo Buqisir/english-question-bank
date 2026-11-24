@@ -1,0 +1,570 @@
+{
+  "entryId": "w:lead",
+  "headword": "lead",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/liːd/",
+    "us": "/liːd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:lead#p-guide",
+      "ipa": {
+        "uk": "/liːd/",
+        "us": "/liːd/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "label": "带领、领先等"
+    },
+    {
+      "pronunciationId": "w:lead#p-metal",
+      "ipa": {
+        "uk": "/led/",
+        "us": "/led/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "label": "金属铅",
+      "needsCheck": [
+        "uk",
+        "us"
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "form": "leaded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "leading",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "leads",
+      "tags": [
+        "plural",
+        "present",
+        "third-person"
+      ]
+    },
+    {
+      "form": "led",
+      "tags": [
+        "participle",
+        "past",
+        "plural",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 62,
+    "mock": 542
+  },
+  "unassignedCounts": {
+    "gaokao": 3,
+    "mock": 11
+  },
+  "senses": [
+    {
+      "senseId": "w:lead#s1",
+      "pos": "v.",
+      "glossZh": "造成；使某种变化发生，或促使某人采取行动",
+      "pronunciationId": "w:lead#p-guide",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 33,
+        "mock": 308
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lead#e-960c7fcd05d13246",
+          "text": "A key finding is that over time, children raised by an authoritative father were significantly more likely to develop persistence, which leads to better outcomes in school.",
+          "source": {
+            "paperId": "paper-gaokao-2020-zhejiang-jan",
+            "paperTitle": "2020 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2020-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2020-zhejiang-jan:reading-c:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:lead#e-b676e2797f882329",
+          "text": "Failure can lead to progress.",
+          "source": {
+            "paperId": "paper-gaokao-2020-ii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2020-ii:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-gaokao-2020-ii:30",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:lead#e-7098ca5f994f9c8e",
+          "text": "What has led to the biases according to the study?",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "question": 34,
+              "questionId": "question:paper-gaokao-2024-i:34",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:lead#s3",
+      "pos": "v.",
+      "glossZh": "负责、带领一个团队；带头或领先",
+      "pronunciationId": "w:lead#p-guide",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 92
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lead#e-33e3d40fc827efdd",
+          "text": "Dr Catherine Hobaiter, who led the research, said that this was the only form of intentional communication to be recorded in the animal kingdom.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:lead#e-d4094d44b17fd83d",
+          "text": "Louise Hartley, who is leading the Tiny Forest project in the UK, explains that the process begins by identifying areas in which a tiny forest could have the biggest influence.",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jun",
+            "paperTitle": "2022 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jun:reading-b:4",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:lead#e-66d48a9815999ce0",
+          "text": "So here is my advice: Lead by action.",
+          "source": {
+            "paperId": "paper-gaokao-2023-zhejiang-jan",
+            "paperTitle": "2023年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2023-zhejiang-jan:reading-b",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-gaokao-2023-zhejiang-jan:reading-b:7",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:lead#s2",
+      "pos": "v.",
+      "glossZh": "带路、领到某处；通向某地",
+      "pronunciationId": "w:lead#p-guide",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 34
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lead#e-45f3e79298fe02f9",
+          "text": "On each floor, hallways stretched in four directions, leading to classrooms, laboratories, and teachers’ offices.",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:writing-continuation:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:lead#e-23bf46be42ffc89b",
+          "text": "Note also the facts important for your purpose as well as anything which leads you to further research.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2021-ii:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:lead#e-1140ba94415efd3e",
+          "text": "The doorway to peace and quiet, for Nick Bright at least, leads straight to his mother-in-law, she lives on the ground floor, while he lives upstairs with his wife and their two daughters.",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:lead#s4",
+      "pos": "adj.",
+      "glossZh": "主要的；处于领先地位的",
+      "pronunciationId": "w:lead#p-guide",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 4,
+        "mock": 82
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lead#e-3cf7ba3a4106bcbc",
+          "text": "Students will experience college-level courses given by some of our college’s leading experts and will receive written feedback（反馈）on their work at the end of the course.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:reading-a",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:lead#e-80a5b172b09b28b8",
+          "text": "Lead researcher Dr. Helena Horder, of the University of Gothenburg in Sweden, said: “These findings are exciting because it’s possible that improving people’s cardiovascular(心血管的) fitness in middle age could delay or even prevent them from developing dementia.”",
+          "source": {
+            "paperId": "paper-gaokao-2022-zhejiang-jan",
+            "paperTitle": "2022年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2022-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2022-zhejiang-jan:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:lead#e-2adfbbae8b43b96d",
+          "text": "He is a star actor of Children’s Theatre, having played leading roles in “The Legend of Sleepy Hollow” and “The Wizard of Oz,” and is fresh from Jersey Production “Ragtime.”",
+          "source": {
+            "paperId": "paper-gaokao-2024-zhejiang-jan",
+            "paperTitle": "2024年1月浙江高考英语",
+            "groupId": "group:paper-gaokao-2024-zhejiang-jan:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:lead#s5",
+      "pos": "n.",
+      "glossZh": "领先位置；带头行动；供别人跟随的做法",
+      "pronunciationId": "w:lead#p-guide",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lead#e-3e57505e491e22e3",
+          "text": "Captain Oliver even sent him to the bench, saying he’d put him in after they took the lead.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam",
+            "paperTitle": "杭州学军中学2026年1月高考考前适应性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-xuejun-2025-12-gaokao-adaptability-exam:writing-continuation:4",
+              "sentence": 5
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:lead#e-3568a38af306f914",
+          "text": "Let your child take the lead, but work together as a family to explore designing and creating.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey",
+            "paperTitle": "苏州市2025-2026学年第一学期学业质量阳光指标调研卷 高三英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-a",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-suzhou-2026-01-senior-three-sunshine-survey:reading-a:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:lead#e-55f390419df30c41",
+          "text": "This past year I talked with him about setting aside a time when I would just follow his lead in play, when he would get to decide what happened and how it happened.",
+          "source": {
+            "paperId": "paper-mock-zj-jinhua-2026-apr-m2",
+            "paperTitle": "金华十校2026年4月高三模拟考试",
+            "groupId": "group:paper-mock-zj-jinhua-2026-apr-m2:reading-b",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-zj-jinhua-2026-apr-m2:reading-b:1",
+              "sentence": 5
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:lead#s6",
+      "pos": "n.",
+      "glossZh": "主演；主要负责人",
+      "pronunciationId": "w:lead#p-guide",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 4
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lead#e-137793e214f25a09",
+          "text": "Joanna Ampil takes the stage as Carlotta, the second female lead.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-a:8",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:lead#e-606e6e7dfc348e86",
+          "text": "Lily Kerhoas plays Christine Daaé, Dean Chisnall plays the Phantom, and Adam Rhys-Charles plays Raou, the second male lead.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量检测（二）英语试卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-a",
+            "locator": {
+              "paragraph": 8,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2026-04-second-teaching-quality-test:reading-a:8",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:lead#s7",
+      "pos": "v.",
+      "glossZh": "过某种生活（lead a life）",
+      "pronunciationId": "w:lead#p-guide",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lead#e-dba8324ae0eb7990",
+          "text": "Being with friends brings a feel-good sensation to help us lead longer happier lives.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2026-04-seventh-quality-test",
+            "paperTitle": "重庆市高2026届高三第七次质量检测",
+            "groupId": "group:paper-mock-cq-nankai-2026-04-seventh-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-cq-nankai-2026-04-seventh-quality-test:seven-choices:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:lead#e-49e9126bee49e0dc",
+          "text": "This can feel annoying when you want to lead your own life and make your own choices.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test",
+            "paperTitle": "2025-2026学年第一学期杭州市高三年级教学质量检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2025-11-first-semester-teaching-quality-test:seven-choices:7",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:lead#s8",
+      "pos": "n.",
+      "glossZh": "铅，一种金属",
+      "pronunciationId": "w:lead#p-metal",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:lead#e-f9595a23cee6c42a",
+          "text": "In order to make their skin look white, ancient people directly applied highly toxic lead powder to the face.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam",
+            "paperTitle": "Z20⁺名校联盟（浙江省名校新高考研究联盟）2026届高三第二次联考英语试题",
+            "groupId": "group:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:grammar-fill",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-zhejiang-z20-alliance-2025-12-senior-three-second-joint-exam:grammar-fill:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:lead#e-f58f45375570c9f2",
+          "text": "Waste electronics contain harmful substances like lead and mercury, posing serious environmental and health risks.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-03-first-simulation-exam",
+            "paperTitle": "泉州市2026届高中毕业班模拟考试（一）高三英语",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-a",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-03-first-simulation-exam:reading-a:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:lead#e-46da23b973be2937",
+          "text": "With a surface hot enough to melt lead in its atmosphere, Venus has been described as “Earth's evil twin” – similar in size, yet worlds apart.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam",
+            "paperTitle": "2025~2026学年度武汉市部分学校高三年级九月调研考试",
+            "groupId": "group:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2025-09-senior-three-september-survey-exam:reading-c:1",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:lead#s9",
+      "pos": "n.",
+      "glossZh": "线索；可继续追查的信息",
+      "pronunciationId": "w:lead#p-guide",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:lead#s10",
+      "pos": "n.",
+      "glossZh": "遛狗用的牵引绳",
+      "pronunciationId": "w:lead#p-guide",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "排字铅条；蒸汽机阀门提前开启量",
+      "reason": "印刷和机械专门用语"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

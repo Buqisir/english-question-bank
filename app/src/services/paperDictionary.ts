@@ -76,6 +76,52 @@ export type PaperDictionaryResponse = {
   truncated: boolean
   omittedSenseCount?: number
   attribution: string
+  otter?: OtterEntry | null
+  otterSenseId?: string | null
+}
+
+type WordCounts = { gaokao: number; mock: number }
+type Accents = { uk: string | null; us: string | null }
+
+export type OtterExample = {
+  exampleId: string
+  text: string
+  zh?: string
+  source: {
+    paperId: string
+    paperTitle: string
+    groupId: string
+    locator: { paragraphId?: string; questionId?: string }
+  }
+}
+
+export type OtterSense = {
+  senseId: string
+  pos: string
+  glossZh: string
+  pronunciationId: string
+  origin: 'gaokao' | 'mock' | 'dictionary'
+  counts: WordCounts
+  folded: boolean
+  examples: OtterExample[]
+}
+
+export type OtterEntry = {
+  entryId: string
+  headword: string
+  lists: string[]
+  variants: string[]
+  forms: { form: string }[]
+  pronunciations: { pronunciationId: string; ipa: Accents; audio: Accents; label?: string }[]
+  counts: WordCounts
+  senses: OtterSense[]
+}
+
+export async function fetchOtterEntry(word: string, signal: AbortSignal): Promise<OtterEntry | null> {
+  const response = await fetch(`/api/paper-dictionary/entry?${new URLSearchParams({ w: word })}`, { signal })
+  if (response.status === 404) return null
+  if (!response.ok) throw await errorFromResponse(response, '词条加载失败')
+  return response.json()
 }
 
 export async function fetchPaperDictionaryStatus(

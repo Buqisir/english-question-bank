@@ -1,0 +1,377 @@
+{
+  "entryId": "w:minute",
+  "headword": "minute",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈmɪnɪt/",
+    "us": "/ˈmɪnɪt/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:minute#p-time",
+      "ipa": {
+        "uk": "/ˈmɪnɪt/",
+        "us": "/ˈmɪnɪt/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "label": "表示时间或会议纪要"
+    },
+    {
+      "pronunciationId": "w:minute#p-tiny",
+      "ipa": {
+        "uk": "/maɪˈnjuːt/",
+        "us": "/maɪˈnuːt/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "label": "极小的"
+    }
+  ],
+  "forms": [
+    {
+      "form": "minuted",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "minuter",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "minutes",
+      "tags": [
+        "plural",
+        "present",
+        "third-person"
+      ]
+    },
+    {
+      "form": "minutest",
+      "tags": [
+        "superlative"
+      ]
+    },
+    {
+      "form": "minuting",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "more minute",
+      "tags": [
+        "comparative"
+      ]
+    },
+    {
+      "form": "most minute",
+      "tags": [
+        "superlative"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 53,
+    "mock": 373
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:minute#s1",
+      "pos": "n.",
+      "glossZh": "分钟；一段时间的长度",
+      "pronunciationId": "w:minute#p-time",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 53,
+        "mock": 357
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:minute#e-c3b2bcc82feee968",
+          "text": "“Just five more minutes outdoors can make a difference,” David Bond says.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jun",
+            "paperTitle": "2021 年 6 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jun:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jun:reading-b:3",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:minute#e-10d4a872844e2241",
+          "text": "She was back in 15 minutes.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-eight-provinces-jan:writing-continuation:4",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:minute#e-76d92b17cb6d5a2f",
+          "text": "That lasted about ten minutes.",
+          "source": {
+            "paperId": "paper-gaokao-2022-i",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（新高考Ⅰ卷）",
+            "groupId": "group:paper-gaokao-2022-i:cloze",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "cloze-2",
+              "sentence": 5
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:minute#s2",
+      "pos": "n.",
+      "glossZh": "一小会儿；片刻",
+      "pronunciationId": "w:minute#p-time",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:minute#e-cf6f9ccc2b560b0c",
+          "text": "He thought for a minute.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline",
+            "paperTitle": "济南市2025—2026学年高中三年级上学期开学摸底考试 英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:writing-continuation",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2025-09-senior-three-opening-baseline:writing-continuation:3",
+              "sentence": 10
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:minute#e-42401e8aeed3c4f7",
+          "text": "If you’ve misplaced something, give your brain a minute or two.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-hangzhou-2026-05-adaptability-test",
+            "paperTitle": "杭州第二中学2026年5月高三年级适应性检测英语学科试题卷",
+            "groupId": "group:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:seven-choices",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-hangzhou-2026-05-adaptability-test:seven-choices:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:minute#e-f6c25de028d5f3a1",
+          "text": "Oren stood there for a minute, staring at a rotting peach on the ground.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test",
+            "paperTitle": "浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）",
+            "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-zhenhai-2026-05-gaokao-mock-test:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:minute#s6",
+      "pos": "n.",
+      "glossZh": "最后一刻（the last minute）",
+      "pronunciationId": "w:minute#p-time",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:minute#e-3db02b9289a4dbdf",
+          "text": "There are many reasons we wait until the last minute to do what we should have done days, weeks, or months ago.",
+          "source": {
+            "paperId": "paper-mock-cq-nankai-2025-12-fourth-quality-test",
+            "paperTitle": "重庆市高2026届高三第四次质量检测 英语",
+            "groupId": "group:paper-mock-cq-nankai-2025-12-fourth-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-cq-nankai-2025-12-fourth-quality-test:seven-choices:2",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:minute#e-c0e24b4520635b7c",
+          "text": "Leave them all to the last minute.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam",
+            "paperTitle": "2025学年第一学期浙江省精诚联盟适应性联考 高三英语",
+            "groupId": "group:paper-mock-zhejiang-jingcheng-alliance-2025-12-senior-three-adaptability-joint-exam:listening.long-form",
+            "locator": {
+              "question": 13,
+              "questionId": "question:listening:13",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:minute#e-af89cca7f749ce1e",
+          "text": "Register for the race at the last minute.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm",
+            "paperTitle": "江苏省苏州市2025-2026学年第一学期高三期中考试英语",
+            "groupId": "group:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:reading-a",
+            "locator": {
+              "question": 22,
+              "questionId": "question:paper-mock-jiangsu-suzhou-2025-11-senior-three-first-semester-midterm:22",
+              "option": "D",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:minute#s3",
+      "pos": "adj.",
+      "glossZh": "极小的；细微到很难看见的",
+      "pronunciationId": "w:minute#p-tiny",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:minute#e-e34d470d68816ad3",
+          "text": "This research helps us understand that individual differences, even minute ones, can lead to unique strengths and successes.",
+          "source": {
+            "paperId": "paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam",
+            "paperTitle": "湖北十一校2026届高三三月月考英语试题",
+            "groupId": "group:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hubei-eleven-schools-2026-03-senior-three-march-monthly-exam:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:minute#e-7591ad0827bee787",
+          "text": "Scientists have found that human breath contains a variety of minute chemical substances known as volatile organic compounds (VOCs).",
+          "source": {
+            "paperId": "paper-mock-shandong-zibo-2026-03-first",
+            "paperTitle": "淄博市2025-2026学年度高三模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zibo-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-zibo-2026-03-first:reading-a:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:minute#e-f71c49e5648abedd",
+          "text": "Yet underwater tracking of minute species like the endangered delta smelt, a silvery fish about 2.5 inches long, is seriously restricted.",
+          "source": {
+            "paperId": "paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis",
+            "paperTitle": "烟台市2025—2026学年度第一学期期末学业质量水平诊断 高三英语",
+            "groupId": "group:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-shandong-yantai-2026-01-senior-three-first-semester-final-academic-quality-diagnosis:reading-c:2",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        }
+      ],
+      "note": "这个义项重音在第二个音节。"
+    },
+    {
+      "senseId": "w:minute#s4",
+      "pos": "n.",
+      "glossZh": "一……就……（the minute）",
+      "pronunciationId": "w:minute#p-time",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": []
+    },
+    {
+      "senseId": "w:minute#s5",
+      "pos": "n.",
+      "glossZh": "会议纪要（复数 minutes）",
+      "pronunciationId": "w:minute#p-time",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "旧币名；地理英里的旧义",
+      "reason": "历史计量用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

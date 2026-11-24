@@ -1,0 +1,246 @@
+{
+  "entryId": "w:yield",
+  "headword": "yield",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/jiːld/",
+    "us": "/jiːld/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:yield#p-main",
+      "ipa": {
+        "uk": "/jiːld/",
+        "us": "/jiːld/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      }
+    }
+  ],
+  "forms": [
+    {
+      "form": "yielded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "yielding",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "yields",
+      "tags": [
+        "plural",
+        "present",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 0,
+    "mock": 36
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 5
+  },
+  "senses": [
+    {
+      "senseId": "w:yield#s1",
+      "pos": "v.",
+      "glossZh": "产生结果；出产某种东西",
+      "pronunciationId": "w:yield#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 15
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:yield#e-af47457748674ab2",
+          "text": "The Glasgow pilot has already yielded promising results.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam",
+            "paperTitle": "浙江强基联盟2025年12月高三联考 英语",
+            "groupId": "group:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-c",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-zhejiang-qiangji-alliance-2025-12-senior-three-joint-exam:reading-c:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:yield#e-e6ea66a9a374e850",
+          "text": "This “carbon avoidance” strategy yielded the greatest benefit.",
+          "source": {
+            "paperId": "paper-mock-shandong-zaozhuang-2026-05-third-mock",
+            "paperTitle": "枣庄市2026届高三第三次模拟考试英语试题",
+            "groupId": "group:paper-mock-shandong-zaozhuang-2026-05-third-mock:reading-c",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-zaozhuang-2026-05-third-mock:reading-c:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:yield#e-5696e9ce09fe72f0",
+          "text": "Research shows that balancing familiar routines with new experiences yields the best results.",
+          "source": {
+            "paperId": "paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test",
+            "paperTitle": "「江南十校」2026届高三综合素质检测英语试题卷",
+            "groupId": "group:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:seven-choices",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-anhui-jiangnan-ten-schools-2026-march-senior-three-comprehensive-quality-test:seven-choices:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:yield#s2",
+      "pos": "n.",
+      "glossZh": "产量；收益",
+      "pronunciationId": "w:yield#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 15
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:yield#e-8dbd9085bb0025a0",
+          "text": "Coupled with weak management, fields often had more weeds than rice, so yields were naturally low.”",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-05-third",
+            "paperTitle": "济南市2026届高三针对性训练英语试题",
+            "groupId": "group:paper-mock-shandong-jinan-2026-05-third:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-05-third:reading-b:3",
+              "sentence": 5
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:yield#e-a0f34b717f33d74c",
+          "text": "Kimani’s innovation has already impacted thousands of farmers, 78% of whom have reported a yield increase of over 36%.",
+          "source": {
+            "paperId": "paper-mock-henan-zhengzhou-2026-04-second",
+            "paperTitle": "郑州市2026年高中毕业年级第二次质量预测英语试题",
+            "groupId": "group:paper-mock-henan-zhengzhou-2026-04-second:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-henan-zhengzhou-2026-04-second:reading-b:5",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:yield#e-68e6c1020c82ef08",
+          "text": "Saroni’s farm serves as a testament to the fact that sustainable practices can lead to both high yield and superior quality.",
+          "source": {
+            "paperId": "paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test",
+            "paperTitle": "山东名校考试联盟2025—2026学年高三年级上学期期中检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-shandong-prestigious-school-alliance-2025-11-senior-three-midterm-test:reading-b:5",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:yield#s3",
+      "pos": "v.",
+      "glossZh": "让步、屈服；交出控制权",
+      "pronunciationId": "w:yield#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 1
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:yield#e-ef30d67556475df9",
+          "text": "Before we yield our cognitive development to screens and algorithms, we must carefully consider what we might be sacrificing.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-d",
+            "locator": {
+              "paragraph": 6,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-d:6",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:yield#s4",
+      "pos": "v.",
+      "glossZh": "让行",
+      "pronunciationId": "w:yield#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    },
+    {
+      "senseId": "w:yield#s5",
+      "pos": "v.",
+      "glossZh": "在压力下弯曲或松开",
+      "pronunciationId": "w:yield#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "让出处理器；古义贡金",
+      "reason": "计算机专门义和古旧用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

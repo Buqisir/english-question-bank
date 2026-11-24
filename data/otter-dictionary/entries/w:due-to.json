@@ -1,0 +1,154 @@
+{
+  "entryId": "w:due-to",
+  "headword": "due to",
+  "kind": "phrase",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/djuː tuː/",
+    "us": "/duː tuː/"
+  },
+  "audio": {
+    "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-1234-due-to.mp3",
+    "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-1234-due-to.mp3"
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:due-to#p-main",
+      "ipa": {
+        "uk": "/djuː tuː/",
+        "us": "/duː tuː/"
+      },
+      "ipaSource": "频序词表",
+      "audio": {
+        "uk": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-gb-d-v1/gaokao-frequency-1234-due-to.mp3",
+        "us": "/vocabulary-assets/gaokao-frequency-v1/audio/google-neural2-us-c-v1/gaokao-frequency-1234-due-to.mp3"
+      }
+    }
+  ],
+  "forms": [],
+  "counts": {
+    "gaokao": 7,
+    "mock": 130
+  },
+  "unassignedCounts": {
+    "gaokao": 1,
+    "mock": 1
+  },
+  "senses": [
+    {
+      "senseId": "w:due-to#s1",
+      "pos": "prep.",
+      "glossZh": "因为；由于",
+      "pronunciationId": "w:due-to#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 6,
+        "mock": 126
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:due-to#e-90bd42662fcd7f92",
+          "text": "Due to a big storm, my flight had been delayed by an hour and a half.",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2024-i:writing-continuation:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:due-to#e-867a338d867b2bea",
+          "text": "Both efforts were overturned due to lawsuits from conservation groups.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-a",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2023-national-a:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2023-national-a:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:due-to#e-b9b4ed73e567191c",
+          "text": "Things quickly got very intense due to the huge amount of energy required to look after them.",
+          "source": {
+            "paperId": "paper-gaokao-2021-ii",
+            "paperTitle": "2021年普通高等学校招生全国统一考试（新高考Ⅱ）英语试题",
+            "groupId": "group:paper-gaokao-2021-ii:reading-b",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-gaokao-2021-ii:reading-b:4",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:due-to#s2",
+      "pos": "adj. + to",
+      "glossZh": "按安排将要；预计会（be due to do）",
+      "pronunciationId": "w:due-to#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:due-to#e-8e25a9959f1d62d6",
+          "text": "Two days before Mr. Somerset was due to return, Jorge was out on a horse seeking out a sheep that had wandered away.",
+          "source": {
+            "paperId": "paper-mock-zhejiang-zhuji-2025-12-first",
+            "paperTitle": "诸暨市2025年12月高三诊断性考试英语试题",
+            "groupId": "group:paper-mock-zhejiang-zhuji-2025-12-first:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-zhejiang-zhuji-2025-12-first:writing-continuation:7",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:due-to#e-a77827396681d65d",
+          "text": "The protest comes just a week before the UK government is due to publish an economic impact assessment of proposed changes to copyright law.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-2026-05-second-mock-exam",
+            "paperTitle": "南京市2026届高三年级第二次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-2026-05-second-mock-exam:reading-d:4",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "归某项债务到期应付给某人",
+      "reason": "特定账务构式"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

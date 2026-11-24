@@ -1,0 +1,405 @@
+{
+  "entryId": "w:tap",
+  "headword": "tap",
+  "kind": "word",
+  "lists": [
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/tæp/",
+    "us": "/tæp/"
+  },
+  "audio": {
+    "uk": null,
+    "us": "/dictionary-audio/wikimedia-v1/8486e2582e861a9e.mp3"
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:tap#p-main",
+      "ipa": {
+        "uk": "/tæp/",
+        "us": "/tæp/"
+      },
+      "ipaSource": "离线词典",
+      "audio": {
+        "uk": null,
+        "us": "/dictionary-audio/wikimedia-v1/8486e2582e861a9e.mp3"
+      }
+    }
+  ],
+  "forms": [
+    {
+      "form": "TAPs",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "tapped",
+      "tags": [
+        "participle",
+        "past",
+        "plural",
+        "third-person"
+      ]
+    },
+    {
+      "form": "tapping",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "taps",
+      "tags": [
+        "plural",
+        "present",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 3,
+    "mock": 38
+  },
+  "unassignedCounts": {
+    "gaokao": 0,
+    "mock": 3
+  },
+  "senses": [
+    {
+      "senseId": "w:tap#s1",
+      "pos": "n.",
+      "glossZh": "水龙头",
+      "pronunciationId": "w:tap#p-main",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 3,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tap#e-77471a8764c4e218",
+          "text": "Now, new research suggests that a simple, cheap measure may significantly reduce the level of microplastics in water from your tap（水龙头）: boiling and filtering（过滤）it.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:tap#e-a421faf8ba89a400",
+          "text": "In a study published Wednesday in Environmental Science & Technology Letters, researchers from China found that boiling tap water for just five minutes – then filtering it after it cools – could remove at least 80 percent of its microplastics.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:2",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:tap#e-d1116668b714c3eb",
+          "text": "The new study suggests boiling tap water could be a tool to limit intake.",
+          "source": {
+            "paperId": "paper-gaokao-2025-i",
+            "paperTitle": "2025年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2025-i:reading-d",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-gaokao-2025-i:reading-d:5",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:tap#s3",
+      "pos": "v.",
+      "glossZh": "在屏幕上点按；用卡片或手机碰一下感应处",
+      "pronunciationId": "w:tap#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 11
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tap#e-c681ec648ea64327",
+          "text": "Judy tapped “join” on the screen, her only motivation being the extra credits.",
+          "source": {
+            "paperId": "paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam",
+            "paperTitle": "2026届武汉市高三五月调研考试英语试题卷",
+            "groupId": "group:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-hubei-wuhan-2026-05-senior-three-may-survey-exam:writing-continuation:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:tap#e-f004a1b60d9c578c",
+          "text": "Tap the screen.",
+          "source": {
+            "paperId": "paper-mock-fujian-xiamen-2026-05-third-adaptability-exam",
+            "paperTitle": "厦门市2026届高中毕业班适应性练习 英语试题",
+            "groupId": "group:paper-mock-fujian-xiamen-2026-05-third-adaptability-exam:listening.long-form",
+            "locator": {
+              "question": 12,
+              "questionId": "question:listening:12",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:tap#e-ec1ab13204613e23",
+          "text": "Tap the three dots from the shopping list and you’re sorted.",
+          "source": {
+            "paperId": "paper-mock-jiangsu-nanjing-yancheng-2026-03-first",
+            "paperTitle": "南京市、盐城市2026届高三年级第一次模拟考试英语试题",
+            "groupId": "group:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-a",
+            "locator": {
+              "paragraph": 9,
+              "paragraphId": "block:paper-mock-jiangsu-nanjing-yancheng-2026-03-first:reading-a:9",
+              "sentence": 4
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:tap#s4",
+      "pos": "v.",
+      "glossZh": "利用现有资源或发掘潜力（常用 tap into）",
+      "pronunciationId": "w:tap#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 10
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tap#e-ade14d08a985cbc7",
+          "text": "Now, researchers from the National University of Singapore (NUS) have tapped into this effect to generate electricity using rain-like droplets.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:tap#e-0f90f268296319fb",
+          "text": "They fail to tap into participants’ potential.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n085",
+            "paperTitle": "苏北七市（南通 泰州 扬州 淮安 徐州 宿迁 连云港）2026届高三第二次调研测试 英语试题卷",
+            "groupId": "group:paper-mock-import-20261026-n085:reading-c",
+            "locator": {
+              "question": 30,
+              "questionId": "question:paper-mock-import-20261026-n085:30",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:tap#e-408e1c98d65da816",
+          "text": "This addiction taps into a fundamental human need.",
+          "source": {
+            "paperId": "paper-mock-import-20261026-n093",
+            "paperTitle": "2026年普通高等学校招生全国统一考试(临沂市模拟)英语",
+            "groupId": "group:paper-mock-import-20261026-n093:seven-choices",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-mock-import-20261026-n093:seven-choices:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:tap#s2",
+      "pos": "v.",
+      "glossZh": "用手指、工具等轻敲或轻拍",
+      "pronunciationId": "w:tap#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 7
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tap#e-0a6f3246dd384d46",
+          "text": "She tapped her head with a soft laugh.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-03-first-adaptive-test",
+            "paperTitle": "青岛市2026年高三年级第一次适应性检测英语试题",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:writing-continuation",
+            "locator": {
+              "paragraph": 7,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-03-first-adaptive-test:writing-continuation:7",
+              "sentence": 7
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:tap#e-9e621a063e0d71b1",
+          "text": "Just as she was clouded in her own disappointment, Ethan gently tapped her on the shoulder, pulling her from her thoughts.",
+          "source": {
+            "paperId": "paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test",
+            "paperTitle": "石家庄市2026届普通高中学校毕业年级教学质量摸底检测 英语学科 试题卷",
+            "groupId": "group:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:writing-continuation",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-hebei-shijiazhuang-2025-11-senior-three-teaching-quality-baseline-test:writing-continuation:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:tap#e-24bc604eb3d06e3c",
+          "text": "Grandpa fell quiet for a moment, staring at the window and still tapping his legs.",
+          "source": {
+            "paperId": "paper-mock-shandong-jinan-2026-04-second-mock",
+            "paperTitle": "济南市2026届高三第二次模拟考试英语试题卷",
+            "groupId": "group:paper-mock-shandong-jinan-2026-04-second-mock:writing-continuation",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-jinan-2026-04-second-mock:writing-continuation:4",
+              "sentence": 10
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:tap#s6",
+      "pos": "n.",
+      "glossZh": "一下轻敲或轻拍",
+      "pronunciationId": "w:tap#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 3
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tap#e-103de26534d04783",
+          "text": "Yet, every careful tap is part of a quiet discipline.",
+          "source": {
+            "paperId": "paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam",
+            "paperTitle": "泉州市2026届高中毕业班适应性练习卷 英语试题",
+            "groupId": "group:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-b",
+            "locator": {
+              "paragraph": 5,
+              "paragraphId": "block:paper-mock-fujian-quanzhou-2026-05-graduating-adaptability-exam:reading-b:5",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:tap#s7",
+      "pos": "n.",
+      "glossZh": "点按屏幕的动作",
+      "pronunciationId": "w:tap#p-main",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 2
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:tap#e-e695c2e97d40289b",
+          "text": "One tap leads to another; ten minutes later you have looked through reviews, filled a cart and almost missed your own slide.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+            "paperTitle": "汕头市2025-2026学年度普通高中毕业班教学质量监测英语",
+            "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:reading-c",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-guangdong-shantou-2026-01-final:reading-c:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:tap#e-fa836c208c0acb67",
+          "text": "While I still enjoy shopping in the market after work, my mother begins her day by comparing prices on apps and ordering everything with a few taps(点击).",
+          "source": {
+            "paperId": "paper-mock-zhejiang-jiaxing-2025-09-baseline-test",
+            "paperTitle": "嘉兴市2025年9月高三基础测试",
+            "groupId": "group:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-zhejiang-jiaxing-2025-09-baseline-test:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:tap#s5",
+      "pos": "v.",
+      "glossZh": "装窃听设备监听",
+      "pronunciationId": "w:tap#p-main",
+      "origin": "dictionary",
+      "counts": {
+        "gaokao": 0,
+        "mock": 0
+      },
+      "folded": true,
+      "examples": []
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "鞋底金属垫片；大声思考协议",
+      "reason": "舞鞋和研究方法专门义"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

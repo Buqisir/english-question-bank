@@ -1,0 +1,455 @@
+{
+  "entryId": "w:record",
+  "headword": "record",
+  "kind": "word",
+  "lists": [
+    "3000",
+    "3100"
+  ],
+  "variants": [],
+  "ipa": {
+    "uk": "/ˈrekɔːd/",
+    "us": "/ˈrekərd/"
+  },
+  "audio": {
+    "uk": null,
+    "us": null
+  },
+  "pronunciations": [
+    {
+      "pronunciationId": "w:record#p-nominal",
+      "ipa": {
+        "uk": "/ˈrekɔːd/",
+        "us": "/ˈrekərd/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "label": "名词、形容词"
+    },
+    {
+      "pronunciationId": "w:record#p-verb",
+      "ipa": {
+        "uk": "/rɪˈkɔːd/",
+        "us": "/rɪˈkɔːrd/"
+      },
+      "ipaSource": "本地词典及频序词表，含编辑补录",
+      "audio": {
+        "uk": null,
+        "us": null
+      },
+      "label": "动词",
+      "needsCheck": [
+        "us"
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "form": "Records",
+      "tags": [
+        "plural"
+      ]
+    },
+    {
+      "form": "recorded",
+      "tags": [
+        "participle",
+        "past"
+      ]
+    },
+    {
+      "form": "recording",
+      "tags": [
+        "participle",
+        "present"
+      ]
+    },
+    {
+      "form": "records",
+      "tags": [
+        "plural",
+        "present",
+        "third-person"
+      ]
+    }
+  ],
+  "counts": {
+    "gaokao": 34,
+    "mock": 225
+  },
+  "unassignedCounts": {
+    "gaokao": 4,
+    "mock": 25
+  },
+  "senses": [
+    {
+      "senseId": "w:record#s1",
+      "pos": "n.",
+      "glossZh": "留下来的资料、记载或档案",
+      "pronunciationId": "w:record#p-nominal",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 17,
+        "mock": 63
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:record#e-01cc6f9d391e63b3",
+          "text": "It will also give them a handy record to refer back to.",
+          "source": {
+            "paperId": "paper-gaokao-2025-zhejiang-jan",
+            "paperTitle": "2025年1月普通高等学校招生全国统一考试英语",
+            "groupId": "group:paper-gaokao-2025-zhejiang-jan:seven-choices",
+            "locator": {
+              "question": 36,
+              "questionId": "question:paper-gaokao-2025-zhejiang-jan:36",
+              "option": "F",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:record#e-5eafd866b6c3cc5d",
+          "text": "What do we know about the records of species collected now?",
+          "source": {
+            "paperId": "paper-gaokao-2024-i",
+            "paperTitle": "2024年普通高等学校招生全国统一考试（新课标Ⅰ）英语试题",
+            "groupId": "group:paper-gaokao-2024-i:reading-d",
+            "locator": {
+              "question": 32,
+              "questionId": "question:paper-gaokao-2024-i:32",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:record#e-fbede3e60fa6d2ca",
+          "text": "From the English side, we have scientific reports and the captain’s record of that terrible day.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:2",
+              "sentence": 3
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:record#s3",
+      "pos": "v.",
+      "glossZh": "把事情、数据或经历记下来",
+      "pronunciationId": "w:record#p-verb",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 61
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:record#e-0a8ca4fde4264d24",
+          "text": "Writing is one of humanity’s later achievements, and until fairly recently even many literate (有文字的) societies recorded their concerns not only in writing but in things.",
+          "source": {
+            "paperId": "paper-gaokao-2023-national-b",
+            "paperTitle": "2023 年普通高等学校招生全国统一考试英语（全国乙卷）",
+            "groupId": "group:paper-gaokao-2023-national-b:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-gaokao-2023-national-b:reading-d:1",
+              "sentence": 2
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:record#e-e5b7346e403749ad",
+          "text": "These scenes may have been painted hundreds of years ago, but they record moments we can all relate to.",
+          "source": {
+            "paperId": "paper-gaokao-2023-ii",
+            "paperTitle": "2023年普通高等学校招生全国统一考试英语（新课标Ⅱ卷）",
+            "groupId": "group:paper-gaokao-2023-ii:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2023-ii:reading-c:2",
+              "sentence": 4
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:record#e-33e3d40fc827efdd",
+          "text": "Dr Catherine Hobaiter, who led the research, said that this was the only form of intentional communication to be recorded in the animal kingdom.",
+          "source": {
+            "paperId": "paper-gaokao-2021-zhejiang-jan",
+            "paperTitle": "2021 年 1 月浙江高考英语",
+            "groupId": "group:paper-gaokao-2021-zhejiang-jan:reading-c",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2021-zhejiang-jan:reading-c:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:record#s4",
+      "pos": "v.",
+      "glossZh": "录音、录像或用仪器录下信号",
+      "pronunciationId": "w:record#p-verb",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 5,
+        "mock": 37
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:record#e-5443e91120bf5c7c",
+          "text": "The creative team behind “Apes” used motion-capture (动作捕捉) technology to create digitalized animals, spending tens of millions of dollars on technology that records an actor’s performance and later processes it with computer graphics to create a final image (图像).",
+          "source": {
+            "paperId": "paper-gaokao-2020-national-iii",
+            "paperTitle": "2020年普通高等学校招生全国统一考试英语（全国Ⅲ卷）",
+            "groupId": "group:paper-gaokao-2020-national-iii:reading-b",
+            "locator": {
+              "paragraph": 2,
+              "paragraphId": "block:paper-gaokao-2020-national-iii:reading-b:2",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:record#e-9d3fdeb1243c234e",
+          "text": "The performance can be recorded.",
+          "source": {
+            "paperId": "paper-gaokao-2021-eight-provinces-jan",
+            "paperTitle": "2021年1月八省联考英语",
+            "groupId": "group:paper-gaokao-2021-eight-provinces-jan:listening.long-form",
+            "locator": {
+              "question": 17,
+              "questionId": "question:listening:17",
+              "option": "C",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:record#e-5b72299845def62e",
+          "text": "Record an audio clip.",
+          "source": {
+            "paperId": "paper-gaokao-2023-four-provinces-feb",
+            "paperTitle": "2023年2月四省联考英语",
+            "groupId": "group:paper-gaokao-2023-four-provinces-feb:reading-d",
+            "locator": {
+              "question": 33,
+              "questionId": "question:paper-gaokao-2023-four-provinces-feb:33",
+              "option": "A",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        }
+      ]
+    },
+    {
+      "senseId": "w:record#s2",
+      "pos": "n.",
+      "glossZh": "创下的最好成绩或最高纪录",
+      "pronunciationId": "w:record#p-nominal",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 2,
+        "mock": 28
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:record#e-1638a589371ced60",
+          "text": "He broke a world record.",
+          "source": {
+            "paperId": "paper-gaokao-2022-national-a",
+            "paperTitle": "2022年普通高等学校招生全国统一考试英语（全国甲卷）",
+            "groupId": "group:paper-gaokao-2022-national-a:listening.long-form",
+            "locator": {
+              "question": 18,
+              "questionId": "question:listening:18",
+              "option": "B",
+              "sentence": 1
+            }
+          },
+          "tier": "gaokao"
+        },
+        {
+          "exampleId": "w:record#e-d81c7ad265d3dc65",
+          "text": "During the 1932-33 season, the Renaissance won 88 straight games, a professional basketball record that remains unbroken.",
+          "source": {
+            "paperId": "paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam",
+            "paperTitle": "2025年11月鄂东南省级示范高中教育教学改革联盟学校期中联考 英语学科 试题卷",
+            "groupId": "group:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-edongnan-2025-11-senior-three-midterm-joint-exam:reading-b:3",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:record#e-ef052115794b507f",
+          "text": "Which record did the woman just break?",
+          "source": {
+            "paperId": "paper-mock-hubei-mingxiao-2025-09",
+            "paperTitle": "湖北省部分名校2025-2026学年度上学期高三9月月考",
+            "groupId": "group:paper-mock-hubei-mingxiao-2025-09:listening.short-dialogue",
+            "locator": {
+              "question": 2,
+              "questionId": "question:listening:2",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:record#s5",
+      "pos": "n.",
+      "glossZh": "唱片",
+      "pronunciationId": "w:record#p-nominal",
+      "origin": "gaokao",
+      "counts": {
+        "gaokao": 1,
+        "mock": 5
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:record#e-48fb6400db7fec48",
+          "text": "As the player’s needle dances across the surface of the record, the light shines in harmony.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a:12",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:record#e-83065ac499b3bb33",
+          "text": "While we wouldn’t recommend dropping $10,000 on a record player, we can’t ignore how good this turntable looks.",
+          "source": {
+            "paperId": "paper-mock-hubei-huanggang-2025-09-senior-three-first-mock",
+            "paperTitle": "黄冈市2025年9月高三年级一模考试英语试卷",
+            "groupId": "group:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a",
+            "locator": {
+              "paragraph": 12,
+              "paragraphId": "block:paper-mock-hubei-huanggang-2025-09-senior-three-first-mock:reading-a:12",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:record#e-742381f01c4876b2",
+          "text": "Driven by this problem, researchers took on a pioneering task: bringing back a song that had disappeared from the wild – known only from a musical record made in the 1960s – to a population of chingolos.",
+          "source": {
+            "paperId": "paper-mock-guangdong-shenzhen-2026-03-first",
+            "paperTitle": "2026年深圳市高三年级第一次调研考试英语",
+            "groupId": "group:paper-mock-guangdong-shenzhen-2026-03-first:reading-c",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-guangdong-shenzhen-2026-03-first:reading-c:3",
+              "sentence": 1
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    },
+    {
+      "senseId": "w:record#s6",
+      "pos": "adj.",
+      "glossZh": "创纪录的",
+      "pronunciationId": "w:record#p-nominal",
+      "origin": "mock",
+      "counts": {
+        "gaokao": 0,
+        "mock": 6
+      },
+      "folded": false,
+      "examples": [
+        {
+          "exampleId": "w:record#e-b5ee41d6187155a2",
+          "text": "In total, 12 out of 20 health indicators fell to record levels for two years.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-d",
+            "locator": {
+              "paragraph": 1,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-d:1",
+              "sentence": 3
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:record#e-df79fc0ecb454467",
+          "text": "Childhood reading has reached record lows, with nearly half of British adults not reading a single book last year.",
+          "source": {
+            "paperId": "paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam",
+            "paperTitle": "湖北省2025-2026学年度上学期高三八校10月月考英语学科试题卷",
+            "groupId": "group:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-d",
+            "locator": {
+              "paragraph": 3,
+              "paragraphId": "block:paper-mock-hubei-eight-schools-2025-10-senior-three-monthly-exam:reading-d:3",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        },
+        {
+          "exampleId": "w:record#e-7fb3bd3ee5a122cc",
+          "text": "Cleaner air due to coal phase-outs has saved an estimated 160,000 lives annually, and renewable energy generation reached record highs.",
+          "source": {
+            "paperId": "paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test",
+            "paperTitle": "青岛市2025-2026学年度第一学期期末学业水平检测 高三英语",
+            "groupId": "group:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-d",
+            "locator": {
+              "paragraph": 4,
+              "paragraphId": "block:paper-mock-shandong-qingdao-2026-02-first-semester-final-academic-proficiency-test:reading-d:4",
+              "sentence": 2
+            }
+          },
+          "tier": "mock"
+        }
+      ]
+    }
+  ],
+  "droppedSenses": [
+    {
+      "glossZh": "编程中的记录类型；古义反复练习曲调",
+      "reason": "专业和古旧用法"
+    }
+  ],
+  "version": 1,
+  "updatedAt": "2026-11-24"
+}

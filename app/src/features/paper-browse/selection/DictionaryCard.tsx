@@ -3,6 +3,7 @@ import { SentenceAnalysis, X } from '../../../icons'
 import { CopyFeedbackIcon, DisclosureIcon, VolumeFeedbackIcon } from '../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../icons/motionInput'
 import { Button } from '../../../shared-ui/Button.tsx'
+import { Notice } from '../../../shared-ui/Notice'
 import { Skeleton, SkeletonGate } from '../../../shared-ui/Skeleton.tsx'
 import type {
   PaperDictionaryEntry,
@@ -325,6 +326,7 @@ export function DictionaryCard({
   lookup,
   result,
   lookupError,
+  onRetryLookup,
   playErrorId,
   sense,
   onRetrySense,
@@ -341,6 +343,7 @@ export function DictionaryCard({
   lookup: 'loading' | 'ready'
   result: PaperDictionaryResponse | null
   lookupError: string
+  onRetryLookup?: () => void
   playErrorId: string
   sense: DictionarySenseState
   onRetrySense: () => void
@@ -412,6 +415,7 @@ export function DictionaryCard({
         </div>
       </div>
 
+      {entries.length > 0 && <p className="paper-dictionary-note">通用词典</p>}
       {copyError && <p className="paper-selection-card-error" role="alert">{copyError}</p>}
 
       {showSurface || singlePronunciations.length > 0 ? (
@@ -430,7 +434,7 @@ export function DictionaryCard({
         </div>
       ) : null}
 
-      <div className="paper-dictionary-sense-block">
+      {entries.length > 0 && <div className="paper-dictionary-sense-block">
         <span className="paper-dictionary-sense-label">本文义</span>
         {sense.status === 'loading' ? (
           <span className="paper-dictionary-sense-skeleton-row" aria-hidden="true">
@@ -454,7 +458,7 @@ export function DictionaryCard({
             </button>
           </span>
         ) : null}
-      </div>
+      </div>}
 
       {lookup === 'loading' ? (
         // 共用灰块（2026-11-15 第二轮，DESIGN.md §5 Waiting）：原来三条自己画的灰条（字色 10%、不动），换成 Skeleton
@@ -466,8 +470,8 @@ export function DictionaryCard({
           skeleton={DICTIONARY_SKELETON_WIDTHS.map((width) => <Skeleton key={width} width={width} height={12} />)}
         />
       ) : null}
-      {lookupError ? <p className="paper-dictionary-note">{lookupError}</p> : null}
-      {result?.status === 'not-found' ? <p className="paper-dictionary-missing">暂未收录该词</p> : null}
+      {lookupError && <Notice kind="error" action={onRetryLookup && { label: '重试', onClick: onRetryLookup }}>{lookupError}</Notice>}
+      {result?.status === 'not-found' && <Notice kind="info">该词暂未加入</Notice>}
       {result?.truncated ? <p className="paper-dictionary-note">词条较长，这里只显示一部分。</p> : null}
 
       {entries.map((entry) => (
