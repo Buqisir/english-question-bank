@@ -1,6 +1,6 @@
 # 01 — Contract and validator
 
-Status: ready
+Status: in progress
 Blocked by: Owner acceptance of `../spec.md`
 Next on PASS: 02
 Terminal: no
