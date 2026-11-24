@@ -511,10 +511,10 @@ console.log('Companion analysis grammar-fill sentence lines, no reprinted passag
   } } } })
   if (html.includes('question-number')) {
     assert.match(html, /<p class="evidence-locate"><span class="inline-label">定位<\/span><b lang="en">third<\/b> → 第 3 段<\/p>/u)
-    assert.match(html, /<p class="evidence-paraphrase"><span class="inline-label">同义替换<\/span><b>B 项<\/b> <span lang="en">The third one\.<\/span><\/p>/u)
+    assert.match(html, /<p class="evidence-paraphrase"><span class="inline-label">正确选项<\/span><b>B 项<\/b> <span lang="en">The third one\.<\/span><\/p>/u)
     assert.ok(html.indexOf('evidence-locate') < html.indexOf('evidence-quote')
       && html.indexOf('evidence-quote') < html.indexOf('evidence-paraphrase')
-      && html.indexOf('evidence-paraphrase') < html.indexOf('NOTE_SENTINEL'), '定位 → 原文依据 → 同义替换 → 分析')
+      && html.indexOf('evidence-paraphrase') < html.indexOf('NOTE_SENTINEL'), '定位 → 原文依据 → 正确选项 → 分析')
   } else assert.fail(`reading fixture did not render a question: ${html.slice(0, 200)}`)
 
   // 2026-11-23, learnt from the 答案详解 book on our own lines: the 定位 note
@@ -536,10 +536,48 @@ console.log('Companion analysis grammar-fill sentence lines, no reprinted passag
         { label: 'D', status: 'wrong', optionTranslationZh: '蛋。', trap: { explanation: '另一个理由。' } }] } } } })
   if (learnt.includes('question-number')) {
     assert.match(learnt, /<span class="locate-note">第 1 段第 2 句<\/span>/u, 'the 定位 note names the 定位句: 首句, 末句 or 第 M 句')
-    assert.match(learnt, /同义替换<\/span><b>B 项<\/b>（牛奶）<span lang="en">Milk\.<\/span>/u, 'the correct option prints its translation once, as a wrong one does')
+    assert.match(learnt, /正确选项<\/span><b>B 项<\/b>（牛奶）<span lang="en">Milk\.<\/span>/u, 'the correct option prints its translation once, as a wrong one does')
     assert.match(learnt, /<b>A、C 项<\/b>（肉；羊毛）错在：原文只说产奶和奶酪。/u, 'two options with one sentence share one line')
     assert.equal((learnt.match(/class="reading-distractor-item"/gu) || []).length, 2)
   } else assert.fail('the 定位 + 同义替换 fixture did not render a question')
+
+  // 2026-11-24 (Owner): the correct option prints as the paper prints it under
+  // 「正确选项」; a 定位词 and the passage's other words for it each carry a
+  // gloss; words the stem already has (cut short) print once; the prose
+  // names paragraphs and sentences by mark and the page counts them; 看第 N
+  // 段 and a 找法 that opens on the same paragraph say it once.
+  const round2 = (entry, stem = 'When did the cows start?') => renderReadingGroup({ group: three, answers: [], openingHeadings: '',
+    paperAsset: { content: { questions: { q1: { questionId: 'q1', questionNo: 21, groupId: 'g', stem,
+      options: [{ label: 'A', text: 'Meat.' }, { label: 'B', text: 'Fresh milk.' }] } } }, answerKey: { answers: { q1: { answer: 'B' } } } },
+    analysis: { groups: {}, questions: { q1: { stemTranslationZh: '牛什么时候开始？', similarityProfile: { family: 'detail' }, ...entry,
+      optionAnalysis: [
+        { label: 'A', status: 'wrong', optionTranslationZh: '肉。', trap: { explanation: '[[p1|sells cheese]]卖的是奶酪，不是肉。' } },
+        { label: 'B', status: 'correct', optionTranslationZh: '鲜奶。', evidence: [{ paragraphId: 'p1', quote: 'Her cows give milk.' }] }] } } } })
+  const glossed = round2({ locateBy: 'stem', locateFindZh: '', locationParaphrases: [
+    { sourceText: 'cows start', sourceZh: '奶牛开始', sourceRole: 'stem', targetText: 'Her cows give milk.', targetParagraphId: 'p1',
+      relationType: 'locationCue', targetCue: 'give milk', targetCueZh: '产奶', answerText: 'milk' },
+    { sourceText: 'Milk.', sourceRole: 'correctOption', targetText: 'milk', relationType: 'paraphrase', note: '[[p1|give milk]]说牛产奶，[[p1]]末尾才说奶酪。' }] })
+  if (glossed.includes('question-number')) {
+    assert.match(glossed, /<b lang="en">cows start<\/b><span class="locate-gloss">（奶牛开始）<\/span> → <b lang="en">give milk<\/b><span class="locate-gloss">（产奶）<\/span><span class="locate-note">第 1 段第 2 句<\/span>/u,
+      'both sides of a 定位 that changes words carry their gloss')
+    assert.match(glossed, /正确选项<\/span><b>B 项<\/b>（鲜奶）<span lang="en">Fresh milk\.<\/span>/u, 'the correct option prints as the paper prints it')
+    assert.match(glossed, /<p class="analysis-prose">第 1 段第 2 句说牛产奶，第 1 段末尾才说奶酪。<\/p>/u, 'marks in the 讲解 print as the page counts them')
+    assert.match(glossed, /错在：第 1 段末句卖的是奶酪，不是肉。/u, 'marks in a 错项 reason print the same way')
+  } else assert.fail('the round-2 fixture did not render a question')
+  const cutShort = round2({ locateBy: 'stem', locateFindZh: '', locationParaphrases: [
+    { sourceText: 'Ann’s cows', sourceRole: 'stem', targetText: 'Her cows give milk.', targetParagraphId: 'p1', relationType: 'locationCue', targetCue: 'cows', answerText: 'milk' }] },
+  'What do Ann’s cows give?')
+  if (cutShort.includes('question-number')) {
+    assert.match(cutShort, /定位<\/span><b lang="en">Ann’s cows<\/b> →<span class="locate-note">第 1 段第 2 句<\/span>/u, 'passage words the stem already has print once')
+  } else assert.fail('the cut-short fixture did not render a question')
+  const mainIdea = renderReadingGroup({ group: three, answers: [], openingHeadings: '',
+    paperAsset: { content: { questions: { q1: { questionId: 'q1', questionNo: 21, groupId: 'g', stem: 'What is the paragraph about?', options: [] } } }, answerKey: { answers: { q1: { answer: 'B' } } } },
+    analysis: { groups: {}, questions: { q1: { locateBy: 'passage', locateFindZh: '[[p1]]先说农场，再说奶和奶酪', stemTranslationZh: '这段讲什么？',
+      similarityProfile: { family: 'main-idea', subtype: 'paragraph-main-idea' }, locationParaphrases: [],
+      optionAnalysis: [{ label: 'B', status: 'correct', evidence: [{ paragraphId: 'p1', quote: 'Ann runs a farm.' }] }] } } } })
+  if (mainIdea.includes('question-number')) {
+    assert.match(mainIdea, /定位<\/span>看第 1 段<span class="locate-find">先说农场，再说奶和奶酪<\/span>/u, '看第 N 段 and a 找法 on the same paragraph name it once')
+  }
 
   const { renderAnswerRuns } = await import('../server/exports/companion-analysis/blocks.mjs')
   const runs = renderAnswerRuns(Array.from({ length: 12 }, (_, index) => ({ questionId: `q${index}`, number: index + 1, value: 'A' })))

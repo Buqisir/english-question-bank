@@ -1,13 +1,13 @@
 import { resolveFigureTextRegion } from '../../../shared/paper-canonical/richContent.mjs'
 import { renderEvidenceQuote, renderFullTranslation, renderGroupHeading, renderHeadingLead, renderOverview, renderQuestionHeader, renderQuestionLead, renderSelectedLongSentences, renderUnderlinedText } from './blocks.mjs'
-import { answerData, passageQuote, questionData } from './paper.mjs'
+import { answerData, answerOptionText, passageQuote, questionData } from './paper.mjs'
 import { array, escapeHtml, exactTextRange, innerQuote, nonEmptyString, passageHtml, withoutClosingPunctuation } from './text.mjs'
 import { stripTrapName } from '../../paper-import/trapNameTail.mjs'
-import { PARAGRAPH_TOKEN, hasReadingLocate, passageSentences, resolveReadingLocate, stemLocateItems } from '../../paper-import-ai/readingLocate.mjs'
+import { PARAGRAPH_TOKEN, hasReadingLocate, passageSentences, resolveReadingLocate, sentenceOfWords, stemLocateItems } from '../../paper-import-ai/readingLocate.mjs'
 
 // 「错在：」 then the sentence, without a trailing type label (trapNameTail.mjs).
-function renderTrapReason(trap) {
-  return `错在：${escapeHtml(stripTrapName(trap).text)}`
+function renderTrapReason(trap, group) {
+  return `错在：${renderProse(stripTrapName(trap).text, group)}`
 }
 
 // Options that one condition rules out together carry the same sentence; they
@@ -240,7 +240,7 @@ function renderLocateQuote(locate, group, correct, underlineTexts) {
   const quotes = [`<p lang="en">“${html}”</p>`, ...others.map(quote =>
     `<p lang="en">“${renderUnderlinedText(innerQuote(quote), underlineTexts.map(innerQuote))}”</p>`)]
   return `<div class="evidence-quote"><span class="micro-heading">原文依据</span>${quotes.join('；')}${locate.bridge
-    ? `<p class="evidence-bridge">→ ${escapeHtml(locate.bridge)}</p>` : ''}</div>`
+    ? `<p class="evidence-bridge">→ ${renderProse(locate.bridge, group)}</p>` : ''}</div>`
 }
 
 const SENTENCE_STEPS = ['', '一', '两']
@@ -284,40 +284,69 @@ function answerWhere(locate, group) {
   return step <= 2 ? `${before ? '前' : '后'}${SENTENCE_STEPS[step]}句` : `同段${before ? '前' : '后'}文`
 }
 
-// The analysis's own second line under the 定位 skeleton: one move from where
-// the reader lands and what to look for. Each [[paragraphId]] is printed the
-// way this passage labels it.
-function renderFind(find, group) {
+// Prose the analysis wrote (讲解, bridge, 错项 reasons, 找法), escaped, with
+// each [[paragraphId]] printed the way this passage labels it (第 3 段, a
+// section head) and each [[paragraphId|words]] with the sentence holding the
+// words as well (第 3 段首句): the page counts, the analysis never does.
+function renderProse(value, group) {
+  const source = nonEmptyString(value)
+  const texts = paragraphTexts(group)
   let html = ''
   let last = 0
-  for (const match of find.matchAll(PARAGRAPH_TOKEN)) {
-    html += escapeHtml(find.slice(last, match.index)) + escapeHtml(passagePlace(group, match[1]) || '原文')
+  for (const match of source.matchAll(PARAGRAPH_TOKEN)) {
+    const place = passagePlace(group, match[1])
+    const index = match[2] === undefined ? -1 : sentenceOfWords(texts.get(match[1]), match[2])
+    const sentence = place && index >= 0 ? sentencePlace(group, match[1], index) : ''
+    const label = !place ? '原文' : !sentence ? place : /段$/u.test(place) ? `${place}${sentence}` : `${place} ${sentence}`
+    html += escapeHtml(source.slice(last, match.index)) + escapeHtml(label)
     last = match.index + match[0].length
   }
-  return find ? `<span class="locate-find">${html}${escapeHtml(find.slice(last))}</span>` : ''
+  return html + escapeHtml(source.slice(last))
+}
+
+// The analysis's own second line under the 定位 skeleton: one move from where
+// the reader lands and what to look for.
+function renderFind(find, group) {
+  return find ? `<span class="locate-find">${renderProse(find, group)}</span>` : ''
 }
 
 // Skeleton + second line: the skeleton is printed the same way on every
 // question so the reader can scan it (the 定位词 and the paragraph, or how
 // the question is checked); the second line, under it, is this question's
 // own move. Why the answer follows is the bridge under the quote.
+// The 定位词 in bold; when the passage words differ, an arrow to them, each
+// with its gloss in muted ink: Ho’s job（Ho 的工作）→ hospital teacher（医院里的老师）.
+// Passage words that are the stem's own, whole or cut short (hospital school,
+// School), are not printed again.
+function locateSameWords(locate) {
+  return locate.sameWords ?? locate.cue.text.toLowerCase() === locate.sourceText.toLowerCase()
+}
+
+function locateWords(locate) {
+  const gloss = value => value ? `<span class="locate-gloss">（${escapeHtml(value)}）</span>` : ''
+  return `<b lang="en">${escapeHtml(locate.sourceText)}</b>${locateSameWords(locate) ? ''
+    : `${gloss(locate.sourceZh)} → <b lang="en">${escapeHtml(locate.cue.text)}</b>${gloss(locate.cueZh)}`}`
+}
+
 function renderSkeletonLocate(locate, entry, group, evidence) {
   const note = value => `<span class="locate-note">${escapeHtml(value)}</span>`
+  let find = locate.find
   let skeleton
   if (locate.by === 'options') skeleton = '核对选项'
   else if (locate.by === 'passage') {
     const named = entry?.similarityProfile?.subtype === 'paragraph-main-idea'
       ? [...new Set(array(evidence).map(item => passagePlace(group, item?.paragraphId)).filter(Boolean))] : []
     skeleton = named.length ? `看${escapeHtml(named.join('、'))}` : '看全文'
+    // 看第 5 段, then a 找法 that opens on the same paragraph: say it once.
+    const [only] = named.length === 1 ? array(evidence).map(item => item?.paragraphId).filter(Boolean) : []
+    if (only && find.startsWith(`[[${only}]]`)) find = find.slice(`[[${only}]]`.length).replace(/^[\s，,：:]+/u, '')
   } else {
     const place = placeWithSentence(group, locate)
-    const sameWords = locate.cue.text.toLowerCase() === locate.sourceText.toLowerCase()
     // The arrow always leads on: to the passage's own words when they
     // differ, else straight to the paragraph.
-    skeleton = `<b lang="en">${escapeHtml(locate.sourceText)}</b>${sameWords
-      ? (place ? ' →' : '') : ` → <b lang="en">${escapeHtml(locate.cue.text)}</b>`}${place ? note(place) : ''}`
+    skeleton = `${locateWords(locate)}${locateSameWords(locate) && place ? ' →' : ''}${place ? note(place) : ''}`
   }
-  return `<p class="evidence-locate"><span class="inline-label">定位</span>${skeleton}${renderFind(locate.find, group)}</p>`
+  return `<p class="evidence-locate"><span class="inline-label">定位</span>${skeleton}${renderFind(find, group)}</p>`
 }
 
 function renderDataLocate(locate, entry, question, group, evidence) {
@@ -336,10 +365,8 @@ function renderDataLocate(locate, entry, question, group, evidence) {
   }
   const place = placeWithSentence(group, locate)
   // Same words in the passage: write them once. Other words: stem → passage.
-  const sameWords = locate.cue.text.toLowerCase() === locate.sourceText.toLowerCase()
   const note = value => `<span class="locate-note">${escapeHtml(value)}</span>`
-  const words = `<b lang="en">${escapeHtml(locate.sourceText)}</b>${sameWords
-    ? note('原词') : ` → <b lang="en">${escapeHtml(locate.cue.text)}</b>`}${place ? note(place) : ''}`
+  const words = `${locateWords(locate)}${locateSameWords(locate) ? note('原词') : ''}${place ? note(place) : ''}`
   const where = answerWhere(locate, group)
   return `<p class="evidence-locate"><span class="inline-label">定位</span>${words}${where
     ? `<span class="locate-where">答案不在定位句，在${escapeHtml(where)}</span>` : ''}</p>`
@@ -372,12 +399,18 @@ function renderLocate(entry, question, group, evidence) {
     ? `${words.map(word => `<b lang="en">${escapeHtml(word)}</b>`).join('、')} → ` : ''}${places.map(escapeHtml).join('、')}</p>`
 }
 
-function renderParaphrase(entry, answer, translation) {
-  const options = [...new Set(array(entry?.locationParaphrases)
+// 正确选项 (Owner 2026-11-24): the correct option as printed, its translation
+// in brackets. How it matches the passage (the same words, other words, a
+// summary, two places put together, one step of inference) is the first
+// sentence of the 讲解 below, in plain words, never a type label.
+function renderCorrectOption(question, entry, answer, translation) {
+  // A paper without option text falls back on the option words the analysis
+  // matched to the passage.
+  const english = (answerOptionText(question, answer) || array(entry?.locationParaphrases)
     .filter(relation => relation?.sourceRole === 'correctOption' && relation?.relationType === 'paraphrase')
-    .map(relation => nonEmptyString(relation.sourceText)).filter(Boolean))]
-  if (options.length === 0) return ''
-  return `<p class="evidence-paraphrase"><span class="inline-label">同义替换</span><b>${escapeHtml(answer)} 项</b>${translation ? `（${escapeHtml(translation)}）` : ' '}<span lang="en">${options.map(escapeHtml).join(' ')}</span></p>`
+    .map(relation => nonEmptyString(relation.sourceText)).find(Boolean) || '').trim()
+  if (!english) return ''
+  return `<p class="evidence-paraphrase"><span class="inline-label">正确选项</span><b>${escapeHtml(answer)} 项</b>${translation ? `（${escapeHtml(translation)}）` : ' '}<span lang="en">${escapeHtml(english)}</span></p>`
 }
 
 export function renderReadingDiscourse(discourse, group, overview) {
@@ -445,9 +478,9 @@ export function renderReadingGroup({ group, title, paperAsset, analysis, answers
       renderReadingStem(question, entry, locate),
       locate ? renderDataLocate(locate, entry, question, group, correct?.evidence) : renderLocate(entry, question, group, correct?.evidence),
       locate?.by === 'stem' ? renderLocateQuote(locate, group, correct, underlineTexts) : renderEvidenceQuote(quotes, underlineTexts),
-      renderParaphrase(entry, answer, withoutClosingPunctuation(correct?.optionTranslationZh)),
-      ...reasoning.map((item) => `<p class="analysis-prose">${escapeHtml(item)}</p>`),
-      distractors.length > 0 ? `<div class="distractor distractor--reading"><div>${distractorRows(distractors).map((row) => `<p class="reading-distractor-item"><b>${row.map(item => escapeHtml(item.label)).join('、')} 项</b>${row.some(item => item.optionTranslationZh) ? `（${row.map(item => escapeHtml(item.optionTranslationZh || '')).join('；')}）` : ''}${renderTrapReason(row[0].trap)}</p>`).join('')}</div></div>` : '',
+      renderCorrectOption(question, entry, answer, withoutClosingPunctuation(correct?.optionTranslationZh)),
+      ...reasoning.map((item) => `<p class="analysis-prose">${renderProse(item, group)}</p>`),
+      distractors.length > 0 ? `<div class="distractor distractor--reading"><div>${distractorRows(distractors).map((row) => `<p class="reading-distractor-item"><b>${row.map(item => escapeHtml(item.label)).join('、')} 项</b>${row.some(item => item.optionTranslationZh) ? `（${row.map(item => escapeHtml(item.optionTranslationZh || '')).join('；')}）` : ''}${renderTrapReason(row[0].trap, group)}</p>`).join('')}</div></div>` : '',
     ].filter(Boolean)
     return `<section class="question question--reading">
       ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer), first)}

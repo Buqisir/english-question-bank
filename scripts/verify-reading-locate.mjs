@@ -237,4 +237,27 @@ ok('找法 findZh: merged as locateFindZh, sits beside the bridge, short, one si
   assert.match(passage('[[p1]] one two three four five six seven eight nine').errors[0], /locateBy=passage 时 findZh 里英文最多 8 个词/u)
 })
 
+ok('strict prose (Owner 2026-11-24): glosses on a changed 定位词, marks instead of counting, no filler verdicts', () => {
+  const strict = value => validate(value, { strictProse: true })
+  const glossed = () => tweak('q3', (_, item) => { item.sourceZh = '开始'; item.targetCueZh = '开张' })
+  assert.throws(() => strict(located()), /sourceZh 写定位词在题干里的意思/u, 'a changed 定位词 needs both glosses')
+  strict(glossed())
+  validate(located())
+  assert.throws(() => validate(tweak('q1', (_, item) => { item.sourceZh = '大宪章' })), /写法相同时不写/u, 'the same words carry no gloss')
+  assert.throws(() => validate(tweak('q3', (_, item) => { item.sourceZh = 'start'; item.targetCueZh = '开张' })), /只写中文/u)
+  const prose = (note, trap) => {
+    const value = glossed()
+    if (note !== undefined) value.questions.q3.locationParaphrases.at(-1).note = note
+    if (trap !== undefined) value.questions.q3.optionAnalysis[0].trap.explanation = trap
+    return value
+  }
+  strict(prose('[[p2|expected few customers]]说她不抱希望，[[p2]]后面写店里天天满。'))
+  assert.throws(() => strict(prose('第 2 段第 2 句说她不抱希望。')), /不自己数段数句/u)
+  assert.throws(() => strict(prose('首句说她不抱希望。')), /不自己数段数句/u)
+  assert.throws(() => strict(prose(undefined, '代进去读不通。')), /「读不通」这类空话/u)
+  assert.throws(() => strict(prose('[[p2|no such words]]说她不抱希望。')), /原样抄，不跨句/u)
+  assert.throws(() => validate(prose('[[p9]]说她不抱希望。')), /不是这篇的段落/u, 'marks are checked on every analysis')
+  validate(prose('第 2 段说她不抱希望，代进去读不通。'))
+})
+
 console.log(`Reading 定位 verify PASSED: ${passed} checks`)
