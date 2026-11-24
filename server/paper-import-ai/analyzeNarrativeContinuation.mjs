@@ -4,7 +4,6 @@ import Ajv from 'ajv/dist/2020.js'
 import {
   createAnalyzerProviderShell,
   readPromptFile,
-  readTeachingAnalysisPrompt,
 } from './analyzerProviderShell.mjs'
 import {
   CONTINUATION_ANALYSIS_V3,
@@ -13,11 +12,15 @@ import {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
-const promptPath = path.join(rootDir, 'prompts/continuation-analysis-v2.md')
+// Spec D2 (docs/cuts/continuation-writing-v3/spec.md): the V3 prompt body plus
+// the structured task input, exactly as in the blind trials. The shared
+// teaching doctrine is not appended. V2 stays only for validating stored data.
+const promptPath = path.join(rootDir, 'prompts/continuation-writing-model-answer-v3.md')
 const stagedAnalysisContractPath = path.join(
   rootDir,
-  'prompts/continuation-writing-staged-analysis-v2.md',
+  'prompts/continuation-writing-staged-analysis-v3.md',
 )
+const CONTINUATION_V3_HEADING = '# Continuation Writing Model Answer Prompt — V3'
 const schemaPath = path.join(rootDir, 'schemas/paper-import/continuation-analysis-v2.schema.json')
 
 const schema = JSON.parse(readPromptFile(schemaPath))
@@ -60,34 +63,44 @@ function buildPromptInput(writingTask) {
   }
 }
 
-export function buildNarrativeContinuationAnalysisMessages({ writingTask }) {
+/**
+ * The V3 prompt the model sees: the file from 「你是一名」 on. The title and the
+ * status/provenance notes above it are for maintainers; the trials sent the
+ * body only (`docs/cuts/continuation-writing-v3/trial/prep.mjs`).
+ */
+export function readContinuationV3PromptBody() {
+  const text = readPromptFile(promptPath)
+  const lines = text.split('\n')
+  if (lines[0] !== CONTINUATION_V3_HEADING) {
+    throw new Error(`continuation V3 prompt must start with ${CONTINUATION_V3_HEADING}`)
+  }
+  let start = 1
+  while (start < lines.length && (lines[start] === '' || lines[start].startsWith('>'))) start += 1
+  return lines.slice(start).join('\n')
+}
+
+export function buildContinuationTaskInputText(writingTask) {
   assertNarrativeContinuationInput({ writingTask })
   return [
-    {
-      role: 'system',
-      content: `${readTeachingAnalysisPrompt(promptPath)}\n\nExact output schema:\n${JSON.stringify(schema)}`,
-    },
-    {
-      role: 'user',
-      content: [
-        'Analyze the complete continuation Writing Task below.',
-        'If it is eligible narrative continuation, return one continuation-analysis-v2 JSON object.',
-        'If it is not eligible, return only the unsupported sentinel specified by the system prompt.',
-        'Return JSON text only.',
-        '',
-        'Structured input:',
-        JSON.stringify(buildPromptInput(writingTask), null, 2),
-      ].join('\n'),
-    },
-  ]
+    'Complete continuation Writing Task:',
+    '',
+    'Structured input:',
+    JSON.stringify(buildPromptInput(writingTask), null, 2),
+  ].join('\n')
+}
+
+export function buildNarrativeContinuationAnalysisMessages({ writingTask }) {
+  const taskText = buildContinuationTaskInputText(writingTask)
+  return [{ role: 'user', content: `${readContinuationV3PromptBody()}\n\n${taskText}\n` }]
 }
 
 export function buildNarrativeContinuationStagedAnalysisContract() {
   return [
-    readTeachingAnalysisPrompt(promptPath),
+    CONTINUATION_V3_HEADING,
     '',
-    'Exact nested continuationAnalysis schema:',
-    JSON.stringify(schema),
+    readContinuationV3PromptBody().trimEnd(),
+    '',
+    '---',
     '',
     readPromptFile(stagedAnalysisContractPath).trim(),
   ].join('\n')
@@ -240,12 +253,17 @@ export function validateNarrativeContinuationAnalysis(analysis, { writingTask })
 function isRetryableNarrativeContinuationError(error) {
   const message = error instanceof Error ? error.message : String(error || '')
   if (message.includes('UNSUPPORTED_CONTINUATION_MODE')) return false
-  return /schema invalid|evidence excerpt|constraint ids|requiredExitState|JSON|缺少|必须|不能为空/.test(message)
+  return /continuation analysis V3 failed|schema invalid|evidence excerpt|constraint ids|requiredExitState|JSON|缺少|必须|不能为空/.test(message)
 }
 
 export const analyzeNarrativeContinuationImportCandidate = createAnalyzerProviderShell({
   assertInput: assertNarrativeContinuationInput,
   buildMessages: buildNarrativeContinuationAnalysisMessages,
-  validate: (analysis, input) => validateNarrativeContinuationAnalysis(analysis, input),
+  // The prompt returns raw V3 (with taskType and blocked). The shell returns it
+  // unchanged once it passes; validateContinuationAnalysisV3 turns it into the
+  // writing entry to persist.
+  validate: (analysis, input) => {
+    validateContinuationAnalysisV3({ analysis, writingTask: input.writingTask })
+  },
   isRetryable: isRetryableNarrativeContinuationError,
 })

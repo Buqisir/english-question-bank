@@ -1,5 +1,9 @@
 # Narrative Continuation Analysis Prompt — V2
 
+> STATUS: SUPERSEDED — replaced by `continuation-writing-model-answer-v3.md`
+> (Owner, 2026-11-24; `docs/cuts/continuation-writing-v3/spec.md`). Kept so
+> groups generated with V2 stay traceable; no workflow loads it.
+
 Analyze one complete NCK1 narrative-continuation task. Return one JSON object
 that conforms exactly to `continuation-analysis-v2.schema.json`. Return JSON
 only. Do not generate the model composition in this nested analysis.

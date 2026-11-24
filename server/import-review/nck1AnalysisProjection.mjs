@@ -262,8 +262,9 @@ export function projectNck1StagedWritingAnalysis(raw) {
     if (!raw.continuationAnalysis || typeof raw.continuationAnalysis !== 'object') {
       fail('New-paper continuation analysis must use continuationAnalysis')
     }
-    // Ticket 02 of docs/cuts/continuation-writing-v3 makes V3 the only version
-    // accepted here; until the prompt moves, V2 stays accepted.
+    // New generation emits only V3 (continuation-writing-v3 spec D2, D4). V2
+    // stays accepted so packages already produced with it can be re-projected
+    // in the revision flow (spec D7).
     if (raw.continuationAnalysis.schemaVersion === CONTINUATION_ANALYSIS_V3) {
       const problems = continuationAnalysisV3ShapeProblems(raw.continuationAnalysis)
       if (problems.length > 0) fail(`New-paper continuation analysis V3 is malformed: ${problems.join('; ')}`)

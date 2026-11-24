@@ -3,13 +3,18 @@
 // Spec: docs/cuts/continuation-writing-v3/spec.md (D1, D3, D7).
 
 import assert from 'node:assert/strict'
-import { mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { spawnSync } from 'node:child_process'
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import Ajv from '../server/node_modules/ajv/dist/2020.js'
 
 import {
+  analyzeNarrativeContinuationImportCandidate,
+  buildNarrativeContinuationAnalysisMessages,
+  buildNarrativeContinuationStagedAnalysisContract,
+  readContinuationV3PromptBody,
   validateContinuationAnalysisV3,
   validateNarrativeContinuationAnalysis,
 } from '../server/paper-import-ai/analyzeNarrativeContinuation.mjs'
@@ -17,7 +22,10 @@ import {
   CONTINUATION_ANALYSIS_V3,
   isContinuationAnalysisV3,
 } from '../shared/writing/continuationAnalysisV3.mjs'
-import { projectNck1StagedWritingAnalysis } from '../server/import-review/nck1AnalysisProjection.mjs'
+import {
+  projectNck1StagedWritingAnalysis,
+  validateNck1StagedAnalysis,
+} from '../server/import-review/nck1AnalysisProjection.mjs'
 import { assertNoRetiredAnalysisFields } from '../server/paper-import/analyzedPackage.mjs'
 import {
   persistWritingAnalysisGroup,
@@ -179,6 +187,131 @@ try {
   assert.ok(validate(written), JSON.stringify(validate.errors))
 } finally {
   rmSync(tempRoot, { recursive: true, force: true })
+}
+
+// ─── Ticket 02: prompt and routes (spec D2, D4) ─────────────────────────────
+
+// Runtime prompt: byte-identical to what the blind trials sent. Run the trial's
+// own prep script on a tracked paper and compare with the builder.
+const prepOut = mkdtempSync(path.join(tmpdir(), 'cw3-prep-'))
+try {
+  const prep = spawnSync(process.execPath, [
+    path.join(root, 'docs/cuts/continuation-writing-v3/trial/prep.mjs'), prepOut,
+  ], { cwd: root, env: { ...process.env, CW_PAPERS: 'paper-2026-i' }, encoding: 'utf8' })
+  assert.equal(prep.status, 0, prep.stderr)
+  const trialPrompt = readFileSync(path.join(prepOut, 'paper-2026-i', 'v3-prompt.txt'), 'utf8')
+  const asset = JSON.parse(readFileSync(path.join(
+    root, 'test-fixtures/retired-paper-assets/paper-2026-i/latest/paper-asset.json'), 'utf8'))
+  const task = Object.values(asset.content.writingTasks).find((t) => t.taskType === 'continuation')
+  const messages = buildNarrativeContinuationAnalysisMessages({ writingTask: task })
+  assert.equal(messages.length, 1)
+  assert.equal(messages[0].role, 'user')
+  assert.equal(messages[0].content, trialPrompt, 'runtime prompt equals the trial prompt byte for byte')
+} finally {
+  rmSync(prepOut, { recursive: true, force: true })
+}
+const promptBody = readContinuationV3PromptBody()
+assert.ok(promptBody.startsWith('你是一名'))
+assert.doesNotMatch(promptBody, /STATUS: PRODUCTION|Owner decision/, 'maintainer notes stay out of the model prompt')
+
+// Staged contract: V3 heading, the same body, the V3 packaging contract; no
+// doctrine, no V2 prompt, no V2 schema.
+const stagedContract = buildNarrativeContinuationStagedAnalysisContract()
+assert.ok(stagedContract.startsWith('# Continuation Writing Model Answer Prompt — V3\n\n你是一名'))
+assert.ok(stagedContract.includes(promptBody.trimEnd()))
+assert.match(stagedContract, /^# NCK1 Staged Narrative Continuation Packaging Contract — V3$/m)
+assert.doesNotMatch(stagedContract, /Teaching Analysis Style|continuation-analysis-v2|Narrative Continuation Analysis Prompt/)
+
+// The plugin's V3 markers and doctrine omission: verify-nck1-analysis-agent-plugin.
+
+// Provider shell: a V3 raw output passes and comes back unchanged.
+const provided = await analyzeNarrativeContinuationImportCandidate(
+  { writingTask: base.writingTask, providerId: 'deepseek-v4-pro' },
+  {
+    analysisRetries: 0,
+    providerRetries: 0,
+    providerCallers: {
+      deepseek: async () => ({ rawText: JSON.stringify(base.output), provider: 'fixture', model: 'fixture', latencyMs: 1 }),
+    },
+  },
+)
+assert.deepEqual(provided.analysis, base.output)
+assert.deepEqual(run({ output: provided.analysis, writingTask: base.writingTask }).writing, stored)
+
+// Staged NCK1 route: a packaged V3 draft passes the local acceptance check; a
+// mismatched modelAnswer does not.
+const stagedRequest = {
+  group: 'continuation',
+  sourceGroup: {
+    groupKey: 'continuation',
+    material: {
+      paper: { paperId: 'paper-cw3', sourceAssetVersion: 1 },
+      group: { groupId: 'g' },
+      writingTask: { ...base.writingTask, groupId: 'g', officialModelAnswer: null },
+    },
+  },
+  authoritativeAnswers: { officialModelAnswer: null },
+}
+assert.deepEqual(validateNck1StagedAnalysis(stagedRequest, stored), { ok: true, warnings: [] })
+assert.throws(() => validateNck1StagedAnalysis(stagedRequest, { ...stored, modelAnswer: 'Different.' }), /standard essay/)
+
+// Backfill driver end to end on a temporary paper: list writes the V3 prompt;
+// persist refuses MUST_FIX and a missing review, then persists on PASS.
+const driverRoot = mkdtempSync(path.join(tmpdir(), 'cw3-driver-'))
+try {
+  const assets = path.join(driverRoot, 'assets')
+  const work = path.join(driverRoot, 'work')
+  const latest = path.join(assets, 'paper-cw3', 'latest')
+  mkdirSync(latest, { recursive: true })
+  const writingTask = { ...base.writingTask, writingTaskId: 'wt-cw3', groupId: 'g' }
+  writeFileSync(path.join(latest, 'paper-asset.json'), JSON.stringify({
+    paper: { paperId: 'paper-cw3' },
+    content: { groups: { g: { groupType: 'writing', writingTaskId: 'wt-cw3' } }, writingTasks: { 'wt-cw3': writingTask } },
+  }))
+  const driver = (mode) => spawnSync(process.execPath, [
+    path.join(root, 'scripts/import-pipeline/writing-analysis-driver.mjs'), mode, 'continuation',
+  ], {
+    cwd: root,
+    encoding: 'utf8',
+    env: {
+      ...process.env,
+      WRITING_ANALYSIS_PAPER_ASSETS_DIR: assets,
+      WRITING_ANALYSIS_WORK_DIR: work,
+      WRITING_ANALYSIS_ALLOWED_PAPERS: 'paper-cw3',
+    },
+  })
+  const key = 'paper-cw3__g'
+  const listed = driver('list')
+  assert.equal(listed.status, 0, listed.stderr)
+  assert.equal(
+    readFileSync(path.join(work, `${key}.analysis-v3.prompt.txt`), 'utf8'),
+    buildNarrativeContinuationAnalysisMessages({ writingTask })[0].content,
+  )
+  writeFileSync(path.join(work, `${key}.analysis-v3.json`), JSON.stringify(base.output))
+  const analysisFile = path.join(latest, 'analyses', 'writing-analysis-v1.json')
+
+  const noReview = driver('persist')
+  assert.equal(noReview.status, 1)
+  assert.match(noReview.stdout, /MISSING independent review/)
+  writeFileSync(path.join(work, `${key}.review.json`), JSON.stringify({
+    verdict: 'MUST_FIX',
+    findings: [{ code: 'ending-moral', problem: 'The last line states a moral.', requiredChange: 'End on the action.' }],
+  }))
+  const mustFix = driver('persist')
+  assert.equal(mustFix.status, 1)
+  assert.match(mustFix.stdout, /verdict is MUST_FIX; persist is blocked/)
+  assert.equal(existsSync(analysisFile), false)
+
+  writeFileSync(path.join(work, `${key}.review.json`), JSON.stringify({ verdict: 'PASS', findings: [] }))
+  const passed = driver('persist')
+  assert.equal(passed.status, 0, passed.stdout + passed.stderr)
+  const persisted = JSON.parse(readFileSync(analysisFile, 'utf8'))
+  assert.deepEqual(persisted.groups.g.writing, stored)
+  assert.ok(validate(persisted), JSON.stringify(validate.errors))
+  // Persisted groups leave the work list.
+  assert.match(driver('list').stdout, /work groups: 0/)
+} finally {
+  rmSync(driverRoot, { recursive: true, force: true })
 }
 
 console.log(`verify-continuation-analysis-v3: ${passing} fixtures pass, ${roundTwoOverLimit.size} round 2 fixtures fail D3.9 as expected, ${failures.length} rule failures caught`)

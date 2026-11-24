@@ -329,15 +329,14 @@ check('valid narrative continuation analysis passes the runtime contract', () =>
   assert.doesNotThrow(() => validateNarrativeContinuationAnalysis(candidate, { writingTask }))
 })
 
-check('message builder uses the tracked prompt and complete source task', () => {
+check('message builder sends the V3 prompt body with the complete source task', () => {
   const messages = buildNarrativeContinuationAnalysisMessages({ writingTask })
-  assert.equal(messages.length, 2)
-  assert.equal(messages[0].role, 'system')
-  assert.match(messages[0].content, /continuation-analysis-v2/)
-  assert.match(messages[0].content, /Do not generate the model composition/)
-  assert.equal(messages[1].role, 'user')
-  assert.match(messages[1].content, /The porridge boiled over/)
-  assert.match(messages[1].content, /their father appeared/)
+  assert.equal(messages.length, 1)
+  assert.equal(messages[0].role, 'user')
+  assert.match(messages[0].content, /^你是一名/)
+  assert.doesNotMatch(messages[0].content, /continuation-analysis-v2/)
+  assert.match(messages[0].content, /The porridge boiled over/)
+  assert.match(messages[0].content, /their father appeared/)
 })
 
 rejects('legacy continuationDesign shape is rejected', () => {
@@ -447,35 +446,41 @@ check('schema and prompt artifacts name the same contract', () => {
   assert.match(stagedPrompt, /"continuationAnalysis"/)
   assert.match(stagedPrompt, /supplied `wordCountTarget`/)
   assert.doesNotMatch(stagedPrompt, /brothers|twins|first-person|150 student-written/i)
-  assert.equal(
-    buildNarrativeContinuationStagedAnalysisContract(),
-    `${prompt.trimEnd()}\n\n---\n\n${doctrine}\n\nExact nested continuationAnalysis schema:\n${JSON.stringify(schema)}\n\n${stagedPrompt}`,
-  )
-  const system = buildNarrativeContinuationAnalysisMessages({ writingTask })[0].content
-  assert.ok(system.includes(JSON.stringify(schema)))
-  assert.match(system, /because starter 2 says/)
-  assert.match(system, /not labels\s+such as kind, brave or selfish without evidence/)
+  // Both V2 prompts are superseded by V3 (docs/cuts/continuation-writing-v3/spec.md)
+  // and no longer reach the runtime; the schema stays for stored V2 data.
+  assert.match(prompt, /STATUS: SUPERSEDED/)
+  assert.match(stagedPrompt, /STATUS: SUPERSEDED/)
+  const staged = buildNarrativeContinuationStagedAnalysisContract()
+  assert.ok(!staged.includes(prompt.split('\n')[0]))
+  assert.ok(!staged.includes(doctrine.split('\n').find(Boolean)))
+  assert.ok(!staged.includes(JSON.stringify(schema)))
 })
 
-const providerResult = await analyzeNarrativeContinuationImportCandidate(
-  { writingTask, providerId: 'deepseek-v4-pro' },
-  {
-    analysisRetries: 0,
-    providerRetries: 0,
-    providerCallers: {
-      deepseek: async () => ({
-        rawText: JSON.stringify(candidate),
-        provider: 'fixture',
-        model: 'fixture-model',
-        latencyMs: 1,
-      }),
+// The provider shell now validates V3 raw output (verify-continuation-analysis-v3
+// covers the passing run); a V2 candidate no longer passes it.
+let providerError
+try {
+  await analyzeNarrativeContinuationImportCandidate(
+    { writingTask, providerId: 'deepseek-v4-pro' },
+    {
+      analysisRetries: 0,
+      providerRetries: 0,
+      providerCallers: {
+        deepseek: async () => ({
+          rawText: JSON.stringify(candidate),
+          provider: 'fixture',
+          model: 'fixture-model',
+          latencyMs: 1,
+        }),
+      },
     },
-  },
-)
+  )
+} catch (error) {
+  providerError = error
+}
 
-check('provider shell returns the validated field without a parallel result shape', () => {
-  assert.deepEqual(providerResult.analysis, candidate)
-  assert.equal(providerResult.provider, 'fixture')
+check('provider shell rejects a V2 candidate', () => {
+  assert.match(String(providerError?.message), /continuation analysis V3 failed/)
 })
 
 const { default: Ajv2020 } = await import(
