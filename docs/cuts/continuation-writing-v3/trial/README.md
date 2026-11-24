@@ -187,3 +187,25 @@ essays stand at V3 3, V2 3, tie 2: no detectable difference in essay quality
 between the two prompts at matched length. The advanced essay was judged worth
 its extra words on all 4 papers (9 of 9 answered across both rounds). The
 question on the third reading question was not answered.
+
+# Direct-speech fix check (2026-11-24)
+
+Owner adopted V3 after round 3, on condition that the 2020 dialogue problem is
+fixed first; the "no empty moral at the end" rule stays. Principle 3 and the
+third reading question now count the source's quoted speech first and match
+it: mostly reported speech when the source mostly reports, short quoted lines
+"about as many as the source" when the source is carried by dialogue.
+
+Four fresh V3 runs, outputs in `fix-check/`. 2020-i was run twice because it
+is the paper the fix targets; 2026-i and zj-2025-jan are controls.
+
+| paper | source quoted | standard quoted (round 3 → now) | advanced quoted (round 3 → now) | third reading answer |
+|---|---|---|---|---|
+| paper-2020-i, run A | 36% | 3% → 13% | 2% → 11% | dialogue-led, about half the text quoted |
+| paper-2020-i, run B | 36% | 3% → 12% | 2% → 13% | dialogue-led, seven or eight quoted lines |
+| paper-2026-i | 0% | 2% → 2% | 2% → 6% | no quotes in the source, reported speech |
+| paper-zj-2025-jan | 11% | 7% → 8% | 7% → 9% | three short quoted places, narration leads |
+
+No failures or warnings; all lengths in range. The 2020 essays now carry four
+or five short quoted lines each and still sit below the source's share; the
+controls did not move up. Fix accepted as sufficient for go-live.
