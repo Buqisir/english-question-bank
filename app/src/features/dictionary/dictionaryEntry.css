@@ -15,15 +15,13 @@
 /* 覆盖浮层默认 flex，词头、读音和操作行按词条网格排列。 */
 .paper-selection-card.otter-entry { display: grid; }
 
-.otter-entry :is(h1, h2, h3, p, ol) { margin: 0; }
+.otter-entry :where(h1, h2, h3, p, ol) { margin: 0; }
 .otter-entry-heading :is(h1, h2) {
   font: 600 var(--eqb-font-size-xl)/1.15 var(--otter-serif);
   overflow-wrap: anywhere;
 }
-.otter-entry-heading :focus-visible {
-  outline: 2px solid var(--eqb-color-action);
-  outline-offset: 2px;
-}
+/* 标题仅供程序定位，交互控件的键盘焦点沿用 Button 的墨环。 */
+.otter-entry-heading :is(h1, h2)[tabindex="-1"]:focus { outline: none; }
 
 .otter-entry-heading,
 .otter-pronunciations,
@@ -35,7 +33,8 @@
 }
 
 .otter-close,
-.otter-actions .eqb-button[aria-haspopup] { margin-inline-start: auto; }
+.otter-entry-heading .eqb-button[aria-haspopup] { margin-inline-start: auto; }
+.otter-entry-heading .eqb-button[aria-haspopup] + .otter-close { margin-inline-start: 0; }
 .otter-entry .paper-dictionary-notebook { margin: 0; padding: 0; }
 .otter-pronunciations,
 .otter-count,

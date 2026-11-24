@@ -1,10 +1,8 @@
-import { useId, useState, useSyncExternalStore, type ReactNode } from 'react'
-import { SentenceAnalysis, X } from '../../../icons'
-import { CopyFeedbackIcon, DisclosureIcon, VolumeFeedbackIcon } from '../../../icons/MotionIcons'
+import { useId, useState, useSyncExternalStore } from 'react'
+import { DisclosureIcon, VolumeFeedbackIcon } from '../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../icons/motionInput'
 import { Button } from '../../../shared-ui/Button.tsx'
 import { Notice } from '../../../shared-ui/Notice'
-import { Skeleton, SkeletonGate } from '../../../shared-ui/Skeleton.tsx'
 import type {
   PaperDictionaryEntry,
   PaperDictionaryPosGroup,
@@ -19,9 +17,6 @@ export type DictionarySenseState =
   // matchKey 是服务端选中的义项（entryId\nposGroupIndex\nsenseId）；短语搭配没有对应义项，为 null。
   | { status: 'ok'; text: string; matchKey?: string | null }
   | { status: 'unavailable' | 'error'; message: string }
-
-// 查词典时的三条灰块宽度（照原来 .paper-dictionary-skeleton-line 的 100% / 82% / 58%）。
-const DICTIONARY_SKELETON_WIDTHS = ['100%', '82%', '58%']
 
 function sameWord(a: string, b: string) {
   return a.localeCompare(b, undefined, { sensitivity: 'accent' }) === 0
@@ -62,18 +57,6 @@ function dedupePronunciations(groups: PaperDictionaryPosGroup[]) {
   return [...byKey.values()]
 }
 
-const GAOKAO_STAGE_LABELS = { high: '高考高频', mid: '高考中频', low: '高考低频' } as const
-
-function GaokaoBadge({ entry }: { entry: PaperDictionaryEntry }) {
-  const stage = entry.gaokao?.frequencyStage
-  if (!stage || !(stage in GAOKAO_STAGE_LABELS)) return null
-  return (
-    <span className="paper-dictionary-badge" title={`高考 3000 词频表第 ${entry.gaokao!.frequencyRank} 位`}>
-      {GAOKAO_STAGE_LABELS[stage]}
-    </span>
-  )
-}
-
 function contextKey(entry: PaperDictionaryEntry, group: PaperDictionaryPosGroup, sense: PaperDictionarySense) {
   return `${entry.entryId}\n${group.posGroupIndex}\n${sense.senseId}`
 }
@@ -106,10 +89,10 @@ function PronunciationRow({
   const audio = useSyncExternalStore(subscribeDictionaryAudio, getDictionaryAudioSnapshot)
   if (pronunciations.length === 0) return null
   return (
-    <span className="paper-dictionary-pronunciations">
+    <span className="otter-pronunciations">
       {groupByIpa(pronunciations).map((group) => (
         <span key={group.items[0].pronunciationId} className="paper-dictionary-pronunciation">
-          {group.ipa ? <span className="paper-dictionary-ipa">{group.ipa}</span> : null}
+          {group.ipa ? <span lang="en-fonipa">{group.ipa}</span> : null}
           {group.items.map((pronunciation) => {
             const label = dialectChipLabel(pronunciation)
             if (!pronunciation.audio) {
@@ -118,21 +101,21 @@ function PronunciationRow({
               ) : null
             }
             return (
-              <button
+              <Button
                 key={pronunciation.pronunciationId}
-                type="button"
-                className="paper-dictionary-play"
-                aria-label={playLabel(surface, pronunciation)}
+                size="sm"
+                label={playLabel(surface, pronunciation)}
+                icon={<>
+                  {label && <span aria-hidden="true" className="paper-dictionary-dialect">{label}</span>}
+                  <VolumeFeedbackIcon size={14} state={audio.key === pronunciation.audio.url ? audio.state : 'idle'} />
+                </>}
                 {...iconMotionInput}
                 onClick={() => {
                   void playDictionaryAudio(pronunciation.audio!.url, pronunciation.audio!.fallbackUrl).catch(() => {
                     onPlayError(pronunciation.pronunciationId)
                   })
                 }}
-              >
-                {label ? <span className="paper-dictionary-dialect">{label}</span> : null}
-                <VolumeFeedbackIcon size={14} state={audio.key === pronunciation.audio.url ? audio.state : 'idle'} />
-              </button>
+              />
             )
           })}
         </span>
@@ -321,47 +304,26 @@ export function dictionaryCopyText(surface: string, result: PaperDictionaryRespo
   return parts.filter(Boolean).join('\n')
 }
 
-export function DictionaryCard({
+export function DictionaryFallback({
   surface,
-  lookup,
   result,
-  lookupError,
-  onRetryLookup,
   playErrorId,
   sense,
   onRetrySense,
   onPlayError,
-  onCopy,
-  copied,
-  copyState,
-  copyError,
-  onClose,
-  notebook,
-  onAnalyzeSentence,
 }: {
   surface: string
-  lookup: 'loading' | 'ready'
-  result: PaperDictionaryResponse | null
-  lookupError: string
-  onRetryLookup?: () => void
+  result: PaperDictionaryResponse
   playErrorId: string
   sense: DictionarySenseState
   onRetrySense: () => void
   onPlayError: (pronunciationId: string) => void
-  onCopy: () => void
-  copied: boolean
-  copyState?: 'idle' | 'pending' | 'done'
-  copyError?: string
-  onClose?: () => void
-  notebook?: ReactNode
-  onAnalyzeSentence?: () => void
 }) {
   const [explainAll, setExplainAll] = useState(false)
   const [creditsOpen, setCreditsOpen] = useState(false)
   const creditsId = useId()
-  const entries = result ? withoutFormOfSenses(result.entries) : []
+  const entries = withoutFormOfSenses(result.entries)
   const single = entries.length === 1 ? entries[0] : null
-  const title = single?.headword || surface
   const singlePronunciations = single ? dedupePronunciations(single.posGroups) : []
   const morphology = single
     ? [...new Set(single.posGroups.flatMap((group) => group.morphologyLabels))]
@@ -378,46 +340,7 @@ export function DictionaryCard({
   const contextMatch = sense.status === 'ok' ? (sense.matchKey || null) : null
 
   return (
-    <div className="paper-selection-card paper-dictionary-card" data-loading={lookup === 'loading' ? '' : undefined}>
-      <div className="paper-selection-card-header">
-        <div className="paper-dictionary-title-row">
-          <p className="paper-dictionary-title">{title}</p>
-          {single ? <GaokaoBadge entry={single} /> : null}
-        </div>
-        <div className="paper-selection-card-actions">
-          {onAnalyzeSentence ? (
-            <button
-              type="button"
-              className="paper-dictionary-analyze"
-              onMouseDown={(event) => event.preventDefault()}
-              onClick={onAnalyzeSentence}
-            >
-              <SentenceAnalysis size={16} />
-              <span>分析所在句</span>
-            </button>
-          ) : null}
-          <button
-            type="button"
-            className="paper-selection-action-btn"
-            {...iconMotionInput}
-            onClick={onCopy}
-            disabled={copyState === 'pending'}
-            aria-busy={copyState === 'pending'}
-            aria-label={copied ? '已复制' : '复制词条'}
-          >
-            <CopyFeedbackIcon size={16} state={copyState ?? (copied ? 'done' : 'idle')} />
-          </button>
-          {onClose ? (
-            <button type="button" className="paper-selection-action-btn" onClick={onClose} aria-label="关闭">
-              <X size={16} />
-            </button>
-          ) : null}
-        </div>
-      </div>
-
-      {entries.length > 0 && <p className="paper-dictionary-note">通用词典</p>}
-      {copyError && <p className="paper-selection-card-error" role="alert">{copyError}</p>}
-
+    <>
       {showSurface || singlePronunciations.length > 0 ? (
         <div className="paper-dictionary-meta">
           {showSurface ? (
@@ -451,35 +374,17 @@ export function DictionaryCard({
           <span className="paper-dictionary-sense-note">{sense.message}</span>
         ) : null}
         {sense.status === 'error' ? (
-          <span className="paper-dictionary-sense-note paper-dictionary-sense-error">
-            {sense.message}
-            <button type="button" className="paper-dictionary-sense-retry" onClick={onRetrySense}>
-              重试
-            </button>
-          </span>
+          <Notice kind="error" action={{ label: '重试', onClick: onRetrySense }}>{sense.message}</Notice>
         ) : null}
       </div>}
 
-      {lookup === 'loading' ? (
-        // 共用灰块（2026-11-15 第二轮，DESIGN.md §5 Waiting）：原来三条自己画的灰条（字色 10%、不动），换成 Skeleton
-        // （桌色、一起呼吸），宽度照旧 100% / 82% / 58%、高 12。走 300ms 门槛；词条在下面另画，查完就卸掉，不留够 500ms。
-        <SkeletonGate
-          pending
-          label="正在查词典"
-          className="paper-dictionary-skeletons"
-          skeleton={DICTIONARY_SKELETON_WIDTHS.map((width) => <Skeleton key={width} width={width} height={12} />)}
-        />
-      ) : null}
-      {lookupError && <Notice kind="error" action={onRetryLookup && { label: '重试', onClick: onRetryLookup }}>{lookupError}</Notice>}
-      {result?.status === 'not-found' && <Notice kind="info">该词暂未加入</Notice>}
-      {result?.truncated ? <p className="paper-dictionary-note">词条较长，这里只显示一部分。</p> : null}
+      {result.truncated && <Notice kind="info">词条较长，这里只显示一部分。</Notice>}
 
       {entries.map((entry) => (
         <section key={entry.entryId} className="paper-dictionary-entry">
           {!single ? (
             <div className="paper-dictionary-entry-head">
               <p className="paper-dictionary-headword">{entry.headword}</p>
-              <GaokaoBadge entry={entry} />
               <PronunciationRow
                 surface={surface}
                 pronunciations={dedupePronunciations(entry.posGroups)}
@@ -500,7 +405,7 @@ export function DictionaryCard({
           ))}
         </section>
       ))}
-      {playErrorId ? <p className="paper-dictionary-note">暂时无法播放</p> : null}
+      {playErrorId && <Notice kind="error">读音播放失败，请重试</Notice>}
 
       {hasExplanations ? (
         <Button
@@ -516,7 +421,6 @@ export function DictionaryCard({
         </Button>
       ) : null}
 
-      {notebook}
       <div className="paper-dictionary-footer">
         <span className="paper-dictionary-source">来源 Wiktionary</span>
         <Button
@@ -563,6 +467,6 @@ export function DictionaryCard({
           ) : null}
         </div>
       </div>
-    </div>
+    </>
   )
 }

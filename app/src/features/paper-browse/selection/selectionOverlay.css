@@ -345,56 +345,12 @@
 /* 词典卡英文词头、音标、词性缩写走卷面衬线字道（Owner 例外，DESIGN.md §3）；
    字形经 PaperFontGate 注入 document.fonts，对 portal 同样生效。 */
 .paper-dictionary-card {
-  width: min(340px, calc(100vw - 24px));
-  padding: 16px 16px 12px;
   --dict-serif: 'EQB Termes', 'EQB Source Han Serif', serif;
   --dict-serif-ipa: 'EQB Termes', 'Times New Roman', 'Charis SIL', 'Doulos SIL', serif;
 }
 
 .paper-dictionary-card[data-loading] {
   min-height: 180px;
-}
-
-.paper-dictionary-card .paper-selection-card-header {
-  top: -16px;
-  margin: -16px -16px 0;
-  padding: 16px 16px 0;
-}
-
-.paper-dictionary-title-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-}
-
-/* 与「真题」徽章同一做法：软底、无描边、4px 圆角。 */
-.paper-dictionary-badge {
-  flex-shrink: 0;
-  padding: 1px 6px;
-  border-radius: 4px;
-  background: var(--desk-hover, #E5EAE1);
-  color: var(--eqb-color-text-muted, #6b6e68);
-  font-family: inherit;
-  font-style: normal;
-  font-size: var(--eqb-font-size-xs, 12px);
-  font-weight: 500;
-  line-height: 1.5;
-  white-space: nowrap;
-}
-
-.paper-dictionary-entry-head .paper-dictionary-badge {
-  align-self: center;
-}
-
-.paper-dictionary-title {
-  margin: 0;
-  font-family: var(--dict-serif);
-  font-size: var(--eqb-font-size-lg, 20px);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0;
-  color: var(--eqb-color-text-strong, #1f1f1d);
 }
 
 .paper-dictionary-meta {

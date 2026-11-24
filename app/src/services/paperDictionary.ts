@@ -89,7 +89,7 @@ export type OtterExample = {
   zh?: string
   source: {
     paperId: string
-    paperTitle: string
+    label: string
     groupId: string
     locator: { paragraphId?: string; questionId?: string }
   }

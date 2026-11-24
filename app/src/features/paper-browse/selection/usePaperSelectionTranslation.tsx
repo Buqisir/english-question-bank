@@ -18,10 +18,11 @@ import {
   type PaperTranslationResultItem,
   type PaperTranslationStatus,
 } from '../../../services/paperTranslation.ts'
-import { DictionaryCard, dictionaryCopyText, type DictionarySenseState } from './DictionaryCard'
+import { DictionaryFallback, dictionaryCopyText, type DictionarySenseState } from './DictionaryCard'
 import { DictionaryEntry } from '../../dictionary/DictionaryEntry'
 import { Button } from '../../../shared-ui/Button'
 import { Menu } from '../../../shared-ui/Menu'
+import { Notice } from '../../../shared-ui/Notice'
 import { useClipboardCopy } from '../../../hooks/useClipboardCopy'
 import { stopDictionaryAudio } from './dictionaryAudio'
 import { createPageTranslationCache } from './pageCache'
@@ -866,6 +867,8 @@ export function usePaperSelectionTranslation({
 
   const otter = dictionaryResult?.otter
   const otterSenseId = dictionaryResult?.otterSenseId
+  const surface = snapshot?.segments[0]?.selectedText ?? ''
+  const fallback = !otter && dictionaryResult?.entries.length ? dictionaryResult : null
   const openFullEntry = () => {
     if (!otter || !snapshot) return
     if (window.matchMedia('(width > 980px)').matches) {
@@ -935,42 +938,36 @@ export function usePaperSelectionTranslation({
         onPointerInsideChange={(inside) => {
           pointerInsideRef.current = inside
         }}
-        dictionary={phase === 'dictionary' ? otter ? (
-          <DictionaryEntry density="quick" entry={otter} senseId={otterSenseId} onClose={dismissSelection} actions={<>
-            <Button size="sm" tone="primary" autoFocus={restoreQuickFocus || snapshot.input === 'keyboard'} onClick={openFullEntry}>完整词条</Button>
-            {notebook}
-            <Menu label="更多查词操作" className="otter-menu" triggerSize="sm" items={[
+        dictionary={phase === 'dictionary' ? (
+          <DictionaryEntry
+            density="quick" entry={otter} senseId={otterSenseId} onClose={dismissSelection}
+            surface={fallback?.entries.length === 1 ? fallback.entries[0].headword : surface}
+            pending={lookupState === 'loading'}
+            notice={<>
+              {lookupError && <Notice kind="error" action={{ label: '重试', onClick: () => { void runLookup(snapshot) } }}>{lookupError}</Notice>}
+              {dictionaryResult?.status === 'not-found' && <Notice kind="info">该词暂未加入</Notice>}
+              {copyError && <Notice kind="error">{copyError}</Notice>}
+            </>}
+            fallback={fallback && (
+              <DictionaryFallback surface={surface} result={fallback} playErrorId={playErrorId} sense={shownSense}
+                onRetrySense={() => { void runSense(snapshot) }} onPlayError={setPlayErrorId} />
+            )}
+            actions={otter ? <>
+              <Button size="sm" tone="strong" autoFocus={restoreQuickFocus || snapshot.input === 'keyboard'} onClick={openFullEntry}>完整词条</Button>
+              {notebook}
+            </> : notebook}
+            menu={<Menu label="更多查词操作" className="otter-menu" triggerSize="sm" items={[
               ...(SENTENCE_ANALYSIS_ENABLED && snapshot.analysisEligible
                 ? [{ key: 'analyze', label: '分析所在句', onSelect: openSentenceAnalysis, restoreFocus: false }] : []),
               { key: 'copy', label: copied ? '已复制词条' : '复制词条', disabled: copyState === 'pending', onSelect: () => {
+                if (!otter) {
+                  void copy(dictionaryCopyText(surface, dictionaryResult, shownSense))
+                  return
+                }
                 const match = otter.senses.find(item => item.senseId === otterSenseId)
                 void copy([otter.headword, match && `本文义 ${match.pos} ${match.glossZh}`].filter(Boolean).join('\n'))
               } },
-            ]} />
-          </>} />
-        ) : (
-          <DictionaryCard
-            surface={snapshot.segments[0]?.selectedText || ''}
-            lookup={lookupState}
-            result={dictionaryResult}
-            lookupError={lookupError}
-            onRetryLookup={() => { void runLookup(snapshot) }}
-            playErrorId={playErrorId}
-            sense={shownSense}
-            onRetrySense={() => {
-              void runSense(snapshot)
-            }}
-            onPlayError={setPlayErrorId}
-            copied={copied}
-            copyState={copyState}
-            copyError={copyError}
-            onCopy={() => {
-              const text = dictionaryCopyText(snapshot.segments[0]?.selectedText || '', dictionaryResult, shownSense)
-              void copy(text)
-            }}
-            onClose={dismissSelection}
-            onAnalyzeSentence={SENTENCE_ANALYSIS_ENABLED && snapshot.analysisEligible ? openSentenceAnalysis : undefined}
-            notebook={notebook}
+            ]} />}
           />
         ) : null}
       />,

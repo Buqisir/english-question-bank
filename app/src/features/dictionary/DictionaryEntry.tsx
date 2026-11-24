@@ -16,11 +16,21 @@ type EntryProps = {
   onClose?: () => void
   showCounts?: boolean
 } & (
-  | { density: 'quick'; entry: OtterEntry; actions: ReactNode }
+  | {
+    density: 'quick'
+    entry?: OtterEntry | null
+    surface: string
+    pending: boolean
+    fallback?: ReactNode
+    notice?: ReactNode
+    menu: ReactNode
+    actions: ReactNode
+  }
   | { density: 'full'; entry?: OtterEntry; word?: string; returnHref?: string }
 )
 
 export function DictionaryEntry(props: EntryProps) {
+  const quick = props.density === 'quick' ? props : null
   const word = props.density === 'full' ? props.word : undefined
   const returnHref = props.density === 'full' ? props.returnHref : undefined
   const [loaded, setLoaded] = useState<OtterEntry | null>()
@@ -35,7 +45,7 @@ export function DictionaryEntry(props: EntryProps) {
   const entry = props.entry ?? loaded
   const context = entry?.senses.find(sense => sense.senseId === props.senseId)
   const full = props.density === 'full'
-  const pending = Boolean(word && entry === undefined && !error)
+  const pending = quick?.pending ?? Boolean(word && entry === undefined && !error)
   const Title = word ? 'h1' : 'h2'
   const returnInHistory = Boolean(returnHref && window.history.state?.otterFromSelection)
 
@@ -83,7 +93,8 @@ export function DictionaryEntry(props: EntryProps) {
   ] : []
 
   return (
-    <div className={`otter-entry otter-entry--${props.density}${full ? '' : ' paper-selection-card'}`} onKeyDown={returnHref ? event => {
+    <div className={`otter-entry otter-entry--${props.density}${full ? '' : ' paper-selection-card paper-dictionary-card'}`}
+      data-loading={quick && pending ? '' : undefined} onKeyDown={returnHref ? event => {
       if (event.key === 'Escape') {
         if (returnInHistory) window.history.back()
         else window.location.replace(returnHref)
@@ -95,20 +106,23 @@ export function DictionaryEntry(props: EntryProps) {
         window.history.back()
       }}>回到原句</ButtonLink>}
       <header className="otter-entry-heading">
-        <Title ref={titleRef} tabIndex={full ? -1 : undefined} lang="en">{entry?.headword ?? word}</Title>
-        {entry?.lists.includes('3000') && <Chip>高考 3000</Chip>}
-        {entry?.lists.includes('3100') && <Chip>高考 3100</Chip>}
+        <Title ref={titleRef} tabIndex={full ? -1 : undefined} lang="en">{entry?.headword ?? word ?? quick?.surface}</Title>
+        {entry && <Chip>{entry.lists.some(list => list === '3000' || list === '3100') ? '高考词汇' : '超纲'}</Chip>}
+        {quick?.fallback && <Chip>通用词典</Chip>}
+        {quick?.menu}
         {props.onClose && <Button size="sm" className="otter-close" label={full ? '关闭完整词条' : '关闭'} icon={<X size={16} />} onClick={props.onClose} />}
       </header>
       {pending && <SkeletonGate pending label="正在查词典" skeleton={<><Skeleton height={12} /><Skeleton width="68%" height={12} /></>} />}
       {error && <Notice kind="error" action={{ label: '重试', onClick: () => { setError(''); setAttempt(n => n + 1) } }}>{error}</Notice>}
-      {entry === null && <Notice kind="info">该词暂未加入</Notice>}
+      {!quick && entry === null && <Notice kind="info">该词暂未加入</Notice>}
+      {quick?.notice}
       {entry && pronunciations(full ? entry.pronunciations : quickPronunciation ? [quickPronunciation] : [], full)}
       {audioError && <Notice kind="error">读音播放失败，请重试</Notice>}
-      {props.density === 'quick' && <>
+      {quick && <>
         {quickSense && <p className="otter-gloss">{context && <Chip>本文</Chip>} <i lang="en">{quickSense.pos}</i> {quickSense.glossZh}</p>}
-        {props.showCounts && <p className="otter-count">本词在真题中出现 {props.entry.counts.gaokao} 次 · 模拟题 {props.entry.counts.mock} 次</p>}
-        <div className="otter-actions">{props.actions}</div>
+        {entry && props.showCounts && <p className="otter-count">本词在真题中出现 {entry.counts.gaokao} 次 · 模拟题 {entry.counts.mock} 次</p>}
+        {quick.fallback}
+        {quick.actions && <div className="otter-actions">{quick.actions}</div>}
       </>}
       {sections.filter(section => section.senses.length).map(({ title, senses, folded }) => (
         <section key={title} aria-label={title} className="otter-senses">
