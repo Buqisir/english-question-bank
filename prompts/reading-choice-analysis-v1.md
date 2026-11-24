@@ -197,12 +197,13 @@ below say how to write it.
 
 1. **First sentence: how the option meets the passage, in plain words.** The
    正确选项 line carries no type label, so the note's first sentence says it:
-   the option keeps the passage's own word (「原文用的就是 productivity，选项沿
-   用」); it says the same thing in other words, naming both (「选项的“意识到”
-   （aware）就是原文的“提高认识”（raise awareness）」); it sums several things
-   up in one word (「教练、顾问、安慰者都属于她扮演的角色」); it puts two places
+   the option keeps the passage's own word (「原文用的就是 harvest，选项沿
+   用」); it says the same thing in other words, naming both (「选项的“省钱”
+   （save money）就是原文的“不用多花一分”（at no extra cost）」); it sums several things
+   up in one word (「修屋顶和补围墙都属于维修」); it puts two places
    together (「“儿童”出自……，“患病”出自……」); it is worked out one step past
-   the passage (「原文没说他挨过饿，只说……，由此推出他见过」). Never call it a
+   the passage (「原文没说他住在海边，只说他每天清早去码头买鱼，由此推出
+   他住得离海不远」). Never call it a
    paraphrase, 同义替换 or 换说法 when the option keeps the passage's word.
    Never name the question type, and never open with 「本题询问」「题目问」.
 2. **As long as the question needs, no longer.** A question answered by one
@@ -214,8 +215,8 @@ below say how to write it.
    to about 80.
 3. **Chinese first, English in brackets, only the deciding words.** Put after
    a Chinese phrase, in brackets, only the one to three English word groups that
-   decide the answer (a few words each, `…` for a cut): 「订单多得忙不过来
-   （flooded）」. The passage sentence is already printed in 原文依据: never copy
+   decide the answer (a few words each, `…` for a cut): 「票一上午就卖光了
+   （sold out）」. The passage sentence is already printed in 原文依据: never copy
    it again, and never leave English bare inside a Chinese sentence.
 4. **An option made of several meanings: land each one.** When the correct
    option puts two or more meanings together (「受伤的志愿者」), give each
@@ -233,7 +234,7 @@ below say how to write it.
 6. **Start where the lines above stop.** The bridge already says what a
    pointing word stands for and why the answer is in the context; the 找法
    says which way to look. Do not retell either, not even in other words
-   (bridge 「there 指 ancient library」, then a note 「抄本放在图书馆里」 says it
+   (bridge 「it 指 the old mill」, then a note 「那台机器装在磨坊里」 says it
    twice). Add what they leave out: how the option's words match the
    passage's, or the step that turns the passage into the option. When nothing
    is left, one sentence and 「选 B」 is enough.
@@ -241,18 +242,21 @@ below say how to write it.
    back.** From the word's own sentence (and the one next to it) draw what the
    answer must be: praise or blame, a person or a thing, a good or a bad thing.
    Write it as 「所以 X 必须是……」. Then put the answer into the sentence and
-   write out what the sentence now says (「放回去：有些老师不留作业，Ho 说这是
-   在帮倒忙」); for a wrong option, write what the sentence would say with it
-   (「放进去就成了“给孩子上常规课是帮倒忙”，和 Ho 自己做的事相反」). Never sum
+   write out what the sentence now says (「放回去：雨下了一整天，比赛只好
+   往后推」); for a wrong option, write what the sentence would say with it
+   (「放进去就成了“雨下了一整天，比赛提前了”，和后文改到下周相反」). Never sum
    it up with a verdict word such as 读得通、读不通、说得通: the reader judges
    from the sentence you wrote out.
 8. **The whole text or a whole paragraph: show the answer covers it.** For a
    best title, main idea or purpose of the whole text, or the main idea of one
-   paragraph, go through the parts in order with marks and say what each part
-   is about in a few words, then say why the correct option covers all of them
-   and each wrong option covers only one part or none (「[[para-2]]讲心情，
-   [[para-3]]讲学习和工作表现，[[para-4]]劝人别放弃；都是植物给人的好处，
-   选 B」). Do not rest a title question on one word of one paragraph.
+   paragraph, `locateFindZh` already walks through the parts with marks; do
+   not walk through them again in the note. Write the note in full sentences,
+   not a list of fragments: say what all the parts have in common and why the
+   correct option's words name exactly that (「几段写的都是早起给人带来的变化：
+   精神更好、效率更高、心情更稳；选项的“改变生活”正好把这几样都包进去，
+   选 C。」). Do not judge the wrong options in the note: each has its own
+   line, where it says which single part it takes or what it adds. Do not rest
+   a title question on one word of one paragraph.
 9. **Stated or worked out: say which.** For what the passage writes, use 「提到」
    「说」「写着」; for what follows from it, use 「可见」「由此推出」 and write the
    step in between. The conclusion stays no stronger than the evidence: say
@@ -267,8 +271,8 @@ below say how to write it.
 Wrong options (`explanation` or `relationNote`) follow rules 3, 5 and 10 too.
 Each says where the option comes from (the word it borrows and where, the
 common-sense guess it invites) and which object, scope, condition or direction
-fails in the passage. Name what lures the reader concretely: 「Good 是疼痛科
-主任（pain management），选项借这个身份说止痛」, not 「容易联想到止痛」. Do not
+fails in the passage. Name what lures the reader concretely: 「Lee 是消防员
+（firefighter），选项借这个身份说他会急救」, not 「容易联想到急救」. Do not
 start every wrong option with the same frame; vary with what each one does.
 `原文没提` stays for options with no anchor, followed by what the passage does
 say there.
@@ -794,8 +798,11 @@ Step 1. Read the stem for one or two clues.
 - 对象词定段，题眼定句: when the object word and a sentence-fixing 题眼 land
   in different sentences, the 定位句 is where the 题眼 lands. A 题眼 lands
   through words (because, the reason, a lesson, a date). An imperative or
-  should / must alone does not move the 定位句 off the sentence holding a
-  name or place from the stem: locate there and bridge on to the advice.
+  should / must alone does not move the 定位句 off a sentence of the text
+  that holds a name or place from the stem: locate there and bridge on to
+  the advice. When the name or place is only the subhead the section is
+  filed under and no sentence repeats it, there is no such sentence: locate
+  on the advice itself (stem "suggest", passage "Be sure to bring"), as below.
 - When the stem has both a sentence-fixing word and one that cannot fix a
   sentence ("What does humans' absence imply"), follow the one that fixes a
   sentence and locate from the stem.
@@ -873,7 +880,7 @@ Step 3. Choose the 定位句 (`targetText`).
   clause for a condition. Only for advice (suggest, advise, recommend,
   urge, should), and only when the 定位句 holds no object word, use the 题眼
   as `sourceText` and the feature words as `targetCue` (stem "suggest",
-  passage "Don't leave"). Never pair words such as purpose, parts, happen
+  passage "Be sure to bring"). Never pair words such as purpose, parts, happen
   or benefit with a loosely related passage word: when no natural pair
   exists, locate on the sentence with the object word. When the 定位句
   holds a distinguishing object word (a name, a number, a rare term), that
@@ -920,22 +927,22 @@ Fields of that item:
 - `targetParagraphId` — the paragraph of `targetText`.
 - `targetCue` — the exact words inside `targetText` that match `sourceText`,
   1-5 English words: the counterpart a reader circles, not a clause (stem
-  “Ho's job”, passage “hospital teacher”, not “what it means to be a
-  hospital teacher”). REQUIRED when the passage words differ from the stem
-  words (stem “started”, passage “opened”); omit it when `sourceText`
+  “Ann's plan”, passage “open a café”, not “what she had dreamed of
+  since she was ten: to open a café”). REQUIRED when the passage words differ from the stem
+  words (stem “quit”, passage “gave up”); omit it when `sourceText`
   appears in `targetText` as is (case does not matter). The PDF prints
   `sourceText → targetCue`, or `sourceText 原词` when there is no
   `targetCue`, so both must read well side by side. A `targetCue` that only
   drops words from `sourceText` or only adds some to it (stem "Ann's cows",
-  passage "cows"; stem "hospital school", passage "School") counts as the
+  passage "cows"; stem "the city library", passage "Library") counts as the
   same words: the page prints 原词.
 - `sourceZh`, `targetCueZh` — REQUIRED with a `targetCue` whose words differ
   from `sourceText`: the Chinese meaning of each side in this passage, at
   most 10 Chinese characters, no English letters. The page prints
-  「started（开始经营）→ opened（开张）」 so a reader who does not know one of
+  「quit（辞职）→ gave up（放弃）」 so a reader who does not know one of
   the two words still sees why they match. Give the meaning here, not a
-  dictionary list: 「Ho's job（Ho 的工作）→ hospital teacher（医院里的老师）」
-  needs the Ho, so 「Ho 的工作」. Omit both when there is no `targetCue` or
+  dictionary list: 「Ann's plan（Ann 的打算）→ open a café（开一家咖啡馆）」
+  needs the Ann, so 「Ann 的打算」. Omit both when there is no `targetCue` or
   the cue is the same words (the page prints 原词 and needs no gloss).
 - `answerText` — the exact passage words where the answer is. It MUST be a
   substring of one `quote` in the correct option's `evidence`. Keep it to
@@ -999,8 +1006,8 @@ Fields of that item:
 second line of the 定位 block. The page prints a fixed first line:
 - `stem`: the 定位词 in bold, → the passage words (`targetCue`) when they
   differ, each with its Chinese (`sourceZh`, `targetCueZh`), and the
-  paragraph and sentence, counted by the page, e.g. 「定位 started（开始经营）
-  → opened（开张）第 2 段首句」;
+  paragraph and sentence, counted by the page, e.g. 「定位 quit（辞职）
+  → gave up（放弃）第 2 段首句」;
 - `options`: 「定位 核对选项」;
 - `passage`: 「定位 看全文」, or the paragraph the question names.
 `locateFindZh` goes under it. It shows how to do THIS question well: the move a
@@ -1079,17 +1086,17 @@ Example, the passage uses other words:
 
 ```json
 {
-  "sourceText": "started",
+  "sourceText": "quit",
   "sourceRole": "stem",
-  "targetText": "When Mia opened her bakery, she expected few customers.",
+  "targetText": "When Mia gave up her office job, her friends thought she would regret it.",
   "targetParagraphId": "para-...",
   "relationType": "locationCue",
-  "targetCue": "opened",
-  "sourceZh": "开始经营",
-  "targetCueZh": "开张",
+  "targetCue": "gave up",
+  "sourceZh": "辞职",
+  "targetCueZh": "放弃",
   "answerText": "the shop was full every morning",
-  "bridgeZh": "But 后是实际情况，和预期相反",
-  "note": "题干 started 对应原文 opened。"
+  "bridgeZh": "But 后是实际情况，和朋友的料想相反",
+  "note": "题干 quit 对应原文 gave up。"
 }
 ```
 Its `locateFindZh`: "往后读，看 But 后".
