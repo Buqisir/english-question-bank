@@ -147,28 +147,37 @@ export function openOtterDictionary(rootDir) {
     }
   }
   const occurrences = new Map()
-  const senseIds = new Map()
+  const matches = new Map()
   for (const row of readOccurrenceRows(path.join(dir, 'occurrence-senses.ndjson'))) {
     const locator = occurrenceKey(row.paperId, row.groupId, row.paragraphId ?? row.questionId)
     let positions = occurrences.get(locator)
     if (!positions) occurrences.set(locator, positions = new Map())
-    const key = occurrenceKey(row.sentence, row.start, row.end, row.surface, row.entryId)
-    if (!senseIds.has(row.senseId)) senseIds.set(row.senseId, row.senseId)
-    positions.set(key, senseIds.get(row.senseId))
+    const key = occurrenceKey(row.sentence, row.start, row.end, row.surface)
+    const previous = positions.get(key)
+    if (previous === null || (previous && previous.entryId !== row.entryId)) {
+      positions.set(key, null)
+      continue
+    }
+    const matchKey = occurrenceKey(row.entryId, row.senseId)
+    if (!matches.has(matchKey)) matches.set(matchKey, { entryId: row.entryId, senseId: row.senseId })
+    positions.set(key, matches.get(matchKey))
+  }
+  function entryById(entryId) {
+    const name = files.get(entryId)
+    if (!name) return null
+    const cached = entries.get(entryId)
+    if (cached) return cached
+    const entry = prepareEntry(readEntry(name))
+    entries.set(entryId, entry)
+    return entry
   }
   return {
     available: files.size > 0,
     find(surface) {
       const key = normalize(surface)
-      const entryId = headwords.get(key) ?? aliases.get(key.toLowerCase())
-      if (!entryId) return null
-      const cached = entries.get(entryId)
-      if (cached) return cached
-      const entry = prepareEntry(readEntry(files.get(entryId)))
-      entries.set(entryId, entry)
-      return entry
+      return entryById(headwords.get(key) ?? aliases.get(key.toLowerCase()))
     },
-    match(entry, paperId, stream, word) {
+    findOccurrence(paperId, stream, word) {
       const occurrence = readOtterOccurrence(stream, word)
       if (!occurrence) return null
       const { leaf, sentence, sentenceNumber } = occurrence
@@ -178,8 +187,12 @@ export function openOtterDictionary(rootDir) {
       if (leaf.kind === 'option') locator = leaf.id.replace(/:([^:]+)$/, '#option=$1')
       if (leaf.kind === 'option-bank') locator = `option-bank:${leaf.id}`
       const positions = occurrences.get(occurrenceKey(paperId, stream.groupId, locator))
-      const senseId = positions?.get(occurrenceKey(sentenceNumber, start, end, word.surface, entry.entryId))
-      return entry.senses.some(sense => sense.senseId === senseId) ? senseId : null
+      const match = positions?.get(occurrenceKey(sentenceNumber, start, end, word.surface))
+      if (!match) return null
+      const entry = entryById(match.entryId)
+      return entry?.senses.some(sense => sense.senseId === match.senseId)
+        ? { entry, senseId: match.senseId }
+        : null
     },
   }
 }

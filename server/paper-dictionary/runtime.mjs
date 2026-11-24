@@ -332,7 +332,8 @@ export function createPaperDictionaryRuntime({
     const { source, slice, word } = resolveWordSelection({
       body, context, userId, schemaVersion: DICTIONARY_REQUEST_SCHEMA,
     })
-    const entry = otter?.find(word.surface) ?? null
+    const match = otter?.findOccurrence(body.paperId, slice.stream, word)
+    const entry = match?.entry ?? otter?.find(word.surface) ?? null
     const lexical = entry
       ? { dictionaryVersion: dictionary().meta?.dictionary_version || DICTIONARY_SCHEMA, status: 'found', entries: [], attribution: '' }
       : lexicalEntry(word.surface)
@@ -347,7 +348,7 @@ export function createPaperDictionaryRuntime({
       truncated: false,
       attribution: lexical.attribution,
       otter: entry,
-      otterSenseId: entry ? otter.match(entry, body.paperId, slice.stream, word) : null,
+      otterSenseId: match?.senseId ?? null,
     })
   }
 
@@ -396,11 +397,11 @@ export function createPaperDictionaryRuntime({
       selectedText: word.surface,
       ...record,
     })
+    const match = otter?.findOccurrence(body.paperId, slice.stream, word)
+    if (match) return respond({ status: 'ok', match: null, phrase: null, otterSenseId: match.senseId })
     const entry = otter?.find(word.surface)
     if (entry) {
       const noMatch = { status: 'none', match: null, phrase: null, otterSenseId: null }
-      const otterSenseId = otter.match(entry, body.paperId, slice.stream, word)
-      if (otterSenseId) return respond({ ...noMatch, status: 'ok', otterSenseId })
       const occurrence = readOtterOccurrence(slice.stream, word)
       if (!occurrence || occurrence.sentence.length > SENSE_PICK_MAX_OCCURRENCE_UTF16 || !entry.senses.length) {
         return respond(noMatch)
