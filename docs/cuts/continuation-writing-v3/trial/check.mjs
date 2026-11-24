@@ -34,6 +34,14 @@ const readability = (text) => {
     wordsPerSentence: +(list.length / sentences).toFixed(1),
   }
 }
+// Share of words inside quotation marks, in percent. Quoted signs or notes count
+// too, so this slightly overstates direct speech.
+const quoteShare = (text) => {
+  const all = words(text).length
+  const quoted = (norm(text).match(/"[^"]*"/g) || []).reduce((sum, q) => sum + words(q).length, 0)
+  return all ? Math.round(100 * quoted / all) : 0
+}
+const sourceQuoteShare = quoteShare(material)
 const starterWords = starters.map((s) => words(s).length)
 const sourceGrams = new Set()
 {
@@ -68,14 +76,19 @@ function measureEssay(label, essay, range, failures, warnings) {
       break
     }
   }
-  return { newWords, perParagraph, ...readability(essay) }
+  const share = quoteShare(essay)
+  // Principle 3: direct speech follows the source. A warning, not a failure.
+  if (share > 2 * sourceQuoteShare + 10) {
+    warnings.push(`${label}: ${share}% of words in direct speech, source ${sourceQuoteShare}%`)
+  }
+  return { newWords, perParagraph, quoteShare: share, ...readability(essay) }
 }
 
 const output = JSON.parse(readFileSync(outputPath, 'utf8'))
 const failures = []
 const warnings = []
 const sourceLevel = readability(material)
-const report = { paper: asset.paperId || path.basename(assetDir), source: { words: words(material).length, ...sourceLevel } }
+const report = { paper: asset.paperId || path.basename(assetDir), source: { words: words(material).length, quoteShare: sourceQuoteShare, ...sourceLevel } }
 
 if (flag === '--v2') {
   report.v2 = measureEssay('v2', output.modelAnswer, null, failures, warnings)

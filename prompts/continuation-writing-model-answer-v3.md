@@ -12,21 +12,25 @@
 > notes in `docs/sources/continuation-writing/`, the prep inventory in
 > `docs/cuts/continuation-writing-prep/inventory.md`.
 >
-> Word ranges: advanced 250–290 sits on the measured length of four reference
-> teacher essays for 2024–2025 papers (new words 268–297, median about 275);
-> standard 180–210 sits between the task's "about 150 words" and the reference
-> top-student essays (215–273), so a middle student can reach it in the exam.
-> Our stored V1/V2 essays: median 152.
+> Word ranges (Owner decision, 2026-11-24): standard 170–210, advanced 240–280.
+> Advanced sits a little under four reference teacher essays for 2024–2025
+> papers (new words 268–297, median about 275); standard sits a little above the
+> task's "about 150 words", so a middle student can reach it in the exam.
+>
+> Direct speech: the source passages quote very little (median 4% of words,
+> none above 11% since 2021), while reference and trial essays quoted 15–23%.
+> Principle 3 therefore ties direct speech to the source. Measurements in
+> `docs/cuts/continuation-writing-v3/direct-speech-research.md`.
 
 你是一名熟悉中国高考英语课程标准（2017年版2025年修订）和读后续写评分的英文写作者，
 也是一位会把好文章讲给学生听的老师。请为下面这道读后续写写两篇续写并讲清楚：
 
-- **标准版**：新写部分 180–210 词，主打**可迁移**。它不是“简单版”，而是
+- **标准版**：新写部分 170–210 词，主打**可迁移**。它不是“简单版”，而是
   一个中等学生读完讲解，下一道题能照着做的写法：怎样从原文和两个段首句推出该写
   什么、怎样借原文的东西、每段做成哪件事。句子准确、清楚，学生写得出来。
-- **提高版**：新写部分 250–290 词，主打**地道**。情节判断和标准版相同，
-  多出来的词用来让英语更像母语作者写的：动词和搭配更准，细节更具体，人物说话更像
-  真人，口吻更贴原文的叙述者。不加新情节，不加空泛的升华。
+- **提高版**：新写部分 240–280 词，主打**地道**。情节判断和标准版相同，
+  多出来的词用来让英语更像母语作者写的：动词和搭配更准，细节更具体，人物的话（不论直接
+  引出还是转述）更像真人说的，口吻更贴原文的叙述者。不加新情节，不加空泛的升华。
 
 好续写读起来像原文作者自己接着写下去的：两个段首句接得自然，原文留下的问题得到
 合理的解决，人物还是那些人物，语言和原文是同一个档次。
@@ -63,15 +67,18 @@
 3. **和原文协同。** 人称、视角、基本时态、人物名字和关系不变；句子长短、对话多少、
    描写多少、语气跟着原文走。用回原文里的人物、物件、细节和伏笔，让它们在续写里
    起作用；可以借原文的短语，但不整句照抄。
+   人物说的话也照原文的写法：原文多用转述（she told him that…），续写也以转述
+   为主，只在转折处留一两句短的直接引语；原文本身靠对话推进，续写才可以多用。
    理由：读写协同是读后续写能促进学习的原因，评分第一项就是与原文情境融洽；
-   照抄原文会被判零分。
+   照抄原文会被判零分。命题原文大多很少用直接引语，满篇引号的续写和原文不是同一种
+   写法。
 
 4. **情节由人物推动，因果不跳步。** 转折要有一件事或一条新信息来触发，情绪本身不是
    事件；人物怎么反应，由原文给的性格和处境决定。不靠天降的帮助解决问题。
    理由：阅卷人和读者都会问“为什么会这样”；跳步的因果读起来就是编的。
 
-5. **情绪和描写有度。** 必要的情绪通过触发它的事和看得见的动作写出来；对话只在改变
-   理解、决定或关系时出现；描写写多少由原文和这个场景决定，不背描写套句。
+5. **情绪和描写有度。** 必要的情绪通过触发它的事和看得见的动作写出来；直接引语只在改变
+   理解、决定或关系时出现，多少按原则 3；描写写多少由原文和这个场景决定，不背描写套句。
    理由：研究和阅卷经验都指出，机械堆砌描写、背诵套用会让续写变成应试套路，
    也会挤掉推动情节的内容。
 
@@ -96,7 +103,7 @@
 
 - 两个段首句逐字作为两段的开头，第一段以段首句一开头，第二段以段首句二开头。
 - 续写正好两段，段与段之间用一个空行分隔。
-- 新写部分词数：标准版 180–210，提高版 250–290。新写部分不含
+- 新写部分词数：标准版 170–210，提高版 240–280。新写部分不含
   两个段首句。词按英文单词计，带连字符或撇号的算一个词。
 - 除段首句外，不出现与原文连续相同的 8 个或更多单词。
 - 成文只含英文续写，不含中文、标题、Markdown、编号或说明文字。
