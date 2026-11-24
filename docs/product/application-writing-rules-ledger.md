@@ -29,3 +29,9 @@ trace.
 V3 contained task-derived patch rules (for example a deadline rule written from one
 past paper). V4 does not carry them. If a trial shows the failure they guarded
 against, the rule comes back here as `active` with new evidence.
+
+## Trials
+
+| Date | Papers | Result | Notes |
+|---|---|---|---|
+| 2026-11-24 | 2026 新课标Ⅰ, 2026 新课标Ⅱ | Blind, V4 standard vs V3 live: Owner picked V4 on both (2 : 0) | Both outputs passed the hard-constraint validator on the first try. No ledger entry was observed. Owner rated the Ⅱ teaching page clear, transferable and with requirements separated from choices, and the Ⅱ advanced essay worth its extra words. Dimension boxes were not filled, so the result does not say which dimension decided it. |
