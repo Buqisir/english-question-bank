@@ -1,0 +1,137 @@
+{
+  "taskType": "continuation",
+  "blocked": null,
+  "reading": {
+    "questions": [
+      {
+        "question": "原文停在哪里，什么问题还没解决？",
+        "answer": "原文停在“我”的一个发现上：为了省事，“我”不再纠正别人的发音，只是微笑点头，却意识到这样可能失去分享自己文化身份的机会。还没解决的是：“我”会不会重新开口，把名字和它背后的东西讲给别人听。"
+      },
+      {
+        "question": "“我”想要什么、是什么样的人，从原文哪里看出来？",
+        "answer": "“我”在乎别人怎么看自己（I did care about how others would think of me），怕同学嫌烦，所以在课堂上耸肩放弃；但最后一句说明“我”其实希望名字被认真对待、文化被看见。她不是不愿解释，而是怕成为负担。"
+      },
+      {
+        "question": "原文是怎么写的？续写该照着怎么写？",
+        "answer": "第一人称、过去时，由“我”回忆讲述；句子中等长度，以叙述和心理活动为主，全文只有一句很短的直接引语（“It’s okay, professor”），描写很少。续写也以叙述和转述为主，只留一两句短引语，不堆景物描写。"
+      }
+    ],
+    "sourceLinks": [
+      {
+        "sourceQuote": "I stopped acting as a “Chinese teacher.”",
+        "use": "这是原文给出的称呼。结尾让“我”重新愿意做这个“Chinese teacher”，形成首尾呼应，也正好回答原文留下的问题。"
+      },
+      {
+        "sourceQuote": "I just smiled and nodded approvingly",
+        "use": "原文里的“微笑点头”是逃避的动作。续写可以写“这次没有只是点头”，用同一个动作的反面表示人物变了。"
+      },
+      {
+        "sourceQuote": "grow tired of my efforts or even lose patience with me",
+        "use": "这是“我”原来的担心。第二段可以让同学们并没有不耐烦、反而笑着练习，用事实把这份担心化解掉。"
+      }
+    ]
+  },
+  "taskCard": {
+    "taskRequires": [
+      "第一段从“在课堂讨论中被邀请解释名字含义”开始，必须写出“我”真的讲了名字的意思（Qiuyu 即“秋雨”）。",
+      "第二段首句说许多同学下课后围过来，所以第一段结束时同学们必须已经对这个名字产生兴趣；下课后的交流留给第二段写。",
+      "要接上原文的转变：“我”此前只微笑点头、不再解释，续写中“我”要重新主动分享，回应原文最后一句“分享文化身份的机会”。",
+      "人物仍是“我”、教授和同学，第一人称过去时不变。"
+    ],
+    "thisEssayChooses": "本文选择：用板书写下两个汉字、讲父母取名的缘由，再把发音拆成两个简单部分来教；教授再试一次几乎读对，同学们小声跟读、抄写汉字，以此铺到第二段。第二段写同学问汉字写法和自己名字的含义，“我”耐心一遍遍教；结尾落在第二天有人在教室后排喊出“Qiuyu”、“我”挥手回应，重新乐于做“Chinese teacher”。取名缘由（雨夜出生、父母的期望）、拆音方法、结尾场景都可以换，例如改成同学请“我”帮他们起中文名，或教授下次点名读对了。"
+  },
+  "standard": {
+    "essay": "In a class discussion, I was invited to explain the meaning of my name. I picked up a marker and wrote my name on the whiteboard in two Chinese characters. \"Qiu means autumn, and yu means rain,\" I said. I told them that I was born on a rainy autumn evening, and my parents hoped I would grow up as calm and gentle as that rain. Then, instead of just smiling, I broke my name into two easy parts. Qiu sounds like \"chee-oh\", and yu is close to \"you\" with rounded lips. The professor tried again, and this time came very close. Several classmates whispered the sounds to themselves, and some copied the characters into their notebooks.\n\nMany of my classmates got interested and came up to me after class. They wanted to know how the characters were written and whether their own names had meanings. I taught them to say \"Qiuyu\", sound by sound. When someone got it wrong, I did not just nod this time. I said it again slowly and waited for them to try once more. Nobody seemed tired of my efforts. They laughed at their own mistakes and kept practicing. The next morning, as I walked into the lecture hall, someone called out \"Qiuyu!\" from the back row. It was not perfect, but close enough. I turned and waved, happy to be a \"Chinese teacher\" again.",
+    "notes": [
+      {
+        "paragraph": 1,
+        "role": "“我”抓住机会讲清名字的意思和读法，教授几乎读对，同学开始感兴趣，为第二段“下课围过来”铺好路。",
+        "items": [
+          {
+            "quote": "I picked up a marker and wrote my name on the whiteboard in two Chinese characters.",
+            "explain": "用一个看得见的动作开场，代替“我鼓起勇气”这类空泛的心理描写。拿起笔走向白板，本身就说明她这次不再逃避。"
+          },
+          {
+            "quote": "I told them that I was born on a rainy autumn evening, and my parents hoped I would grow up as calm and gentle as that rain.",
+            "explain": "名字含义用转述来讲，和原文以叙述为主的写法一致；“秋雨”落到出生时的场景和父母的期望上，名字就有了故事，同学才会感兴趣。"
+          },
+          {
+            "quote": "Then, instead of just smiling, I broke my name into two easy parts.",
+            "explain": "“instead of just smiling”直接对上原文的“只是微笑点头”，一句话交代人物的变化；“拆成两部分”是新的教法，解释了为什么这次能读对，而不是像上次那样重复五遍。"
+          },
+          {
+            "quote": "Several classmates whispered the sounds to themselves, and some copied the characters into their notebooks.",
+            "explain": "用同学的小动作表现“感兴趣”，正好成立第二段首句的前提，但没有提前写下课后的事。"
+          }
+        ]
+      },
+      {
+        "paragraph": 2,
+        "role": "同学下课来问，“我”耐心地教，原来的担心被事实化解；结尾用一声喊名字和一个挥手收住原文的问题。",
+        "items": [
+          {
+            "quote": "When someone got it wrong, I did not just nod this time.",
+            "explain": "再次呼应原文的“点头”，用同一个动作的反面写出转变，比直接说“我变得自信了”更有说服力。"
+          },
+          {
+            "quote": "Nobody seemed tired of my efforts.",
+            "explain": "借原文“grow tired of my efforts”的说法，把“我”原来最怕的事情明确否定掉，前后因果接上了。"
+          },
+          {
+            "quote": "It was not perfect, but close enough.",
+            "explain": "不写成人人都读得完美，更真实；短句也让结尾节奏放慢。"
+          },
+          {
+            "quote": "happy to be a \"Chinese teacher\" again",
+            "explain": "收在原文自己给出的称呼上，回答了原文最后提出的问题，不需要另加一句大道理。"
+          }
+        ]
+      }
+    ],
+    "expressions": [
+      {
+        "expression": "break my name into two easy parts",
+        "function": "说清“我”这次换了教法：把难读的名字拆开教，是情节能往前走（教授读对、同学学会）的原因。"
+      },
+      {
+        "expression": "whispered the sounds to themselves / copied the characters into their notebooks",
+        "function": "用同学的小动作写出兴趣，不必写“they were very interested”这样的标签。"
+      },
+      {
+        "expression": "someone called out \"Qiuyu!\" from the back row",
+        "function": "把结尾落在一个具体场景上：名字被人喊出来，就是“我”分享成功的证据。"
+      }
+    ],
+    "pitfalls": [
+      {
+        "pitfall": "第一段就写下课后同学围过来、一起练发音。",
+        "why": "这是第二段首句的事。第一段只需写到同学感兴趣，提前写掉会让第二段首句接不上或重复。"
+      },
+      {
+        "pitfall": "只讲名字的意思，不写“我”的态度变化，或写成长篇的中国文化介绍。",
+        "why": "原文留下的问题是“我”要不要重新分享，续写要让这个转变发生；大段文化介绍偏离了人物和情节。"
+      },
+      {
+        "pitfall": "结尾写一句“Names are bridges between cultures”之类的感悟。",
+        "why": "这种话放在任何文化故事后面都成立，不推进情节；用“被喊出名字、挥手回应”这样的具体动作收尾更好。"
+      }
+    ]
+  },
+  "advanced": {
+    "essay": "In a class discussion, I was invited to explain the meaning of my name. For a moment I almost smiled and let it pass. Instead, I picked up a marker and wrote two Chinese characters on the whiteboard. Pointing to the first, I told them that Qiu means autumn; the second, yu, means rain. I had been born on a rainy autumn night, I explained, and my parents, listening to rain on the window, hoped I would grow up as quiet and steady as that rain. I did something I had not done since that awkward lecture: I broke my name into pieces. \"Chee-oh, then yu, like 'you' with your lips rounded,\" I said. The professor tried it slowly, twice. The second time it was almost right, and a few classmates were mouthing the sounds under their breath.\n\nMany of my classmates got interested and came up to me after class. Some wanted to see how the characters were written, stroke by stroke; others asked whether their own names carried a meaning. One girl admitted that she had been calling me \"Q\" for weeks because she was afraid of getting it wrong. We practiced right there between the desks. Whenever someone stumbled, I no longer just nodded. I said it again, slower, and waited while they had another go. Nobody lost patience; they laughed at their own mistakes and kept at it until the sounds began to land. Before we left, I tore a page from my notebook and wrote out their names in Chinese characters. The next morning, as I stepped into the lecture hall, someone called \"Qiuyu!\" from the back row. It was not quite the way my mother says it, but it was close, and it was mine. I turned and waved, glad to be a \"Chinese teacher\" again.",
+    "beyondStandard": [
+      {
+        "quote": "For a moment I almost smiled and let it pass.",
+        "explain": "先写出“差点又像从前那样笑笑算了”的一瞬间犹豫，人物的转变有了过程，也更贴原文那个在乎别人眼光的叙述者。"
+      },
+      {
+        "quote": "One girl admitted that she had been calling me \"Q\" for weeks because she was afraid of getting it wrong.",
+        "explain": "补了一个很真实的细节：别人也怕读错。原来不只“我”尴尬，这让第二段的交流更像真人之间会发生的事，且用转述，不加新情节。"
+      },
+      {
+        "quote": "kept at it until the sounds began to land",
+        "explain": "“keep at it”“the sounds began to land”是母语者常用的地道搭配，比标准版的“kept practicing”更具体地写出发音一点点到位的过程。"
+      }
+    ]
+  }
+}

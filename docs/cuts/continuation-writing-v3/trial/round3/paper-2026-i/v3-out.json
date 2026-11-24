@@ -1,0 +1,133 @@
+{
+  "taskType": "continuation",
+  "blocked": null,
+  "reading": {
+    "questions": [
+      {
+        "question": "原文停在哪里？什么问题还没解决？",
+        "answer": "原文停在咖啡馆里：Emily 喝着热巧克力，向 Daniel 和 Rachel 讲完自己的困境。还没解决的有两件事：她离多伦多还有一百英里、圣诞计划可能泡汤；她的车还卡在沟里。"
+      },
+      {
+        "question": "人物想要什么、是什么样的人？从哪里看出来？",
+        "answer": "Emily 一心想赶到多伦多和男友过圣诞（set out ... with high hopes），有点大意（听到暴雪警告却 didn't give it much thought），但遇事能自己扛（独自在车里过夜、定时开发动机取暖）。Daniel 和 Rachel 是路过就停车、主动帮忙的人：敲窗很轻（a gentle knock），说话真诚（With genuine warmth in her voice），还 listened patiently。"
+      },
+      {
+        "question": "原文是怎么写的？续写要照着怎样写？",
+        "answer": "第三人称、一般过去时，叙述者站在 Emily 这边讲。句子多是中短句，直接引语一句都没有，人物的话全用转述（Rachel asked if she was okay and told her...）；描写很少，只点到 blinding whiteout 这类关键画面。所以续写也以转述为主，最多留一句短的直接引语，少写景、多写事。"
+      }
+    ],
+    "sourceLinks": [
+      {
+        "sourceQuote": "the couple bought Emily a hot chocolate",
+        "use": "热巧克力是这对夫妇善意的标志。第二段 Emily 回来取车时，让大家再围坐着喝一次热巧克力，前后呼应，收尾不用讲道理。"
+      },
+      {
+        "sourceQuote": "her car was completely stuck",
+        "use": "车卡在沟里是原文留下的第二个问题。第一段得交代车怎么办（交给 Daniel），第二段取车时让它已经被拖出来，问题就收住了。"
+      },
+      {
+        "sourceQuote": "her entire holiday plan could be ruined",
+        "use": "这是 Emily 最担心的事。第一段结尾让她当晚就到多伦多见到男友，直接回应这句担心。"
+      }
+    ]
+  },
+  "taskCard": {
+    "taskRequires": [
+      "第一段从夫妇建议坐火车开始，要写出 Emily 怎样接受建议、怎样到达多伦多；第一段结束时她必须已经离开，车还留在当地，否则第二段的 returned to get her car 接不上。",
+      "车的问题不能丢：第一段要交代车留给谁或怎么处理，第二段 Emily 回来取车时要让这件事有着落。",
+      "必须接上原文事实：她离目的地约一百英里，车卡在沟里，圣诞计划可能泡汤；帮她的是 Daniel 和 Rachel。",
+      "第二段从三天后回来取车写起，要把原文的问题收住，不能再起一个新的大麻烦。"
+    ],
+    "thisEssayChooses": "本文选的路线是：Daniel 说自己有皮卡，路清了就把车拖出来，Emily 把车钥匙交给他；Rachel 把电话号码写在餐巾纸上给她；夫妇送她上火车，当晚她见到男友。三天后车已经停在夫妇家门口、加满了油，Daniel 不肯收油钱，大家围着火喝热巧克力，Emily 带着那张餐巾纸开车回家。可以换的地方很多：车也可以由 Daniel 叫拖车或者等雪化后一起去拖；号码可以写在别的东西上；结尾可以落在留下礼物、约好明年再见等具体动作上。“男友一起来”“油箱加满”都是本文的选择，不是题目要求。语气上照原文用转述，只保留 Daniel 一句短的直接引语。"
+  },
+  "standard": {
+    "essay": "Daniel and Rachel suggested that Emily continue her journey by train. At first Emily hesitated. She could not simply leave her car in a ditch. Daniel told her the station was only twenty minutes away and a train to Toronto left at noon. As for the car, he had a pickup truck and would pull it out once the roads were cleared. \"Leave the car to us,\" he said. Rachel wrote their number on a napkin and pressed it into Emily's hand. Emily handed Daniel her car keys. The couple drove her to the station. As the train pulled away, she waved through the frosty window, holding the napkin tightly. That evening, she stepped into her boyfriend's arms in Toronto.\n\nThree days later, Emily returned to get her car. Daniel met her and her boyfriend at the station. To her surprise, her car was waiting outside the couple's house, with a full tank of gas. Daniel explained that he had pulled it out of the ditch the day after Christmas. Emily tried to pay him for the gas, but he shook his head and said anyone would have done the same. Rachel invited them in, and they sat by the fire, drinking hot chocolate and laughing about Emily's night in the snow. Then she drove home, the napkin with their number tucked in her wallet.",
+    "notes": [
+      {
+        "paragraph": 1,
+        "role": "把“坐火车”的建议变成行动：先写 Emily 为什么犹豫，再让夫妇解决她的顾虑，最后送她到多伦多，同时把车留在当地，给第二段留好位置。",
+        "items": [
+          {
+            "quote": "She could not simply leave her car in a ditch.",
+            "explain": "建议提出后，Emily 不是马上答应，而是想到原文里那辆卡住的车。这一句给犹豫找了一个看得见的理由，比写“她很矛盾”更具体，也顺手把车的问题带进来。"
+          },
+          {
+            "quote": "As for the car, he had a pickup truck and would pull it out once the roads were cleared.",
+            "explain": "转折由一条新信息触发：Daniel 有皮卡，能拖车。解决办法来自原文人物自己手边的东西，不靠新人物或天降帮助。As for... 是转述时换话题的常用说法，学生可以直接拿去用。"
+          },
+          {
+            "quote": "Emily handed Daniel her car keys.",
+            "explain": "不写“她决定相信他们”，而写交钥匙这个动作：信任和决定都在动作里了。它也解释了第二段 Daniel 为什么能把车开回家。"
+          },
+          {
+            "quote": "That evening, she stepped into her boyfriend's arms in Toronto.",
+            "explain": "第一段结尾回应原文“圣诞计划可能泡汤”的担心：她赶上了。Emily 人已离开、车还在当地，第二段首句“三天后回来取车”就顺理成章。"
+          }
+        ]
+      },
+      {
+        "paragraph": 2,
+        "role": "收住车的问题，用原文的热巧克力和第一段的餐巾纸把两段串起来，结尾落在一个具体物件上。",
+        "items": [
+          {
+            "quote": "her car was waiting outside the couple's house, with a full tank of gas",
+            "explain": "车的问题在这里解决，而且多走了一小步：油箱加满了。这个细节不用形容词就写出了 Daniel 的为人，也为下一句付油钱做铺垫。"
+          },
+          {
+            "quote": "he shook his head and said anyone would have done the same",
+            "explain": "人物的话用转述，和原文写法一致；摇头这个动作加一句平常话，比写“他是个无私的人”更像真人。"
+          },
+          {
+            "quote": "the napkin with their number tucked in her wallet",
+            "explain": "结尾不贴“善良温暖人心”之类的道理，而落在第一段 Rachel 塞给她的那张餐巾纸上：它还在，意思是这段联系也会留下来。"
+          }
+        ]
+      }
+    ],
+    "expressions": [
+      {
+        "expression": "As for the car, ...",
+        "function": "在转述里从“人怎么走”转到“车怎么办”，一句话处理原文留下的第二个问题，不用另起直接对话。"
+      },
+      {
+        "expression": "pull it out (of the ditch)",
+        "function": "写把卡在沟里的车拖出来的地道说法，正好接上原文的 slid into a ditch。"
+      },
+      {
+        "expression": "press something into someone's hand",
+        "function": "写 Rachel 把写着号码的餐巾纸塞到 Emily 手里，用一个动作表现她的热心，也让这个物件进入故事，到结尾再出现。"
+      }
+    ],
+    "pitfalls": [
+      {
+        "pitfall": "第一段写 Emily 拒绝坐火车，或者在第一段里就把车修好、开着车去多伦多。",
+        "why": "第二段首句说她三天后回来取车，说明她第一段是坐火车走的、车留在了当地。第一段提前写掉车的事，第二段就接不上。"
+      },
+      {
+        "pitfall": "车的问题靠新出现的人解决，比如路过的修车师傅、警察突然把车拖出来。",
+        "why": "原文里能帮忙的人就是 Daniel 和 Rachel。让新人物解决问题是天降帮助，也抢了原文人物的戏，阅卷人会觉得因果是编的。"
+      },
+      {
+        "pitfall": "满篇直接对话，或者结尾写一大段 kindness 能改变世界之类的感悟。",
+        "why": "原文一句直接引语都没有，全靠转述推进；满篇引号和原文不是同一种写法。口号式结尾放在哪个故事后面都成立，只占词数，不解决原文的问题。"
+      }
+    ]
+  },
+  "advanced": {
+    "essay": "Daniel and Rachel suggested that Emily continue her journey by train. Emily hesitated. Leaving her car in a ditch, in a country she barely knew, did not feel right. But Daniel had already worked it out. The station was twenty minutes away, he said, and the noon train would have her in Toronto by evening. As for the car, he had a pickup truck and a tow rope, and he would haul it out once the plows had been through. \"Leave the car to us,\" he said. Rachel scribbled their number on a paper napkin and folded Emily's fingers around it. Emily looked from one kind face to the other, then slid her keys across the table. The couple dropped her at the station before noon. As the train pulled away, Emily waved through the frosty window, the napkin crumpled in her other hand. That evening, she stepped into her boyfriend's arms in Toronto.\n\nThree days later, Emily returned to get her car. This time her boyfriend came with her. Daniel was waiting at the station, and on the drive out of town he wouldn't say a word about the car. Then they turned into his driveway. There it sat, scraped clean of snow, its tank full. He had towed it out the morning after Christmas, Daniel explained with a shrug. Emily reached for her wallet to pay for the gas, but he waved it away. Anybody would have done the same, he told her. Rachel had a pot of hot chocolate ready, and the four of them sat by the fire, laughing about Emily's night in the ditch. When it was time to go, Emily drove home along the cleared road, the napkin with their number tucked safely in her wallet.",
+    "beyondStandard": [
+      {
+        "quote": "Leaving her car in a ditch, in a country she barely knew, did not feel right.",
+        "explain": "标准版只说她不能丢下车；这里补上“在一个几乎不认识的国家”，把她的犹豫和原文“陌生的路、加拿大小镇”接起来，理由更具体，口吻也更像在 Emily 心里说话。"
+      },
+      {
+        "quote": "slid her keys across the table",
+        "explain": "标准版是 handed... her car keys；这里把动作放回原文的咖啡馆桌边，slid 写出那种轻轻推过去、下定决心的样子，场景和动作都更具体。"
+      },
+      {
+        "quote": "There it sat, scraped clean of snow, its tank full.",
+        "explain": "标准版用 To her surprise 直接说出惊讶；这里先写 Daniel 一路不提车，再用短句把车“亮出来”，惊喜由读者自己感到。scraped clean of snow 是写刮掉车上积雪的地道搭配。"
+      }
+    ]
+  }
+}

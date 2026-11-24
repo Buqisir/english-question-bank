@@ -169,3 +169,21 @@ third reading answer calls it a few short quoted lines and both V3 essays
 quote 2–3%. The principle 3 wording leads with "mostly reported speech" and
 the model applied that default. To fix after the vote by making the third
 question decide the amount from the source first.
+
+## Round 3 result (Owner voted 2026-11-24)
+
+Outputs are in `round3/` (`key.json` holds the A/B mapping; the mock-gd V2 file
+is the target-200 run).
+
+| paper | Owner's pick |
+|---|---|
+| paper-2026-i | V2 |
+| paper-zj-2025-jan | V3 |
+| paper-2020-i | about the same |
+| paper-mock-gd-2026-m1 | about the same |
+
+1 V2, 1 V3, 2 ties; no reasons written. Over rounds 2 and 3 the standard
+essays stand at V3 3, V2 3, tie 2: no detectable difference in essay quality
+between the two prompts at matched length. The advanced essay was judged worth
+its extra words on all 4 papers (9 of 9 answered across both rounds). The
+question on the third reading question was not answered.

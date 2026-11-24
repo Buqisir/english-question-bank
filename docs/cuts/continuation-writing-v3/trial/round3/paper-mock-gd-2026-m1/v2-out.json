@@ -1,0 +1,402 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Noah’s aching hands seemed to agree with his brother’s words. He looked down the dark driveway, and for a moment he almost dropped his own shovel too. Then he felt the folded bill in his pocket. Mrs. Williams had paid them before they had moved any snow. “She trusted us, Lucas,” he said quietly. “If we leave now, we’re taking her money for nothing.” Lucas kicked at the snow and said nothing. Noah picked up his brother’s shovel and held it out. After a long moment, Lucas took it. Side by side, slower now, they cleared one narrow strip at a time until only a thin line of snow remained near the street.\n\nAs they cleared the final shovel of snow, Mrs. Williams’ car returned. Her headlights swept across the clean driveway, and she stepped out, surprised. “I thought you two would be long gone in this cold,” she said. Lucas lowered his eyes. “We almost were,” he admitted. “But you’d already paid us.” Mrs. Williams looked at their red, numb hands and smiled. “Then I know who to call next time it snows.” On the way home, the brothers stopped at Mr. Henderson’s window. The red bicycle was still far beyond their reach, but with twenty-seven dollars and more work ahead, it no longer seemed impossible.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v2",
+    "storyUnderstanding": {
+      "centralSituation": {
+        "statement": "兄弟俩为买橱窗里的红色自行车铲雪挣钱；威廉斯太太先付了二十美元就出门了，活干到一半，天冷手麻，卢卡斯想不干完就走。",
+        "evidence": [
+          {"source": "material", "excerpt": "They stared at the red bicycle that stood proudly in the center of the display."},
+          {"source": "material", "excerpt": "She took a twenty-dollar bill from her purse and placed it into Noah’s hand."},
+          {"source": "material", "excerpt": "Let’s just go. She’ll never know we didn’t finish."}
+        ]
+      },
+      "sourceEndState": {
+        "statement": "原文停在车道铲到一半：卢卡斯把铲子扔下，提议直接离开；诺亚还没有回应，钱已经在诺亚手里，威廉斯太太不在家。",
+        "evidence": [
+          {"source": "material", "excerpt": "Halfway through, Lucas threw down his shovel in frustration"},
+          {"source": "material", "excerpt": "I have to rush out"}
+        ]
+      },
+      "narrativePerspective": {
+        "statement": "第三人称、一般过去时，叙述者贴近兄弟俩的感受（如“更甚于一整天的收入”的惊喜），但不进入单一人物的长篇内心独白。",
+        "evidence": [
+          {"source": "material", "excerpt": "Twenty dollars—more than they had made the entire day!"}
+        ]
+      },
+      "timeAndPlaceFrame": {
+        "statement": "冬天第一场雪当天，从下午到天色渐暗；地点是枫树街一栋维多利亚式房子的长车道。",
+        "evidence": [
+          {"source": "material", "excerpt": "When the first snow of winter covered their town"},
+          {"source": "material", "excerpt": "as the afternoon darkened and the temperature dropped"},
+          {"source": "material", "excerpt": "Noah knocked on the door of a beautiful Victorian house."}
+        ]
+      },
+      "characters": [
+        {
+          "name": "Noah",
+          "role": "弟兄之一，接下工作、手里拿着钱的人",
+          "establishedTraits": [
+            {
+              "statement": "主动出面找活：是他去敲门、开口询问。",
+              "evidence": [{"source": "material", "excerpt": "When Noah asked if she needed her driveway shoveled"}]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "和哥哥一样想攒够买自行车的钱。",
+              "evidence": [{"source": "material", "excerpt": "For months, they had saved every spare coin, yet the price still seemed far beyond their reach."}]
+            }
+          ],
+          "currentState": {
+            "statement": "身体同样疲惫，手又酸又疼，正面临是否同意离开的选择。",
+            "evidence": [{"source": "paragraph1Starter", "excerpt": "Noah’s aching hands seemed to agree with his brother’s words."}]
+          }
+        },
+        {
+          "name": "Lucas",
+          "role": "提出放弃的一方",
+          "establishedTraits": [
+            {
+              "statement": "此前一直坚持（邻里收入少也没放弃），但在寒冷和疲劳的压力下情绪失控。",
+              "evidence": [
+                {"source": "material", "excerpt": "Refusing to give up, they headed to Maple Street"},
+                {"source": "material", "excerpt": "Lucas threw down his shovel in frustration"}
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "想结束又冷又累的活，并认为雇主不会发现。",
+              "evidence": [{"source": "material", "excerpt": "She’ll never know we didn’t finish."}]
+            }
+          ],
+          "currentState": {
+            "statement": "铲子已扔在地上，沮丧，想走。",
+            "evidence": [{"source": "material", "excerpt": "threw down his shovel in frustration"}]
+          }
+        },
+        {
+          "name": "Mrs. Williams",
+          "role": "雇主，提前付钱并把活交给孩子们",
+          "establishedTraits": [
+            {
+              "statement": "信任孩子：没等完工就先付了钱，并说交给“能干的手”。",
+              "evidence": [
+                {"source": "material", "excerpt": "I’ll leave it in your capable hands."},
+                {"source": "material", "excerpt": "she said with an encouraging smile"}
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "急着出门，需要有人替她把车道铲干净。",
+              "evidence": [{"source": "material", "excerpt": "Mrs. Williams answered, looking like she was in a hurry"}]
+            }
+          ],
+          "currentState": {
+            "statement": "原文结尾时不在家，不知道活干到哪一步。",
+            "evidence": [{"source": "material", "excerpt": "I have to rush out"}]
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "participants": ["Lucas", "Noah"],
+          "currentRelation": {
+            "statement": "兄弟，为同一目标合作挣钱；此刻在“走还是干完”上出现分歧的可能。",
+            "evidence": [
+              {"source": "material", "excerpt": "the brothers saw an opportunity"},
+              {"source": "paragraph1Starter", "excerpt": "seemed to agree with his brother’s words"}
+            ]
+          }
+        },
+        {
+          "participants": ["Mrs. Williams", "the brothers"],
+          "currentRelation": {
+            "statement": "她已预付全款并表示信任，兄弟俩欠她一条干净的车道。",
+            "evidence": [
+              {"source": "material", "excerpt": "placed it into Noah’s hand"},
+              {"source": "material", "excerpt": "I’ll leave it in your capable hands."}
+            ]
+          }
+        }
+      ],
+      "causalChain": [
+        {
+          "cause": {
+            "statement": "存了几个月的钱仍买不起自行车。",
+            "evidence": [{"source": "material", "excerpt": "the price still seemed far beyond their reach"}]
+          },
+          "effect": {
+            "statement": "下雪后决定靠铲雪攒钱。",
+            "evidence": [{"source": "material", "excerpt": "determined to turn the snowfall into savings through hard work"}]
+          }
+        },
+        {
+          "cause": {
+            "statement": "自家附近只挣到七美元。",
+            "evidence": [{"source": "material", "excerpt": "they had earned just seven dollars"}]
+          },
+          "effect": {
+            "statement": "转到房子更大、积雪更深的枫树街，接到预付二十美元的活。",
+            "evidence": [{"source": "material", "excerpt": "they headed to Maple Street, where the houses were bigger and the driveways deeper in snow"}]
+          }
+        },
+        {
+          "cause": {
+            "statement": "天黑降温，手麻、肌肉酸痛，车道显得没有尽头。",
+            "evidence": [{"source": "material", "excerpt": "the long driveway seemed endless"}]
+          },
+          "effect": {
+            "statement": "卢卡斯扔下铲子，提议不干完就走。",
+            "evidence": [{"source": "material", "excerpt": "Let’s just go."}]
+          }
+        }
+      ],
+      "unresolvedProblem": {
+        "statement": "钱已经收下，车道只铲了一半：兄弟俩是偷偷离开，还是忍着冷和累把答应的活干完。",
+        "evidence": [
+          {"source": "material", "excerpt": "Halfway through"},
+          {"source": "material", "excerpt": "She’ll never know we didn’t finish."}
+        ]
+      },
+      "usableClues": [
+        {
+          "statement": "预付的二十美元和“交给你们能干的手”这句话：她的信任是诺亚拒绝离开的现成理由。",
+          "evidence": [{"source": "material", "excerpt": "I’ll leave it in your capable hands."}]
+        },
+        {
+          "statement": "橱窗里的红色自行车：兄弟俩挣钱的根本目标，可在结尾回扣。",
+          "evidence": [{"source": "material", "excerpt": "the red bicycle"}]
+        },
+        {
+          "statement": "手麻和疲劳：让坚持有代价，也可作为她回来时看到的痕迹。",
+          "evidence": [{"source": "material", "excerpt": "Their hands grew numb"}]
+        }
+      ],
+      "meaningDirection": {
+        "statement": "较强推断：故事指向“收了钱、被信任，就要把活干完”，即靠诚实劳动挣钱；具体怎样落到结尾仍开放。",
+        "confidence": "stronglyInferred",
+        "evidence": [
+          {"source": "material", "excerpt": "through hard work"},
+          {"source": "paragraph2Starter", "excerpt": "As they cleared the final shovel of snow"}
+        ]
+      },
+      "sourceStyle": {
+        "statement": "第三人称过去时，句子短而具体，以动作和身体感受推进（手麻、扔铲子），对话少且每句都推动情节。",
+        "evidence": [
+          {"source": "material", "excerpt": "Their hands grew numb"},
+          {"source": "material", "excerpt": "Lucas threw down his shovel in frustration"}
+        ]
+      }
+    },
+    "continuationContract": {
+      "hardConstraints": [
+        {
+          "id": "hc-past-third-person",
+          "statement": "保持第三人称、一般过去时，以兄弟俩为叙述中心。",
+          "evidence": [{"source": "material", "excerpt": "Lucas and Noah pressed their noses against Mr. Henderson’s shop window"}]
+        },
+        {
+          "id": "hc-finish-driveway",
+          "statement": "兄弟俩最终把车道铲完（第二段段首写明铲下最后一锹雪）。",
+          "evidence": [{"source": "paragraph2Starter", "excerpt": "As they cleared the final shovel of snow"}]
+        },
+        {
+          "id": "hc-paid-in-advance",
+          "statement": "二十美元在开工前已付给诺亚，续写不能写成完工后才付这笔钱。",
+          "evidence": [{"source": "material", "excerpt": "She took a twenty-dollar bill from her purse and placed it into Noah’s hand."}]
+        }
+      ],
+      "softAffordances": [
+        {
+          "statement": "她的预付和信任话语很适合作为诺亚说服自己和哥哥的理由。",
+          "evidence": [{"source": "material", "excerpt": "I’ll leave it in your capable hands."}]
+        },
+        {
+          "statement": "结尾可以回到红色自行车这一目标。",
+          "evidence": [{"source": "material", "excerpt": "They stared at the red bicycle"}]
+        }
+      ],
+      "openChoices": [
+        "诺亚用什么话、什么动作让卢卡斯回心转意，或卢卡斯自己想通",
+        "威廉斯太太回来后的具体反应和是否另有表示",
+        "兄弟俩是否讲出差点离开的事",
+        "结尾是否、如何回到自行车"
+      ],
+      "forbiddenContradictions": [
+        {
+          "id": "fc-no-leaving-unfinished",
+          "statement": "不能写兄弟俩丢下没铲完的车道离开。",
+          "evidence": [{"source": "paragraph2Starter", "excerpt": "As they cleared the final shovel of snow"}]
+        },
+        {
+          "id": "fc-no-early-return",
+          "statement": "第一段不能让威廉斯太太提前回来；她的车在第二段段首才回来。",
+          "evidence": [{"source": "paragraph2Starter", "excerpt": "Mrs. Williams’ car returned"}]
+        },
+        {
+          "id": "fc-no-instant-bike",
+          "statement": "不能凭外力突然送来自行车或大笔钱解决问题；原文强调靠劳动攒钱。",
+          "evidence": [{"source": "material", "excerpt": "determined to turn the snowfall into savings through hard work"}]
+        }
+      ],
+      "paragraphs": [
+        {
+          "paragraphIndex": 1,
+          "entryState": {
+            "statement": "卢卡斯刚提议离开，诺亚的身体也很想同意。",
+            "evidence": [{"source": "paragraph1Starter", "excerpt": "Noah’s aching hands seemed to agree with his brother’s words."}]
+          },
+          "starterFunction": {
+            "statement": "段首先承认诺亚也被诱惑（“手似乎同意”），说明后面的坚持需要一个让他改变主意的原因，而不是天生不想走。",
+            "evidence": [{"source": "paragraph1Starter", "excerpt": "seemed to agree"}]
+          },
+          "requiredMoves": [
+            {
+              "id": "p1-move-decide-stay",
+              "statement": "写出兄弟俩放弃离开、重新开始铲雪的决定及其原因。",
+              "evidence": [
+                {"source": "paragraph1Starter", "excerpt": "aching hands seemed to agree"},
+                {"source": "paragraph2Starter", "excerpt": "As they cleared the final shovel of snow"}
+              ]
+            }
+          ],
+          "requiredExitState": [
+            {
+              "id": "p1-exit-still-working",
+              "statement": "因为第二段开头他们正在铲最后一锹雪，第一段结束时兄弟俩必须仍在车道上干活，且活还没完全干完。",
+              "evidence": [{"source": "paragraph2Starter", "excerpt": "As they cleared the final shovel of snow"}]
+            },
+            {
+              "id": "p1-exit-owner-absent",
+              "statement": "因为第二段她的车才回来，第一段结束时威廉斯太太仍未回家。",
+              "evidence": [{"source": "paragraph2Starter", "excerpt": "Mrs. Williams’ car returned"}]
+            }
+          ],
+          "supportedOptions": [
+            {
+              "statement": "由诺亚提起她的预付和信任来说服卢卡斯。",
+              "evidence": [{"source": "material", "excerpt": "placed it into Noah’s hand"}]
+            }
+          ]
+        },
+        {
+          "paragraphIndex": 2,
+          "entryState": {
+            "statement": "车道铲完的那一刻，威廉斯太太开车回来。",
+            "evidence": [{"source": "paragraph2Starter", "excerpt": "As they cleared the final shovel of snow, Mrs. Williams’ car returned."}]
+          },
+          "starterFunction": {
+            "statement": "让雇主在完工时出现，第二段的任务是写她看到结果后的反应和这件事的收束。",
+            "evidence": [{"source": "paragraph2Starter", "excerpt": "Mrs. Williams’ car returned"}]
+          },
+          "requiredMoves": [
+            {
+              "id": "p2-move-encounter",
+              "statement": "写出威廉斯太太与兄弟俩的会面及她对完成的车道的反应。",
+              "evidence": [{"source": "paragraph2Starter", "excerpt": "Mrs. Williams’ car returned"}]
+            }
+          ],
+          "requiredExitState": [
+            {
+              "id": "p2-exit-resolved",
+              "statement": "“走还是干完”的问题已经结束，故事有一个与劳动挣钱目标相连的收束。",
+              "evidence": [{"source": "material", "excerpt": "turn the snowfall into savings through hard work"}]
+            }
+          ],
+          "supportedOptions": [
+            {
+              "statement": "她注意到他们冻僵的手，或请他们下次再来。",
+              "evidence": [{"source": "material", "excerpt": "Their hands grew numb"}]
+            }
+          ]
+        }
+      ],
+      "closureRequirements": [
+        {
+          "id": "close-no-outside-rescue",
+          "statement": "结局由兄弟俩完成工作这一事实推动，不靠意外馈赠直接实现买车。",
+          "evidence": [{"source": "material", "excerpt": "through hard work"}]
+        }
+      ]
+    },
+    "developmentPlan": {
+      "selectedRoute": "本范文选择：诺亚摸到口袋里预付的钞票，想起她先付钱的信任，劝回卢卡斯，两人放慢节奏坚持；她回来时活刚好干完，卢卡斯坦白差点离开，她因此愿意下次雪天再请他们；回家路上自行车仍远，但已不再遥不可及。",
+      "routeRationale": [
+        {
+          "statement": "原文里钱在诺亚手里，且她明确说交给他们，这是最直接能让诺亚改变主意的原文事实，不需要新造外部事件。",
+          "evidence": [
+            {"source": "material", "excerpt": "placed it into Noah’s hand"},
+            {"source": "material", "excerpt": "I’ll leave it in your capable hands."}
+          ]
+        },
+        {
+          "statement": "二十七美元离买车仍远，所以结尾只写“有希望”，不写马上买到，和原文的价格差距一致。",
+          "evidence": [{"source": "material", "excerpt": "they had earned just seven dollars"}]
+        }
+      ],
+      "paragraphs": [
+        {
+          "paragraphIndex": 1,
+          "cause": "诺亚也想走，但摸到口袋里她开工前就付的二十美元，意识到离开等于白拿她的钱。",
+          "action": "诺亚说出她信任他们，捡起哥哥的铲子递过去；卢卡斯沉默片刻后接过，两人放慢速度一段段铲。",
+          "result": "车道只剩靠街边的一窄条雪，她还没回来。",
+          "sourceEvidence": [
+            {"source": "material", "excerpt": "She took a twenty-dollar bill from her purse and placed it into Noah’s hand."},
+            {"source": "paragraph1Starter", "excerpt": "Noah’s aching hands seemed to agree with his brother’s words."}
+          ],
+          "cluePayoffs": [
+            {
+              "clue": {"source": "material", "excerpt": "I’ll leave it in your capable hands."},
+              "payoff": "她的预付和信任成为诺亚不走的理由。"
+            }
+          ],
+          "bridge": "留下最后一窄条雪，正好接第二段段首“铲下最后一锹”和她回来的时刻。",
+          "emotionChanges": [
+            {
+              "trigger": "摸到口袋里预付的钞票",
+              "from": "疲惫、动摇",
+              "to": "坚定",
+              "visibleAction": "捡起哥哥的铲子递过去"
+            }
+          ]
+        },
+        {
+          "paragraphIndex": 2,
+          "cause": "她回来看见干净的车道，以为他们早该冷得回家了。",
+          "action": "卢卡斯低头承认差点离开，但因为已收了钱还是干完；她看着他们冻红的手，说下次下雪还找他们。",
+          "result": "兄弟俩得到她的认可和以后继续挣钱的机会。",
+          "sourceEvidence": [
+            {"source": "paragraph2Starter", "excerpt": "As they cleared the final shovel of snow, Mrs. Williams’ car returned."},
+            {"source": "material", "excerpt": "the price still seemed far beyond their reach"}
+          ],
+          "cluePayoffs": [
+            {
+              "clue": {"source": "material", "excerpt": "They stared at the red bicycle that stood proudly in the center of the display."},
+              "payoff": "回家路过橱窗，自行车仍买不起，但靠这天的二十七美元和以后的活，它不再显得不可能。"
+            }
+          ],
+          "ending": "兄弟俩在亨德森先生的橱窗前停下，自行车仍远在能力之外，却已不再遥不可及。",
+          "relationshipChanges": [
+            {
+              "participants": ["Mrs. Williams", "the brothers"],
+              "from": "一次性雇佣、预先付钱的信任",
+              "to": "愿意下次再雇他们",
+              "cause": "她回来看到车道在寒冷中被铲完，并听到卢卡斯的坦白"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        "也可以写卢卡斯自己看到诺亚独自坚持而回来帮忙，再在她回来时讲出差点放弃的事。"
+      ],
+      "qualityRisks": [
+        "不要让她回来后再付一大笔钱或直接送自行车，否则变成外力解围。",
+        "第一段不要把车道铲完，最后一锹留给第二段段首。"
+      ]
+    }
+  }
+}

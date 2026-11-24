@@ -1,0 +1,436 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "Daniel and Rachel suggested that Emily continue her journey by train. A station in the next town still had trains running to Toronto, they explained. Emily hesitated. \"But what about my car?\" she asked. Daniel told her that a mechanic he knew could pull it out of the ditch once the snow stopped, and that it would be safe at his garage. Relieved, Emily thanked them again and again. That afternoon, the couple drove her to the station. Sitting by the train window, Emily watched the white fields slip past. On Christmas Eve, she stepped onto the platform in Toronto, where her boyfriend was waiting with open arms.\n\nThree days later, Emily returned to get her car. Daniel and Rachel met her at the same little cafe, and this time she insisted on buying the hot chocolate. Together they went to the garage, where her car stood free of snow, already pulled out of the ditch. Emily paid the mechanic and handed the couple a box of cookies she had baked with her boyfriend on Christmas Day. \"Without you, I would have spent Christmas alone in a ditch,\" she said. Rachel smiled and made her promise to check the weather next time. As Emily drove home slowly along the cleared highway, she realized that the storm had nearly ruined her holiday, but two strangers had turned it into one she would never forget.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v2",
+    "storyUnderstanding": {
+      "centralSituation": {
+        "statement": "Emily 为了赶到多伦多和男友过圣诞，在暴风雪中开车出行，被迫离开高速、车滑进沟里，在车里熬了一夜；第二天被路过的 Daniel 和 Rachel 夫妇接到咖啡馆，但她离目的地还有约一百英里，车动不了，假期计划眼看要泡汤。",
+        "evidence": [
+          {"source": "material", "excerpt": "with high hopes of reaching Toronto to meet her boyfriend for Christmas"},
+          {"source": "material", "excerpt": "her car slid into a ditch"},
+          {"source": "material", "excerpt": "she was about a hundred miles from her destination, her car was completely stuck, and her entire holiday plan could be ruined"}
+        ]
+      },
+      "sourceEndState": {
+        "statement": "原文停在咖啡馆里：夫妇给 Emily 买了热巧克力，耐心听她讲完处境。此时还没有任何人提出解决办法；“坐火车”这一建议属于第一段的入口状态，不是原文已经发生的事。",
+        "evidence": [
+          {"source": "material", "excerpt": "the couple bought Emily a hot chocolate and listened patiently"},
+          {"source": "paragraph1Starter", "excerpt": "Daniel and Rachel suggested that Emily continue her journey by train."}
+        ]
+      },
+      "narrativePerspective": {
+        "statement": "第三人称有限视角，紧跟 Emily 的行动和感受，一般过去时叙述。",
+        "evidence": [
+          {"source": "material", "excerpt": "Seeing no hope of immediate rescue, Emily decided to spend the night in her car."}
+        ]
+      },
+      "timeAndPlaceFrame": {
+        "statement": "12 月 23 日出发，暴风雪中驶向一个陌生的加拿大小镇附近；过了一夜后在附近的一家咖啡馆，时间应在圣诞节前。",
+        "evidence": [
+          {"source": "material", "excerpt": "set out on December 23rd"},
+          {"source": "material", "excerpt": "found herself on an unfamiliar road toward a Canadian town"},
+          {"source": "material", "excerpt": "a nearby cafe they knew"}
+        ]
+      },
+      "characters": [
+        {
+          "name": "Emily Sanders",
+          "role": "主人公，25 岁，从底特律开车去多伦多",
+          "establishedTraits": [
+            {
+              "statement": "出发前听到暴风雪预警却没当回事，以为警察会像在密歇根那样安排绕行——有些想当然、低估风险。",
+              "evidence": [
+                {"source": "material", "excerpt": "Although she had heard warnings about an approaching snowstorm"},
+                {"source": "material", "excerpt": "police would simply detour"}
+              ]
+            },
+            {
+              "statement": "遇困时会自己想办法：把卡住的车弄出来继续慢行，没信号就决定在车里过夜并定时开引擎取暖。",
+              "evidence": [
+                {"source": "material", "excerpt": "After a struggle, she managed to free the vehicle and continued inching along the snow-covered road."},
+                {"source": "material", "excerpt": "To stay warm, she ran her engine for a few minutes every now and then."}
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "赶到多伦多与男友共度圣诞。",
+              "evidence": [
+                {"source": "material", "excerpt": "with high hopes of reaching Toronto to meet her boyfriend for Christmas"}
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "人已安全、心怀感激，但仍为离目的地太远、车被困、假期可能被毁而发愁。",
+            "evidence": [
+              {"source": "material", "excerpt": "Grateful and relieved, Emily accepted the offer."},
+              {"source": "material", "excerpt": "her entire holiday plan could be ruined"}
+            ]
+          }
+        },
+        {
+          "name": "Daniel 和 Rachel",
+          "role": "回家途中停车帮忙的一对夫妇",
+          "establishedTraits": [
+            {
+              "statement": "看到被困的车主动停下，提醒在车里过夜不安全，带她去咖啡馆、请她喝热巧克力并耐心倾听——热心而周到。",
+              "evidence": [
+                {"source": "material", "excerpt": "Daniel and his wife Rachel, who noticed the stranded (被困的) vehicle on their way home and stopped to see if they could help"},
+                {"source": "material", "excerpt": "told her it was not safe to stay overnight in the car"},
+                {"source": "material", "excerpt": "the couple bought Emily a hot chocolate and listened patiently"}
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "想帮这个陌生人脱离困境。",
+              "evidence": [
+                {"source": "material", "excerpt": "stopped to see if they could help"}
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "已经听完 Emily 的难处，正要给出办法（段首一：建议坐火车）。",
+            "evidence": [
+              {"source": "paragraph1Starter", "excerpt": "Daniel and Rachel suggested that Emily continue her journey by train."}
+            ]
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "participants": ["Emily", "Daniel 和 Rachel"],
+          "currentRelation": {
+            "statement": "刚认识的陌生人，夫妇主动施助，Emily 感激并信任地接受了帮助。",
+            "evidence": [
+              {"source": "material", "excerpt": "Grateful and relieved, Emily accepted the offer."}
+            ]
+          }
+        }
+      ],
+      "causalChain": [
+        {
+          "cause": {
+            "statement": "Emily 忽视暴风雪预警，暴雪中被引下高速，走上陌生小路。",
+            "evidence": [
+              {"source": "material", "excerpt": "Emily was directed off the highway"}
+            ]
+          },
+          "effect": {
+            "statement": "车滑进沟里、手机没信号，只能在车里过夜。",
+            "evidence": [
+              {"source": "material", "excerpt": "her car slid into a ditch"},
+              {"source": "material", "excerpt": "found no signal on her phone"}
+            ]
+          }
+        },
+        {
+          "cause": {
+            "statement": "车完全动不了，离多伦多还有约一百英里。",
+            "evidence": [
+              {"source": "material", "excerpt": "her car was completely stuck"}
+            ]
+          },
+          "effect": {
+            "statement": "开车去多伦多这条路走不通，需要另一种交通方式——这正是段首一“坐火车”建议的起因，也是车被留下、三天后才回来取的原因。",
+            "evidence": [
+              {"source": "paragraph1Starter", "excerpt": "continue her journey by train"},
+              {"source": "paragraph2Starter", "excerpt": "returned to get her car"}
+            ]
+          }
+        }
+      ],
+      "unresolvedProblem": {
+        "statement": "两件事没解决：她能否及时赶到多伦多过圣诞；困在沟里的车怎么办。",
+        "evidence": [
+          {"source": "material", "excerpt": "she was about a hundred miles from her destination, her car was completely stuck, and her entire holiday plan could be ruined"}
+        ]
+      },
+      "usableClues": [
+        {
+          "statement": "热巧克力和“附近的咖啡馆”是这对夫妇善意的具体载体，结尾可以回到这里表达感谢。",
+          "evidence": [
+            {"source": "material", "excerpt": "the couple bought Emily a hot chocolate"}
+          ]
+        },
+        {
+          "statement": "Emily 出发前没把暴风雪预警当回事，可以在结尾体现她对此有了新的认识。",
+          "evidence": [
+            {"source": "material", "excerpt": "Although she had heard warnings about an approaching snowstorm"}
+          ]
+        },
+        {
+          "statement": "目的是和男友过圣诞，这给第一段一个明确的落点：她是否赶上了。",
+          "evidence": [
+            {"source": "material", "excerpt": "to meet her boyfriend for Christmas"}
+          ]
+        }
+      ],
+      "meaningDirection": {
+        "statement": "把原文合起来看，更支持“陌生人的善意让一场险些被毁的旅程得以挽回”这一方向；Emily 是否因此反思自己忽视预警，原文没有明说，属于可选的意义延伸。",
+        "confidence": "stronglyInferred",
+        "evidence": [
+          {"source": "material", "excerpt": "With genuine warmth in her voice"},
+          {"source": "material", "excerpt": "her entire holiday plan could be ruined"}
+        ]
+      },
+      "sourceStyle": {
+        "statement": "平实的新闻纪实式叙述：按时间顺序推进，以动作和处境为主，句子中等长度，几乎没有直接引语，情绪用简短词语点出（panic、grateful and relieved）。",
+        "evidence": [
+          {"source": "material", "excerpt": "As night fell, panic set in."},
+          {"source": "material", "excerpt": "Grateful and relieved, Emily accepted the offer."}
+        ]
+      }
+    },
+    "continuationContract": {
+      "hardConstraints": [
+        {
+          "id": "hc-person-tense",
+          "statement": "保持第三人称、一般过去时叙述。",
+          "evidence": [
+            {"source": "material", "excerpt": "Emily accepted the offer"}
+          ]
+        },
+        {
+          "id": "hc-car-stays-behind",
+          "statement": "Emily 改坐火车继续旅程时，车留在当地，没有随她离开。",
+          "evidence": [
+            {"source": "paragraph1Starter", "excerpt": "continue her journey by train"},
+            {"source": "paragraph2Starter", "excerpt": "returned to get her car"}
+          ]
+        },
+        {
+          "id": "hc-goal-toronto",
+          "statement": "旅程的目的地和目的不变：去多伦多见男友过圣诞。",
+          "evidence": [
+            {"source": "material", "excerpt": "with high hopes of reaching Toronto to meet her boyfriend for Christmas"}
+          ]
+        }
+      ],
+      "softAffordances": [
+        {
+          "statement": "原文支持夫妇继续出力帮忙（如送她去车站、照应那辆车），因为他们已经表现出主动、周到的帮助，但具体怎样帮是开放的。",
+          "evidence": [
+            {"source": "material", "excerpt": "stopped to see if they could help"}
+          ]
+        },
+        {
+          "statement": "原文支持 Emily 最终赶上圣诞团聚，因为火车绕开了车被困的问题，但原文和段首都没有确认她何时到达。",
+          "evidence": [
+            {"source": "paragraph1Starter", "excerpt": "continue her journey by train"}
+          ]
+        }
+      ],
+      "openChoices": [
+        "车站在哪里、谁送 Emily 去车站",
+        "车由谁、用什么方式拖出沟",
+        "Emily 回来时是否再见到 Daniel 和 Rachel，以及如何表达感谢",
+        "Emily 取车后开往哪里"
+      ],
+      "forbiddenContradictions": [
+        {
+          "id": "fc-drive-own-car-on",
+          "statement": "第一段不能让 Emily 开着自己的车继续去多伦多，否则第二段“回来取车”就失去依据。",
+          "evidence": [
+            {"source": "paragraph2Starter", "excerpt": "returned to get her car"}
+          ]
+        },
+        {
+          "id": "fc-never-leaves",
+          "statement": "第一段不能让 Emily 一直留在当地等车修好，因为第二段说她三天后“回来”取车，说明她此前已经离开。",
+          "evidence": [
+            {"source": "paragraph2Starter", "excerpt": "Three days later, Emily returned"}
+          ]
+        },
+        {
+          "id": "fc-couple-relation",
+          "statement": "不能改写原文关系：Rachel 是 Daniel 的妻子，两人与 Emily 原本互不相识。",
+          "evidence": [
+            {"source": "material", "excerpt": "Daniel and his wife Rachel"},
+            {"source": "material", "excerpt": "noticed the stranded (被困的) vehicle on their way home"}
+          ]
+        }
+      ],
+      "paragraphs": [
+        {
+          "paragraphIndex": 1,
+          "entryState": {
+            "statement": "在咖啡馆里，夫妇提出让 Emily 坐火车继续旅程，车的问题还悬着。",
+            "evidence": [
+              {"source": "paragraph1Starter", "excerpt": "Daniel and Rachel suggested that Emily continue her journey by train."}
+            ]
+          },
+          "starterFunction": {
+            "statement": "段首一给出解决“去多伦多”这一问题的办法，本段要写 Emily 怎样接受并落实这个建议。",
+            "evidence": [
+              {"source": "paragraph1Starter", "excerpt": "suggested that Emily continue her journey by train"}
+            ]
+          },
+          "requiredMoves": [
+            {
+              "id": "p1-act-on-train",
+              "statement": "Emily 回应并采纳坐火车的建议，实际踏上火车旅程。",
+              "evidence": [
+                {"source": "paragraph1Starter", "excerpt": "continue her journey by train"}
+              ]
+            }
+          ],
+          "requiredExitState": [
+            {
+              "id": "p1-exit-left-car",
+              "statement": "段末 Emily 已经离开车所在的地方，车仍留在当地。因为段首二说她三天后“回来取车”，第一段必须已经让她走、让车留下。",
+              "evidence": [
+                {"source": "paragraph2Starter", "excerpt": "Three days later, Emily returned to get her car."}
+              ]
+            }
+          ],
+          "supportedOptions": [
+            {
+              "statement": "可以交代车的暂时安置（如有人答应帮忙拖车），让她放心离开，也为第二段取车做铺垫。",
+              "evidence": [
+                {"source": "material", "excerpt": "her car was completely stuck"}
+              ]
+            },
+            {
+              "statement": "可以写她赶上了和男友的圣诞团聚，回应原文开头的目标。",
+              "evidence": [
+                {"source": "material", "excerpt": "to meet her boyfriend for Christmas"}
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphIndex": 2,
+          "entryState": {
+            "statement": "三天后，Emily 回到当地取车。",
+            "evidence": [
+              {"source": "paragraph2Starter", "excerpt": "Three days later, Emily returned to get her car."}
+            ]
+          },
+          "starterFunction": {
+            "statement": "段首二把故事拉回车的问题，本段要写取车的经过和结果，并收束整段经历。",
+            "evidence": [
+              {"source": "paragraph2Starter", "excerpt": "returned to get her car"}
+            ]
+          },
+          "requiredMoves": [
+            {
+              "id": "p2-retrieve-car",
+              "statement": "写出取车这一行动及其结果。",
+              "evidence": [
+                {"source": "paragraph2Starter", "excerpt": "returned to get her car"}
+              ]
+            }
+          ],
+          "requiredExitState": [
+            {
+              "id": "p2-exit-car-settled",
+              "statement": "段末车的问题有了交代。",
+              "evidence": [
+                {"source": "material", "excerpt": "her car was completely stuck"}
+              ]
+            }
+          ],
+          "supportedOptions": [
+            {
+              "statement": "可以让 Emily 再见到这对夫妇并当面道谢，回应他们此前的帮助。",
+              "evidence": [
+                {"source": "material", "excerpt": "the couple bought Emily a hot chocolate and listened patiently"}
+              ]
+            }
+          ]
+        }
+      ],
+      "closureRequirements": [
+        {
+          "id": "close-holiday-outcome",
+          "statement": "全文结束时要交代“假期计划是否被毁”这一原文悬念的结局。",
+          "evidence": [
+            {"source": "material", "excerpt": "her entire holiday plan could be ruined"}
+          ]
+        }
+      ]
+    },
+    "developmentPlan": {
+      "selectedRoute": "本范文选择：Emily 担心车，Daniel 答应请认识的修车师傅雪停后把车拖出来，她放心地坐火车走，圣诞前夜在多伦多见到男友；三天后回来，与夫妇在同一家咖啡馆重聚、由她请喝热巧克力，取回已拖出的车，送上礼物道谢后开车回家，意识到是陌生人挽回了这个假期。",
+      "routeRationale": [
+        {
+          "statement": "车完全卡住是 Emily 不肯走的最直接顾虑，先让夫妇解决车的安置，她坐火车离开才有动机；同时让车留在当地，第二段“回来取车”才说得通。",
+          "evidence": [
+            {"source": "material", "excerpt": "her car was completely stuck"},
+            {"source": "paragraph2Starter", "excerpt": "returned to get her car"}
+          ]
+        },
+        {
+          "statement": "原文的悬念是“假期可能被毁”，第一段让她赶上圣诞团聚，直接回答了这个问题；第二段再处理车和感谢，两段各解决一件事。",
+          "evidence": [
+            {"source": "material", "excerpt": "her entire holiday plan could be ruined"}
+          ]
+        }
+      ],
+      "paragraphs": [
+        {
+          "paragraphIndex": 1,
+          "cause": "车卡在沟里，Emily 对坐火车的建议犹豫，担心车没人管。",
+          "action": "Daniel 说认识的修车师傅雪停后能把车拖出来、放在他的车库；夫妇当天下午送她去车站。",
+          "result": "Emily 放心坐上火车，圣诞前夜到达多伦多，男友在站台等她。",
+          "sourceEvidence": [
+            {"source": "paragraph1Starter", "excerpt": "continue her journey by train"},
+            {"source": "material", "excerpt": "her car was completely stuck"}
+          ],
+          "cluePayoffs": [
+            {
+              "clue": {"source": "material", "excerpt": "to meet her boyfriend for Christmas"},
+              "payoff": "她在圣诞前夜与男友团聚，原文的出行目标达成。"
+            }
+          ],
+          "bridge": "车已托付给修车师傅、人在多伦多，所以三天后她自然要回来取车。",
+          "emotionChanges": [
+            {
+              "trigger": "Daniel 承诺安排人把车拖出并妥善存放",
+              "from": "犹豫、担心车",
+              "to": "放心、感激",
+              "visibleAction": "连声道谢，随后坐上火车"
+            }
+          ]
+        },
+        {
+          "paragraphIndex": 2,
+          "cause": "车还在修车师傅那里，Emily 也欠这对夫妇一份人情。",
+          "action": "她在同一家咖啡馆与夫妇见面并抢着请喝热巧克力，取回已拖出的车，付钱给师傅，送上和男友一起烤的饼干道谢；Rachel 让她答应下次要看天气预报。",
+          "result": "车顺利取回，Emily 慢慢开车回家，意识到风暴差点毁了假期，是两个陌生人把它变成难忘的经历。",
+          "sourceEvidence": [
+            {"source": "paragraph2Starter", "excerpt": "returned to get her car"},
+            {"source": "material", "excerpt": "the couple bought Emily a hot chocolate"}
+          ],
+          "cluePayoffs": [
+            {
+              "clue": {"source": "material", "excerpt": "the couple bought Emily a hot chocolate"},
+              "payoff": "这次换 Emily 请喝热巧克力，用同一个细节表达回报。"
+            },
+            {
+              "clue": {"source": "material", "excerpt": "Although she had heard warnings about an approaching snowstorm"},
+              "payoff": "Rachel 叮嘱她下次看天气，回应她出发时轻视预警，但不拔高成说教。"
+            }
+          ],
+          "ending": "Emily 开车回家，明白风暴险些毁掉的假期因陌生人的帮助而变得难忘，回答了原文“假期可能被毁”的悬念。",
+          "relationshipChanges": [
+            {
+              "participants": ["Emily", "Daniel 和 Rachel"],
+              "from": "受助的陌生人",
+              "to": "互相关心的朋友",
+              "cause": "夫妇帮她安置车并送她上火车，她回来后当面回报"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        "夫妇本人在雪停后帮忙把车拖出，第二段由他们陪 Emily 去取车。"
+      ],
+      "qualityRisks": [
+        "第一段不要提前写取车经过，取车是第二段的主要任务。"
+      ]
+    }
+  }
+}

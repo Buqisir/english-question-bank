@@ -1,0 +1,525 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "When Mrs.Meredith heard of John's idea, she thought it was a good one, too. \"Bernard can keep all the money he earns,\" she said. That afternoon Harry watched the popping corn, John poured it into a big bowl, and Clara filled the paper bags. By evening, thirty bags stood in neat rows on the table. The next morning, Mrs. Meredith led the children to Bernard's home. When John explained the plan, Bernard's eyes lit up. \"Do you really mean it?\" he asked. His mother thanked them again and again, and Bernard found an old basket to carry the bags.\n\nWith everything ready, Bernard started out on his new business. At the first house he knocked softly and could hardly speak. But the woman who opened the door smiled and bought two bags. Feeling braver, Bernard went from street to street, telling people the popcorn was fresh and cheap. Some neighbors bought it because they liked popcorn; others bought it because they knew his family needed help. Before noon his basket was empty. Bernard ran home and poured the coins into his mother's hands. It was not much, but it was enough to buy bread and medicine for his father. That evening he came to thank the Merediths. John laughed. \"There is plenty of corn left in Uncle John's box!\"",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v2",
+    "storyUnderstanding": {
+      "centralSituation": {
+        "statement": "经济不景气的小镇上，Meredith 太太把一个困难家庭的情况讲给孩子们听：父亲卧病、母亲要照顾他无法外出工作，小男孩 Bernard 很想挣钱却找不到办法。孩子们想帮他挣钱，John 提出了一个具体方案。",
+        "evidence": [
+          {"source": "material", "excerpt": "There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy."},
+          {"source": "material", "excerpt": "He wants very much to earn some money"},
+          {"source": "material", "excerpt": "I wish we could help him to earn money"}
+        ]
+      },
+      "sourceEndState": {
+        "statement": "原文停在 John 刚说出方案：用 Uncle John 送来的一大箱玉米做爆米花、装进纸袋，由 Bernard 挨家挨户去卖。此时方案只是提出来，还没有征得母亲同意，没有动手制作，Bernard 本人也还不知道。",
+        "evidence": [
+          {"source": "material", "excerpt": "You know that big box of corn Uncle John sent us?"},
+          {"source": "material", "excerpt": "put it into paper bags, and Bernard can take it around to the houses and sell it."}
+        ]
+      },
+      "narrativePerspective": {
+        "statement": "第三人称全知叙述，以一般过去时讲述，镜头主要跟随 Meredith 家的孩子们。",
+        "evidence": [
+          {"source": "material", "excerpt": "After their mother left the room, the children sat thinking about Bernard."}
+        ]
+      },
+      "timeAndPlaceFrame": {
+        "statement": "经济衰退时期的一个小社区；原文事件发生在某天早上 Meredith 家中，母亲前一天刚去过 Bernard 家。",
+        "evidence": [
+          {"source": "material", "excerpt": "The Meredith family lived in a small community."},
+          {"source": "material", "excerpt": "As the economy was in decline, some people in the town had lost their jobs."},
+          {"source": "material", "excerpt": "One morning she told her children about a family she had visited the day before."}
+        ]
+      },
+      "characters": [
+        {
+          "name": "Mrs. Meredith",
+          "role": "孩子们的母亲，连接两家的人",
+          "establishedTraits": [
+            {
+              "statement": "常花大量时间探望穷人，有空就送食物和药品，说明她乐于、也习惯于实际帮助困难家庭。",
+              "evidence": [
+                {"source": "material", "excerpt": "She spent a great deal of time visiting the poor."},
+                {"source": "material", "excerpt": "When she had time, she would bring food and medicine to them."}
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "她关心 Bernard 想挣钱的愿望，但自己想不出他能做什么。",
+              "evidence": [
+                {"source": "material", "excerpt": "He wants very much to earn some money"}
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "原文结尾时她已离开房间，还不知道 John 的主意；第一段开头她才听说并认可。",
+            "evidence": [
+              {"source": "material", "excerpt": "After their mother left the room, the children sat thinking about Bernard."},
+              {"source": "paragraph1Starter", "excerpt": "she thought it was a good one, too"}
+            ]
+          }
+        },
+        {
+          "name": "John",
+          "role": "提出卖爆米花方案的孩子",
+          "establishedTraits": [
+            {
+              "statement": "先沉默思考再突然提出办法，而且兄妹们信任他的主意，说明他善于想出可行的点子。",
+              "evidence": [
+                {"source": "material", "excerpt": "For some moments, John said nothing, but, suddenly, he sprang to his feet and cried"},
+                {"source": "material", "excerpt": "When John had an idea, it was sure to be a good one."}
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "想找一个大家都能出力、让 Bernard 自己挣钱的办法。",
+              "evidence": [
+                {"source": "material", "excerpt": "I have a solution that we can all help accomplish"}
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "刚刚说出完整方案，正等着付诸行动。",
+            "evidence": [
+              {"source": "material", "excerpt": "Bernard can take it around to the houses and sell it."}
+            ]
+          }
+        },
+        {
+          "name": "Harry and Clara",
+          "role": "John 的弟妹，方案的参与者",
+          "establishedTraits": [
+            {
+              "statement": "他们主动表示想帮 Bernard 家，并立刻被 John 的主意吸引。",
+              "evidence": [
+                {"source": "material", "excerpt": "We really should do something to assist them."},
+                {"source": "material", "excerpt": "The other children also jumped up all attention."}
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "希望帮 Bernard 挣钱，减轻他家的困难。",
+              "evidence": [
+                {"source": "material", "excerpt": "His family is suffering so much."}
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "全神贯注地听 John 的方案，准备一起行动。",
+            "evidence": [
+              {"source": "material", "excerpt": "The other children also jumped up all attention."}
+            ]
+          }
+        },
+        {
+          "name": "Bernard",
+          "role": "困难家庭的小男孩，卖爆米花的人",
+          "establishedTraits": [
+            {
+              "statement": "母亲评价他很能帮妈妈的忙，而且很想挣钱，说明他懂事、愿意为家庭出力。",
+              "evidence": [
+                {"source": "material", "excerpt": "He is such a help to his mother."},
+                {"source": "material", "excerpt": "He wants very much to earn some money"}
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "父亲卧病、母亲无法工作，他想挣钱补贴家用。",
+              "evidence": [
+                {"source": "material", "excerpt": "There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy."}
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "原文中他没有出场，也还不知道 Meredith 家孩子们的计划。",
+            "evidence": [
+              {"source": "material", "excerpt": "Bernard can take it around to the houses and sell it."}
+            ]
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "participants": ["Meredith children", "Bernard"],
+          "currentRelation": {
+            "statement": "孩子们只是从母亲口中知道 Bernard，原文没有说他们见过面；他们出于同情想帮他。",
+            "evidence": [
+              {"source": "material", "excerpt": "I wish you could see him"},
+              {"source": "material", "excerpt": "I wish we could help him to earn money"}
+            ]
+          }
+        },
+        {
+          "participants": ["Mrs. Meredith", "Bernard's family"],
+          "currentRelation": {
+            "statement": "她前一天刚探望过这家人，熟悉他们的处境。",
+            "evidence": [
+              {"source": "material", "excerpt": "One morning she told her children about a family she had visited the day before."}
+            ]
+          }
+        }
+      ],
+      "causalChain": [
+        {
+          "cause": {
+            "statement": "父亲生病、母亲要照顾他不能工作，家里没有收入来源。",
+            "evidence": [
+              {"source": "material", "excerpt": "There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy."}
+            ]
+          },
+          "effect": {
+            "statement": "Bernard 很想挣钱，但连 Meredith 太太也看不出他能做什么。",
+            "evidence": [
+              {"source": "material", "excerpt": "He wants very much to earn some money"}
+            ]
+          }
+        },
+        {
+          "cause": {
+            "statement": "孩子们想帮 Bernard 挣钱，家里恰好有 Uncle John 送来的一大箱玉米。",
+            "evidence": [
+              {"source": "material", "excerpt": "I wish we could help him to earn money"},
+              {"source": "material", "excerpt": "You know that big box of corn Uncle John sent us?"}
+            ]
+          },
+          "effect": {
+            "statement": "John 提出做爆米花装袋、由 Bernard 上门售卖的方案：Meredith 家出原料和人手，Bernard 出力挣钱。",
+            "evidence": [
+              {"source": "material", "excerpt": "Bernard can take it around to the houses and sell it."}
+            ]
+          }
+        }
+      ],
+      "unresolvedProblem": {
+        "statement": "方案还停在口头：需要得到母亲认可、做出爆米花并装袋、让 Bernard 知道并接受，然后由他去卖；这家人能否靠 Bernard 挣到钱仍未解决。",
+        "evidence": [
+          {"source": "material", "excerpt": "I have a solution that we can all help accomplish"},
+          {"source": "material", "excerpt": "Bernard can take it around to the houses and sell it."}
+        ]
+      },
+      "usableClues": [
+        {
+          "statement": "Uncle John 送来的一大箱玉米是爆米花的原料，也可以在结尾说明这门小生意还能继续。",
+          "evidence": [
+            {"source": "material", "excerpt": "You know that big box of corn Uncle John sent us?"}
+          ]
+        },
+        {
+          "statement": "纸袋和上门售卖是方案的具体做法，决定第一段要准备什么、第二段 Bernard 做什么。",
+          "evidence": [
+            {"source": "material", "excerpt": "put it into paper bags, and Bernard can take it around to the houses and sell it."}
+          ]
+        },
+        {
+          "statement": "镇上的人在困难时期互相帮助，可以解释邻居为什么愿意买 Bernard 的爆米花。",
+          "evidence": [
+            {"source": "material", "excerpt": "People were trying to help each other meet the challenges."}
+          ]
+        },
+        {
+          "statement": "Meredith 太太常给穷人送食物和药品；挣到的钱用来买食物、药品，与这个家庭的实际需要一致。",
+          "evidence": [
+            {"source": "material", "excerpt": "When she had time, she would bring food and medicine to them."}
+          ]
+        }
+      ],
+      "meaningDirection": {
+        "statement": "帮助困难的人，可以不是直接施舍，而是给他一个靠自己挣钱的机会；大家一起出力完成这件事。原文点出了“大家都能参与完成”，但最终意义仍由续写的结果落实。",
+        "confidence": "stronglyInferred",
+        "evidence": [
+          {"source": "material", "excerpt": "I have a solution that we can all help accomplish"},
+          {"source": "material", "excerpt": "People were trying to help each other meet the challenges."}
+        ]
+      },
+      "sourceStyle": {
+        "statement": "第三人称过去时，叙述平实，句子短；推进主要靠人物简短对话（Clara、Harry、John 各说一两句）加少量动作描写，如跳起来、全神贯注。",
+        "evidence": [
+          {"source": "material", "excerpt": "For some moments, John said nothing, but, suddenly, he sprang to his feet and cried"},
+          {"source": "material", "excerpt": "The other children also jumped up all attention."}
+        ]
+      }
+    },
+    "continuationContract": {
+      "hardConstraints": [
+        {
+          "id": "hc-popcorn-business",
+          "statement": "Bernard 的新生意就是 John 提出的方案：用家里的玉米做爆米花、装纸袋、由 Bernard 上门卖。",
+          "evidence": [
+            {"source": "material", "excerpt": "Bernard can take it around to the houses and sell it."},
+            {"source": "paragraph1Starter", "excerpt": "she thought it was a good one, too"},
+            {"source": "paragraph2Starter", "excerpt": "Bernard started out on his new business"}
+          ]
+        },
+        {
+          "id": "hc-family-facts",
+          "statement": "Bernard 家的处境不变：父亲卧病，母亲要照顾他不能出去工作。",
+          "evidence": [
+            {"source": "material", "excerpt": "There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy."}
+          ]
+        },
+        {
+          "id": "hc-narration",
+          "statement": "保持第三人称、一般过去时的叙述。",
+          "evidence": [
+            {"source": "material", "excerpt": "After their mother left the room, the children sat thinking about Bernard."}
+          ]
+        }
+      ],
+      "softAffordances": [
+        {
+          "statement": "Meredith 家三个孩子都可以参与制作，呼应“大家都能出力”。",
+          "evidence": [
+            {"source": "material", "excerpt": "I have a solution that we can all help accomplish"}
+          ]
+        },
+        {
+          "statement": "Meredith 太太熟悉 Bernard 家，可以带孩子们去或帮忙联系。",
+          "evidence": [
+            {"source": "material", "excerpt": "One morning she told her children about a family she had visited the day before."}
+          ]
+        },
+        {
+          "statement": "镇上人们互相帮助，买家可能部分出于善意购买；但经济困难也可能让售卖不那么顺利。",
+          "evidence": [
+            {"source": "material", "excerpt": "People were trying to help each other meet the challenges."},
+            {"source": "material", "excerpt": "Many of their families were struggling to make ends meet."}
+          ]
+        }
+      ],
+      "openChoices": [
+        "Meredith 太太认可后具体说了什么、是否亲自帮忙",
+        "谁做爆米花、做了多少袋、何时做好",
+        "Bernard 怎样得知计划，第一次见面的情形",
+        "售卖过程中遇到谁、顺利还是先受挫",
+        "挣到多少钱、钱怎么用、生意是否继续"
+      ],
+      "forbiddenContradictions": [
+        {
+          "id": "fc-mother-opposes",
+          "statement": "不能写 Meredith 太太反对或否决这个主意。",
+          "evidence": [
+            {"source": "paragraph1Starter", "excerpt": "she thought it was a good one, too"}
+          ]
+        },
+        {
+          "id": "fc-not-ready",
+          "statement": "第二段开始时不能还缺爆米花或 Bernard 尚未同意；也不能由 Meredith 家孩子替 Bernard 去卖。",
+          "evidence": [
+            {"source": "paragraph2Starter", "excerpt": "With everything ready"},
+            {"source": "paragraph2Starter", "excerpt": "Bernard started out on his new business"}
+          ]
+        },
+        {
+          "id": "fc-charity-instead",
+          "statement": "不能把故事改成直接送钱了事，从而丢掉 Bernard 自己挣钱这一核心。",
+          "evidence": [
+            {"source": "material", "excerpt": "He wants very much to earn some money"},
+            {"source": "material", "excerpt": "I wish we could help him to earn money"}
+          ]
+        }
+      ],
+      "paragraphs": [
+        {
+          "paragraphIndex": 1,
+          "entryState": {
+            "statement": "Meredith 太太听说了 John 的主意并认为很好，方案得到大人认可。",
+            "evidence": [
+              {"source": "paragraph1Starter", "excerpt": "When Mrs.Meredith heard of John's idea, she thought it was a good one, too."}
+            ]
+          },
+          "starterFunction": {
+            "statement": "开头语把“口头方案”推进到“获准执行”，这一段要写的是从认可到动手准备。",
+            "evidence": [
+              {"source": "paragraph1Starter", "excerpt": "she thought it was a good one, too"}
+            ]
+          },
+          "requiredMoves": [
+            {
+              "id": "p1-move-prepare",
+              "statement": "把方案落实为准备行动：做出可以卖的袋装爆米花。",
+              "evidence": [
+                {"source": "material", "excerpt": "we can make popcorn"},
+                {"source": "paragraph2Starter", "excerpt": "With everything ready"}
+              ]
+            }
+          ],
+          "requiredExitState": [
+            {
+              "id": "p1-exit-ready",
+              "statement": "因为第二段开头说“一切准备就绪”，第一段结束时售卖所需的爆米花等东西必须已经备好。",
+              "evidence": [
+                {"source": "paragraph2Starter", "excerpt": "With everything ready"}
+              ]
+            },
+            {
+              "id": "p1-exit-bernard-joins",
+              "statement": "因为第二段说 Bernard 开始了“他的新生意”，第一段结束时 Bernard 必须已经知道并接受这个计划。",
+              "evidence": [
+                {"source": "paragraph2Starter", "excerpt": "Bernard started out on his new business"}
+              ]
+            }
+          ],
+          "supportedOptions": [
+            {
+              "statement": "三个孩子分工制作爆米花并装袋。",
+              "evidence": [
+                {"source": "material", "excerpt": "I have a solution that we can all help accomplish"}
+              ]
+            },
+            {
+              "statement": "由 Meredith 太太带孩子们去 Bernard 家说明计划。",
+              "evidence": [
+                {"source": "material", "excerpt": "One morning she told her children about a family she had visited the day before."}
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphIndex": 2,
+          "entryState": {
+            "statement": "一切准备好，Bernard 出发开始卖爆米花。",
+            "evidence": [
+              {"source": "paragraph2Starter", "excerpt": "With everything ready, Bernard started out on his new business."}
+            ]
+          },
+          "starterFunction": {
+            "statement": "开头语把主角切换到 Bernard，这一段写他上门售卖的过程和结果。",
+            "evidence": [
+              {"source": "paragraph2Starter", "excerpt": "Bernard started out on his new business"}
+            ]
+          },
+          "requiredMoves": [
+            {
+              "id": "p2-move-sell",
+              "statement": "Bernard 带着爆米花到人家门口去卖。",
+              "evidence": [
+                {"source": "material", "excerpt": "Bernard can take it around to the houses and sell it."}
+              ]
+            }
+          ],
+          "requiredExitState": [
+            {
+              "id": "p2-exit-outcome",
+              "statement": "交代这次售卖的结果，以及它对 Bernard 挣钱帮家这件事意味着什么。",
+              "evidence": [
+                {"source": "material", "excerpt": "He wants very much to earn some money"}
+              ]
+            }
+          ],
+          "supportedOptions": [
+            {
+              "statement": "有邻居出于互助的心意购买。",
+              "evidence": [
+                {"source": "material", "excerpt": "People were trying to help each other meet the challenges."}
+              ]
+            },
+            {
+              "statement": "Bernard 把钱交给家里，用于家庭所需。",
+              "evidence": [
+                {"source": "material", "excerpt": "He is such a help to his mother."}
+              ]
+            }
+          ]
+        }
+      ],
+      "closureRequirements": [
+        {
+          "id": "cl-earning-goal",
+          "statement": "结尾回应原文的核心问题：Bernard 是否借这门生意挣到钱、帮到家里。",
+          "evidence": [
+            {"source": "material", "excerpt": "He wants very much to earn some money"},
+            {"source": "material", "excerpt": "I wish we could help him to earn money"}
+          ]
+        }
+      ]
+    },
+    "developmentPlan": {
+      "selectedRoute": "本范文选择：母亲认可后，三个孩子分工做好爆米花装袋，第二天由母亲带去 Bernard 家，Bernard 欣然接受；第二段 Bernard 起初胆怯，第一笔生意成交后放开胆子，上午就卖完，把钱交给母亲买面包和药，晚上来道谢，John 用“玉米还多着呢”收尾。",
+      "routeRationale": [
+        {
+          "statement": "第二段开头要求“一切就绪”且生意是 Bernard 的，所以第一段必须写完制作和 Bernard 接受两件事，不能把售卖提前写进第一段。",
+          "evidence": [
+            {"source": "paragraph2Starter", "excerpt": "With everything ready, Bernard started out on his new business."}
+          ]
+        },
+        {
+          "statement": "镇上人们互相帮助，让“邻居愿意买”有原文依据，而不是凭空的好运。",
+          "evidence": [
+            {"source": "material", "excerpt": "People were trying to help each other meet the challenges."}
+          ]
+        },
+        {
+          "statement": "钱用于买食物和父亲的药，直接对应这个家庭“父亲卧病、母亲无法工作”的实际困难。",
+          "evidence": [
+            {"source": "material", "excerpt": "There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy."}
+          ]
+        }
+      ],
+      "paragraphs": [
+        {
+          "paragraphIndex": 1,
+          "cause": "母亲认可了这个主意，方案可以执行；但爆米花还没做，Bernard 也还不知道。",
+          "action": "Harry、John、Clara 分工爆玉米、装纸袋；第二天母亲带他们到 Bernard 家，John 说明计划。",
+          "result": "Bernard 眼睛一亮、欣然接受，他母亲连声道谢，Bernard 找来旧篮子装爆米花——一切就绪。",
+          "sourceEvidence": [
+            {"source": "material", "excerpt": "I have a solution that we can all help accomplish"},
+            {"source": "paragraph2Starter", "excerpt": "With everything ready"}
+          ],
+          "cluePayoffs": [
+            {
+              "clue": {"source": "material", "excerpt": "put it into paper bags"},
+              "payoff": "Clara 把爆米花装进纸袋，方案中的细节被兑现。"
+            }
+          ],
+          "bridge": "Bernard 拿着装满爆米花的篮子，准备出门，正好接上第二段的“一切就绪、出发”。",
+          "emotionChanges": [
+            {
+              "trigger": "John 说明可以由他来卖爆米花挣钱",
+              "from": "想挣钱却无路可走",
+              "to": "惊喜、有了希望",
+              "visibleAction": "Bernard 眼睛一亮，问 Do you really mean it?"
+            }
+          ]
+        },
+        {
+          "paragraphIndex": 2,
+          "cause": "Bernard 第一次做生意，在第一户门前很胆怯。",
+          "action": "开门的妇人买了两袋，他胆子大起来，挨街推销；有人因喜欢而买，有人因知道他家困难而买。",
+          "result": "中午前卖完，他跑回家把硬币交给母亲，钱虽不多，够给父亲买面包和药。",
+          "sourceEvidence": [
+            {"source": "material", "excerpt": "Bernard can take it around to the houses and sell it."},
+            {"source": "material", "excerpt": "People were trying to help each other meet the challenges."}
+          ],
+          "cluePayoffs": [
+            {
+              "clue": {"source": "material", "excerpt": "You know that big box of corn Uncle John sent us?"},
+              "payoff": "John 说 Uncle John 的箱子里还有很多玉米，表明这门生意可以继续，Bernard 挣钱的问题不只解决一天。"
+            }
+          ],
+          "ending": "当晚 Bernard 来道谢，John 笑着说玉米还多着呢，故事以帮助可以持续下去收束，不额外喊口号。",
+          "emotionChanges": [
+            {
+              "trigger": "第一户妇人笑着买了两袋",
+              "from": "胆怯，敲门很轻，几乎说不出话",
+              "to": "有信心",
+              "visibleAction": "他挨街走，主动告诉人们爆米花新鲜又便宜"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        "第二段可以先写售卖受挫（很多人家也缺钱），再写 Bernard 坚持或换个地方后卖出，同样满足合同。"
+      ],
+      "qualityRisks": [
+        "不要在第一段就让 Bernard 出门卖，否则与第二段开头“一切就绪、出发”重复。",
+        "结尾不要变成 Meredith 家直接给钱，或拔高成空洞的人生道理。"
+      ]
+    }
+  }
+}
