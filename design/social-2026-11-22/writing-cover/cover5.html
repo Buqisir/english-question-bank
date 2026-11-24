@@ -2,11 +2,11 @@
 @font-face{font-family:NS;font-weight:400;src:url(FONTS_SERIF/noto-serif-sc-chinese-simplified-400-normal.woff2)}
 @font-face{font-family:NS;font-weight:700;src:url(FONTS_SERIF/noto-serif-sc-chinese-simplified-700-normal.woff2)}
 @font-face{font-family:NS;font-weight:900;src:url(FONTS_SERIF/noto-serif-sc-chinese-simplified-900-normal.woff2)}
-:root{--ink:#1B231E;--green:#3F7F68;--deep:#2C6E56;--mute:#7A857F;--chip:#DDF1E8;--paper:#F2FAF5}
+:root{--ink:#1B231E;--green:#3F7F68;--deep:#2C6E56;--mute:#7A857F;--chip:#DDF1E8;--paper:#DDF1E8}
 *{margin:0;box-sizing:border-box}
 body{width:1500px;height:2000px;position:relative;overflow:hidden;background:var(--paper);font-family:"Liberation Serif",NS,serif;color:var(--ink)}
 .bg{position:absolute;inset:0;background:url(T3.png) center/cover}
-.fadeTop{position:absolute;left:0;right:0;top:0;height:720px;background:linear-gradient(var(--paper) 0,var(--paper) 60%,rgba(242,250,245,0))}
+.fadeTop{position:absolute;left:0;right:0;top:0;height:720px;background:linear-gradient(var(--paper) 0,var(--paper) 60%,rgba(221,241,232,0))}
 .kicker{position:absolute;left:135px;top:150px;font:400 40px NS;color:var(--green);letter-spacing:2px}
 h1{position:absolute;left:130px;top:220px;font:900 140px/1.16 NS;letter-spacing:2px}
 h1 q{quotes:"「" "」";color:var(--deep)}
@@ -23,9 +23,10 @@ h1 q{quotes:"「" "」";color:var(--deep)}
 .cta span{margin-left:12px;font-family:"Liberation Serif"}
 .foot{position:absolute;left:135px;right:135px;bottom:90px;display:flex;justify-content:space-between;font:400 38px NS;color:var(--green)}
 .foot span span{font-family:"Liberation Serif"}
-.footbg{position:absolute;left:0;right:0;bottom:0;height:300px;background:linear-gradient(rgba(242,250,245,0),rgba(242,250,245,.92) 45%,var(--paper))}
+.footbg{position:absolute;left:0;right:0;bottom:0;height:300px;background:linear-gradient(rgba(221,241,232,0),rgba(221,241,232,.92) 45%,var(--paper))}
+.tint{position:absolute;inset:0;background:#E9F6F2;mix-blend-mode:multiply}
 </style></head><body>
-<div class="bg"></div><div class="fadeTop"></div>
+<div class="bg"></div><div class="tint"></div><div class="fadeTop"></div>
 <div class="kicker">应用文，换一种讲法</div>
 <h1>别只写<br><span style="margin-left:-70px"><q>我会尽力</q>。</span></h1>
 <div class="sub">给外教 Kate 写邮件：建议配图 + 自荐画图</div>
