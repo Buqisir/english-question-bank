@@ -2,7 +2,7 @@
 
 Revision: `AW4-SPEC-1`
 
-Status: draft, awaiting Owner acceptance
+Status: accepted by Owner 2026-11-24 (「规范通过，从 01 开始做」)
 
 Planning baseline: `origin/main@c11b14e3e`
 
