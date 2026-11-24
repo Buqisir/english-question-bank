@@ -1,8 +1,9 @@
 import { useId, useState, useSyncExternalStore } from 'react'
-import { DisclosureIcon, VolumeFeedbackIcon } from '../../../icons/MotionIcons'
+import { DisclosureIcon } from '../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../icons/motionInput'
 import { Button } from '../../../shared-ui/Button.tsx'
 import { Notice } from '../../../shared-ui/Notice'
+import { PronunciationButton } from '../../../shared-ui/PronunciationButton'
 import type {
   PaperDictionaryEntry,
   PaperDictionaryPosGroup,
@@ -54,29 +55,17 @@ function dedupePronunciations(groups: PaperDictionaryPosGroup[]) {
       if (!existing || (!existing.audio && pronunciation.audio)) byKey.set(key, pronunciation)
     }
   }
-  return [...byKey.values()]
+  return [...byKey.values()].sort((a, b) => accentOrder(a.dialect) - accentOrder(b.dialect))
+}
+
+function accentOrder(dialect: string) {
+  return dialect === 'UK' ? 0 : dialect === 'US' ? 1 : 2
 }
 
 function contextKey(entry: PaperDictionaryEntry, group: PaperDictionaryPosGroup, sense: PaperDictionarySense) {
   return `${entry.entryId}\n${group.posGroupIndex}\n${sense.senseId}`
 }
 
-function groupByIpa(pronunciations: PaperDictionaryPronunciation[]) {
-  const groups: Array<{ ipa: string | null; items: PaperDictionaryPronunciation[] }> = []
-  for (const pronunciation of pronunciations) {
-    const existing = groups.find((group) => group.ipa === pronunciation.ipa)
-    if (existing) existing.items.push(pronunciation)
-    else groups.push({ ipa: pronunciation.ipa, items: [pronunciation] })
-  }
-  return groups
-}
-
-function dialectChipLabel(pronunciation: PaperDictionaryPronunciation) {
-  return pronunciation.dialect === 'unspecified' ? '' : pronunciation.dialectLabel
-}
-
-// 同一音标只写一次，方言跟在音标后面作标注；有录音的方言标注本身就是播放按钮，
-// 这样播放入口总在固定位置，不会夹在两段音标之间。
 function PronunciationRow({
   surface,
   pronunciations,
@@ -90,36 +79,18 @@ function PronunciationRow({
   if (pronunciations.length === 0) return null
   return (
     <span className="otter-pronunciations">
-      {groupByIpa(pronunciations).map((group) => (
-        <span key={group.items[0].pronunciationId} className="paper-dictionary-pronunciation">
-          {group.ipa ? <span lang="en-fonipa">{group.ipa}</span> : null}
-          {group.items.map((pronunciation) => {
-            const label = dialectChipLabel(pronunciation)
-            if (!pronunciation.audio) {
-              return label ? (
-                <span key={pronunciation.pronunciationId} className="paper-dictionary-dialect">{label}</span>
-              ) : null
-            }
-            return (
-              <Button
-                key={pronunciation.pronunciationId}
-                size="sm"
-                label={playLabel(surface, pronunciation)}
-                icon={<>
-                  {label && <span aria-hidden="true" className="paper-dictionary-dialect">{label}</span>}
-                  <VolumeFeedbackIcon size={14} state={audio.key === pronunciation.audio.url ? audio.state : 'idle'} />
-                </>}
-                {...iconMotionInput}
-                onClick={() => {
-                  void playDictionaryAudio(pronunciation.audio!.url, pronunciation.audio!.fallbackUrl).catch(() => {
-                    onPlayError(pronunciation.pronunciationId)
-                  })
-                }}
-              />
-            )
-          })}
-        </span>
-      ))}
+      {pronunciations.map(pronunciation => {
+        const { pronunciationId, ipa, audio: recording, dialect, dialectLabel } = pronunciation
+        return <PronunciationButton key={pronunciationId}
+          label={dialect === 'unspecified' ? '' : dialectLabel} ipa={ipa}
+          playback={recording ? {
+            label: playLabel(surface, pronunciation),
+            state: audio.key === recording.url ? audio.state : 'idle',
+            play: () => {
+              void playDictionaryAudio(recording.url, recording.fallbackUrl).catch(() => onPlayError(pronunciationId))
+            },
+          } : undefined} />
+      })}
     </span>
   )
 }
@@ -357,7 +328,7 @@ export function DictionaryFallback({
         </div>
       ) : null}
 
-      {entries.length > 0 && <div className="paper-dictionary-sense-block">
+      {entries.length > 0 && (sense.status === 'loading' || sense.status === 'ok') && <div className="paper-dictionary-sense-block">
         <span className="paper-dictionary-sense-label">本文义</span>
         {sense.status === 'loading' ? (
           <span className="paper-dictionary-sense-skeleton-row" aria-hidden="true">
@@ -370,13 +341,10 @@ export function DictionaryFallback({
             {sense.matchKey ? <span className="paper-dictionary-machine">机器参考</span> : null}
           </>
         ) : null}
-        {sense.status === 'unavailable' ? (
-          <span className="paper-dictionary-sense-note">{sense.message}</span>
-        ) : null}
-        {sense.status === 'error' ? (
-          <Notice kind="error" action={{ label: '重试', onClick: onRetrySense }}>{sense.message}</Notice>
-        ) : null}
       </div>}
+      {sense.status === 'error' && (
+        <Notice kind="error" action={{ label: '重试', onClick: onRetrySense }}>{sense.message}</Notice>
+      )}
 
       {result.truncated && <Notice kind="info">词条较长，这里只显示一部分。</Notice>}
 

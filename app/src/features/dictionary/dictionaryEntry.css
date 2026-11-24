@@ -39,7 +39,11 @@
 .otter-pronunciations,
 .otter-count,
 .otter-source { color: var(--eqb-color-text-muted); font-size: var(--eqb-font-size-xs); }
-.otter-pronunciations [lang="en-fonipa"],
+.otter-pronunciations [lang="en-fonipa"] {
+  font-family: var(--otter-serif);
+  font-size: var(--eqb-font-size-control);
+  color: var(--eqb-color-text-muted);
+}
 .otter-gloss i,
 .otter-example p[lang="en"] { font-family: var(--otter-serif); }
 .otter-entry--full > .eqb-button { justify-self: start; }

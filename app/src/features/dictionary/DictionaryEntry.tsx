@@ -70,7 +70,10 @@ export function DictionaryEntry(props: EntryProps) {
         {showLabels && item.label && <span>{item.label}</span>}
         {(['uk', 'us'] as const).map(accent => {
           const url = item.audio[accent]
-          return <PronunciationButton key={accent} accent={accent} ipa={item.ipa[accent]} playback={url ? {
+          const ipa = item.ipa[accent]
+          const label = accent === 'uk' ? '英' : '美'
+          return <PronunciationButton key={accent} label={label} ipa={ipa} playback={url ? {
+            label: `播放${label}式读音${ipa ? ` ${ipa}` : ''}`,
             state: audio.key === url ? audio.state : 'idle',
             play: () => {
               setAudioError(false)

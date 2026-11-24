@@ -346,7 +346,6 @@
    字形经 PaperFontGate 注入 document.fonts，对 portal 同样生效。 */
 .paper-dictionary-card {
   --dict-serif: 'EQB Termes', 'EQB Source Han Serif', serif;
-  --dict-serif-ipa: 'EQB Termes', 'Times New Roman', 'Charis SIL', 'Doulos SIL', serif;
 }
 
 .paper-dictionary-card[data-loading] {
@@ -406,52 +405,6 @@
   margin-top: 12px;
 }
 
-.paper-dictionary-pronunciations {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 2px 12px;
-  color: var(--eqb-color-text-muted, #6b6e68);
-}
-
-.paper-dictionary-pronunciation {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 2px;
-}
-
-.paper-dictionary-ipa + .paper-dictionary-dialect {
-  margin-left: 2px;
-}
-
-/* 纯图标的发音键（没有「英 / 美」字）：原宽 14 图标 + 左右 4 = 22，撑到 28 见方，左右各 −3 抵掉。
-   跟在音标后面的原来左边多 2，所以那一个是 2 − 3 = −1。 */
-.paper-dictionary-play:not(:has(.paper-dictionary-dialect)) {
-  width: 28px;
-  margin-inline: -3px;
-}
-
-.paper-dictionary-ipa + .paper-dictionary-play {
-  margin-left: 2px;
-}
-
-.paper-dictionary-ipa + .paper-dictionary-play:not(:has(.paper-dictionary-dialect)) {
-  margin-left: -1px;
-}
-
-.paper-dictionary-dialect {
-  font-size: var(--eqb-font-size-xs, 12px);
-  font-weight: 400;
-}
-
-.paper-dictionary-ipa {
-  font-family: var(--dict-serif-ipa);
-  font-size: var(--eqb-font-size-sm, 14px);
-  font-weight: 400;
-  line-height: 1.45;
-}
-
-.paper-dictionary-play,
 .paper-dictionary-more {
   appearance: none;
   border: 0;
@@ -465,31 +418,10 @@
   padding: 0;
 }
 
-.paper-dictionary-play {
-  align-self: center;
-  /* 灰态底（2026-11-17 Owner 照截图统一）：灰块最小 28、圆角 8；用负外边距抵掉多出来的尺寸，外边距盒和原来一样大，旁边的排版不动。
-     原高 20：现 28，上下各 −4。宽度不动（带「英 / 美」字的键本来就比 28 宽），只有纯图标的键在下一条撑成 28 见方。 */
-  min-width: 20px;
-  height: 28px;
-  margin-block: -4px;
-  padding: 0 4px;
-  gap: 2px;
-  justify-content: center;
-  border-radius: var(--eqb-radius-control);
-  color: var(--eqb-color-text-muted, #6b6e68);
-  transition: background var(--motion-state), color var(--motion-state);
-}
-
-.paper-dictionary-play:hover {
-  background: var(--eqb-color-state-hover);
-}
-
-.paper-dictionary-play:hover,
 .paper-dictionary-more:hover {
   color: var(--eqb-color-text-strong, #1f1f1d);
 }
 
-.paper-dictionary-play:focus-visible,
 .paper-dictionary-more:focus-visible {
   outline: 2px solid var(--eqb-color-text-strong, #1f1f1d);
   outline-offset: 2px;
@@ -651,12 +583,6 @@
   border-radius: 50%;
   background: var(--eqb-color-text-strong, #1f1f1d);
   vertical-align: middle;
-}
-
-.paper-dictionary-sense-note {
-  font-size: var(--eqb-font-size-xs, 12px);
-  line-height: 1.45;
-  color: var(--eqb-color-text-muted, #6b6e68);
 }
 
 .paper-dictionary-sense-error {

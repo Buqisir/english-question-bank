@@ -1083,8 +1083,9 @@ async function verifyBrowser() {
     await page.waitForSelector('.paper-dictionary-card')
     await page.evaluate(() => window.__dictCalls.dictionary[0].complete({ headword: 'adopt', gloss: '采用；采纳', labels: ['过去式', '过去分词'] }))
     await page.waitForTimeout(400)
-    check('dictionary still opens when 本文义 is off, with no upstream call', await page.evaluate(() => window.__dictCalls.sense.length) === 0
-      && (await page.locator('.paper-dictionary-card').innerText()).includes('本文义暂不可用'))
+    check('dictionary hides the 本文义 row when it is off, with no upstream call', await page.evaluate(() => window.__dictCalls.sense.length) === 0
+      && await page.locator('.paper-dictionary-card .paper-dictionary-sense-block').count() === 0
+      && (await page.locator('.paper-dictionary-card').innerText()).includes('采用；采纳'))
   } finally {
     await browser.close()
     await vite.close()
