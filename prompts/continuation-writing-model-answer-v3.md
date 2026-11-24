@@ -1,8 +1,14 @@
 # Continuation Writing Model Answer Prompt — V3
 
-> STATUS: CANDIDATE — not wired into production. Written 2026-11-24 for a blind
-> trial against the production pair `continuation-analysis-v2.md` +
-> `continuation-writing-staged-analysis-v2.md`.
+> STATUS: PRODUCTION — adopted by the Owner on 2026-11-24 after three blind
+> rounds against the V2 pair (`continuation-analysis-v2.md` +
+> `continuation-writing-staged-analysis-v2.md`, now superseded). The workflow
+> loads the body after these notes plus the structured task input,
+> exactly as in the trials, without the shared teaching doctrine. The staged
+> NCK1 route adds `continuation-writing-staged-analysis-v3.md`.
+> Spec: `docs/cuts/continuation-writing-v3/spec.md`.
+>
+> Written 2026-11-24 for a blind trial against the V2 pair.
 >
 > V3 follows the shape that won for application writing (V4): a few principles
 > that each carry their reason, hard constraints only where a program checks

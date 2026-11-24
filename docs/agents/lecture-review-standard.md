@@ -39,4 +39,4 @@ Owner 2026-11-20 定。审阅时按下列两档记录问题，评论沿用条目
 
 - [教学讲评写法](../../.agents/skills/importing-nck1-papers/reference/teaching-analysis-style-v1.md)
 - [听力](../../prompts/listening-analysis-v1.md)、[阅读四选一](../../prompts/reading-choice-analysis-v1.md)、[七选五](../../prompts/seven-choices-analysis-v1.md)、[完形](../../prompts/cloze-analysis-v1.md)、[语法填空](../../prompts/grammar-fill-analysis-v1.md)
-- [应用文](../../prompts/application-writing-model-answer-v4.md)、[读后续写](../../prompts/continuation-analysis-v2.md)
+- [应用文](../../prompts/application-writing-model-answer-v4.md)、[读后续写](../../prompts/continuation-writing-model-answer-v3.md)

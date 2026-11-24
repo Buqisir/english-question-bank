@@ -226,6 +226,10 @@ assert.doesNotMatch(applicationStaged, /"reviewCard"\s*:/)
 assert.match(continuationStaged, /"taskType": "continuation"/)
 assert.match(continuationStaged, /"continuationAnalysis"/)
 assert.doesNotMatch(continuationStaged, /brothers|twins|first-person|150 student-written/i)
+const continuationStagedV3 = read('prompts/continuation-writing-staged-analysis-v3.md')
+assert.match(continuationStagedV3, /"taskType": "continuation"/)
+assert.match(continuationStagedV3, /"schemaVersion": "continuation-analysis-v3"/)
+assert.doesNotMatch(continuationStagedV3, /"(reviewCard|highlightExpressions|continuationDesign)"\s*:/)
 
 const clozePanel = read('app/src/features/paper-intelligence/ClozeAnalysisPanel.tsx')
 const clozeSurfaceAdapter = read('app/src/features/paper-intelligence/clozeAnalysisSurfaceAdapter.ts')
@@ -287,23 +291,8 @@ const messages = [
     paper,
     group: { groupId: 'group-grammar', paragraphs: [paragraph], questions: [question] },
   })[0].content,
-  buildNarrativeContinuationAnalysisMessages({
-    writingTask: {
-      writingTaskId: 'wt-continuation-style-fixture',
-      groupId: 'group-continuation',
-      taskType: 'continuation',
-      instruction: 'Continue the story in two paragraphs.',
-      materialText: 'A child wanted to repair a broken gift before her mother returned.',
-      continuationStarters: [
-        'Her father entered the room.',
-        'Together they carried the repaired gift downstairs.',
-      ],
-      wordCountTarget: 150,
-    },
-  })[0].content,
   buildListeningAnalysisMessages(listeningInput)[0].content,
   buildListeningAnalysisAgentRequest(listeningInput).outputContract,
-  buildNarrativeContinuationStagedAnalysisContract(),
 ]
 
 // Application V4 is voted and run without the shared doctrine (application-writing-v4 spec D2).
@@ -322,6 +311,37 @@ for (const content of applicationRuntimes) {
   assert.doesNotMatch(content, /^# Teaching Analysis Style — V1$/m)
 }
 
+// Continuation V3 is voted and run without the shared doctrine either
+// (continuation-writing-v3 spec D2).
+const continuationRuntimes = [
+  buildNarrativeContinuationAnalysisMessages({
+    writingTask: {
+      writingTaskId: 'wt-continuation-style-fixture',
+      groupId: 'group-continuation',
+      taskType: 'continuation',
+      instruction: 'Continue the story in two paragraphs.',
+      materialText: 'A child wanted to repair a broken gift before her mother returned.',
+      continuationStarters: [
+        'Her father entered the room.',
+        'Together they carried the repaired gift downstairs.',
+      ],
+      wordCountTarget: 150,
+    },
+  })[0].content,
+  buildNarrativeContinuationStagedAnalysisContract(),
+]
+for (const content of continuationRuntimes) {
+  assert.doesNotMatch(content, /^# Teaching Analysis Style — V1$/m)
+  assert.doesNotMatch(content, /先讲人话，再给名字/)
+  assert.doesNotMatch(content, /continuation-analysis-v2/)
+  assert.match(content, /不加新情节，不加空泛的升华/)
+  assert.match(content, /多少要从原文看出来/)
+}
+assert.match(continuationRuntimes[0], /^你是一名/)
+assert.match(continuationRuntimes[0], /A child wanted to repair a broken gift/)
+assert.match(continuationRuntimes[1], /^# Continuation Writing Model Answer Prompt — V3$/m)
+assert.match(continuationRuntimes[1], /^# NCK1 Staged Narrative Continuation Packaging Contract — V3$/m)
+
 for (const [index, content] of messages.entries()) {
   const headingCount = content.match(/^# Teaching Analysis Style — V1$/gm)?.length || 0
   assert.equal(headingCount, 1, `runtime prompt ${index + 1} must load the shared doctrine exactly once`)
@@ -332,7 +352,6 @@ for (const [index, content] of messages.entries()) {
 // Wiring checks, not evidence that a model obeys the accuracy instructions.
 const clozeRuntime = messages.find((content) => content.includes('# Cloze Analysis Prompt'))
 const grammarRuntime = messages.find((content) => content.includes('# Grammar-Fill Analysis Prompt'))
-const continuationRuntime = messages.find((content) => content.includes('# Narrative Continuation Analysis Prompt — V2'))
 assert.match(clozeRuntime, /substitute each option into the complete construction/)
 assert.match(clozeRuntime, /what each possessive or preposition links/)
 assert.match(clozeRuntime, /Stop once that difference is clear/)
@@ -341,13 +360,6 @@ assert.match(grammarRuntime, /Add a position statement only when word order\s+it
 for (const content of [clozeRuntime, grammarRuntime]) {
   assert.doesNotMatch(content, /Chinese explanation quality comes after structure/)
 }
-assert.match(continuationRuntime, /`sourceEndState` stops at the end of `material`/)
-assert.match(continuationRuntime, /Several failed attempts do not prove that/)
-assert.match(continuationRuntime, /Test necessity against a compatible alternative/)
-assert.match(continuationRuntime, /date does not establish\s+that an earlier promise specified that date/)
-assert.match(continuationRuntime, /Write the contract before choosing the route/)
-assert.match(continuationRuntime, /Keep every schema-required field/)
-assert.match(continuationRuntime, /本范文选择……/)
 
 for (const name of ['sevenChoices', 'cloze', 'grammarFill']) {
   assert.doesNotMatch(prompts[name], /teachingNote/, `${name} must not request the retired field`)
@@ -406,4 +418,4 @@ for (const item of benchmark.cases) {
   }
 }
 
-console.log('PASS teaching-analysis doctrine is loaded by every live builder except application V4, which runs without it, and the 25-case benchmark resolves to tracked assets')
+console.log('PASS teaching-analysis doctrine is loaded by every live builder except application V4 and continuation V3, which run without it, and the 25-case benchmark resolves to tracked assets')

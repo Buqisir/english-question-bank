@@ -238,34 +238,42 @@ export function validateApplicationModelAnswer({ modelAnswer, writingTask, group
   }
 }
 
-export function validateApplicationReview(review) {
+/**
+ * The independent PASS | MUST_FIX review that gates persistence on the backfill
+ * route, shared by application and continuation writing.
+ */
+export function validateWritingReview(review, label = 'writing') {
   if (!review || typeof review !== 'object' || Array.isArray(review)) {
-    throw new Error('application review is not an object')
+    throw new Error(`${label} review is not an object`)
   }
   if (Object.keys(review).some((key) => !['verdict', 'findings'].includes(key))) {
-    throw new Error('application review contains unknown fields')
+    throw new Error(`${label} review contains unknown fields`)
   }
   if (!['PASS', 'MUST_FIX'].includes(review.verdict) || !Array.isArray(review.findings)) {
-    throw new Error('application review has an invalid verdict or findings')
+    throw new Error(`${label} review has an invalid verdict or findings`)
   }
   if (review.verdict === 'PASS' && review.findings.length !== 0) {
-    throw new Error('application review PASS must have no findings')
+    throw new Error(`${label} review PASS must have no findings`)
   }
   if (review.verdict === 'MUST_FIX' && review.findings.length === 0) {
-    throw new Error('application review MUST_FIX requires a finding')
+    throw new Error(`${label} review MUST_FIX requires a finding`)
   }
   for (const finding of review.findings) {
     if (!finding || typeof finding !== 'object' || Array.isArray(finding)) {
-      throw new Error('application review finding is malformed')
+      throw new Error(`${label} review finding is malformed`)
     }
     if (Object.keys(finding).some((key) => !['code', 'problem', 'requiredChange'].includes(key))) {
-      throw new Error('application review finding contains unknown fields')
+      throw new Error(`${label} review finding contains unknown fields`)
     }
     for (const key of ['code', 'problem', 'requiredChange']) {
-      if (!nonEmptyString(finding[key])) throw new Error(`application review finding ${key} is empty`)
+      if (!nonEmptyString(finding[key])) throw new Error(`${label} review finding ${key} is empty`)
     }
   }
   return review
+}
+
+export function validateApplicationReview(review) {
+  return validateWritingReview(review, 'application')
 }
 
 /**

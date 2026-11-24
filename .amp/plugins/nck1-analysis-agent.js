@@ -13,13 +13,14 @@ const WRITING_CONTRACT_MARKERS = Object.freeze({
     '# NCK1 Staged Application Analysis Packaging Contract — V2',
   ]),
   continuation: Object.freeze([
-    '# Narrative Continuation Analysis Prompt — V2',
-    '# NCK1 Staged Narrative Continuation Packaging Contract — V2',
+    '# Continuation Writing Model Answer Prompt — V3',
+    '# NCK1 Staged Narrative Continuation Packaging Contract — V3',
   ]),
 })
-// Application V4 was voted without the shared doctrine and its task expressions
-// contradict the doctrine's retired-highlights rule (application-writing-v4 spec D2).
-const GROUPS_WITHOUT_DOCTRINE = new Set(['application'])
+// Application V4 and continuation V3 were voted without the shared doctrine, and
+// their task expressions contradict the doctrine's retired-highlights rule
+// (application-writing-v4 and continuation-writing-v3 spec D2).
+const GROUPS_WITHOUT_DOCTRINE = new Set(['application', 'continuation'])
 const LISTENING_CONTRACT_MARKER = '"const": "listening-analysis-v1"'
 const OBJECTIVE_GROUPS = new Set([
   'reading-a', 'reading-b', 'reading-c', 'reading-d', 'seven', 'cloze', 'grammar',

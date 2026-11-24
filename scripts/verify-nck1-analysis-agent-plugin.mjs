@@ -11,6 +11,7 @@ import nck1AnalysisAgentPlugin, {
   stampNck1AnalysisAgentMeta,
   validateNck1AnalysisGroupInput,
 } from '../.amp/plugins/nck1-analysis-agent.js'
+import { buildNarrativeContinuationStagedAnalysisContract } from '../server/paper-import-ai/analyzeNarrativeContinuation.mjs'
 
 function request(group, marker = group) {
   return {
@@ -35,8 +36,8 @@ const writingContractMarkers = {
     '# NCK1 Staged Application Analysis Packaging Contract — V2',
   ],
   continuation: [
-    '# Narrative Continuation Analysis Prompt — V2',
-    '# NCK1 Staged Narrative Continuation Packaging Contract — V2',
+    '# Continuation Writing Model Answer Prompt — V3',
+    '# NCK1 Staged Narrative Continuation Packaging Contract — V3',
   ],
 }
 
@@ -65,14 +66,18 @@ assert.equal(NCK1_ANALYSIS_AGENT_MODEL, 'xai/grok-4.6')
 assert.equal(NCK1_ANALYSIS_AGENT_REASONING_EFFORT, 'xhigh')
 
 const valid = request('reading-a', 'A-ONLY')
-const actualContinuationContract = [
-  'continuation-analysis-v2.md', 'continuation-writing-staged-analysis-v2.md',
-].map((file) => readFileSync(new URL(`../prompts/${file}`, import.meta.url), 'utf8')).join('\n\n')
+// Continuation V3 (continuation-writing-v3 spec D2): the contract the staged
+// builder produces passes, the superseded V2 pair is rejected, and the request
+// sent to the model omits the shared doctrine.
+const actualContinuationContract = buildNarrativeContinuationStagedAnalysisContract()
 assert.doesNotThrow(() => validateNck1AnalysisGroupInput({
   ...writingRequest('continuation'), outputContract: actualContinuationContract,
 }))
+const supersededContinuationContract = [
+  'continuation-analysis-v2.md', 'continuation-writing-staged-analysis-v2.md',
+].map((file) => readFileSync(new URL(`../prompts/${file}`, import.meta.url), 'utf8')).join('\n\n')
 assert.throws(() => validateNck1AnalysisGroupInput({
-  ...writingRequest('continuation'), outputContract: actualContinuationContract.replaceAll('— V2', '— V1'),
+  ...writingRequest('continuation'), outputContract: supersededContinuationContract,
 }), /tracked base and staged/)
 // Application V4 (application-writing-v4 spec D2/D4): the tracked V4 contract
 // passes, the superseded V3 + V1 contract is rejected, and the request sent to
@@ -93,7 +98,8 @@ const applicationMessage = buildNck1AnalysisAgentMessage(writingRequest('applica
 assert.doesNotMatch(applicationMessage, /DOCTRINE-APPLICATION-ONLY/u, 'application V4 request omits the doctrine')
 assert.doesNotMatch(applicationMessage, /shared teaching doctrine/u)
 const continuationMessage = buildNck1AnalysisAgentMessage(writingRequest('continuation'))
-assert.match(continuationMessage, /DOCTRINE-CONTINUATION-ONLY/u, 'continuation still carries the doctrine')
+assert.doesNotMatch(continuationMessage, /DOCTRINE-CONTINUATION-ONLY/u, 'continuation V3 request omits the doctrine')
+assert.doesNotMatch(continuationMessage, /shared teaching doctrine/u)
 const normalizedValid = validateNck1AnalysisGroupInput(valid)
 assert.deepEqual({ ...normalizedValid, outputContract: valid.outputContract }, valid)
 assert.match(normalizedValid.outputContract, /Exact required groups\[groupId\]\.teachingContent JSON Schema annex/u)

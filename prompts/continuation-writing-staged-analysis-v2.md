@@ -1,5 +1,9 @@
 # NCK1 Staged Narrative Continuation Packaging Contract — V2
 
+> STATUS: SUPERSEDED — replaced by `continuation-writing-staged-analysis-v3.md`
+> (Owner, 2026-11-24). Kept so groups generated with V2 stay traceable; no
+> workflow loads it.
+
 Use this after the V2 continuation-analysis prompt. Return exactly:
 
 ```json
