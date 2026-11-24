@@ -1,0 +1,154 @@
+{
+  "source": "blind trial 2026-11-24, paper-gaokao-2021-eight-provinces-jan.out.json",
+  "writingTask": {
+    "taskType": "application",
+    "instruction": "假定你是李华，准备参加学校组织的英文诗朗诵比赛。请给外教George写封邮件求助，内容包括：",
+    "wordCountTarget": 80,
+    "applicationGiven": {
+      "top": [
+        "Dear George,",
+        "I’m writing to ask for your help."
+      ],
+      "bottom": [
+        "Yours,",
+        "Li Hua"
+      ]
+    }
+  },
+  "groupPassage": null,
+  "output": {
+    "taskType": "application",
+    "blocked": null,
+    "taskCard": {
+      "taskRequires": [
+        "身份与读者：李华给外教 George 写邮件求助；格式给定 Dear George, / I’m writing to ask for your help. / Yours, / Li Hua。",
+        "三个要点：说明比赛要求；请他推荐英文诗；请教朗诵技巧。"
+      ],
+      "thisEssayChooses": "补充了具体的比赛规则（20 行以内、3 分钟、评分看发音、流利度和情感表达），把“推荐诗”和“请教技巧”各写成一个具体问题，结尾约一个具体时间让外教听一遍；语气礼貌但像学生对熟悉的老师说话，不卑微。"
+    },
+    "standard": {
+      "essay": "Dear George,\n\nI’m writing to ask for your help. Our school is holding an English poetry reading contest next month, and I have signed up. Each of us must read a poem of no more than twenty lines within three minutes, and we will be judged on pronunciation, fluency and expression.\n\nSince you know English poetry far better than I do, could you recommend a short but moving poem that suits a beginner like me?\n\nI would also like some advice on reading skills. Where should I pause, and how can I keep my voice natural when I am nervous?\n\nIf you are free this Thursday afternoon, may I read my poem to you in your office? Your comments would mean a lot to me.\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "说明比赛要求",
+          "quote": "Each of us must read a poem of no more than twenty lines within three minutes, and we will be judged on pronunciation, fluency and expression."
+        },
+        {
+          "point": "请他推荐英文诗",
+          "quote": "Since you know English poetry far better than I do, could you recommend a short but moving poem that suits a beginner like me?"
+        },
+        {
+          "point": "请教朗诵技巧",
+          "quote": "Where should I pause, and how can I keep my voice natural when I am nervous?"
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接住给定首句，交代背景，并完成要点一：说明比赛要求。",
+          "items": [
+            {
+              "quote": "and I have signed up",
+              "explain": "先说“我已经报名了”，George 立刻明白这件事是真的、近在眼前，求助有了分量。比“I want to take part”更干脆。"
+            },
+            {
+              "quote": "no more than twenty lines within three minutes",
+              "explain": "把“比赛要求”落到两个可核对的数字上：诗的长度和时间。外教推荐诗时正需要这两条信息，所以这不是凑字，而是为下一段铺路。"
+            },
+            {
+              "quote": "we will be judged on pronunciation, fluency and expression",
+              "explain": "be judged on 是说评分标准的地道搭配；expression 在朗诵语境里指“有感情的表达”。说清评分点，George 才知道技巧该往哪里教。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "完成要点二：请他推荐英文诗。",
+          "items": [
+            {
+              "quote": "Since you know English poetry far better than I do",
+              "explain": "先说为什么找他：从对方的长处出发给理由，既是真诚的赞美，也让请求顺理成章。"
+            },
+            {
+              "quote": "a short but moving poem that suits a beginner like me",
+              "explain": "把“推荐一首诗”说成带条件的请求：短、动人、适合初学者。对方读完就知道该怎么挑，这就是“读完能行动”。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "完成要点三：请教朗诵技巧。",
+          "items": [
+            {
+              "quote": "I would also like some advice on reading skills.",
+              "explain": "also 把第三个要点自然接上；advice 是不可数名词，不加 s，这是学生常错的地方。"
+            },
+            {
+              "quote": "Where should I pause, and how can I keep my voice natural when I am nervous?",
+              "explain": "不笼统地问“有什么技巧”，而是问两个具体困难：停顿和紧张。问题越具体，对方越容易回答，也显得自己认真准备过。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "结尾落在下一步行动上：约时间请他听一遍。",
+          "items": [
+            {
+              "quote": "If you are free this Thursday afternoon, may I read my poem to you in your office?",
+              "explain": "if 条件句给对方留了余地，may I 是对老师礼貌的请求方式；时间和地点都具体，George 只需回答行或不行。"
+            },
+            {
+              "quote": "Your comments would mean a lot to me.",
+              "explain": "用 would 的委婉语气表达感谢和期待，比“Thank you very much”更贴近这次具体的请求。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "be judged on ...",
+          "function": "说明比赛按哪些方面评分，用来交代比赛要求。"
+        },
+        {
+          "expression": "could you recommend a ... poem that suits ...?",
+          "function": "带条件地请人推荐，让对方知道该按什么标准挑选。"
+        },
+        {
+          "expression": "If you are free ..., may I ...?",
+          "function": "向老师提出具体的见面请求，同时给对方留出拒绝的余地。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear George,\n\nI’m writing to ask for your help. Our school is holding an English poetry reading contest later this month, and I have decided to give it a try. Each of us must recite a poem of no more than twenty lines within three minutes, and the judges will look at pronunciation, fluency and, above all, how well we convey the poem's feelings.\n\nHaving only read the poems in our textbook, I would be grateful if you could recommend one or two short but memorable ones. I still remember you reading us Robert Frost's poem about two roads in a yellow wood, and something like that would be perfect.\n\nBesides, I would appreciate some tips on reciting. How should I handle pauses and stress, and what should I do with my hands on stage? If it is convenient, could I recite my poem to you on Thursday afternoon? Even five minutes of your feedback would help a lot.\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "说明比赛要求",
+          "quote": "Each of us must recite a poem of no more than twenty lines within three minutes, and the judges will look at pronunciation, fluency and, above all, how well we convey the poem's feelings."
+        },
+        {
+          "point": "请他推荐英文诗",
+          "quote": "Having only read the poems in our textbook, I would be grateful if you could recommend one or two short but memorable ones."
+        },
+        {
+          "point": "请教朗诵技巧",
+          "quote": "How should I handle pauses and stress, and what should I do with my hands on stage?"
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "above all, how well we convey the poem's feelings",
+          "explain": "标准版只是并列三个评分点；above all 点出最重要的一项，比赛要求不只是列出来，还排了主次，外教推荐和指导时就知道重点在情感。"
+        },
+        {
+          "quote": "I still remember you reading us Robert Frost's poem about two roads in a yellow wood",
+          "explain": "用一段和 George 共同的课堂记忆来说明想要什么样的诗，既更贴近师生关系，也给了对方一个具体的参照，比只说“短而动人”更好挑。"
+        },
+        {
+          "quote": "Even five minutes of your feedback would help a lot.",
+          "explain": "主动把请求缩小到“五分钟”，替忙碌的老师着想，让对方更容易答应；比标准版的感谢句多了一层对读者处境的体贴。"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "source": "blind trial 2026-11-24, paper-gaokao-2021-zhejiang-jan.out.json",
+  "writingTask": {
+    "taskType": "application",
+    "instruction": "46. 假定你是李华，下周有新西兰学生访问你校，你将作为学生代表致欢迎辞。请为此写一篇发言稿，内容包括：",
+    "wordCountTarget": 80,
+    "applicationGiven": {
+      "top": [],
+      "bottom": []
+    }
+  },
+  "groupPassage": null,
+  "output": {
+    "taskType": "application",
+    "blocked": null,
+    "taskCard": {
+      "taskRequires": [
+        "身份与读者：李华作为学生代表，当面向下周来访的新西兰学生致欢迎辞；文体是发言稿，题面没有给定称呼、首句或结尾句。",
+        "三个要点：表示欢迎；介绍活动安排；表达祝愿。"
+      ],
+      "thisEssayChooses": "用口头问候“Good morning, dear friends from New Zealand!”直接开场，不另写信件式称呼行；把活动补成按星期排列的三项（听课、剪纸、告别会包饺子），每项带一句对客人的好处；结尾加一句“有事找谁”的实用提示，再落到交朋友、留回忆的祝愿。语气热情、口语化，像同龄人当面说话。"
+    },
+    "standard": {
+      "essay": "Good morning, dear friends from New Zealand! On behalf of all the students here, I'd like to give you a warm welcome. We have been looking forward to your visit for weeks.\n\nHere is what we have planned for your week. On Monday, you will join our classes and see how Chinese students learn. On Wednesday, our art teacher will show you how to make paper-cuts, which you can take home. On Friday evening, there will be a farewell party, where you can make dumplings with us.\n\nIf you need any help, just ask any of us wearing a red badge. I hope you will make good friends here and take home happy memories. Enjoy your stay!",
+      "pointMap": [
+        {
+          "point": "表示欢迎",
+          "quote": "On behalf of all the students here, I'd like to give you a warm welcome."
+        },
+        {
+          "point": "介绍活动安排",
+          "quote": "On Monday, you will join our classes and see how Chinese students learn."
+        },
+        {
+          "point": "介绍活动安排",
+          "quote": "On Wednesday, our art teacher will show you how to make paper-cuts, which you can take home."
+        },
+        {
+          "point": "介绍活动安排",
+          "quote": "On Friday evening, there will be a farewell party, where you can make dumplings with us."
+        },
+        {
+          "point": "表达祝愿",
+          "quote": "I hope you will make good friends here and take home happy memories."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "当面打招呼并代表全体学生表示欢迎。",
+          "items": [
+            {
+              "quote": "Good morning, dear friends from New Zealand!",
+              "explain": "发言稿是说给台下的人听的，开口先问好、点明听众是谁，比写成“Dear Sir”式的信件称呼更像真的在讲台上说话。"
+            },
+            {
+              "quote": "On behalf of all the students here",
+              "explain": "点明“学生代表”这个身份：我不是只代表自己，而是替全校同学说欢迎，这正是题面给的角色。"
+            },
+            {
+              "quote": "We have been looking forward to your visit for weeks.",
+              "explain": "用现在完成进行时说“盼了好几周”，让欢迎不只是一句客套，客人能感到自己是被期待的。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "按时间顺序介绍活动安排，这是全文主体。",
+          "items": [
+            {
+              "quote": "Here is what we have planned for your week.",
+              "explain": "先用一句话预告“下面讲安排”，听众知道接下来要记什么；口头发言尤其需要这种提示。"
+            },
+            {
+              "quote": "On Monday, you will join our classes and see how Chinese students learn.",
+              "explain": "用“On Monday / On Wednesday / On Friday evening”串起三项活动，听的人一下就能跟上顺序；每项都说清客人做什么、能看到什么，而不只是列活动名。"
+            },
+            {
+              "quote": "which you can take home",
+              "explain": "非限制性定语从句顺带补一句好处：剪纸作品能带回家。一个从句就把“活动”和“对客人的意义”连起来了。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "给出实用提示并表达祝愿，收住全文。",
+          "items": [
+            {
+              "quote": "just ask any of us wearing a red badge",
+              "explain": "告诉客人遇到问题找谁、怎么认出来，听完就知道下一步怎么做，比“有问题随时找我们”更具体。"
+            },
+            {
+              "quote": "I hope you will make good friends here and take home happy memories.",
+              "explain": "祝愿落在这次访问本身：交朋友、留回忆，而不是一句换到哪篇都能用的“祝你们一切顺利”。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "On behalf of all the students here, I'd like to give you a warm welcome.",
+          "function": "以学生代表身份致欢迎，一句话交代身份和目的。"
+        },
+        {
+          "expression": "Here is what we have planned for ...",
+          "function": "在介绍日程前预告内容，帮听众抓住接下来的信息。"
+        },
+        {
+          "expression": "just ask any of us ...",
+          "function": "告诉来访者遇到困难找谁，让欢迎落到实处。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Good morning, dear friends from New Zealand! On behalf of all the students here, it's my great pleasure to welcome you to our school. Ever since we heard you were coming, our whole class has been counting the days.\n\nWe've planned a busy but fun week for you. On Monday, each of you will be paired with a buddy, who will take you to classes and show you around. On Wednesday, our art teacher will teach you paper-cutting, so you'll have a little piece of China to take home. On Friday evening, we'll wrap things up with a farewell party, where you can try your hand at making dumplings with us.\n\nIf anything confuses you, from the canteen menu to the bus routes, just ask your buddy. We hope you'll leave with not only photos but also friends you'll keep in touch with. Enjoy every minute!",
+      "pointMap": [
+        {
+          "point": "表示欢迎",
+          "quote": "On behalf of all the students here, it's my great pleasure to welcome you to our school."
+        },
+        {
+          "point": "介绍活动安排",
+          "quote": "On Monday, each of you will be paired with a buddy, who will take you to classes and show you around."
+        },
+        {
+          "point": "介绍活动安排",
+          "quote": "On Wednesday, our art teacher will teach you paper-cutting, so you'll have a little piece of China to take home."
+        },
+        {
+          "point": "介绍活动安排",
+          "quote": "On Friday evening, we'll wrap things up with a farewell party, where you can try your hand at making dumplings with us."
+        },
+        {
+          "point": "表达祝愿",
+          "quote": "We hope you'll leave with not only photos but also friends you'll keep in touch with."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "our whole class has been counting the days",
+          "explain": "标准版说“盼了几周”，这里用 count the days 这个地道说法，把期待说得更生动，也更像同龄人之间的热情。"
+        },
+        {
+          "quote": "each of you will be paired with a buddy",
+          "explain": "多安排了一个“一对一伙伴”，后文“ask your buddy”又呼应它：活动安排不只是日程，而是让客人整周都有人照应，更具体、更可行。"
+        },
+        {
+          "quote": "leave with not only photos but also friends you'll keep in touch with",
+          "explain": "用 not only ... but also 把“照片”和“会保持联系的朋友”对比，祝愿从泛泛的“留下回忆”推进到“交到长期朋友”，更贴近这次交流的真正意义。"
+        }
+      ]
+    }
+  }
+}

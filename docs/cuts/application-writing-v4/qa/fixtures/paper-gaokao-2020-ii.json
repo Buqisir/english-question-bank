@@ -1,0 +1,140 @@
+{
+  "source": "blind trial 2026-11-24, paper-gaokao-2020-ii.out.json",
+  "writingTask": {
+    "taskType": "application",
+    "instruction": "假定你是李华，上周日你校举办了5公里越野赛跑活动。请你为校英文报写一篇报道，内容包括：",
+    "wordCountTarget": 80,
+    "applicationGiven": {
+      "top": [
+        "A Cross-Country Running Race"
+      ],
+      "bottom": []
+    }
+  },
+  "groupPassage": null,
+  "output": {
+    "taskType": "application",
+    "blocked": null,
+    "taskCard": {
+      "taskRequires": [
+        "身份与读者：李华为校英文报写新闻报道，读者是全校师生；标题 A Cross-Country Running Race 已给定。",
+        "要点三个：参加人员、跑步路线（从校门口到南山脚下）、活动反响。"
+      ],
+      "thisEssayChooses": "用新闻报道的写法：首句交代时间、事件、规模，再按“谁参加—怎么跑—反响如何”三段展开；补充了约300人、三个年级、二十位老师、沿河小路和公园、补水站与校医等合理细节；结尾用一句面向读者的号召收住，语气客观而带一点校园温度。"
+    },
+    "standard": {
+      "essay": "A Cross-Country Running Race\n\nLast Sunday, our school held a 5-kilometer cross-country race, which drew more than 300 runners. Students from all three grades took part, and about twenty teachers, including our headmaster, ran alongside them.\n\nStarting from the school gate, runners followed the riverside path past the town park and finished at the foot of South Hill. Volunteers handed out water at two stations, and the school doctor stood by in case anyone needed help.\n\nThe event was a great success. Many runners said the last kilometer was the toughest, but cheers from their classmates kept them going. Our headmaster hopes to make the race a yearly event, so start training now for next year!",
+      "pointMap": [
+        {
+          "point": "参加人员",
+          "quote": "Students from all three grades took part, and about twenty teachers, including our headmaster, ran alongside them."
+        },
+        {
+          "point": "跑步路线：从校门口到南山脚下",
+          "quote": "Starting from the school gate, runners followed the riverside path past the town park and finished at the foot of South Hill."
+        },
+        {
+          "point": "活动反响",
+          "quote": "Many runners said the last kilometer was the toughest, but cheers from their classmates kept them going."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "新闻导语：交代时间、事件和规模，并写出参加人员。",
+          "items": [
+            {
+              "quote": "Last Sunday, our school held a 5-kilometer cross-country race",
+              "explain": "新闻第一句就回答“什么时候、谁、做了什么”，读者一眼知道这篇报道讲什么。5-kilometer 作前置定语用连字符、名词用单数，是英语报道的常规写法。"
+            },
+            {
+              "quote": "which drew more than 300 runners",
+              "explain": "用 draw（吸引）而不说 there were many people，一个数字就把“规模大”说具体了，比 many students 更像新闻。"
+            },
+            {
+              "quote": "including our headmaster, ran alongside them",
+              "explain": "参加人员不只罗列“学生和老师”，还点出校长和老师“陪着学生一起跑”，让人员这一要点有画面感，也为结尾校长的打算埋下伏笔。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写清跑步路线，并补充保障安排。",
+          "items": [
+            {
+              "quote": "Starting from the school gate",
+              "explain": "用现在分词短语交代起点，把起点和后面的路线、终点压进一句，路线从头到尾一气读完。"
+            },
+            {
+              "quote": "finished at the foot of South Hill",
+              "explain": "题面给的终点“南山脚下”逐项落实；at the foot of 是“在……脚下”的地道说法，不要写成 under the South Hill。"
+            },
+            {
+              "quote": "the school doctor stood by in case anyone needed help",
+              "explain": "stand by 表示“待命”，in case 说明这样安排的原因，让报道显得真实可信：越野赛读者自然会关心安全。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "写活动反响，并以面向读者的号召结尾。",
+          "items": [
+            {
+              "quote": "the last kilometer was the toughest, but cheers from their classmates kept them going",
+              "explain": "反响不只说“大家很开心”，而是写出“最后一公里最难、同学的加油让人坚持下来”这一具体情形，but 前后一抑一扬，读者能感到现场。"
+            },
+            {
+              "quote": "so start training now for next year!",
+              "explain": "校报读者是同学，结尾直接告诉他们下一步能做什么，比 It was a meaningful activity 这种能贴到任何文章后的话有用。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "draw more than ... runners",
+          "function": "报道活动规模，用数字代替 many people。"
+        },
+        {
+          "expression": "start from ... and finish at the foot of ...",
+          "function": "交代路线的起点和终点，正好对应题面“从校门口到南山脚下”。"
+        },
+        {
+          "expression": "... kept them going",
+          "function": "描写反响时说明“是什么让大家坚持下来”，把感受写具体。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "A Cross-Country Running Race\n\nLast Sunday morning, more than 300 runners lined up for our school's 5-kilometer cross-country race. Students from all three grades signed up, and around twenty teachers, our headmaster among them, joined in.\n\nAt 8 a.m. sharp, the starting whistle blew. From the school gate, the route took runners along the riverside path and past the town park, before ending at the foot of South Hill. Student volunteers ran two water stations, and the school doctor was on hand.\n\nThe race turned out to be a highlight of the term. Many runners admitted the final kilometer nearly wore them out, yet cheers from their classmates carried them across the line. \"I came in last, but I've never felt prouder,\" said one Senior One student. The school plans to make the race a yearly event, so lace up your running shoes for next year!",
+      "pointMap": [
+        {
+          "point": "参加人员",
+          "quote": "Students from all three grades signed up, and around twenty teachers, our headmaster among them, joined in."
+        },
+        {
+          "point": "跑步路线：从校门口到南山脚下",
+          "quote": "From the school gate, the route took runners along the riverside path and past the town park, before ending at the foot of South Hill."
+        },
+        {
+          "point": "活动反响",
+          "quote": "Many runners admitted the final kilometer nearly wore them out, yet cheers from their classmates carried them across the line."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "At 8 a.m. sharp, the starting whistle blew.",
+          "explain": "用一个短句把读者带到起跑现场，sharp 表示“整点”，比标准版只写路线多了时间和现场感，长短句交替也让报道有节奏。"
+        },
+        {
+          "quote": "\"I came in last, but I've never felt prouder,\" said one Senior One student.",
+          "explain": "引用参赛同学的原话，是新闻报道写反响的常用手法；最后一名却最自豪，比“大家都很高兴”更打动校报读者，也点出这项活动重在坚持而非名次。"
+        },
+        {
+          "quote": "nearly wore them out, yet cheers from their classmates carried them across the line",
+          "explain": "wear out（累垮）和 carry ... across the line（把人“托”过终点线）是体育报道里的地道搭配，比标准版的 the toughest / kept them going 更有画面。"
+        }
+      ]
+    }
+  }
+}

@@ -200,6 +200,7 @@ const registry = {
   'scripts/verify-public-search-metadata-v1.mjs',
   'scripts/verify-public-paper-review-consumer.mjs',
   'scripts/verify-continuation-analysis-v1.mjs',
+  'scripts/verify-application-analysis-v4.mjs',
   'scripts/verify-teaching-analysis-style.mjs',
   'scripts/verify-nck1-new-paper-locks.mjs',
   'scripts/verify-i6-writing-render.mjs',

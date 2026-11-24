@@ -24,6 +24,7 @@ import { execFileSync } from 'node:child_process'
 import Ajv from 'ajv/dist/2020.js'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 import { isCompleteApplicationReviewCard } from '../../shared/writing/applicationReviewCard.mjs'
+import { applicationAnalysisV4ShapeProblems } from '../../shared/writing/applicationAnalysisV4.mjs'
 
 const WRITING_ANALYSIS_FILENAME = 'writing-analysis-v1.json'
 const WRITING_ANALYSIS_SCHEMA_VERSION = 'writing-analysis-v1'
@@ -348,6 +349,9 @@ export function validateWritingAnalysisCandidate(candidate) {
     if (candidate.reviewCard !== undefined) {
       throw new Error('reviewCard is only valid for application writing.')
     }
+    if (candidate.applicationAnalysis !== undefined) {
+      throw new Error('applicationAnalysis is only valid for application writing.')
+    }
     if (hasNarrativeContinuationAnalysis(candidate)) {
       if (candidate.continuationDesign !== undefined) {
         throw new Error('continuationDesign is only valid on historical continuation writing.')
@@ -399,6 +403,18 @@ export function validateWritingAnalysisCandidate(candidate) {
     }
     if (candidate.highlightExpressions !== undefined) {
       throw new Error('highlightExpressions is retired for application writing.')
+    }
+    if (candidate.applicationAnalysis !== undefined) {
+      if (candidate.reviewCard !== undefined) {
+        throw new Error('applicationAnalysis replaces reviewCard; a group carries one or the other.')
+      }
+      const problems = applicationAnalysisV4ShapeProblems(candidate.applicationAnalysis)
+      if (problems.length > 0) {
+        throw new Error(`applicationAnalysis is malformed: ${problems.join('; ')}`)
+      }
+      if (candidate.modelAnswer !== candidate.applicationAnalysis.standard.essay) {
+        throw new Error('modelAnswer must equal applicationAnalysis.standard.essay.')
+      }
     }
   }
 
@@ -558,6 +574,9 @@ export function persistWritingAnalysisGroup({ paperAssetsDir }, work, analysis) 
         ? { officialModelAnswer: analysis.officialModelAnswer }
         : {}),
       ...(analysis.reviewCard !== undefined ? { reviewCard: analysis.reviewCard } : {}),
+      ...(analysis.applicationAnalysis !== undefined
+        ? { applicationAnalysis: structuredClone(analysis.applicationAnalysis) }
+        : {}),
     }
   }
 
