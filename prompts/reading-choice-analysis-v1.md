@@ -181,6 +181,109 @@ the sentence.
 question asks the student to do. It may name the familiar exam question type,
 but it must not expose internal enum names or repeat the full answer analysis.
 
+### How the answer note reads on the page
+
+The page prints, for each question and in this order: the English stem and its
+Chinese translation; the 定位 line (定位词 → passage words, each with its
+Chinese gloss when they differ, then the paragraph and sentence) and under it
+the 找法 (`locateFindZh`); 原文依据, the passage sentence(s) in English with the
+answer highlighted, and the bridge (`bridgeZh`) when the answer is not in the
+定位句; 正确选项, 「B 项（选项中文）option English」 exactly as the paper prints
+the option; then your answer note; then one 「X 项（选项中文）错在：」 line per
+wrong option. The answer note is the `note` of each `locationParaphrases` item
+that is not the stem 定位 item. Write it for a reader who has just read
+everything above it. The rules earlier in this section still hold; the rules
+below say how to write it.
+
+1. **First sentence: how the option meets the passage, in plain words.** The
+   正确选项 line carries no type label, so the note's first sentence says it:
+   the option keeps the passage's own word (「原文用的就是 productivity，选项沿
+   用」); it says the same thing in other words, naming both (「选项的“意识到”
+   （aware）就是原文的“提高认识”（raise awareness）」); it sums several things
+   up in one word (「教练、顾问、安慰者都属于她扮演的角色」); it puts two places
+   together (「“儿童”出自……，“患病”出自……」); it is worked out one step past
+   the passage (「原文没说他挨过饿，只说……，由此推出他见过」). Never call it a
+   paraphrase, 同义替换 or 换说法 when the option keeps the passage's word.
+   Never name the question type, and never open with 「本题询问」「题目问」.
+2. **As long as the question needs, no longer.** A question answered by one
+   place in the passage (a name, a date, a place, one stated fact) gets one or
+   two sentences, about 40 Chinese characters: say where the answer is and
+   how the option says it, then 「选 B」. Do not split such an option into
+   layers, do not add a second place, do not explain what is plain. A question
+   whose answer needs several places, a summary or a step of inference gets up
+   to about 80.
+3. **Chinese first, English in brackets, only the deciding words.** Put after
+   a Chinese phrase, in brackets, only the one to three English word groups that
+   decide the answer (a few words each, `…` for a cut): 「订单多得忙不过来
+   （flooded）」. The passage sentence is already printed in 原文依据: never copy
+   it again, and never leave English bare inside a Chinese sentence.
+4. **An option made of several meanings: land each one.** When the correct
+   option puts two or more meanings together (「受伤的志愿者」), give each
+   meaning its own place: 「“受伤”落在[[para-2|hurt his ankle]]（hurt his
+   ankle）；“志愿者”落在[[para-1|signed up to help]]（signed up to help）」.
+5. **Places are marks; the page counts them.** Never count paragraphs or
+   sentences yourself: no 第 N 段, 第 M 句, 首句, 末句, 首段, 末段 anywhere in
+   your prose. Write [[paragraphId]] for a paragraph and [[paragraphId|two to
+   five words copied from one sentence of it]] for a sentence; the page prints
+   「第 3 段」 or 「第 3 段首句」 the way the passage is labelled, so a count can
+   never be wrong. The same marks work in `bridgeZh`, `locateFindZh` and the
+   wrong-option sentences. With several places, go through them in passage
+   order with 「先……接着……」. The 定位 line already gives the 定位句's place;
+   do not repeat it. When one place is enough, do not invent a second.
+6. **Start where the lines above stop.** The bridge already says what a
+   pointing word stands for and why the answer is in the context; the 找法
+   says which way to look. Do not retell either, not even in other words
+   (bridge 「there 指 ancient library」, then a note 「抄本放在图书馆里」 says it
+   twice). Add what they leave out: how the option's words match the
+   passage's, or the step that turns the passage into the option. When nothing
+   is left, one sentence and 「选 B」 is enough.
+7. **Word-meaning and reference questions: conditions first, then put it
+   back.** From the word's own sentence (and the one next to it) draw what the
+   answer must be: praise or blame, a person or a thing, a good or a bad thing.
+   Write it as 「所以 X 必须是……」. Then put the answer into the sentence and
+   write out what the sentence now says (「放回去：有些老师不留作业，Ho 说这是
+   在帮倒忙」); for a wrong option, write what the sentence would say with it
+   (「放进去就成了“给孩子上常规课是帮倒忙”，和 Ho 自己做的事相反」). Never sum
+   it up with a verdict word such as 读得通、读不通、说得通: the reader judges
+   from the sentence you wrote out.
+8. **The whole text or a whole paragraph: show the answer covers it.** For a
+   best title, main idea or purpose of the whole text, or the main idea of one
+   paragraph, go through the parts in order with marks and say what each part
+   is about in a few words, then say why the correct option covers all of them
+   and each wrong option covers only one part or none (「[[para-2]]讲心情，
+   [[para-3]]讲学习和工作表现，[[para-4]]劝人别放弃；都是植物给人的好处，
+   选 B」). Do not rest a title question on one word of one paragraph.
+9. **Stated or worked out: say which.** For what the passage writes, use 「提到」
+   「说」「写着」; for what follows from it, use 「可见」「由此推出」 and write the
+   step in between. The conclusion stays no stronger than the evidence: say
+   where it stops (「只能推到“去过”，推不出“住过”」).
+10. **No filler.** Never write 读得通、读不通、说得通、说不通、讲得通、讲不通、
+    换了个说法、换个说法、容易误选、容易选错, or empty praise such as 「符合语境」
+    「逻辑闭环」「与主题契合」「合理概括了原文」. Each says nothing about this
+    question; write the thing it stands for. A one-line rule of thumb (「举例是
+    为了说明前后的观点句」) is allowed only when the next clause applies it to
+    this passage at once.
+
+Wrong options (`explanation` or `relationNote`) follow rules 3, 5 and 10 too.
+Each says where the option comes from (the word it borrows and where, the
+common-sense guess it invites) and which object, scope, condition or direction
+fails in the passage. Name what lures the reader concretely: 「Good 是疼痛科
+主任（pain management），选项借这个身份说止痛」, not 「容易联想到止痛」. Do not
+start every wrong option with the same frame; vary with what each one does.
+`原文没提` stays for options with no anchor, followed by what the passage does
+say there.
+
+Two or more wrong options share one line on the page when their sentences are
+identical word for word: 「A、B 项（…；…）错在：」. Give them the same sentence
+only when every clause of it is true of each of them (one condition rules them
+all out, and the sentence says why each fails it). If any clause fits only one
+of them, write separate sentences. Never merge to save writing, and never with
+a sentence like 「均缺乏原文依据」.
+
+Length: a one-place note about 40 Chinese characters; with several places, a
+summary or a step of inference, about 80; a whole-text note about 90. A
+wrong-option sentence is usually under 45.
+
 ---
 
 ## Group Analysis Schema
@@ -592,7 +695,7 @@ May be used for: `scopeShift`, `entityMismatch`
 
 ## locationParaphrases
 
-UI title: 定位关系 / 同义替换
+UI title: 定位关系 / 正确选项
 
 Each reading question MUST include 1-3 items:
 
@@ -616,13 +719,17 @@ Rules:
 - `targetParagraphId` must reference existing paragraph
 - `relationType`:
   - `locationCue` — 定位线索
-  - `paraphrase` — 同义替换
+  - `paraphrase` — 选项换了说法（原文的意思，选项用了别的词）
   - `wordFamily` — 词族关联
   - `calculation` — 计算/推算
 - `note`: Chinese, preserving key English expressions
 - `note` is the student-facing reasoning bridge, not only a label such as
   “同义替换”. Include the decisive hidden step when the question is not direct
-  retrieval.
+  retrieval. The page prints no relation label: it prints 「正确选项」, the
+  option as the paper prints it with its Chinese, and then the `note` of each
+  non-stem item. So the note's first sentence says in plain words how the
+  option meets the passage (rule 1 of "How the answer note reads on the
+  page"); `relationType` stays a data field only.
 - for `calculation`, write the complete operation and result in `note`
 - Do not use `inferenceBridge`; choose `paraphrase` or `locationCue`.
 
@@ -816,7 +923,18 @@ Fields of that item:
   words (stem “started”, passage “opened”); omit it when `sourceText`
   appears in `targetText` as is (case does not matter). The PDF prints
   `sourceText → targetCue`, or `sourceText 原词` when there is no
-  `targetCue`, so both must read well side by side.
+  `targetCue`, so both must read well side by side. A `targetCue` that only
+  drops words from `sourceText` or only adds some to it (stem "Ann's cows",
+  passage "cows"; stem "hospital school", passage "School") counts as the
+  same words: the page prints 原词.
+- `sourceZh`, `targetCueZh` — REQUIRED with a `targetCue` whose words differ
+  from `sourceText`: the Chinese meaning of each side in this passage, at
+  most 10 Chinese characters, no English letters. The page prints
+  「started（开始经营）→ opened（开张）」 so a reader who does not know one of
+  the two words still sees why they match. Give the meaning here, not a
+  dictionary list: 「Ho's job（Ho 的工作）→ hospital teacher（医院里的老师）」
+  needs the Ho, so 「Ho 的工作」. Omit both when there is no `targetCue` or
+  the cue is the same words (the page prints 原词 and needs no gloss).
 - `answerText` — the exact passage words where the answer is. It MUST be a
   substring of one `quote` in the correct option's `evidence`. Keep it to
   the deciding words, not the whole evidence. The deciding words cover every
@@ -878,7 +996,9 @@ Fields of that item:
 `locateFindZh` (question level, on every question; called 找法 below) — the
 second line of the 定位 block. The page prints a fixed first line:
 - `stem`: the 定位词 in bold, → the passage words (`targetCue`) when they
-  differ, and the paragraph, e.g. 「定位 started → opened 第 2 段」;
+  differ, each with its Chinese (`sourceZh`, `targetCueZh`), and the
+  paragraph and sentence, counted by the page, e.g. 「定位 started（开始经营）
+  → opened（开张）第 2 段首句」;
 - `options`: 「定位 核对选项」;
 - `passage`: 「定位 看全文」, or the paragraph the question names.
 `locateFindZh` goes under it. It shows how to do THIS question well: the move a
@@ -932,7 +1052,7 @@ Example, answer in the 定位句:
   "targetParagraphId": "para-...",
   "relationType": "locationCue",
   "answerText": "rent a boat for ten dollars an hour",
-  "note": "题干 Lake Mora 原词出现在第 2 段。"
+  "note": "题干 Lake Mora 原词出现在原文。"
 }
 ```
 Its `locateFindZh`: "" (the answer is in the 定位句 and no signal is the handle).
@@ -948,7 +1068,7 @@ Example, answer in the context (a pronoun points back):
   "relationType": "locationCue",
   "answerText": "an old clock tower stands at the edge of the village",
   "bridgeZh": "there 指 old clock tower",
-  "note": "题干 the golden key 原词出现在第 3 段。"
+  "note": "题干 the golden key 原词出现在原文。"
 }
 ```
 Its `locateFindZh`: "there 指哪里，往前找".
@@ -963,6 +1083,8 @@ Example, the passage uses other words:
   "targetParagraphId": "para-...",
   "relationType": "locationCue",
   "targetCue": "opened",
+  "sourceZh": "开始经营",
+  "targetCueZh": "开张",
   "answerText": "the shop was full every morning",
   "bridgeZh": "But 后是实际情况，和预期相反",
   "note": "题干 started 对应原文 opened。"
@@ -1017,4 +1139,9 @@ Output must:
 - Every question must have `stemTranslationZh` and `locationParaphrases`
 - Every question must have `locateBy`; a `stem` question has exactly one stem `locationCue` item whose `sourceText` is copied from the stem, whose `targetText` is one whole passage sentence, and whose `answerText` lies inside the correct option's evidence quote; `bridgeZh` appears exactly when `answerText` is outside `targetText`
 - Every question has `locateFindZh`: "" only for a `stem` question whose answer is in the 定位句 with no signal word as the handle; otherwise the line says how to do this question well and would not fit another question unchanged (stem: one move, at most 16 units and one English signal word; options: what to carry back and what decides it, at most 24 units; passage: how this text is built, with [[paragraphId]] places and a few passage words, then what the answer must cover, at most 48 units); paragraphs only as [[paragraphId]]
+- A stem `locationCue` item whose `targetCue` uses other words than `sourceText` has `sourceZh` and `targetCueZh`, each Chinese only and at most 10 characters; an item with no `targetCue`, or a cue that only drops or adds words, has neither
+- Notes of non-stem items, wrong-option `explanation` and `relationNote`, `bridgeZh` and `locateFindZh` name places only as [[paragraphId]] or [[paragraphId|words copied from one sentence of that paragraph]]; no 第 N 段, 第 M 句, 首句, 末句, 首段, 末段 written out
+- None of these contain 读得通、读不通、说得通、说不通、讲得通、讲不通、换了个说法、换了一种说法、换个说法、容易误选、容易选错
+- The first sentence of each answer note says how the correct option meets the passage (same word, other words with both named, a summary, two places, one step of inference), without a type label
+- Wrong options share an identical sentence only when every clause of it is true of each of them
 - If source information is sufficient, output immediately without unrelated deliberation text

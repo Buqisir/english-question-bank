@@ -9,7 +9,7 @@ import {
   readTeachingAnalysisPrompt,
 } from './analyzerProviderShell.mjs'
 import { countQuoteMatches } from '../paper-import/validator.mjs'
-import { hasReadingLocate, resolveReadingLocate } from './readingLocate.mjs'
+import { hasReadingLocate, proseIssues, resolveReadingLocate } from './readingLocate.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -186,6 +186,10 @@ export function validateReadingAnalysisShape(analysis, {
   requireSelectedLongSentences = false,
   requireTeachingContent = false,
   requireLocate = false,
+  // New analyses (Owner 2026-11-24): paragraphs and sentences in the prose
+  // are marks the page counts, no filler verdicts, and a 定位词 that differs
+  // from the passage's words carries both glosses.
+  strictProse = false,
 }) {
   if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) throw new Error('AI 未返回 JSON 对象。')
   if (analysis.schemaVersion !== 'reading-choice-analysis-v1') throw new Error('AI JSON schemaVersion 不正确。')
@@ -279,12 +283,22 @@ export function validateReadingAnalysisShape(analysis, {
       if (option?.trap?.sourceQuote) assertTrapSourceQuoteMatch(questionId, option)
     }
     for (const relation of item.locationParaphrases) assertExactQuote(questionId, 'locationParaphrases.targetText', relation)
+    const prose = [
+      ...item.locationParaphrases.filter(relation => !(relation?.sourceRole === 'stem' && relation?.relationType === 'locationCue'))
+        .map(relation => ['讲解 note ', relation?.note]),
+      ...item.optionAnalysis.filter(option => option?.status === 'wrong')
+        .flatMap(option => [[`${option.label} 项 trap.explanation `, option?.trap?.explanation], [`${option.label} 项 trap.relationNote `, option?.trap?.relationNote]]),
+    ]
+    for (const [field, value] of prose) {
+      const [issue] = proseIssues(value, paragraphsById, { strict: strictProse, field })
+      if (issue) throw new Error(`${questionId}: ${issue}`)
+    }
     // 定位 (BUB-255): checked whenever an analysis carries it, and required
     // when the caller asks for it.
     if (requireLocate || hasReadingLocate(item)) {
       const { errors } = resolveReadingLocate({
         entry: item, stem: sourceQuestion?.stem, paragraphs: paragraphsById, correctEvidence: correctOption?.evidence,
-        options: sourceQuestion?.options, answer: correctOption?.label,
+        options: sourceQuestion?.options, answer: correctOption?.label, strict: strictProse,
       })
       if (errors.length) throw new Error(`${questionId}: ${errors[0]}`)
     }
@@ -305,6 +319,7 @@ export const analyzeReadingImportCandidate = createAnalyzerProviderShell({
     requireFullTranslation: true,
     requireSelectedLongSentences: true,
     requireTeachingContent: true,
+    strictProse: true,
     // 定位 stays optional for new imports until the Owner accepts the two
     // sample papers (BUB-255); an analysis that carries it is always checked.
   }),

@@ -645,6 +645,13 @@ h5 {
   white-space: nowrap;
 }
 
+/* The gloss after a 定位词 and after the passage's other words for it:
+   muted like the stem's Chinese line, so the English stays what the eye
+   finds first. */
+.evidence-locate .locate-gloss {
+  color: var(--muted);
+}
+
 /* Its own line, lined up with the words after 「定位」 (two characters plus
    the label's 0.5em gap). */
 .evidence-locate .locate-where {
