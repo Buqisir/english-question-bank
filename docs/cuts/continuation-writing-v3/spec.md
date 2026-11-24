@@ -2,7 +2,7 @@
 
 Revision: `CW3-SPEC-1`
 
-Status: draft, waiting for Owner acceptance
+Status: accepted by Owner 2026-11-24 (「规范通过，从 01 开始做」)
 
 Planning baseline: branch `claude/dreamy-thompson-296ayb@fda2e071b`; production
 code as on `origin/main`.
@@ -51,7 +51,7 @@ reading the web page or the PDF can:
 
 Groups generated before this cut look exactly as they do now.
 
-## Accepted decisions (pending acceptance)
+## Accepted decisions
 
 ### D1 Data contract
 
