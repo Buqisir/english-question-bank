@@ -358,7 +358,9 @@ For each reading group:
   Unicode-code-point slices of the single `fullTranslationZh` value (never a
   second translation copy), each explicitly linked to existing source paragraph
   IDs. Add `answer-evidence` annotations for textual question evidence and
-  `sentence-structure` annotations covering every selected sentence. Each range
+  `sentence-structure` annotations covering every selected sentence; a
+  `sentence-structure` annotation names its sentence in `selectedSentenceId`,
+  the `sentenceId` of that selected long sentence. Each range
   is `{textId,paragraphId,start,end,quote}` and `quote` must equal that exact
   code-point slice. There are two coordinate systems: translation paragraph
   `start/end` are relative to the entire `fullTranslationZh`; annotation
