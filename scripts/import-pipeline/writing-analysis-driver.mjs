@@ -3,11 +3,14 @@
 //
 // Phase 1:  node writing-analysis-driver.mjs list [application|continuation|all]
 //   Scans ALLOWED papers for un-analysed writing groups of the given type.
-//   Application writes a locked pure-text prompt plus a task record; continuation
-//   retains its combined prompt and task record. Both add a manifest summary.
+//   Application writes the V4 prompt (V4 + complete task text) as
+//   <key>.analysis-v4.prompt.txt plus a task record; continuation retains its
+//   combined prompt and task record. Both add a manifest summary.
 //
 // Phase 2:  node writing-analysis-driver.mjs persist [application|continuation|all]
-//   Application reads reviewed separated work files; continuation keeps its
+//   Application reads the agent-written V4 JSON <key>.analysis-v4.json and the
+//   independent review <key>.review.json; modelAnswer is the standard essay
+//   (docs/cuts/application-writing-v4/spec.md D4). Continuation keeps its
 //   agent-written <key>.out.json flow and vocab gate (MF-2).
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
@@ -21,7 +24,7 @@ import {
 import { buildContinuationAnalysisMessages } from '../../server/paper-import-ai/analyzeContinuationAnalysis.mjs'
 import {
   buildApplicationModelAnswerMessages,
-  validateApplicationModelAnswer,
+  validateApplicationAnalysisV4,
   validateApplicationReview,
 } from '../../server/paper-import-ai/applicationWritingWorkflow.mjs'
 
@@ -91,7 +94,7 @@ if (mode === 'list') {
       ].join('\n')
       writeFileSync(path.join(WA_DIR, `${k}.combined.txt`), combined, 'utf8')
     } else {
-      writeFileSync(path.join(WA_DIR, `${k}.model-answer.prompt.txt`), messages[0].content, 'utf8')
+      writeFileSync(path.join(WA_DIR, `${k}.analysis-v4.prompt.txt`), messages[0].content, 'utf8')
     }
     writeFileSync(path.join(WA_DIR, `${k}.task.json`), JSON.stringify(w, null, 2), 'utf8')
 
@@ -121,38 +124,35 @@ if (mode === 'list') {
 
     try {
       if (w.writingTask.taskType === 'application') {
-        const modelAnswerPath = path.join(WA_DIR, `${k}.model-answer.txt`)
-        const reviewCardPath = path.join(WA_DIR, `${k}.review-card.json`)
+        const analysisPath = path.join(WA_DIR, `${k}.analysis-v4.json`)
         const reviewPath = path.join(WA_DIR, `${k}.review.json`)
         const officialModelAnswerPath = path.join(WA_DIR, `${k}.official-model-answer.txt`)
         for (const [label, filePath] of [
-          ['model answer', modelAnswerPath],
-          ['review card', reviewCardPath],
+          ['V4 analysis', analysisPath],
           ['independent review', reviewPath],
         ]) {
           if (!existsSync(filePath)) throw new Error(`MISSING ${label} work file for ${k}`)
         }
-        let reviewCard
+        let analysis
         let review
         try {
-          reviewCard = JSON.parse(readFileSync(reviewCardPath, 'utf8'))
+          analysis = JSON.parse(readFileSync(analysisPath, 'utf8'))
           review = JSON.parse(readFileSync(reviewPath, 'utf8'))
         } catch (error) {
           throw new Error(`PARSE_FAIL ${k}: ${error instanceof Error ? error.message : String(error)}`)
         }
-        validateApplicationModelAnswer({
-          modelAnswer: readFileSync(modelAnswerPath, 'utf8'),
+        const { writing, warnings } = validateApplicationAnalysisV4({
+          analysis,
           writingTask: w.writingTask,
           groupPassage: w.groupPassage,
         })
+        for (const warning of warnings) console.warn(`WARN ${k}: ${warning}`)
         validateApplicationReview(review)
         if (review.verdict !== 'PASS') {
           throw new Error(`independent review verdict is ${review.verdict}; persist is blocked`)
         }
         const candidate = {
-          taskType: 'application',
-          modelAnswer: readFileSync(modelAnswerPath, 'utf8'),
-          reviewCard,
+          ...writing,
           ...(existsSync(officialModelAnswerPath)
             ? { officialModelAnswer: readFileSync(officialModelAnswerPath, 'utf8') }
             : {}),

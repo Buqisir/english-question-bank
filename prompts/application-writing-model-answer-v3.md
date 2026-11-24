@@ -1,7 +1,8 @@
 # Application Writing Model Answer Prompt — V3
 
-> STATUS: PRODUCTION — source-grounded and loaded by the application-writing
-> model-answer workflow.
+> STATUS: SUPERSEDED — replaced by `application-writing-model-answer-v4.md`
+> (Owner, 2026-11-24). Kept so groups generated with V3 stay traceable; no
+> workflow loads it.
 >
 > This prompt operationalizes `docs/product/application-writing-doctrine-v1.md`.
 > `prompts/application-writing-model-answer-v2.md` remains only as the preserved

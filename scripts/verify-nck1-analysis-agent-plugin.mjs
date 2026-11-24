@@ -31,8 +31,8 @@ function request(group, marker = group) {
 
 const writingContractMarkers = {
   application: [
-    '# Application Writing Model Answer Prompt — V3',
-    '# NCK1 Staged Application Analysis Packaging Contract — V1',
+    '# Application Writing Model Answer Prompt — V4',
+    '# NCK1 Staged Application Analysis Packaging Contract — V2',
   ],
   continuation: [
     '# Narrative Continuation Analysis Prompt — V2',
@@ -74,6 +74,26 @@ assert.doesNotThrow(() => validateNck1AnalysisGroupInput({
 assert.throws(() => validateNck1AnalysisGroupInput({
   ...writingRequest('continuation'), outputContract: actualContinuationContract.replaceAll('— V2', '— V1'),
 }), /tracked base and staged/)
+// Application V4 (application-writing-v4 spec D2/D4): the tracked V4 contract
+// passes, the superseded V3 + V1 contract is rejected, and the request sent to
+// the model omits the shared doctrine for application only.
+const actualApplicationContract = [
+  'application-writing-model-answer-v4.md', 'application-writing-staged-analysis-v2.md',
+].map((file) => readFileSync(new URL(`../prompts/${file}`, import.meta.url), 'utf8')).join('\n\n')
+assert.doesNotThrow(() => validateNck1AnalysisGroupInput({
+  ...writingRequest('application'), outputContract: actualApplicationContract,
+}))
+const supersededApplicationContract = [
+  'application-writing-model-answer-v3.md', 'application-writing-staged-analysis-v1.md',
+].map((file) => readFileSync(new URL(`../prompts/${file}`, import.meta.url), 'utf8')).join('\n\n')
+assert.throws(() => validateNck1AnalysisGroupInput({
+  ...writingRequest('application'), outputContract: supersededApplicationContract,
+}), /tracked base and staged/)
+const applicationMessage = buildNck1AnalysisAgentMessage(writingRequest('application'))
+assert.doesNotMatch(applicationMessage, /DOCTRINE-APPLICATION-ONLY/u, 'application V4 request omits the doctrine')
+assert.doesNotMatch(applicationMessage, /shared teaching doctrine/u)
+const continuationMessage = buildNck1AnalysisAgentMessage(writingRequest('continuation'))
+assert.match(continuationMessage, /DOCTRINE-CONTINUATION-ONLY/u, 'continuation still carries the doctrine')
 const normalizedValid = validateNck1AnalysisGroupInput(valid)
 assert.deepEqual({ ...normalizedValid, outputContract: valid.outputContract }, valid)
 assert.match(normalizedValid.outputContract, /Exact required groups\[groupId\]\.teachingContent JSON Schema annex/u)

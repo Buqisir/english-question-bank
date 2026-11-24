@@ -11,18 +11,22 @@ work.
 
 ## Required reading
 
-Read these files in order:
+For generation, read only:
 
-1. `docs/product/application-writing-doctrine-v1.md`
-2. `.agents/skills/importing-nck1-papers/reference/teaching-analysis-style-v1.md`
+1. `prompts/application-writing-model-answer-v4.md`
+
+V4 is the production prompt (Owner, 2026-11-24;
+`docs/cuts/application-writing-v4/spec.md`). It was voted without the shared
+teaching doctrine, so do not add the doctrine, the teaching-analysis style or
+the V3 prompt to a generation run.
+
+For review mode, a cold-start doctrine review, an ambiguous task, or a
+requested source-grounded audit, also read:
+
+2. `docs/product/application-writing-doctrine-v1.md`
 3. `docs/sources/application-writing/curriculum/application-writing-crosswalk.md`
-4. `prompts/application-writing-model-answer-v3.md`
-
-For a cold-start doctrine review, an ambiguous task, or a requested
-source-grounded audit, also read both complete paper transcriptions:
-
-5. `docs/sources/application-writing/papers/zhu-jingli-task-analysis.md`
-6. `docs/sources/application-writing/papers/tang-bangshun-critical-turn.md`
+4. `docs/sources/application-writing/papers/zhu-jingli-task-analysis.md`
+5. `docs/sources/application-writing/papers/tang-bangshun-critical-turn.md`
 
 Do not load any course, lesson, student, question-bank, or model-answer-
 collection material from the source project.
@@ -42,12 +46,17 @@ SPEC CONTRADICTS: cannot reconstruct complete application task
 
 ## Generation mode
 
-Follow the production V3 prompt and return only the complete English
-composition. Do not expose the internal review-card reasoning.
+Follow the production V4 prompt and return only its JSON object: the task
+card, the standard essay with point map, notes and expressions, and the
+advanced essay with point map and `beyondStandard`. In the staged NCK1 route,
+`prompts/application-writing-staged-analysis-v2.md` gives the outer shape
+instead.
 
-The production workflow still requires its existing deterministic format and
-word-count checks plus an independent `PASS | MUST_FIX` content review before
-persistence. This entrypoint does not bypass those gates.
+Before persistence the workflow runs the V4 program checks
+(`validateApplicationAnalysisV4`: given lines, paragraphs, word counts,
+verbatim quotes, point coverage) and, in the backfill route, an independent
+`PASS | MUST_FIX` content review of the standard essay. This entrypoint does
+not bypass those gates.
 
 ## Review mode
 

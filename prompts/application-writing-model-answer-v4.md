@@ -1,7 +1,9 @@
 # Application Writing Model Answer Prompt — V4
 
-> STATUS: TRIAL — not loaded by any workflow. Production stays on
-> `application-writing-model-answer-v3.md` until a blind review approves V4.
+> STATUS: PRODUCTION — won both blind rounds against V3 (Owner, 2026-11-24) and
+> is loaded by the application-writing workflow as this file plus the complete
+> task text, without the shared teaching doctrine.
+> Spec: `docs/cuts/application-writing-v4/spec.md`.
 >
 > V4 keeps V3's authority order and source grounding, replaces V3's internal
 > checklists with seven principles that each carry their reason, and asks for

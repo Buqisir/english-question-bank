@@ -1,7 +1,10 @@
 # 应用文范文生成准则 v1
 
-Status: production doctrine; implemented by
-`prompts/application-writing-model-answer-v3.md`
+Status: reference doctrine. It was implemented by
+`prompts/application-writing-model-answer-v3.md`, which V4
+(`prompts/application-writing-model-answer-v4.md`) replaced on 2026-11-24.
+V4 runs without this doctrine attached; the doctrine stays the reference for
+independent content review and for source grounding.
 
 ## 1. 用途与来源
 
@@ -241,9 +244,10 @@ Status: production doctrine; implemented by
 - `modelAnswer` 继续表示 AI 参考范文。
 - `officialModelAnswer` 只保存来源真实提供的官方范文。
 - 独立内容复核继续作为范文持久化前置门。
-- 当前生产 Prompt 为 `prompts/application-writing-model-answer-v3.md`；
-  `prompts/application-writing-model-answer-v2.md` 仅保留为上一版历史对照，
-  生产工作流不得继续读取 V2。
+- 当前生产 Prompt 为 `prompts/application-writing-model-answer-v4.md`（2026-11-24 起），
+  运行时不附本准则；V3、V2 仅保留为历史对照，生产工作流不得读取。
+  V4 新写落盘 `applicationAnalysis`，不再生成 `ReviewCard`；上面关于 `ReviewCard`
+  的条目只适用于 V3 及更早落盘的数据。
 
 ## 12. 来源使用护栏
 

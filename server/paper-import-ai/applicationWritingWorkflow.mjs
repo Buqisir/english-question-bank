@@ -1,19 +1,18 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import {
-  readPromptFile,
-  readTeachingAnalysisPrompt,
-} from './analyzerProviderShell.mjs'
+import { readPromptFile } from './analyzerProviderShell.mjs'
 import {
   APPLICATION_ANALYSIS_V4,
   checkApplicationAnalysisV4,
 } from '../../shared/writing/applicationAnalysisV4.mjs'
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
-const promptPath = path.join(repoRoot, 'prompts/application-writing-model-answer-v3.md')
+// Spec D2 (docs/cuts/application-writing-v4/spec.md): V4 plus the task text,
+// as in both blind trials. The shared teaching doctrine is not appended.
+const promptPath = path.join(repoRoot, 'prompts/application-writing-model-answer-v4.md')
 const stagedAnalysisContractPath = path.join(
   repoRoot,
-  'prompts/application-writing-staged-analysis-v1.md',
+  'prompts/application-writing-staged-analysis-v2.md',
 )
 const SPEC_CONTRADICTS = 'SPEC CONTRADICTS: cannot reconstruct complete application task'
 const APPLICATION_CJK = /[　-〿㐀-䶿一-鿿豈-﫿＀-￯]/
@@ -163,14 +162,16 @@ export function buildCompleteApplicationTaskText(writingTask, groupPassage) {
 }
 
 export function buildApplicationModelAnswerMessages(writingTask, groupPassage) {
-  const prompt = readTeachingAnalysisPrompt(promptPath)
+  const prompt = readPromptFile(promptPath).trimEnd()
   const taskText = buildCompleteApplicationTaskText(writingTask, groupPassage)
   return [{ role: 'user', content: `${prompt}\n\n${taskText}` }]
 }
 
 export function buildApplicationStagedAnalysisContract() {
   return [
-    readTeachingAnalysisPrompt(promptPath),
+    readPromptFile(promptPath).trimEnd(),
+    '',
+    '---',
     '',
     readPromptFile(stagedAnalysisContractPath).trim(),
   ].join('\n')
