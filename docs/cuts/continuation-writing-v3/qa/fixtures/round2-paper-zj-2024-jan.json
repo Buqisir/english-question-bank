@@ -1,0 +1,150 @@
+{
+  "source": "blind round 2 2026-11-24, round2/paper-zj-2024-jan/v3-out.json; task from test-fixtures/retired-paper-assets/paper-zj-2024-jan",
+  "writingTask": {
+    "taskType": "continuation",
+    "instruction": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\nEva spent the first week of high school trying to keep her head above water. One of the major headaches for her was finding her way in the huge school building. It was a six-story building. On each floor, hallways stretched in four directions, learning to classrooms, laboratories and teachers’ offices. Somewhere in the building, there was also a library, a cafeteria and a gym.\nHaving a poor sense of direction, Eva found it impossible to get around in such a huge building. All the different hallways and rooms were too much to think about, let alone commit to memory. She decided that she would memorize where her classes were and then pretend that the rest of the place didn’t exist.\nIn her first PE class, Eva was shocked when Coach Pitt announced that everyone had to run one mile around the track outside. She searched the faces of her classmates for signs of panic. There was nothing she feared more than having to run a whole mile. To Eva, “a mile” was used to describe long distances. It was ten miles from her home to her grandfather’s, and that always seemed like a long way, even in a car!\nWhen Coach Pitt blew his whistle (哨子) , Eva figured she would be left in the dust. However, while some of her classmates edged ahead, others actually fell behind. “It’s just the beginning,” she thought. “I’ll come in last for sure.”\nSoon Eva began to breathe hard, with her heart pounding and legs shaking. Feeling desperate, Eva started using a mind trick on herself. She stopped thinking about the word “mile”. Instead, she focused on reaching the shadow cast on the track by an oak tree up ahead. Then she concentrated on jogging to the spot where the trace curved (拐弯) . After that, she tried to see if she could complete her first lap. One lap turned into two, then three, then four.",
+    "materialText": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\n\nEva spent the first week of high school trying to keep her head above water. One of the major headaches for her was finding her way in the huge school building. It was a six-story building. On each floor, hallways stretched in four directions, learning to classrooms, laboratories and teachers’ offices. Somewhere in the building, there was also a library, a cafeteria and a gym.\n\nHaving a poor sense of direction, Eva found it impossible to get around in such a huge building. All the different hallways and rooms were too much to think about, let alone commit to memory. She decided that she would memorize where her classes were and then pretend that the rest of the place didn’t exist.\n\nIn her first PE class, Eva was shocked when Coach Pitt announced that everyone had to run one mile around the track outside. She searched the faces of her classmates for signs of panic. There was nothing she feared more than having to run a whole mile. To Eva, “a mile” was used to describe long distances. It was ten miles from her home to her grandfather’s, and that always seemed like a long way, even in a car!\n\nWhen Coach Pitt blew his whistle (哨子) , Eva figured she would be left in the dust. However, while some of her classmates edged ahead, others actually fell behind. “It’s just the beginning,” she thought. “I’ll come in last for sure.”\n\nSoon Eva began to breathe hard, with her heart pounding and legs shaking. Feeling desperate, Eva started using a mind trick on herself. She stopped thinking about the word “mile”. Instead, she focused on reaching the shadow cast on the track by an oak tree up ahead. Then she concentrated on jogging to the spot where the trace curved (拐弯) . After that, she tried to see if she could complete her first lap. One lap turned into two, then three, then four.",
+    "continuationStarters": [
+      "When Coach Pitt said “Nice work!” to her at the finish line, Eva was surprised.",
+      "Eva decided to use the same trick to deal with the school building."
+    ],
+    "wordCountTarget": 150
+  },
+  "output": {
+    "taskType": "continuation",
+    "blocked": null,
+    "reading": {
+      "questions": [
+        {
+          "question": "原文停在哪里？还有哪些问题没解决？",
+          "answer": "原文停在 Eva 靠“小目标”跑完第四圈（一英里正好四圈），跑步这件事其实已经快结束了。但开头提出的大问题——方向感差、找不到教学楼里的路、只好假装其余地方不存在——一直没解决，第二段要回到它。"
+        },
+        {
+          "question": "第一段首句里 Eva 为什么会“surprised”？",
+          "answer": "她一开始认定自己会被甩在后面、肯定最后一名，跑的时候又只盯着下一个小目标，没去想总距离。所以教练夸她时，她才意识到自己不但跑完了，而且没有最后。惊讶来自她原来的预想和结果之间的落差。"
+        },
+        {
+          "question": "“the same trick”到底是什么，怎么用到教学楼上？",
+          "answer": "trick 就是原文写的：不去想“一英里”这个大词，只盯住下一个看得见的点（树影、拐弯处、一圈）。用到楼里，就是不去想六层楼四个方向，每次只找一个地方，靠看得见的标志一段一段走。"
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "she focused on reaching the shadow cast on the track by an oak tree up ahead",
+          "use": "第一段让 Eva 回头想自己是怎么跑完的，点到橡树、拐弯、一圈这几个小目标，让她自己总结出“诀窍”，第二段首句的 the same trick 才有着落。"
+        },
+        {
+          "sourceQuote": "It was ten miles from her home to her grandfather’s",
+          "use": "用回“去外公家很远”这个细节，对比“刚刚自己脚下就跑完了一英里”，把惊讶写得具体，而不是只说 she was very proud。"
+        },
+        {
+          "sourceQuote": "pretend that the rest of the place didn’t exist",
+          "use": "结尾回扣这句：她曾经假装大部分地方不存在，现在却能给别人指路，原文开头的问题由此收住。"
+        }
+      ]
+    },
+    "taskCard": {
+      "taskRequires": [
+        "第一段从教练在终点说“Nice work!”、Eva 很惊讶写起，要交代她为什么惊讶：她跑完了一英里，而且没有像她担心的那样最后一个到。",
+        "第二段首句说她决定用“the same trick”，所以第一段结束时她必须已经意识到这个诀窍：把大目标拆成一个个看得见的小目标。",
+        "第一段不要提前写她去认路，认楼的行动属于第二段。",
+        "第二段要接上原文开头的问题：方向感差、六层楼找不到路、只记教室位置。"
+      ],
+      "thisEssayChooses": "本文让 Eva 在终点回头看见还有同学在跑，确认自己不是最后；用“外公家”的细节写出她对一英里的新认识。第二段选了“每次只找一个地方”的路线：先找图书馆，靠饮水机这类标志认路，在笔记本后面画路线，一周加一个地点；结尾让一个新同学向她问路，她不用看本子就能指路。这些都可以换：先找的地方可以是食堂或体育馆，标志可以是海报、楼梯，结尾也可以是她第一次准时独自走到某处，只要还是“一次一个小目标”并收回到找路这个问题上。"
+    },
+    "standard": {
+      "essay": "When Coach Pitt said “Nice work!” to her at the finish line, Eva was surprised. She had been so busy chasing one small goal after another that she had lost count of her laps. Bent over with her hands on her knees, she looked back. Several classmates were still jogging around the last curve. She had not come in last after all. She had run a whole mile, a word that used to mean the long drive to her grandfather's. She had never tried to run it all at once. She had only run to the oak tree, then to the curve, then to the end of one lap.\n\nEva decided to use the same trick to deal with the school building. The next morning, she gave herself one small goal: find the library. From her homeroom on the second floor, she walked down the east hallway to the stairs, went up one floor and turned left at the water fountain. There were the library doors. She drew the route in the back of her notebook. Each day that week, she added one more place: the cafeteria, the gym, the science labs. On Friday, a new student stopped her in the hallway and asked the way to the gym. Eva did not need her notebook. \"Down the stairs, then right at the cafeteria,\" she said, pointing.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "解释 Eva 为什么惊讶，并让她自己看清跑完一英里的“诀窍”，为第二段的 the same trick 铺好路。",
+          "items": [
+            {
+              "quote": "she had lost count of her laps",
+              "explain": "惊讶要有原因。她一直盯着小目标，连圈数都忘了数，所以教练一夸，她才发现已经跑完了。这句话把“惊讶”和原文里的跑法连在一起。"
+            },
+            {
+              "quote": "Several classmates were still jogging around the last curve. She had not come in last after all.",
+              "explain": "用一个看得见的画面（还有人在跑）证明她不是最后，再用 after all 回应她原来那句“I'll come in last for sure”。这比写 she was very happy 更有说服力。"
+            },
+            {
+              "quote": "a word that used to mean the long drive to her grandfather's",
+              "explain": "借原文“去外公家十英里”的细节，写出“一英里”在她心里变了：以前是遥远的距离，现在是自己跑完的路。情绪通过细节写出来，不用贴标签。"
+            },
+            {
+              "quote": "She had only run to the oak tree, then to the curve, then to the end of one lap.",
+              "explain": "这是本段最关键的一句：她自己把诀窍说清楚了。三个小目标都来自原文，排成一串，读者一看就懂 trick 是什么，第二段首句接得上。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "把同一个诀窍用到教学楼上，一步一步认路，最后用“给别人指路”收住原文开头的问题。",
+          "items": [
+            {
+              "quote": "she gave herself one small goal: find the library",
+              "explain": "第一个动作就把 trick 落地：不是记住整栋楼，而是只找一个地方。one small goal 和第一段的 one small goal after another 呼应，学生一看就知道“同一个办法”用在哪。"
+            },
+            {
+              "quote": "turned left at the water fountain",
+              "explain": "方向感差的人靠的是看得见的标志，就像跑道上的树影。饮水机就是楼里的“橡树影子”，让认路的过程具体、可信。"
+            },
+            {
+              "quote": "Each day that week, she added one more place",
+              "explain": "交代时间在推进，一次一个地方，正好对应原文 One lap turned into two, then three, then four 的节奏，用一句话就把一周的进展写完了。"
+            },
+            {
+              "quote": "Eva did not need her notebook.",
+              "explain": "结尾落在一个具体动作上：她不用看本子就能给别人指路。原来自己都找不到路的人现在能帮别人，问题解决了，不用再加一句空泛的道理。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "lose count of (her laps)",
+          "function": "说明她专注于眼前的小目标，忘了总距离，正好解释第一段首句里的“surprised”。"
+        },
+        {
+          "expression": "come in last",
+          "function": "原文里她担心 I'll come in last for sure，续写用 She had not come in last after all 回应，把担心和结果连起来。"
+        },
+        {
+          "expression": "turn left at the water fountain / walk down the hallway to the stairs",
+          "function": "写认路的具体动作和标志，让“一次一个小目标”在教学楼里变得看得见。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段大写特写跑步的痛苦和最后冲刺，或者让教练讲一大段鼓励的话。",
+          "why": "原文最后她已经跑到第四圈，段首句也已经在终点了。第一段的任务是解释惊讶、让她想明白 trick，否则第二段的 the same trick 就没着落。"
+        },
+        {
+          "pitfall": "第二段写“她不再害怕，很快就熟悉了整栋楼”，或者让同学、老师直接带她认完全部地方。",
+          "why": "段首句要求用“同一个诀窍”，就必须写出一次一个小目标的具体过程；靠别人帮忙或一句话带过，都没有用上 trick，因果也跳步了。"
+        },
+        {
+          "pitfall": "结尾写一句 This experience taught me that big problems can be solved step by step.",
+          "why": "原文是第三人称 Eva，突然换成 me 不协同；而且这种道理放在任何故事后面都成立，只占词数，不如落在她给别人指路这样的具体动作上。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "When Coach Pitt said “Nice work!” to her at the finish line, Eva was surprised. She had been so busy chasing the next shadow, the next curve, that she had lost count of her laps. She bent over, hands on her knees, and gulped down air. Behind her, a handful of classmates were still dragging themselves around the far turn. She hadn't come in last. She hadn't even come close. A mile. The same word that stretched all the way to her grandfather's house had just fit under her own two feet. She had never actually run a mile, she realized. She had run to an oak tree, then to a bend in the track, then around one lap, and the small pieces had quietly added up.\n\nEva decided to use the same trick to deal with the school building. She stopped thinking about six floors and four directions. On Monday, she set herself one target: the library. Before homeroom, she climbed to the third floor, turned right at the water fountain and followed the hallway past the chemistry lab until she spotted rows of shelves through a glass door. That afternoon, she found the cafeteria by following the smell of pizza down the back stairs. She sketched each route in the back of her notebook, and by the end of the second week the gym and the art room had both found their way onto the page. On Friday, a girl with a crumpled schedule stopped her outside the science labs and asked, almost in a whisper, where Room 412 was. Eva didn't have to check her notebook. She walked the girl to the stairs and told her to go up one floor and turn left. The building she had once pretended didn't exist was beginning to feel like her own.",
+      "beyondStandard": [
+        {
+          "quote": "She hadn't come in last. She hadn't even come close. A mile.",
+          "explain": "连续几个短句加一个只有两个词的片段，模仿原文 “I'll come in last for sure” 那种贴着 Eva 心里想法的叙述口吻，让读者跟着她一下一下反应过来，比标准版的一句陈述更像母语作者的节奏。"
+        },
+        {
+          "quote": "had just fit under her own two feet",
+          "explain": "标准版只说一英里的意义变了；这里用“装进了她自己的两只脚底下”把抽象的距离变成身体感受，和“一直延伸到外公家”形成对比，更具体也更地道。"
+        },
+        {
+          "quote": "found the cafeteria by following the smell of pizza down the back stairs",
+          "explain": "方向感差的人认路靠的不只是标志，还有气味、声音。这个细节让“一次一个目标”更真实；动词 follow 的两种用法（跟着走廊、跟着气味）也是更准确的搭配。"
+        }
+      ]
+    }
+  }
+}

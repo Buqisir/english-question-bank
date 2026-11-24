@@ -202,6 +202,32 @@ export type ContinuationAnalysisV2 = {
 
 export type ContinuationAnalysis = ContinuationAnalysisV1 | ContinuationAnalysisV2
 
+export type ContinuationQuoteNote = { quote: string; explain: string }
+
+/**
+ * V3 continuation analysis (docs/cuts/continuation-writing-v3/spec.md D1).
+ * When present, `modelAnswer` equals `standard.essay`. Not part of
+ * `ContinuationAnalysis`, whose readers render the V1/V2 three-zone shape.
+ */
+export type ContinuationAnalysisV3 = {
+  schemaVersion: 'continuation-analysis-v3'
+  reading: {
+    questions: { question: string; answer: string }[]
+    sourceLinks: { sourceQuote: string; use: string }[]
+  }
+  taskCard: { taskRequires: string[]; thisEssayChooses: string }
+  standard: {
+    essay: string
+    notes: { paragraph: number; role: string; items: ContinuationQuoteNote[] }[]
+    expressions: { expression: string; function: string }[]
+    pitfalls: { pitfall: string; why: string }[]
+  }
+  advanced: {
+    essay: string
+    beyondStandard: ContinuationQuoteNote[]
+  }
+}
+
 export function isNarrativeContinuationAnalysis(value: unknown): value is ContinuationAnalysis {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false
   const analysis = value as Record<string, unknown>

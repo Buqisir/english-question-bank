@@ -25,6 +25,10 @@ import Ajv from 'ajv/dist/2020.js'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 import { isCompleteApplicationReviewCard } from '../../shared/writing/applicationReviewCard.mjs'
 import { applicationAnalysisV4ShapeProblems } from '../../shared/writing/applicationAnalysisV4.mjs'
+import {
+  CONTINUATION_ANALYSIS_V3,
+  continuationAnalysisV3ShapeProblems,
+} from '../../shared/writing/continuationAnalysisV3.mjs'
 
 const WRITING_ANALYSIS_FILENAME = 'writing-analysis-v1.json'
 const WRITING_ANALYSIS_SCHEMA_VERSION = 'writing-analysis-v1'
@@ -309,18 +313,20 @@ if suspect:
  *   - highlightExpressions retired and rejected for new candidates
  *
  * Continuation checks:
- *   Narrative continuation (continuationAnalysis V1 compatibility or V2 production):
+ *   Narrative continuation (continuationAnalysis V1 compatibility, V2, or V3 with
+ *   modelAnswer equal to standard.essay):
  *   - taskType === 'continuation'
  *   - modelAnswer non-empty
  *   - officialModelAnswer optional; when present, a trim-non-empty source string
- *   - continuationAnalysis matches its declared V1 or V2 schema
+ *   - continuationAnalysis matches its declared V1 or V2 schema, or the V3 shape
  *   - continuationDesign / highlightExpressions / reviewCard forbidden
  *   Historical continuation:
  *   - continuationDesign.theme non-empty
  *   - continuationDesign.paragraphs exactly 2, each non-empty
  *   - highlightExpressions 3–5
  *   - each text normalized is a substring of modelAnswer; note non-empty
- *   Soft warning: word count outside [120, 200] (SW-2: floor 120 for continuation)
+ *   Soft warning: word count outside [120, 200] (SW-2: floor 120 for continuation);
+ *   skipped for V3, whose new-word ranges are checked by the V3 validator
  *
  * Vocab gate (MF-2): called separately via runVocabGate; this function does NOT
  * invoke the gate — the driver pipeline calls runVocabGate before this validator.
@@ -359,15 +365,25 @@ export function validateWritingAnalysisCandidate(candidate) {
       if (candidate.highlightExpressions !== undefined) {
         throw new Error('highlightExpressions is only valid on historical continuation writing.')
       }
-      const validateContinuationAnalysisSchema = continuationAnalysisValidator(
-        candidate.continuationAnalysis,
-      )
-      if (!validateContinuationAnalysisSchema(candidate.continuationAnalysis)) {
-        throw new Error(
-          `continuationAnalysis schema invalid: ${formatContinuationAnalysisSchemaErrors(
-            validateContinuationAnalysisSchema.errors,
-          )}`,
+      if (candidate.continuationAnalysis.schemaVersion === CONTINUATION_ANALYSIS_V3) {
+        const problems = continuationAnalysisV3ShapeProblems(candidate.continuationAnalysis)
+        if (problems.length > 0) {
+          throw new Error(`continuationAnalysis V3 is malformed: ${problems.join('; ')}`)
+        }
+        if (candidate.modelAnswer !== candidate.continuationAnalysis.standard.essay) {
+          throw new Error('modelAnswer must equal continuationAnalysis.standard.essay.')
+        }
+      } else {
+        const validateContinuationAnalysisSchema = continuationAnalysisValidator(
+          candidate.continuationAnalysis,
         )
+        if (!validateContinuationAnalysisSchema(candidate.continuationAnalysis)) {
+          throw new Error(
+            `continuationAnalysis schema invalid: ${formatContinuationAnalysisSchemaErrors(
+              validateContinuationAnalysisSchema.errors,
+            )}`,
+          )
+        }
       }
     } else {
       const cd = candidate.continuationDesign
@@ -455,8 +471,10 @@ export function validateWritingAnalysisCandidate(candidate) {
     }
   }
 
-  // Soft: word count applies only to a supplied essay.
+  // Soft: word count applies only to a supplied essay. V3 counts new words
+  // against its own ranges in the V3 check, so the legacy range does not apply.
   if (candidate.modelAnswer === undefined) return
+  if (candidate.continuationAnalysis?.schemaVersion === CONTINUATION_ANALYSIS_V3) return
   const wc = wordCount(candidate.modelAnswer)
   if (candidate.taskType === 'continuation') {
     if (wc < 120 || wc > 200) {

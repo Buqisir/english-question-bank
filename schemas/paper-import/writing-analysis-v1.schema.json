@@ -66,19 +66,28 @@
               "continuationAnalysis": {
                 "type": "object",
                 "additionalProperties": true,
-                "required": ["schemaVersion", "storyUnderstanding", "continuationContract"],
+                "required": ["schemaVersion"],
                 "properties": {
-                  "schemaVersion": { "enum": ["continuation-analysis-v1", "continuation-analysis-v2"] }
+                  "schemaVersion": {
+                    "enum": ["continuation-analysis-v1", "continuation-analysis-v2", "continuation-analysis-v3"]
+                  }
                 },
                 "oneOf": [
                   {
                     "properties": { "schemaVersion": { "const": "continuation-analysis-v1" } },
-                    "required": ["narrativeDevelopment", "languageAlignment", "paragraphBlueprint"]
+                    "required": [
+                      "storyUnderstanding",
+                      "continuationContract",
+                      "narrativeDevelopment",
+                      "languageAlignment",
+                      "paragraphBlueprint"
+                    ]
                   },
                   {
                     "properties": { "schemaVersion": { "const": "continuation-analysis-v2" } },
-                    "required": ["developmentPlan"]
-                  }
+                    "required": ["storyUnderstanding", "continuationContract", "developmentPlan"]
+                  },
+                  { "$ref": "#/$defs/continuationAnalysisV3" }
                 ]
               }
             },
@@ -154,6 +163,132 @@
     }
   },
   "$defs": {
+    "continuationAnalysisV3": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "reading", "taskCard", "standard", "advanced"],
+      "properties": {
+        "schemaVersion": { "const": "continuation-analysis-v3" },
+        "reading": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["questions", "sourceLinks"],
+          "properties": {
+            "questions": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["question", "answer"],
+                "properties": {
+                  "question": { "$ref": "#/$defs/applicationAnalysisText" },
+                  "answer": { "$ref": "#/$defs/applicationAnalysisText" }
+                }
+              }
+            },
+            "sourceLinks": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["sourceQuote", "use"],
+                "properties": {
+                  "sourceQuote": { "$ref": "#/$defs/applicationAnalysisText" },
+                  "use": { "$ref": "#/$defs/applicationAnalysisText" }
+                }
+              }
+            }
+          }
+        },
+        "taskCard": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["taskRequires", "thisEssayChooses"],
+          "properties": {
+            "taskRequires": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 4,
+              "items": { "$ref": "#/$defs/applicationAnalysisText" }
+            },
+            "thisEssayChooses": { "$ref": "#/$defs/applicationAnalysisText" }
+          }
+        },
+        "standard": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["essay", "notes", "expressions", "pitfalls"],
+          "properties": {
+            "essay": { "$ref": "#/$defs/applicationAnalysisText" },
+            "notes": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["paragraph", "role", "items"],
+                "properties": {
+                  "paragraph": { "type": "integer", "minimum": 1, "maximum": 2 },
+                  "role": { "$ref": "#/$defs/applicationAnalysisText" },
+                  "items": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 4,
+                    "items": { "$ref": "#/$defs/applicationQuoteNote" }
+                  }
+                }
+              }
+            },
+            "expressions": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["expression", "function"],
+                "properties": {
+                  "expression": { "$ref": "#/$defs/applicationAnalysisText" },
+                  "function": { "$ref": "#/$defs/applicationAnalysisText" }
+                }
+              }
+            },
+            "pitfalls": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["pitfall", "why"],
+                "properties": {
+                  "pitfall": { "$ref": "#/$defs/applicationAnalysisText" },
+                  "why": { "$ref": "#/$defs/applicationAnalysisText" }
+                }
+              }
+            }
+          }
+        },
+        "advanced": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["essay", "beyondStandard"],
+          "properties": {
+            "essay": { "$ref": "#/$defs/applicationAnalysisText" },
+            "beyondStandard": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 3,
+              "items": { "$ref": "#/$defs/applicationQuoteNote" }
+            }
+          }
+        }
+      }
+    },
     "applicationAnalysisV4": {
       "type": "object",
       "additionalProperties": false,

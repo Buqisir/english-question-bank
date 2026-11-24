@@ -1,0 +1,150 @@
+{
+  "source": "direct-speech fix check 2026-11-24, fix-check/paper-zj-2025-jan/v3-out.json; task from test-fixtures/retired-paper-assets/paper-zj-2025-jan",
+  "writingTask": {
+    "taskType": "continuation",
+    "instruction": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\nKevin was pretty bored. His mother was at work, and his father had been away on business. Therefore, he was left in the care of Mrs. Hill, an old lady who lived next door. His parents had raised the 12-year-old to be a good boy. He never got into trouble, though sometimes he wanted to do risky things. Mrs. Hill was asleep. Kevin sighed (叹息) and hoped something exciting would happen. Suddenly, a movement outside caught his eye.\nMrs. Hill’s front window faced Mr. and Mrs. Green’s house across the street. The couple had both gone to work, so it was strange that someone was over there. Kevin stared at the man at their front door. Suddenly, the man jumped through an open window into the house. With his heart in his mouth, Kevin grabbed Mrs. Hill’s home phone and called the police.\nThinking that the man might get away with whatever he wanted before the police arrived, Kevin decided to do something. He rushed out of Mrs. Hill’s house and crossed the street quickly. Grabbing a branch from a cut-down tree, he jumped in through the window. “Stop right there! You must leave right now!” he called out, holding the branch with both hands.\nThe man froze for a second, but when he saw the skinny boy he breathed a sigh of relief. “Hey, kid, put that down. It was my home. My parents used to live here and my father’s watch was here,” he explained, trying to lift a floorboard.\nAt that moment, the sounds of a police car echoed (回响) in the air. The man stood up in a panic, then ran through the house toward the window and jumped out. Kevin followed out and told the arriving police officers what had happened. They pursued and arrested the man.\nKevin went back to Mrs. Hill’s house. Somehow he wasn’t sure he had done the right thing. “What if he has told the truth?” he thought to himself. The man’s words sounded pretty convincing.",
+    "materialText": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\n\nKevin was pretty bored. His mother was at work, and his father had been away on business. Therefore, he was left in the care of Mrs. Hill, an old lady who lived next door. His parents had raised the 12-year-old to be a good boy. He never got into trouble, though sometimes he wanted to do risky things. Mrs. Hill was asleep. Kevin sighed (叹息) and hoped something exciting would happen. Suddenly, a movement outside caught his eye.\n\nMrs. Hill’s front window faced Mr. and Mrs. Green’s house across the street. The couple had both gone to work, so it was strange that someone was over there. Kevin stared at the man at their front door. Suddenly, the man jumped through an open window into the house. With his heart in his mouth, Kevin grabbed Mrs. Hill’s home phone and called the police.\n\nThinking that the man might get away with whatever he wanted before the police arrived, Kevin decided to do something. He rushed out of Mrs. Hill’s house and crossed the street quickly. Grabbing a branch from a cut-down tree, he jumped in through the window. “Stop right there! You must leave right now!” he called out, holding the branch with both hands.\n\nThe man froze for a second, but when he saw the skinny boy he breathed a sigh of relief. “Hey, kid, put that down. It was my home. My parents used to live here and my father’s watch was here,” he explained, trying to lift a floorboard.\n\nAt that moment, the sounds of a police car echoed (回响) in the air. The man stood up in a panic, then ran through the house toward the window and jumped out. Kevin followed out and told the arriving police officers what had happened. They pursued and arrested the man.\n\nKevin went back to Mrs. Hill’s house. Somehow he wasn’t sure he had done the right thing. “What if he has told the truth?” he thought to himself. The man’s words sounded pretty convincing.",
+    "continuationStarters": [
+      "When Mr. and Mrs. Green got home, Kevin went to talk to them.",
+      "Kevin and Mr. Green took the watch they had found to the police station."
+    ],
+    "wordCountTarget": 150
+  },
+  "output": {
+    "taskType": "continuation",
+    "blocked": null,
+    "reading": {
+      "questions": [
+        {
+          "question": "原文停在哪里，什么问题还没解决？",
+          "answer": "停在 Kevin 回到 Mrs. Hill 家、开始怀疑自己：那个男人已被警察抓走，可他说的“这是我家、我父亲的手表在这里”是不是真的？手表到底在不在地板下、男人是不是被冤枉，都还没有答案。"
+        },
+        {
+          "question": "人物想要什么、是什么样的人，从原文哪里看出来？",
+          "answer": "Kevin 是个守规矩、但心里想冒险的12岁男孩（He never got into trouble, though sometimes he wanted to do risky things）；他先报警再自己冲进去，事后又反复想对不对，说明他胆大但心细、在乎公平。那个男人只想拿回父亲的手表：他见是个瘦小孩子就松了口气，一边解释一边撬地板，不像真正的小偷。"
+        },
+        {
+          "question": "原文是怎么写的？",
+          "answer": "第三人称、过去时，紧跟 Kevin 的视角；句子大多短而直接，动作接动作。原文只有三处引号（Kevin 的喊话、男人的解释、Kevin 的心里话），每处一两句，其余都是叙述，描写很少。续写也以叙述推进，只在关键处留一两句短的直接引语。"
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "trying to lift a floorboard",
+          "use": "这是原文埋下的伏笔：续写里 Kevin 能直接带 Green 夫妇找到那块地板，把它撬开就找到手表，不用另编寻找过程。"
+        },
+        {
+          "sourceQuote": "My parents used to live here and my father’s watch was here",
+          "use": "男人的这句话给了续写两条线索：向 Green 夫妇核实“这房子以前是谁的”，以及手表是父亲的东西，可在表背刻名字来证明他说的是真的。"
+        },
+        {
+          "sourceQuote": "What if he has told the truth?",
+          "use": "这是 Kevin 的疑问，续写要回答它：手表被找到，证明男人没说谎；男人最后一句“你报警是对的”同时解开 Kevin 对自己做法的怀疑。"
+        }
+      ]
+    },
+    "taskCard": {
+      "taskRequires": [
+        "第一段从 Kevin 去找刚回家的 Green 夫妇谈话写起，人物不变：Kevin、Green 夫妇、那个男人和警察。",
+        "第二段首句说“Kevin and Mr. Green took the watch they had found”，所以第一段结束时手表必须已经被找到，而且是 Kevin 和 Mr. Green 一起找到的。",
+        "必须接上原文事实：男人说父母曾住这里、父亲的手表在这里，他当时在撬地板；他已被警察逮捕，所以第二段去警察局能见到他。",
+        "要回应 Kevin 的疑问：男人说的是不是真话、Kevin 做得对不对。"
+      ],
+      "thisEssayChooses": "本文选的路线：Green 夫妇说房子是十年前从一对老夫妇手里买的，他们有个儿子；Kevin 带他们去撬开那块地板，找到装在小盒里的银表，表背刻着名字。到警察局后用名字和男人的证件对上，Mr. Green 不追究，男人被警告后放走，并对 Kevin 说他报警是对的。以下都可以换：表可以放在信封里而不是盒子里，证明方式可以是照片或男人说出表上的特征，结尾可以落在男人戴上表或和 Kevin 握手。Mr. Green 不追究也是选择，但要让男人拿回手表，这条最顺。"
+    },
+    "standard": {
+      "essay": "When Mr. and Mrs. Green got home, Kevin went to talk to them. He told them about the man who had climbed through their window and what he had said about his father's watch. Mr. Green looked surprised. He explained that they had bought the house from an old couple about ten years before. \"They did have a son,\" Mrs. Green added quietly. Kevin led them into the living room and pointed to the floorboard the man had tried to lift. Mr. Green fetched a screwdriver and pulled the board up. Underneath lay a small wooden box covered in dust. Inside was an old silver watch with a name carved on its back.\n\nKevin and Mr. Green took the watch they had found to the police station. An officer listened to their story and then brought the man out. When he saw the watch, his eyes filled with tears. He said it had been his father's, and his father had hidden it under the floor long ago. The name on the back matched the name on his driver's license. Mr. Green decided not to press charges, and the officer let the man go with a warning. Kevin handed him the watch. \"Sorry I scared you, kid,\" the man said. \"You were right to call the police.\" He wound the watch slowly, and it began to tick.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "Kevin 向 Green 夫妇核实男人的话，并带他们找到手表，让第二段首句“they had found”成立。",
+          "items": [
+            {
+              "quote": "He explained that they had bought the house from an old couple about ten years before.",
+              "explain": "这是推动情节的新信息：房子以前确实属于一对老夫妇，男人的话第一次得到印证。转折靠一条信息触发，而不是靠 Kevin“突然觉得”。用转述而不是引号，和原文以叙述为主的写法一致。"
+            },
+            {
+              "quote": "\"They did have a son,\" Mrs. Green added quietly.",
+              "explain": "全段唯一的直接引语，放在改变理解的地方：老夫妇有个儿子，那个男人很可能就是他。did 加强语气，quietly 让人感到 Green 太太也开始同情他。"
+            },
+            {
+              "quote": "pointed to the floorboard the man had tried to lift",
+              "explain": "用回原文的伏笔 trying to lift a floorboard。Kevin 当时在场，所以由他带路最合理，也让他在找表这件事上出力，而不是只站在旁边。"
+            },
+            {
+              "quote": "Inside was an old silver watch with a name carved on its back.",
+              "explain": "倒装句把“手表”放到句尾，读者最后才看到它，像打开盒子一样。表背的名字是为第二段准备的证据，后面靠它证明男人没说谎。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "在警察局证明男人说的是真话，手表物归原主，解开 Kevin 心里“我做得对不对”的疑问。",
+          "items": [
+            {
+              "quote": "When he saw the watch, his eyes filled with tears.",
+              "explain": "情绪通过看得见的反应写出来，而不是写 he was very moved。这一个动作就说明这块表对他有多重要。"
+            },
+            {
+              "quote": "The name on the back matched the name on his driver's license.",
+              "explain": "第一段表背名字的伏笔在这里兑现。真相靠一件可以核对的证据确定，因果不跳步，比只写“警察相信了他”可信。"
+            },
+            {
+              "quote": "\"You were right to call the police.\"",
+              "explain": "这句话由被抓的人亲口说出，同时回答了原文结尾 Kevin 的两个疑问：男人说的是真的，而 Kevin 报警也没有错。不用再加一句道理。"
+            },
+            {
+              "quote": "He wound the watch slowly, and it began to tick.",
+              "explain": "结尾落在一个动作和一个物件上：停了多年的表重新走起来，暗示这家人的记忆回到主人手里。点到为止，比贴一句“诚实最重要”有分量。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "Underneath lay a small wooden box covered in dust.",
+          "function": "地点状语开头的倒装句，写“撬开后看到什么”，让发现有画面感；covered in dust 说明东西藏了很久，暗合“父母以前住这里”。"
+        },
+        {
+          "expression": "his eyes filled with tears",
+          "function": "用看得见的反应写男人见到手表时的激动，比直接说 moved 或 excited 具体，也说明他在乎的是父亲的遗物而不是钱。"
+        },
+        {
+          "expression": "decided not to press charges / let the man go with a warning",
+          "function": "交代男人闯入的结果：他毕竟私闯民宅，警告后放走合情合理，避免写成“什么事都没有”。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段只写 Kevin 和 Green 夫妇聊天、表示怀疑，没有找到手表；或者第二段才去撬地板。",
+          "why": "第二段首句写的是 the watch they had found，第一段结束时手表必须已经找到，而且 Mr. Green 要参与。"
+        },
+        {
+          "pitfall": "让男人在续写里被证明是真正的小偷，或者让 Kevin 后悔报警、怪自己害了人。",
+          "why": "段首句要把找到的手表送去警察局，说明手表真实存在、男人没有说谎；而 Kevin 报警是正常的谨慎，把他写成做错事不符合原文给他的“好孩子”形象，也收不住他的疑问。"
+        },
+        {
+          "pitfall": "满篇对话，或者结尾加一句 This experience taught Kevin that... 的大道理。",
+          "why": "原文只有三处简短引号，续写对话过多就不是同一种写法；空泛的道理放在任何故事后都成立，只占词数，不推进情节。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "When Mr. and Mrs. Green got home, Kevin went to talk to them. Standing on their doorstep, he told them everything: the man at the window, the branch, the police car, and the story about the watch. Mr. Green frowned and rubbed his chin. They had bought the house from an old couple about ten years earlier, he said, and the couple had a grown-up son. Kevin's stomach tightened. He led them into the living room and pointed at the loose floorboard. Mr. Green fetched a screwdriver from the garage, knelt down and pried the board up. A small tin box lay in the dust underneath. Mrs. Green lifted the lid. Inside, wrapped in a faded handkerchief, was a silver watch with a name engraved on its back.\n\nKevin and Mr. Green took the watch they had found to the police station. The officer on duty listened, checked the name on the watch against the man's driver's license, and nodded. A few minutes later he brought the man out. The moment the man saw the watch, his shoulders dropped and his eyes went wet. His father had hidden it under the floor many years ago, he explained, and he had never stopped thinking about it. Mr. Green said he would not press charges, and the officer let the man off with a warning. Kevin held out the watch, but his hands were not quite steady. \"I'm sorry,\" he said. \"I thought you were a thief.\" The man shook his head. \"If I saw a stranger climb into my neighbor's house, I'd want a kid like you next door.\" He turned the tiny knob slowly, held the watch to his ear, and smiled as it began to tick again.",
+      "beyondStandard": [
+        {
+          "quote": "he told them everything: the man at the window, the branch, the police car, and the story about the watch",
+          "explain": "标准版只概括“告诉他们那个人和手表的事”；这里用冒号后一串名词，把原文里的窗户、树枝、警车一件件点回来，既快速回顾，又像孩子一口气说完的样子。"
+        },
+        {
+          "quote": "Kevin's stomach tightened.",
+          "explain": "标准版没写 Kevin 听到“他们有个儿子”时的反应；这一句用身体感觉写出他意识到“可能抓错了人”的不安，紧接原文结尾他的疑问，比写 he felt worried 地道。"
+        },
+        {
+          "quote": "If I saw a stranger climb into my neighbor's house, I'd want a kid like you next door.",
+          "explain": "标准版的 You were right to call the police 直接说结论；这里男人换位思考，用口语的虚拟句给出肯定，更像真人说话，也带出一点幽默和宽容，和 Kevin 那句道歉一来一回。"
+        }
+      ]
+    }
+  }
+}

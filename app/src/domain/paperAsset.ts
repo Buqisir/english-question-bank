@@ -5,10 +5,15 @@
  * Import unit = whole paper. PaperSurface target = full English exam standard layout.
  */
 
-import type { ContinuationAnalysis } from './continuationAnalysis.ts'
+import type { ContinuationAnalysis, ContinuationAnalysisV3 } from './continuationAnalysis.ts'
 import type { ApplicationReviewCard } from '../../../shared/writing/applicationReviewCard.mjs'
 
-export type { ContinuationAnalysis, ContinuationAnalysisV1, ContinuationAnalysisV2 } from './continuationAnalysis.ts'
+export type {
+  ContinuationAnalysis,
+  ContinuationAnalysisV1,
+  ContinuationAnalysisV2,
+  ContinuationAnalysisV3,
+} from './continuationAnalysis.ts'
 export {
   isNarrativeContinuationAnalysis,
   isNarrativeContinuationWritingAnalysis,
@@ -301,7 +306,7 @@ export type ContinuationWritingAnalysisV1 = {
   taskType: 'continuation'
   modelAnswer?: string
   officialModelAnswer?: string
-  continuationAnalysis: ContinuationAnalysis
+  continuationAnalysis: ContinuationAnalysis | ContinuationAnalysisV3
 }
 
 export type ContinuationWritingAnalysisLegacy = {

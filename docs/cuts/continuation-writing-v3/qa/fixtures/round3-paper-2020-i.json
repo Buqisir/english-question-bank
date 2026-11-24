@@ -1,0 +1,150 @@
+{
+  "source": "blind round 3 2026-11-24, round3/paper-2020-i/v3-out.json; task from test-fixtures/retired-paper-assets/paper-2020-i",
+  "writingTask": {
+    "taskType": "continuation",
+    "instruction": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\nThe Meredith family lived in a small community. As the economy was in decline, some people in the town had lost their jobs. Many of their families were struggling to make ends meet. People were trying to help each other meet the challenges.\nMrs. Meredith was a most kind and thoughtful woman. She spent a great deal of time visiting the poor. She knew they had problems, and they needed all kinds of help. When she had time, she would bring food and medicine to them.\nOne morning she told her children about a family she had visited the day before. There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy. The little boy – his name was Bernard – had interested her very much.\n“I wish you could see him,” she said to her own children, John, Harry, and Clara. “He is such a help to his mother. He wants very much to earn some money, but I don’t see what he can do.”\nAfter their mother left the room, the children sat thinking about Bernard. “I wish we could help him to earn money,” said Clara. “His family is suffering so much.”\n“So do I,” said Harry. “We really should do something to assist them.”\nFor some moments, John said nothing, but, suddenly, he sprang to his feet and cried, “I have a great idea! I have a solution that we can all help accomplish (完成) .”\nThe other children also jumped up all attention. When John had an idea, it was sure to be a good one. “I tell you what we can do,” said John. “You know that big box of corn Uncle John sent us? Well, we can make popcorn (爆米花) , and put it into paper bags, and Bernard can take it around to the houses and sell it.”",
+    "materialText": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\n\nThe Meredith family lived in a small community. As the economy was in decline, some people in the town had lost their jobs. Many of their families were struggling to make ends meet. People were trying to help each other meet the challenges.\n\nMrs. Meredith was a most kind and thoughtful woman. She spent a great deal of time visiting the poor. She knew they had problems, and they needed all kinds of help. When she had time, she would bring food and medicine to them.\n\nOne morning she told her children about a family she had visited the day before. There was a man sick in bed, his wife, who took care of him and could not go out to work, and their little boy. The little boy – his name was Bernard – had interested her very much.\n\n“I wish you could see him,” she said to her own children, John, Harry, and Clara. “He is such a help to his mother. He wants very much to earn some money, but I don’t see what he can do.”\n\nAfter their mother left the room, the children sat thinking about Bernard. “I wish we could help him to earn money,” said Clara. “His family is suffering so much.”\n\n“So do I,” said Harry. “We really should do something to assist them.”\n\nFor some moments, John said nothing, but, suddenly, he sprang to his feet and cried, “I have a great idea! I have a solution that we can all help accomplish (完成) .”\n\nThe other children also jumped up all attention. When John had an idea, it was sure to be a good one. “I tell you what we can do,” said John. “You know that big box of corn Uncle John sent us? Well, we can make popcorn (爆米花) , and put it into paper bags, and Bernard can take it around to the houses and sell it.”",
+    "continuationStarters": [
+      "When Mrs.Meredith heard of John's idea, she thought it was a good one, too.",
+      "With everything ready, Bernard started out on his new business."
+    ],
+    "wordCountTarget": 150
+  },
+  "output": {
+    "taskType": "continuation",
+    "blocked": null,
+    "reading": {
+      "questions": [
+        {
+          "question": "原文停在哪里，什么问题还没解决？",
+          "answer": "原文停在John说出主意：用Uncle John送的玉米做爆米花，装进纸袋，让Bernard挨家去卖。主意只是说出来了，大人还没同意，爆米花还没做，Bernard能不能真的挣到钱也还不知道。"
+        },
+        {
+          "question": "人物想要什么、是什么样的人，从原文哪里看出来？",
+          "answer": "Bernard想挣钱帮家里（He wants very much to earn some money），他父亲卧病、母亲要照顾父亲出不了门，可见他懂事、肯干。三个孩子想帮他又不是直接给钱，而是想办法让他自己挣（I wish we could help him to earn money），John点子多，Clara和Harry热心。"
+        },
+        {
+          "question": "原文是怎么写的？续写该照着怎样写？",
+          "answer": "第三人称过去时，句子短而平实，描写很少；有几句直接引语，但都短，而且每句都在推动事情。续写也用短句、过去时，以叙述为主，只在关键处留一两句短的直接引语。"
+        }
+      ],
+      "sourceLinks": [
+        {
+          "sourceQuote": "that big box of corn Uncle John sent us",
+          "use": "续写里做爆米花时直接用这箱玉米（Uncle John's corn），结尾还可以让剩下的玉米说明生意能继续，让原文的物件真正起作用。"
+        },
+        {
+          "sourceQuote": "There was a man sick in bed",
+          "use": "Bernard卖东西胆怯时想起卧病的父亲，给他鼓起勇气一个原文里现成的理由；结尾挣到的钱也落到父亲的药上，呼应Mrs. Meredith送药的细节。"
+        },
+        {
+          "sourceQuote": "put it into paper bags",
+          "use": "第一段写孩子们分工时，叠纸袋、装袋就是现成的动作，让准备过程具体可见。"
+        }
+      ]
+    },
+    "taskCard": {
+      "taskRequires": [
+        "第一段从Mrs. Meredith赞成这个主意写起，要写到一切准备好：爆米花做好、装好袋，Bernard这边也同意并到场，因为第二段首句说With everything ready。",
+        "第一段不能写Bernard出门去卖，那是第二段首句才开始的动作。",
+        "第二段写Bernard开始卖爆米花，并对原文的问题有交代：他是否通过卖爆米花挣到了钱、帮到了家里。",
+        "人物仍是Meredith一家和Bernard；爆米花、纸袋、Uncle John的玉米要接上原文。"
+      ],
+      "thisEssayChooses": "本文选择让Mrs. Meredith当天去和Bernard的母亲商量，第二天孩子们在厨房分工准备；第二段写Bernard先胆怯、想起父亲后放开声音，邻居被他打动，傍晚卖完，钱用来给父亲买药，最后以剩下的半箱玉米收尾。可以换的：是否先去征求Bernard家同意、谁负责哪项准备、买家的反应、挣的钱用在什么地方、结尾落在哪个物件上，都可以换成别的同样合理的写法；但不能让新人物替Bernard卖完或直接给钱。"
+    },
+    "standard": {
+      "essay": "When Mrs.Meredith heard of John's idea, she thought it was a good one, too. She told the children that she would visit Bernard's mother that afternoon. Bernard's mother was very thankful, and the boy came over early the next morning. Soon the kitchen was full of noise. John poured some of Uncle John's corn into a big pan and shook it over the fire. The corn began to pop, and a warm smell filled the house. Harry and Clara folded paper bags, and Bernard filled each one carefully. By noon, twenty bags stood in a neat row in a basket.\n\nWith everything ready, Bernard started out on his new business. He walked from house to house with the basket on his arm. At first his voice was so low that people could hardly hear him. Then he thought of his sick father and spoke a little louder. An old lady bought two bags and told him it was the best popcorn she had ever tasted. Soon the neighbors heard about the boy who was working to help his family. When the sun went down, the basket was empty. Bernard ran to the Merediths' house and poured the coins onto the table. \"Now Father can have his medicine!\" he said, his eyes shining. John smiled and said there was still half a box of corn left.",
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "从妈妈同意走到“一切准备好”：先补上去Bernard家商量这一步，再写孩子们分工做爆米花、装袋，最后停在装满的篮子上，正好接第二段的With everything ready。",
+          "items": [
+            {
+              "quote": "she would visit Bernard's mother that afternoon",
+              "explain": "Mrs. Meredith本来就常去看望穷人，由她去和Bernard家商量，合乎她的身份，也让Bernard参与这件事有了交代，不是孩子们自作主张。"
+            },
+            {
+              "quote": "John poured some of Uncle John's corn into a big pan and shook it over the fire",
+              "explain": "用回原文Uncle John送的那箱玉米，并用poured、shook两个具体动词把做爆米花写成看得见的过程，比“they made popcorn”更像故事。"
+            },
+            {
+              "quote": "Harry and Clara folded paper bags, and Bernard filled each one carefully",
+              "explain": "一句话交代分工，原文的三个孩子和Bernard都有事做；carefully带出Bernard认真，不必贴“他很勤快”的标签。"
+            },
+            {
+              "quote": "By noon, twenty bags stood in a neat row in a basket.",
+              "explain": "用一个具体画面表示“准备好了”，第一段停在这里，第二段首句With everything ready就接得上，而且没有提前写出门去卖。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "写Bernard从胆怯到放开、生意做成，再把挣到的钱落到父亲的药上，收住原文“他想挣钱帮家里”的问题。",
+          "items": [
+            {
+              "quote": "Then he thought of his sick father and spoke a little louder.",
+              "explain": "转变由一个原因触发：想起卧病的父亲。这个原因原文里现成就有，所以他的变化不是凭空的。"
+            },
+            {
+              "quote": "Soon the neighbors heard about the boy who was working to help his family.",
+              "explain": "生意变好的原因是邻居被他的行动打动，邻居只做反应、不起名字，也没有人替他把东西卖掉，问题仍由Bernard自己解决。"
+            },
+            {
+              "quote": "\"Now Father can have his medicine!\" he said, his eyes shining.",
+              "explain": "全段唯一一句直接引语，放在结果揭晓处；钱的用处呼应原文父亲卧病、Mrs. Meredith送药的细节，情绪通过his eyes shining这个动作显出来。"
+            },
+            {
+              "quote": "John smiled and said there was still half a box of corn left.",
+              "explain": "用转述和剩下的半箱玉米收尾，暗示这门小生意还能做下去，比加一句“帮助别人很快乐”更具体。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "His voice was so low that people could hardly hear him.",
+          "function": "用一个能听到的细节写出Bernard第一次叫卖的胆怯，不用直接说he was nervous。"
+        },
+        {
+          "expression": "thought of his sick father and spoke a little louder",
+          "function": "让人物的变化有原文给的理由，写胆怯后鼓起勇气时可以借用这个“想起某人—动作改变”的结构。"
+        },
+        {
+          "expression": "poured the coins onto the table",
+          "function": "用一个动作和一个物件展示结果，让读者看到他挣到了钱，而不是只说he earned a lot of money。"
+        }
+      ],
+      "pitfalls": [
+        {
+          "pitfall": "第一段就让Bernard出门卖爆米花，甚至卖完。",
+          "why": "第二段首句写的是With everything ready, Bernard started out，第一段提前写掉了第二段的事，两段就接不上。"
+        },
+        {
+          "pitfall": "让Mrs. Meredith或某个富人直接给Bernard家一大笔钱，或者大量买下全部爆米花。",
+          "why": "原文的重点是帮Bernard自己挣钱；靠天降的帮助解决问题，因果是编的，也丢掉了孩子们想出的这个主意。"
+        },
+        {
+          "pitfall": "结尾写一大段感想，如“我们明白了帮助别人是快乐的”。",
+          "why": "这种话放在任何故事后都成立，只占词数；原文叙述平实，结尾落在钱、药、剩下的玉米这样的具体东西上更像原作者。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "When Mrs.Meredith heard of John's idea, she thought it was a good one, too. She said she would walk over to Bernard's home that very afternoon and talk it over with his mother. Bernard's mother was deeply grateful, and the boy came round first thing the next morning. Soon the Meredith kitchen was full of noise. John tipped some of Uncle John's corn into a heavy pan and held it over the fire. In a minute the first kernels began to pop, then dozens at once, and a warm, buttery smell drifted through the house. Harry and Clara folded paper bags as fast as they could, while Bernard scooped in the popcorn, filling each bag right to the top. By noon, twenty fat bags sat in a row in a basket.\n\nWith everything ready, Bernard started out on his new business. He went from door to door with the basket on his arm. At the first house his voice came out so small that the woman had to ask him twice what he was selling. Bernard swallowed hard, thought of his father lying in bed, and said it again, clearly this time. She bought two bags and told him it was the best popcorn she had tasted in years. Word got around quickly. Neighbors who had little money themselves still found a few coins for the boy who was working to help his family. By the time the street lamps came on, the basket was empty and his pocket was heavy with coins. Bernard ran all the way to the Merediths' house and emptied them onto the kitchen table. \"Now Father can have his medicine,\" he said, out of breath. John grinned and pointed at the box in the corner. There was still plenty of corn left for another day.",
+      "beyondStandard": [
+        {
+          "quote": "In a minute the first kernels began to pop, then dozens at once, and a warm, buttery smell drifted through the house.",
+          "explain": "标准版只说The corn began to pop；这里用the first kernels到dozens at once写出爆米花由少到多的真实过程，drifted through比filled更贴气味慢慢飘散的样子。"
+        },
+        {
+          "quote": "his voice came out so small that the woman had to ask him twice what he was selling",
+          "explain": "标准版说people could hardly hear him，比较笼统；这里落到一个具体的买主和一个具体后果（问了两遍），胆怯写得更像真事。"
+        },
+        {
+          "quote": "Neighbors who had little money themselves still found a few coins",
+          "explain": "接回原文开头经济不景气、大家互相帮助的背景，说明邻居自己也不宽裕仍愿意买，比标准版的heard about更有分量，又没有加新情节。"
+        }
+      ]
+    }
+  }
+}
