@@ -1,6 +1,6 @@
 # 01 — Contract and validator
 
-Status: done (branch), CI numbers below
+Status: done (branch)
 Blocked by: none (spec accepted 2026-11-24)
 Next on PASS: 02
 Terminal: no
@@ -37,7 +37,7 @@ editing them; delete it after.
 - [x] The round 2 2025-ii output raises the new-name warning; the round 3
   outputs raise none.
 - [x] V1, V2 and I19 envelopes validate and project exactly as before.
-- [ ] `node scripts/verify-ci.mjs` passes, or every failure also fails on the
+- [x] `node scripts/verify-ci.mjs` passes, or every failure also fails on the
   pre-change commit and is listed.
 
 ## Out of scope
@@ -59,7 +59,13 @@ I19 envelopes still validate. App `tsc -b` passes. Also pass:
 `verify-continuation-analysis-v1`, `verify-application-analysis-v4`,
 `verify-single-group-analysis`, `verify-architecture-housekeeping`,
 `verify-analyzed-package`.
-CI: CI_PLACEHOLDER
+CI: full `verify-ci.mjs` in this container: 37 scripts failed. 36 also fail
+on the pre-change commit `d98e5615f` (rerun there one by one): no ImageMagick 7
+`magick` binary, no service on `127.0.0.1:8787`, and the deploy and OCR
+fixtures that need them. They need GitHub CI to confirm. The 37th,
+`verify-review-build-identity`, failed with "Target file watcher failed" while
+files were being edited during the run; it passes when rerun on the committed
+tree.
 Notes:
 - No standalone `continuation-analysis-v3.schema.json`. The V3 shape lives in
   `$defs.continuationAnalysisV3` inside `writing-analysis-v1.schema.json`,
