@@ -1,0 +1,141 @@
+{
+  "taskType": "continuation",
+  "blocked": null,
+  "reading": {
+    "questions": [
+      {
+        "question": "原文停在哪里？还有什么问题没解决？",
+        "answer": "原文最后，“我”已经和教练确认 David 想跑仍然可以跑，David 正朝“我”走来；但他本人已经说了不跑。没解决的问题是：David 会不会改变主意，上场跑完这场比赛。"
+      },
+      {
+        "question": "David 为什么不想跑了？",
+        "answer": "不是身体不行，而是教练的一句担心让他害怕外校孩子会笑他。所以续写要解决的是“怕被笑”，而不是“跑不动”。"
+      },
+      {
+        "question": "“我”能拿什么说服他？",
+        "answer": "原文已经给了证据：他从没缺过一次训练，每次都跑完了。“我”不用讲大道理，把这些事实提醒给他就够了。"
+      }
+    ],
+    "sourceLinks": [
+      {
+        "sourceQuote": "His usual big toothy smile was absent today.",
+        "use": "笑容消失是原文给出的情绪信号，续写里让这个笑容回来，就能不写“他开心了”而写出他的转变。"
+      },
+      {
+        "sourceQuote": "David had not missed a single practice, and although he always finished his run long after the other children, he did always finish.",
+        "use": "这是“我”劝他的现成理由；结尾也可以回扣“他总能跑完”。"
+      },
+      {
+        "sourceQuote": "I was afraid that kids from other schools would laugh at him",
+        "use": "这是全篇的担心；第二段让外校孩子不但没笑，反而为他鼓掌，正好回答这个担心。"
+      }
+    ]
+  },
+  "taskCard": {
+    "taskRequires": [
+      "第一段从“我们并排坐下、David 不看我”开始，写“我”怎样让他改变主意。",
+      "第二段首句说 David 走上起跑线，所以第一段结束时他必须已经决定参赛，但不能在第一段就开跑。",
+      "要接上原文事实：他怕外校孩子笑他、他从不缺训练、每次都跑到终点、他跑得慢且身体左右摇晃。",
+      "第二段要给出比赛结果，回应“会不会被笑”这个担心。"
+    ],
+    "thisEssayChooses": "本文让“我”用他自己的训练记录来劝他，只用一句短的直接引语作为转折，其余用转述，贴合原文写法；比赛中让先跑完的同学回头等他、外校孩子也一起鼓掌，结尾落在教练的点头和“他总能跑完”上。可以换的有：劝说的具体说法、由谁先带头加油、教练有没有出场，甚至让他中途摔倒再爬起来，只要他最后跑完、没有人笑他即可。"
+  },
+  "standard": {
+    "essay": "We sat down next to each other, but David wouldn't look at me. He kept his eyes on his running shoes. I asked him quietly if he was worried about the other kids. He nodded and admitted that he didn't want anyone to laugh at him. I reminded him of all the practices he had never missed and all the runs he had finished. \"You didn't train this hard to stand by a fence,\" I said. After a long moment, he lifted his head. A little of his toothy smile came back, and he said he wanted to run.\n\nI watched as David moved up to the starting line with the other runners. When the whistle blew, the children rushed into the forest, and soon David was alone, rocking from side to side along the path. His classmates finished first, but instead of resting, they ran back to the edge of the forest and waited for him. When David finally came out of the trees, they cheered his name. Nobody laughed. Even the kids from the other schools joined in, clapping as he made his way to the finish line. He crossed it long after everyone else, red-faced but smiling. The coach shook his hand and then gave me a quiet nod. David had finished, just as he always did.",
+    "notes": [
+      {
+        "paragraph": 1,
+        "role": "找出 David 不跑的真正原因，用他自己的经历劝动他，段末让他决定参赛，为第二段的起跑线做好准备。",
+        "items": [
+          {
+            "quote": "He kept his eyes on his running shoes.",
+            "explain": "接住段首句“他不看我”，用一个看得见的动作写出他的难过和不好意思；盯着跑鞋也暗示他心里其实还想跑。"
+          },
+          {
+            "quote": "I reminded him of all the practices he had never missed and all the runs he had finished.",
+            "explain": "劝说的理由直接来自原文的事实，不是空洞的“你要勇敢”。用转述写，和原文以转述为主的写法一致。"
+          },
+          {
+            "quote": "\"You didn't train this hard to stand by a fence,\" I said.",
+            "explain": "全段唯一的直接引语，放在转折处。“站在篱笆边”用回原文开头他独自站着的地点，话短，像老师真会说的。"
+          },
+          {
+            "quote": "A little of his toothy smile came back, and he said he wanted to run.",
+            "explain": "让原文里“消失的笑容”回来一点，用变化写情绪；同时完成段首句二要求的前提：他决定参赛了。"
+          }
+        ]
+      },
+      {
+        "paragraph": 2,
+        "role": "写比赛过程和结果，回答“会不会被人笑”的担心，以 David 跑完收住全文。",
+        "items": [
+          {
+            "quote": "soon David was alone, rocking from side to side along the path",
+            "explain": "如实写他落在后面、身体摇晃，不让他突然跑得飞快，因果合理，也呼应原文对他跑步样子的描写。"
+          },
+          {
+            "quote": "they ran back to the edge of the forest and waited for him",
+            "explain": "转折由同学的一个具体行动触发，而不是天降奇迹；这正是原文说同学们把他当普通孩子的延续。"
+          },
+          {
+            "quote": "Nobody laughed.",
+            "explain": "两个词的短句，直接回答教练的担心，短句放在这里分量最重。"
+          },
+          {
+            "quote": "David had finished, just as he always did.",
+            "explain": "结尾落在“跑完”这件事上，回扣原文“他总能跑完”，不另贴一句空泛的道理。"
+          }
+        ]
+      }
+    ],
+    "expressions": [
+      {
+        "expression": "kept his eyes on his running shoes",
+        "function": "用视线写难过和逃避，比 he was sad 具体，也接住“不看我”。"
+      },
+      {
+        "expression": "a little of his toothy smile came back",
+        "function": "让原文的细节回来，写出情绪的转变，并且是“一点点”地回来，分寸合适。"
+      },
+      {
+        "expression": "made his way to the finish line",
+        "function": "make one's way 写出慢慢地、费力地前进，适合写 David 跑向终点。"
+      }
+    ],
+    "pitfalls": [
+      {
+        "pitfall": "第一段就让 David 开跑，甚至跑完。",
+        "why": "第二段首句写他“走向起跑线”，比赛还没开始；第一段提前写比赛就和段首句冲突。"
+      },
+      {
+        "pitfall": "让 David 突然跑得很快，甚至拿了第一名。",
+        "why": "原文说他的病让他不能像别的孩子那样跑，这样写违背原文设定，因果不成立；原文看重的是“跑完”，不是“赢”。"
+      },
+      {
+        "pitfall": "用大段口号式的鼓励或结尾道理（如 Never give up and you will succeed）。",
+        "why": "空话不推进情节、占词数；劝说要用原文给的事实，结尾要落在具体的事上。"
+      }
+    ]
+  },
+  "advanced": {
+    "essay": "We sat down next to each other, but David wouldn't look at me. He stared at the toes of his running shoes and picked at the grass by the fence. I waited. At last he mumbled that the kids from the other schools would laugh at the way he ran. I couldn't promise they wouldn't. Instead, I asked him how many practices he had missed that season. He shrugged and said none. And how many runs had he finished? Every single one, he said, a little louder this time. \"Then you already know how to do this,\" I told him. \"Today is just a different forest.\" He turned that over for a while. Then he pushed himself up on the fence post and said he was going to run. The toothy grin was back, if only halfway.\n\nI watched as David moved up to the starting line with the other runners. He took a spot at the very end of the row. The whistle blew, and within seconds the pack had disappeared among the evergreens, leaving David alone on the path, rocking along at his own steady pace. Long minutes passed. One by one, the runners came out of the forest and crossed the finish line. Then someone shouted that David was coming. His classmates ran to the edge of the trees and lined the last stretch of the route. Soon children from the other six schools were standing beside them, clapping and calling his name. Not one of them laughed. David crossed the line red-faced, his hair stuck to his forehead, and threw both arms in the air. The coach was the first to reach him. Over David's head, he caught my eye and gave me a sheepish smile. It just took David longer, that's all.",
+    "beyondStandard": [
+      {
+        "quote": "I couldn't promise they wouldn't. Instead, I asked him how many practices he had missed that season.",
+        "explain": "“我”不说空话保证没人笑，而是用提问让 David 自己说出答案，更像一位真实的特教老师，也比标准版直接提醒更有说服力。"
+      },
+      {
+        "quote": "\"Today is just a different forest.\"",
+        "explain": "把比赛说成“只是换了一片树林”，借原文的常绿森林，用孩子听得懂的话把陌生的比赛变成熟悉的训练，比标准版的劝说更贴人物和场景。"
+      },
+      {
+        "quote": "he caught my eye and gave me a sheepish smile",
+        "explain": "catch one's eye、sheepish smile 是地道搭配，不写一句“教练知道自己错了”，却让读者看出他的歉意，收住原文里“我”对教练的懊恼。"
+      },
+      {
+        "quote": "It just took David longer, that's all.",
+        "explain": "结尾化用原文叙述者自己的话，口吻和原文完全一致，比标准版的结尾更像原作者亲手写的。"
+      }
+    ]
+  }
+}

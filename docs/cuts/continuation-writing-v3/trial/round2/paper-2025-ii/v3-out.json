@@ -1,0 +1,137 @@
+{
+  "taskType": "continuation",
+  "blocked": null,
+  "reading": {
+    "questions": [
+      {
+        "question": "原文停在哪里？“我”还有什么问题没解决？",
+        "answer": "原文停在“我”的一个发现上：为了省事不再纠正别人的发音，可能正在失去分享自己文化身份的机会。问题不是“名字太难念”，而是“我”要不要、怎样重新把名字讲给别人听。"
+      },
+      {
+        "question": "“我”是个什么样的人？为什么之前选择了放弃？",
+        "answer": "“我”在意别人的看法，怕同学不耐烦，所以在课堂上耸肩说“没关系”，之后干脆微笑点头。续写里“我”的改变要有一个契机（被请去解释名字的含义），而且要写出她这次做法和上次不一样。"
+      },
+      {
+        "question": "第一次失败的原因是什么？这次靠什么成功？",
+        "answer": "上次教授一遍遍跟读整个名字，越念越尴尬；这次“我”先讲名字的意思，再把名字拆成两个音带大家读。有了画面、有了方法，大家才念得出、也才愿意念。"
+      }
+    ],
+    "sourceLinks": [
+      {
+        "sourceQuote": "I forced a smile, unsure how to respond further.",
+        "use": "上次是“勉强笑”，续写结尾可以让“我”真心笑出来，用同一个动作的前后对比写出变化，不必直接说“我很开心”。"
+      },
+      {
+        "sourceQuote": "This approach spared me the discomfort of having to over-explain.",
+        "use": "借 spare 这个词回头反思：“我”以为省掉了大家的麻烦，其实也省掉了别人了解“我”的机会。"
+      },
+      {
+        "sourceQuote": "yet they still could not say it the way I did",
+        "use": "第二段可以让一位同学“几乎念得和我一样”，正面回应原文的难题，让读者看到问题真的被解决了一部分。"
+      }
+    ]
+  },
+  "taskCard": {
+    "taskRequires": [
+      "第一段要写“我”在课堂讨论中解释名字的含义：秋雨分别是什么意思，以及为什么起这个名字。",
+      "第二段首句说很多同学“感兴趣、课后来找我”，所以第一段结束时，同学们必须已经被名字的意思和“我”的讲法吸引住了，但课后交流要留到第二段。",
+      "必须接上原文的转变：“我”之前为了省事不再纠正别人，续写要写出“我”这次不再回避，重新愿意分享自己的名字和文化。",
+      "人称（第一人称“我”）、过去时、爱尔兰留学的场景不变。"
+    ],
+    "thisEssayChooses": "本文选的路线是：“我”想起上次的尴尬，但决定不再躲开，在黑板上写下两个字，讲“秋＝autumn，雨＝rain”，再讲出生在下雨的秋夜、爷爷取名的理由；然后把名字拆成两个音带全班读，连教授也念对了。第二段写同学课后问自己的名字用中文怎么写，同桌 Emma 练到几乎念对，并说出“秋雨”的英文意思，最后“我”在她本子上写下她的中文名字。可以换的地方：名字的来历（父母起名、季节、家乡）、帮“我”的同学是谁、结尾落在哪个动作上（写名字、教发音、交换名字都行）；教授念对这一笔也是选择，不写也说得通。"
+  },
+  "standard": {
+    "essay": "In a class discussion, I was invited to explain the meaning of my name. My heart beat faster as I remembered the laughter in that lecture. But this time, I decided not to shrug it off. I walked to the board and wrote the two characters of my name. I explained that \"Qiu\" means autumn and \"yu\" means rain. I told them I was born on a rainy autumn night, and my grandfather believed autumn rain brought cool air and a good harvest. The room went quiet. I broke my name into two sounds and had everyone repeat them after me. This time, even the professor got it right.\n\nMany of my classmates got interested and came up to me after class. Some asked what their own names would mean in Chinese, while others wanted to hear mine again. Emma, who sat beside me, practised \"Qiu-yu\" until she said it almost the way I did. \"Autumn rain,\" she said softly. \"I'll remember that.\" I laughed, and this time the laughter felt warm. For weeks I had nodded at every wrong version of my name, thinking I was saving everyone trouble. Now I saw that a name is easier to say once people know the story behind it. Before we left, I wrote Emma's name in Chinese in her notebook, and I was glad to be a \"Chinese teacher\" again.",
+    "notes": [
+      {
+        "paragraph": 1,
+        "role": "把“被请去解释名字”写成一次重新开口的机会：先接住上次的尴尬，再讲名字的意思，最后用新方法让大家念对，为第二段“同学感兴趣”铺好路。",
+        "items": [
+          {
+            "quote": "But this time, I decided not to shrug it off.",
+            "explain": "shrug 直接接回原文里那个耸肩的动作，shrug it off 又是“一笑了之”的地道说法。一句话就写出了“我”和上次不同的决定，比写 I became brave 更具体。"
+          },
+          {
+            "quote": "I explained that \"Qiu\" means autumn and \"yu\" means rain.",
+            "explain": "原文几乎都用叙述和转述，所以这里用 explained that 转述解释内容，而不是写一大段直接引语，和原文是同一种写法。"
+          },
+          {
+            "quote": "I broke my name into two sounds and had everyone repeat them after me.",
+            "explain": "这是本段的关键动作：上次教授跟读整个名字失败了，这次“我”换了方法。问题被解决是因为有一个新做法，而不是因为大家忽然变友好了，因果不跳步。"
+          },
+          {
+            "quote": "This time, even the professor got it right.",
+            "explain": "教授是原文里出现过的人物，让他这次念对，收住了上次课堂的那个场面。even 一个词就写出了这件事的分量。"
+          }
+        ]
+      },
+      {
+        "paragraph": 2,
+        "role": "写同学课后来交流，让一个具体的人念对“我”的名字，并让“我”想明白原文最后提出的问题，结尾落在一个动作上。",
+        "items": [
+          {
+            "quote": "practised \"Qiu-yu\" until she said it almost the way I did",
+            "explain": "回应原文的 they still could not say it the way I did。用 almost 而不是 perfectly，更真实，也说明努力有了结果。"
+          },
+          {
+            "quote": "\"Autumn rain,\" she said softly. \"I'll remember that.\"",
+            "explain": "全文唯一的直接引语，放在关系改变的地方：同学记住的不只是读音，而是名字的意思。短短两句，像真人说的话。"
+          },
+          {
+            "quote": "thinking I was saving everyone trouble",
+            "explain": "回头说清“我”之前为什么只点头，对应原文的 spared me the discomfort。有了这句反思，第二段才真正回答了原文末尾的问题。"
+          },
+          {
+            "quote": "I was glad to be a \"Chinese teacher\" again",
+            "explain": "原文写“我”不再当“中文老师”，结尾让“我”高兴地重新当一次，首尾呼应。结尾落在“在她本子上写名字”这个动作上，不贴空泛的道理。"
+          }
+        ]
+      }
+    ],
+    "expressions": [
+      {
+        "expression": "decide not to shrug it off",
+        "function": "借原文“耸肩”这个动作写出态度的转变：从“算了”到“不再回避”。"
+      },
+      {
+        "expression": "break my name into two sounds / have everyone repeat them after me",
+        "function": "把“教发音”写成看得见的步骤，说明这次为什么能成功。"
+      },
+      {
+        "expression": "say it almost the way I did",
+        "function": "回应原文的发音难题，写出问题被部分解决，真实而不夸张。"
+      }
+    ],
+    "pitfalls": [
+      {
+        "pitfall": "第一段只解释名字的意思，或者把同学课后围上来、学写名字都写进第一段。",
+        "why": "第一段要做到的是“讲名字并让大家感兴趣”；课后交流是第二段首句给出的内容，提前写掉第二段就没东西写了。"
+      },
+      {
+        "pitfall": "写成满篇对话，或者让“我”大段直接演讲名字的含义。",
+        "why": "原文几乎只用叙述和转述，只有一句短的直接引语；满篇引号和原文不是同一种写法，也占掉推进情节的词数。"
+      },
+      {
+        "pitfall": "结尾写一句“我们要为自己的文化骄傲”“文化需要交流”之类的口号。",
+        "why": "这种话放在任何故事后面都成立，不推进任何事。原文的问题是“我”要不要分享名字，用一个具体动作收住更好。"
+      }
+    ]
+  },
+  "advanced": {
+    "essay": "In a class discussion, I was invited to explain the meaning of my name. For a moment, I was back in that lecture hall, hearing the laughter and feeling my shoulders rise in a helpless shrug. Then I thought of all the times I had simply smiled and nodded. I walked to the whiteboard and wrote the two characters, stroke by stroke. \"Qiu\" means autumn, I explained, and \"yu\" means rain. I had been born on a wet October night, and my grandfather, a farmer all his life, chose the name because autumn rain cools the summer heat and comes just in time for the harvest. Nobody was laughing now. A few classmates leaned forward. I split the name into two easy sounds and had the class echo each one after me. When the professor finally landed on \"Qiuyu,\" he grinned, and the room broke into applause rather than laughter.\n\nMany of my classmates got interested and came up to me after class. Some wanted to know whether their own names could be turned into Chinese; others just asked me to say mine again. Emma, who sat next to me, kept mouthing \"Qiu-yu\" under her breath until she got it almost the way I did. \"Autumn rain,\" she said, trying the words out. \"No wonder it's hard. It's a whole picture.\" I laughed, and this time it was not a forced laugh. For weeks I had been nodding at every wrong version of my name, telling myself I was sparing everyone the trouble. What I had really been sparing them was the chance to know me. Before we packed up, Emma slid her notebook across the desk and asked me to write her name in Chinese. I took my time over each stroke, happy to play the \"Chinese teacher\" once again.",
+    "beyondStandard": [
+      {
+        "quote": "the room broke into applause rather than laughter",
+        "explain": "标准版只写教授念对了；这里让全班的反应和原文的 the class erupting into laughter 形成对照，同一个“全班一起出声”的场面，意思完全反过来，更贴原文。"
+      },
+      {
+        "quote": "kept mouthing \"Qiu-yu\" under her breath",
+        "explain": "标准版用 practised；mouth（不出声地做口型）加 under her breath 是更具体、更地道的动作，让读者看见 Emma 在认真练。"
+      },
+      {
+        "quote": "What I had really been sparing them was the chance to know me.",
+        "explain": "接着上一句的 sparing everyone the trouble，把原文的 spared 用了两次、意思翻转：省掉的不是麻烦，而是别人了解“我”的机会。比标准版的概括句更贴原文最后一句，也只属于这个故事。"
+      }
+    ]
+  }
+}

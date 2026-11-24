@@ -1,0 +1,136 @@
+{
+  "taskType": "continuation",
+  "blocked": null,
+  "reading": {
+    "questions": [
+      {
+        "question": "原文停在哪里？什么问题还没解决？",
+        "answer": "停在“我”终于站到哥哥的角度去想：哥哥身体不好、妻子刚去世，Toby 是陪他撑下去的伙伴。兄弟俩两个月没联系，裂痕还在，没有人道歉，也没有和好。"
+      },
+      {
+        "question": "哥哥为什么回“Not a chance.”？他真正在意的是什么？",
+        "answer": "不是因为淋雨或开车麻烦，而是“我”把他唯一的伴儿当成要关在门外的麻烦。所以和好的关键不只是说对不起，还要让 Toby 被接纳。"
+      },
+      {
+        "question": "“我”是个什么样的人？",
+        "answer": "从“he’ll get over it”和“thinking he should call first”看，他爱面子、习惯觉得自己有理，但有良心。所以他认错要有一个想通的过程，道歉时也该说得具体，而不是突然变成另一个人。"
+      }
+    ],
+    "sourceLinks": [
+      {
+        "sourceQuote": "Toby was his constant companion, the one who kept him going.",
+        "use": "第一段写“我”想通时，把这句的意思换成自己的话（Toby 是家人、是让哥哥每天起床的那一个），说明“我”到底错在哪里。"
+      },
+      {
+        "sourceQuote": "driving home with a wet dog",
+        "use": "结尾“我”说会在门口备好毛巾，正好回应当初那只湿淋淋的狗：下雨也不用再把 Toby 关在外面了，原文的问题用一个物件收住。"
+      },
+      {
+        "sourceQuote": "a 50-pound ball of fire",
+        "use": "第二段让 Toby 照着这个性子出场：冲出来、扑到“我”身上、差点把饼干盒撞掉，用它打破兄弟俩的僵局，比让人物自己突然软下来更自然。"
+      }
+    ]
+  },
+  "taskCard": {
+    "taskRequires": [
+      "第一段从“我”认错写起，必须写清“我”错在哪里：把哥哥和他相依为命的 Toby 关在门外，这要接上原文哥哥丧妻、生病、Toby 是他依靠这些事实。",
+      "第二段首句说“我”带着妻子做的饼干到了哥哥家门口，所以第一段结束时要已经决定当面去道歉，饼干也要由妻子做好；第一段不能写到敲门或见面。",
+      "第二段要写见面和结果，回应两个月的冷战和“Not a chance.”，让兄弟关系有一个合理的收束。"
+    ],
+    "thisEssayChooses": "本文选择：第一段由“我”自己说清对 Toby 的两种看法（我眼里是麻烦，哥哥眼里是家人），再写妻子主动做饼干、“我”第二天开车去；第二段让 Toby 扑上来打破沉默，哥哥笑了、让“我”进门，最后“我”邀请他和 Toby 参加下一次聚会并答应备好毛巾。可以换的有：去的时间、饼干是谁提议做的、打破僵局的方式（也可以是哥哥先开口，或看到饼干想起小时候），以及结尾的具体物件（毛巾也可以换成给 Toby 的垫子、狗绳等）。叙述保持第一人称、过去时，以转述为主，只在最后留两三句短的直接引语。"
+  },
+  "standard": {
+    "essay": "I realized it was me who was at fault. I had been so busy protecting my backyard plan that I never thought about what Toby meant to my brother. To me, Toby was a problem. To him, Toby was family, and I had sent them both out into the rain. That evening I told my wife I wanted to say sorry in person, not in a text. She smiled and offered to bake his favorite biscuits. The next morning, I drove to his house, practicing what I would say all the way.\n\nWith the biscuits my wife had made, I arrived at my brother's door. I knocked, and Toby's barking came first. My brother looked thinner than I remembered. I held out the box and told him I was sorry. I said I had thought only of my party, not of him, and that Toby was welcome in our house any time. For a long moment he said nothing. Then Toby pushed past his legs and jumped up at me, nearly knocking the box out of my hands. My brother laughed and stepped aside to let me in. We talked for hours while Toby lay at our feet, waiting for crumbs. Before I left, I invited him to our next gathering, and this time he said yes. \"Bring Toby,\" I said. \"I'll have a towel ready at the door.\"",
+    "notes": [
+      {
+        "paragraph": 1,
+        "role": "说清“我”错在哪里，并从认错走到行动：决定当面道歉、妻子做好饼干、“我”出发，正好停在第二段首句之前。",
+        "items": [
+          {
+            "quote": "To me, Toby was a problem. To him, Toby was family,",
+            "explain": "两个短句并排，把兄弟俩对同一只狗的不同看法摆在一起，认错就有了具体内容，而不是只说“我很后悔”。这是从原文“constant companion”推出来的。"
+          },
+          {
+            "quote": "I had sent them both out into the rain",
+            "explain": "用原文那场雨来写自己的错：被送进雨里的不只是狗，还有哥哥。借原文的场景，但换了说法，没有照抄。"
+          },
+          {
+            "quote": "say sorry in person, not in a text",
+            "explain": "对照原文那条被回“Not a chance.”的短信，说明“我”这次换了方式，为第二段“到门口”做铺垫。"
+          },
+          {
+            "quote": "She smiled and offered to bake his favorite biscuits.",
+            "explain": "第二段首句提到“妻子做的饼干”，第一段就要让饼干有来处。妻子在原文里一直劝“我”联系哥哥，这里让她主动帮忙，人物前后一致。"
+          }
+        ]
+      },
+      {
+        "paragraph": 2,
+        "role": "写见面、道歉和和好，用 Toby 打破僵局，用一条毛巾收住当初“湿狗不能进屋”的问题。",
+        "items": [
+          {
+            "quote": "My brother looked thinner than I remembered.",
+            "explain": "一句外貌就接上了原文的“health issues”和丧妻之痛，不用再解释哥哥过得不好。"
+          },
+          {
+            "quote": "that Toby was welcome in our house any time",
+            "explain": "道歉说到了点子上：当初的矛盾就是 Toby 不能进屋。用转述来写道歉，和原文以转述为主的写法一致。"
+          },
+          {
+            "quote": "Then Toby pushed past his legs and jumped up at me, nearly knocking the box out of my hands.",
+            "explain": "转折由一件事触发：Toby 还是原文那个“ball of fire”，它一扑，哥哥就笑了。比写“他终于原谅了我”更可信。"
+          },
+          {
+            "quote": "\"I'll have a towel ready at the door.\"",
+            "explain": "结尾落在一个物件上：有了毛巾，下雨天湿狗也能进屋，原文的问题被具体地解决了，不需要再加一句大道理。"
+          }
+        ]
+      }
+    ],
+    "expressions": [
+      {
+        "expression": "I had sent them both out into the rain",
+        "function": "把原文的雨变成“我”的过错，认错时用得上，读者一下就回想起那天的场面。"
+      },
+      {
+        "expression": "pushed past his legs and jumped up at me",
+        "function": "写 Toby 冲出来扑人，动作具体，又符合它的性格，是本题打破僵局最自然的办法。"
+      },
+      {
+        "expression": "stepped aside to let me in",
+        "function": "不用写“他原谅了我”，一个让路的动作就表示关系松动了，也和当初“让不让狗进屋”形成对照。"
+      }
+    ],
+    "pitfalls": [
+      {
+        "pitfall": "第一段就写“我”到了哥哥家、见面道歉。",
+        "why": "第二段首句才写“我”到门口，第一段提前写掉就和段首句冲突，第二段也没东西可写了。"
+      },
+      {
+        "pitfall": "只写“我很后悔”“我很难过”，不说清错在哪里。",
+        "why": "原文最后一段已经给出了答案：Toby 是哥哥的依靠。认错不接上这一点，道歉就是空的，哥哥为什么原谅也说不通。"
+      },
+      {
+        "pitfall": "和好之后完全不提 Toby，或结尾加一句“家人比什么都重要”之类的道理。",
+        "why": "矛盾就是从 Toby 能不能进屋开始的，不回应它问题就没收住；放在哪个故事后面都成立的道理只占词数，不推进任何事。"
+      }
+    ]
+  },
+  "advanced": {
+    "essay": "I realized it was me who was at fault. I had been so proud of my tidy backyard that I had never stopped to ask what it cost my brother. Toby wasn't just a dog to him. Since his wife's death, Toby had been the one who got him out of bed each morning. And I had sent them both out into the rain. That night I admitted all this to my wife. She didn't say \"I told you so.\" Instead, she rolled up her sleeves and baked a batch of peanut butter biscuits, the kind my brother had loved since we were boys. The next morning I packed them in a tin and set off before I could talk myself out of it.\n\nWith the biscuits my wife had made, I arrived at my brother's door. Before I could knock, Toby's deep bark boomed from inside. My brother opened the door only halfway. He looked older and thinner than he had in June, and his eyes went from my face to the tin. I told him I had been wrong to shut Toby out, that I had cared more about my clean floors than about him, and that I was sorry. He was quiet for so long that I thought he might close the door. Then Toby squeezed past his knees, planted two paws on my chest and nearly sent the biscuits flying. My brother's face broke into a grin. \"Well,\" he said, \"at least one of us has forgiven you.\" We spent the afternoon at his kitchen table, working through the tin, while Toby lay across my feet. Before I left, I asked him to come for Sunday dinner. He hesitated, glancing down at the dog. \"Bring him,\" I said. \"I'll keep a towel by the door.\"",
+    "beyondStandard": [
+      {
+        "quote": "Toby had been the one who got him out of bed each morning",
+        "explain": "标准版只说 Toby 是“family”，这里把原文“the one who kept him going”落到一个看得见的日常细节上，更具体，也更像叙述者自己的口吻。"
+      },
+      {
+        "quote": "set off before I could talk myself out of it",
+        "explain": "“talk myself out of it”是地道的短语动词，写出这个爱面子的“我”差点又退缩，比标准版的“drove to his house”多了人物心理，却没有直接写情绪。"
+      },
+      {
+        "quote": "\"Well,\" he said, \"at least one of us has forgiven you.\"",
+        "explain": "哥哥的话带点自嘲和幽默，借 Toby 说出原谅，像真人在别扭时会说的话；标准版只写“My brother laughed”，这里让和好有了人物自己的声音。"
+      }
+    ]
+  }
+}
