@@ -1,0 +1,137 @@
+{
+  "taskType": "continuation",
+  "blocked": null,
+  "reading": {
+    "questions": [
+      {
+        "question": "原文停在哪里，什么问题还没解决？",
+        "answer": "原文停在Kevin回到Mrs. Hill家后的犹豫：那个男人已经被警察抓走，可他说“这是我家，我父亲的手表在这里”，Kevin开始怀疑自己是不是冤枉了人。没解决的问题是：那人说的是不是真的，手表到底在不在地板下。"
+      },
+      {
+        "question": "Kevin想要什么、是什么样的人，从原文哪里看出来？",
+        "answer": "他是个守规矩又想做点冒险事的12岁男孩（He never got into trouble, though sometimes he wanted to do risky things）；他先报警，再拿树枝冲进去，说明他想保护邻居；最后一句 What if he has told the truth? 说明他在乎是非，不只想当英雄，所以续写要让他主动去弄清真相。"
+      },
+      {
+        "question": "原文是怎么写的？续写要照着怎么写？",
+        "answer": "第三人称、过去时，围绕Kevin叙述；句子短而清楚，以叙述动作为主，只有三处很短的直接引语，描写很少。续写也以叙述和转述为主，只在关键处留一两句短的直接引语。"
+      }
+    ],
+    "sourceLinks": [
+      {
+        "sourceQuote": "trying to lift a floorboard",
+        "use": "这是原文埋下的伏笔：男人想撬的那块地板，正是续写里找到手表的地方。第一段让Kevin带Green夫妇去那块地板，证据就有了来处。"
+      },
+      {
+        "sourceQuote": "Grabbing a branch from a cut-down tree",
+        "use": "第二段Kevin为挥树枝吓到对方道歉，用回原文的物件，让和解有具体的抓手。"
+      },
+      {
+        "sourceQuote": "Mrs. Hill was asleep. Kevin sighed (叹息) and hoped something exciting would happen.",
+        "use": "开头Kevin嫌无聊、盼着有刺激的事。结尾让刚醒的Mrs. Hill问一句“有什么刺激的事吗”，首尾呼应，故事就收住了。"
+      }
+    ]
+  },
+  "taskCard": {
+    "taskRequires": [
+      "第一段从Kevin去找回家的Green夫妇谈话开始，必须写到“找到了手表”：第二段首句说 the watch they had found，所以第一段结束时手表已经被找到，而且Mr. Green在场。",
+      "要接上原文的线索：男人说父母曾住这里、父亲的手表在这里，还在撬地板；Kevin怀疑他说的是真的。",
+      "第二段从Kevin和Mr. Green把手表送到警察局开始，要交代被捕男人的结局，回答Kevin“我做得对不对”的疑问。",
+      "人称、时态、人物关系不变：Kevin是12岁男孩，由Mrs. Hill照看；Green夫妇是房主。"
+    ],
+    "thisEssayChooses": "本文选的路线是：Mr. Green记得房子是从一对老夫妇手里买的，Kevin带他们撬开那块松动的地板找到刻字的手表；到警察局后男人认出手表，解释了原委，Mr. Green不追究，男人反过来肯定Kevin，最后回到醒来的Mrs. Hill。这些都是选择，可以换：比如由Mrs. Green记起旧房主，手表可以装在别的东西里，警察也可以先核对房产记录；Green夫妇也可以仍然要求男人道歉。但不能让一个新人物来揭开真相，也不能让Kevin在第一段就去警察局。"
+  },
+  "standard": {
+    "essay": "When Mr. and Mrs. Green got home, Kevin went to talk to them. He told them about the man, the phone call and the police car, and repeated what the man had said about his father's watch. Mr. Green rubbed his chin. They had bought the house from an old couple ten years ago, he said. Kevin led them to the room where the man had been kneeling. One floorboard was loose. Mr. Green fetched a screwdriver and lifted it. Underneath lay a tin box covered in dust. Inside was an old watch with the words “For my son” on its back.\n\nKevin and Mr. Green took the watch they had found to the police station. An officer listened to them and brought the man out. As soon as he saw the watch, his eyes filled with tears. His father had hidden it under the floor and forgotten it when the family moved, he explained. Nobody had answered the door, so he climbed in. Mr. Green said he should have asked, but since nothing was damaged, he would not press charges. Kevin said sorry for frightening him with the branch. The man shook his head. “You were looking after your neighbours' house, kid.” He wound the watch, and it began to tick. Back at Mrs. Hill's house, the old lady had just woken up. “Anything exciting happen?” she asked. Kevin smiled. “A little,” he said.",
+    "notes": [
+      {
+        "paragraph": 1,
+        "role": "把Kevin的怀疑变成行动：他把男人的话告诉房主，房主提供新信息，大家按原文的伏笔找到手表，为第二段首句的 the watch they had found 铺好路。",
+        "items": [
+          {
+            "quote": "repeated what the man had said about his father's watch",
+            "explain": "Kevin不是只汇报“有小偷”，而是把让他不安的那句话也说出来。这一步接住原文结尾的怀疑，也给后面找表一个理由。用转述而不是重写一遍对话，和原文的写法一致。"
+          },
+          {
+            "quote": "They had bought the house from an old couple ten years ago, he said.",
+            "explain": "转折需要一条新信息来触发。这条信息只有房主知道，由Mr. Green说出来最合理，它让男人“父母以前住这里”的说法变得可信，又没有引入新人物。"
+          },
+          {
+            "quote": "Kevin led them to the room where the man had been kneeling.",
+            "explain": "用回原文的 trying to lift a floorboard：Kevin亲眼看到男人在撬地板，所以由他带路。证据从原文的伏笔里来，不是凭空出现。"
+          },
+          {
+            "quote": "with the words “For my son” on its back",
+            "explain": "一个具体的刻字就证明了男人说的是真话，比写“他们终于相信了”更有力，也让读者自己得出结论。"
+          }
+        ]
+      },
+      {
+        "paragraph": 2,
+        "role": "在警察局解开误会，交代男人的结局，并回答Kevin“我做得对吗”的疑问，最后落回开头的Mrs. Hill收尾。",
+        "items": [
+          {
+            "quote": "As soon as he saw the watch, his eyes filled with tears.",
+            "explain": "情绪通过看得见的反应写出来，而且是被“看见手表”这件事触发的，不用写 he was very moved 之类的标签。"
+          },
+          {
+            "quote": "Kevin said sorry for frightening him with the branch.",
+            "explain": "用回原文的树枝，让Kevin为自己的鲁莽负责；同时他并没有因为报警道歉，分寸合理。"
+          },
+          {
+            "quote": "“You were looking after your neighbours' house, kid.”",
+            "explain": "全段唯一一句有分量的直接引语放在关系改变的地方：由被他“冤枉”的人来肯定他，比作者直接说“他做得对”更可信。kid 呼应原文男人对他的称呼。"
+          },
+          {
+            "quote": "“Anything exciting happen?” she asked. Kevin smiled. “A little,” he said.",
+            "explain": "开头Kevin嫌无聊、盼刺激，结尾用一问一答收住，轻描淡写反而有回味，不需要贴一句大道理。"
+          }
+        ]
+      }
+    ],
+    "expressions": [
+      {
+        "expression": "rubbed his chin",
+        "function": "写Mr. Green边听边回想的样子，用一个动作代替 he thought hard，自然引出他想起的旧房主。"
+      },
+      {
+        "expression": "Underneath lay a tin box covered in dust.",
+        "function": "倒装 Underneath lay… 把读者的目光放到地板下面，covered in dust 说明东西放了很多年，正好支持男人的说法。"
+      },
+      {
+        "expression": "He wound the watch, and it began to tick.",
+        "function": "手表重新走动，用一个动作表示事情回到正轨，比写“一切都好了”具体。"
+      }
+    ],
+    "pitfalls": [
+      {
+        "pitfall": "第一段就写到警察局，或让警察来找到手表。",
+        "why": "第二段首句写的是Kevin和Mr. Green把“他们找到的”手表送去警察局，所以手表必须在第一段由他们找到，人还没去警察局。"
+      },
+      {
+        "pitfall": "写成那人真是小偷，或者让一个新冒出来的邻居、侦探揭开真相。",
+        "why": "第二段首句说他们带着找到的手表去警察局，说明男人的话被证实；由新人物来解决问题就是天降的帮助，也抢了Kevin和Green夫妇的戏。"
+      },
+      {
+        "pitfall": "满篇对话或大段心理描写，结尾写“Kevin learned that honesty is the best policy”之类的口号。",
+        "why": "原文以叙述为主，对话很少；口号式结尾放在任何故事后都成立，只占词数，评分时常被扣分。"
+      }
+    ]
+  },
+  "advanced": {
+    "essay": "When Mr. and Mrs. Green got home, Kevin went to talk to them. Standing on their doorstep, he told them everything, from the open window to the police car. Then, a little less sure of himself, he repeated what the man had said about his father's watch. Mr. Green frowned and rubbed his chin. They had bought the house from an elderly couple ten years ago, he said, and the old man had once mentioned a son who lived far away. Kevin led them inside to the spot where the man had been kneeling. One floorboard sat slightly higher than the rest. Mr. Green fetched a screwdriver and eased it up. Underneath, wrapped in a faded handkerchief, lay a silver watch. Engraved on the back were three small words: For my son.\n\nKevin and Mr. Green took the watch they had found to the police station. An officer heard them out and then brought the man from a back room. The moment he saw the watch, his shoulders dropped and his eyes grew wet. His father had hidden it under the floor to keep it safe, he explained, and in the rush of moving house had left it behind. That morning nobody had answered the door, and he had lost his patience. Mr. Green told him that he should have left a note, but since nothing had been taken or broken, he would not press charges. Kevin shuffled his feet and apologized for waving a branch at him. The man let out a small laugh. “You scared me half to death, kid. Your neighbours are lucky to have you.” He wound the watch gently, and it began to tick. Back at Mrs. Hill's house, the old lady was just stirring in her armchair. “Anything exciting happen?” she asked. Kevin grinned. “Just a little,” he said.",
+    "beyondStandard": [
+      {
+        "quote": "Then, a little less sure of himself, he repeated what the man had said",
+        "explain": "标准版只交代他转述了那句话；提高版加一个短语写出他说话时的心虚，把原文结尾的犹豫带进新场景，人物更连贯。"
+      },
+      {
+        "quote": "One floorboard sat slightly higher than the rest. Mr. Green fetched a screwdriver and eased it up.",
+        "explain": "标准版说 was loose，提高版写成看得见的样子 sat slightly higher than the rest；eased it up 比 lifted it 更准地写出小心撬起的动作。"
+      },
+      {
+        "quote": "his shoulders dropped and his eyes grew wet",
+        "explain": "两个具体的身体反应写出紧绷的人松下来又动了感情，比标准版的 his eyes filled with tears 多了一层“如释重负”。"
+      }
+    ]
+  }
+}
