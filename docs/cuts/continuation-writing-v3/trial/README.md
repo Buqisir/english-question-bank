@@ -57,3 +57,44 @@ grade 3.5–5.8, 8.6–12.0 words per sentence.
 The advanced essays sit inside the reference length and readability range.
 2025 Ⅱ runs longer per sentence than the reference (14.8 against 12.0 at most);
 its source is also the hardest of the three (FK 7.8).
+
+# Round 2 (2026-11-24)
+
+Round 1 was not voted: the V2 essays ran about 50 words shorter than the V3
+standard essays, and the Owner could not judge quality across that gap.
+
+## What changed
+
+- Owner set the ranges: standard 170–210, advanced 240–280 new words.
+- Principle 3 now ties direct speech to the source: mostly reported speech
+  when the source mostly reports, one or two short quoted lines at the turn.
+  Evidence in `../direct-speech-research.md`. `check.mjs` warns, without
+  failing, when an essay's quoted share exceeds twice the source's plus 10
+  points.
+- Both arms regenerated fresh. The V2 arm is unchanged except
+  `wordCountTarget`, set with `CW_V2_TARGET` in `prep.mjs`. V2 counts the
+  target over the whole essay including the two starters, so 190 gave 168–186
+  new words; the three papers that came out more than 20 words short of the V3
+  essay were regenerated at 225.
+- Sides re-randomised; votes go to a new collection.
+
+## Checks run
+
+- `check.mjs` with the new ranges on all 7 V3 outputs and 4 V2 outputs: no
+  failures. Warnings only on the count of `beyondStandard` items (4, want 2–3)
+  for two papers. No direct-speech warnings.
+- Every V2 `continuationAnalysis` passes
+  `validateNarrativeContinuationAnalysis`.
+
+## Calibration numbers (V3 only)
+
+| paper | source quoted | standard new words | standard quoted | advanced new words | advanced quoted | advanced FK | advanced words/sentence |
+|---|---|---|---|---|---|---|---|
+| paper-2024-i | 2% | 195 | 4% | 270 | 2% | 5.7 | 15.5 |
+| paper-2025-i | 1% | 207 | 4% | 277 | 7% | 4.2 | 13.0 |
+| paper-2025-ii | 3% | 202 | 4% | 274 | 5% | 6.0 | 14.3 |
+
+Direct speech fell from 15–32% in round 1 to single figures. The advanced
+essays now run longer per sentence than the reference teacher essays (13.0–15.5
+against 8.6–12.0), likely because reported speech folds lines into longer
+sentences. Not a failure; worth watching in the Owner's read.
