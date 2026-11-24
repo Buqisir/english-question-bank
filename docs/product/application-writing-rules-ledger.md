@@ -1,0 +1,31 @@
+# Application Writing Rules Ledger
+
+V4 (`prompts/application-writing-model-answer-v4.md`) keeps the prompt to a goal,
+seven principles with reasons, and program-checked hard constraints. A rule that
+forbids one specific failure enters the prompt only after that failure is
+observed in our own generated output. This ledger records each candidate rule
+and the evidence behind it, so the prompt does not collect patches nobody can
+trace.
+
+## States
+
+- `watch`: seen in human or third-party essays, not yet in our output. Not in the
+  prompt. Reviewers look for it in every trial.
+- `active`: seen in our output. Written into the prompt as one sentence with its
+  reason. Record the trial and the quote.
+- `retired`: no longer needed (the principle now covers it, or it stopped
+  appearing for two trials after removal). Removed from the prompt.
+
+## Entries
+
+| ID | Failure | State | Evidence | Since |
+|---|---|---|---|---|
+| L1 | Forced personification: objects given feelings or actions that add no meaning (a collection that "smiles", a decision that "knocks") | watch | Owner 2026-11-24: high-score human essays contain flaws we do not learn from; observed in third-party reference essays during review | 2026-11-24 |
+| L2 | Awkward inversion used only to show a structure, where normal order reads better | watch | Same source as L1 | 2026-11-24 |
+| L3 | Filler sublimation: a closing value line that could follow any essay and adds nothing the content supports | watch | Same source as L1; V3 doctrine already limits value to one layer | 2026-11-24 |
+
+## Not carried over from V3
+
+V3 contained task-derived patch rules (for example a deadline rule written from one
+past paper). V4 does not carry them. If a trial shows the failure they guarded
+against, the rule comes back here as `active` with new evidence.
