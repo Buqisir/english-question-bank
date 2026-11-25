@@ -1,6 +1,8 @@
 import { sourceReferenceBlocks } from '../../paper-import/sourceReferences.mjs'
 import { projectApplicationReviewCardDisplay } from '../../../shared/writing/applicationReviewCard.mjs'
 import { projectContinuationAnalysisDisplay } from '../../../shared/writing/continuationAnalysis.mjs'
+import { isApplicationAnalysisV4 } from '../../../shared/writing/applicationAnalysisV4.mjs'
+import { isContinuationAnalysisV3 } from '../../../shared/writing/continuationAnalysisV3.mjs'
 import { renderHeadingLead } from './blocks.mjs'
 import { array, escapeHtml, innerQuote, nonEmptyString, paragraphBlocks, paragraphLines, withoutClosingPunctuation } from './text.mjs'
 
@@ -144,27 +146,104 @@ export function renderContinuationAnalysis(analysis) {
     </section>`
 }
 
-export function renderWritingModels(source, legacySourceEssay, model, isContinuation) {
+function signoffIndex(text, isContinuation) {
+  return isContinuation ? -1 : paragraphLines(text)
+    .findLastIndex(line => /^(?:Yours(?:[ ,]+(?:sincerely|faithfully|truly))?|Sincerely|Best (?:regards|wishes)|Kind regards|Regards)[,.]?$/iu.test(line))
+}
+
+// One essay: a run-in heading, then its paragraphs; a letter's sign-off lines
+// stay together with the paragraph before them.
+function renderModelEssay(text, label, isContinuation) {
+  const paragraphs = paragraphBlocks(text, 'model-paragraph')
+  const signoff = signoffIndex(text, isContinuation)
+  if (signoff > 0) {
+    const tail = paragraphs.splice(signoff - 1)
+    paragraphs.push(`<div class="heading-lead model-signoff">${tail.join('')}</div>`)
+  }
+  return `<div class="model-essay">${renderHeadingLead(`<h4>${label}</h4>`, ...paragraphs)}</div>`
+}
+
+function sourceEssayTexts(source, legacySourceEssay) {
   const sourceEssays = array(source?.essays?.entries)
     .map(entry => sourceReferenceBlocks(entry)
       .filter(block => block.kind === 'paragraph')
       .map(block => block.paragraph.text).join('\n'))
     .filter(text => text.trim())
   if (sourceEssays.length === 0 && legacySourceEssay) sourceEssays.push(legacySourceEssay)
-  const essays = sourceEssays.map(text => ({ text, label: '参考范文' }))
+  return sourceEssays
+}
+
+export function renderWritingModels(source, legacySourceEssay, model, isContinuation) {
+  const essays = sourceEssayTexts(source, legacySourceEssay).map(text => ({ text, label: '参考范文' }))
   if (model) essays.push({ text: model, label: '参考范文（AI 撰写）' })
   if (essays.length === 0) return ''
-  const content = essays.map(({ text, label }) => {
-    const paragraphs = paragraphBlocks(text, 'model-paragraph')
-    const signoff = isContinuation ? -1 : paragraphLines(text)
-      .findLastIndex(line => /^(?:Yours(?:[ ,]+(?:sincerely|faithfully|truly))?|Sincerely|Best (?:regards|wishes)|Kind regards|Regards)[,.]?$/iu.test(line))
-    if (signoff > 0) {
-      const tail = paragraphs.splice(signoff - 1)
-      paragraphs.push(`<div class="heading-lead model-signoff">${tail.join('')}</div>`)
-    }
-    return `<div class="model-essay">${renderHeadingLead(`<h4>${label}</h4>`, ...paragraphs)}</div>`
-  }).join('')
+  const content = essays.map(({ text, label }) => renderModelEssay(text, label, isContinuation)).join('')
   return `<section class="writing-block model-answer"${isContinuation ? ' data-continuation-section="modelAnswer"' : ''}>${content}</section>`
+}
+
+// 应用文 V4 and 读后续写 V3 (docs/cuts/application-writing-v4/spec.md D6,
+// docs/cuts/continuation-writing-v3/spec.md D6). One lecture in the order the
+// spec gives; continuation adds only 读原文 before and 容易写偏 after the
+// shared blocks. The group heading opens the first block so it never sits
+// alone at a column foot.
+function lectureBlock(name, title, body, groupHeading = '') {
+  const [first = '', ...rest] = body
+  return `<section class="writing-block lecture-block" data-writing-lecture-block="${name}">${renderHeadingLead(`${groupHeading}<h4>${escapeHtml(title)}</h4>`, first, ...rest)}</section>`
+}
+
+function lectureNotes(items) {
+  return array(items).map(item => `<div class="lecture-note"><p class="lecture-quote" lang="en">“${escapeHtml(innerQuote(item.quote))}”</p><p class="lecture-explain">${escapeHtml(item.explain)}</p></div>`)
+}
+
+// A run-in label never ends a column: it and the first item below it stay together.
+function labelled(label, items) {
+  const [first = '', ...rest] = items
+  return [`<div class="heading-lead"><p class="lecture-subhead"><span class="inline-label">${escapeHtml(label)}</span></p>${first}</div>`, ...rest]
+}
+
+function lectureEssay(name, text, label, isContinuation) {
+  return `<section class="writing-block model-answer lecture-block" data-writing-lecture-block="${name}">${renderModelEssay(text, label, isContinuation)}</section>`
+}
+
+export function writingLectureOf(writing, isContinuation) {
+  if (isContinuation) {
+    return isContinuationAnalysisV3(writing?.continuationAnalysis) ? writing.continuationAnalysis : null
+  }
+  return isApplicationAnalysisV4(writing?.applicationAnalysis) ? writing.applicationAnalysis : null
+}
+
+export function renderWritingLecture(lecture, { groupHeading, isContinuation, source, legacySourceEssay }) {
+  const blocks = []
+  if (isContinuation) {
+    blocks.push(['reading', '读原文', [
+      ...array(lecture.reading.questions).map(item => `<div class="lecture-qa"><p class="lecture-question">${escapeHtml(item.question)}</p><p>${escapeHtml(item.answer)}</p></div>`),
+      ...labelled('原文这里可以借', lectureNotes(array(lecture.reading.sourceLinks).map(link => ({ quote: link.sourceQuote, explain: link.use })))),
+    ]])
+  }
+  blocks.push(['taskCard', '审题卡', [
+    `<p class="lecture-subhead"><span class="inline-label">必须做到</span></p><ol class="lecture-list">${array(lecture.taskCard.taskRequires).map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ol>`,
+    `<p><span class="inline-label">可以换</span>${escapeHtml(lecture.taskCard.thisEssayChooses)}</p>`,
+  ]])
+  const html = blocks.map(([name, title, body], index) => lectureBlock(name, title, body, index === 0 ? groupHeading : ''))
+  html.push(lectureEssay('standardEssay', lecture.standard.essay, '标准版范文（AI 撰写）', isContinuation))
+  // Each paragraph's heading travels with its first note only, so a long
+  // paragraph can still run on into the next column.
+  html.push(lectureBlock('notes', '逐段看', array(lecture.standard.notes).flatMap(note => {
+    const [first = '', ...rest] = lectureNotes(note.items)
+    return [`<div class="heading-lead lecture-paragraph"><h5>第 ${escapeHtml(note.paragraph)} 段：${escapeHtml(note.role)}</h5>${first}</div>`, ...rest]
+  })))
+  html.push(lectureBlock('expressions', '本题可用表达', array(lecture.standard.expressions).map(item =>
+    `<p class="lecture-pair"><span class="lecture-term" lang="en">${escapeHtml(item.expression)}</span>${escapeHtml(item.function)}</p>`)))
+  if (isContinuation) {
+    html.push(lectureBlock('pitfalls', '容易写偏', array(lecture.standard.pitfalls).map(item =>
+      `<p class="lecture-pair"><span class="lecture-term">${escapeHtml(withoutClosingPunctuation(item.pitfall))}</span>${escapeHtml(item.why)}</p>`)))
+  }
+  html.push(lectureEssay('advancedEssay', lecture.advanced.essay, '提高版范文（AI 撰写）', isContinuation))
+  html.push(lectureBlock('beyondStandard', '提高版多做了什么', lectureNotes(lecture.advanced.beyondStandard)))
+  const official = sourceEssayTexts(source, legacySourceEssay)
+    .map(text => renderModelEssay(text, '参考范文', isContinuation)).join('')
+  if (official) html.push(`<section class="writing-block model-answer"${isContinuation ? ' data-continuation-section="modelAnswer"' : ''}>${official}</section>`)
+  return html.join('')
 }
 
 export function renderWritingGroup({ group, title, analysis, sourceReferencesByGroup, openingHeadings }) {
@@ -173,10 +252,16 @@ export function renderWritingGroup({ group, title, analysis, sourceReferencesByG
   const isContinuation = (source?.taskType ?? writing?.taskType) === 'continuation'
   const legacySourceEssay = nonEmptyString(writing?.officialModelAnswer)
   const model = nonEmptyString(writing?.modelAnswer)
-  const models = renderWritingModels(source, legacySourceEssay, model, isContinuation)
-  if (!writing && !models) return ''
   const groupTitle = title || group.title || (isContinuation ? '读后续写' : '应用文写作')
   const groupHeading = `${openingHeadings}<h3 class="group-title" data-running="${escapeHtml(groupTitle)}">${escapeHtml(groupTitle)}</h3>`
+  const lecture = writingLectureOf(writing, isContinuation)
+  if (lecture) {
+    return `<section class="analysis-group analysis-group--writing">
+    ${renderWritingLecture(lecture, { groupHeading, isContinuation, source, legacySourceEssay })}
+  </section>`
+  }
+  const models = renderWritingModels(source, legacySourceEssay, model, isContinuation)
+  if (!writing && !models) return ''
   const reviewCard = isContinuation ? '' : renderReviewCard(writing?.reviewCard, groupHeading)
   return `<section class="analysis-group analysis-group--writing">
     ${reviewCard || renderHeadingLead(groupHeading)}
